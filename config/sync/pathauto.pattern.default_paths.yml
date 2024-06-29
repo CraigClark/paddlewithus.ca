@@ -1,0 +1,23 @@
+uuid: 7bd137db-b12f-45fc-a7be-6fe5f91a97b1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: default_paths
+label: 'default paths'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  eb44259d-d331-4d60-8cac-83e2b4dc029b:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: eb44259d-d331-4d60-8cac-83e2b4dc029b
+    context_mapping:
+      node: node
+    bundles:
+      page: page
+      webform: webform
+selection_logic: and
+weight: -5
+relationships: {  }
