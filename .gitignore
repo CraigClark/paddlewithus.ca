@@ -44,11 +44,9 @@ bower_components/
 
 # Custom
 docker
-
-# OpenPlus
-
 html/modules/*
 html/themes/*
 !html/modules/custom/
 !html/themes/custom/
-!/html/home.html
+!/html/robots.txt
+

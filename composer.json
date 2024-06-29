@@ -78,7 +78,7 @@
                 "type:drupal-custom-theme"
             ]
         },
-         "scripts": {
+        "scripts": {
             "post-install-cmd": [
                 "@composer drupal-scaffold"
             ],
