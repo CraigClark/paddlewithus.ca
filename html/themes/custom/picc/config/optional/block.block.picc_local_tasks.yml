@@ -3,15 +3,17 @@ status: true
 dependencies:
   theme:
     - picc
-id: picc_page_title
+id: picc_local_tasks
 theme: picc
 region: content
-weight: -6
+weight: -4
 provider: null
-plugin: page_title_block
+plugin: local_tasks_block
 settings:
-  id: page_title_block
-  label: 'Page title'
+  id: local_tasks_block
+  label: Tabs
   provider: core
   label_display: '0'
+  primary: true
+  secondary: true
 visibility: {  }

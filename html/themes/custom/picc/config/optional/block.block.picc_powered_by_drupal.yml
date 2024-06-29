@@ -5,15 +5,15 @@ dependencies:
     - system
   theme:
     - picc
-id: picc_messages
+id: picc_powered_by_drupal
 theme: picc
-region: content
-weight: -7
+region: footer
+weight: 0
 provider: null
-plugin: system_messages_block
+plugin: system_powered_by_block
 settings:
-  id: system_messages_block
-  label: Messages
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
   provider: system
   label_display: '0'
 visibility: {  }

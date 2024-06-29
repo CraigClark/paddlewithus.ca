@@ -12,8 +12,7 @@
     "require": {
         "composer/installers": "^2.0",
         "drupal/admin_toolbar": "^3.4",
-        "drupal/bootstrap_barrio": "^5.5",
-        "drupal/bootstrap_library": "^2.0",
+        "drupal/bootstrap5": "^4.0",
         "drupal/core-composer-scaffold": "^10.1",
         "drupal/core-recommended": "^10.1",
         "drupal/devel": "^5.0",

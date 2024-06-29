@@ -1,15 +1,15 @@
-uuid: bc4c533d-1a08-4e26-8706-a14cd12c78e2
+uuid: 81f34f3c-b290-4a85-91f8-f1a551a4302a
 langcode: en
 status: true
 dependencies:
   module:
     - help
   theme:
-    - picc
+    - bootstrap5
 _core:
-  default_config_hash: OW_yd_Vr9j6xAy7ZACzH_ak7UpzNfthI4WlMZcKw-Ms
-id: picc_help
-theme: picc
+  default_config_hash: S0Y16qIQfKiOEzWlddOGk3u_BKwAruAheA8VVFfGbLc
+id: bootstrap5_help
+theme: bootstrap5
 region: content
 weight: -3
 provider: null

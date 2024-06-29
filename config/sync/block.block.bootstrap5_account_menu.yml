@@ -1,3 +1,4 @@
+uuid: b17e907d-2f06-4f4f-94fb-59441eba46d5
 langcode: en
 status: true
 dependencies:
@@ -6,9 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - picc
-id: picc_account_menu
-theme: picc
+    - bootstrap5
+_core:
+  default_config_hash: YRZjNp4d68NjJAVhrrUrXKwpV12i7OFWg4MY6Bsd0mw
+id: bootstrap5_account_menu
+theme: bootstrap5
 region: nav_additional
 weight: -7
 provider: null
@@ -16,8 +19,8 @@ plugin: 'system_menu_block:account'
 settings:
   id: 'system_menu_block:account'
   label: 'User account menu'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
   expand_all_items: false

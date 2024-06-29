@@ -3,15 +3,15 @@ status: true
 dependencies:
   theme:
     - picc
-id: picc_page_title
+id: picc_local_actions
 theme: picc
 region: content
-weight: -6
+weight: -2
 provider: null
-plugin: page_title_block
+plugin: local_actions_block
 settings:
-  id: page_title_block
-  label: 'Page title'
+  id: local_actions_block
+  label: 'Primary admin actions'
   provider: core
   label_display: '0'
 visibility: {  }

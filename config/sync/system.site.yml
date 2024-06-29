@@ -2,9 +2,9 @@ _core:
   default_config_hash: ijfbzDTN4CbE7Sr-6ubWzy_t1vH4OtU1doNCLssVz-4
 langcode: en
 uuid: 6e6165db-1990-4392-9540-5e8bc9a51c82
-name: 'Paddle with Petrie Island Canoe Club'
+name: 'Petrie Island Canoe Club'
 mail: clark.craig@gmail.com
-slogan: ''
+slogan: 'Paddle with us!'
 page:
   403: ''
   404: ''

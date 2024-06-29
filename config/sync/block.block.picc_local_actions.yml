@@ -1,0 +1,20 @@
+uuid: c59ccf47-9508-49ca-84cb-dab330d905b1
+langcode: en
+status: true
+dependencies:
+  theme:
+    - picc
+_core:
+  default_config_hash: jJmWnnR9KftatuuLJ98ucMzoOuiF5WsaB_pH6a0gZ0k
+id: picc_local_actions
+theme: picc
+region: content
+weight: -2
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }
