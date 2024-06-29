@@ -1,0 +1,20 @@
+uuid: 2987cef1-ee2b-423b-abe0-36e2225d85a7
+langcode: en
+status: true
+dependencies:
+  theme:
+    - picc
+_core:
+  default_config_hash: m8T104ycbzCa4c4ssizvM14Zd9d2umQ_6tBsj3x6j8E
+id: picc_page_title
+theme: picc
+region: content
+weight: -7
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

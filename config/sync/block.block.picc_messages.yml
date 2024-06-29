@@ -1,0 +1,22 @@
+uuid: 824ca599-82d7-49de-8a28-36d1d95696b0
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - picc
+_core:
+  default_config_hash: dIDgyANkt6ZIjJhiEPpPQNvbBZRM5b4Bk6PF4gfx8VQ
+id: picc_messages
+theme: picc
+region: highlighted
+weight: -6
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

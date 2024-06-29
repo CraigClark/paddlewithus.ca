@@ -1,0 +1,22 @@
+uuid: 182e905c-9565-4828-8a6d-bd5fcae24d3d
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - picc
+_core:
+  default_config_hash: 6YbEE0-uO_wby9_6n8zX_Nti23ReruRa1BteStRWiTE
+id: picc_help
+theme: picc
+region: highlighted
+weight: -2
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

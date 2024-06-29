@@ -1,0 +1,23 @@
+uuid: 349217b8-9452-40b8-bd67-56df070771a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - picc
+_core:
+  default_config_hash: 8JliHDtC7i8ZIa3b70K56hK0moiXFzU_6sXYB3QG928
+id: picc_search_form_narrow
+theme: picc
+region: sidebar_first
+weight: -7
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

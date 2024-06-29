@@ -1,0 +1,22 @@
+uuid: fbc784a1-235b-4864-b54b-0c50f862b508
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - picc
+_core:
+  default_config_hash: n72r6ePDBseQMb6JZc_-ZfWrMNSoBnViVeFy4m2sJms
+id: picc_powered
+theme: picc
+region: footer_fifth
+weight: -7
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

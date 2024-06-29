@@ -1,0 +1,22 @@
+uuid: 37d5600c-08fe-4069-94e8-ba80b42f6b91
+langcode: en
+status: true
+dependencies:
+  theme:
+    - picc
+_core:
+  default_config_hash: iPBChmvxuhPYZd9T65508lW5gnagdnaZ2DRFYVIZ31g
+id: picc_primary_local_tasks
+theme: picc
+region: content
+weight: -5
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

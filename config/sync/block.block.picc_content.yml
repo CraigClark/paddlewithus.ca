@@ -1,0 +1,22 @@
+uuid: 0fd36897-1b4e-48d5-9096-42d2b10c6211
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - picc
+_core:
+  default_config_hash: k3nk7-UN9nQ97nYp0UeisRgJ52gRYO-5C81jUb116-E
+id: picc_content
+theme: picc
+region: content
+weight: -3
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,5 +1,54 @@
-files-private
-html
+# Drupal
+test-results
+scripts/local
+scripts/drupal
+files_private/
+
+# Composer files
+html/*
+!html/modules/
+!html/themes/
+
 vendor
-/.editorconfig
-/.gitattributes
+*/*/*/vendor
+*/*/vendor
+
+# Ignore Development Files
+compass_app_log.txt
+*.DS_Store
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*.sass-cache
+*.ddev
+*.prettierignore
+*.editorconfig
+.vscode/
+
+# Node
+node_modules/
+bower_components/
+
+# PhpStorm
+.idea
+
+# SASS
+.sass-cache
+*.sass-cache*
+**/sass/*.css
+
+# Custom
+docker
+
+# OpenPlus
+
+html/modules/*
+html/themes/*
+!html/modules/custom/
+!html/themes/custom/
+!/html/home.html
