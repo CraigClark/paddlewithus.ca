@@ -1,4 +1,4 @@
-uuid: 3d83de69-fb77-4f77-a40e-8b80f6196d32
+uuid: 0dd3ccf5-6c83-475b-b554-a4019634f330
 langcode: en
 status: open
 dependencies:
@@ -15,8 +15,8 @@ close: null
 uid: 1
 template: false
 archive: false
-id: regatta_ready
-title: 'Regatta ready'
+id: summer_paddle_survey
+title: 'Summer paddle survey'
 description: ''
 categories: {  }
 elements: |-
@@ -28,6 +28,7 @@ elements: |-
       high: Lots!
       medium: 'A bit'
       low: 'Not much'
+    '#required': true
   paddling_skill:
     '#type': radios
     '#title': 'Do you feel like you improved your paddling skills?'
@@ -36,6 +37,7 @@ elements: |-
       high: 'Yes! A lot'
       medium: 'Yes, a bit'
       low: 'No'
+    '#required': true
   return_paddler:
     '#type': radios
     '#title': 'Would you come back and do the program again or join another PICC program?'
@@ -44,6 +46,7 @@ elements: |-
       high: Absolutely!
       medium: Maybe
       low: 'Probably not'
+    '#required': true
 css: ''
 javascript: ''
 settings:
