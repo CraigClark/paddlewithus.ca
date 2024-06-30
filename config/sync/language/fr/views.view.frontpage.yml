@@ -22,12 +22,8 @@ display:
           exposed_sorts_label: 'Trier par'
       empty:
         area_text_custom:
-          content: "Aucun contenu de page d'accueil n'a été créé pour l'instant. Suivre le <a href=\"https://www.drupal.org/fr/docs/user_guide/fr/index.html\">Guide utilisateur</a> pour démarrer la construction de votre site."
+          content: "Il n'y a actuellement aucun sondage publié."
         title:
-          title: 'Bienvenue !'
+          title: Bienvenue!
       header:
-        area:
-          content:
-            value: '<p>FR Surveys for the following activities</p>'
-            format: basic_html
-  page_1: {  }
+        area: {  }

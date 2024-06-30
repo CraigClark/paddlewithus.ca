@@ -20,13 +20,30 @@ title: 'Regatta ready'
 description: ''
 categories: {  }
 elements: |-
-  en_will_you_be_back:
+  amount_of_fun:
     '#type': radios
-    '#title': 'EN Will you be back'
+    '#title': 'How much fun did you or your child/ children have during your PICC summer program?'
+    '#title_display': before
     '#options':
-      'yes': 'yes'
-      'no': 'no'
-      maybe: maybe
+      high: Lots!
+      medium: 'A bit'
+      low: 'Not much'
+  paddling_skill:
+    '#type': radios
+    '#title': 'Do you feel like you improved your paddling skills?'
+    '#title_display': before
+    '#options':
+      high: 'Yes! A lot'
+      medium: 'Yes, a bit'
+      low: 'No'
+  return_paddler:
+    '#type': radios
+    '#title': 'Would you come back and do the program again or join another PICC program?'
+    '#title_display': before
+    '#options':
+      high: Absolutely!
+      medium: Maybe
+      low: 'Probably not'
 css: ''
 javascript: ''
 settings:
@@ -134,7 +151,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: 'Thank you for your submission'
-  confirmation_message: '<p>What we went people to do next. Maybe links to social media sites , the website etc</p>'
+  confirmation_message: '<div class="row"><div class="col-sm-6 mb-3 mb-sm-0"><div class="card h-100"><div class="card-body"><h5 class="card-title">Stay in touch</h5><p class="card-text">Join us on Facebook for exciting updates, awesome events, and loads of paddling fun at Petrie Island!</p><p><a class="btn btn-primary" href="https://www.facebook.com/petriecanoe/">Join us on Facebook</a></p></div></div></div><div class="col-sm-6"><div class="card h-100"><div class="card-body"><h5 class="card-title">Camps &amp; Programs</h5><p class="card-text">Here is a more engaging and friendly version of the message: Did you know we run programs all year round? We have an amazing variety of paddling programs for all ages and skill levels! Whether your little ones want to start with our Kiddie programs, you''re looking for recreational fun, or your teens are ready to dive into competitive paddling, we’ve got something for everyone!</p><p><a class="btn btn-primary" href="https://petriecanoe.ca/programs/">Discover Our Programs</a></p></div></div></div></div>'
   confirmation_attributes: {  }
   confirmation_back: false
   confirmation_back_label: ''
