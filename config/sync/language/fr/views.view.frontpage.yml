@@ -25,5 +25,3 @@ display:
           content: "Il n'y a actuellement aucun sondage publié."
         title:
           title: Bienvenue!
-      header:
-        area: {  }
