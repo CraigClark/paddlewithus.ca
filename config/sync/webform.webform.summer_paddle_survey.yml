@@ -6,9 +6,11 @@ dependencies:
     - webform_analysis
 third_party_settings:
   webform_analysis:
-    chart_type: PieChart
+    chart_type: ColumnChart
     components:
-      - en_will_you_be_back
+      - amount_of_fun
+      - paddling_skill
+      - return_paddler
 weight: 0
 open: null
 close: null
@@ -35,12 +37,13 @@ elements: |-
     '#required': true
   paddling_skill:
     '#type': radios
-    '#title': 'Do you feel like did you or your child/ children  improved your paddling skills?'
+    '#title': 'Do you feel like you or your child/ children  improved your paddling skills?'
     '#title_display': before
     '#options':
       high: 'Yes! A lot'
       medium: 'Yes, a bit'
       low: 'No'
+      unsure: "I don't know"
     '#required': true
   return_paddler:
     '#type': radios
@@ -51,6 +54,15 @@ elements: |-
       medium: Maybe
       low: 'Probably not'
     '#required': true
+  comment:
+    '#type': textarea
+    '#title': Comments
+  sublitted_from:
+    '#type': webform_computed_token
+    '#title': 'Sublitted from'
+    '#display_on': view
+    '#template': '[webform_submission:node:title]'
+    '#store': true
 css: ''
 javascript: ''
 settings:
