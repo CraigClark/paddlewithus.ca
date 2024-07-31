@@ -7,9 +7,25 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "billboardjs/billboard",
+                "version": "3.10.3",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "billboard"
+                },
+                "dist": {
+                    "url": "https://registry.npmjs.org/billboard.js/-/billboard.js-3.10.3.tgz",
+                    "type": "tar"
+                }
+            }
         }
     ],
     "require": {
+        "billboardjs/billboard": "^3.10",
         "composer/installers": "^2.0",
         "drupal/admin_toolbar": "^3.4",
         "drupal/antibot": "^2.0",
@@ -41,6 +57,15 @@
             "php-http/discovery": true
         },
         "sort-packages": true
+    },
+    "scripts": {
+        "clean-billboardjs": "./scripts/clean-billboardjs.sh",
+        "post-install-cmd": [
+            "@clean-billboardjs"
+        ],
+        "post-update-cmd": [
+            "@clean-billboardjs"
+        ]
     },
     "extra": {
         "drupal-scaffold": {
