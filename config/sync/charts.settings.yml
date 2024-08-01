@@ -1,12 +1,17 @@
 _core:
   default_config_hash: wZ5T1cqvSG3zUPxdtz_BgdBiNjgy1K1Al-L3iT7sPh8
-dependencies: {  }
 charts_default_settings:
-  library: ''
+  library: billboard
   type: line
   display:
     title: ''
+    title_position: out
     subtitle: ''
+    data_labels: false
+    data_markers: false
+    legend_position: right
+    background: ''
+    three_dimensional: 0
     colors:
       - '#006fb0'
       - '#f07c33'
@@ -33,17 +38,8 @@ charts_default_settings:
       - '#ff9b8f'
       - '#85000f'
       - '#ff7581'
-    color_changer: false
-    title_position: out
-    tooltips: true
-    tooltips_use_html: false
-    data_markers: false
-    data_labels: false
-    legend: false
-    legend_position: right
-    background: ''
-    three_dimensional: 0
     polar: 0
+    tooltips: true
     dimensions:
       width: ''
       width_units: '%'
@@ -58,6 +54,7 @@ charts_default_settings:
       yellow_to: '85'
       red_from: '0'
       red_to: '50'
+    color_changer: false
   xaxis:
     title: ''
     labels_rotation: '0'
@@ -69,7 +66,11 @@ charts_default_settings:
     suffix: ''
     decimal_count: ''
     labels_rotation: '0'
+  library_config: {  }
 advanced:
   debug: false
   requirements:
     cdn: true
+dependencies:
+  module:
+    - charts_billboard

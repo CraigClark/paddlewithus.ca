@@ -128,7 +128,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           webform_element_format: link
-          webform_multiple_value: 1
+          webform_multiple_value: true
           webform_multiple_delta: 0
           webform_check_access: 1
           webform_multiple_field:
@@ -183,7 +183,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           webform_element_format: value
-          webform_multiple_value: 1
+          webform_multiple_value: true
           webform_multiple_delta: 0
           webform_check_access: 1
           webform_multiple_field:
@@ -238,7 +238,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           webform_element_format: value
-          webform_multiple_value: 1
+          webform_multiple_value: true
           webform_multiple_delta: 0
           webform_check_access: 1
           webform_multiple_field:
@@ -298,7 +298,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           webform_element_format: value
-          webform_multiple_value: 1
+          webform_multiple_value: true
           webform_multiple_delta: 0
           webform_check_access: 1
           webform_multiple_field:
@@ -353,7 +353,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           webform_element_format: value
-          webform_multiple_value: 1
+          webform_multiple_value: true
           webform_multiple_delta: 0
           webform_check_access: 1
           webform_multiple_field:
@@ -408,7 +408,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           webform_element_format: link
-          webform_multiple_value: 1
+          webform_multiple_value: true
           webform_multiple_delta: 0
           webform_check_access: 1
           webform_multiple_field:
@@ -472,6 +472,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 10
           total_pages: null
           id: 0
@@ -486,7 +487,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:

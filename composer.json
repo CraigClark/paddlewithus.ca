@@ -29,6 +29,7 @@
         "composer/installers": "^2.0",
         "drupal/admin_toolbar": "^3.4",
         "drupal/antibot": "^2.0",
+        "drupal/better_exposed_filters": "^7.0@beta",
         "drupal/bootstrap5": "^4.0",
         "drupal/charts": "^5.1",
         "drupal/core-composer-scaffold": "^10.1",
