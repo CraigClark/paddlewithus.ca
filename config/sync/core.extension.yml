@@ -15,10 +15,12 @@ module:
   charts_billboard: 0
   charts_blocks: 0
   ckeditor5: 0
+  collapsiblock: 0
   config: 0
   config_translation: 0
   contact: 0
   contextual: 0
+  csv_serialization: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
@@ -31,6 +33,7 @@ module:
   history: 0
   image: 0
   inline_form_errors: 0
+  js_cookie: 0
   language: 0
   language_switcher_extended: 0
   layout_builder: 0
@@ -45,6 +48,8 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  rest: 0
+  serialization: 0
   settings_tray: 0
   shortcut: 0
   system: 0
@@ -54,6 +59,7 @@ module:
   toolbar: 0
   update: 0
   user: 0
+  views_data_export: 0
   views_ui: 0
   webform: 0
   webform_access: 0

@@ -2,10 +2,17 @@ uuid: 4812e5e0-2fd0-44dc-8c72-1b3eaef90027
 langcode: en
 status: true
 dependencies:
+  config:
+    - webform.webform.summer_paddle_survey
   module:
     - better_exposed_filters
     - charts
     - charts_billboard
+    - csv_serialization
+    - rest
+    - serialization
+    - user
+    - views_data_export
     - webform
     - webform_views
 id: survey_results
@@ -386,8 +393,9 @@ display:
                   collapsible_disable_automatic_open: false
                   is_secondary: false
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'view any webform submission'
       cache:
         type: tag
         options: {  }
@@ -437,43 +445,36 @@ display:
           transform_dash: false
           break_phrase: false
       filters:
-        sid:
-          id: sid
+        webform_id:
+          id: webform_id
           table: webform_submission
-          field: sid
+          field: webform_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: webform_submission
-          entity_field: sid
-          plugin_id: numeric
-          operator: '>='
+          entity_field: webform_id
+          plugin_id: bundle
+          operator: in
           value:
-            min: ''
-            max: ''
-            value: '0'
+            summer_paddle_survey: summer_paddle_survey
           group: 1
           exposed: false
           expose:
-            operator_id: sid_op
-            label: 'Submission ID'
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: sid_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: sid
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -497,13 +498,9 @@ display:
             library: billboard
             type: pie
             fields:
-              label: webform_submission_value_2
+              label: webform_submission_value_1
               stacking: false
               data_providers:
-                webform_submission_value_3:
-                  enabled: false
-                  color: '#006fb0'
-                  weight: 7
                 webform_submission_value:
                   enabled: false
                   color: '#f07c33'
@@ -522,10 +519,10 @@ display:
                   weight: 7
                 webform_submission_value_5:
                   enabled: true
-                  color: '#cbde67'
+                  color: '#2326dd'
                   weight: 7
                 webform_submission_value_6:
-                  enabled: true
+                  enabled: false
                   color: '#7643b6'
                   weight: 7
             display:
@@ -590,6 +587,7 @@ display:
         - 'languages:language_interface'
         - url
         - user
+        - user.permissions
       tags: {  }
   block_2:
     id: block_2
@@ -598,9 +596,90 @@ display:
     position: 1
     display_options:
       title: 'Will you return?'
+      style:
+        type: chart
+        options:
+          grouping: {  }
+          chart_settings:
+            library: billboard
+            type: pie
+            fields:
+              label: webform_submission_value_2
+              stacking: false
+              data_providers:
+                webform_submission_value:
+                  enabled: false
+                  color: '#f07c33'
+                  weight: 7
+                webform_submission_value_1:
+                  enabled: false
+                  color: '#342e9c'
+                  weight: 7
+                webform_submission_value_2:
+                  enabled: false
+                  color: '#579b17'
+                  weight: 7
+                webform_submission_value_4:
+                  enabled: false
+                  color: '#75060a'
+                  weight: 7
+                webform_submission_value_5:
+                  enabled: false
+                  color: '#2326dd'
+                  weight: 7
+                webform_submission_value_6:
+                  enabled: true
+                  color: '#7643b6'
+                  weight: 7
+            display:
+              title: ''
+              title_position: out
+              subtitle: ''
+              data_labels: false
+              data_markers: false
+              legend_position: right
+              background: ''
+              three_dimensional: 0
+              polar: 0
+              tooltips: true
+              dimensions:
+                width: ''
+                width_units: '%'
+                height: ''
+                height_units: ''
+              gauge:
+                max: '100'
+                min: '0'
+                green_from: '85'
+                green_to: '100'
+                yellow_from: '50'
+                yellow_to: '85'
+                red_from: '0'
+                red_to: '50'
+              color_changer: false
+            xaxis:
+              title: horizontal
+              labels_rotation: '0'
+            yaxis:
+              title: vertucal
+              min: ''
+              max: ''
+              prefix: ''
+              suffix: ''
+              decimal_count: ''
+              labels_rotation: '0'
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         title: false
         group_by: false
+        style: false
+        row: false
       group_by: true
       display_description: ''
       display_extenders: {  }
@@ -610,6 +689,7 @@ display:
         - 'languages:language_interface'
         - url
         - user
+        - user.permissions
       tags: {  }
   block_camp:
     id: block_camp
@@ -672,6 +752,79 @@ display:
           webform_multiple_value: true
           webform_multiple_delta: 0
           webform_check_access: 0
+        sid:
+          id: sid
+          table: webform_submission
+          field: sid
+          relationship: none
+          group_type: count
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: sid
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<i>{{ sid }}  submissions</i>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          set_precision: false
+          precision: 0
+          decimal: .
+          format_plural: 0
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
       empty:
         area:
           id: area
@@ -706,6 +859,7 @@ display:
         style: false
         row: false
         fields: false
+        header: true
       group_by: true
       display_description: ''
       display_extenders: {  }
@@ -715,6 +869,454 @@ display:
         - 'languages:language_interface'
         - url
         - user
+        - user.permissions
+      tags: {  }
+  block_comment:
+    id: block_comment
+    display_title: Comments
+    display_plugin: block
+    position: 5
+    display_options:
+      title: Comments
+      fields:
+        webform_submission_value_1:
+          id: webform_submission_value_1
+          table: webform_submission_field_summer_paddle_survey_sublitted_from
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 0
+        completed:
+          id: completed
+          table: webform_submission
+          field: completed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: completed
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: html_date
+            custom_date_format: ''
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        webform_submission_value:
+          id: webform_submission_value
+          table: webform_submission_field_summer_paddle_survey_comment
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"card mt-3 mb-4\">\r\n  <div class=\"card-body\">\r\n    <p class=\"card-text\"> {{ webform_submission_value }}</p>\r\n  </div>\r\n  <div class=\"card-footer text-muted\">\r\n    Submitted to <i>{{ webform_submission_value_1 }}</i> on {{ completed }}\r\n  </div>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 1
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        title: false
+        css_class: false
+        style: false
+        row: false
+        fields: false
+      css_class: ''
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - user.permissions
+      tags: {  }
+  block_comments_all:
+    id: block_comments_all
+    display_title: 'Comments - all'
+    display_plugin: block
+    position: 5
+    display_options:
+      title: Comments
+      fields:
+        webform_submission_value_1:
+          id: webform_submission_value_1
+          table: webform_submission_field_summer_paddle_survey_sublitted_from
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 0
+        completed:
+          id: completed
+          table: webform_submission
+          field: completed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: completed
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: html_date
+            custom_date_format: ''
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        webform_submission_value:
+          id: webform_submission_value
+          table: webform_submission_field_summer_paddle_survey_comment
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"card mt-3 mb-4\">\r\n  <div class=\"card-body\">\r\n    <p class=\"card-text\"> {{ webform_submission_value }}</p>\r\n  </div>\r\n  <div class=\"card-footer text-muted\">\r\n    Submitted to <i>{{ webform_submission_value_1 }}</i> on {{ completed }}\r\n  </div>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 1
+      arguments: {  }
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        title: false
+        css_class: false
+        style: false
+        row: false
+        fields: false
+        arguments: false
+        header: false
+      css_class: ''
+      display_description: ''
+      header: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user
+        - user.permissions
       tags: {  }
   block_fun:
     id: block_fun
@@ -723,9 +1325,90 @@ display:
     position: 1
     display_options:
       title: 'Did you have fun?'
+      style:
+        type: chart
+        options:
+          grouping: {  }
+          chart_settings:
+            library: billboard
+            type: pie
+            fields:
+              label: webform_submission_value_1
+              stacking: false
+              data_providers:
+                webform_submission_value:
+                  enabled: false
+                  color: '#f07c33'
+                  weight: 7
+                webform_submission_value_1:
+                  enabled: false
+                  color: '#342e9c'
+                  weight: 7
+                webform_submission_value_2:
+                  enabled: false
+                  color: '#579b17'
+                  weight: 7
+                webform_submission_value_4:
+                  enabled: false
+                  color: '#3f067a'
+                  weight: 7
+                webform_submission_value_5:
+                  enabled: true
+                  color: '#2326dd'
+                  weight: 7
+                webform_submission_value_6:
+                  enabled: false
+                  color: '#7643b6'
+                  weight: 7
+            display:
+              title: ''
+              title_position: out
+              subtitle: ''
+              data_labels: false
+              data_markers: false
+              legend_position: right
+              background: ''
+              three_dimensional: 0
+              polar: 0
+              tooltips: true
+              dimensions:
+                width: ''
+                width_units: '%'
+                height: ''
+                height_units: ''
+              gauge:
+                max: '100'
+                min: '0'
+                green_from: '85'
+                green_to: '100'
+                yellow_from: '50'
+                yellow_to: '85'
+                red_from: '0'
+                red_to: '50'
+              color_changer: false
+            xaxis:
+              title: horizontal
+              labels_rotation: '0'
+            yaxis:
+              title: vertucal
+              min: ''
+              max: ''
+              prefix: ''
+              suffix: ''
+              decimal_count: ''
+              labels_rotation: '0'
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         title: false
         group_by: false
+        style: false
+        row: false
       group_by: true
       display_description: ''
       display_extenders: {  }
@@ -735,6 +1418,391 @@ display:
         - 'languages:language_interface'
         - url
         - user
+        - user.permissions
+      tags: {  }
+  block_fun_all:
+    id: block_fun_all
+    display_title: 'fun - all'
+    display_plugin: block
+    position: 1
+    display_options:
+      title: 'Did you have fun?'
+      arguments: {  }
+      style:
+        type: chart
+        options:
+          grouping: {  }
+          chart_settings:
+            library: billboard
+            type: pie
+            fields:
+              label: webform_submission_value_1
+              stacking: false
+              data_providers:
+                webform_submission_value:
+                  enabled: false
+                  color: '#f07c33'
+                  weight: 7
+                webform_submission_value_1:
+                  enabled: false
+                  color: '#342e9c'
+                  weight: 7
+                webform_submission_value_2:
+                  enabled: false
+                  color: '#579b17'
+                  weight: 7
+                webform_submission_value_4:
+                  enabled: false
+                  color: '#3f067a'
+                  weight: 7
+                webform_submission_value_5:
+                  enabled: true
+                  color: '#2326dd'
+                  weight: 7
+                webform_submission_value_6:
+                  enabled: false
+                  color: '#7643b6'
+                  weight: 7
+            display:
+              title: ''
+              title_position: out
+              subtitle: ''
+              data_labels: false
+              data_markers: false
+              legend_position: right
+              background: ''
+              three_dimensional: 0
+              polar: 0
+              tooltips: true
+              dimensions:
+                width: ''
+                width_units: '%'
+                height: ''
+                height_units: ''
+              gauge:
+                max: '100'
+                min: '0'
+                green_from: '85'
+                green_to: '100'
+                yellow_from: '50'
+                yellow_to: '85'
+                red_from: '0'
+                red_to: '50'
+              color_changer: false
+            xaxis:
+              title: horizontal
+              labels_rotation: '0'
+            yaxis:
+              title: vertucal
+              min: ''
+              max: ''
+              prefix: ''
+              suffix: ''
+              decimal_count: ''
+              labels_rotation: '0'
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        title: false
+        group_by: false
+        style: false
+        row: false
+        arguments: false
+      group_by: true
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - user
+        - user.permissions
+      tags: {  }
+  block_link_to_result:
+    id: block_link_to_result
+    display_title: 'Link to result'
+    display_plugin: block
+    position: 4
+    display_options:
+      title: ''
+      fields:
+        entity_id:
+          id: entity_id
+          table: webform_submission
+          field: entity_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: entity_id
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        webform_submission_value:
+          id: webform_submission_value
+          table: webform_submission_field_summer_paddle_survey_sublitted_from
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: '/node/16?id={{ entity_id }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: '0'
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 0
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<h1>No Results found</h1>\r\n\r\n<p>The survey likely hasn't had any submissions yet</p>"
+            format: basic_html
+          tokenize: false
+      arguments: {  }
+      filters:
+        webform_id:
+          id: webform_id
+          table: webform_submission
+          field: webform_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: webform_id
+          plugin_id: bundle
+          operator: in
+          value:
+            summer_paddle_survey: summer_paddle_survey
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        langcode:
+          id: langcode
+          table: webform_submission
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_site_default***': '***LANGUAGE_site_default***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        empty: false
+        title: false
+        group_by: false
+        style: false
+        row: false
+        fields: false
+        arguments: false
+        filters: false
+        filter_groups: false
+        header: false
+        footer: false
+      group_by: true
+      display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<a href="/node/17">All camps</a>'
+            format: basic_html
+          tokenize: false
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user
+        - user.permissions
       tags: {  }
   block_paddle_skills:
     id: block_paddle_skills
@@ -742,8 +1810,89 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      style:
+        type: chart
+        options:
+          grouping: {  }
+          chart_settings:
+            library: billboard
+            type: pie
+            fields:
+              label: webform_submission_value
+              stacking: false
+              data_providers:
+                webform_submission_value:
+                  enabled: false
+                  color: '#f07c33'
+                  weight: 7
+                webform_submission_value_1:
+                  enabled: false
+                  color: '#342e9c'
+                  weight: 7
+                webform_submission_value_2:
+                  enabled: false
+                  color: '#579b17'
+                  weight: 7
+                webform_submission_value_4:
+                  enabled: true
+                  color: '#3d7539'
+                  weight: 7
+                webform_submission_value_5:
+                  enabled: false
+                  color: '#2326dd'
+                  weight: 7
+                webform_submission_value_6:
+                  enabled: false
+                  color: '#7643b6'
+                  weight: 7
+            display:
+              title: ''
+              title_position: out
+              subtitle: ''
+              data_labels: false
+              data_markers: false
+              legend_position: right
+              background: ''
+              three_dimensional: 0
+              polar: 0
+              tooltips: true
+              dimensions:
+                width: ''
+                width_units: '%'
+                height: ''
+                height_units: ''
+              gauge:
+                max: '100'
+                min: '0'
+                green_from: '85'
+                green_to: '100'
+                yellow_from: '50'
+                yellow_to: '85'
+                red_from: '0'
+                red_to: '50'
+              color_changer: false
+            xaxis:
+              title: horizontal
+              labels_rotation: '0'
+            yaxis:
+              title: vertucal
+              min: ''
+              max: ''
+              prefix: ''
+              suffix: ''
+              decimal_count: ''
+              labels_rotation: '0'
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         group_by: false
+        style: false
+        row: false
       group_by: true
       display_description: ''
       display_extenders: {  }
@@ -753,4 +1902,884 @@ display:
         - 'languages:language_interface'
         - url
         - user
+        - user.permissions
+      tags: {  }
+  block_responses_all:
+    id: block_responses_all
+    display_title: responses-all
+    display_plugin: block
+    position: 4
+    display_options:
+      title: Responses
+      fields:
+        sid:
+          id: sid
+          table: webform_submission
+          field: sid
+          relationship: none
+          group_type: count
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: sid
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: '{{ webform_submission_value }} <i>{{ sid }}  submissions</i>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: true
+          empty_zero: true
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          set_precision: false
+          precision: 0
+          decimal: .
+          format_plural: 1
+          format_plural_string: !!binary MSBzdWJtaXNzaW9uA0Bjb3VudCBzdWJtaXNzaW9ucw==
+          prefix: ''
+          suffix: ''
+        webform_submission_value:
+          id: webform_submission_value
+          table: webform_submission_field_summer_paddle_survey_sublitted_from
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '{{ webform_submission_value }} |  {{ sid }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: '0'
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: true
+          empty_zero: true
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 0
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<h1>No Results found</h1>\r\n\r\n<p>The survey likely hasn't had any submissions yet</p>"
+            format: basic_html
+          tokenize: false
+      arguments: {  }
+      filters:
+        sid:
+          id: sid
+          table: webform_submission
+          field: sid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: sid
+          plugin_id: numeric
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: sid_op
+            label: 'Submission ID'
+            description: ''
+            use_operator: false
+            operator: sid_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: sid
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        webform_submission_value:
+          id: webform_submission_value
+          table: webform_submission_field_summer_paddle_survey_sublitted_from
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_computed_filter
+          operator: longerthan
+          value: '3'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: html_list
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          type: ul
+          wrapper_class: item-list
+          class: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        empty: false
+        title: false
+        group_by: false
+        style: false
+        row: false
+        fields: false
+        arguments: false
+        filters: false
+        filter_groups: false
+        header: false
+      group_by: true
+      display_description: ''
+      header: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - user
+        - user.permissions
+      tags: {  }
+  block_return_all:
+    id: block_return_all
+    display_title: 'return - all'
+    display_plugin: block
+    position: 1
+    display_options:
+      title: 'Will you return?'
+      arguments: {  }
+      style:
+        type: chart
+        options:
+          grouping: {  }
+          chart_settings:
+            library: billboard
+            type: pie
+            fields:
+              label: webform_submission_value_2
+              stacking: false
+              data_providers:
+                webform_submission_value:
+                  enabled: false
+                  color: '#f07c33'
+                  weight: 7
+                webform_submission_value_1:
+                  enabled: false
+                  color: '#342e9c'
+                  weight: 7
+                webform_submission_value_2:
+                  enabled: false
+                  color: '#579b17'
+                  weight: 7
+                webform_submission_value_4:
+                  enabled: false
+                  color: '#75060a'
+                  weight: 7
+                webform_submission_value_5:
+                  enabled: false
+                  color: '#2326dd'
+                  weight: 7
+                webform_submission_value_6:
+                  enabled: true
+                  color: '#7643b6'
+                  weight: 7
+            display:
+              title: ''
+              title_position: out
+              subtitle: ''
+              data_labels: false
+              data_markers: false
+              legend_position: right
+              background: ''
+              three_dimensional: 0
+              polar: 0
+              tooltips: true
+              dimensions:
+                width: ''
+                width_units: '%'
+                height: ''
+                height_units: ''
+              gauge:
+                max: '100'
+                min: '0'
+                green_from: '85'
+                green_to: '100'
+                yellow_from: '50'
+                yellow_to: '85'
+                red_from: '0'
+                red_to: '50'
+              color_changer: false
+            xaxis:
+              title: horizontal
+              labels_rotation: '0'
+            yaxis:
+              title: vertucal
+              min: ''
+              max: ''
+              prefix: ''
+              suffix: ''
+              decimal_count: ''
+              labels_rotation: '0'
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        title: false
+        group_by: false
+        style: false
+        row: false
+        arguments: false
+      group_by: true
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - user
+        - user.permissions
+      tags: {  }
+  block_skills_all:
+    id: block_skills_all
+    display_title: 'skills  - all'
+    display_plugin: block
+    position: 1
+    display_options:
+      arguments: {  }
+      style:
+        type: chart
+        options:
+          grouping: {  }
+          chart_settings:
+            library: billboard
+            type: pie
+            fields:
+              label: webform_submission_value
+              stacking: false
+              data_providers:
+                webform_submission_value:
+                  enabled: false
+                  color: '#f07c33'
+                  weight: 7
+                webform_submission_value_1:
+                  enabled: false
+                  color: '#342e9c'
+                  weight: 7
+                webform_submission_value_2:
+                  enabled: false
+                  color: '#579b17'
+                  weight: 7
+                webform_submission_value_4:
+                  enabled: true
+                  color: '#3d7539'
+                  weight: 7
+                webform_submission_value_5:
+                  enabled: false
+                  color: '#2326dd'
+                  weight: 7
+                webform_submission_value_6:
+                  enabled: false
+                  color: '#7643b6'
+                  weight: 7
+            display:
+              title: ''
+              title_position: out
+              subtitle: ''
+              data_labels: false
+              data_markers: false
+              legend_position: right
+              background: ''
+              three_dimensional: 0
+              polar: 0
+              tooltips: true
+              dimensions:
+                width: ''
+                width_units: '%'
+                height: ''
+                height_units: ''
+              gauge:
+                max: '100'
+                min: '0'
+                green_from: '85'
+                green_to: '100'
+                yellow_from: '50'
+                yellow_to: '85'
+                red_from: '0'
+                red_to: '50'
+              color_changer: false
+            xaxis:
+              title: horizontal
+              labels_rotation: '0'
+            yaxis:
+              title: vertucal
+              min: ''
+              max: ''
+              prefix: ''
+              suffix: ''
+              decimal_count: ''
+              labels_rotation: '0'
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        group_by: false
+        style: false
+        row: false
+        arguments: false
+      group_by: true
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - user
+        - user.permissions
+      tags: {  }
+  data_export_1:
+    id: data_export_1
+    display_title: 'Data export'
+    display_plugin: data_export
+    position: 10
+    display_options:
+      fields:
+        webform_submission_value_4:
+          id: webform_submission_value_4
+          table: webform_submission_field_summer_paddle_survey_sublitted_from
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: 'Sublitted from'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 0
+        completed:
+          id: completed
+          table: webform_submission
+          field: completed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: webform_submission
+          entity_field: completed
+          plugin_id: field
+          label: Completed
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: 'Y-m-d H:i'
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        webform_submission_value:
+          id: webform_submission_value
+          table: webform_submission_field_summer_paddle_survey_paddling_skill
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: 'Do you feel like you or your child/ children  improved your paddling skills?'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 1
+        webform_submission_value_1:
+          id: webform_submission_value_1
+          table: webform_submission_field_summer_paddle_survey_amount_of_fun
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: 'How much fun did you or your child/ children have during your PICC summer program?'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 1
+        webform_submission_value_2:
+          id: webform_submission_value_2
+          table: webform_submission_field_summer_paddle_survey_return_paddler
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: 'Would you or your child/ children come back and do the program again or join another PICC program?'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 1
+        webform_submission_value_3:
+          id: webform_submission_value_3
+          table: webform_submission_field_summer_paddle_survey_comment
+          field: webform_submission_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: webform_submission_field
+          label: Comments
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          webform_element_format: value
+          webform_multiple_value: true
+          webform_multiple_delta: 0
+          webform_check_access: 0
+      arguments: {  }
+      style:
+        type: data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: true
+            trim: true
+            encoding: utf8
+            utf8_bom: '0'
+            use_serializer_encode_only: false
+      defaults:
+        fields: false
+        arguments: false
+      display_extenders: {  }
+      path: export
+      displays:
+        block_responses_all: block_responses_all
+        default: '0'
+        block_2: '0'
+        block_camp: '0'
+        block_comment: '0'
+        block_comments_all: '0'
+        block_fun: '0'
+        block_fun_all: '0'
+        block_paddle_skills: '0'
+        block_skills_all: '0'
+      filename: '[date:html_date]-picc-survey-resullts.csv'
+      automatic_download: true
+      store_in_public_file_directory: false
+      custom_redirect_path: false
+      redirect_to_display: none
+      include_query_params: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+        - user
+        - user.permissions
       tags: {  }

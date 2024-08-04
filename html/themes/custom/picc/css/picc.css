@@ -1,7 +1,73 @@
+:root {
+  /* semantic colours */
+  --picc-positive: rgb(0, 100, 0);
+  --picc-impartial: rgb(185, 121, 10);
+  --picc-negative: rgb(139, 0, 0);
+  --picc-neutral: rgb(77, 89, 91);
+}
+
 .picc-lang {
   margin-top: 1.25em;
   text-align: right;
 }
 .picc-lang a {
   text-decoration: none;
+}
+
+
+/* Set the colours in the pie chart */
+
+[class*="bb-legend-item"][class*="Yes--A-lot"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="Yes--A-lot"],
+[class*="bb-legend-item"][class*="Absolutely"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="Absolutely"],
+[class*="bb-legend-item"][class*="Lots"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="Lots"] {
+  fill: var(--picc-positive) !important;
+  stroke: var(--picc-positive) !important;
+}
+
+[class*="bb-legend-item"][class*="Yes--a-bit"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="Yes--a-bit"],
+[class*="bb-legend-item"][class*="Maybe"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="Maybe"],
+[class*="bb-legend-item"][class*="A-bit"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="A-bit"] {
+  fill: var(--picc-impartial) !important;
+  stroke: var(--picc-impartial) !important;
+}
+
+[class*="bb-legend-item"][class*="No"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="No"],
+[class*="bb-legend-item"][class*="Probably-not"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="Probably-not"],
+[class*="bb-legend-item"][class*="Not-much"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="Not-much"] {
+  fill: var(--picc-negative) !important;
+  stroke: var(--picc-negative) !important;
+}
+
+[class*="bb-legend-item"][class*="I-don-t-know"] .bb-legend-item-tile,
+[class*="bb-arc"][class*="I-don-t-know"] {
+  fill: var(--picc-neutral) !important;
+  stroke: var(--picc-neutral) !important;
+}
+
+[class*="block-views-blocksurvey-results"] {
+ h2 {
+  font-size: 1.5em;
+  text-align: center;
+ }
+}
+
+[class*="block-views-blocksurvey-results-block-comment"],
+[class*="block-views-blocksurvey-results-block-responses"] {
+  h2 {
+    text-align: left;
+    margin-top: 3em;
+  }
+}
+
+main {
+  padding-bottom: 4em;
 }
