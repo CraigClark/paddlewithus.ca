@@ -1,0 +1,14 @@
+uuid: 593540a3-9d62-4761-8323-90f4ddf433a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.board_member
+  module:
+    - user
+id: user_remove_role_action.board_member
+label: 'Remove the board member role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: board_member

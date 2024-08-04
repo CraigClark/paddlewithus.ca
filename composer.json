@@ -7,21 +7,41 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "billboardjs/billboard",
+                "version": "3.10.3",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "billboard"
+                },
+                "dist": {
+                    "url": "https://registry.npmjs.org/billboard.js/-/billboard.js-3.10.3.tgz",
+                    "type": "tar"
+                }
+            }
         }
     ],
     "require": {
+        "billboardjs/billboard": "^3.10",
         "composer/installers": "^2.0",
         "drupal/admin_toolbar": "^3.4",
         "drupal/antibot": "^2.0",
+        "drupal/better_exposed_filters": "^7.0@beta",
         "drupal/bootstrap5": "^4.0",
+        "drupal/charts": "^5.1",
+        "drupal/collapsiblock": "^4.3",
         "drupal/core-composer-scaffold": "^10.1",
         "drupal/core-recommended": "^10.1",
         "drupal/devel": "^5.0",
         "drupal/language_switcher_extended": "^1.1",
         "drupal/pathauto": "^1.12",
-        "drupal/recaptcha": "^3.3",
+        "drupal/views_data_export": "^1.4",
         "drupal/webform": "^6.2",
         "drupal/webform_analysis": "^1.0@beta",
+        "drupal/webform_views": "^5.2",
         "drush/drush": "^12.5"
     },
     "conflict": {
@@ -41,6 +61,15 @@
             "php-http/discovery": true
         },
         "sort-packages": true
+    },
+    "scripts": {
+        "clean-billboardjs": "./scripts/clean-billboardjs.sh",
+        "post-install-cmd": [
+            "@clean-billboardjs"
+        ],
+        "post-update-cmd": [
+            "@clean-billboardjs"
+        ]
     },
     "extra": {
         "drupal-scaffold": {

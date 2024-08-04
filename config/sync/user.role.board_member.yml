@@ -1,0 +1,12 @@
+uuid: b04a930b-ca3f-4b49-9c4c-4cd5948574f1
+langcode: en
+status: true
+dependencies:
+  module:
+    - webform
+id: board_member
+label: 'board member'
+weight: 4
+is_admin: null
+permissions:
+  - 'view any webform submission'

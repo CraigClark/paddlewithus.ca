@@ -50,3 +50,7 @@ html/themes/*
 !html/themes/custom/
 !/html/robots.txt
 
+#Databases
+*.sql.gz
+*.sql
+
