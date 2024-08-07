@@ -303,6 +303,14 @@ display:
           webform_element_format: value
           webform_multiple_value: true
           webform_multiple_delta: 0
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ','
+          format_plural: false
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
           webform_check_access: 1
         webform_submission_value_6:
           id: webform_submission_value_6
@@ -580,6 +588,38 @@ display:
       relationships: {  }
       header: {  }
       footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - user
+        - user.permissions
+      tags: {  }
+  block_1:
+    id: block_1
+    display_title: 'list of submissions'
+    display_plugin: block
+    position: 13
+    display_options:
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        style: false
+        row: false
+      display_description: ''
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -1610,7 +1650,7 @@ display:
             alter_text: false
             text: ''
             make_link: true
-            path: '/node/16?id={{ entity_id }}'
+            path: '/node/17?id={{ entity_id }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -1791,7 +1831,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<a href="/node/17">All camps</a>'
+            value: '<a href="/node/16">All camps</a>'
             format: basic_html
           tokenize: false
       footer: {  }

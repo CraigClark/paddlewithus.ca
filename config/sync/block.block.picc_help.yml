@@ -11,7 +11,7 @@ _core:
 id: picc_help
 theme: picc
 region: content
-weight: 1
+weight: 0
 provider: null
 plugin: help_block
 settings:
