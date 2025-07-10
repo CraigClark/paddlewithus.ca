@@ -1,0 +1,24 @@
+uuid: 52027ded-01d0-4f49-836e-7c49d5be2b49
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_qr
+    - node.type.summer_program
+  module:
+    - qrcode_fields
+id: node.summer_program.field_qr
+field_name: field_qr
+entity_type: node
+bundle: summer_program
+label: QR
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    text: '[node:url]'
+default_value_callback: ''
+settings:
+  qrcode_plugin: goqr
+field_type: qrcode_text

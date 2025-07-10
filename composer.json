@@ -41,6 +41,7 @@
         "drupal/hide_revision_field": "^2.5",
         "drupal/language_switcher_extended": "^1.1",
         "drupal/pathauto": "^1.12",
+        "drupal/qrcode_fields": "^2.1",
         "drupal/redirect": "^1.11",
         "drupal/views_data_export": "^1.4",
         "drupal/webform": "^6.2",
