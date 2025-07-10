@@ -488,6 +488,19 @@ display:
         options: {  }
       empty: {  }
       sorts:
+        field_program_target_id:
+          id: field_program_target_id
+          table: node__field_program
+          field: field_program_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         field_end_date_value:
           id: field_end_date_value
           table: node__field_end_date
