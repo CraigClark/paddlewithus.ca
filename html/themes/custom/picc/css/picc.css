@@ -71,3 +71,59 @@
 main {
   padding-bottom: 4em;
 }
+
+.qr-codes {
+  margin: 3em 0 6em;
+}
+
+@media screen and (min-width:30em) {
+  .qr-codes {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2em;
+    margin: 3em 0 8em;
+    align-items: center;
+  }
+}
+
+@media print {
+  .qr-codes {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2em;
+    margin: 3em 0 8em;
+    align-items: center;
+  }
+}
+
+.qr-codes .qr-program {
+  font-weight: 900;
+  font-size: 3em;
+}
+
+.qr-codes .qr-dates {
+  font-size: 2em;
+}
+
+@media print {
+  .qr-codes {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 2em;
+    margin: 8em 0;
+    align-items: center;
+  }
+  .qr-codes .qr-program {
+    font-weight: 900;
+    font-size: 3em;
+  }
+
+  .qr-codes .qr-dates {
+    font-size: 1.5em;
+  }
+
+  ul.picc-lang {
+    display: none;
+  }
+}
+

@@ -1,0 +1,9 @@
+display:
+  default:
+    display_options:
+      fields:
+        nothing:
+          alter:
+            text: "<div class=\"qr-codes\">\r\n  <div>\r\n    {{ field_qr }}\r\n  </div>\r\n  <div>\r\n<h2>Veuillez répondre à notre sondage pour nous aider à évaluer notre programme.</h2>\r\n    <div class=\"qr-program\">\r\n      {{ field_program }}\r\n    </div>\r\n    <div class=\"qr-dates\">\r\n      du {{ field_start_date }} au {{ field_end_date }} {{ field_end_date_1 }}\r\n    </div>\r\n<p>Scannez le code QR pour répondre au sondage — cela prend moins d’une minute.</p>\r\n  </div>\r\n</div>"
+      title: 'Codes QR'
+label: 'Codes QR'

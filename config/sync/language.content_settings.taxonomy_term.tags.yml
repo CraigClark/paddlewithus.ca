@@ -1,18 +1,18 @@
-uuid: 94c3f01b-6c02-4abf-b504-fca37a83f9e9
+uuid: 000c8e9a-fdb4-412c-bbd4-a9b3d262c783
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.summer_program
+    - taxonomy.vocabulary.tags
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: true
+    enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: node.summer_program
-target_entity_type_id: node
-target_bundle: summer_program
+id: taxonomy_term.tags
+target_entity_type_id: taxonomy_term
+target_bundle: tags
 default_langcode: site_default
 language_alterable: false

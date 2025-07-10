@@ -1,18 +1,18 @@
-uuid: 94c3f01b-6c02-4abf-b504-fca37a83f9e9
+uuid: 82cc83b9-69d7-46dc-a9fc-3c4b5056eee6
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.summer_program
+    - shortcut.set.default
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: true
+    enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: node.summer_program
-target_entity_type_id: node
-target_bundle: summer_program
+id: shortcut.default
+target_entity_type_id: shortcut
+target_bundle: default
 default_langcode: site_default
 language_alterable: false

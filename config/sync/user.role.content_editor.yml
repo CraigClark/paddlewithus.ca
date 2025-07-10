@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - node.type.page
+    - node.type.summer_program
+    - taxonomy.vocabulary.summer_program
     - taxonomy.vocabulary.tags
   module:
+    - content_translation
     - contextual
     - file
     - node
@@ -26,15 +29,27 @@ permissions:
   - 'access files overview'
   - 'access toolbar'
   - 'administer url aliases'
+  - 'create content translations'
   - 'create page content'
+  - 'create summer_program content'
+  - 'create terms in summer_program'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'delete any summer_program content'
+  - 'delete content translations'
   - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
+  - 'delete terms in summer_program'
   - 'edit own page content'
+  - 'edit terms in summer_program'
   - 'edit terms in tags'
   - 'revert all revisions'
+  - 'translate any entity'
+  - 'translate page node'
+  - 'translate summer_program node'
+  - 'translate summer_program taxonomy_term'
+  - 'update content translations'
   - 'view all revisions'
   - 'view own unpublished content'
   - 'view the administration theme'

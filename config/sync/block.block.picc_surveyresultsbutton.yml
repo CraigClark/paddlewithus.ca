@@ -28,7 +28,7 @@ visibility:
   request_path:
     id: request_path
     negate: true
-    pages: "/node/16\r\n/node/17"
+    pages: "/node/16\r\n/node/17\r\n/en/qr\r\n/fr/qr\r\n/qr"
   user_role:
     id: user_role
     negate: false

@@ -1,5 +1,5 @@
 status: 1
-pattern: '[node:field_program] | [node:field_start_date:date:custom:F d] to [node:field_end_date:date:custom:F d Y]'
+pattern: '[node:field_program] | du [node:field_start_date:date:custom:d F] au [node:field_end_date:date:custom:d F Y]'
 escape: false
 preserve_titles: false
 save: true
