@@ -1,0 +1,10 @@
+status: 1
+pattern: '[node:field_program] | [node:field_start_date:date:custom:F d] - [node:field_end_date:date:custom:F d Y]'
+escape: false
+preserve_titles: false
+save: true
+chunk: 50
+dependencies:
+  config:
+    - node.type.summer_program
+new_content_behavior: 0

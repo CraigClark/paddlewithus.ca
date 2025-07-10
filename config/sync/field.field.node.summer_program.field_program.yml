@@ -1,0 +1,29 @@
+uuid: ee5f6432-e889-47d6-a5de-fd9c7ca6c47c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_program
+    - node.type.summer_program
+    - taxonomy.vocabulary.summer_program
+id: node.summer_program.field_program
+field_name: field_program
+entity_type: node
+bundle: summer_program
+label: Program
+description: 'If you don''t see the program you need, <a href="/admin/structure/taxonomy/manage/summer_program/overview">add it here</a>.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      summer_program: summer_program
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

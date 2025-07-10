@@ -1,0 +1,16 @@
+uuid: 94c3f01b-6c02-4abf-b504-fca37a83f9e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.summer_program
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.summer_program
+target_entity_type_id: node
+target_bundle: summer_program
+default_langcode: site_default
+language_alterable: false

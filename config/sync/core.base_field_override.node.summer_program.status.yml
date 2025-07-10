@@ -1,0 +1,22 @@
+uuid: 32d52494-9ad7-474b-9768-db00ad0ee8bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.summer_program
+id: node.summer_program.status
+field_name: status
+entity_type: node
+bundle: summer_program
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

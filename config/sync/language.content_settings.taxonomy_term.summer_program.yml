@@ -1,0 +1,16 @@
+uuid: 9ffa3cb1-5a61-4b24-b758-37263428f454
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.summer_program
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.summer_program
+target_entity_type_id: taxonomy_term
+target_bundle: summer_program
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,33 @@
+uuid: ca71ee59-d736-4b3a-a25c-17fad50974be
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.webform
+    - node.type.summer_program
+    - webform.webform.summer_paddle_survey
+  module:
+    - webform
+id: node.summer_program.webform
+field_name: webform
+entity_type: node
+bundle: summer_program
+label: Webform
+description: 'Select the webform that you would like to attach to this node.'
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 0dd3ccf5-6c83-475b-b554-a4019634f330
+    default_data: ''
+    status: open
+    open: ''
+    close: ''
+    webform_access_group: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: webform

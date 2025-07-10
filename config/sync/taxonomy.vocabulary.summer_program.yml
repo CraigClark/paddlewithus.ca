@@ -1,0 +1,9 @@
+uuid: 3da83563-c252-47f3-a387-dc9d9ae1cf88
+langcode: en
+status: true
+dependencies: {  }
+name: 'Summer program'
+vid: summer_program
+description: 'List of programs available in the summer'
+weight: 0
+new_revision: false

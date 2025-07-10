@@ -1,0 +1,29 @@
+uuid: a4071618-4799-485b-b6c2-24d58b840f4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.summer_program.field_end_date
+    - field.field.node.summer_program.field_program
+    - field.field.node.summer_program.field_start_date
+    - field.field.node.summer_program.webform
+    - node.type.summer_program
+  module:
+    - user
+id: node.summer_program.teaser
+targetEntityType: node
+bundle: summer_program
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_end_date: true
+  field_program: true
+  field_start_date: true
+  langcode: true
+  webform: true

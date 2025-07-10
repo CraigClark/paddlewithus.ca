@@ -1,0 +1,21 @@
+uuid: bcaa85a9-0534-4f72-8e3b-7265333428bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_start_date
+    - node.type.summer_program
+  module:
+    - datetime
+id: node.summer_program.field_start_date
+field_name: field_start_date
+entity_type: node
+bundle: summer_program
+label: 'Start date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

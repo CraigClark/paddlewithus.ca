@@ -493,9 +493,10 @@ display:
           entity_field: langcode
           plugin_id: language
           operator: in
-          value: {  }
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
           group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: langcode_op
             label: Language

@@ -1,0 +1,21 @@
+uuid: 4c3bf414-6aef-4e2d-801e-0a5884f4f4de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_end_date
+    - node.type.summer_program
+  module:
+    - datetime
+id: node.summer_program.field_end_date
+field_name: field_end_date
+entity_type: node
+bundle: summer_program
+label: 'End date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

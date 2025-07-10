@@ -1,6 +1,7 @@
 _core:
   default_config_hash: 4GIX5Esnc_umpXUBj4IIocRX7Mt5fPhm4AgXfE3E56E
 module:
+  auto_entitylabel: -100
   admin_toolbar: 0
   admin_toolbar_tools: 0
   announcements_feed: 0
@@ -15,6 +16,7 @@ module:
   charts_billboard: 0
   charts_blocks: 0
   ckeditor5: 0
+  coffee: 0
   collapsiblock: 0
   config: 0
   config_translation: 0
@@ -48,6 +50,7 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  redirect: 0
   rest: 0
   serialization: 0
   settings_tray: 0
@@ -73,6 +76,7 @@ module:
   webform_ui: 0
   webform_views: 0
   webform_views_example: 0
+  hide_revision_field: 1
   pathauto: 1
   webform_bootstrap: 1
   content_translation: 10

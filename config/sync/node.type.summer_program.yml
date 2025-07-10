@@ -1,0 +1,17 @@
+uuid: 01656174-50cf-44cd-b003-586144d7d7a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'summer program survey'
+type: summer_program
+description: null
+help: null
+new_revision: false
+preview_mode: 1
+display_submitted: false
