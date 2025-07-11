@@ -29,6 +29,7 @@ compass_app_log.txt
 *.prettierignore
 *.editorconfig
 .vscode/
+.nova
 
 # Node
 node_modules/

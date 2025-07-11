@@ -1,0 +1,60 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Content types to apply this behavior to.
+ */
+function auto_translation_stub_get_enabled_content_types(): array {
+  return [
+    'summer_program',
+    // Add more content types here if needed.
+  ];
+}
+
+/**
+ * Languages to create stubs in.
+ */
+function auto_translation_stub_get_target_languages(): array {
+  return [
+    'fr', // Add other language codes if needed.
+  ];
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function auto_translation_stub_entity_insert(EntityInterface $entity): void {
+  if ($entity instanceof Node && in_array($entity->bundle(), auto_translation_stub_get_enabled_content_types())) {
+    auto_translation_stub_create_translations($entity);
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function auto_translation_stub_entity_update(EntityInterface $entity): void {
+  if ($entity instanceof Node && in_array($entity->bundle(), auto_translation_stub_get_enabled_content_types())) {
+    auto_translation_stub_create_translations($entity);
+  }
+}
+
+/**
+ * Automatically create translation stubs.
+ */
+function auto_translation_stub_create_translations(Node $node): void {
+  $default_lang = $node->language()->getId();
+
+  foreach (auto_translation_stub_get_target_languages() as $langcode) {
+    if ($langcode === $default_lang) {
+      continue;
+    }
+
+    if (!$node->hasTranslation($langcode)) {
+      $translation = $node->addTranslation($langcode, $node->toArray());
+      $translation->setPublished(true);
+      $translation->save();
+    }
+  }
+}
