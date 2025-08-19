@@ -36,6 +36,7 @@ module:
   history: 0
   image: 0
   inline_form_errors: 0
+  jquery_ui: 0
   js_cookie: 0
   language: 0
   language_switcher_extended: 0
@@ -59,6 +60,7 @@ module:
   shortcut: 0
   system: 0
   taxonomy: 0
+  taxonomy_manager: 0
   text: 0
   token: 0
   toolbar: 0

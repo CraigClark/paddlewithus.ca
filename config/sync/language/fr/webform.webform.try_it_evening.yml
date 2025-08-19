@@ -1,0 +1,29 @@
+title: 'Prêt pour la régate'
+elements: |
+  header_text:
+    '#text': '<div class="alert alert-success my-4" role="alert">Nous voulons avoir votre avis!</div>'
+  amount_of_fun:
+    '#title': "À quel point vous ou votre/vos enfant(s) vous êtes-vous amusés pendant votre programme d'été CCIP?"
+    '#options':
+      high: Beaucoup!
+      medium: 'Un peu'
+      low: 'Pas beaucoup'
+  paddling_skill:
+    '#title': 'Avez-vous l’impression que vous, votre enfant ou vos enfants avez amélioré vos techniques de pagayage?'
+    '#options':
+      high: 'Oui! Beaucoup'
+      medium: 'Oui, un peu'
+      low: Non
+      unsure: 'Je ne sais pas'
+  return_paddler:
+    '#title': 'Est-ce que vous, votre enfant ou vos enfants reviendriez au programme ou vous joindriez à un autre programme PICC?'
+    '#options':
+      high: Absolument!
+      medium: Peut-être
+      low: 'Probablement pas'
+  comment:
+    '#title': Commentaires
+settings:
+  form_confidential_message: '<p>Les soumissions sont confidentielles.</p>'
+  confirmation_title: 'Merci pour votre soumission'
+  confirmation_message: '<div class="row"><div class="col-sm-6 mb-3 mb-sm-0"><div class="card h-100"><div class="card-body"><h5 class="card-title">Garder le contact</h5><p class="card-text">Joignez-vous à nous sur Facebook pour des mises à jour intéressantes, des événements formidables et beaucoup de plaisir à pagayer à l’île Petrie!</p><p><a class="btn btn-primary" href="https://www.facebook.com/petriecanoe/">Rejoignez-nous sur Facebook</a></p></div></div></div><div class="col-sm-6"><div class="card h-100"><div class="card-body"><h5 class="card-title">Camps &amp; Programmes</h5><p class="card-text">Saviez-vous que nous offrons des programmes tout au long de l’année? Nous offrons une variété incroyable de programmes de canotage pour tous les âges et tous les niveaux de compétence! Que vos tout-petits veuillent commencer par nos programmes pour les jeunes, que vous soyez à la recherche de loisirs ou que vos adolescents soient prêts à plonger dans le canotage de compétition, nous avons quelque chose pour tout le monde!</p><p><a class="btn btn-primary" href="https://petriecanoe.ca/programs/">Découvrez nos programmes</a></p></div></div></div></div>'

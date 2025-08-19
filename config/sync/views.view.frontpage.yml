@@ -8,6 +8,7 @@ dependencies:
   module:
     - datetime
     - node
+    - taxonomy
     - user
 _core:
   default_config_hash: OEEnRQIjfIaCFRsz8U3VqDrE82ltQKlo8wNbQJRZXu0
@@ -160,7 +161,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 50
+          items_per_page: 100
           total_pages: 0
           id: 0
           tags:
@@ -230,13 +231,15 @@ display:
           empty: true
           title: Welcome!
       sorts:
-        field_program_target_id:
-          id: field_program_target_id
-          table: node__field_program
-          field: field_program_target_id
-          relationship: none
+        weight:
+          id: weight
+          table: taxonomy_term_field_data
+          field: weight
+          relationship: field_program
           group_type: group
           admin_label: ''
+          entity_type: taxonomy_term
+          entity_field: weight
           plugin_id: standard
           order: ASC
           expose:
@@ -396,10 +399,19 @@ display:
         options:
           query_comment: ''
           disable_sql_rewrite: false
-          distinct: false
+          distinct: true
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        field_program:
+          id: field_program
+          table: node__field_program
+          field: field_program
+          relationship: none
+          group_type: group
+          admin_label: 'field_program: Taxonomy term'
+          plugin_id: standard
+          required: false
       header:
         area:
           id: area

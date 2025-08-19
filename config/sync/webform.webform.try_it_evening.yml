@@ -1,4 +1,4 @@
-uuid: 0dd3ccf5-6c83-475b-b554-a4019634f330
+uuid: 250e7ec2-9f93-4264-b23b-9acada8addf0
 langcode: en
 status: open
 dependencies:
@@ -17,8 +17,8 @@ close: null
 uid: 1
 template: false
 archive: false
-id: summer_paddle_survey
-title: 'Summer paddle survey'
+id: try_it_evening
+title: 'Try it evening'
 description: ''
 categories: {  }
 elements: |-
@@ -28,35 +28,45 @@ elements: |-
     '#format': full_html
   amount_of_fun:
     '#type': radios
-    '#title': 'How much fun did you or your child/children have during your PICC summer program?'
+    '#title': 'Did you have fun?'
     '#title_display': before
     '#options':
-      high: Lots!
+      high: 'Yes! Lots!'
       medium: 'A bit'
       low: 'Not much'
     '#required': true
-  paddling_skill:
+  signup_ease:
     '#type': radios
-    '#title': 'Do you feel like you or your child/children  improved your paddling skills?'
-    '#title_display': before
+    '#title': 'Was it easy to sign-up?'
     '#options':
-      high: 'Yes! A lot'
-      medium: 'Yes, a bit'
-      low: 'No'
-      unsure: "I don't know"
+      'yes': 'yes'
+      'no': 'no'
     '#required': true
-  return_paddler:
-    '#type': radios
-    '#title': 'Would you or your child/children come back and do the program again or join another PICC program?'
-    '#title_display': before
+  referral_source:
+    '#type': webform_checkboxes_other
+    '#title': 'How did you hear about us?'
     '#options':
-      high: Absolutely!
-      medium: Maybe
-      low: 'Probably not'
+      social: 'Social media'
+      personal_referral: 'From someone in a paddle program.'
+      beach_visibility: 'Spotted the club at the beach'
     '#required': true
+  program_interest:
+    '#type': checkbox
+    '#title': 'I’m interested in programs'
   comment:
     '#type': textarea
     '#title': Comments
+  program_interest_type:
+    '#type': webform_entity_checkboxes
+    '#title': 'What program are you interested in?'
+    '#target_type': taxonomy_term
+    '#selection_handler': 'default:taxonomy_term'
+    '#selection_settings':
+      target_bundles:
+        program_types: program_types
+      sort:
+        field: name
+        direction: asc
   sublitted_from:
     '#type': webform_computed_token
     '#title': 'Sublitted from'
