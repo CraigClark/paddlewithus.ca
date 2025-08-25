@@ -45,7 +45,6 @@
         "drupal/qrcode_fields": "^2.1",
         "drupal/redirect": "^1.11",
         "drupal/taxonomy_manager": "^2.0",
-        "drupal/upgrade_status": "^4",
         "drupal/views_data_export": "^1.4",
         "drupal/webform": "^6.3@beta",
         "drupal/webform_analysis": "^1.0@beta",
