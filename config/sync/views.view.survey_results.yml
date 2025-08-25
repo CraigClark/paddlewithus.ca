@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - webform.webform.summer_paddle_survey
+    - webform.webform.try_it_evening
   module:
     - better_exposed_filters
     - charts
@@ -303,6 +304,7 @@ display:
           webform_element_format: value
           webform_multiple_value: true
           webform_multiple_delta: 0
+          webform_check_access: 1
           set_precision: false
           precision: 0
           decimal: .
@@ -311,7 +313,6 @@ display:
           format_plural_string: !!binary MQNAY291bnQ=
           prefix: ''
           suffix: ''
-          webform_check_access: 1
         webform_submission_value_6:
           id: webform_submission_value_6
           table: webform_submission_field_summer_paddle_survey_return_paddler
@@ -386,13 +387,13 @@ display:
               autosubmit: false
               autosubmit_exclude_textfield: false
               autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
               autosubmit_hide: false
               input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
               secondary_open: false
               reset_button_always_show: false
-              autosubmit_textfield_minimum_length: 3
             filter:
               webform_submission_value:
                 plugin_id: default
@@ -468,6 +469,7 @@ display:
           operator: in
           value:
             summer_paddle_survey: summer_paddle_survey
+            try_it_evening: try_it_evening
           group: 1
           exposed: false
           expose:

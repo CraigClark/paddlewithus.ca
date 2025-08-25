@@ -1,0 +1,16 @@
+uuid: f4311267-16aa-4505-b5c4-6950e0855d71
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.day_time
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.day_time
+target_entity_type_id: taxonomy_term
+target_bundle: day_time
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,14 @@
+uuid: f9151c2e-ab49-459d-a768-49d7d90c8e43
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.coach
+  module:
+    - user
+id: user_remove_role_action.coach
+label: 'Remove the Coach role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: coach

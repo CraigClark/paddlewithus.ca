@@ -8,19 +8,23 @@ elements: |
       high: Beaucoup!
       medium: 'Un peu'
       low: 'Pas beaucoup'
-  paddling_skill:
-    '#title': 'Avez-vous l’impression que vous, votre enfant ou vos enfants avez amélioré vos techniques de pagayage?'
+  signup_ease:
+    '#title': 'L’inscription était-elle facile?'
     '#options':
-      high: 'Oui! Beaucoup'
-      medium: 'Oui, un peu'
-      low: Non
-      unsure: 'Je ne sais pas'
-  return_paddler:
-    '#title': 'Est-ce que vous, votre enfant ou vos enfants reviendriez au programme ou vous joindriez à un autre programme PICC?'
+      'yes': oui
+      'no': non
+  referral_source:
+    '#title': 'Comment avez-vous entendu parler de nous?'
     '#options':
-      high: Absolument!
-      medium: Peut-être
-      low: 'Probablement pas'
+      social: 'Médias sociaux'
+      personal_referral: 'Par quelqu’un dans un programme de pagaie'
+      beach_visibility: 'J’ai remarqué le club à la plage'
+  program_interest:
+    '#title': 'Je suis intéressé à d’autres programmes'
+  program_interest_type:
+    '#title': 'Quel programme vous intéresse?'
+  day_time:
+    '#title': 'Quels jour et heure vous conviennent le mieux?'
   comment:
     '#title': Commentaires
 settings:

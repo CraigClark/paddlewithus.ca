@@ -1,0 +1,14 @@
+uuid: 9d28fa09-0f34-44b1-93cb-4a6e3326b85a
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.athlete
+  module:
+    - user
+id: user_remove_role_action.athlete
+label: 'Remove the Athlete role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: athlete

@@ -22,6 +22,12 @@ title: 'Try it evening'
 description: ''
 categories: {  }
 elements: |-
+  sublitted_from:
+    '#type': webform_computed_token
+    '#title': 'Sublitted from'
+    '#display_on': view
+    '#template': '[webform_submission:node:title]'
+    '#store': true
   header_text:
     '#type': processed_text
     '#text': '<div class="alert alert-success my-4" role="alert">We want to hear from you!</div>'
@@ -47,32 +53,40 @@ elements: |-
     '#title': 'How did you hear about us?'
     '#options':
       social: 'Social media'
-      personal_referral: 'From someone in a paddle program.'
+      personal_referral: 'From someone in a paddle program'
       beach_visibility: 'Spotted the club at the beach'
     '#required': true
   program_interest:
     '#type': checkbox
-    '#title': 'I’m interested in programs'
+    '#title': 'I’m interested in more programs'
+  programs_container:
+    '#type': container
+    '#states':
+      visible-slide:
+        ':input[name="program_interest"]':
+          checked: true
+    program_interest_type:
+      '#type': webform_entity_checkboxes
+      '#title': 'What program are you interested in?'
+      '#target_type': taxonomy_term
+      '#selection_handler': 'default:taxonomy_term'
+      '#selection_settings':
+        target_bundles:
+          program_types: program_types
+        sort:
+          field: name
+          direction: asc
+    day_time:
+      '#type': webform_term_select
+      '#title': 'What day and time work best for you?'
+      '#select2': true
+      '#vocabulary': day_time
+      '#breadcrumb': true
+      '#tree_delimiter': ''
+      '#depth': 2
   comment:
     '#type': textarea
     '#title': Comments
-  program_interest_type:
-    '#type': webform_entity_checkboxes
-    '#title': 'What program are you interested in?'
-    '#target_type': taxonomy_term
-    '#selection_handler': 'default:taxonomy_term'
-    '#selection_settings':
-      target_bundles:
-        program_types: program_types
-      sort:
-        field: name
-        direction: asc
-  sublitted_from:
-    '#type': webform_computed_token
-    '#title': 'Sublitted from'
-    '#display_on': view
-    '#template': '[webform_submission:node:title]'
-    '#store': true
 css: ''
 javascript: ''
 settings:

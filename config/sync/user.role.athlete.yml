@@ -1,0 +1,9 @@
+uuid: 3ad51882-e338-4dbc-a298-44f58d18b6e9
+langcode: en
+status: true
+dependencies: {  }
+id: athlete
+label: Athlete
+weight: 5
+is_admin: null
+permissions: {  }

@@ -1,0 +1,9 @@
+uuid: 22f949fd-85c8-4f31-b1ec-d1c68cdf276c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Day and time'
+vid: day_time
+description: null
+weight: 0
+new_revision: false

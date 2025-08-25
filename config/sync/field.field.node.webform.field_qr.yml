@@ -1,0 +1,24 @@
+uuid: 4b989aae-c476-4966-93d2-91ff2228b27f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_qr
+    - node.type.webform
+  module:
+    - qrcode_fields
+id: node.webform.field_qr
+field_name: field_qr
+entity_type: node
+bundle: webform
+label: QR
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    text: '[node:url]'
+default_value_callback: ''
+settings:
+  qrcode_plugin: goqr
+field_type: qrcode_text

@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.webform.body
+    - field.field.node.webform.field_qr
     - field.field.node.webform.webform
     - node.type.webform
   module:
@@ -31,5 +32,6 @@ content:
     weight: 100
     region: content
 hidden:
+  field_qr: true
   langcode: true
   webform: true

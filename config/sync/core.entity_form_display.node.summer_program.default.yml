@@ -11,6 +11,7 @@ dependencies:
     - node.type.summer_program
   module:
     - datetime
+    - webform
 id: node.summer_program.default
 targetEntityType: node
 bundle: summer_program
@@ -42,6 +43,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  webform:
+    type: webform_entity_reference_select
+    weight: 4
+    region: content
+    settings:
+      default_data: true
+      webforms: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   field_qr: true
@@ -54,4 +63,3 @@ hidden:
   translation: true
   uid: true
   url_redirects: true
-  webform: true

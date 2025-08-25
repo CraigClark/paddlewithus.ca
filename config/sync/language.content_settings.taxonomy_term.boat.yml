@@ -1,0 +1,11 @@
+uuid: e21939cf-de6a-4f32-8c08-75f259008859
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+id: taxonomy_term.boat
+target_entity_type_id: taxonomy_term
+target_bundle: boat
+default_langcode: site_default
+language_alterable: false
