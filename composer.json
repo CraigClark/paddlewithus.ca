@@ -35,8 +35,9 @@
         "drupal/charts": "^5.1",
         "drupal/coffee": "^2.0",
         "drupal/collapsiblock": "^4.3",
-        "drupal/core-composer-scaffold": "^10.1",
-        "drupal/core-recommended": "^10.1",
+        "drupal/core-composer-scaffold": "^11",
+        "drupal/core-project-message": "^11",
+        "drupal/core-recommended": "^11",
         "drupal/devel": "^5.0",
         "drupal/hide_revision_field": "^2.5",
         "drupal/language_switcher_extended": "^1.1",
@@ -129,7 +130,7 @@
         }
     },
     "require-dev": {
-        "drupal/core-dev": "^10.1",
+        "drupal/core-dev": "^11",
         "kint-php/kint": "^5.0"
     }
 }
