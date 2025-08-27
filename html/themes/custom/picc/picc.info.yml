@@ -1,7 +1,7 @@
 name: picc
 type: theme
 description: 'picc subtheme based on Bootstrap 5 theme.'
-core_version_requirement: '^9.4 || ^10'
+core_version_requirement: '^9.4 || ^10 || ^11'
 'base theme': bootstrap5
 libraries:
   - picc/global-styling
