@@ -1,0 +1,29 @@
+uuid: b25171b8-a8fc-477b-94e7-afb424ec7179
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_boat
+    - taxonomy.vocabulary.boat
+    - taxonomy.vocabulary.competition_class
+id: taxonomy_term.competition_class.field_boat
+field_name: field_boat
+entity_type: taxonomy_term
+bundle: competition_class
+label: Boat
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:filter_existing_terms'
+  handler_settings:
+    target_bundles:
+      boat: boat
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

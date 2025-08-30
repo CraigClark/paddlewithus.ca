@@ -1,0 +1,21 @@
+uuid: eae16998-ae3a-4922-8a35-29b2f31a0087
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_position
+    - node.type.athlete_log
+  module:
+    - options
+id: node.athlete_log.field_position
+field_name: field_position
+entity_type: node
+bundle: athlete_log
+label: Position
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

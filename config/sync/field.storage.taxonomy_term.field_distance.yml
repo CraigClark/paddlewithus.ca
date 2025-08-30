@@ -1,0 +1,33 @@
+uuid: 57dba52c-1e81-491b-a787-37b3cbd3012a
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_distance
+field_name: field_distance
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '200'
+      label: 200m
+    -
+      value: '500'
+      label: 500m
+    -
+      value: '1000'
+      label: 1000m
+    -
+      value: '5000'
+      label: 5000m
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

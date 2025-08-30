@@ -1,0 +1,16 @@
+uuid: 2f64c904-0900-4f93-9ea0-582f643a1ad0
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.regatta
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.regatta
+target_entity_type_id: taxonomy_term
+target_bundle: regatta
+default_langcode: site_default
+language_alterable: false

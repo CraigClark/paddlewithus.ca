@@ -1,0 +1,26 @@
+uuid: c9b88f75-eb0b-421f-a793-123d993877a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - filter.format.plain_text
+    - node.type.athlete_log
+  module:
+    - text
+id: node.athlete_log.body
+field_name: body
+entity_type: node
+bundle: athlete_log
+label: Comment
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - plain_text
+field_type: text_with_summary

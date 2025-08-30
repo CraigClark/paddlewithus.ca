@@ -1,0 +1,55 @@
+uuid: ef586869-15f3-4340-929a-0da58750b7c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.athlete_log.body
+    - field.field.node.athlete_log.field_activity_logged
+    - field.field.node.athlete_log.field_position
+    - field.field.node.athlete_log.field_time
+    - node.type.athlete_log
+  module:
+    - options
+    - text
+    - user
+id: node.athlete_log.default
+targetEntityType: node
+bundle: athlete_log
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_activity_logged:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_position:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_time:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

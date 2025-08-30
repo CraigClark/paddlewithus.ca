@@ -1,0 +1,22 @@
+uuid: d462e966-205c-4b1c-80dc-ad36ff50b7aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.athlete_log
+id: node.athlete_log.status
+field_name: status
+entity_type: node
+bundle: athlete_log
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -23,6 +23,7 @@ module:
   config_translation: 0
   contact: 0
   contextual: 0
+  cshs: 0
   csv_serialization: 0
   datetime: 0
   dblog: 0
@@ -48,6 +49,7 @@ module:
   menu_ui: 0
   mysql: 0
   node: 0
+  node_view_permissions: 0
   options: 0
   page_cache: 0
   path: 0
@@ -90,4 +92,5 @@ theme:
   stable9: 0
   bootstrap5: 0
   picc: 0
+  gin: 0
 profile: standard

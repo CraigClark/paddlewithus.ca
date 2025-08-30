@@ -4,6 +4,6 @@ status: true
 dependencies: {  }
 name: 'Day and time'
 vid: day_time
-description: null
+description: 'Specifies a day of the week and a time slot'
 weight: 0
 new_revision: false

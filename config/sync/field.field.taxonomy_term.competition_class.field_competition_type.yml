@@ -1,0 +1,21 @@
+uuid: 09fa9534-8438-4cc6-8802-33357e96e070
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_competition_type
+    - taxonomy.vocabulary.competition_class
+  module:
+    - options
+id: taxonomy_term.competition_class.field_competition_type
+field_name: field_competition_type
+entity_type: taxonomy_term
+bundle: competition_class
+label: 'Competition type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

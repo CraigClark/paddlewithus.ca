@@ -1,0 +1,21 @@
+uuid: 4129e629-e231-40a2-b939-09132899ecbf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_distance
+    - taxonomy.vocabulary.competition_class
+  module:
+    - options
+id: taxonomy_term.competition_class.field_distance
+field_name: field_distance
+entity_type: taxonomy_term
+bundle: competition_class
+label: Distance
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

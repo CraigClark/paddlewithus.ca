@@ -1,0 +1,33 @@
+uuid: 9dbc34ea-ab82-46b7-8a6d-ce31e5388d42
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_age
+field_name: field_age
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: u12
+      label: U12
+    -
+      value: u14
+      label: U14
+    -
+      value: u16
+      label: U16
+    -
+      value: u18
+      label: U18
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

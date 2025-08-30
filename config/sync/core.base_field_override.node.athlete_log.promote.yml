@@ -1,0 +1,22 @@
+uuid: 9df5cea9-3d04-45c5-9fc2-e0ae17745a22
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.athlete_log
+id: node.athlete_log.promote
+field_name: promote
+entity_type: node
+bundle: athlete_log
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,17 @@
+uuid: 18ae3f62-eaf5-42bd-9966-8eb20a2aed64
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Athlete log'
+type: athlete_log
+description: 'Allows athletes to log practices and regattas'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

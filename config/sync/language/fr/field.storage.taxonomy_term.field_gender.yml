@@ -1,0 +1,8 @@
+settings:
+  allowed_values:
+    -
+      label: Hommes
+    -
+      label: Femmes
+    -
+      label: Ouvert

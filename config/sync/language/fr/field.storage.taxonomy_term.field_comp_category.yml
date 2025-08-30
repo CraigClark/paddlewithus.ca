@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    2:
+      label: Maîtres
+    3:
+      label: Ouvert
+    4:
+      label: 'Olympiques spéciaux'
+    5:
+      label: Paralympique

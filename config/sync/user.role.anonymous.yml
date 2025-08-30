@@ -7,6 +7,7 @@ dependencies:
   module:
     - contact
     - filter
+    - node_view_permissions
     - system
 _core:
   default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
@@ -18,3 +19,6 @@ permissions:
   - 'access content'
   - 'access site-wide contact form'
   - 'use text format restricted_html'
+  - 'view any page content'
+  - 'view any summer_program content'
+  - 'view any webform content'

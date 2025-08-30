@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "989b708041dc74b0b1d52340e48faad5",
+    "content-hash": "3d0edcb1a573c3572ccc4790238c3054",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2285,6 +2285,72 @@
             "time": "2025-08-07T10:22:57+00:00"
         },
         {
+            "name": "drupal/cshs",
+            "version": "4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/cshs.git",
+                "reference": "4.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/cshs-4.0.3.zip",
+                "reference": "4.0.3",
+                "shasum": "0e637ddae6b6217c6c7dca36c3fd232f25fb2495"
+            },
+            "require": {
+                "drupal/core": "^10.3 || ^11",
+                "php": ">=8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "4.0.3",
+                    "datestamp": "1732597582",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Walter Jenner",
+                    "homepage": "https://drupal.org/u/valderama"
+                },
+                {
+                    "name": "Sergii Bondarenko",
+                    "homepage": "https://drupal.org/u/BR0kEN",
+                    "email": "sb@firstvector.org"
+                },
+                {
+                    "name": "Daneel Cruz",
+                    "homepage": "https://drupal.org/u/daneelcm"
+                },
+                {
+                    "name": "Purushotam Rai",
+                    "homepage": "https://drupal.org/u/purushotam.rai"
+                }
+            ],
+            "description": "A simple client-side hierarchical select widget for taxonomy terms.",
+            "homepage": "https://www.drupal.org/project/cshs",
+            "keywords": [
+                "client-side-select",
+                "hierarchical-select",
+                "module",
+                "select",
+                "taxonomy"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/cshs",
+                "issues": "https://www.drupal.org/project/issues/cshs"
+            }
+        },
+        {
             "name": "drupal/csv_serialization",
             "version": "4.0.1",
             "source": {
@@ -2498,6 +2564,135 @@
                 "issues": "https://gitlab.com/drupalspoons/devel/-/issues",
                 "slack": "https://drupal.slack.com/archives/C012WAW1MH6"
             }
+        },
+        {
+            "name": "drupal/gin",
+            "version": "5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/gin.git",
+                "reference": "5.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/gin-5.0.3.zip",
+                "reference": "5.0.3",
+                "shasum": "9b72e430c8be7126885243b1e78eec6e3dc20196"
+            },
+            "require": {
+                "drupal/core": "^11.2",
+                "drupal/gin_toolbar": "^3.0"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "5.0.3",
+                    "datestamp": "1752238057",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "scripts": {
+                "phpcs": [
+                    "phpcs -s --runtime-set ignore_warnings_on_exit 1 --runtime-set ignore_errors_on_exit 0 'web/modules/custom'"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Sascha Eggenberger (saschaeggi)",
+                    "homepage": "https://www.drupal.org/u/saschaeggi",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "saschaeggi",
+                    "homepage": "https://www.drupal.org/user/1999056"
+                }
+            ],
+            "description": "For a better Admin and Content Editor Experience.",
+            "homepage": "https://www.drupal.org/project/gin",
+            "support": {
+                "source": "https://git.drupalcode.org/project/gin",
+                "issues": "https://www.drupal.org/project/issues/gin"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/sponsors/saschaeggi"
+                },
+                {
+                    "type": "other",
+                    "url": "https://paypal.me/saschaeggi"
+                }
+            ]
+        },
+        {
+            "name": "drupal/gin_toolbar",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/gin_toolbar.git",
+                "reference": "3.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/gin_toolbar-3.0.2.zip",
+                "reference": "3.0.2",
+                "shasum": "6d041143d67440e5b68f6f927e8edb298866dd94"
+            },
+            "require": {
+                "drupal/core": "^11.2"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.0.2",
+                    "datestamp": "1752237929",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Sascha Eggenberger (saschaeggi)",
+                    "homepage": "https://www.drupal.org/u/saschaeggi",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "saschaeggi",
+                    "homepage": "https://www.drupal.org/user/1999056"
+                }
+            ],
+            "description": "Gin Toolbar for Frontend use",
+            "homepage": "https://www.drupal.org/project/gin_toolbar",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/gin_toolbar",
+                "issues": "https://www.drupal.org/project/issues/gin_toolbar"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/sponsors/saschaeggi"
+                },
+                {
+                    "type": "other",
+                    "url": "https://paypal.me/saschaeggi"
+                }
+            ]
         },
         {
             "name": "drupal/hide_revision_field",
@@ -2733,6 +2928,58 @@
             "homepage": "https://www.drupal.org/project/language_switcher_extended",
             "support": {
                 "source": "https://git.drupalcode.org/project/language_switcher_extended"
+            }
+        },
+        {
+            "name": "drupal/node_view_permissions",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/node_view_permissions.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/node_view_permissions-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "ce083999566e31ecc4e22ea09b7a15ce51920ae6"
+            },
+            "require": {
+                "drupal/core": "^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1754514736",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "adcillc",
+                    "homepage": "https://www.drupal.org/user/366450"
+                },
+                {
+                    "name": "adci_contributor",
+                    "homepage": "https://www.drupal.org/user/1830536"
+                },
+                {
+                    "name": "nagy.balint",
+                    "homepage": "https://www.drupal.org/user/1763952"
+                }
+            ],
+            "description": "enables permissions 'View own content' and 'View any content' for each content type on permissions page",
+            "homepage": "http://drupal.org/project/node_view_permissions",
+            "support": {
+                "source": "https://git.drupalcode.org/project/node_view_permissions"
             }
         },
         {

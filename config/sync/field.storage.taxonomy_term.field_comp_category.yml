@@ -1,0 +1,39 @@
+uuid: d5bdcfc7-4c79-40bc-8318-d0b6a5e97cc9
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_comp_category
+field_name: field_comp_category
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: junior
+      label: Junior
+    -
+      value: senior
+      label: Senior
+    -
+      value: master
+      label: Masters
+    -
+      value: open
+      label: Open
+    -
+      value: special_o
+      label: 'Special olympics'
+    -
+      value: para
+      label: Paralympic
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

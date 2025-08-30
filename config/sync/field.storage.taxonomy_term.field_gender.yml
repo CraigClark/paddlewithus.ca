@@ -1,0 +1,30 @@
+uuid: 6aff0fae-92e5-4068-8330-1f4318ffb651
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_gender
+field_name: field_gender
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: male
+      label: "Men's"
+    -
+      value: female
+      label: "Women's"
+    -
+      value: mixed
+      label: Mixed
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

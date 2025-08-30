@@ -1,8 +1,8 @@
-uuid: c856f807-6268-4ccc-8a95-02b50af4d1f4
-langcode: zxx
+uuid: b7e88e4b-d1c5-48c4-8b07-fa3dfc4feac8
+langcode: en
 status: true
 dependencies: {  }
-name: Boat
+name: 'Boat type'
 vid: boat
 description: null
 weight: 0

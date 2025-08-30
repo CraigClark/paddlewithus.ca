@@ -1,0 +1,10 @@
+status: 1
+pattern: '[term:field_comp_category] [term:field_age] [term:field_gender] [term:field_boat] [term:field_distance]'
+escape: false
+preserve_titles: false
+save: false
+chunk: 50
+dependencies:
+  config:
+    - taxonomy.vocabulary.competition_class
+new_content_behavior: 0

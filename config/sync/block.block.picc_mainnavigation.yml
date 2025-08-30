@@ -1,0 +1,25 @@
+uuid: a91abd0e-50aa-4bd2-9fd8-76a4b62fe9fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - picc
+id: picc_mainnavigation
+theme: picc
+region: nav_main
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: null
+  expand_all_items: false
+visibility: {  }

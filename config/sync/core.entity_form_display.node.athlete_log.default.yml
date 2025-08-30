@@ -1,0 +1,72 @@
+uuid: af33ff1e-21cc-410f-931a-177d9850e7b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.athlete_log.body
+    - field.field.node.athlete_log.field_activity_logged
+    - field.field.node.athlete_log.field_position
+    - field.field.node.athlete_log.field_time
+    - node.type.athlete_log
+  module:
+    - text
+id: node.athlete_log.default
+targetEntityType: node
+bundle: athlete_log
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 6
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_activity_logged:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_position:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_time:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  path: true
+  promote: true
+  revision_log: true
+  sticky: true
+  translation: true
+  uid: true
+  url_redirects: true

@@ -1,0 +1,72 @@
+uuid: d4e9d2c2-e2f2-4a0e-abe5-267774f6d60d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.competition_class.field_age
+    - field.field.taxonomy_term.competition_class.field_boat
+    - field.field.taxonomy_term.competition_class.field_comp_category
+    - field.field.taxonomy_term.competition_class.field_competition_type
+    - field.field.taxonomy_term.competition_class.field_distance
+    - field.field.taxonomy_term.competition_class.field_gender
+    - taxonomy.vocabulary.competition_class
+id: taxonomy_term.competition_class.default
+targetEntityType: taxonomy_term
+bundle: competition_class
+mode: default
+content:
+  field_age:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_boat:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_comp_category:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_competition_type:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_distance:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_gender:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  revision_log_message: true
+  status: true

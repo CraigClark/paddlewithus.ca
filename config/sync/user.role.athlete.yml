@@ -1,9 +1,20 @@
 uuid: 3ad51882-e338-4dbc-a298-44f58d18b6e9
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.athlete_log
+  module:
+    - node
+    - node_view_permissions
 id: athlete
 label: Athlete
 weight: 5
 is_admin: null
-permissions: {  }
+permissions:
+  - 'create athlete_log content'
+  - 'delete own athlete_log content'
+  - 'edit own athlete_log content'
+  - 'revert athlete_log revisions'
+  - 'view athlete_log revisions'
+  - 'view own athlete_log content'

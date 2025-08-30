@@ -1,0 +1,16 @@
+uuid: 8615ca2a-ed7f-4b3a-b5d4-e61888f5b659
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.athlete_log
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.athlete_log
+target_entity_type_id: node
+target_bundle: athlete_log
+default_langcode: site_default
+language_alterable: false
