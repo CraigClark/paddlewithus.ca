@@ -5,6 +5,12 @@ dependencies:
   config:
     - node.type.page
     - node.type.summer_program
+    - taxonomy.vocabulary.activity
+    - taxonomy.vocabulary.boat
+    - taxonomy.vocabulary.competition_class
+    - taxonomy.vocabulary.day_time
+    - taxonomy.vocabulary.program_types
+    - taxonomy.vocabulary.regatta
     - taxonomy.vocabulary.summer_program
     - taxonomy.vocabulary.tags
   module:
@@ -15,7 +21,7 @@ dependencies:
     - path
     - system
     - taxonomy
-    - toolbar
+    - taxonomy_manager
 _core:
   default_config_hash: e_wG1u7SrGaJbY2-Szgbgl-c8T3kdirU3uTNq2c_QJQ
 id: content_editor
@@ -27,12 +33,18 @@ permissions:
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
+  - 'access taxonomy manager list'
   - 'access taxonomy overview'
-  - 'access toolbar'
   - 'administer url aliases'
   - 'create content translations'
   - 'create page content'
   - 'create summer_program content'
+  - 'create terms in activity'
+  - 'create terms in boat'
+  - 'create terms in competition_class'
+  - 'create terms in day_time'
+  - 'create terms in program_types'
+  - 'create terms in regatta'
   - 'create terms in summer_program'
   - 'create terms in tags'
   - 'create url aliases'
@@ -41,12 +53,31 @@ permissions:
   - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
-  - 'delete term revisions in summer_program'
+  - 'delete terms in activity'
+  - 'delete terms in boat'
+  - 'delete terms in competition_class'
+  - 'delete terms in day_time'
+  - 'delete terms in program_types'
+  - 'delete terms in regatta'
+  - 'delete terms in summer_program'
+  - 'delete terms in tags'
   - 'edit any summer_program content'
   - 'edit own page content'
+  - 'edit terms in activity'
+  - 'edit terms in boat'
+  - 'edit terms in competition_class'
+  - 'edit terms in day_time'
+  - 'edit terms in program_types'
+  - 'edit terms in regatta'
   - 'edit terms in summer_program'
   - 'edit terms in tags'
   - 'revert all revisions'
+  - 'revert term revisions in activity'
+  - 'revert term revisions in boat'
+  - 'revert term revisions in competition_class'
+  - 'revert term revisions in day_time'
+  - 'revert term revisions in program_types'
+  - 'revert term revisions in regatta'
   - 'revert term revisions in summer_program'
   - 'translate any entity'
   - 'translate page node'
@@ -55,5 +86,12 @@ permissions:
   - 'update content translations'
   - 'view all revisions'
   - 'view own unpublished content'
+  - 'view term revisions in activity'
+  - 'view term revisions in boat'
+  - 'view term revisions in competition_class'
+  - 'view term revisions in day_time'
+  - 'view term revisions in program_types'
+  - 'view term revisions in regatta'
   - 'view term revisions in summer_program'
+  - 'view term revisions in tags'
   - 'view the administration theme'

@@ -23,6 +23,9 @@ settings:
     -
       value: '5000'
       label: 5000m
+    -
+      value: '16000'
+      label: 16k
   allowed_values_function: ''
 module: options
 locked: false

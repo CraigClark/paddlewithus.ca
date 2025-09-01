@@ -1,2 +1,2 @@
 label: 'Date longue par défaut'
-pattern: 'l j F Y - H:i'
+pattern: 'l, F j, Y - H:i'

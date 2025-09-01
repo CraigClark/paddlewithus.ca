@@ -5,8 +5,9 @@ dependencies:
   config:
     - node.type.athlete_log
   module:
+    - content_translation
     - node
-    - node_view_permissions
+    - system
 id: athlete
 label: Athlete
 weight: 5
@@ -15,6 +16,5 @@ permissions:
   - 'create athlete_log content'
   - 'delete own athlete_log content'
   - 'edit own athlete_log content'
-  - 'revert athlete_log revisions'
-  - 'view athlete_log revisions'
-  - 'view own athlete_log content'
+  - 'translate editable entities'
+  - 'view the administration theme'

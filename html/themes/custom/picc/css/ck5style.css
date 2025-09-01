@@ -11888,4 +11888,13 @@ a > .ck-content code {
   overflow-y: auto;
 }
 
-/*# sourceMappingURL=ck5style.css.map */
+/* custom */
+/* Solid background + readable text for autocomplete/list popovers */
+
+.ui-widget.ui-widget-content {
+  background: #fff;
+}
+
+.ui-widget.ui-widget-content  .material-icons {
+  padding-right: .5em;
+}

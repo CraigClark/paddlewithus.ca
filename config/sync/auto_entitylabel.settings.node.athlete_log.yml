@@ -1,0 +1,10 @@
+status: 1
+pattern: 'Athlete log: [node:author] | [node:field_date:date:html_date] '
+escape: false
+preserve_titles: false
+save: true
+chunk: 50
+dependencies:
+  config:
+    - node.type.athlete_log
+new_content_behavior: 0

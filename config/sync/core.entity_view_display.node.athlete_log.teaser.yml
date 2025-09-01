@@ -4,27 +4,24 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.athlete_log.body
     - field.field.node.athlete_log.field_activity_logged
+    - field.field.node.athlete_log.field_date
+    - field.field.node.athlete_log.field_notes
     - field.field.node.athlete_log.field_position
+    - field.field.node.athlete_log.field_race_type
+    - field.field.node.athlete_log.field_regatta
+    - field.field.node.athlete_log.field_self_eval
+    - field.field.node.athlete_log.field_tc_type
     - field.field.node.athlete_log.field_time
+    - field.field.node.athlete_log.field_training_type
     - node.type.athlete_log
   module:
-    - text
     - user
 id: node.athlete_log.teaser
 targetEntityType: node
 bundle: athlete_log
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 100
-    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -32,6 +29,13 @@ content:
     region: content
 hidden:
   field_activity_logged: true
+  field_date: true
+  field_notes: true
   field_position: true
+  field_race_type: true
+  field_regatta: true
+  field_self_eval: true
+  field_tc_type: true
   field_time: true
+  field_training_type: true
   langcode: true

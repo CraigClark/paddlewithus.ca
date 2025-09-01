@@ -1,0 +1,127 @@
+uuid: cd4f1d3a-2271-4534-a764-93ddb3de68fe
+langcode: en
+status: true
+dependencies: {  }
+id: eca_bpmn_io_process_zkat14i
+data: |
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+    <bpmn2:process id="Process_zKaT14i" name="Athlete log: redirect on save" isExecutable="true" camunda:versionTag="">
+      <bpmn2:documentation />
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property name="Tags" value="" />
+          <camunda:property name="Changelog" value="" />
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="form__form_submit_1" name="Create new log entry" camunda:modelerTemplate="org.drupal.event.form:form_submit">
+        <bpmn2:extensionElements>
+          <camunda:field name="form_ids">
+            <camunda:string>node_athlete_log_form</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="bundle">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="operation">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="form:form_submit" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_0x225cu</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:startEvent id="form__form_submit_1_1" name="Edit existing log entry" camunda:modelerTemplate="org.drupal.event.form:form_submit">
+        <bpmn2:extensionElements>
+          <camunda:field name="form_ids">
+            <camunda:string>node_athlete_log_edit_form</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="bundle">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="operation">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="form:form_submit" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_1y64ack</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="action_goto_action_1bn2o1s" name="Redirect to URL" camunda:modelerTemplate="org.drupal.action.action_goto_action">
+        <bpmn2:extensionElements>
+          <camunda:field name="url">
+            <camunda:string>/user/athelete-log</camunda:string>
+          </camunda:field>
+          <camunda:field name="replace_tokens">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="action_goto_action" />
+          </camunda:properties>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0x225cu</bpmn2:incoming>
+        <bpmn2:incoming>Flow_1y64ack</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1uvqf48</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_0x225cu" sourceRef="form__form_submit_1" targetRef="action_goto_action_1bn2o1s" />
+      <bpmn2:sequenceFlow id="Flow_1y64ack" sourceRef="form__form_submit_1_1" targetRef="action_goto_action_1bn2o1s" />
+      <bpmn2:intermediateThrowEvent id="Event_0diwn26">
+        <bpmn2:incoming>Flow_1uvqf48</bpmn2:incoming>
+      </bpmn2:intermediateThrowEvent>
+      <bpmn2:sequenceFlow id="Flow_1uvqf48" sourceRef="action_goto_action_1bn2o1s" targetRef="Event_0diwn26" />
+      <bpmn2:textAnnotation id="TextAnnotation_1wvmg8q">
+        <bpmn2:text>done</bpmn2:text>
+      </bpmn2:textAnnotation>
+      <bpmn2:association id="Association_1pplxay" associationDirection="None" sourceRef="Event_0diwn26" targetRef="TextAnnotation_1wvmg8q" />
+      <bpmn2:association id="Association_1h10hgf" sourceRef="Event_0diwn26" targetRef="TextAnnotation_1wvmg8q" />
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_Process_zKaT14i">
+      <bpmndi:BPMNPlane id="BPMNPlane_Process_zKaT14i" bpmnElement="Process_zKaT14i">
+        <bpmndi:BPMNShape id="form__form_submit_1_2_di" bpmnElement="form__form_submit_1">
+          <dc:Bounds x="57" y="52" width="36" height="36" />
+          <bpmndi:BPMNLabel>
+            <dc:Bounds x="36" y="88" width="78" height="27" />
+          </bpmndi:BPMNLabel>
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="form__form_submit_1_di" bpmnElement="form__form_submit_1_1">
+          <dc:Bounds x="57" y="192" width="36" height="36" />
+          <bpmndi:BPMNLabel>
+            <dc:Bounds x="35" y="228" width="81" height="27" />
+          </bpmndi:BPMNLabel>
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="action_goto_action_1bn2o1s_di" bpmnElement="action_goto_action_1bn2o1s">
+          <dc:Bounds x="175" y="30" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Event_0diwn26_di" bpmnElement="Event_0diwn26">
+          <dc:Bounds x="357" y="52" width="36" height="36" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_1wvmg8q_di" bpmnElement="TextAnnotation_1wvmg8q">
+          <dc:Bounds x="407" y="-63" width="100" height="30" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="Flow_0x225cu_di" bpmnElement="Flow_0x225cu">
+          <di:waypoint x="93" y="70" />
+          <di:waypoint x="175" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1y64ack_di" bpmnElement="Flow_1y64ack">
+          <di:waypoint x="93" y="210" />
+          <di:waypoint x="225" y="210" />
+          <di:waypoint x="225" y="110" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1uvqf48_di" bpmnElement="Flow_1uvqf48">
+          <di:waypoint x="275" y="70" />
+          <di:waypoint x="357" y="70" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_1h10hgf_di" bpmnElement="Association_1h10hgf">
+          <di:waypoint x="385" y="55" />
+          <di:waypoint x="447" y="-33" />
+        </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+  </bpmn2:definitions>

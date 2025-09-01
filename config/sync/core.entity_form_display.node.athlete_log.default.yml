@@ -3,55 +3,294 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.athlete_log.body
     - field.field.node.athlete_log.field_activity_logged
+    - field.field.node.athlete_log.field_date
+    - field.field.node.athlete_log.field_notes
     - field.field.node.athlete_log.field_position
+    - field.field.node.athlete_log.field_race_type
+    - field.field.node.athlete_log.field_regatta
+    - field.field.node.athlete_log.field_self_eval
+    - field.field.node.athlete_log.field_tc_type
     - field.field.node.athlete_log.field_time
+    - field.field.node.athlete_log.field_training_type
     - node.type.athlete_log
   module:
-    - text
+    - conditional_fields
+    - datetime
+    - field_group
+third_party_settings:
+  field_group:
+    group_time_position:
+      children:
+        - field_time
+        - field_position
+      label: 'Time and position'
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: html_element
+      format_settings:
+        classes: 'd-flex column-gap-3'
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
 id: node.athlete_log.default
 targetEntityType: node
 bundle: athlete_log
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 6
+  field_activity_logged:
+    type: options_buttons
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_date:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_notes:
+    type: string_textarea
+    weight: 11
     region: content
     settings:
-      rows: 9
-      summary_rows: 3
+      rows: 5
       placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-  field_activity_logged:
+    third_party_settings:
+      conditional_fields:
+        9ce3d53a-6e54-48c4-825c-89c8c8a593bc:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 3
+            value: ''
+            values: "practice\r\nregatta\r\ntime_control"
+            value_form: {  }
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
+  field_position:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        74e6edd9-7b1c-4892-9fa2-eaccc57ca68d:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: regatta
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
+  field_race_type:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        63ed29a2-ac2d-45e5-8d95-e69b23414b88:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: true
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: regatta
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
+  field_regatta:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        31f496fd-6679-44dd-913e-b0043b5c0c0b:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: true
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: regatta
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
+  field_self_eval:
+    type: options_buttons
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        a07d9bdd-71b1-43e0-82b3-e720c1e0abba:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 3
+            value: ''
+            values: "practice\r\nregatta\r\ntime_control"
+            value_form: {  }
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
+  field_tc_type:
     type: options_select
     weight: 8
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_position:
-    type: options_select
-    weight: 5
-    region: content
-    settings: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        3d9defb8-a0ae-4f90-baf2-c4df300d76b1:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: true
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: time_control
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
   field_time:
     type: string_textfield
-    weight: 4
+    weight: 6
     region: content
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 7
+    third_party_settings:
+      conditional_fields:
+        b6daf813-5f13-4164-bd42-da283d1c2ab2:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: true
+            condition: value
+            grouping: AND
+            values_set: 3
+            value: ''
+            values: "regatta\r\ntime_control"
+            value_form:
+              -
+                value: time_control
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
+  field_training_type:
+    type: options_buttons
+    weight: 9
     region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        ba1a2dbd-a03e-4ed3-b9ab-5ce09a9ea343:
+          entity_type: node
+          bundle: athlete_log
+          dependee: field_activity_logged
+          settings:
+            state: visible
+            reset: true
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: practice
+            effect: fade
+            effect_options:
+              fade:
+                speed: '300'
+              slide:
+                speed: '400'
+            selector: ''
   title:
     type: string_textfield
     weight: 0
@@ -66,6 +305,7 @@ hidden:
   path: true
   promote: true
   revision_log: true
+  status: true
   sticky: true
   translation: true
   uid: true

@@ -1,0 +1,14 @@
+uuid: a0ad4760-e41d-4060-84d8-505bf967c530
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.competition_class
+id: taxonomy_vocabulary_competition_class
+entity_type_id: taxonomy_vocabulary
+entity_id: competition_class
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied
