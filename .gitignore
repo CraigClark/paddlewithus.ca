@@ -50,6 +50,8 @@ html/themes/*
 !html/modules/custom/
 !html/themes/custom/
 !/html/robots.txt
+/notes
+/tmp
 
 #Databases
 *.sql.gz
