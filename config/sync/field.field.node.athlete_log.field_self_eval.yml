@@ -1,0 +1,21 @@
+uuid: be8916d0-a57b-4b8c-9a54-6c2e165457e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_self_eval
+    - node.type.athlete_log
+  module:
+    - options
+id: node.athlete_log.field_self_eval
+field_name: field_self_eval
+entity_type: node
+bundle: athlete_log
+label: 'How did you do?'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

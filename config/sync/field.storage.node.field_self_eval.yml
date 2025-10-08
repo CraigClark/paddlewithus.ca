@@ -1,0 +1,36 @@
+uuid: a56d292d-ac20-432e-b502-1f7f69c60893
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_self_eval
+field_name: field_self_eval
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '5'
+      label: '<span class="eval-icon">😃</span><span class="responsive-hide"> Amazing</span>'
+    -
+      value: '4'
+      label: '<span class="eval-icon">🙂</span><span class="responsive-hide"> Good</span>'
+    -
+      value: '3'
+      label: '<span class="eval-icon">😐</span><span class="responsive-hide"> Okay</span>'
+    -
+      value: '2'
+      label: '<span class="eval-icon">🙁</span><span class="responsive-hide"> Poor</span>'
+    -
+      value: '1'
+      label: '<span class="eval-icon">😡</span><span class="responsive-hide"> Terrible</span>'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

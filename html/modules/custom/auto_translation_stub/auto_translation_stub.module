@@ -9,6 +9,7 @@ use Drupal\node\Entity\Node;
 function auto_translation_stub_get_enabled_content_types(): array {
   return [
     'summer_program',
+    'athlete_log',
     // Add more content types here if needed.
   ];
 }

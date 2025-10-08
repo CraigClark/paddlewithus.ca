@@ -1,0 +1,29 @@
+uuid: 738337de-3ed3-4fcb-9796-e09208650b23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_training_type
+    - node.type.athlete_log
+    - taxonomy.vocabulary.activity
+id: node.athlete_log.field_training_type
+field_name: field_training_type
+entity_type: node
+bundle: athlete_log
+label: 'Practice type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:filter_existing_terms'
+  handler_settings:
+    target_bundles:
+      activity: activity
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

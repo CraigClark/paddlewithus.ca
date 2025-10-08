@@ -1,0 +1,14 @@
+uuid: 4cbfa1a6-4e3a-4b6b-9185-5d92ea8fde24
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.athlete_log
+id: node_type_athlete_log
+entity_type_id: node_type
+entity_id: athlete_log
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

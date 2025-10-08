@@ -1,0 +1,30 @@
+uuid: 206d7c13-2fe3-4014-8001-7d213ed6b8ac
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_activity_logged
+field_name: field_activity_logged
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: practice
+      label: Practice
+    -
+      value: regatta
+      label: Regatta
+    -
+      value: time_control
+      label: 'Time control'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,14 @@
+uuid: 660ee41c-18f2-4494-8a45-47827d1b0c98
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.regatta
+id: taxonomy_vocabulary_regatta
+entity_type_id: taxonomy_vocabulary
+entity_id: regatta
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

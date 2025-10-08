@@ -7,6 +7,7 @@ dependencies:
     - filter.format.webform_default
   module:
     - contact
+    - content_translation
     - file
     - filter
     - shortcut
@@ -22,5 +23,6 @@ permissions:
   - 'access shortcuts'
   - 'access site-wide contact form'
   - 'delete own files'
+  - 'translate editable entities'
   - 'use text format basic_html'
   - 'use text format webform_default'

@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    -
+      label: M12
+    -
+      label: M14
+    -
+      label: M16
+    -
+      label: M18

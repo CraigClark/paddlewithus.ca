@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    -
+      label: '200&nbsp;m'
+    -
+      label: '500&nbsp;m'
+    -
+      label: '1000&nbsp;m'
+    -
+      label: '5000&nbsp;m'

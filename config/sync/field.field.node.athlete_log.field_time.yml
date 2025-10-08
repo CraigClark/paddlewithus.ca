@@ -1,0 +1,19 @@
+uuid: 14259f8f-0e63-4507-9958-81cf320b3726
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time
+    - node.type.athlete_log
+id: node.athlete_log.field_time
+field_name: field_time
+entity_type: node
+bundle: athlete_log
+label: Time
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

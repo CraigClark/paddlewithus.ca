@@ -1,2 +1,2 @@
 label: 'Date courte par défaut'
-pattern: 'd/m/Y - H:i'
+pattern: 'm/d/Y - H:i'

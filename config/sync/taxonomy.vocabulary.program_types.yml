@@ -4,6 +4,6 @@ status: true
 dependencies: {  }
 name: 'program types'
 vid: program_types
-description: null
+description: 'Types of programs and activities offred by PICC'
 weight: 0
 new_revision: false

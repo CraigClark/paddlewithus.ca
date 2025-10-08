@@ -1,0 +1,14 @@
+uuid: ea70ee96-d09a-4256-bb66-f0e5ad191c07
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.summer_program
+id: taxonomy_vocabulary_summer_program
+entity_type_id: taxonomy_vocabulary
+entity_id: summer_program
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

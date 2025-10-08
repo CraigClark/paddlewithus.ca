@@ -1,0 +1,14 @@
+uuid: 6c97fe85-ef89-4872-b8c2-6ac2b8c8b76e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.day_time
+id: taxonomy_vocabulary_day_time
+entity_type_id: taxonomy_vocabulary
+entity_id: day_time
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

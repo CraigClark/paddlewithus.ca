@@ -1,0 +1,127 @@
+uuid: e3f6ab7f-d83f-4f96-a73f-0611eba5fd9a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.athlete_log.field_activity_logged
+    - field.field.node.athlete_log.field_date
+    - field.field.node.athlete_log.field_notes
+    - field.field.node.athlete_log.field_position
+    - field.field.node.athlete_log.field_race_type
+    - field.field.node.athlete_log.field_regatta
+    - field.field.node.athlete_log.field_self_eval
+    - field.field.node.athlete_log.field_tc_type
+    - field.field.node.athlete_log.field_time
+    - field.field.node.athlete_log.field_training_type
+    - node.type.athlete_log
+  module:
+    - datetime
+    - field_label
+    - layout_builder
+    - options
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.athlete_log.search_index
+targetEntityType: node
+bundle: athlete_log
+mode: search_index
+content:
+  field_activity_logged:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: long
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 0
+    region: content
+  field_notes:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_position:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_race_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_regatta:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: Regatta
+        label_tag: span
+    weight: 1
+    region: content
+  field_self_eval:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: 'Self evaluation'
+        label_tag: ''
+    weight: 6
+    region: content
+  field_tc_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_training_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: 'Training type'
+        plural_label: 'Training types'
+        label_tag: ''
+    weight: 4
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+hidden:
+  field_time: true
+  langcode: true
+  links: true
