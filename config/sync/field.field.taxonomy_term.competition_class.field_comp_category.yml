@@ -1,0 +1,21 @@
+uuid: 3fa0f8f4-ce30-4a2c-9348-87b85f08cad6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_comp_category
+    - taxonomy.vocabulary.competition_class
+  module:
+    - options
+id: taxonomy_term.competition_class.field_comp_category
+field_name: field_comp_category
+entity_type: taxonomy_term
+bundle: competition_class
+label: Category
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

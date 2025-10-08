@@ -1,0 +1,25 @@
+uuid: 09ae8b92-d065-4318-b086-7e0c6ed9b15a
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - picc
+id: picc_useraccountmenu
+theme: picc
+region: nav_main
+weight: -4
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

@@ -1,6 +1,42 @@
 <?php
 
+use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
+
 /**
- * @file
- * picc theme file.
+ * Implements hook_preprocess_HOOK() for menu-local-tasks.html.twig.
  */
+function picc_preprocess_menu_local_tasks(array &$variables): void {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (!$node instanceof NodeInterface || $node->bundle() !== 'athlete_log') {
+    return;
+  }
+
+  $strip_view = static function (array &$bucket): void {
+    if (empty($bucket) || !is_array($bucket)) {
+      return;
+    }
+    foreach ($bucket as $k => $item) {
+      // Local tasks come in a few shapes; handle them all.
+      $url = null;
+      if (!empty($item['#link']['url']) && $item['#link']['url'] instanceof Url) {
+        $url = $item['#link']['url'];
+      }
+      elseif (!empty($item['#url']) && $item['#url'] instanceof Url) {
+        $url = $item['#url'];
+      }
+
+      $route_name = $url ? $url->getRouteName() : (!empty($item['#link']['route_name']) ? $item['#link']['route_name'] : '');
+      if ($route_name === 'entity.node.canonical') {
+        unset($bucket[$k]);
+      }
+    }
+  };
+
+  if (isset($variables['primary'])) {
+    $strip_view($variables['primary']);
+  }
+  if (isset($variables['secondary'])) {
+    $strip_view($variables['secondary']);
+  }
+}

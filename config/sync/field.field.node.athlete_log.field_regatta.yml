@@ -1,0 +1,29 @@
+uuid: 8e1fab95-5d08-4a2d-9044-59cd56dfe5d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_regatta
+    - node.type.athlete_log
+    - taxonomy.vocabulary.regatta
+id: node.athlete_log.field_regatta
+field_name: field_regatta
+entity_type: node
+bundle: athlete_log
+label: 'What regatta are you logging?'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:filter_existing_terms'
+  handler_settings:
+    target_bundles:
+      regatta: regatta
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

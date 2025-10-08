@@ -1,0 +1,9 @@
+uuid: c226be69-6b01-4304-aca6-a6bc761f28ba
+langcode: en
+status: true
+dependencies: {  }
+name: Competition
+vid: competition_class
+description: 'Lists types of races for regattas and time controls.'
+weight: 0
+new_revision: false

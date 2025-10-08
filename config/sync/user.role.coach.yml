@@ -1,9 +1,39 @@
 uuid: 75a330ba-5fd5-4655-a397-6af237402873
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - taxonomy.vocabulary.activity
+    - taxonomy.vocabulary.boat
+    - taxonomy.vocabulary.competition_class
+    - taxonomy.vocabulary.regatta
+  module:
+    - content_translation
+    - rabbit_hole
+    - system
+    - taxonomy
 id: coach
 label: Coach
 weight: 6
 is_admin: null
-permissions: {  }
+permissions:
+  - 'access user profiles'
+  - 'create terms in activity'
+  - 'create terms in boat'
+  - 'create terms in competition_class'
+  - 'create terms in regatta'
+  - 'edit terms in activity'
+  - 'edit terms in boat'
+  - 'edit terms in competition_class'
+  - 'edit terms in regatta'
+  - 'rabbit hole bypass taxonomy_term'
+  - 'revert term revisions in activity'
+  - 'revert term revisions in boat'
+  - 'revert term revisions in competition_class'
+  - 'revert term revisions in regatta'
+  - 'translate editable entities'
+  - 'view term revisions in activity'
+  - 'view term revisions in boat'
+  - 'view term revisions in competition_class'
+  - 'view term revisions in regatta'
+  - 'view the administration theme'

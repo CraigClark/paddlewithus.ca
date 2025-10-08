@@ -1,0 +1,9 @@
+uuid: 94ebc134-3f7d-41d4-baa3-3e68deccb123
+langcode: en
+status: true
+dependencies: {  }
+name: Regatta
+vid: regatta
+description: 'The names of specific regattas.'
+weight: 0
+new_revision: false

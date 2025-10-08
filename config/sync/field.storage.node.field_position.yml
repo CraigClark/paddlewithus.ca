@@ -1,0 +1,51 @@
+uuid: a5474a32-0b59-4074-bb1f-bd076c01df72
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_position
+field_name: field_position
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '1'
+      label: 1ˢᵗ
+    -
+      value: '2'
+      label: 2ⁿᵈ
+    -
+      value: '3'
+      label: 3ʳᵈ
+    -
+      value: '4'
+      label: 4ᵗʰ
+    -
+      value: '5'
+      label: 5ᵗʰ
+    -
+      value: '6'
+      label: 6ᵗʰ
+    -
+      value: '7'
+      label: 7ᵗʰ
+    -
+      value: '8'
+      label: 8ᵗʰ
+    -
+      value: '9'
+      label: 9ᵗʰ
+    -
+      value: '10'
+      label: 10ᵗʰ
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

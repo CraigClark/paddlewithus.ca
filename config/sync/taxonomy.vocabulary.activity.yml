@@ -2,8 +2,8 @@ uuid: bfa8fd63-e6b5-44e9-9859-207ad2357e00
 langcode: en
 status: true
 dependencies: {  }
-name: 'Paddling activity'
+name: 'Training activity'
 vid: activity
-description: null
+description: 'Training activities engaged in my athletes'
 weight: 0
 new_revision: false

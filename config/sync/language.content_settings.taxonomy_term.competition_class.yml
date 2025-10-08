@@ -1,0 +1,16 @@
+uuid: d8a2921a-737d-43df-8b87-13ce15f9b938
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.competition_class
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.competition_class
+target_entity_type_id: taxonomy_term
+target_bundle: competition_class
+default_langcode: en
+language_alterable: false

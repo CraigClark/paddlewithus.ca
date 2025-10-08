@@ -1,0 +1,34 @@
+uuid: b7ef2c70-5576-4d1a-bb05-87cbe9540b28
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.competition_class.field_age
+    - field.field.taxonomy_term.competition_class.field_boat
+    - field.field.taxonomy_term.competition_class.field_comp_category
+    - field.field.taxonomy_term.competition_class.field_competition_type
+    - field.field.taxonomy_term.competition_class.field_distance
+    - field.field.taxonomy_term.competition_class.field_gender
+    - taxonomy.vocabulary.competition_class
+  module:
+    - options
+id: taxonomy_term.competition_class.default
+targetEntityType: taxonomy_term
+bundle: competition_class
+mode: default
+content:
+  field_competition_type:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: -4
+    region: content
+hidden:
+  description: true
+  field_age: true
+  field_boat: true
+  field_comp_category: true
+  field_distance: true
+  field_gender: true
+  langcode: true

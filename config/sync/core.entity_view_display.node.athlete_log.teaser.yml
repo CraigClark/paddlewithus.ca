@@ -1,0 +1,41 @@
+uuid: 30004d1b-c5de-4374-bdbc-735689ce541d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.athlete_log.field_activity_logged
+    - field.field.node.athlete_log.field_date
+    - field.field.node.athlete_log.field_notes
+    - field.field.node.athlete_log.field_position
+    - field.field.node.athlete_log.field_race_type
+    - field.field.node.athlete_log.field_regatta
+    - field.field.node.athlete_log.field_self_eval
+    - field.field.node.athlete_log.field_tc_type
+    - field.field.node.athlete_log.field_time
+    - field.field.node.athlete_log.field_training_type
+    - node.type.athlete_log
+  module:
+    - user
+id: node.athlete_log.teaser
+targetEntityType: node
+bundle: athlete_log
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_activity_logged: true
+  field_date: true
+  field_notes: true
+  field_position: true
+  field_race_type: true
+  field_regatta: true
+  field_self_eval: true
+  field_tc_type: true
+  field_time: true
+  field_training_type: true
+  langcode: true

@@ -1,0 +1,25 @@
+uuid: e2a89a33-55d1-468d-883a-77f4116d4e2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tc_type
+    - node.type.athlete_log
+id: node.athlete_log.field_tc_type
+field_name: field_tc_type
+entity_type: node
+bundle: athlete_log
+label: 'Time control type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: select_competition
+      display_name: entity_reference_2
+      arguments: {  }
+field_type: entity_reference

@@ -1,0 +1,14 @@
+uuid: 013dae3b-2087-432a-b7e3-3006a596e011
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+id: taxonomy_vocabulary_boat
+entity_type_id: taxonomy_vocabulary
+entity_id: boat
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

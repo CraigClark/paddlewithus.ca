@@ -1,0 +1,22 @@
+settings:
+  allowed_values:
+    -
+      label: 1ᵉʳ
+    -
+      label: 2ᵉ
+    -
+      label: 3ᵉ
+    -
+      label: 4ᵉ
+    -
+      label: 5ᵉ
+    -
+      label: 6ᵉ
+    -
+      label: 7ᵉ
+    -
+      label: 8ᵉ
+    -
+      label: 9ᵉ
+    -
+      label: 10ᵉ

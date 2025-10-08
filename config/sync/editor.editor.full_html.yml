@@ -28,6 +28,7 @@ settings:
       - blockQuote
       - drupalInsertImage
       - insertTable
+      - materialIcons
       - horizontalLine
       - '|'
       - heading
@@ -95,7 +96,8 @@ settings:
         startIndex: true
       multiBlock: true
     ckeditor5_sourceEditing:
-      allowed_tags: {  }
+      allowed_tags:
+        - '<i class>'
 image_upload:
   status: true
   scheme: public
