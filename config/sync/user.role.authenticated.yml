@@ -10,6 +10,7 @@ dependencies:
     - content_translation
     - file
     - filter
+    - rabbit_hole
     - shortcut
     - system
 _core:
@@ -23,6 +24,7 @@ permissions:
   - 'access shortcuts'
   - 'access site-wide contact form'
   - 'delete own files'
+  - 'rabbit hole bypass user'
   - 'translate editable entities'
   - 'use text format basic_html'
   - 'use text format webform_default'

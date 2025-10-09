@@ -94,4 +94,3 @@ permissions:
   - 'view term revisions in regatta'
   - 'view term revisions in summer_program'
   - 'view term revisions in tags'
-  - 'view the administration theme'

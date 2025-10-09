@@ -47,6 +47,7 @@
         "drupal/facets": "^3.0",
         "drupal/field_group": "^4.0",
         "drupal/field_label": "^1.5",
+        "drupal/field_permissions": "^1.4",
         "drupal/gin": "^5.0",
         "drupal/gin_toolbar": "^3.0",
         "drupal/hide_revision_field": "^2.5",

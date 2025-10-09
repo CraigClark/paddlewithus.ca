@@ -1,11 +1,18 @@
 uuid: cb30124b-7e28-4b16-8013-330028484275
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - field_permissions
 _core:
   default_config_hash: OeKGIkmZA_c-t6QLH81WNQx8gDCc1MRmxaTuQgxBByU
 id: administrator
 label: Administrator
 weight: 3
 is_admin: true
-permissions: {  }
+permissions:
+  - 'create field_past_club'
+  - 'edit field_past_club'
+  - 'edit own field_past_club'
+  - 'view field_past_club'
+  - 'view own field_past_club'

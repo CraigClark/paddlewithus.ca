@@ -6,6 +6,7 @@ dependencies:
     - node.type.athlete_log
   module:
     - content_translation
+    - field_permissions
     - node
 id: athlete
 label: Athlete
@@ -13,6 +14,15 @@ weight: 5
 is_admin: null
 permissions:
   - 'create athlete_log content'
+  - 'create field_coach'
+  - 'create field_current_club'
+  - 'create field_past_club'
   - 'delete own athlete_log content'
   - 'edit own athlete_log content'
+  - 'edit own field_coach'
+  - 'edit own field_current_club'
+  - 'edit own field_past_club'
   - 'translate editable entities'
+  - 'view own field_coach'
+  - 'view own field_current_club'
+  - 'view own field_past_club'

@@ -5,7 +5,7 @@ dependencies: {  }
 id: user
 entity_type_id: user
 entity_id: null
-action: display_page
+action: page_not_found
 allow_override: 1
 redirect: ''
 redirect_code: 301

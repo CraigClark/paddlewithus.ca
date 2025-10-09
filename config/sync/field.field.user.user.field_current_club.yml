@@ -1,0 +1,30 @@
+uuid: bb512c2b-7b1d-4d06-9b85-40843376f874
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_current_club
+    - taxonomy.vocabulary.club
+  module:
+    - user
+id: user.user.field_current_club
+field_name: field_current_club
+entity_type: user
+bundle: user
+label: 'Current club'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:filter_existing_terms'
+  handler_settings:
+    target_bundles:
+      club: club
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

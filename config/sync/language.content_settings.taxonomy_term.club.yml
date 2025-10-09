@@ -1,0 +1,16 @@
+uuid: 9543fd03-50a9-47b6-b733-d06071f1281d
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.club
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.club
+target_entity_type_id: taxonomy_term
+target_bundle: club
+default_langcode: site_default
+language_alterable: false

@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - system
     - webform
 id: board_member
 label: 'board member'
@@ -12,4 +11,3 @@ is_admin: null
 permissions:
   - 'access user profiles'
   - 'view any webform submission'
-  - 'view the administration theme'

@@ -17,7 +17,6 @@ dependencies:
     - system.menu.main
     - user.role.administrator
     - user.role.athlete
-    - user.role.coach
   module:
     - better_exposed_filters
     - csv_serialization
@@ -1075,7 +1074,6 @@ display:
           role:
             administrator: administrator
             athlete: athlete
-            coach: coach
       cache:
         type: search_api_none
         options: {  }

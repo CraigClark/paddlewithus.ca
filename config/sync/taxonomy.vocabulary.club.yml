@@ -1,0 +1,9 @@
+uuid: 915974c3-65f5-4886-8600-ee90abb33618
+langcode: en
+status: true
+dependencies: {  }
+name: Club
+vid: club
+description: null
+weight: 0
+new_revision: false

@@ -9,6 +9,7 @@ dependencies:
     - taxonomy.vocabulary.regatta
   module:
     - content_translation
+    - field_permissions
     - rabbit_hole
     - system
     - taxonomy
@@ -32,6 +33,7 @@ permissions:
   - 'edit terms in competition_class'
   - 'edit terms in regatta'
   - 'rabbit hole bypass taxonomy_term'
+  - 'rabbit hole bypass user'
   - 'revert term revisions in activity'
   - 'revert term revisions in boat'
   - 'revert term revisions in competition_class'
@@ -41,8 +43,10 @@ permissions:
   - 'translate editable entities'
   - 'translate regatta taxonomy_term'
   - 'update content translations'
+  - 'view field_coach'
+  - 'view field_current_club'
+  - 'view field_past_club'
   - 'view term revisions in activity'
   - 'view term revisions in boat'
   - 'view term revisions in competition_class'
   - 'view term revisions in regatta'
-  - 'view the administration theme'
