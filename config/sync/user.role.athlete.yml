@@ -7,7 +7,6 @@ dependencies:
   module:
     - content_translation
     - node
-    - system
 id: athlete
 label: Athlete
 weight: 5
@@ -17,4 +16,3 @@ permissions:
   - 'delete own athlete_log content'
   - 'edit own athlete_log content'
   - 'translate editable entities'
-  - 'view the administration theme'

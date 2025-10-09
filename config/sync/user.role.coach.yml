@@ -12,12 +12,17 @@ dependencies:
     - rabbit_hole
     - system
     - taxonomy
+    - toolbar
 id: coach
 label: Coach
 weight: 6
 is_admin: null
 permissions:
+  - 'access administration pages'
+  - 'access taxonomy overview'
+  - 'access toolbar'
   - 'access user profiles'
+  - 'create content translations'
   - 'create terms in activity'
   - 'create terms in boat'
   - 'create terms in competition_class'
@@ -31,7 +36,11 @@ permissions:
   - 'revert term revisions in boat'
   - 'revert term revisions in competition_class'
   - 'revert term revisions in regatta'
+  - 'translate activity taxonomy_term'
+  - 'translate competition_class taxonomy_term'
   - 'translate editable entities'
+  - 'translate regatta taxonomy_term'
+  - 'update content translations'
   - 'view term revisions in activity'
   - 'view term revisions in boat'
   - 'view term revisions in competition_class'

@@ -37,7 +37,6 @@
         "drupal/coffee": "^2.0",
         "drupal/collapsiblock": "^4.3",
         "drupal/conditional_fields": "^4.0@alpha",
-        "drupal/content_access": "^2.1@RC",
         "drupal/core-composer-scaffold": "^11",
         "drupal/core-project-message": "^11",
         "drupal/core-recommended": "^11",
