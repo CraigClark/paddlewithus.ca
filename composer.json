@@ -55,6 +55,7 @@
         "drupal/language_switcher_extended": "^1.1",
         "drupal/login_emailusername": "^3.0",
         "drupal/material_icons": "^2.0",
+        "drupal/menu_item_role_access": "^2.4",
         "drupal/name": "^1.0",
         "drupal/node_view_permissions": "^2.0",
         "drupal/pathauto": "^1.12",
