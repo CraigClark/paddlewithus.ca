@@ -12,9 +12,11 @@ dependencies:
     - field.storage.node.field_self_eval
     - field.storage.node.field_tc_type
     - field.storage.node.field_training_type
+    - field.storage.user.field_coach
     - search_api.server.local_db
   module:
     - node
+    - user
 id: athlete_log
 name: 'Athlete log'
 description: ''
@@ -161,12 +163,27 @@ field_settings:
     dependencies:
       module:
         - node
+  uid_2:
+    label: 'Authored by » User » Coach » User » User ID'
+    datasource_id: 'entity:node'
+    property_path: 'uid:entity:field_coach:entity:uid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.user.field_coach
+      module:
+        - node
+        - user
 datasource_settings:
   'entity:node':
     bundles:
       default: false
       selected:
         - athlete_log
+    languages:
+      default: true
+      selected: {  }
+  'entity:user':
     languages:
       default: true
       selected: {  }
