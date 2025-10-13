@@ -11,8 +11,8 @@ label: Administrator
 weight: 3
 is_admin: true
 permissions:
-  - 'create field_past_club'
-  - 'edit field_past_club'
-  - 'edit own field_past_club'
-  - 'view field_past_club'
-  - 'view own field_past_club'
+  - 'create field_current_club'
+  - 'edit field_current_club'
+  - 'edit own field_current_club'
+  - 'view field_current_club'
+  - 'view own field_current_club'

@@ -23,6 +23,7 @@ permissions:
   - 'edit own field_current_club'
   - 'edit own field_past_club'
   - 'translate editable entities'
+  - 'view field_current_club'
   - 'view own field_coach'
   - 'view own field_current_club'
   - 'view own field_past_club'

@@ -9,6 +9,7 @@ dependencies:
     - field.field.user.user.field_past_club
     - field.field.user.user.user_picture
   module:
+    - autocomplete_deluxe
     - name
     - user
 _core:
@@ -24,17 +25,38 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_coach:
-    type: options_buttons
+    type: autocomplete_deluxe
     weight: 4
     region: content
-    settings: {  }
-    third_party_settings:
-      conditional_fields: {  }
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 10
+      min_length: 0
+      delimiter: ','
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+    third_party_settings: {  }
   field_current_club:
-    type: options_buttons
+    type: autocomplete_deluxe
     weight: 2
     region: content
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 10
+      min_length: 0
+      delimiter: ','
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
   field_name:
     type: name_default
@@ -70,10 +92,21 @@ content:
       field_title_display: before
     third_party_settings: {  }
   field_past_club:
-    type: options_buttons
+    type: autocomplete_deluxe
     weight: 3
     region: content
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 10
+      min_length: 0
+      delimiter: ','
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
   language:
     weight: 5

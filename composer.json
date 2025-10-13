@@ -30,6 +30,7 @@
         "drupal/admin_toolbar": "^3.4",
         "drupal/antibot": "^2.0",
         "drupal/auto_entitylabel": "^3.4",
+        "drupal/autocomplete_deluxe": "^2.1",
         "drupal/better_exposed_filters": "^7.0@beta",
         "drupal/bootstrap5": "^4.0",
         "drupal/bpmn_io": "^3.0",

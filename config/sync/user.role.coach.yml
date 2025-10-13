@@ -5,6 +5,7 @@ dependencies:
   config:
     - taxonomy.vocabulary.activity
     - taxonomy.vocabulary.boat
+    - taxonomy.vocabulary.club
     - taxonomy.vocabulary.competition_class
     - taxonomy.vocabulary.regatta
   module:
@@ -26,10 +27,12 @@ permissions:
   - 'create content translations'
   - 'create terms in activity'
   - 'create terms in boat'
+  - 'create terms in club'
   - 'create terms in competition_class'
   - 'create terms in regatta'
   - 'edit terms in activity'
   - 'edit terms in boat'
+  - 'edit terms in club'
   - 'edit terms in competition_class'
   - 'edit terms in regatta'
   - 'rabbit hole bypass taxonomy_term'
@@ -39,6 +42,7 @@ permissions:
   - 'revert term revisions in competition_class'
   - 'revert term revisions in regatta'
   - 'translate activity taxonomy_term'
+  - 'translate club taxonomy_term'
   - 'translate competition_class taxonomy_term'
   - 'translate editable entities'
   - 'translate regatta taxonomy_term'
@@ -48,5 +52,6 @@ permissions:
   - 'view field_past_club'
   - 'view term revisions in activity'
   - 'view term revisions in boat'
+  - 'view term revisions in club'
   - 'view term revisions in competition_class'
   - 'view term revisions in regatta'
