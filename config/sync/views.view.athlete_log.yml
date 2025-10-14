@@ -1248,18 +1248,7 @@ display:
           skip_access: false
           preserve_facet_query_args: false
           query_tags: {  }
-      relationships:
-        uid:
-          id: uid
-          table: search_api_datasource_athlete_log_entity_node
-          field: uid
-          relationship: none
-          group_type: group
-          admin_label: 'Authored by: User'
-          entity_type: node
-          plugin_id: search_api
-          required: false
-          skip_access: false
+      relationships: {  }
       css_class: ''
       header:
         result:
@@ -2338,7 +2327,7 @@ display:
         - 'search_api_list:athlete_log'
   page_1:
     id: page_1
-    display_title: 'PG | my athletes'
+    display_title: "PG | my athletes' logs"
     display_plugin: page
     position: 2
     display_options:
