@@ -26,7 +26,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: "My atllete's logs"
+      title: "My athletes' logs"
       fields:
         name:
           id: name
