@@ -490,9 +490,10 @@ display:
           plugin_id: language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            en: en
+            fr: fr
           group: 1
-          exposed: false
+          exposed: true
           expose:
             operator_id: langcode_op
             label: Language
@@ -507,7 +508,7 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
+            reduce: true
           is_grouped: false
           group_info:
             label: ''

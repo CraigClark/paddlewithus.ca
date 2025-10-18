@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.user.field_current_club
     - node.type.athlete_log
+    - system.menu.main
     - user.role.administrator
     - user.role.athlete
     - user.role.coach
@@ -25,6 +26,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: "My atllete's logs"
       fields:
         name:
           id: name
@@ -37,7 +39,7 @@ display:
           entity_field: name
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: '{{ name }}'
@@ -165,7 +167,7 @@ display:
           entity_field: uid
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -231,7 +233,7 @@ display:
           entity_field: nid
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: 'node edits {{ nid }}'
@@ -293,6 +295,55 @@ display:
           format_plural_string: !!binary MQNAY291bnQ=
           prefix: ''
           suffix: ''
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<b>{{ name }}:</b> {{ nid }} log entries | <a href="/user/{{ uid }}/athlete-log">View log</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       pager:
         type: mini
         options:
@@ -332,7 +383,33 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        field_name_family:
+          id: field_name_family
+          table: user__field_name
+          field: field_name_family
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        field_name_given:
+          id: field_name_given
+          table: user__field_name
+          field: field_name_given
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments:
         field_coach_target_id:
           id: field_coach_target_id
@@ -493,8 +570,50 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: uid
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
-        type: default
+        type: html_list
         options:
           grouping:
             -
@@ -502,7 +621,10 @@ display:
               rendered: true
               rendered_strip: false
           row_class: ''
-          default_row_class: true
+          default_row_class: false
+          type: ol
+          wrapper_class: item-list
+          class: ''
       row:
         type: fields
         options:
@@ -534,6 +656,34 @@ display:
       header: {  }
       footer: {  }
       display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - user.roles
+      tags:
+        - 'config:field.storage.user.field_current_club'
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: user/my-athletes
+      menu:
+        type: normal
+        title: 'My athletes'
+        description: ''
+        weight: 10
+        expanded: false
+        menu_name: main
+        parent: user.page
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
