@@ -1,0 +1,71 @@
+label: Commandes
+display:
+  default:
+    display_title: Principal
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Filtrer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tout -'
+            offset_label: Décalage
+          tags:
+            previous: "‹\_précédent"
+            next: "suivant\_›"
+            first: "«\_premier"
+            last: "dernier\_»"
+      fields:
+        commerce_order_bulk_form:
+          action_title: 'Pour la sélection'
+        order_number:
+          label: '#'
+          separator: ', '
+        placed:
+          label: Date
+          separator: ', '
+        type:
+          label: Type
+          separator: ', '
+        store_id:
+          label: Boutique
+          separator: ', '
+        uid:
+          label: Client
+          separator: ', '
+        mail:
+          label: Courriel
+          separator: ', '
+        state:
+          label: État
+          separator: ', '
+        total_price__number:
+          label: Total
+          separator: ', '
+        operations:
+          label: Actions
+      filters:
+        order_number:
+          expose:
+            label: 'Numéro de commande'
+        type:
+          expose:
+            label: Type
+        state:
+          expose:
+            label: État
+      title: Commandes
+  page_1:
+    display_title: Page
+    display_options:
+      menu:
+        title: Commandes
+      tab_options:
+        title: Commandes
+        description: 'Gérer vos commandes.'

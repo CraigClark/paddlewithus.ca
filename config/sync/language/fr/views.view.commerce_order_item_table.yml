@@ -1,0 +1,29 @@
+label: 'Eléments de la commande'
+display:
+  default:
+    display_title: Principal
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      fields:
+        title:
+          label: Titre
+          separator: ', '
+        unit_price__number:
+          label: 'Prix unitaire'
+          separator: ', '
+        quantity:
+          label: Quantité
+          separator: ', '
+        total_price__number:
+          label: 'Prix total'
+          separator: ', '
+      arguments:
+        order_item_id:
+          exception:
+            title: Tout

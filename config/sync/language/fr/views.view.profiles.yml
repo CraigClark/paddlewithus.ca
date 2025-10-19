@@ -1,0 +1,25 @@
+label: Profils
+display:
+  default:
+    display_title: Principal
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      arguments:
+        uid:
+          exception:
+            title: Tout
+        type:
+          exception:
+            title: Tout
+        status:
+          exception:
+            title: Tout
+      title: Profils
+  user_page:
+    display_title: "Page d'utilisateur"

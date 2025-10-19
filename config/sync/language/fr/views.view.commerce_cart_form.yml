@@ -1,0 +1,29 @@
+display:
+  default:
+    display_title: Principal
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      fields:
+        purchased_entity:
+          label: Élément
+          separator: ', '
+        unit_price__number:
+          label: Prix
+          separator: ', '
+        edit_quantity:
+          label: Quantité
+        remove_button:
+          label: Retirer
+        total_price__number:
+          label: Total
+          separator: ', '
+      arguments:
+        order_id:
+          exception:
+            title: Tout

@@ -37,6 +37,7 @@
         "drupal/charts": "^5.1",
         "drupal/coffee": "^2.0",
         "drupal/collapsiblock": "^4.3",
+        "drupal/commerce": "^3.2",
         "drupal/conditional_fields": "^4.0@alpha",
         "drupal/core-composer-scaffold": "^11",
         "drupal/core-project-message": "^11",
