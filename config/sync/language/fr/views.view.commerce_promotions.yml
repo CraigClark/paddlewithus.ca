@@ -1,0 +1,57 @@
+label: Promotions
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tout -'
+            offset_label: Décalage
+      fields:
+        name:
+          label: Nom
+          separator: ', '
+        offer__target_plugin_id:
+          separator: ', '
+        usage_limit:
+          label: Utilisation
+          separator: ', '
+        usage_limit_customer:
+          separator: ', '
+        start_date:
+          label: 'Date de début'
+          separator: ', '
+        end_date:
+          label: 'Date de fin'
+          separator: ', '
+        operations:
+          label: Actions
+      filters:
+        name:
+          expose:
+            label: Nom
+        status:
+          expose:
+            label: État
+      title: Promotions
+  admin:
+    display_title: Page
+    display_options:
+      menu:
+        title: Lister
+      tab_options:
+        title: Lister
