@@ -1,0 +1,21 @@
+uuid: 29fdf3c8-375f-48db-a63e-e726929485b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_capacity
+  module:
+    - commerce_stock_field
+id: commerce_product_variation.activity.field_capacity
+field_name: field_capacity
+entity_type: commerce_product_variation
+bundle: activity
+label: Capacity
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: commerce_stock_level

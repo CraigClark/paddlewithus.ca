@@ -5,8 +5,10 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.activity
     - field.field.commerce_product_variation.activity.attribute_activity_period
+    - field.field.commerce_product_variation.activity.field_capacity
   module:
     - commerce_price
+    - commerce_stock_field
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
 bundle: activity
@@ -17,6 +19,22 @@ content:
     weight: 1
     region: content
     settings: {  }
+    third_party_settings: {  }
+  commerce_stock_always_in_stock:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_capacity:
+    type: commerce_stock_level_simple_transaction
+    weight: 91
+    region: content
+    settings:
+      step: '1'
+      custom_transaction_note: false
+      default_transaction_note: 'Transaction issued by stock level field.'
     third_party_settings: {  }
   langcode:
     type: language_select
