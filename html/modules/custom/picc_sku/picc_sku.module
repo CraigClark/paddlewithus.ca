@@ -16,63 +16,54 @@ function _picc_sku_generate_unique(): string {
 }
 
 /**
- * Internal helper: prefill the SKU only if it's a new entity OR truly empty.
+ * Internal helper: prefill the SKU if it's new or truly empty.
  */
 function _picc_sku_prefill_if_needed(array &$form, FormStateInterface $form_state): void {
-  // Ensure the SKU widget exists.
   if (!isset($form['sku']['widget'][0]['value'])) {
     return;
   }
 
-  // Get the entity being edited/created.
   $entity = NULL;
   $form_object = $form_state->getFormObject();
   if ($form_object && method_exists($form_object, 'getEntity')) {
     $entity = $form_object->getEntity();
   }
 
-  $sku_widget =& $form['sku']['widget'][0]['value'];
   $input_val = $form_state->getValue(['sku', 0, 'value']);
-  $default_val = $sku_widget['#default_value'] ?? '';
   $entity_val = '';
-
-  if ($entity instanceof \Drupal\commerce_product\Entity\ProductVariationInterface && $entity->hasField('sku')) {
+  if ($entity && $entity->hasField('sku')) {
     $entity_val = (string) $entity->get('sku')->value;
   }
 
-  // Decide whether to generate:
-  // - If the variation is NEW, always generate.
-  // - If NOT new, only generate if everything is empty (entity + input + default).
   $is_new = $entity ? $entity->isNew() : TRUE;
-  $everything_empty = ($entity_val === '') && ($input_val === NULL || $input_val === '') && ($default_val === '');
+  $everything_empty = ($entity_val === '') && ($input_val === NULL || $input_val === '');
 
   if ($is_new || $everything_empty) {
     $sku = _picc_sku_generate_unique();
-    // Set default (what shows in the input)…
-    $sku_widget['#default_value'] = $sku;
-    // …and set the submitted value if no user input present.
-    if ($input_val === NULL || $input_val === '') {
-      $form_state->setValue(['sku', 0, 'value'], $sku);
-    }
+    $form['sku']['widget'][0]['value']['#default_value'] = $sku;
+    $form_state->setValue(['sku', 0, 'value'], $sku);
   }
+
+  // Hide the field from the form completely.
+  $form['sku']['#access'] = FALSE;
 }
 
 /**
- * On ADD form: prefill so validation passes.
+ * On ADD form: generate + hide.
  */
 function picc_sku_form_commerce_product_variation_add_form_alter(array &$form, FormStateInterface $form_state): void {
   _picc_sku_prefill_if_needed($form, $form_state);
 }
 
 /**
- * On EDIT form: only prefill if empty (never overwrite an existing SKU).
+ * On EDIT form: only generate if missing + hide.
  */
 function picc_sku_form_commerce_product_variation_form_alter(array &$form, FormStateInterface $form_state): void {
   _picc_sku_prefill_if_needed($form, $form_state);
 }
 
 /**
- * Safety net: if somehow empty on save (API/migration), generate once.
+ * Safety net: ensure a SKU exists when saving (for API/imports).
  */
 function picc_sku_entity_presave(EntityInterface $entity): void {
   if ($entity->getEntityTypeId() !== 'commerce_product_variation' || !$entity->hasField('sku')) {
