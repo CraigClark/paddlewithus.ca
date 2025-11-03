@@ -1,0 +1,40 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Generate a unique SKU string.
+ */
+function _picc_sku_generate_unique() : string {
+  $storage = \Drupal::entityTypeManager()->getStorage('commerce_product_variation');
+  do {
+    // Prefix to taste. Keep short and readable.
+    $candidate = 'ACT-' . substr(hash('xxh128', microtime(TRUE) . random_int(PHP_INT_MIN, PHP_INT_MAX)), 0, 8);
+    $exists = $storage->loadByProperties(['sku' => $candidate]);
+  } while (!empty($exists));
+  return $candidate;
+}
+
+/**
+ * On ADD form: if SKU is empty, prefill it so validation passes.
+ */
+function picc_sku_form_commerce_product_variation_add_form_alter(array &$form, FormStateInterface $form_state) {
+  if (isset($form['sku'])) {
+    $current = $form_state->getValue(['sku', 0, 'value']);
+    if ($current === NULL || $current === '') {
+      $form['sku']['widget'][0]['value']['#default_value'] = _picc_sku_generate_unique();
+    }
+  }
+}
+
+/**
+ * On EDIT form: if SKU somehow empty (e.g., migration), prefill it.
+ */
+function picc_sku_form_commerce_product_variation_form_alter(array &$form, FormStateInterface $form_state) {
+  if (isset($form['sku'])) {
+    $current = $form_state->getValue(['sku', 0, 'value']);
+    if ($current === NULL || $current === '') {
+      $form['sku']['widget'][0]['value']['#default_value'] = _picc_sku_generate_unique();
+    }
+  }
+}
