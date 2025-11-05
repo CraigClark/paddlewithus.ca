@@ -42,6 +42,7 @@ module:
   csv_serialization: 0
   date_filter: 0
   datetime: 0
+  datetime_range: 0
   dblog: 0
   dynamic_page_cache: 0
   eca: 0

@@ -15,7 +15,7 @@ bundle: activity
 mode: default
 content:
   attribute_activity_period:
-    type: options_select
+    type: options_buttons
     weight: 1
     region: content
     settings: {  }
