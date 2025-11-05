@@ -1,0 +1,21 @@
+uuid: 9444ea15-e691-48f0-84c4-4122b47c22e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_date_range
+  module:
+    - datetime_range
+id: commerce_product_variation.activity.field_date_range
+field_name: field_date_range
+entity_type: commerce_product_variation
+bundle: activity
+label: 'Camp date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

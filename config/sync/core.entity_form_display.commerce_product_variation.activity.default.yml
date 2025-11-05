@@ -4,60 +4,61 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_variation_type.activity
-    - field.field.commerce_product_variation.activity.attribute_activity_period
     - field.field.commerce_product_variation.activity.field_capacity
+    - field.field.commerce_product_variation.activity.field_date_range
   module:
     - commerce_price
     - commerce_stock_field
+    - datetime_range
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
 bundle: activity
 mode: default
 content:
-  attribute_activity_period:
-    type: options_buttons
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   commerce_stock_always_in_stock:
     type: boolean_checkbox
-    weight: 5
+    weight: 4
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_capacity:
     type: commerce_stock_level_simple_transaction
-    weight: 91
+    weight: 5
     region: content
     settings:
       step: '1'
       custom_transaction_note: false
       default_transaction_note: 'Transaction issued by stock level field.'
     third_party_settings: {  }
+  field_date_range:
+    type: daterange_default
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 8
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   list_price:
     type: commerce_list_price
-    weight: -1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   price:
     type: commerce_price_default
-    weight: 0
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   sku:
     type: string_textfield
-    weight: -4
+    weight: 1
     region: content
     settings:
       size: 60
@@ -65,21 +66,21 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 90
+    weight: 9
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }

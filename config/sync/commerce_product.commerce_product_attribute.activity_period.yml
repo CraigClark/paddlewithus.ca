@@ -1,7 +1,0 @@
-uuid: 4c0b9ff9-4912-4751-9bd6-acba0f75d98d
-langcode: en
-status: true
-dependencies: {  }
-id: activity_period
-label: 'Activity period'
-elementType: select
