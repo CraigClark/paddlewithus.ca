@@ -45,6 +45,14 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  coupons:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
   customer_comments:
     type: string
     label: above
