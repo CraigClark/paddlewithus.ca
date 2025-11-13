@@ -1,0 +1,20 @@
+uuid: 53996551-91bb-41af-9259-f977615cc6eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_order
+    - profile
+id: commerce_order_item.field_child
+field_name: field_child
+entity_type: commerce_order_item
+type: entity_reference
+settings:
+  target_type: profile
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: 71da1254-9f20-4a39-94ad-525cacb6bb17
+langcode: en
+status: true
+dependencies:
+  module:
+    - name
+    - profile
+id: profile.field_name
+field_name: field_name
+entity_type: profile
+type: name
+settings: {  }
+module: name
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

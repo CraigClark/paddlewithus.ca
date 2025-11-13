@@ -47,6 +47,7 @@
         "drupal/date_filter": "^1.0",
         "drupal/devel": "^5.0",
         "drupal/eca": "^3.0",
+        "drupal/environment_indicator": "^4.0",
         "drupal/facets": "^3.0",
         "drupal/field_group": "^4.0",
         "drupal/field_label": "^1.5",

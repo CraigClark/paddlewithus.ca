@@ -1,0 +1,46 @@
+uuid: 9af5d502-ae04-4b1b-be44-c2fc72f219d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_item_type.activity_registration
+    - field.field.commerce_order_item.activity_registration.field_child
+id: commerce_order_item.activity_registration.default
+targetEntityType: commerce_order_item
+bundle: activity_registration
+mode: default
+content:
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: long
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_child:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  adjustments: true
+  purchased_entity: true
+  quantity: true
+  search_api_excerpt: true
+  total_price: true
+  unit_price: true

@@ -1,0 +1,11 @@
+uuid: 55fb3492-32c2-4f22-822f-377141706f17
+langcode: en
+status: true
+dependencies: {  }
+machine: remote
+description: null
+name: Remote
+weight: -10
+url: 'https://paddlewithus.ca'
+fg_color: '#000000'
+bg_color: '#ffbf00'

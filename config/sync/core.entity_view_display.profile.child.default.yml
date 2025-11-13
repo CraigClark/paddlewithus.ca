@@ -1,0 +1,42 @@
+uuid: 34c57082-a801-434c-90a6-31c1957d37c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.profile.child.field_birth_date
+    - field.field.profile.child.field_name
+    - profile.type.child
+  module:
+    - datetime
+    - name
+id: profile.child.default
+targetEntityType: profile
+bundle: child
+mode: default
+content:
+  field_birth_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_name:
+    type: name_default
+    label: above
+    settings:
+      format: default
+      markup: none
+      list_format: ''
+      link_target: ''
+      preferred_field_reference: ''
+      preferred_field_reference_separator: ', '
+      alternative_field_reference: ''
+      alternative_field_reference_separator: ', '
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

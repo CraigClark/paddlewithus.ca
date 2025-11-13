@@ -1,0 +1,11 @@
+uuid: 2acf7601-9240-4ccb-afc2-16ad73dde2fc
+langcode: en
+status: true
+dependencies: {  }
+machine: local_ddev
+description: null
+name: ddev.local
+weight: -10
+url: 'https://paddlewithus.ca.ddev.site'
+fg_color: '#000000'
+bg_color: '#2aff32'

@@ -6,5 +6,5 @@ id: activity
 label: Activity
 traits: {  }
 locked: false
-orderItemType: default
+orderItemType: activity_registration
 generateTitle: false

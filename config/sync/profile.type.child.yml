@@ -1,0 +1,12 @@
+uuid: 5e65bcbd-5e10-430b-abcd-74bd588f93d7
+langcode: en
+status: true
+dependencies: {  }
+id: child
+label: Child
+display_label: Child
+multiple: true
+registration: true
+roles: {  }
+allow_revisions: false
+new_revision: false

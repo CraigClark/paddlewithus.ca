@@ -1,0 +1,10 @@
+uuid: 06b7f094-fee0-460f-b701-2f15f36fde9c
+langcode: en
+status: true
+dependencies: {  }
+id: activity_registration
+label: 'Activity registration'
+traits: {  }
+locked: false
+purchasableEntityType: commerce_product_variation
+orderType: default

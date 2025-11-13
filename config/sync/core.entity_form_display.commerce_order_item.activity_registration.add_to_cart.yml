@@ -1,0 +1,52 @@
+uuid: 3e7fe8b7-dfaf-4aad-9645-688f287e65cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_item_type.activity_registration
+    - core.entity_form_mode.commerce_order_item.add_to_cart
+    - field.field.commerce_order_item.activity_registration.field_child
+  module:
+    - autocomplete_deluxe
+    - commerce_order
+id: commerce_order_item.activity_registration.add_to_cart
+targetEntityType: commerce_order_item
+bundle: activity_registration
+mode: add_to_cart
+content:
+  field_child:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  purchased_entity:
+    type: autocomplete_deluxe
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 10
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+    third_party_settings: {  }
+  quantity:
+    type: commerce_quantity
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+      step: '1'
+    third_party_settings: {  }
+hidden:
+  adjustments: true
+  created: true
+  total_price: true
+  unit_price: true
