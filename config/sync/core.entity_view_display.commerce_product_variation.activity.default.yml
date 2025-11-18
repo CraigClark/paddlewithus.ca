@@ -9,19 +9,32 @@ dependencies:
   module:
     - commerce_price
     - commerce_stock_field
+    - commerce_variation_cart_form
     - datetime_range
     - field_label
+third_party_settings:
+  commerce_variation_cart_form:
+    combine: false
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
 bundle: activity
 mode: default
 content:
+  commerce_variation_cart_form:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_capacity:
     type: commerce_stock_level_simple
     label: above
     settings: {  }
-    third_party_settings: {  }
-    weight: 1
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: 'Places available'
+        label_tag: ''
+    weight: 2
     region: content
   field_date_range:
     type: daterange_default
@@ -30,13 +43,13 @@ content:
       timezone_override: ''
       format_type: html_date
       from_to: both
-      separator: '-'
+      separator: ' to '
     third_party_settings:
       field_label:
         label_class: ''
         label_value: ''
         label_tag: ''
-    weight: 2
+    weight: 3
     region: content
   list_price:
     type: commerce_price_default
@@ -45,7 +58,7 @@ content:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
-    weight: -1
+    weight: 0
     region: content
   price:
     type: commerce_price_default
@@ -54,7 +67,7 @@ content:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   langcode: true

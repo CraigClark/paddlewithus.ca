@@ -5,49 +5,21 @@ dependencies:
   config:
     - commerce_order.commerce_order_item_type.activity_registration
     - field.field.commerce_order_item.activity_registration.field_child
-  module:
-    - commerce_order
 id: commerce_order_item.activity_registration.default
 targetEntityType: commerce_order_item
 bundle: activity_registration
 mode: default
 content:
   field_child:
-    type: entity_reference_autocomplete
-    weight: 3
+    type: options_select
+    weight: 0
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  purchased_entity:
-    type: entity_reference_autocomplete
-    weight: -1
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  quantity:
-    type: commerce_quantity
-    weight: 1
-    region: content
-    settings:
-      placeholder: ''
-      step: '1'
-    third_party_settings: {  }
-  unit_price:
-    type: commerce_unit_price
-    weight: 2
-    region: content
-    settings:
-      require_confirmation: true
+    settings: {  }
     third_party_settings: {  }
 hidden:
   adjustments: true
   created: true
+  purchased_entity: true
+  quantity: true
   total_price: true
+  unit_price: true

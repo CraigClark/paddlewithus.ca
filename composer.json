@@ -39,6 +39,7 @@
         "drupal/collapsiblock": "^4.3",
         "drupal/commerce": "^3.2",
         "drupal/commerce_stock": "^3.0",
+        "drupal/commerce_variation_cart_form": "^1.5",
         "drupal/conditional_fields": "^4.0@alpha",
         "drupal/core-composer-scaffold": "^11",
         "drupal/core-project-message": "^11",

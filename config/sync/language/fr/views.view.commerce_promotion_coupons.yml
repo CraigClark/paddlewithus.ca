@@ -1,3 +1,4 @@
+label: Coupons
 display:
   default:
     display_title: Principal
@@ -28,6 +29,7 @@ display:
           label: Utilisation
           separator: ', '
         usage_limit_customer:
+          label: 'Per-customer limit'
           separator: ', '
         operations:
           label: Actions
@@ -35,6 +37,7 @@ display:
         code:
           expose:
             label: Code
+      title: Coupons
       arguments:
         promotion_id:
           exception:

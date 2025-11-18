@@ -5,67 +5,14 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.activity
     - field.field.commerce_product.activity.body
-    - views.view.variant_session
   module:
+    - field_label
     - layout_builder
-    - layout_discovery
     - text
-    - views
 third_party_settings:
   layout_builder:
-    enabled: true
+    enabled: false
     allow_custom: false
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
-          ac95e5f4-c515-49af-9c41-8b820635eb60:
-            uuid: ac95e5f4-c515-49af-9c41-8b820635eb60
-            region: content
-            configuration:
-              id: 'field_block:commerce_product:activity:title'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: string
-                label: hidden
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
-          c313f7fd-776b-4d9a-8abc-22bf3eed9575:
-            uuid: c313f7fd-776b-4d9a-8abc-22bf3eed9575
-            region: content
-            configuration:
-              id: 'field_block:commerce_product:activity:body'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          7dda034d-a333-44e5-a701-68e43ee2cf94:
-            uuid: 7dda034d-a333-44e5-a701-68e43ee2cf94
-            region: content
-            configuration:
-              id: 'views_block:variant_session-block_session'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: null
-            weight: 2
-            additional: {  }
-        third_party_settings: {  }
 id: commerce_product.activity.default
 targetEntityType: commerce_product
 bundle: activity
@@ -86,10 +33,23 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  variations:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        plural_label: ''
+        label_tag: ''
+    weight: 2
+    region: content
 hidden:
   created: true
   langcode: true
   search_api_excerpt: true
   stores: true
   uid: true
-  variations: true

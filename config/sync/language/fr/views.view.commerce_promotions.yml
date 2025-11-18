@@ -26,6 +26,7 @@ display:
           label: Nom
           separator: ', '
         offer__target_plugin_id:
+          label: 'Offer type'
           separator: ', '
         usage_limit:
           label: Utilisation
@@ -44,6 +45,12 @@ display:
         name:
           expose:
             label: Nom
+        offer__target_plugin_id:
+          expose:
+            label: 'Offer type'
+        code:
+          expose:
+            label: 'Coupon code'
         status:
           expose:
             label: État
