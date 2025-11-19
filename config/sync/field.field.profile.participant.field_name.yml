@@ -1,16 +1,16 @@
-uuid: fb1ebca4-0509-4a5b-ae98-16f914dc5a90
+uuid: fb98c9fd-740b-47d2-a06f-5abdf8f0294e
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.profile.field_name
-    - profile.type.child
+    - profile.type.participant
   module:
     - name
-id: profile.child.field_name
+id: profile.participant.field_name
 field_name: field_name
 entity_type: profile
-bundle: child
+bundle: participant
 label: Name
 description: ''
 required: false

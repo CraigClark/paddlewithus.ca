@@ -1,16 +1,16 @@
-uuid: 17a5bd7c-3eaf-470f-8c55-c9100184456b
+uuid: b747a447-dd62-4068-8251-bfb163ca0aa7
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.profile.field_birth_date
-    - profile.type.child
+    - profile.type.participant
   module:
     - datetime
-id: profile.child.field_birth_date
+id: profile.participant.field_birth_date
 field_name: field_birth_date
 entity_type: profile
-bundle: child
+bundle: participant
 label: 'Birth date'
 description: ''
 required: false

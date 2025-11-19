@@ -1,16 +1,16 @@
-uuid: 681dfbe8-a0a7-40b0-b757-b7b1b6ba51c9
+uuid: 4c923a3d-eb2c-4be7-83c2-d827e62d4473
 langcode: en
 status: true
 dependencies:
   config:
     - commerce_order.commerce_order_item_type.activity_registration
-    - field.storage.commerce_order_item.field_child
-    - profile.type.child
-id: commerce_order_item.activity_registration.field_child
-field_name: field_child
+    - field.storage.commerce_order_item.field_participant
+    - profile.type.participant
+id: commerce_order_item.activity_registration.field_participant
+field_name: field_participant
 entity_type: commerce_order_item
 bundle: activity_registration
-label: Child
+label: Participant
 description: ''
 required: false
 translatable: false
@@ -20,9 +20,9 @@ settings:
   handler: 'default:profile'
   handler_settings:
     target_bundles:
-      child: child
+      participant: participant
     sort:
-      field: field_birth_date
+      field: _none
       direction: ASC
     auto_create: false
     auto_create_bundle: ''

@@ -1,17 +1,17 @@
-uuid: 34c57082-a801-434c-90a6-31c1957d37c2
+uuid: b8dabba7-3059-406f-9e06-de8a37c46d73
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.profile.child.field_birth_date
-    - field.field.profile.child.field_name
-    - profile.type.child
+    - field.field.profile.participant.field_birth_date
+    - field.field.profile.participant.field_name
+    - profile.type.participant
   module:
     - datetime
     - name
-id: profile.child.default
+id: profile.participant.default
 targetEntityType: profile
-bundle: child
+bundle: participant
 mode: default
 content:
   field_birth_date:

@@ -1,0 +1,15 @@
+uuid: 2f2092ad-33ca-4512-ae6e-bd67a4f3ab0c
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  commerce_order:
+    customer_profile_type: false
+id: participant
+label: Participant
+display_label: ''
+multiple: true
+registration: true
+roles: {  }
+allow_revisions: false
+new_revision: false

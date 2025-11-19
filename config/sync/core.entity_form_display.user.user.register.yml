@@ -122,6 +122,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  participant_profiles:
+    type: profile_form
+    weight: 90
+    region: content
+    settings:
+      form_mode: default
+    third_party_settings: {  }
 hidden:
   contact: true
   customer_profiles: true
