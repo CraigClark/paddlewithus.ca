@@ -9,7 +9,7 @@ id: participant
 label: Participant
 display_label: ''
 multiple: true
-registration: true
+registration: false
 roles: {  }
 allow_revisions: false
 new_revision: false

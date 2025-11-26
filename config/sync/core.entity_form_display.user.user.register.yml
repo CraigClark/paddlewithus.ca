@@ -4,15 +4,21 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.user.register
+    - field.field.user.user.field_address
+    - field.field.user.user.field_co_guardian_email
+    - field.field.user.user.field_co_guardian_name
+    - field.field.user.user.field_co_guardian_phone
+    - field.field.user.user.field_co_guardian_phone_2
     - field.field.user.user.field_coach
     - field.field.user.user.field_current_club
     - field.field.user.user.field_name
     - field.field.user.user.field_past_club
+    - field.field.user.user.field_phone
+    - field.field.user.user.field_phone_2
     - field.field.user.user.user_picture
   module:
     - autocomplete_deluxe
     - name
-    - profile
     - user
 _core:
   default_config_hash: FaQ9Ptcpxpg30AtiqRDtl_8zbJArHP1LPfug_s59TOA
@@ -122,17 +128,18 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  participant_profiles:
-    type: profile_form
-    weight: 90
-    region: content
-    settings:
-      form_mode: default
-    third_party_settings: {  }
 hidden:
   contact: true
   customer_profiles: true
+  field_address: true
+  field_co_guardian_email: true
+  field_co_guardian_name: true
+  field_co_guardian_phone: true
+  field_co_guardian_phone_2: true
+  field_phone: true
+  field_phone_2: true
   langcode: true
+  participant_profiles: true
   path: true
   timezone: true
   user_picture: true

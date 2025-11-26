@@ -46,7 +46,6 @@
         "drupal/core-recommended": "^11",
         "drupal/cshs": "^4.0",
         "drupal/date_filter": "^1.0",
-        "drupal/devel": "^5.0",
         "drupal/eca": "^3.0",
         "drupal/environment_indicator": "^4.0",
         "drupal/facets": "^3.0",
@@ -156,6 +155,7 @@
     },
     "require-dev": {
         "drupal/core-dev": "^11",
-        "kint-php/kint": "^5.0"
+        "drupal/devel": "^5.4",
+        "kint-php/kint": "^6.1"
     }
 }

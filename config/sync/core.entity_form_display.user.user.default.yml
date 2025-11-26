@@ -3,15 +3,45 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_address
+    - field.field.user.user.field_co_guardian_email
+    - field.field.user.user.field_co_guardian_name
+    - field.field.user.user.field_co_guardian_phone
+    - field.field.user.user.field_co_guardian_phone_2
     - field.field.user.user.field_coach
     - field.field.user.user.field_current_club
     - field.field.user.user.field_name
     - field.field.user.user.field_past_club
+    - field.field.user.user.field_phone
+    - field.field.user.user.field_phone_2
     - field.field.user.user.user_picture
   module:
+    - address
     - autocomplete_deluxe
+    - field_group
     - name
+    - telephone
     - user
+third_party_settings:
+  field_group:
+    group_co_guardian:
+      children:
+        - field_co_guardian_name
+        - field_co_guardian_phone
+        - field_co_guardian_phone_2
+        - field_co_guardian_email
+      label: Co-guardian
+      region: content
+      parent_name: ''
+      weight: 8
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: co-guardian
+        label_as_html: false
+        description: 'Description of a co-guardian here'
+        required_fields: true
 _core:
   default_config_hash: FaQ9Ptcpxpg30AtiqRDtl_8zbJArHP1LPfug_s59TOA
 id: user.user.default
@@ -23,6 +53,43 @@ content:
     weight: 0
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_address:
+    type: address_default
+    weight: 7
+    region: content
+    settings:
+      wrapper_type: fieldset
+    third_party_settings: {  }
+  field_co_guardian_email:
+    type: email_default
+    weight: 13
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_co_guardian_name:
+    type: string_textfield
+    weight: 9
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_co_guardian_phone:
+    type: telephone_default
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_co_guardian_phone_2:
+    type: telephone_default
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   field_coach:
     type: autocomplete_deluxe
@@ -108,14 +175,26 @@ content:
       new_terms: false
       no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
-  language:
+  field_phone:
+    type: telephone_default
     weight: 5
     region: content
-    settings: {  }
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_phone_2:
+    type: telephone_default
+    weight: 6
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
 hidden:
   contact: true
+  customer_profiles: true
   langcode: true
+  language: true
+  participant_profiles: true
   path: true
   timezone: true
   user_picture: true
