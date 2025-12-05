@@ -1,16 +1,16 @@
-uuid: 71da1254-9f20-4a39-94ad-525cacb6bb17
+uuid: 57e6474c-0870-4099-9226-20b3dbb36dad
 langcode: en
 status: true
 dependencies:
   module:
-    - name
     - profile
-id: profile.field_name
-field_name: field_name
+    - text
+id: profile.field_allergies
+field_name: field_allergies
 entity_type: profile
-type: name
+type: text_long
 settings: {  }
-module: name
+module: text
 locked: false
 cardinality: 1
 translatable: true

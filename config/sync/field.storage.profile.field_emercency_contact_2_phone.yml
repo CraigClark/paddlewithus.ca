@@ -1,16 +1,16 @@
-uuid: 71da1254-9f20-4a39-94ad-525cacb6bb17
+uuid: 946d4c89-8701-4902-81b4-c105165b2db8
 langcode: en
 status: true
 dependencies:
   module:
-    - name
     - profile
-id: profile.field_name
-field_name: field_name
+    - telephone
+id: profile.field_emercency_contact_2_phone
+field_name: field_emercency_contact_2_phone
 entity_type: profile
-type: name
+type: telephone
 settings: {  }
-module: name
+module: telephone
 locked: false
 cardinality: 1
 translatable: true

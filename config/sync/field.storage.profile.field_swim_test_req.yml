@@ -1,16 +1,15 @@
-uuid: 71da1254-9f20-4a39-94ad-525cacb6bb17
+uuid: 9550b5c0-41fd-4452-9243-d289d8a7c997
 langcode: en
 status: true
 dependencies:
   module:
-    - name
     - profile
-id: profile.field_name
-field_name: field_name
+id: profile.field_swim_test_req
+field_name: field_swim_test_req
 entity_type: profile
-type: name
+type: boolean
 settings: {  }
-module: name
+module: core
 locked: false
 cardinality: 1
 translatable: true

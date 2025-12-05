@@ -3,17 +3,76 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.profile.participant.field_account_holder
+    - field.field.profile.participant.field_allergies
     - field.field.profile.participant.field_birth_date
+    - field.field.profile.participant.field_emercency_contact_1_name
+    - field.field.profile.participant.field_emercency_contact_1_phone
+    - field.field.profile.participant.field_emercency_contact_1_rel
+    - field.field.profile.participant.field_emercency_contact_2_name
+    - field.field.profile.participant.field_emercency_contact_2_phone
+    - field.field.profile.participant.field_emercency_contact_2_rel
+    - field.field.profile.participant.field_emercency_contact_3_phone
+    - field.field.profile.participant.field_emercency_contact_3_rel
+    - field.field.profile.participant.field_emercency_contact_name
+    - field.field.profile.participant.field_medical_notes
     - field.field.profile.participant.field_name
+    - field.field.profile.participant.field_owner
+    - field.field.profile.participant.field_photo_consent
+    - field.field.profile.participant.field_swim_test_req
     - profile.type.participant
   module:
     - datetime
+    - field_group
     - name
+    - telephone
+    - text
+third_party_settings:
+  field_group:
+    group_emergency_contact:
+      children:
+        - field_emercency_contact_1_name
+        - field_emercency_contact_1_phone
+        - field_emercency_contact_1_rel
+        - field_emercency_contact_2_name
+        - field_emercency_contact_2_phone
+        - field_emercency_contact_2_rel
+        - field_emercency_contact_name
+        - field_emercency_contact_3_phone
+        - field_emercency_contact_3_rel
+      label: 'Emergency contacts'
+      parent_name: ''
+      region: content
+      weight: 6
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: emergency-contact
+        label_as_html: false
+        description: ''
 id: profile.participant.default
 targetEntityType: profile
 bundle: participant
 mode: default
 content:
+  field_account_holder:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_allergies:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_birth_date:
     type: datetime_default
     label: above
@@ -22,6 +81,85 @@ content:
       format_type: medium
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_emercency_contact_1_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_emercency_contact_1_phone:
+    type: telephone_link
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_emercency_contact_1_rel:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_emercency_contact_2_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_emercency_contact_2_phone:
+    type: telephone_link
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_emercency_contact_2_rel:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_emercency_contact_3_phone:
+    type: telephone_link
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_emercency_contact_3_rel:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_emercency_contact_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_medical_notes:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_name:
     type: name_default
@@ -37,6 +175,34 @@ content:
       alternative_field_reference_separator: ', '
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_owner:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_photo_consent:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_swim_test_req:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
     region: content
 hidden:
   search_api_excerpt: true

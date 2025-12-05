@@ -1,0 +1,21 @@
+uuid: 71cec351-6e50-4b9a-b842-89c587efdf67
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.field_emercency_contact_2_rel
+field_name: field_emercency_contact_2_rel
+entity_type: profile
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

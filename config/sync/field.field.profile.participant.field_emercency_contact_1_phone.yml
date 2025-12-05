@@ -1,0 +1,21 @@
+uuid: 8920ad4c-51bb-4af8-89d3-4840d7b2a39a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_emercency_contact_1_phone
+    - profile.type.participant
+  module:
+    - telephone
+id: profile.participant.field_emercency_contact_1_phone
+field_name: field_emercency_contact_1_phone
+entity_type: profile
+bundle: participant
+label: 'Emercency contact 1 phone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

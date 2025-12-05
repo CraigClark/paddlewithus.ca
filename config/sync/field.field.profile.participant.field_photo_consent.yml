@@ -1,0 +1,21 @@
+uuid: 90732d26-0682-425a-b804-e3832367b18a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_photo_consent
+    - profile.type.participant
+id: profile.participant.field_photo_consent
+field_name: field_photo_consent
+entity_type: profile
+bundle: participant
+label: 'I consent to this person being filmed for promotional photos and videos'
+description: ' Petrie Island Canoe Club may take photos and videos during programs for promotional use (website, social media, newsletters, materials). Photos are never sold or shared with third parties.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

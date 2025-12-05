@@ -1,0 +1,24 @@
+uuid: da086a23-fd45-4ced-9fd3-2fe6bcbbbd68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_allergies
+    - filter.format.basic_html
+    - profile.type.participant
+  module:
+    - text
+id: profile.participant.field_allergies
+field_name: field_allergies
+entity_type: profile
+bundle: participant
+label: Allergies
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

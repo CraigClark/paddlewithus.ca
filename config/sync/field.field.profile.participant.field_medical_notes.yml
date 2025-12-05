@@ -1,0 +1,24 @@
+uuid: 4d1f68e3-f11c-4c25-bea0-eb4ed9307965
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_medical_notes
+    - filter.format.basic_html
+    - profile.type.participant
+  module:
+    - text
+id: profile.participant.field_medical_notes
+field_name: field_medical_notes
+entity_type: profile
+bundle: participant
+label: ' Medical notes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

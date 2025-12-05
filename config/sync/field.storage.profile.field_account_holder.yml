@@ -1,16 +1,15 @@
-uuid: 71da1254-9f20-4a39-94ad-525cacb6bb17
+uuid: b00ea9ac-f6d4-45af-baa9-3a77af9485b4
 langcode: en
 status: true
 dependencies:
   module:
-    - name
     - profile
-id: profile.field_name
-field_name: field_name
+id: profile.field_account_holder
+field_name: field_account_holder
 entity_type: profile
-type: name
+type: boolean
 settings: {  }
-module: name
+module: core
 locked: false
 cardinality: 1
 translatable: true

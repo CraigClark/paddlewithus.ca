@@ -1,16 +1,16 @@
-uuid: 71da1254-9f20-4a39-94ad-525cacb6bb17
+uuid: aeec0008-b6d5-4cf9-86b6-e2289fa0d46d
 langcode: en
 status: true
 dependencies:
   module:
-    - name
     - profile
-id: profile.field_name
-field_name: field_name
+    - text
+id: profile.field_medical_notes
+field_name: field_medical_notes
 entity_type: profile
-type: name
+type: text_long
 settings: {  }
-module: name
+module: text
 locked: false
 cardinality: 1
 translatable: true

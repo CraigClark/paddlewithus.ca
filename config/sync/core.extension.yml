@@ -105,6 +105,7 @@ module:
   rabbit_hole: 0
   realname: 0
   redirect: 0
+  registration_role: 0
   rest: 0
   rh_node: 0
   rh_taxonomy: 0
