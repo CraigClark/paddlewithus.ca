@@ -1,0 +1,21 @@
+uuid: 2bd31a4f-17e9-4c73-8ffd-5f7f8c3ff7b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_age_calc_date
+  module:
+    - datetime
+id: commerce_product_variation.activity.field_age_calc_date
+field_name: field_age_calc_date
+entity_type: commerce_product_variation
+bundle: activity
+label: 'Age calculation date'
+description: 'Date used to calculate participant age (e.g., Dec 31, 2025)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -4,11 +4,15 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_variation_type.activity
+    - field.field.commerce_product_variation.activity.field_age_calc_date
+    - field.field.commerce_product_variation.activity.field_age_min
     - field.field.commerce_product_variation.activity.field_capacity
     - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_maximum_age
   module:
     - commerce_price
     - commerce_stock_field
+    - datetime
     - datetime_range
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
@@ -21,6 +25,19 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_age_calc_date:
+    type: datetime_default
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_age_min:
+    type: number
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   field_capacity:
     type: commerce_stock_level_simple_transaction
@@ -36,6 +53,13 @@ content:
     weight: 6
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_maximum_age:
+    type: number
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

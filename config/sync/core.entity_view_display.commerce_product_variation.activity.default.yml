@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_variation_type.activity
+    - field.field.commerce_product_variation.activity.field_age_calc_date
+    - field.field.commerce_product_variation.activity.field_age_min
     - field.field.commerce_product_variation.activity.field_capacity
     - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_maximum_age
   module:
     - commerce_price
     - commerce_stock_field
@@ -23,7 +26,7 @@ content:
   commerce_variation_cart_form:
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_capacity:
     type: commerce_stock_level_simple
@@ -34,7 +37,7 @@ content:
         label_class: ''
         label_value: 'Places available'
         label_tag: ''
-    weight: 2
+    weight: 1
     region: content
   field_date_range:
     type: daterange_default
@@ -49,16 +52,7 @@ content:
         label_class: ''
         label_value: ''
         label_tag: ''
-    weight: 3
-    region: content
-  list_price:
-    type: commerce_price_default
-    label: above
-    settings:
-      strip_trailing_zeroes: false
-      currency_display: symbol
-    third_party_settings: {  }
-    weight: 0
+    weight: 2
     region: content
   price:
     type: commerce_price_default
@@ -67,10 +61,14 @@ content:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
 hidden:
+  field_age_calc_date: true
+  field_age_min: true
+  field_maximum_age: true
   langcode: true
+  list_price: true
   product_id: true
   search_api_excerpt: true
   sku: true

@@ -1,0 +1,25 @@
+uuid: 90dc25cc-ba76-4472-93c9-fcbcf1a25632
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_age_min
+id: commerce_product_variation.activity.field_age_min
+field_name: field_age_min
+entity_type: commerce_product_variation
+bundle: activity
+label: 'Minimum age'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  min: 0
+  max: 100
+  prefix: ''
+  suffix: ''
+field_type: integer

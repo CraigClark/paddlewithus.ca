@@ -7,7 +7,6 @@ dependencies:
     - field.field.commerce_order_item.activity_registration.field_participant
   module:
     - commerce_price
-    - field_label
 id: commerce_order_item.activity_registration.default
 targetEntityType: commerce_order_item
 bundle: activity_registration
@@ -32,18 +31,6 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_participant:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: false
-    third_party_settings:
-      field_label:
-        label_class: ''
-        label_value: ''
-        label_tag: ''
-    weight: 4
-    region: content
   quantity:
     type: number_decimal
     label: above
@@ -66,6 +53,7 @@ content:
     region: content
 hidden:
   adjustments: true
+  field_participant: true
   purchased_entity: true
   search_api_excerpt: true
   total_price: true
