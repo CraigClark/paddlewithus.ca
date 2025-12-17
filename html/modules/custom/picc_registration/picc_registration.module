@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * PICC Registration module file.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter() for commerce_product.
+ */
+function picc_registration_commerce_product_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  // Only add register button for Activity products
+  if ($entity->bundle() != 'activity') {
+    return;
+  }
+  
+  // Get the default variation
+  $variation = $entity->getDefaultVariation();
+  if (!$variation) {
+    return;
+  }
+  
+  // Build Register link
+  $url = Url::fromRoute('entity.webform.canonical', ['webform' => 'program_registration'], [
+    'query' => [
+      'product' => $entity->id(),
+      'variation' => $variation->id(),
+    ],
+  ]);
+  
+  $build['register_link'] = [
+    '#type' => 'link',
+    '#title' => t('Register for This Program'),
+    '#url' => $url,
+    '#attributes' => [
+      'class' => ['btn', 'btn-primary', 'btn-lg', 'register-button'],
+    ],
+    '#weight' => -10, // Show above variations/add-to-cart
+  ];
+}

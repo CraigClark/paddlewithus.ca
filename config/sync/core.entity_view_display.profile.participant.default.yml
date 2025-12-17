@@ -12,9 +12,9 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_2_name
     - field.field.profile.participant.field_emercency_contact_2_phone
     - field.field.profile.participant.field_emercency_contact_2_rel
+    - field.field.profile.participant.field_emercency_contact_3_name
     - field.field.profile.participant.field_emercency_contact_3_phone
     - field.field.profile.participant.field_emercency_contact_3_rel
-    - field.field.profile.participant.field_emercency_contact_name
     - field.field.profile.participant.field_medical_notes
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
@@ -37,7 +37,7 @@ third_party_settings:
         - field_emercency_contact_2_name
         - field_emercency_contact_2_phone
         - field_emercency_contact_2_rel
-        - field_emercency_contact_name
+        - field_emercency_contact_3_name
         - field_emercency_contact_3_phone
         - field_emercency_contact_3_rel
       label: 'Emergency contacts'
@@ -130,6 +130,14 @@ content:
     third_party_settings: {  }
     weight: 12
     region: content
+  field_emercency_contact_3_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
   field_emercency_contact_3_phone:
     type: telephone_link
     label: above
@@ -145,14 +153,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 15
-    region: content
-  field_emercency_contact_name:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 13
     region: content
   field_medical_notes:
     type: text_default

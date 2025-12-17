@@ -12,9 +12,9 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_2_name
     - field.field.profile.participant.field_emercency_contact_2_phone
     - field.field.profile.participant.field_emercency_contact_2_rel
+    - field.field.profile.participant.field_emercency_contact_3_name
     - field.field.profile.participant.field_emercency_contact_3_phone
     - field.field.profile.participant.field_emercency_contact_3_rel
-    - field.field.profile.participant.field_emercency_contact_name
     - field.field.profile.participant.field_medical_notes
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
@@ -37,7 +37,7 @@ third_party_settings:
         - field_emercency_contact_2_name
         - field_emercency_contact_2_phone
         - field_emercency_contact_2_rel
-        - field_emercency_contact_name
+        - field_emercency_contact_3_name
         - field_emercency_contact_3_phone
         - field_emercency_contact_3_rel
       label: 'Emergency contacts'
@@ -106,14 +106,14 @@ content:
     third_party_settings: {  }
   field_emercency_contact_1_phone:
     type: telephone_default
-    weight: 22
+    weight: 21
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_1_rel:
     type: string_textfield
-    weight: 23
+    weight: 22
     region: content
     settings:
       size: 60
@@ -121,7 +121,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_2_name:
     type: string_textfield
-    weight: 24
+    weight: 23
     region: content
     settings:
       size: 60
@@ -129,12 +129,20 @@ content:
     third_party_settings: {  }
   field_emercency_contact_2_phone:
     type: telephone_default
-    weight: 25
+    weight: 24
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_2_rel:
+    type: string_textfield
+    weight: 25
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_emercency_contact_3_name:
     type: string_textfield
     weight: 26
     region: content
@@ -144,22 +152,14 @@ content:
     third_party_settings: {  }
   field_emercency_contact_3_phone:
     type: telephone_default
-    weight: 28
+    weight: 27
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_3_rel:
     type: string_textfield
-    weight: 29
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_emercency_contact_name:
-    type: string_textfield
-    weight: 27
+    weight: 28
     region: content
     settings:
       size: 60
