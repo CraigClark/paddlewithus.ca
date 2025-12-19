@@ -13,32 +13,120 @@ use Drupal\Core\Url;
  * Implements hook_ENTITY_TYPE_view_alter() for commerce_product.
  */
 function picc_registration_commerce_product_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
-  // Only add register button for Activity products
+  // Only add register buttons for Activity products
   if ($entity->bundle() != 'activity') {
     return;
   }
   
-  // Get the default variation
-  $variation = $entity->getDefaultVariation();
-  if (!$variation) {
+  // Get all variations
+  $variations = $entity->getVariations();
+  if (empty($variations)) {
     return;
   }
   
-  // Build Register link
-  $url = Url::fromRoute('entity.webform.canonical', ['webform' => 'program_registration'], [
-    'query' => [
-      'product' => $entity->id(),
-      'variation' => $variation->id(),
-    ],
-  ]);
+  // Check if user is logged in
+  $current_user = \Drupal::currentUser();
+  $is_logged_in = $current_user->isAuthenticated();
   
-  $build['register_link'] = [
-    '#type' => 'link',
-    '#title' => t('Register for This Program'),
-    '#url' => $url,
-    '#attributes' => [
-      'class' => ['btn', 'btn-primary', 'btn-lg', 'register-button'],
-    ],
-    '#weight' => -10, // Show above variations/add-to-cart
+  // Build a variations list with register buttons
+  $variations_list = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['product-variations-list']],
+    '#weight' => -10,
   ];
+  
+  foreach ($variations as $variation) {
+    $variation_id = $variation->id();
+    
+    // Get variation details
+    $title = $variation->getTitle();
+    $price = $variation->getPrice();
+    $date_range = $variation->get('field_date_range')->value ?? NULL;
+    $capacity = $variation->get('field_capacity')->value ?? NULL;
+    
+    // Format date range
+    $dates_display = '';
+    if (!empty($date_range)) {
+      $date_parts = explode('|', $date_range);
+      if (count($date_parts) == 2) {
+        $start = date('M j', strtotime($date_parts[0]));
+        $end = date('M j, Y', strtotime($date_parts[1]));
+        $dates_display = $start . ' - ' . $end;
+      }
+    }
+    
+    // Build variation item
+    $variation_item = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['variation-item', 'mb-4', 'p-3', 'border', 'rounded']],
+    ];
+    
+    // Variation title
+    $variation_item['title'] = [
+      '#markup' => '<h3 class="h4">' . $title . '</h3>',
+    ];
+    
+    // Variation details
+    $details = [];
+    if ($price) {
+      $details[] = '<strong>Price:</strong> ' . $price->__toString();
+    }
+    if ($dates_display) {
+      $details[] = '<strong>Dates:</strong> ' . $dates_display;
+    }
+    if ($capacity) {
+      $details[] = '<strong>Capacity:</strong> ' . $capacity . ' spots';
+    }
+    
+    if (!empty($details)) {
+      $variation_item['details'] = [
+        '#markup' => '<p>' . implode(' | ', $details) . '</p>',
+      ];
+    }
+    
+    // Register button - conditional based on login state
+    if ($is_logged_in) {
+      // User is logged in - show register button
+      // Use direct path instead of route to avoid version compatibility issues
+      $url = Url::fromUserInput('/webform/program_registration', [
+        'query' => [
+          'product' => $entity->id(),
+          'variation' => $variation_id,
+        ],
+      ]);
+      
+      $variation_item['register_button'] = [
+        '#type' => 'link',
+        '#title' => t('Register for This Session'),
+        '#url' => $url,
+        '#attributes' => [
+          'class' => ['btn', 'btn-primary', 'register-button'],
+        ],
+      ];
+    } else {
+      // User not logged in - show login/create account button
+      // Build destination URL to return here after login
+      $current_path = \Drupal::service('path.current')->getPath();
+      
+      $login_url = Url::fromRoute('user.login', [], [
+        'query' => [
+          'destination' => $current_path,
+        ],
+      ]);
+      
+      $variation_item['login_button'] = [
+        '#type' => 'link',
+        '#title' => t('Login or Create Account to Register'),
+        '#url' => $login_url,
+        '#attributes' => [
+          'class' => ['btn', 'btn-outline-primary', 'login-button'],
+        ],
+      ];
+    }
+    
+    $variations_list['variation_' . $variation_id] = $variation_item;
+  }
+  
+  // Add the variations list to the build
+  $build['variations_list'] = $variations_list;
 }

@@ -148,9 +148,6 @@ class PiccRegistrationHandler extends WebformHandlerBase {
    */
   protected function createParticipantProfile($data, $user_id) {
     
-    // Determine if this is the account holder
-    $is_account_holder = ($data['who_participating'] === 'myself');
-    
     // Build name field value (using Name module format)
     $name_value = [
       'given' => $data['participant_first_name'] ?? '',
@@ -164,7 +161,6 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       'field_owner' => $user_id,
       'field_name' => $name_value,
       'field_birth_date' => $data['participant_birth_date'],
-      'field_account_holder' => $is_account_holder,
     ]);
     
     // Add emergency contact 1 (required)
