@@ -24,18 +24,6 @@ elements: |-
     '#type': hidden
     '#title': 'Variation ID'
     '#default_value': '[current-page:query:variation]'
-  account_holder_display:
-    '#type': processed_text
-    '#text': '<p><strong>Registering as:</strong> [current-user:field_name]</p><p><strong>Email:</strong> [current-user:mail]</p><p><strong>Phone:</strong> [current-user:field_phone]</p><p><em>To update your contact information, visit your <a href="/user">account page</a>.</em></p>'
-    '#format': full_html
-  who_participating:
-    '#type': radios
-    '#title': "Who's participating in this program?"
-    '#description': 'Select whether you are registering for yourself or another person'
-    '#required': true
-    '#options':
-      myself: 'I am participating myself'
-      someone_else: "I'm registering someone else (child, family member, etc.)"
   participant_info:
     '#type': fieldset
     '#title': 'Participant Information'
@@ -295,7 +283,6 @@ settings:
 access:
   create:
     roles:
-      - anonymous
       - authenticated
     users: {  }
     permissions: {  }

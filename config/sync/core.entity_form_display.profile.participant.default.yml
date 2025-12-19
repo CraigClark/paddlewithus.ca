@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.profile.participant.field_account_holder
     - field.field.profile.participant.field_allergies
     - field.field.profile.participant.field_birth_date
     - field.field.profile.participant.field_emercency_contact_1_name
@@ -75,13 +74,6 @@ targetEntityType: profile
 bundle: participant
 mode: default
 content:
-  field_account_holder:
-    type: boolean_checkbox
-    weight: 2
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_allergies:
     type: text_textarea
     weight: 4
