@@ -18,7 +18,6 @@ dependencies:
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
     - field.field.profile.participant.field_photo_consent
-    - field.field.profile.participant.field_swim_test_req
     - profile.type.participant
   module:
     - datetime
@@ -42,7 +41,7 @@ third_party_settings:
       label: 'Emergency contacts'
       region: content
       parent_name: ''
-      weight: 6
+      weight: 5
       format_type: fieldset
       format_settings:
         classes: ''
@@ -55,12 +54,10 @@ third_party_settings:
       children:
         - field_allergies
         - field_medical_notes
-        - field_photo_consent
-        - field_swim_test_req
       label: 'Medical information'
       region: content
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: fieldset
       format_settings:
         classes: ''
@@ -199,18 +196,10 @@ content:
       field_title_display: before
     third_party_settings: {  }
   field_photo_consent:
-    type: boolean_checkbox
-    weight: 6
+    type: options_buttons
+    weight: 2
     region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_swim_test_req:
-    type: boolean_checkbox
-    weight: 7
-    region: content
-    settings:
-      display_label: true
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_owner: true
