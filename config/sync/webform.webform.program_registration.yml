@@ -24,108 +24,6 @@ elements: |-
     '#type': hidden
     '#title': 'Variation ID'
     '#default_value': '[current-page:query:variation]'
-  participant_info:
-    '#type': fieldset
-    '#title': 'Participant Information'
-    '#description': 'Information about the person who will participate in this program'
-    participant_first_name:
-      '#type': textfield
-      '#title': 'First Name'
-      '#required': true
-    participant_last_name:
-      '#type': textfield
-      '#title': 'Last Name'
-      '#required': true
-    participant_birth_date:
-      '#type': date
-      '#title': 'Birth Date'
-      '#required': true
-      '#date_date_max': today
-      '#description': "Participant's date of birth (required for age validation)"
-    emergency_contact_1:
-      '#type': fieldset
-      '#title': 'Emergency Contact 1 (Required)'
-      '#description': 'Primary person to contact in case of emergency'
-      emergency_1_name:
-        '#type': textfield
-        '#title': Name
-        '#required': true
-        '#placeholder': 'Jane Smith'
-      emergency_1_phone:
-        '#type': tel
-        '#title': Phone
-        '#required': true
-        '#placeholder': 613-555-1234
-      emergency_1_relationship:
-        '#type': select
-        '#title': Relationship
-        '#required': true
-        '#options':
-          parent: Parent
-          guardian: Guardian
-          grandparent: Grandparent
-          sibling: 'Sibling (18+)'
-          spouse: Spouse/Partner
-          friend: Friend
-          other: Other
-    emergency_contact_2:
-      '#type': fieldset
-      '#title': 'Emergency Contact 2 (Optional)'
-      emergency_2_name:
-        '#type': textfield
-        '#title': Name
-        '#placeholder': 'Dave Smith'
-      emergency_2_phone:
-        '#type': tel
-        '#title': Phone
-        '#placeholder': 613-555-5678
-      emergency_2_relationship:
-        '#type': select
-        '#title': Relationship
-        '#options':
-          parent: Parent
-          guardian: Guardian
-          grandparent: Grandparent
-          sibling: 'Sibling (18+)'
-          spouse: Spouse/Partner
-          friend: Friend
-          other: Other
-    emergency_contact_3:
-      '#type': fieldset
-      '#title': 'Emergency Contact 3 (Optional)'
-      emergency_3_name:
-        '#type': textfield
-        '#title': Name
-      emergency_3_phone:
-        '#type': tel
-        '#title': Phone
-      emergency_3_relationship:
-        '#type': select
-        '#title': Relationship
-        '#options':
-          parent: Parent
-          guardian: Guardian
-          grandparent: Grandparent
-          sibling: 'Sibling (18+)'
-          spouse: Spouse/Partner
-          friend: Friend
-          other: Other
-    medical_info:
-      '#type': fieldset
-      '#title': 'Medical Information (Optional)'
-      '#description': 'Important health information coaches should know'
-      allergies:
-        '#type': textarea
-        '#title': Allergies
-        '#rows': 3
-        '#description': 'List any food allergies, environmental allergies, or other allergies coaches should be aware of'
-        '#placeholder': 'Peanuts, shellfish, bee stings...'
-      medical_notes:
-        '#type': textarea
-        '#title': 'Medical Notes'
-        '#rows': 4
-        '#description': 'Any medical conditions, medications, or other health information coaches should know'
-        '#placeholder': 'Asthma (uses inhaler), diabetes...'
   swim_test_acknowledgment:
     '#type': checkbox
     '#title': 'Swim Test Requirement'
@@ -135,14 +33,6 @@ elements: |-
     '#title_display': before
     '#description_display': before
     '#field_prefix': 'I understand the participant must pass a swim test before water activities'
-  photo_consent:
-    '#type': checkbox
-    '#title': 'Photo & Video Consent'
-    '#description': 'Petrie Island Canoe Club may take photos and videos during programs for promotional use (website, social media, newsletters, materials). Photos are never sold or shared with third parties. You may withdraw consent at any time by contacting info@petriecanoe.ca'
-    '#return_value': '1'
-    '#title_display': before
-    '#description_display': before
-    '#field_prefix': 'I consent to this participant being photographed/videoed for PICC promotional use'
 css: ''
 javascript: ''
 settings:
