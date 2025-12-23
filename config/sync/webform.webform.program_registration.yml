@@ -24,6 +24,19 @@ elements: |-
     '#type': hidden
     '#title': 'Variation ID'
     '#default_value': '[current-page:query:variation]'
+  participants:
+    '#type': webform_entity_checkboxes
+    '#title': 'Select Participants'
+    '#target_type': profile
+    '#selection_handler': views
+    '#selection_settings':
+      view:
+        view_name: participants
+        display_name: er_participants
+    '#required': true
+  manage_participants:
+    '#type': webform_markup
+    '#markup': '<p><a class="btn btn-secondary" href="/user/[current-user:uid]/participant/add?destination=[current-page:url:relative]">+ Add New Participant</a></p><p><small>To edit a participant, go to </small><a href="/user/[current-user:uid]/participant/list"><small>your participant profiles</small></a><small>.</small></p>'
   swim_test_acknowledgment:
     '#type': checkbox
     '#title': 'Swim Test Requirement'
