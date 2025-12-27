@@ -12,13 +12,13 @@ use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\Core\Url;
 
 /**
- * Creates participant profiles and Commerce orders from webform submissions.
+ * Creates Commerce orders from selected participant profiles.
  *
  * @WebformHandler(
  *   id = "picc_registration_handler",
  *   label = @Translation("PICC Registration Handler"),
  *   category = @Translation("PICC"),
- *   description = @Translation("Creates participant profiles and Commerce orders for PICC program registration."),
+ *   description = @Translation("Creates Commerce orders for selected participants."),
  *   cardinality = \Drupal\webform\Plugin\WebformHandlerInterface::CARDINALITY_SINGLE,
  *   results = \Drupal\webform\Plugin\WebformHandlerInterface::RESULTS_PROCESSED,
  * )
@@ -37,10 +37,21 @@ class PiccRegistrationHandler extends WebformHandlerBase {
     $current_user = \Drupal::currentUser();
     $user_id = $current_user->id();
     
+    // Get selected participants (array of profile IDs from entity_checkboxes)
+    $selected_participants = $data['participants'] ?? [];
+    
+    // Filter out empty values (webform checkboxes return 0 for unchecked)
+    $selected_participants = array_filter($selected_participants);
+    
+    if (empty($selected_participants)) {
+      \Drupal::messenger()->addError($this->t('Please select at least one participant.'));
+      return;
+    }
+    
     // Log start
-    \Drupal::logger('picc_registration')->notice('Processing registration for user @uid, product @product, variation @variation', [
+    \Drupal::logger('picc_registration')->notice('Processing registration for user @uid, @count participants, variation @variation', [
       '@uid' => $user_id,
-      '@product' => $data['product_id'] ?? 'unknown',
+      '@count' => count($selected_participants),
       '@variation' => $data['variation_id'] ?? 'unknown',
     ]);
     
@@ -48,16 +59,13 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       // Step 1: Validate product/variation exists
       $variation = $this->validateVariation($data);
       
-      // Step 2: Create Participant Profile FIRST (so data isn't lost if age fails)
-      $profile = $this->createParticipantProfile($data, $user_id);
+      // Step 2: Validate age for all selected participants
+      $this->validateParticipantsAge($selected_participants, $variation);
       
-      // Step 3: Validate age requirements (after profile saved)
-      $this->validateAge($data, $variation, $profile);
+      // Step 3: Create order with order items for each selected participant
+      $order = $this->createCommerceOrder($selected_participants, $user_id, $variation);
       
-      // Step 4: Create Commerce Order
-      $order = $this->createCommerceOrder($data, $profile, $user_id, $variation);
-      
-      // Step 5: Redirect to checkout
+      // Step 4: Redirect to checkout
       $checkout_url = Url::fromRoute('commerce_checkout.form', [
         'commerce_order' => $order->id(),
         'step' => 'order_information',
@@ -65,9 +73,9 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       $form_state->setRedirectUrl($checkout_url);
       
       // Log success
-      \Drupal::logger('picc_registration')->notice('Successfully created profile @pid and order @oid', [
-        '@pid' => $profile->id(),
+      \Drupal::logger('picc_registration')->notice('Successfully created order @oid with @count participants', [
         '@oid' => $order->id(),
+        '@count' => count($selected_participants),
       ]);
       
       // Show success message
@@ -103,123 +111,76 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       throw new \Exception("Product variation {$variation_id} not found.");
     }
     
-    // Optional: Validate variation belongs to product
-    $product_id = $data['product_id'] ?? NULL;
-    if ($product_id && $variation->getProductId() != $product_id) {
-      throw new \Exception('Invalid product/variation combination.');
-    }
-    
     return $variation;
   }
   
   /**
-   * Validates participant age against program requirements.
+   * Validates age for all selected participants.
    */
-  protected function validateAge($data, $variation, $profile) {
-    $birth_date = $data['participant_birth_date'] ?? NULL;
-    
-    if (empty($birth_date)) {
-      throw new \Exception('Birth date is required.');
-    }
-    
+  protected function validateParticipantsAge($participant_ids, $variation) {
     // Get age requirements from variation
     $age_min = $variation->get('field_age_min')->value ?? 0;
     $age_max = $variation->get('field_maximum_age')->value ?? 99;
     $age_calc_date = $variation->get('field_age_calc_date')->value ?? NULL;
     
-    // Calculate age
-    $birth = new \DateTime($birth_date);
+    // Skip validation if no age requirements
+    if (empty($age_min) && empty($age_max)) {
+      return;
+    }
+    
     $calc_date = $age_calc_date ? new \DateTime($age_calc_date) : new \DateTime();
-    $age = $birth->diff($calc_date)->y;
     
-    // Validate
-    if ($age < $age_min || $age > $age_max) {
-      $calc_info = $age_calc_date ? " as of " . $calc_date->format('F j, Y') : "";
-      
-      // Profile was already saved, so tell user they can edit it
-      $profile_url = '/user/' . \Drupal::currentUser()->id() . '/participant/' . $profile->id() . '/edit';
-      
-      throw new \Exception("Participant must be between {$age_min} and {$age_max} years old{$calc_info}. Participant will be {$age}{$calc_info}. Your participant profile has been saved and you can <a href='{$profile_url}'>edit it here</a> if needed.");
-    }
-  }
-  
-  /**
-   * Creates a Participant profile from webform data.
-   */
-  protected function createParticipantProfile($data, $user_id) {
+    $invalid_participants = [];
     
-    // Build name field value (using Name module format)
-    $name_value = [
-      'given' => $data['participant_first_name'] ?? '',
-      'family' => $data['participant_last_name'] ?? '',
-    ];
-    
-    // Create the profile
-    $profile = Profile::create([
-      'type' => 'participant',
-      'uid' => $user_id,
-      'field_owner' => $user_id,
-      'field_name' => $name_value,
-      'field_birth_date' => $data['participant_birth_date'],
-    ]);
-    
-    // Add emergency contact 1 (required)
-    if (!empty($data['emergency_1_name'])) {
-      $profile->set('field_emercency_contact_1_name', $data['emergency_1_name']);
-      $profile->set('field_emercency_contact_1_phone', $data['emergency_1_phone']);
-      $profile->set('field_emercency_contact_1_rel', $data['emergency_1_relationship']);
-    }
-    
-    // Add emergency contact 2 (optional)
-    if (!empty($data['emergency_2_name'])) {
-      $profile->set('field_emercency_contact_2_name', $data['emergency_2_name']);
-      $profile->set('field_emercency_contact_2_phone', $data['emergency_2_phone']);
-      $profile->set('field_emercency_contact_2_rel', $data['emergency_2_relationship']);
-    }
-    
-    // Add emergency contact 3 (optional)
-    if (!empty($data['emergency_3_name'])) {
-      // Note: field_emercency_contact_3_name doesn't exist in config, using available fields
-      if ($profile->hasField('field_emercency_contact_name')) {
-        $profile->set('field_emercency_contact_name', $data['emergency_3_name']);
+    foreach ($participant_ids as $profile_id) {
+      $profile = Profile::load($profile_id);
+      if (!$profile) {
+        continue;
       }
-      $profile->set('field_emercency_contact_3_phone', $data['emergency_3_phone']);
-      $profile->set('field_emercency_contact_3_rel', $data['emergency_3_relationship']);
+      
+      $birth_date = $profile->get('field_birth_date')->value;
+      if (empty($birth_date)) {
+        $name_field = $profile->get('field_name')->first();
+        $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Unknown';
+        $invalid_participants[] = "{$name} (no birth date)";
+        continue;
+      }
+      
+      $birth = new \DateTime($birth_date);
+      $age = $birth->diff($calc_date)->y;
+      
+      if ($age < $age_min || $age > $age_max) {
+        $name_field = $profile->get('field_name')->first();
+        $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Unknown';
+        $invalid_participants[] = "{$name} (age {$age})";
+      }
     }
     
-    // Add medical information (optional)
-    if (!empty($data['allergies'])) {
-      $profile->set('field_allergies', $data['allergies']);
+    if (!empty($invalid_participants)) {
+      $calc_info = $age_calc_date ? " as of " . $calc_date->format('F j, Y') : "";
+      throw new \Exception("The following participants do not meet age requirements ({$age_min}-{$age_max}{$calc_info}): " . implode(', ', $invalid_participants));
     }
-    
-    if (!empty($data['medical_notes'])) {
-      $profile->set('field_medical_notes', $data['medical_notes']);
-    }
-    
-    // Add consents
-    $profile->set('field_photo_consent', !empty($data['photo_consent']));
-    $profile->set('field_swim_test_req', !empty($data['swim_test_acknowledgment']));
-    
-    // Save the profile
-    $profile->save();
-    
-    return $profile;
   }
   
   /**
-   * Creates a Commerce order from webform data.
+   * Creates a Commerce order with order items for selected participants.
    */
-  protected function createCommerceOrder($data, $profile, $user_id, $variation) {
+  protected function createCommerceOrder($participant_ids, $user_id, $variation) {
     
-    // Create order item
-    $order_item = OrderItem::create([
-      'type' => 'activity_registration',
-      'purchased_entity' => $variation,
-      'quantity' => 1,
-      'unit_price' => $variation->getPrice(),
-      'field_participant' => $profile->id(),
-    ]);
-    $order_item->save();
+    $order_items = [];
+    
+    // Create an order item for each selected participant
+    foreach ($participant_ids as $profile_id) {
+      $order_item = OrderItem::create([
+        'type' => 'activity_registration',
+        'purchased_entity' => $variation,
+        'quantity' => 1,
+        'unit_price' => $variation->getPrice(),
+        'field_participant' => $profile_id,
+      ]);
+      $order_item->save();
+      $order_items[] = $order_item;
+    }
     
     // Load the store
     $store_storage = \Drupal::entityTypeManager()->getStorage('commerce_store');
@@ -241,7 +202,7 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       'mail' => $email,
       'uid' => $user_id,
       'store_id' => $store->id(),
-      'order_items' => [$order_item],
+      'order_items' => $order_items,
       'billing_profile' => NULL, // Will be set during checkout
     ]);
     $order->save();
