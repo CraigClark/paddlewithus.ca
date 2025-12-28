@@ -163,14 +163,52 @@ class PiccRegistrationHandler extends WebformHandlerBase {
   }
   
   /**
-   * Creates a Commerce order with order items for selected participants.
+   * Creates or updates a Commerce order with order items for selected participants.
    */
   protected function createCommerceOrder($participant_ids, $user_id, $variation) {
     
-    $order_items = [];
+    $variation_id = $variation->id();
+    $skipped_already_in_cart = [];
+    $skipped_completed = [];
+    $new_order_items = [];
     
-    // Create an order item for each selected participant
+    // Find existing draft order for this user
+    $existing_order = $this->findDraftOrder($user_id);
+    
+    // Get participants already in the cart (if cart exists)
+    $existing_participants = [];
+    if ($existing_order) {
+      foreach ($existing_order->getItems() as $item) {
+        $item_variation_id = $item->getPurchasedEntityId();
+        $item_participant_id = $item->get('field_participant')->target_id;
+        
+        // Track participants by variation
+        if (!isset($existing_participants[$item_variation_id])) {
+          $existing_participants[$item_variation_id] = [];
+        }
+        $existing_participants[$item_variation_id][] = $item_participant_id;
+      }
+    }
+    
+    // Process each selected participant
     foreach ($participant_ids as $profile_id) {
+      $profile = Profile::load($profile_id);
+      $name_field = $profile ? $profile->get('field_name')->first() : NULL;
+      $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Participant';
+      
+      // Check if already in THIS cart for THIS variation
+      if (isset($existing_participants[$variation_id]) && in_array($profile_id, $existing_participants[$variation_id])) {
+        $skipped_already_in_cart[] = $name;
+        continue;
+      }
+      
+      // Check if in a COMPLETED order
+      if ($this->isInCompletedOrder($profile_id, $variation_id)) {
+        $skipped_completed[] = $name;
+        continue;
+      }
+      
+      // Create new order item
       $order_item = OrderItem::create([
         'type' => 'activity_registration',
         'purchased_entity' => $variation,
@@ -178,11 +216,155 @@ class PiccRegistrationHandler extends WebformHandlerBase {
         'unit_price' => $variation->getPrice(),
         'field_participant' => $profile_id,
       ]);
+      
       $order_item->save();
-      $order_items[] = $order_item;
+      $new_order_items[] = $order_item;
     }
     
-    // Load the store
+    // If no new items to add, check what happened
+    if (empty($new_order_items)) {
+      // Check if everything was already in cart (not an error - just redirect to cart)
+      if (!empty($skipped_already_in_cart) && empty($skipped_completed)) {
+        \Drupal::messenger()->addStatus($this->t('All selected participants are already in your cart.'));
+        // Don't throw error, just return existing order for redirect
+        if ($existing_order) {
+          return $existing_order;
+        }
+      }
+      
+      // Otherwise, throw error (all were completed or nothing to do)
+      $all_skipped = array_merge($skipped_already_in_cart, $skipped_completed);
+      throw new \Exception('All selected participants are already registered for this session. No new registrations were created.');
+    }
+    
+    // Show messages only when we're actually proceeding
+    if (!empty($skipped_already_in_cart)) {
+      \Drupal::messenger()->addStatus($this->t('Already in cart: @names', [
+        '@names' => implode(', ', $skipped_already_in_cart),
+      ]));
+    }
+    
+    if (!empty($skipped_completed)) {
+      \Drupal::messenger()->addWarning($this->t('The following participants were already registered for this session (skipped): @names', [
+        '@names' => implode(', ', $skipped_completed),
+      ]));
+    }
+    
+    // Add new items to existing order OR create new order
+    if ($existing_order) {
+      // Add to existing cart
+      foreach ($new_order_items as $order_item) {
+        $existing_order->addItem($order_item);
+      }
+      $existing_order->save();
+      $order = $existing_order;
+      
+      if (!empty($new_order_items)) {
+        \Drupal::messenger()->addStatus($this->t('Added @count participant(s) to your cart.', [
+          '@count' => count($new_order_items),
+        ]));
+      }
+    } else {
+      // Create new order
+      $store = $this->getStore();
+      $user = \Drupal\user\Entity\User::load($user_id);
+      
+      $order = Order::create([
+        'type' => 'default',
+        'state' => 'draft',
+        'mail' => $user->getEmail(),
+        'uid' => $user_id,
+        'store_id' => $store->id(),
+        'order_items' => $new_order_items,
+        'cart' => TRUE,
+        'billing_profile' => NULL,
+      ]);
+      $order->save();
+    }
+    
+    // NOW set titles on all order items AFTER order is fully saved
+    foreach ($order->getItems() as $item) {
+      $participant_id = $item->get('field_participant')->target_id;
+      if ($participant_id) {
+        $profile = Profile::load($participant_id);
+        if ($profile) {
+          $name_field = $profile->get('field_name')->first();
+          $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Participant';
+          $variation_title = $item->getPurchasedEntity()->getTitle();
+          $new_title = $variation_title . ' - ' . $name;
+          
+          \Drupal::logger('picc_registration')->notice('Post-order title set: @title for item @iid', [
+            '@title' => $new_title,
+            '@iid' => $item->id(),
+          ]);
+          
+          $item->setTitle($new_title);
+          $item->save();
+        }
+      }
+    }
+    
+    return $order;
+  }
+  
+  /**
+   * Find existing draft order for user.
+   */
+  protected function findDraftOrder($user_id) {
+    $order_storage = \Drupal::entityTypeManager()->getStorage('commerce_order');
+    
+    $query = $order_storage->getQuery()
+      ->condition('uid', $user_id)
+      ->condition('state', 'draft')
+      ->condition('cart', TRUE)
+      ->sort('order_id', 'DESC')
+      ->range(0, 1)
+      ->accessCheck(TRUE);
+    
+    $order_ids = $query->execute();
+    
+    if (!empty($order_ids)) {
+      return $order_storage->load(reset($order_ids));
+    }
+    
+    return NULL;
+  }
+  
+  /**
+   * Check if participant is in a completed order.
+   */
+  protected function isInCompletedOrder($profile_id, $variation_id) {
+    $order_item_storage = \Drupal::entityTypeManager()->getStorage('commerce_order_item');
+    
+    $order_item_ids = $order_item_storage->getQuery()
+      ->condition('type', 'activity_registration')
+      ->condition('field_participant', $profile_id)
+      ->condition('purchased_entity', $variation_id)
+      ->accessCheck(TRUE)
+      ->execute();
+    
+    if (empty($order_item_ids)) {
+      return FALSE;
+    }
+    
+    // Check if any order items are in completed orders
+    $order_storage = \Drupal::entityTypeManager()->getStorage('commerce_order');
+    foreach ($order_item_ids as $order_item_id) {
+      $order_item = $order_item_storage->load($order_item_id);
+      $order = $order_item->getOrder();
+      
+      if ($order && in_array($order->getState()->getId(), ['completed', 'fulfillment'])) {
+        return TRUE;
+      }
+    }
+    
+    return FALSE;
+  }
+  
+  /**
+   * Get the store.
+   */
+  protected function getStore() {
     $store_storage = \Drupal::entityTypeManager()->getStorage('commerce_store');
     $stores = $store_storage->loadMultiple();
     $store = reset($stores);
@@ -191,23 +373,7 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       throw new \Exception('No store configured. Please contact administrator.');
     }
     
-    // Get user email
-    $user = \Drupal\user\Entity\User::load($user_id);
-    $email = $user->getEmail();
-    
-    // Create the order
-    $order = Order::create([
-      'type' => 'default',
-      'state' => 'draft',
-      'mail' => $email,
-      'uid' => $user_id,
-      'store_id' => $store->id(),
-      'order_items' => $order_items,
-      'billing_profile' => NULL, // Will be set during checkout
-    ]);
-    $order->save();
-    
-    return $order;
+    return $store;
   }
 
 }
