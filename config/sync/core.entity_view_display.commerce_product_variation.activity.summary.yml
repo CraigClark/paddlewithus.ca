@@ -1,0 +1,69 @@
+uuid: 09b796e4-30ad-442b-be42-84fdeb877163
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - core.entity_view_mode.commerce_product_variation.summary
+    - field.field.commerce_product_variation.activity.field_age_calc_date
+    - field.field.commerce_product_variation.activity.field_age_min
+    - field.field.commerce_product_variation.activity.field_capacity
+    - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_maximum_age
+  module:
+    - commerce_price
+    - commerce_variation_cart_form
+    - datetime_range
+    - field_label
+    - layout_builder
+third_party_settings:
+  commerce_variation_cart_form:
+    combine: false
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: commerce_product_variation.activity.summary
+targetEntityType: commerce_product_variation
+bundle: activity
+mode: summary
+content:
+  field_date_range:
+    type: daterange_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: html_date
+      from_to: both
+      separator: ' to '
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 1
+    region: content
+  price:
+    type: commerce_price_default
+    label: hidden
+    settings:
+      strip_trailing_zeroes: false
+      currency_display: symbol
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 0
+    region: content
+hidden:
+  commerce_variation_cart_form: true
+  field_age_calc_date: true
+  field_age_min: true
+  field_capacity: true
+  field_maximum_age: true
+  langcode: true
+  list_price: true
+  product_id: true
+  search_api_excerpt: true
+  sku: true
+  title: true
