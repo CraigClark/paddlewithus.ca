@@ -23,11 +23,6 @@ targetEntityType: commerce_product_variation
 bundle: activity
 mode: default
 content:
-  commerce_variation_cart_form:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_capacity:
     type: commerce_stock_level_simple
     label: above
@@ -64,6 +59,7 @@ content:
     weight: 0
     region: content
 hidden:
+  commerce_variation_cart_form: true
   field_age_calc_date: true
   field_age_min: true
   field_maximum_age: true

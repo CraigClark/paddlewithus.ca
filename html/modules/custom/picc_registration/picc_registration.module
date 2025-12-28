@@ -130,3 +130,47 @@ function picc_registration_commerce_product_view_alter(array &$build, EntityInte
   // Add the variations list to the build
   $build['variations_list'] = $variations_list;
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter() for commerce_order_item.
+ * 
+ * Ensures order item titles include participant names when displayed.
+ */
+function picc_registration_commerce_order_item_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  // Only process activity_registration order items
+  if ($entity->bundle() !== 'activity_registration') {
+    return;
+  }
+  
+  // Check if participant name is already in title
+  $current_title = $entity->getTitle();
+  if (strpos($current_title, ' - ') !== FALSE) {
+    // Title already has participant name
+    return;
+  }
+  
+  // Get participant profile
+  $participant_id = $entity->get('field_participant')->target_id;
+  if (!$participant_id) {
+    return;
+  }
+  
+  $profile = \Drupal\profile\Entity\Profile::load($participant_id);
+  if (!$profile) {
+    return;
+  }
+  
+  // Build name
+  $name_field = $profile->get('field_name')->first();
+  $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Participant';
+  
+  // Update title for display
+  $variation_title = $entity->getPurchasedEntity()->getTitle();
+  $new_title = $variation_title . ' - ' . $name;
+  
+  // Override the title in the render array
+  if (isset($build['title'])) {
+    $build['title']['#markup'] = $new_title;
+  }
+}
+

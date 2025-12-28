@@ -283,23 +283,33 @@ class PiccRegistrationHandler extends WebformHandlerBase {
     }
     
     // NOW set titles on all order items AFTER order is fully saved
+    // Load items fresh from storage to ensure saves work
+    $order_item_storage = \Drupal::entityTypeManager()->getStorage('commerce_order_item');
     foreach ($order->getItems() as $item) {
-      $participant_id = $item->get('field_participant')->target_id;
+      $item_id = $item->id();
+      // Reload from storage to get a fresh, saveable entity
+      $fresh_item = $order_item_storage->load($item_id);
+      
+      if (!$fresh_item) {
+        continue;
+      }
+      
+      $participant_id = $fresh_item->get('field_participant')->target_id;
       if ($participant_id) {
         $profile = Profile::load($participant_id);
         if ($profile) {
           $name_field = $profile->get('field_name')->first();
           $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Participant';
-          $variation_title = $item->getPurchasedEntity()->getTitle();
+          $variation_title = $fresh_item->getPurchasedEntity()->getTitle();
           $new_title = $variation_title . ' - ' . $name;
           
           \Drupal::logger('picc_registration')->notice('Post-order title set: @title for item @iid', [
             '@title' => $new_title,
-            '@iid' => $item->id(),
+            '@iid' => $fresh_item->id(),
           ]);
           
-          $item->setTitle($new_title);
-          $item->save();
+          $fresh_item->setTitle($new_title);
+          $fresh_item->save();
         }
       }
     }
