@@ -25,6 +25,7 @@ module:
   commerce_checkout: 0
   commerce_number_pattern: 0
   commerce_order: 0
+  commerce_payment: 0
   commerce_price: 0
   commerce_product: 0
   commerce_promotion: 0
@@ -33,6 +34,7 @@ module:
   commerce_stock_local: 0
   commerce_stock_ui: 0
   commerce_store: 0
+  commerce_stripe: 0
   commerce_variation_cart_form: 0
   conditional_fields: 0
   config: 0
@@ -80,6 +82,7 @@ module:
   inline_form_errors: 0
   jquery_ui: 0
   js_cookie: 0
+  key: 0
   language: 0
   language_switcher_extended: 0
   layout_builder: 0

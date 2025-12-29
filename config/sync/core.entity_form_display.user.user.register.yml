@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.user.register
+    - field.field.user.user.commerce_remote_id
     - field.field.user.user.field_address
     - field.field.user.user.field_co_guardian_email
     - field.field.user.user.field_co_guardian_name
@@ -129,6 +130,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  commerce_remote_id: true
   contact: true
   customer_profiles: true
   field_address: true

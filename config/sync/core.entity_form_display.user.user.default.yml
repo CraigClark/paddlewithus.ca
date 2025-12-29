@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.commerce_remote_id
     - field.field.user.user.field_address
     - field.field.user.user.field_co_guardian_email
     - field.field.user.user.field_co_guardian_name
@@ -190,6 +191,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  commerce_remote_id: true
   contact: true
   customer_profiles: true
   langcode: true
