@@ -2,7 +2,7 @@ name: 'PICC Registration'
 type: module
 description: 'Handles program registration - creates participant profiles and Commerce orders from webform submissions.'
 package: PICC
-version: '17.7'
+version: '17.9'
 core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:webform

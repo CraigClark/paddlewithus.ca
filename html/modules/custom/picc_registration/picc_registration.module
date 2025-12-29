@@ -223,8 +223,29 @@ function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterfa
   // Get address values as array
   $address_values = $user_address->getValue();
   
-  \Drupal::logger('picc_registration')->notice('Found user address, attempting to pre-populate. Address data: @data', [
-    '@data' => print_r($address_values, TRUE)
+  // Get user's name from field_name if available
+  $given_name = '';
+  $family_name = '';
+  
+  if ($user->hasField('field_name') && !$user->get('field_name')->isEmpty()) {
+    $name_field = $user->get('field_name')->first();
+    if ($name_field) {
+      $name_values = $name_field->getValue();
+      
+      // Debug: log what getValue actually returns
+      \Drupal::logger('picc_registration')->notice('Name field getValue: @values', [
+        '@values' => print_r($name_values, TRUE)
+      ]);
+      
+      $given_name = $name_values['given'] ?? '';
+      $family_name = $name_values['family'] ?? '';
+    }
+  }
+  
+  \Drupal::logger('picc_registration')->notice('Found user address, attempting to pre-populate. Address data: @data, Name: @given @family', [
+    '@data' => print_r($address_values, TRUE),
+    '@given' => $given_name,
+    '@family' => $family_name,
   ]);
   
   // Get billing address field
@@ -252,8 +273,8 @@ function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterfa
       'address_line1' => $address_values['address_line1'] ?? '',
       'address_line2' => $address_values['address_line2'] ?? '',
       'organization' => $address_values['organization'] ?? '',
-      'given_name' => $address_values['given_name'] ?? '',
-      'family_name' => $address_values['family_name'] ?? '',
+      'given_name' => $given_name ?: ($address_values['given_name'] ?? ''),
+      'family_name' => $family_name ?: ($address_values['family_name'] ?? ''),
     ];
     
     \Drupal::logger('picc_registration')->notice('Successfully set billing address default values');
