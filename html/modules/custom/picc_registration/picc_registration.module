@@ -174,3 +174,95 @@ function picc_registration_commerce_order_item_view_alter(array &$build, EntityI
   }
 }
 
+/**
+ * Implements hook_form_alter().
+ * 
+ * Pre-populates billing address on checkout from user's profile address.
+ */
+function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Only act on commerce checkout forms
+  if (strpos($form_id, 'commerce_checkout_flow_') !== 0) {
+    return;
+  }
+  
+  // Debug: Log that we're in a checkout form
+  \Drupal::logger('picc_registration')->notice('Processing checkout form: @form_id', ['@form_id' => $form_id]);
+  
+  // Only populate on the order (checkout) step that has billing info
+  if (!isset($form['payment_information']) || !isset($form['payment_information']['billing_information'])) {
+    \Drupal::logger('picc_registration')->notice('No payment_information or billing_information found in form');
+    return;
+  }
+  
+  $current_user = \Drupal::currentUser();
+  if (!$current_user->isAuthenticated()) {
+    \Drupal::logger('picc_registration')->notice('User not authenticated');
+    return;
+  }
+  
+  // Load user account
+  $user = \Drupal\user\Entity\User::load($current_user->id());
+  if (!$user) {
+    \Drupal::logger('picc_registration')->notice('Could not load user');
+    return;
+  }
+  
+  // Check if user has field_address on their profile
+  if (!$user->hasField('field_address') || $user->get('field_address')->isEmpty()) {
+    \Drupal::logger('picc_registration')->notice('User does not have field_address or it is empty');
+    return;
+  }
+  
+  // Get the user's address
+  $user_address = $user->get('field_address')->first();
+  if (!$user_address) {
+    \Drupal::logger('picc_registration')->notice('Could not get user address value');
+    return;
+  }
+  
+  // Get address values as array
+  $address_values = $user_address->getValue();
+  
+  \Drupal::logger('picc_registration')->notice('Found user address, attempting to pre-populate. Address data: @data', [
+    '@data' => print_r($address_values, TRUE)
+  ]);
+  
+  // Get billing address field
+  $billing_info = &$form['payment_information']['billing_information'];
+  
+  // Check if address is already filled with actual data
+  $existing_default = $billing_info['address']['widget'][0]['address']['#default_value'] ?? [];
+  $has_real_data = !empty($existing_default['address_line1']) || !empty($existing_default['locality']);
+  
+  if ($has_real_data) {
+    \Drupal::logger('picc_registration')->notice('Billing address already has real data, skipping pre-fill');
+    return;
+  }
+  
+  // Pre-populate billing address with user's profile address
+  if (isset($billing_info['address']['widget'][0]['address'])) {
+    $address_field = &$billing_info['address']['widget'][0]['address'];
+    
+    // Map user address to billing address using getValue() array
+    $address_field['#default_value'] = [
+      'country_code' => $address_values['country_code'] ?? 'CA',
+      'administrative_area' => $address_values['administrative_area'] ?? '',
+      'locality' => $address_values['locality'] ?? '',
+      'postal_code' => $address_values['postal_code'] ?? '',
+      'address_line1' => $address_values['address_line1'] ?? '',
+      'address_line2' => $address_values['address_line2'] ?? '',
+      'organization' => $address_values['organization'] ?? '',
+      'given_name' => $address_values['given_name'] ?? '',
+      'family_name' => $address_values['family_name'] ?? '',
+    ];
+    
+    \Drupal::logger('picc_registration')->notice('Successfully set billing address default values');
+  } else {
+    \Drupal::logger('picc_registration')->notice('Could not find address field in expected location');
+    
+    // Debug: log the actual structure
+    \Drupal::logger('picc_registration')->notice('Billing info keys: @keys', [
+      '@keys' => implode(', ', array_keys($billing_info))
+    ]);
+  }
+}

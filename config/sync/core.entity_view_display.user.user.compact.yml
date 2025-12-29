@@ -6,10 +6,6 @@ dependencies:
     - core.entity_view_mode.user.compact
     - field.field.user.user.commerce_remote_id
     - field.field.user.user.field_address
-    - field.field.user.user.field_co_guardian_email
-    - field.field.user.user.field_co_guardian_name
-    - field.field.user.user.field_co_guardian_phone
-    - field.field.user.user.field_co_guardian_phone_2
     - field.field.user.user.field_coach
     - field.field.user.user.field_current_club
     - field.field.user.user.field_name
@@ -43,10 +39,6 @@ hidden:
   commerce_remote_id: true
   customer_profiles: true
   field_address: true
-  field_co_guardian_email: true
-  field_co_guardian_name: true
-  field_co_guardian_phone: true
-  field_co_guardian_phone_2: true
   field_coach: true
   field_current_club: true
   field_name: true

@@ -5,10 +5,6 @@ dependencies:
   config:
     - field.field.user.user.commerce_remote_id
     - field.field.user.user.field_address
-    - field.field.user.user.field_co_guardian_email
-    - field.field.user.user.field_co_guardian_name
-    - field.field.user.user.field_co_guardian_phone
-    - field.field.user.user.field_co_guardian_phone_2
     - field.field.user.user.field_coach
     - field.field.user.user.field_current_club
     - field.field.user.user.field_name
@@ -33,35 +29,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 4
-    region: content
-  field_co_guardian_email:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_co_guardian_name:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  field_co_guardian_phone:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  field_co_guardian_phone_2:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 9
     region: content
   field_coach:
     type: entity_reference_label

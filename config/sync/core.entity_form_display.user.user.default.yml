@@ -5,10 +5,6 @@ dependencies:
   config:
     - field.field.user.user.commerce_remote_id
     - field.field.user.user.field_address
-    - field.field.user.user.field_co_guardian_email
-    - field.field.user.user.field_co_guardian_name
-    - field.field.user.user.field_co_guardian_phone
-    - field.field.user.user.field_co_guardian_phone_2
     - field.field.user.user.field_coach
     - field.field.user.user.field_current_club
     - field.field.user.user.field_name
@@ -61,36 +57,6 @@ content:
     region: content
     settings:
       wrapper_type: fieldset
-    third_party_settings: {  }
-  field_co_guardian_email:
-    type: email_default
-    weight: 13
-    region: content
-    settings:
-      placeholder: ''
-      size: 60
-    third_party_settings: {  }
-  field_co_guardian_name:
-    type: string_textfield
-    weight: 9
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_co_guardian_phone:
-    type: telephone_default
-    weight: 11
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_co_guardian_phone_2:
-    type: telephone_default
-    weight: 12
-    region: content
-    settings:
-      placeholder: ''
     third_party_settings: {  }
   field_coach:
     type: autocomplete_deluxe

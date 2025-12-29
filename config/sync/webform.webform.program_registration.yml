@@ -36,7 +36,7 @@ elements: |-
     '#required': true
   manage_participants:
     '#type': webform_markup
-    '#markup': '<p><a class="btn btn-secondary" href="/user/[current-user:uid]/participant/add?destination=[current-page:url:relative]">+ Add New Participant</a></p><p><small>To edit a participant, go to </small><a href="/user/[current-user:uid]/participant/list"><small>your participant profiles</small></a><small>.</small></p>'
+    '#markup': '<p><a class="btn btn-secondary" href="/user/[current-user:uid]/participant/add?destination=/webform/program_registration?variation=[current-page:query:variation]">+ Add New Participant</a></p><p><small>To edit a participant, go to </small><a href="/user/[current-user:uid]/participant/list"><small>your participant profiles</small></a><small>.</small></p>'
   swim_test_acknowledgment:
     '#type': checkbox
     '#title': 'Swim Test Requirement'

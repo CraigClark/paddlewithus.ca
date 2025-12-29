@@ -1,0 +1,30 @@
+uuid: 9fe80ea1-7ed4-43e8-ac0f-902c1aa285c9
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_cart
+    - user
+  theme:
+    - picc
+id: picc_cart
+theme: picc
+region: nav_main
+weight: 0
+provider: null
+plugin: commerce_cart
+settings:
+  id: commerce_cart
+  label: Cart
+  label_display: '0'
+  provider: commerce_cart
+  dropdown: false
+  show_if_empty: true
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated

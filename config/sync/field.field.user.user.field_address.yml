@@ -11,7 +11,7 @@ id: user.user.field_address
 field_name: field_address
 entity_type: user
 bundle: user
-label: Address
+label: 'Home address'
 description: ''
 required: false
 translatable: false
@@ -26,11 +26,11 @@ default_value:
     sorting_code: null
     address_line1: ''
     address_line2: ''
-    address_line3: ''
-    organization: ''
-    given_name: ''
+    address_line3: null
+    organization: null
+    given_name: null
     additional_name: null
-    family_name: ''
+    family_name: null
 default_value_callback: ''
 settings:
   available_countries:
