@@ -1,11 +1,11 @@
-uuid: 22aaf3fa-bc86-4725-9943-6c45bf69024e
+uuid: ff049715-69ba-4b4b-bb9e-be690d2e2c32
 langcode: en
 status: true
 dependencies:
   module:
     - commerce_stripe
-id: stripe_test_ddev_local
-label: 'Stripe test ddev.local'
+id: stripe_test
+label: 'Stripe test'
 weight: null
 plugin: stripe_payment_element
 configuration:
@@ -18,8 +18,8 @@ configuration:
   authentication_method: api_keys
   access_token: ''
   stripe_user_id: ''
-  publishable_key: STRIPE_TEST_PUBLISHABLE
-  secret_key: STRIPE_TEST_SECRET
+  publishable_key: 'stored in settings'
+  secret_key: 'stored in settings'
   webhook_signing_secret: ''
   payment_method_usage: on_session
   capture_method: automatic_async
@@ -34,18 +34,18 @@ configuration:
       discover: discover
       mastercard: mastercard
       visa: visa
-      affirm: '0'
       dinersclub: '0'
       jcb: '0'
       maestro: '0'
       unionpay: '0'
       applepay: '0'
       googlepay: '0'
-      amazon_pay: '0'
-      alipay: '0'
-      wechat_pay: '0'
-      cashapp: '0'
-      klarna: '0'
       us_bank_account: '0'
+      alipay: '0'
+      amazon_pay: '0'
+      wechat_pay: '0'
+      affirm: '0'
+      klarna: '0'
+      cashapp: '0'
 conditions: {  }
 conditionOperator: AND

@@ -10,7 +10,7 @@ dependencies:
 id: picc_cart
 theme: picc
 region: nav_main
-weight: 0
+weight: -5
 provider: null
 plugin: commerce_cart
 settings:
