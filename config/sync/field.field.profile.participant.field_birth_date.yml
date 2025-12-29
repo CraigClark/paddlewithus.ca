@@ -1,0 +1,21 @@
+uuid: b747a447-dd62-4068-8251-bfb163ca0aa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_birth_date
+    - profile.type.participant
+  module:
+    - datetime
+id: profile.participant.field_birth_date
+field_name: field_birth_date
+entity_type: profile
+bundle: participant
+label: 'Birth date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

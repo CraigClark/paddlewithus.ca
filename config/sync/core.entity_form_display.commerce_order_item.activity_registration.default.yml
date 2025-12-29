@@ -1,0 +1,20 @@
+uuid: 2ed99732-4b85-40cc-979c-521529622e3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_item_type.activity_registration
+    - field.field.commerce_order_item.activity_registration.field_participant
+id: commerce_order_item.activity_registration.default
+targetEntityType: commerce_order_item
+bundle: activity_registration
+mode: default
+content: {  }
+hidden:
+  adjustments: true
+  created: true
+  field_participant: true
+  purchased_entity: true
+  quantity: true
+  total_price: true
+  unit_price: true

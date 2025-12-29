@@ -1,0 +1,55 @@
+uuid: 8a870cce-b8ed-440f-bf84-2171c1c799e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.field.commerce_product.activity.body
+  module:
+    - field_label
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: commerce_product.activity.default
+targetEntityType: commerce_product
+bundle: activity
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  variations:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        plural_label: ''
+        label_tag: ''
+    weight: 2
+    region: content
+hidden:
+  created: true
+  langcode: true
+  search_api_excerpt: true
+  stores: true
+  uid: true

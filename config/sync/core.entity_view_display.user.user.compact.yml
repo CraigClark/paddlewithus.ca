@@ -4,10 +4,14 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.commerce_remote_id
+    - field.field.user.user.field_address
     - field.field.user.user.field_coach
     - field.field.user.user.field_current_club
     - field.field.user.user.field_name
     - field.field.user.user.field_past_club
+    - field.field.user.user.field_phone
+    - field.field.user.user.field_phone_2
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -32,11 +36,17 @@ content:
     weight: 0
     region: content
 hidden:
+  commerce_remote_id: true
+  customer_profiles: true
+  field_address: true
   field_coach: true
   field_current_club: true
   field_name: true
   field_past_club: true
+  field_phone: true
+  field_phone_2: true
   langcode: true
   member_for: true
+  participant_profiles: true
   realname: true
   search_api_excerpt: true

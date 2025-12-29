@@ -2,6 +2,7 @@ _core:
   default_config_hash: 4GIX5Esnc_umpXUBj4IIocRX7Mt5fPhm4AgXfE3E56E
 module:
   auto_entitylabel: -100
+  address: 0
   admin_toolbar: 0
   admin_toolbar_tools: 0
   antibot: 0
@@ -19,6 +20,22 @@ module:
   ckeditor5: 0
   coffee: 0
   collapsiblock: 0
+  commerce: 0
+  commerce_cart: 0
+  commerce_checkout: 0
+  commerce_number_pattern: 0
+  commerce_order: 0
+  commerce_payment: 0
+  commerce_price: 0
+  commerce_product: 0
+  commerce_promotion: 0
+  commerce_stock: 0
+  commerce_stock_field: 0
+  commerce_stock_local: 0
+  commerce_stock_ui: 0
+  commerce_store: 0
+  commerce_stripe: 0
+  commerce_variation_cart_form: 0
   conditional_fields: 0
   config: 0
   config_translation: 0
@@ -28,6 +45,7 @@ module:
   csv_serialization: 0
   date_filter: 0
   datetime: 0
+  datetime_range: 0
   dblog: 0
   dynamic_page_cache: 0
   eca: 0
@@ -46,6 +64,9 @@ module:
   eca_user: 0
   eca_views: 0
   editor: 0
+  entity: 0
+  entity_reference_revisions: 0
+  environment_indicator: 0
   field: 0
   field_group: 0
   field_label: 0
@@ -57,9 +78,11 @@ module:
   help: 0
   history: 0
   image: 0
+  inline_entity_form: 0
   inline_form_errors: 0
   jquery_ui: 0
   js_cookie: 0
+  key: 0
   language: 0
   language_switcher_extended: 0
   layout_builder: 0
@@ -79,10 +102,14 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  picc_registration: 0
+  picc_sku: 0
+  profile: 0
   qrcode_fields: 0
   rabbit_hole: 0
   realname: 0
   redirect: 0
+  registration_role: 0
   rest: 0
   rh_node: 0
   rh_taxonomy: 0
@@ -93,9 +120,11 @@ module:
   serialization: 0
   settings_tray: 0
   shortcut: 0
+  state_machine: 0
   system: 0
   taxonomy: 0
   taxonomy_manager: 0
+  telephone: 0
   text: 0
   token: 0
   toolbar: 0

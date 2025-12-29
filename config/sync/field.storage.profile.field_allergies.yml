@@ -1,0 +1,19 @@
+uuid: 57e6474c-0870-4099-9226-20b3dbb36dad
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+    - text
+id: profile.field_allergies
+field_name: field_allergies
+entity_type: profile
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

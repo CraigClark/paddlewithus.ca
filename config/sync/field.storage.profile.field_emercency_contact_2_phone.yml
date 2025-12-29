@@ -1,0 +1,19 @@
+uuid: 946d4c89-8701-4902-81b4-c105165b2db8
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+    - telephone
+id: profile.field_emercency_contact_2_phone
+field_name: field_emercency_contact_2_phone
+entity_type: profile
+type: telephone
+settings: {  }
+module: telephone
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

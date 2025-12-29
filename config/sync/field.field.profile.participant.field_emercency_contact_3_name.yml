@@ -1,0 +1,19 @@
+uuid: 337d91a8-e880-46e1-8475-6a3baa557e52
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_emercency_contact_3_name
+    - profile.type.participant
+id: profile.participant.field_emercency_contact_3_name
+field_name: field_emercency_contact_3_name
+entity_type: profile
+bundle: participant
+label: 'Emercency contact 3 name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

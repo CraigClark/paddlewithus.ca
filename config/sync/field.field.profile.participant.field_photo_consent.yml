@@ -1,0 +1,21 @@
+uuid: 3c6735bd-40a7-4658-bdb5-50dae4b63052
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_photo_consent
+    - profile.type.participant
+  module:
+    - options
+id: profile.participant.field_photo_consent
+field_name: field_photo_consent
+entity_type: profile
+bundle: participant
+label: 'Photo consent'
+description: "<p><small>[site:name] may take photos and videos during programs for promotional use on our website, social media, newsletters, and marketing materials.<br>\r\nPhotos and videos are never sold or shared with third parties for commercial purposes.<br>\r\nYou can change this consent at any time by editing this participant's profile.</small><p>\r\n<p><small><em>This consent applies to all programs this participant registers for. You can update it at any time.</em></small><p>\r\n"
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,7 @@
+name: PICC Auto SKU
+type: module
+description: Auto-generates SKU for product variations and makes it read-only.
+package: PICC
+core_version_requirement: ^10 || ^11
+dependencies:
+  - commerce_product

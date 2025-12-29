@@ -1,0 +1,14 @@
+uuid: 11e105e8-167a-4c5e-b3c3-797f603fdb62
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.account_holder
+  module:
+    - user
+id: user_remove_role_action.account_holder
+label: 'Remove the Account holder role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: account_holder

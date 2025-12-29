@@ -1,0 +1,141 @@
+uuid: c46efea2-34bb-41d1-9f30-bdfda1e0d3c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.field.commerce_product_variation.activity.field_age_calc_date
+    - field.field.commerce_product_variation.activity.field_age_min
+    - field.field.commerce_product_variation.activity.field_capacity
+    - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_maximum_age
+  module:
+    - commerce_price
+    - commerce_stock_field
+    - commerce_variation_cart_form
+    - datetime_range
+    - field_label
+    - layout_builder
+third_party_settings:
+  commerce_variation_cart_form:
+    combine: false
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          92f33436-0a3d-494a-8bf6-ec168094bfa8:
+            uuid: 92f33436-0a3d-494a-8bf6-ec168094bfa8
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:price'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: commerce_price_default
+                label: above
+                settings:
+                  strip_trailing_zeroes: false
+                  currency_display: symbol
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          3a0e9060-6dc3-4f59-9cf5-eed1136c7823:
+            uuid: 3a0e9060-6dc3-4f59-9cf5-eed1136c7823
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_capacity'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: commerce_stock_level_simple
+                label: above
+                settings: {  }
+                third_party_settings:
+                  field_label:
+                    label_class: ''
+                    label_value: 'Places available'
+                    label_tag: ''
+            weight: 1
+            additional: {  }
+          8d7f0e9b-7885-4e3e-9075-279bd214bd2a:
+            uuid: 8d7f0e9b-7885-4e3e-9075-279bd214bd2a
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_date_range'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: daterange_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: html_date
+                  from_to: both
+                  separator: ' to '
+                third_party_settings:
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: ''
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }
+id: commerce_product_variation.activity.default
+targetEntityType: commerce_product_variation
+bundle: activity
+mode: default
+content:
+  field_capacity:
+    type: commerce_stock_level_simple
+    label: above
+    settings: {  }
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: 'Places available'
+        label_tag: ''
+    weight: 1
+    region: content
+  field_date_range:
+    type: daterange_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: html_date
+      from_to: both
+      separator: ' to '
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 2
+    region: content
+  price:
+    type: commerce_price_default
+    label: above
+    settings:
+      strip_trailing_zeroes: false
+      currency_display: symbol
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  commerce_variation_cart_form: true
+  field_age_calc_date: true
+  field_age_min: true
+  field_maximum_age: true
+  langcode: true
+  list_price: true
+  product_id: true
+  search_api_excerpt: true
+  sku: true
+  title: true

@@ -1,0 +1,289 @@
+<?php
+
+/**
+ * @file
+ * PICC Registration module file.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter() for commerce_product.
+ */
+function picc_registration_commerce_product_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  // Only add register buttons for Activity products
+  if ($entity->bundle() != 'activity') {
+    return;
+  }
+  
+  // Get all variations
+  $variations = $entity->getVariations();
+  if (empty($variations)) {
+    return;
+  }
+  
+  // Check if user is logged in
+  $current_user = \Drupal::currentUser();
+  $is_logged_in = $current_user->isAuthenticated();
+  
+  // Build a variations list with register buttons
+  $variations_list = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['product-variations-list']],
+    '#weight' => -10,
+  ];
+  
+  foreach ($variations as $variation) {
+    $variation_id = $variation->id();
+    
+    // Get variation details
+    $title = $variation->getTitle();
+    $price = $variation->getPrice();
+    $date_range = $variation->get('field_date_range')->value ?? NULL;
+    $capacity = $variation->get('field_capacity')->value ?? NULL;
+    
+    // Format date range
+    $dates_display = '';
+    if (!empty($date_range)) {
+      $date_parts = explode('|', $date_range);
+      if (count($date_parts) == 2) {
+        $start = date('M j', strtotime($date_parts[0]));
+        $end = date('M j, Y', strtotime($date_parts[1]));
+        $dates_display = $start . ' - ' . $end;
+      }
+    }
+    
+    // Build variation item
+    $variation_item = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['variation-item', 'mb-4', 'p-3', 'border', 'rounded']],
+    ];
+    
+    // Variation title
+    $variation_item['title'] = [
+      '#markup' => '<h3 class="h4">' . $title . '</h3>',
+    ];
+    
+    // Variation details
+    $details = [];
+    if ($price) {
+      $details[] = '<strong>Price:</strong> ' . $price->__toString();
+    }
+    if ($dates_display) {
+      $details[] = '<strong>Dates:</strong> ' . $dates_display;
+    }
+    if ($capacity) {
+      $details[] = '<strong>Capacity:</strong> ' . $capacity . ' spots';
+    }
+    
+    if (!empty($details)) {
+      $variation_item['details'] = [
+        '#markup' => '<p>' . implode(' | ', $details) . '</p>',
+      ];
+    }
+    
+    // Register button - conditional based on login state
+    if ($is_logged_in) {
+      // User is logged in - show register button
+      // Use direct path instead of route to avoid version compatibility issues
+      $url = Url::fromUserInput('/webform/program_registration', [
+        'query' => [
+          'product' => $entity->id(),
+          'variation' => $variation_id,
+        ],
+      ]);
+      
+      $variation_item['register_button'] = [
+        '#type' => 'link',
+        '#title' => t('Register for This Session'),
+        '#url' => $url,
+        '#attributes' => [
+          'class' => ['btn', 'btn-primary', 'register-button'],
+        ],
+      ];
+    } else {
+      // User not logged in - show login/create account button
+      // Build destination URL to return here after login
+      $current_path = \Drupal::service('path.current')->getPath();
+      
+      $login_url = Url::fromRoute('user.login', [], [
+        'query' => [
+          'destination' => $current_path,
+        ],
+      ]);
+      
+      $variation_item['login_button'] = [
+        '#type' => 'link',
+        '#title' => t('Login or Create Account to Register'),
+        '#url' => $login_url,
+        '#attributes' => [
+          'class' => ['btn', 'btn-outline-primary', 'login-button'],
+        ],
+      ];
+    }
+    
+    $variations_list['variation_' . $variation_id] = $variation_item;
+  }
+  
+  // Add the variations list to the build
+  $build['variations_list'] = $variations_list;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter() for commerce_order_item.
+ * 
+ * Ensures order item titles include participant names when displayed.
+ */
+function picc_registration_commerce_order_item_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  // Only process activity_registration order items
+  if ($entity->bundle() !== 'activity_registration') {
+    return;
+  }
+  
+  // Check if participant name is already in title
+  $current_title = $entity->getTitle();
+  if (strpos($current_title, ' - ') !== FALSE) {
+    // Title already has participant name
+    return;
+  }
+  
+  // Get participant profile
+  $participant_id = $entity->get('field_participant')->target_id;
+  if (!$participant_id) {
+    return;
+  }
+  
+  $profile = \Drupal\profile\Entity\Profile::load($participant_id);
+  if (!$profile) {
+    return;
+  }
+  
+  // Build name
+  $name_field = $profile->get('field_name')->first();
+  $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Participant';
+  
+  // Update title for display
+  $variation_title = $entity->getPurchasedEntity()->getTitle();
+  $new_title = $variation_title . ' - ' . $name;
+  
+  // Override the title in the render array
+  if (isset($build['title'])) {
+    $build['title']['#markup'] = $new_title;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ * 
+ * Pre-populates billing address on checkout from user's profile address.
+ */
+function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Only act on commerce checkout forms
+  if (strpos($form_id, 'commerce_checkout_flow_') !== 0) {
+    return;
+  }
+  
+  // Debug: Log that we're in a checkout form
+  \Drupal::logger('picc_registration')->notice('Processing checkout form: @form_id', ['@form_id' => $form_id]);
+  
+  // Only populate on the order (checkout) step that has billing info
+  if (!isset($form['payment_information']) || !isset($form['payment_information']['billing_information'])) {
+    \Drupal::logger('picc_registration')->notice('No payment_information or billing_information found in form');
+    return;
+  }
+  
+  $current_user = \Drupal::currentUser();
+  if (!$current_user->isAuthenticated()) {
+    \Drupal::logger('picc_registration')->notice('User not authenticated');
+    return;
+  }
+  
+  // Load user account
+  $user = \Drupal\user\Entity\User::load($current_user->id());
+  if (!$user) {
+    \Drupal::logger('picc_registration')->notice('Could not load user');
+    return;
+  }
+  
+  // Check if user has field_address on their profile
+  if (!$user->hasField('field_address') || $user->get('field_address')->isEmpty()) {
+    \Drupal::logger('picc_registration')->notice('User does not have field_address or it is empty');
+    return;
+  }
+  
+  // Get the user's address
+  $user_address = $user->get('field_address')->first();
+  if (!$user_address) {
+    \Drupal::logger('picc_registration')->notice('Could not get user address value');
+    return;
+  }
+  
+  // Get address values as array
+  $address_values = $user_address->getValue();
+  
+  // Get user's name from field_name if available
+  $given_name = '';
+  $family_name = '';
+  
+  if ($user->hasField('field_name') && !$user->get('field_name')->isEmpty()) {
+    $name_field = $user->get('field_name')->first();
+    if ($name_field) {
+      $name_values = $name_field->getValue();
+      
+      // Debug: log what getValue actually returns
+      \Drupal::logger('picc_registration')->notice('Name field getValue: @values', [
+        '@values' => print_r($name_values, TRUE)
+      ]);
+      
+      $given_name = $name_values['given'] ?? '';
+      $family_name = $name_values['family'] ?? '';
+    }
+  }
+  
+  \Drupal::logger('picc_registration')->notice('Found user address, attempting to pre-populate. Address data: @data, Name: @given @family', [
+    '@data' => print_r($address_values, TRUE),
+    '@given' => $given_name,
+    '@family' => $family_name,
+  ]);
+  
+  // Get billing address field
+  $billing_info = &$form['payment_information']['billing_information'];
+  
+  // Check if address is already filled with actual data
+  $existing_default = $billing_info['address']['widget'][0]['address']['#default_value'] ?? [];
+  $has_real_data = !empty($existing_default['address_line1']) || !empty($existing_default['locality']);
+  
+  if ($has_real_data) {
+    \Drupal::logger('picc_registration')->notice('Billing address already has real data, skipping pre-fill');
+    return;
+  }
+  
+  // Pre-populate billing address with user's profile address
+  if (isset($billing_info['address']['widget'][0]['address'])) {
+    $address_field = &$billing_info['address']['widget'][0]['address'];
+    
+    // Map user address to billing address using getValue() array
+    $address_field['#default_value'] = [
+      'country_code' => $address_values['country_code'] ?? 'CA',
+      'administrative_area' => $address_values['administrative_area'] ?? '',
+      'locality' => $address_values['locality'] ?? '',
+      'postal_code' => $address_values['postal_code'] ?? '',
+      'address_line1' => $address_values['address_line1'] ?? '',
+      'address_line2' => $address_values['address_line2'] ?? '',
+      'organization' => $address_values['organization'] ?? '',
+      'given_name' => $given_name ?: ($address_values['given_name'] ?? ''),
+      'family_name' => $family_name ?: ($address_values['family_name'] ?? ''),
+    ];
+    
+    \Drupal::logger('picc_registration')->notice('Successfully set billing address default values');
+  } else {
+    \Drupal::logger('picc_registration')->notice('Could not find address field in expected location');
+    
+    // Debug: log the actual structure
+    \Drupal::logger('picc_registration')->notice('Billing info keys: @keys', [
+      '@keys' => implode(', ', array_keys($billing_info))
+    ]);
+  }
+}

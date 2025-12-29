@@ -1,0 +1,27 @@
+uuid: c31037ba-fa48-4660-909d-204aaf2a8337
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - profile
+id: profile.field_photo_consent
+field_name: field_photo_consent
+entity_type: profile
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'yes'
+      label: 'I consent to this participant being photographed or videoed for promotional purposes'
+    -
+      value: 'no'
+      label: 'I do not consent to this participant being photographed or videoed'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

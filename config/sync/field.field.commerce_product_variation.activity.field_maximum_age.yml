@@ -1,0 +1,25 @@
+uuid: e0579736-8a89-4080-8c4e-b852d730ad0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_maximum_age
+id: commerce_product_variation.activity.field_maximum_age
+field_name: field_maximum_age
+entity_type: commerce_product_variation
+bundle: activity
+label: 'Maximum age'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 99
+default_value_callback: ''
+settings:
+  min: 0
+  max: 100
+  prefix: ''
+  suffix: ''
+field_type: integer

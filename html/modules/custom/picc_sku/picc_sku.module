@@ -1,0 +1,76 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Generate a unique SKU string.
+ */
+function _picc_sku_generate_unique(): string {
+  $storage = \Drupal::entityTypeManager()->getStorage('commerce_product_variation');
+  do {
+    $candidate = 'ACT-' . substr(hash('xxh128', microtime(TRUE) . random_int(PHP_INT_MIN, PHP_INT_MAX)), 0, 8);
+    $exists = $storage->loadByProperties(['sku' => $candidate]);
+  } while (!empty($exists));
+  return $candidate;
+}
+
+/**
+ * Internal helper: prefill the SKU if it's new or truly empty.
+ */
+function _picc_sku_prefill_if_needed(array &$form, FormStateInterface $form_state): void {
+  if (!isset($form['sku']['widget'][0]['value'])) {
+    return;
+  }
+
+  $entity = NULL;
+  $form_object = $form_state->getFormObject();
+  if ($form_object && method_exists($form_object, 'getEntity')) {
+    $entity = $form_object->getEntity();
+  }
+
+  $input_val = $form_state->getValue(['sku', 0, 'value']);
+  $entity_val = '';
+  if ($entity && $entity->hasField('sku')) {
+    $entity_val = (string) $entity->get('sku')->value;
+  }
+
+  $is_new = $entity ? $entity->isNew() : TRUE;
+  $everything_empty = ($entity_val === '') && ($input_val === NULL || $input_val === '');
+
+  if ($is_new || $everything_empty) {
+    $sku = _picc_sku_generate_unique();
+    $form['sku']['widget'][0]['value']['#default_value'] = $sku;
+    $form_state->setValue(['sku', 0, 'value'], $sku);
+  }
+
+  // Hide the field from the form completely.
+  $form['sku']['#access'] = FALSE;
+}
+
+/**
+ * On ADD form: generate + hide.
+ */
+function picc_sku_form_commerce_product_variation_add_form_alter(array &$form, FormStateInterface $form_state): void {
+  _picc_sku_prefill_if_needed($form, $form_state);
+}
+
+/**
+ * On EDIT form: only generate if missing + hide.
+ */
+function picc_sku_form_commerce_product_variation_form_alter(array &$form, FormStateInterface $form_state): void {
+  _picc_sku_prefill_if_needed($form, $form_state);
+}
+
+/**
+ * Safety net: ensure a SKU exists when saving (for API/imports).
+ */
+function picc_sku_entity_presave(EntityInterface $entity): void {
+  if ($entity->getEntityTypeId() !== 'commerce_product_variation' || !$entity->hasField('sku')) {
+    return;
+  }
+  $sku = (string) $entity->get('sku')->value;
+  if ($sku === '') {
+    $entity->set('sku', _picc_sku_generate_unique());
+  }
+}

@@ -1,0 +1,16 @@
+uuid: d100d8f9-fa37-4075-9f6f-2c8980fd32c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: commerce_product_variation.activity
+target_entity_type_id: commerce_product_variation
+target_bundle: activity
+default_langcode: site_default
+language_alterable: false

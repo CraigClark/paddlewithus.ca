@@ -1,0 +1,28 @@
+uuid: 51d1e262-64c2-4970-a57a-cb9a4d70d084
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_owner
+    - profile.type.participant
+id: profile.participant.field_owner
+field_name: field_owner
+entity_type: profile
+bundle: participant
+label: Owner
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:profile'
+  handler_settings:
+    target_bundles:
+      participant: participant
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

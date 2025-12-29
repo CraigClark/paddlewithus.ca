@@ -1,0 +1,10 @@
+status: 1
+pattern: '[commerce_product_variation:product_id:entity:title] [commerce_product_variation:field_date_range:start_date:custom:F j] - [commerce_product_variation:field_date_range:end_date:custom:F j, Y]'
+escape: false
+preserve_titles: false
+save: true
+chunk: 50
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+new_content_behavior: 0

@@ -1,0 +1,14 @@
+uuid: 94cc58ed-7e99-4513-8d6b-b32125066307
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.account_holder
+  module:
+    - user
+id: user_add_role_action.account_holder
+label: 'Add the Account holder role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: account_holder

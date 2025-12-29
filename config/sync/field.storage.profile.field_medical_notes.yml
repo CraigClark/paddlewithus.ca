@@ -1,0 +1,19 @@
+uuid: aeec0008-b6d5-4cf9-86b6-e2289fa0d46d
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+    - text
+id: profile.field_medical_notes
+field_name: field_medical_notes
+entity_type: profile
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

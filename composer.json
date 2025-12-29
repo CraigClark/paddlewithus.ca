@@ -37,14 +37,18 @@
         "drupal/charts": "^5.1",
         "drupal/coffee": "^2.0",
         "drupal/collapsiblock": "^4.3",
+        "drupal/commerce": "^3.2",
+        "drupal/commerce_stock": "^3.0",
+        "drupal/commerce_stripe": "^2.1",
+        "drupal/commerce_variation_cart_form": "^1.5",
         "drupal/conditional_fields": "^4.0@alpha",
         "drupal/core-composer-scaffold": "^11",
         "drupal/core-project-message": "^11",
         "drupal/core-recommended": "^11",
         "drupal/cshs": "^4.0",
         "drupal/date_filter": "^1.0",
-        "drupal/devel": "^5.0",
         "drupal/eca": "^3.0",
+        "drupal/environment_indicator": "^4.0",
         "drupal/facets": "^3.0",
         "drupal/field_group": "^4.0",
         "drupal/field_label": "^1.5",
@@ -52,6 +56,7 @@
         "drupal/gin": "^5.0",
         "drupal/gin_toolbar": "^3.0",
         "drupal/hide_revision_field": "^2.5",
+        "drupal/key": "^1.21",
         "drupal/language_switcher_extended": "^1.1",
         "drupal/login_emailusername": "^3.0",
         "drupal/material_icons": "^2.0",
@@ -63,6 +68,7 @@
         "drupal/rabbit_hole": "^1.0",
         "drupal/realname": "^2.0",
         "drupal/redirect": "^1.11",
+        "drupal/registration_role": "^2.0",
         "drupal/search_api": "^1.38",
         "drupal/search_api_block": "^1.2",
         "drupal/taxonomy_manager": "^2.0",
@@ -152,6 +158,7 @@
     },
     "require-dev": {
         "drupal/core-dev": "^11",
-        "kint-php/kint": "^5.0"
+        "drupal/devel": "^5.4",
+        "kint-php/kint": "^6.1"
     }
 }

@@ -1,0 +1,13 @@
+uuid: d58a13e5-50cb-44fe-898b-435591d800d8
+langcode: en
+status: true
+dependencies: {  }
+id: activity
+label: Activity
+traits: {  }
+locked: false
+description: 'Camps and competitive training'
+variationTypes:
+  - activity
+multipleVariations: true
+injectVariationFields: false

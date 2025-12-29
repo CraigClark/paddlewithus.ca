@@ -1,0 +1,19 @@
+uuid: 7dcbdd1b-4dfd-4755-821d-f5833ca90c90
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_emercency_contact_2_rel
+    - profile.type.participant
+id: profile.participant.field_emercency_contact_2_rel
+field_name: field_emercency_contact_2_rel
+entity_type: profile
+bundle: participant
+label: 'Emercency contact 2 relationship'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

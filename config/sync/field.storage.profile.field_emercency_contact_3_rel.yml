@@ -1,0 +1,21 @@
+uuid: af322bef-1e25-40fc-8933-29fedd405201
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.field_emercency_contact_3_rel
+field_name: field_emercency_contact_3_rel
+entity_type: profile
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

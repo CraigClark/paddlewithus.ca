@@ -1,0 +1,17 @@
+uuid: 2645be00-5c5b-4ab6-919f-9a68c77a062c
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_checkout
+    - profile
+id: account_holder
+label: 'Account holder'
+weight: 7
+is_admin: false
+permissions:
+  - 'access checkout'
+  - 'create participant profile'
+  - 'delete own participant profile'
+  - 'update own participant profile'
+  - 'view own participant profile'
