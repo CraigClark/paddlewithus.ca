@@ -1,0 +1,9 @@
+uuid: 9588c7fe-37e2-4271-9a4b-9e247b927577
+langcode: en
+status: true
+dependencies: {  }
+name: 'Experience level'
+vid: experience_level
+description: 'Beginner, intermediate etc'
+weight: 0
+new_revision: false

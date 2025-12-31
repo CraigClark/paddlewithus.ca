@@ -1,12 +1,12 @@
-uuid: b6ffa1a4-54e6-49db-92d1-00d55e8c50a7
+uuid: 73ab907f-6f49-4742-8f70-6a63e1e82b8a
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.club
-id: taxonomy_vocabulary_club
+    - taxonomy.vocabulary.season
+id: taxonomy_vocabulary_season
 entity_type_id: taxonomy_vocabulary
-entity_id: club
+entity_id: season
 action: page_not_found
 allow_override: 0
 redirect: ''

@@ -8,7 +8,7 @@ id: taxonomy_vocabulary_competition_class
 entity_type_id: taxonomy_vocabulary
 entity_id: competition_class
 action: page_not_found
-allow_override: 1
+allow_override: 0
 redirect: ''
 redirect_code: 301
 redirect_fallback_action: access_denied

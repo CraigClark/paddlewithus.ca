@@ -7,7 +7,6 @@ dependencies:
     - taxonomy.vocabulary.activity
     - taxonomy.vocabulary.boat
     - taxonomy.vocabulary.competition_class
-    - taxonomy.vocabulary.day_time
     - taxonomy.vocabulary.program_types
     - taxonomy.vocabulary.regatta
     - taxonomy.vocabulary.tags
@@ -39,7 +38,6 @@ permissions:
   - 'create terms in activity'
   - 'create terms in boat'
   - 'create terms in competition_class'
-  - 'create terms in day_time'
   - 'create terms in program_types'
   - 'create terms in regatta'
   - 'create terms in tags'
@@ -51,7 +49,6 @@ permissions:
   - 'delete terms in activity'
   - 'delete terms in boat'
   - 'delete terms in competition_class'
-  - 'delete terms in day_time'
   - 'delete terms in program_types'
   - 'delete terms in regatta'
   - 'delete terms in tags'
@@ -59,7 +56,6 @@ permissions:
   - 'edit terms in activity'
   - 'edit terms in boat'
   - 'edit terms in competition_class'
-  - 'edit terms in day_time'
   - 'edit terms in program_types'
   - 'edit terms in regatta'
   - 'edit terms in tags'
@@ -67,7 +63,6 @@ permissions:
   - 'revert term revisions in activity'
   - 'revert term revisions in boat'
   - 'revert term revisions in competition_class'
-  - 'revert term revisions in day_time'
   - 'revert term revisions in program_types'
   - 'revert term revisions in regatta'
   - 'translate any entity'
@@ -78,7 +73,6 @@ permissions:
   - 'view term revisions in activity'
   - 'view term revisions in boat'
   - 'view term revisions in competition_class'
-  - 'view term revisions in day_time'
   - 'view term revisions in program_types'
   - 'view term revisions in regatta'
   - 'view term revisions in tags'

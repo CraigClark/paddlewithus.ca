@@ -1,0 +1,9 @@
+uuid: b7903284-48d2-440d-8bb9-8536d0ea3c97
+langcode: en
+status: true
+dependencies: {  }
+name: 'Activity type'
+vid: activity_type
+description: 'Camp, sprint program etc'
+weight: 0
+new_revision: false

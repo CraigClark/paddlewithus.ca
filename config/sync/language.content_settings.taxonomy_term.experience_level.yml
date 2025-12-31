@@ -1,0 +1,16 @@
+uuid: 00addb34-3c3c-4152-8a34-f8cba7ede198
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.experience_level
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.experience_level
+target_entity_type_id: taxonomy_term
+target_bundle: experience_level
+default_langcode: site_default
+language_alterable: false

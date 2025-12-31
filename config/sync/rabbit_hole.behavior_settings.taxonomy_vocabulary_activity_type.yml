@@ -1,14 +1,14 @@
-uuid: 6c97fe85-ef89-4872-b8c2-6ac2b8c8b76e
+uuid: 221072ee-9a89-4d97-bd14-e5cc05dc9f11
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.day_time
-id: taxonomy_vocabulary_day_time
+    - taxonomy.vocabulary.activity_type
+id: taxonomy_vocabulary_activity_type
 entity_type_id: taxonomy_vocabulary
-entity_id: day_time
+entity_id: activity_type
 action: page_not_found
-allow_override: 1
+allow_override: 0
 redirect: ''
 redirect_code: 301
 redirect_fallback_action: access_denied

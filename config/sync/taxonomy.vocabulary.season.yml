@@ -1,0 +1,9 @@
+uuid: 60615fdf-a3fc-40e7-b5c0-cfebdc0a0806
+langcode: en
+status: true
+dependencies: {  }
+name: Season
+vid: season
+description: 'Spring, summer etc'
+weight: 0
+new_revision: false

@@ -1,16 +1,16 @@
-uuid: f4311267-16aa-4505-b5c4-6950e0855d71
+uuid: 5f598401-0fe6-4cce-b8ac-4dc407121037
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.day_time
+    - taxonomy.vocabulary.activity_type
   module:
     - content_translation
 third_party_settings:
   content_translation:
     enabled: true
-id: taxonomy_term.day_time
+id: taxonomy_term.activity_type
 target_entity_type_id: taxonomy_term
-target_bundle: day_time
+target_bundle: activity_type
 default_langcode: site_default
 language_alterable: false
