@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - ui_styles
+  theme:
+    - daisyui_ext
+third_party_settings:
+  ui_styles:
+    block:
+      selected: {  }
+      extra: ''
+    title:
+      selected: {  }
+      extra: ''
+    content:
+      selected: {  }
+      extra: ''
+id: daisyui_ext_site_branding
+theme: daisyui_ext
+region: navbar_start
+weight: -5
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: false
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

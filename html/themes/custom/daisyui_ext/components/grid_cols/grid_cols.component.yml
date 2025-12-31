@@ -1,0 +1,270 @@
+name: "Grid cols"
+description: "The grid system of tailwind CSS uses a series of utility classes for layouts and alignment of content. 'Grid cols' offers an off-the-shelf component to add a n-colummn configurable section. For more powerful needs, please refer to the Tailwind CSS documentation."
+group: "Grid"
+replaces: ui_suite_daisyui:grid_cols
+noUi: true
+links:
+  - "https://daisyui.com/docs/layout-and-typography/"
+  - "https://tailwindcss.com/docs/max-width"
+  - "https://tailwindcss.com/docs/grid-template-columns"
+  - "https://tailwindcss.com/docs/gap"
+slots:
+  items:
+    title: Items
+props:
+  type: object
+  properties:
+    container_type:
+      title: "Container type"
+      description: "Utilities for controlling if container class is injected in the markup."
+      type: string
+      enum:
+        - container mx-auto
+        - breakout
+        - bg-breakout
+      "meta:enum":
+        container mx-auto: "Container (default)"
+        breakout: "Breakout"
+        bg-breakout: "Bg breakout"
+    background_image:
+      title: Background image
+      description: "The background image URL. Optional."
+      $ref: "ui-patterns://url"
+    background_size:
+      title: "Background size"
+      description: "Utilities for controlling the background size of an element's background image."
+      type: string
+      enum:
+        - bg-auto
+        - bg-cover
+        - bg-contain
+      "meta:enum":
+        bg-auto: "Background auto"
+        bg-cover: "Background cover"
+        bg-contain: "Background contain"
+    background_position:
+      title: "Background position"
+      description: "Utilities for controlling the position of an element's background image."
+      type: string
+      enum:
+        - bg-bottom
+        - bg-center
+        - bg-left
+        - bg-left-bottom
+        - bg-left-top
+        - bg-right
+        - bg-right-bottom
+        - bg-right-top
+        - bg-top
+      "meta:enum":
+        bg-bottom: "Background bottom"
+        bg-center: "Background center"
+        bg-left: "Background left"
+        bg-left-bottom: "Background left bottom"
+        bg-left-top: "Background left top"
+        bg-right: "Background right"
+        bg-right-bottom: "Background right bottom"
+        bg-right-top: "Background right top"
+        bg-top: "Background top"
+    background_repeat:
+      title: "Background repeat"
+      description: "Utilities for controlling the repetition of an element's background image."
+      type: string
+      enum:
+        - bg-repeat
+        - bg-no-repeat
+        - bg-repeat-x
+        - bg-repeat-y
+        - bg-repeat-round
+        - bg-repeat-space
+      "meta:enum":
+        bg-repeat: "Background repeat"
+        bg-no-repeat: "Background no repeat"
+        bg-repeat-x: "Background repeat x"
+        bg-repeat-y: "Background repeat y"
+        bg-repeat-round: "Background repeat round"
+        bg-repeat-space: "Background repeat space"
+    gap:
+      title: "Gap (mobile first)"
+      description: "Utilities for controlling gutters between grid and flexbox items, for mobile first."
+      type: integer
+      enum:
+        - 0
+        - 2
+        - 4
+        - 8
+        - 12
+      "meta:enum":
+        0: "0rem"
+        2: "0.5rem"
+        4: "1rem"
+        8: "2rem"
+        12: "3rem"
+    gap_lg:
+      title: "Gap (lg)"
+      description: "Utilities for controlling gutters between grid and flexbox items, for 'lg' breakpoint."
+      type: integer
+      enum:
+        - 0
+        - 2
+        - 4
+        - 8
+        - 12
+      "meta:enum":
+        0: "0rem"
+        2: "0.5rem"
+        4: "1rem"
+        8: "2rem"
+        12: "3rem"
+    gap_md:
+      title: "Gap (md)"
+      description: "Utilities for controlling gutters between grid and flexbox items, for 'md' breakpoint."
+      type: integer
+      enum:
+        - 0
+        - 2
+        - 4
+        - 8
+        - 12
+      "meta:enum":
+        0: "0rem"
+        2: "0.5rem"
+        4: "1rem"
+        8: "2rem"
+        12: "3rem"
+    gap_sm:
+      title: "Gap (sm)"
+      description: "Utilities for controlling gutters between grid and flexbox items, for 'sm' breakpoint."
+      type: integer
+      enum:
+        - 0
+        - 2
+        - 4
+        - 8
+        - 12
+      "meta:enum":
+        0: "0rem"
+        2: "0.5rem"
+        4: "1rem"
+        8: "2rem"
+        12: "3rem"
+    grid_cols:
+      title: "Grid Template Columns (mobile first)"
+      description: "Utilities for specifying the columns in a grid layout, for mobile first."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "1 column"
+        2: "2 columns"
+        3: "3 columns"
+        4: "4 columns"
+        5: "5 columns"
+        6: "6 columns"
+        7: "7 columns"
+        8: "8 columns"
+        9: "9 columns"
+        10: "10 columns"
+        11: "11 columns"
+        12: "12 columns"
+    grid_cols_lg:
+      title: "Grid Template Columns (lg)"
+      description: "Utilities for specifying the columns in a grid layout, for 'lg' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "1 column"
+        2: "2 columns"
+        3: "3 columns"
+        4: "4 columns"
+        5: "5 columns"
+        6: "6 columns"
+        7: "7 columns"
+        8: "8 columns"
+        9: "9 columns"
+        10: "10 columns"
+        11: "11 columns"
+        12: "12 columns"
+    grid_cols_md:
+      title: "Grid Template Columns (md)"
+      description: "Utilities for specifying the columns in a grid layout, for 'md' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "1 column"
+        2: "2 columns"
+        3: "3 columns"
+        4: "4 columns"
+        5: "5 columns"
+        6: "6 columns"
+        7: "7 columns"
+        8: "8 columns"
+        9: "9 columns"
+        10: "10 columns"
+        11: "11 columns"
+        12: "12 columns"
+    grid_cols_sm:
+      title: "Grid Template Columns (sm)"
+      description: "Utilities for specifying the columns in a grid layout, for 'sm' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "1 column"
+        2: "2 columns"
+        3: "3 columns"
+        4: "4 columns"
+        5: "5 columns"
+        6: "6 columns"
+        7: "7 columns"
+        8: "8 columns"
+        9: "9 columns"
+        10: "10 columns"
+        11: "11 columns"
+        12: "12 columns"

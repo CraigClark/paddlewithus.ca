@@ -1,0 +1,22 @@
+uuid: 22e9843a-1f90-4022-99cd-f1d9713d372c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - daisyui_ext
+_core:
+  default_config_hash: 82XaOHK4lspI2s9RY6zn_-40eX2HqsinYxZ1SW-NaAE
+id: daisyui_ext_messages
+theme: daisyui_ext
+region: content
+weight: -4
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

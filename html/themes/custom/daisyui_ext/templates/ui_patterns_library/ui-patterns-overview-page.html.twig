@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * UI Pattern library page template, override this in your theme.
+ */
+#}
+{% if groups is not empty %}
+<div class="container py-6 mx-auto">
+  <div class="grid grid-cols-12">
+    <div class="aside col-span-12 lg:col-span-3">
+      <div  class="sticky">
+        {{ include('ui-patterns-overview-quicklinks.html.twig', {'groups': groups}, with_context = false) }}
+      </div>
+    </div>
+    <div class="col-span-12 lg:col-span-9">
+  {% for components in groups %}
+    {% for component in components %}
+      <div class="ui_patterns_component pb-8 md:pb-16 mb-8 md:mb-16 border-dashed border-black border-b-2 dark:border-white" id="{{ component.id }}">
+        <h2 class="ui_patterns_component__title text-4xl font-bold">
+          <a href="{{ url('ui_patterns_library.single', {'provider': component.provider, 'machineName': component.machineName }) }}"
+             class="component__link">{{ component.name }}</a>
+        </h2>
+        {{ include('ui-patterns-component-metadata.html.twig', {'component': component}, with_context = false) }}
+        {{ include('ui-patterns-component-table.html.twig', {'component': component}, with_context = false) }}
+        {% if component.stories %}
+          {{ include('ui-patterns-stories-compact.html.twig', {'component': component}, with_context = false) }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+<style>
+  .aside .sticky {
+    position: relative;
+    padding-bottom : 50px;
+  @media (min-width: 1024px) {
+    position: sticky;
+    top: 100px;
+    margin-right: 50px;
+    height : 100vh;
+    overflow-y: auto;
+    padding-bottom : 300px;
+  }
+  }
+</style>

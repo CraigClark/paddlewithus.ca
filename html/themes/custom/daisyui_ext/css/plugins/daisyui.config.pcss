@@ -1,0 +1,10 @@
+/**
+ * Import DaisyUI excluding DaisyUI reset.css as Tailwind already provide same mechanism (Preflight).
+ * We exclude DaisyUI reset.css as it prevents style from base layer to be applied.
+ */
+@plugin "daisyui" {
+  exclude: reset;
+  themes: light --default, dark;
+  logs: false;
+  --color-primary: oklch(55% 0.3 240);
+}

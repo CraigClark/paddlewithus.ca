@@ -1,0 +1,34 @@
+/**
+ * Responsive utility classes for container.
+ *
+ * This file contains utility classes for creating responsive container behavior.
+ *
+ * Class Naming Convention:
+ * - .container-{size}: Applies the container with.
+ *
+ * Extending or change this classes based on your needs.
+ */
+
+@utility container-xs {
+  @apply px-2 md:px-0 max-w-2xl mx-auto;
+}
+
+@utility container-sm {
+  @apply px-2 lg:px-0 max-w-4xl mx-auto;
+}
+
+@utility container-md {
+  @apply px-4 lg:px-2 xl:px-0 max-w-5xl mx-auto;
+}
+
+@utility container-lg {
+  @apply px-4 xl:px-0 max-w-6xl mx-auto;
+}
+
+@utility container-xl {
+  @apply px-8 xl:px-4 2xl:px-0  max-w-7xl mx-auto;
+}
+
+@utility container-full {
+  @apply px-8 mx-auto;
+}

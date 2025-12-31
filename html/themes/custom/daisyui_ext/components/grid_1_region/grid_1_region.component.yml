@@ -1,0 +1,336 @@
+name: "Grid 1 region"
+description: "The grid system of tailwind CSS uses a series of utility classes for layouts and alignment of content. 'Grid 1 region' offers an off-the-shelf component to add a 1-colummn configurable section. For more powerful needs, please refer to the Tailwind CSS documentation."
+group: "Grid"
+replaces: ui_suite_daisyui:grid_1_region
+noUi: true
+links:
+  - "https://daisyui.com/docs/layout-and-typography/"
+  - "https://tailwindcss.com/docs/max-width"
+  - "https://tailwindcss.com/docs/grid-template-columns"
+  - "https://tailwindcss.com/docs/grid-column"
+icon_map:
+  - [col_first]
+slots:
+  col_first:
+    title: First col
+props:
+  type: object
+  properties:
+    container_type:
+      title: "Container type"
+      description: "Utilities for controlling if container class is injected in the markup."
+      type: string
+      enum:
+        - container mx-auto
+        - breakout
+        - bg-breakout
+      "meta:enum":
+        container mx-auto: "Container (default)"
+        breakout: "Breakout"
+        bg-breakout: "Bg breakout"
+    background_image:
+      title: Background image
+      description: "The background image URL. Optional."
+      $ref: "ui-patterns://url"
+    background_size:
+      title: "Background size"
+      description: "Utilities for controlling the background size of an element's background image."
+      type: string
+      enum:
+        - bg-auto
+        - bg-cover
+        - bg-contain
+      "meta:enum":
+        bg-auto: "Background auto"
+        bg-cover: "Background cover"
+        bg-contain: "Background contain"
+    background_position:
+      title: "Background position"
+      description: "Utilities for controlling the position of an element's background image."
+      type: string
+      enum:
+        - bg-bottom
+        - bg-center
+        - bg-left
+        - bg-left-bottom
+        - bg-left-top
+        - bg-right
+        - bg-right-bottom
+        - bg-right-top
+        - bg-top
+      "meta:enum":
+        bg-bottom: "Background bottom"
+        bg-center: "Background center"
+        bg-left: "Background left"
+        bg-left-bottom: "Background left bottom"
+        bg-left-top: "Background left top"
+        bg-right: "Background right"
+        bg-right-bottom: "Background right bottom"
+        bg-right-top: "Background right top"
+        bg-top: "Background top"
+    background_repeat:
+      title: "Background repeat"
+      description: "Utilities for controlling the repetition of an element's background image."
+      type: string
+      enum:
+        - bg-repeat
+        - bg-no-repeat
+        - bg-repeat-x
+        - bg-repeat-y
+        - bg-repeat-round
+        - bg-repeat-space
+      "meta:enum":
+        bg-repeat: "Background repeat"
+        bg-no-repeat: "Background no repeat"
+        bg-repeat-x: "Background repeat x"
+        bg-repeat-y: "Background repeat y"
+        bg-repeat-round: "Background repeat round"
+        bg-repeat-space: "Background repeat space"
+    col_span:
+      title: "Grid Column Span (mobile first)"
+      description: "Use the col-span-* utilities to make an element span n columns, for mobile first."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "span 1"
+        2: "span 2"
+        3: "span 3"
+        4: "span 4"
+        5: "span 5"
+        6: "span 6"
+        7: "span 7"
+        8: "span 8"
+        9: "span 9"
+        10: "span 10"
+        11: "span 11"
+        12: "span 12"
+    col_start:
+      title: "Grid Column Start (mobile first)"
+      description: "Use the col-start-* utilities to make an element start at the nth grid line, for mobile first."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+      "meta:enum":
+        1: "start 1"
+        2: "start 2"
+        3: "start 3"
+        4: "start 4"
+        5: "start 5"
+        6: "start 6"
+        7: "start 7"
+        8: "start 8"
+        9: "start 9"
+        10: "start 10"
+        11: "start 11"
+        12: "start 12"
+        13: "start 13"
+    col_span_lg:
+      title: "Grid Column Span (lg)"
+      description: "Use the col-span-* utilities to make an element span n columns, for 'lg' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "span 1"
+        2: "span 2"
+        3: "span 3"
+        4: "span 4"
+        5: "span 5"
+        6: "span 6"
+        7: "span 7"
+        8: "span 8"
+        9: "span 9"
+        10: "span 10"
+        11: "span 11"
+        12: "span 12"
+    col_start_lg:
+      title: "Grid Column Start (lg)"
+      description: "Use the col-start-* utilities to make an element start at the nth grid line, for 'lg' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+      "meta:enum":
+        1: "start 1"
+        2: "start 2"
+        3: "start 3"
+        4: "start 4"
+        5: "start 5"
+        6: "start 6"
+        7: "start 7"
+        8: "start 8"
+        9: "start 9"
+        10: "start 10"
+        11: "start 11"
+        12: "start 12"
+        13: "start 13"
+    col_span_md:
+      title: "Grid Column Span (md)"
+      description: "Use the col-span-* utilities to make an element span n columns, for 'md' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "span 1"
+        2: "span 2"
+        3: "span 3"
+        4: "span 4"
+        5: "span 5"
+        6: "span 6"
+        7: "span 7"
+        8: "span 8"
+        9: "span 9"
+        10: "span 10"
+        11: "span 11"
+        12: "span 12"
+    col_start_md:
+      title: "Grid Column Start (md)"
+      description: "Use the col-start-* utilities to make an element start at the nth grid line, for 'md' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+      "meta:enum":
+        1: "start 1"
+        2: "start 2"
+        3: "start 3"
+        4: "start 4"
+        5: "start 5"
+        6: "start 6"
+        7: "start 7"
+        8: "start 8"
+        9: "start 9"
+        10: "start 10"
+        11: "start 11"
+        12: "start 12"
+        13: "start 13"
+    col_span_sm:
+      title: "Grid Column Span (sm)"
+      description: "Use the col-span-* utilities to make an element span n columns, for 'sm' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+      "meta:enum":
+        1: "span 1"
+        2: "span 2"
+        3: "span 3"
+        4: "span 4"
+        5: "span 5"
+        6: "span 6"
+        7: "span 7"
+        8: "span 8"
+        9: "span 9"
+        10: "span 10"
+        11: "span 11"
+        12: "span 12"
+    col_start_sm:
+      title: "Grid Column Start (sm)"
+      description: "Use the col-start-* utilities to make an element start at the nth grid line, for 'sm' breakpoint."
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+      "meta:enum":
+        1: "start 1"
+        2: "start 2"
+        3: "start 3"
+        4: "start 4"
+        5: "start 5"
+        6: "start 6"
+        7: "start 7"
+        8: "start 8"
+        9: "start 9"
+        10: "start 10"
+        11: "start 11"
+        12: "start 12"
+        13: "start 13"

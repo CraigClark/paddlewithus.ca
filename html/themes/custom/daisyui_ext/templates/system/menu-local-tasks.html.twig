@@ -1,0 +1,50 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display primary and secondary local tasks.
+ *
+ * Available variables:
+ * - primary: HTML list items representing primary tasks.
+ * - secondary: HTML list items representing primary tasks.
+ *
+ * Each item in these variables (primary and secondary) can be individually
+ * themed in menu-local-task.html.twig.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% if primary %}
+  {% set primary_tabs %}
+    <h2 class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
+    {{ include('ui_suite_daisyui:tabs', {
+    variant: 'lift',
+    items: primary,
+    attributes: attributes.addClass('pb-3'),
+    }, with_context: false) }}
+  {% endset %}
+  {{ include('daisyui_ext:section', {
+    content: primary_tabs,
+    attributes: create_attribute().addClass('pt-0 pb-0'),
+    layout_attributes: create_attribute().addClass('container-lg'),
+    content_attributes: create_attribute().addClass('mb-0')
+  }, with_context: false)
+  }}
+{% endif %}
+{% if secondary %}
+  {% set secondary_tabs %}
+    <h2 class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
+    {{ include('ui_suite_daisyui:tabs', {
+    variant: 'border',
+    items: secondary,
+    attributes: attributes.addClass('pb-3'),
+    }, with_context: false) }}
+  {% endset %}
+  {{ include('daisyui_ext:section', {
+    content: secondary_tabs,
+    attributes: create_attribute().addClass('pt-0 pb-0'),
+    layout_attributes: create_attribute().addClass('container-lg'),
+    content_attributes: create_attribute().addClass('mb-0')
+  }, with_context: false)
+  }}
+{% endif %}

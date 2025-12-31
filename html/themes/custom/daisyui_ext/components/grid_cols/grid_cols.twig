@@ -1,0 +1,24 @@
+{% set container_type = container_type|default('container mx-auto') %}
+
+{% set grid_cols = grid_cols|default(1) %}
+{% set grid_cols_lg = grid_cols_lg|default(4) %}
+{% set grid_cols_md = grid_cols_md|default(2) %}
+{% set gap = gap|default(4) %}
+{% set grid_classes = ['grid', gap ? 'gap-' ~ gap, gap_lg ? 'lg:gap-' ~ gap_lg, gap_md ? 'md:gap-' ~ gap_md, gap_sm ? 'sm:gap-' ~ gap_sm, grid_cols ? 'grid-cols-' ~ grid_cols, grid_cols_lg ? 'lg:grid-cols-' ~ grid_cols_lg, grid_cols_md ? 'md:grid-cols-' ~ grid_cols_md, grid_cols_sm ? 'sm:grid-cols-' ~ grid_cols_sm] %}
+{% set grid_classes_attributes = create_attribute().addClass(grid_classes) %}
+
+{% set attributes = attributes.addClass(background_size, background_position, background_repeat) %}
+
+{% if background_image %}
+  {% set attributes = attributes.setAttribute('style', 'background-image: url(' ~ background_image ~ ')') %}
+{% endif %}
+
+<section {{ attributes.addClass(container_type != 'bg-breakout' ? grid_classes, container_type) }} >
+{% if container_type == 'bg-breakout' %}
+  <div {{ grid_classes_attributes.addClass('container', 'mx-auto') }} >
+{% endif %}
+<!-- ITEMS -->{{ items }}<!-- END ITEMS -->
+{% if container_type == 'bg-breakout' %}
+  </div>
+{% endif %}
+</section>

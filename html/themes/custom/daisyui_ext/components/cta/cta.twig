@@ -1,0 +1,19 @@
+{%
+  set classes = [
+    'cta',
+    variant and variant != 'default' ? 'cta-' ~ variant,
+    centered ? 'cta-centered',
+  ]
+%}
+
+{% set attributes = attributes.addClass(classes) %}
+
+{% set heading_level = heading_level|default(1) %}
+
+<div {{ attributes }}>
+  <h{{ heading_level }} class="cta-title">{{ title }}</h{{ heading_level }}>
+  <p class="cta-text">{{ text }}</p>
+  <div class="cta-buttons">
+    {{ buttons }}
+  </div>
+</div>

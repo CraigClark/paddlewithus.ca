@@ -1,0 +1,43 @@
+name: CTA
+description: "CTA Sections"
+group: CTA Section
+links:
+  - "https://tailwindcss.com/plus/ui-blocks/marketing/sections/cta-sections"
+variants:
+  default:
+    title: Default
+  primary:
+    title: Primary
+  secondary:
+    title: Secondary
+slots:
+  title:
+    title: Title
+  text:
+    title: Text
+  buttons:
+    title: Buttons
+props:
+  type: object
+  properties:
+    heading_level:
+      title: "Heading level"
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      "meta:enum":
+        1: "h1 (Default)"
+        2: h2
+        3: h3
+        4: h4
+        5: h5
+        6: h6
+    centered:
+      title: "Centered?"
+      description: "It is possible to center a CTA section."
+      type: boolean

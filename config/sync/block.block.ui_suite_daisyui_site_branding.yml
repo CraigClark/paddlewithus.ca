@@ -1,0 +1,37 @@
+uuid: 8d4ba59c-3dd3-4afc-9cf4-4854ff244fef
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - ui_styles
+  theme:
+    - ui_suite_daisyui
+third_party_settings:
+  ui_styles:
+    block:
+      selected: {  }
+      extra: ''
+    title:
+      selected: {  }
+      extra: ''
+    content:
+      selected: {  }
+      extra: ''
+_core:
+  default_config_hash: PHLPjtjzcoM4Wm_ByFLHCcomDu1q5-Kp6Ihk5CTJxh0
+id: ui_suite_daisyui_site_branding
+theme: ui_suite_daisyui
+region: navbar_start
+weight: -5
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: false
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

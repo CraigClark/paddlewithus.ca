@@ -1,0 +1,82 @@
+{%
+  set classes = [
+    'card',
+    variant and variant == 'side' ? 'card-' ~ variant,
+    variant and variant == 'responsive' ? 'lg:card-side',
+    border ? 'card-' ~ border,
+    size ? 'card-' ~ size,
+    image_full ? 'image-full',
+  ]
+%}
+
+{% set attributes = attributes.addClass(classes) %}
+
+{%
+  set body_classes = [
+    'card-body',
+    centered ? 'items-center text-center',
+  ]
+%}
+
+{% set body_attributes = create_attribute() %}
+{% set body_attributes = body_attributes.addClass(body_classes) %}
+
+{%
+  set figure_classes = [
+    centered ? 'px-10',
+    centered and image_bottom ? 'pb-10',
+    centered and not image_bottom ? 'pt-10',
+  ]
+%}
+
+{% set figure_attributes = create_attribute() %}
+{% set figure_attributes = figure_attributes.addClass(figure_classes) %}
+
+{% set heading_level = heading_level|default(2) %}
+{% set tag_name = 'div' %}
+
+{% if url is not empty %}
+  {% set tag_name = 'a' %}
+  {% set attributes = attributes.setAttribute('href', url) %}
+{% endif %}
+
+<{{ tag_name }} {{ attributes }}>
+  {% if image and not image_bottom %}
+    <figure {{ figure_attributes }}>
+    {% if centered %}
+      {{ image|add_class('rounded-xl') }}
+    {% else %}
+      {{ image }}
+    {% endif %}
+    </figure>
+  {% endif %}
+  {% if title or text or actions %}
+  <div {{ body_attributes }}>
+    {% if actions and actions_top %}
+    <div class="card-actions justify-end">
+      {{ actions }}
+    </div>
+    {% endif %}
+    {% if title %}
+    <h{{ heading_level }} class="card-title">{{ title }}</h{{ heading_level }}>
+    {% endif %}
+    {% if text %}
+    <div>{{ text }}</div>
+    {% endif %}
+    {% if actions and not actions_top %}
+    <div class="card-actions justify-end">
+      {{ actions }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if image and image_bottom %}
+    <figure {{ figure_attributes }}>
+    {% if centered %}
+      {{ image|add_class('rounded-xl') }}
+    {% else %}
+      {{ image }}
+    {% endif %}
+    </figure>
+  {% endif %}
+</{{ tag_name }}>

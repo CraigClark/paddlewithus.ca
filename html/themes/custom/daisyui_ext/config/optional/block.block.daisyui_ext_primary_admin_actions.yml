@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - daisyui_ext
+id: daisyui_ext_primary_admin_actions
+theme: daisyui_ext
+region: content
+weight: -3
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

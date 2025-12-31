@@ -1,0 +1,81 @@
+{% set attributes = attributes|default(create_attribute()) %}
+{% set layout_attributes = layout_attributes|default(create_attribute()) %}
+{% set grid_attributes = grid_attributes|default(create_attribute()) %}
+{% set title_attributes = title_attributes|default(create_attribute()) %}
+{% set content_attributes = content_attributes|default(create_attribute()) %}
+{% set footer_attributes = footer_attributes|default(create_attribute()) %}
+
+{% set heading_level = heading_level|default(2) %}
+
+{% set class = attributes.class|default('') %}
+{% set padding_top_classes = class|split(' ')|filter(c => 'pt-' in c )|join(' ') %}
+{% set padding_bottom_classes = class|split(' ')|filter(c => 'pb-' in c )|join(' ') %}
+{% if padding_top_classes is empty %}
+    {% set attributes = attributes.addClass('pt-auto') %}
+{% endif %}
+{% if padding_bottom_classes is empty %}
+    {% set attributes = attributes.addClass('pb-auto') %}
+{% endif %}
+
+{% set layout_class = layout_attributes.class|default('') %}
+{% set layout_main_classes = layout_class|split(' ')|filter(c => 'container-' in c )|join(' ') %}
+{% if layout_main_classes is empty %}
+    {% set layout_attributes = layout_attributes.addClass('container-lg') %}
+{% endif %}
+
+{% set title_class = title_attributes.class|default('') %}
+{% set title_margin_classes = title_class|split(' ')|filter(c => 'mb-' in c )|join(' ') %}
+{% if title_margin_classes is empty %}
+    {% set title_attributes = title_attributes.addClass('mb-sm') %}
+{% endif %}
+
+{% set content_class = content_attributes.class|default('') %}
+{% set content_margin_classes = content_class|split(' ')|filter(c => 'mb-' in c )|join(' ') %}
+{% if content_margin_classes is empty %}
+    {% set content_attributes = content_attributes.addClass('mb-md') %}
+{% endif %}
+
+{% set grid_class = grid_attributes.class|default('') %}
+{% set grid_classes = grid_class|split(' ')|filter(c => 'grid-' in c )|join(' ') %}
+{% set grid_gap_classes = grid_class|split(' ')|filter(c => 'gap-' in c )|join(' ') %}
+{% set grid_margin_classes = grid_class|split(' ')|filter(c => 'mb-' in c )|join(' ') %}
+{% if grid_classes is empty %}
+    {% set grid_attributes = grid_attributes.addClass('grid-1') %}
+{% endif %}
+{% if grid_gap_classes is empty %}
+    {% set grid_attributes = grid_attributes.addClass('gap-md') %}
+{% endif %}
+{% if grid_margin_classes is empty %}
+    {% set grid_attributes = grid_attributes.addClass('mb-sm') %}
+{% endif %}
+
+{% set grid %}
+    {% if items is sequence %}
+    <div{{ grid_attributes.addClass('grid') }}>
+        {% block grid_items %}
+            {% for item in items %}
+                {% block grid_item %}
+                    {{ item }}
+                {% endblock %}
+            {%- endfor -%}
+        {% endblock %}
+    </div>
+    {% else %}
+        {{- items -}}
+    {% endif %}
+{% endset %}
+
+<section {{ attributes }}>
+<div{{ layout_attributes }}>
+    {% if title %}
+        <h{{ heading_level }} {{ title_attributes }}>{{ title }}</h{{ heading_level }}>
+    {% endif %}
+    {% if content %}
+        <div {{ content_attributes }}>{{ content }}</div>
+    {% endif %}
+    {{ grid }}
+    {% if footer %}
+        <div {{ footer_attributes }}>{{ footer }}</div>
+    {% endif %}
+</div>
+</section>

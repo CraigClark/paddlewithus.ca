@@ -1,0 +1,39 @@
+uuid: 6bcae0f7-c6bf-4006-93b6-af03745bce49
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+    - ui_styles
+  theme:
+    - ui_suite_daisyui
+third_party_settings:
+  ui_styles:
+    block:
+      selected: {  }
+      extra: ''
+    title:
+      selected: {  }
+      extra: ''
+    content:
+      selected: {  }
+      extra: ''
+_core:
+  default_config_hash: FTud_OhWelHsR8zbbtlYzcWE7Kd8pa_LDS287zZwUdA
+id: ui_suite_daisyui_useraccountmenu
+theme: ui_suite_daisyui
+region: navbar_end
+weight: 0
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

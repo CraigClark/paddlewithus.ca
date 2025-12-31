@@ -1,0 +1,36 @@
+/**
+ * Grid Utility Classes
+ *
+ * This file contains utility classes for creating responsive grid layouts.
+ * Each class is designed to apply a specific grid configuration in your layout.
+ *
+ * Class Naming Convention:
+ * - .grid-{n}: Creates a grid with 'n' columns.
+ * - .grid-{n}-{ratio}: Creates a grid with 'n' columns with specified column ratios.
+ *   Ratios are specified in the format {width1}x{width2}x{width3}, etc
+ *   Example: .grid-3-25x50x25 creates a 3-column grid with column widths of 25%, 50%, and 25%.
+ *
+ * Extending classes:
+ * - To add new grid configurations, follow the existing naming convention.
+ * - Define the grid structure using Tailwind's grid utilities and responsive breakpoints.
+ * - Example: To create a new 6-column grid, you might add:
+ *   @utility grid-6 {
+ *     @apply grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6;
+ *   }
+ */
+
+@utility grid-1 {
+  @apply grid-cols-1;
+}
+
+@utility grid-2 {
+  @apply grid-cols-1 md:grid-cols-2;
+}
+
+@utility grid-3 {
+  @apply grid-cols-1 lg:grid-cols-3;
+}
+
+@utility grid-4 {
+  @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-4;
+}

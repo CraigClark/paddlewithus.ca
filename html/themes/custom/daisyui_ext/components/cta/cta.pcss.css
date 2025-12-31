@@ -1,0 +1,57 @@
+@reference '../../css/app.pcss';
+
+.cta {
+  @apply mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8;
+}
+
+.cta-centered {
+  @apply text-center;
+
+  .cta-title {
+    @apply mx-auto;
+  }
+
+  .cta-text {
+    @apply mx-auto;
+  }
+
+  .cta-buttons {
+    @apply justify-center;
+  }
+}
+
+.cta-title {
+  @apply text-base-content max-w-xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl;
+}
+
+.cta-text {
+  @apply text-base-content/70 mt-6 max-w-xl text-lg/8 text-pretty;
+}
+
+.cta-buttons {
+  @apply mt-10 flex items-center gap-x-6;
+}
+
+.cta-primary {
+  @apply bg-primary;
+
+  .cta-title {
+    @apply text-primary-content;
+  }
+
+  .cta-text {
+    @apply text-primary-content/70;
+  }
+}
+
+.cta-secondary {
+  @apply bg-secondary;
+
+  .cta-title {
+    @apply text-secondary-content;
+  }
+
+  .cta-text {
+    @apply text-secondary-content/70;
+  }
+}

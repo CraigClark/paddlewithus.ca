@@ -1,0 +1,22 @@
+uuid: ea1ef56a-2340-4e91-9447-8537f102a6b5
+langcode: en
+status: true
+dependencies:
+  theme:
+    - daisyui_ext
+_core:
+  default_config_hash: '-oaIKW187qSrruVy4Y33w067hGTZ64jQDTZA_VN-lRU'
+id: daisyui_ext_primary_local_tasks
+theme: daisyui_ext
+region: content
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

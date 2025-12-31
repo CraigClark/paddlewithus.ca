@@ -1,0 +1,191 @@
+################################################################################
+# Typography.
+################################################################################
+
+typography_font_size:
+  enabled: false
+
+typography_font_weight:
+  category: "Typography"
+  label: "Font weight"
+  description: "Utilities for controlling the font weight of an element."
+  links:
+    - "https://tailwindcss.com/docs/font-weight"
+  options:
+    font-thin: "thin"
+    font-extralight: "extralight"
+    font-light: "light"
+    font-normal: "normal"
+    font-medium: "medium"
+    font-semibold: "semibold"
+    font-bold: "bold"
+    font-extrabold: "extrabold"
+    font-black: "black"
+  previewed_with:
+    - p-2
+
+font_size:
+  category: "Typography"
+  label: "Font size"
+  description: "We use specifics size classes (with custom tokens) for a responsive typography display"
+  options:
+    title-2xl: Title 2xl (42px)
+    title-xl: Title xl (36px)
+    title-lg: Title lg (28px)
+    title-md: Title md (22px)
+    title-sm: Title sm (18px)
+    title-xs: Title xs (16px)
+    title-2xs: Title 2xs (14px)
+    copy-2xl: Text 2xl (22px)
+    copy-xl: Text xl (18px)
+    copy-lg: Text lg (16px)
+    copy-md: Text md (14px)
+    copy-sm: Text sm (12px)
+    copy-xs: Text xs (10px)
+  previewed_with:
+    - mb-4
+
+text_align:
+  category: "Typography"
+  label: "Text align"
+  description: "Utilities for controlling the alignment of text."
+  links:
+    - "https://tailwindcss.com/docs/text-align"
+  options:
+    text-left: Left
+    text-center: Center
+    text-right: Right
+    text-justify: Justify
+    text-start: Start
+    text-end: End
+  previewed_with:
+    - mb-4
+
+################################################################################
+# DaisyUI classes.
+################################################################################
+
+daisyui_glass:
+  enabled: false
+
+################################################################################
+# Layout.
+################################################################################
+
+layout_grid:
+  category: "Layout"
+  label: "Grid"
+  description: "Handle grid layout."
+  links:
+    - "https://tailwindcss.com/docs/grid-template-columns"
+  options:
+    grid-1: 1 column
+    grid-2: 2 columns 50x50
+    grid-3: 3 columns 33x33x33
+    grid-4: 4 columns 25x25x25x25
+  previewed_with:
+    - grid
+
+layout_container:
+  category: "Layout"
+  label: "Container"
+  description: "Handle container layout."
+  links:
+    - "https://tailwindcss.com/docs/max-width"
+  options:
+    container-xs: Container xs (672px)
+    container-sm: Container sm (896px)
+    container-md: Container md (1024px)
+    container-lg: Container lg (1152px)
+    container-xl: Container xl (1280px)
+    container-full: Container full
+  previewed_with:
+    - h-16
+    - bg-base-100
+
+################################################################################
+# Spacing.
+################################################################################
+
+spacing_padding_top:
+  enabled: false
+
+spacing_padding_bottom:
+  enabled: false
+
+spacing_margin_bottom:
+  enabled: false
+
+padding_top:
+  category: "Spacing"
+  label: "Padding top"
+  description: "Utilities for controlling an element's padding top."
+  links:
+    - "https://tailwindcss.com/docs/padding"
+  options:
+    pt-auto: Auto
+    pt-2xl: "2Xlarge"
+    pt-xl: "Xlarge"
+    pt-lg: Large
+    pt-md: Medium
+    pt-sm: Small
+    pt-xs: Extra small
+
+padding_bottom:
+  category: "Spacing"
+  label: "Padding bottom"
+  description: "Utilities for controlling an element's padding bottom."
+  links:
+    - "https://tailwindcss.com/docs/padding"
+  options:
+    pb-auto: Auto
+    pb-2xl: "2Xlarge"
+    pb-xl: "Xlarge"
+    pb-lg: Large
+    pb-md: Medium
+    pb-sm: Small
+    pb-xs: Extra small
+
+margin_bottom:
+  category: "Spacing"
+  label: "Margin bottom"
+  description: "Utilities for controlling an element's margin bottom."
+  links:
+    - "https://tailwindcss.com/docs/margin"
+  options:
+    mb-auto: "Auto"
+    mb-2xl: "2Xlarge"
+    mb-xl: "Xlarge"
+    mb-lg: "Large"
+    mb-md: "Medium"
+    mb-sm: "Small"
+    mb-xs: "Extra small"
+
+margin_top:
+  category: "Spacing"
+  label: "Margin top"
+  description: "Utilities for controlling an element's margin top."
+  links:
+    - "https://tailwindcss.com/docs/margin"
+  options:
+    mt-auto: "Auto"
+    mt-2xl: "2Xlarge"
+    mt-xl: "Xlarge"
+    mt-lg: "Large"
+    mt-md: "Medium"
+    mt-sm: "Small"
+    mt-xs: "Extra small"
+
+gap:
+  category: "Spacing"
+  label: "Gap"
+  description: "Utilities for controlling an grid layout gaps."
+  links:
+    - "https://tailwindcss.com/docs/gap"
+  options:
+    gap-xs: "Gap xs"
+    gap-sm: "Gap sm"
+    gap-md: "Gap md"
+    gap-lg: "Gap lg"
+    gap-xl: "Gap xl"
+    gap-2xl: "Gap 2xl"

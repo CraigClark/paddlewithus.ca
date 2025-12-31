@@ -1,0 +1,20 @@
+uuid: a9f85964-4a77-4e93-ad1d-dc3b5981be38
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ui_suite_daisyui
+_core:
+  default_config_hash: Bt0x-Edhy3GKG-ByrKL9Ykb1pYQhC36iCsN2JZIC3hY
+id: ui_suite_daisyui_page_title
+theme: ui_suite_daisyui
+region: content
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

@@ -1,0 +1,27 @@
+name: Centered secondary
+slots:
+  title: Boost your productivity. Start using our app today.
+  text: Incididunt sint fugiat pariatur cupidatat consectetur sit cillum anim id veniam aliqua proident excepteur commodo do ea.
+  buttons:
+    - type: component
+      component: "ui_suite_daisyui:button"
+      slots:
+        label: "Get started"
+    - type: component
+      component: "ui_suite_daisyui:button"
+      slots:
+        label: "Learn more"
+      props:
+        icon:
+          pack_id: hero_outline_24
+          icon_id: arrow-small-right
+          settings:
+            size: 20
+            stroke_width: 2
+        icon_position: right
+        ghost: true
+        attributes:
+          class: text-secondary-content hover:text-base-content
+props:
+  variant: secondary
+  centered: true

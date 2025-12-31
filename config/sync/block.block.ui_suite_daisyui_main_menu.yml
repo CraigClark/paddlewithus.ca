@@ -1,0 +1,27 @@
+uuid: 92df31e3-07cb-4021-a3e1-f2ddc3c4af89
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - ui_suite_daisyui
+_core:
+  default_config_hash: YZqEeITDSc6debJmP_sL2IHgZTt3f_gv5pNeJQUxy4E
+id: ui_suite_daisyui_main_menu
+theme: ui_suite_daisyui
+region: navbar_center
+weight: -4
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

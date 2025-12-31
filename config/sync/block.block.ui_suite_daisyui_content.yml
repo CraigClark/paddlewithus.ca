@@ -1,0 +1,22 @@
+uuid: 934f132a-1337-4ede-a43e-c6767cf1ab92
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ui_suite_daisyui
+_core:
+  default_config_hash: rmlOsLtc2jNfVqD5CH4Tzq7f8aLxaCZw8ZuyBIWjdWQ
+id: ui_suite_daisyui_content
+theme: ui_suite_daisyui
+region: content
+weight: 1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

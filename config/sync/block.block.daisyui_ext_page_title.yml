@@ -1,0 +1,20 @@
+uuid: cdc9edeb-d412-4bfb-b95d-065ee6678ce2
+langcode: en
+status: true
+dependencies:
+  theme:
+    - daisyui_ext
+_core:
+  default_config_hash: tdubJ507OERqHL-f9v4ooacpirvK4ExDaggHATFQgT0
+id: daisyui_ext_page_title
+theme: daisyui_ext
+region: content
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

@@ -1,0 +1,68 @@
+name: Section
+group: Layout system
+status: experimental
+description: >
+  A flexible layout component based on UI Styles that defines structure, grid, alignment, spacing, and theming options.
+  It can include an optional header, background area, and a list of items arranged in a grid. Designed to be used
+  within the Drupal UI UI Styles and UI Patterns UI to make easy extendable.
+
+props:
+  type: object
+  properties:
+    layout_attributes:
+      title: Layout attributes
+      $ref: "ui-patterns://attributes"
+      description: >
+        CSS classes that set padding, margins, and gaps inside the layout.
+    grid_attributes:
+      title: Grid attributes
+      $ref: "ui-patterns://attributes"
+      description: >
+        CSS classes that set padding, margins, and gaps inside the layout.
+    title_attributes:
+      title: "Title attributes"
+      description: >
+        CSS classes that set size, color, and margin for the title of the layout.
+      $ref: 'ui-patterns://attributes'
+    content_attributes:
+      title: "Content attributes"
+      description: >
+        CSS classes that set size, color, and margin for the content of the layout.
+      $ref: 'ui-patterns://attributes'
+    footer_attributes:
+      title: "Footer attributes"
+      description: >
+        CSS classes that set size, color, and margin for the footer of the layout.
+      $ref: 'ui-patterns://attributes'
+    heading_level:
+      title: "Heading level"
+      type: integer
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      "meta:enum":
+        2: h2
+        3: "h3 (Default)"
+        4: h4
+        5: h5
+        6: h6
+slots:
+  title:
+    title: Title
+    description: >
+      Title displayed inside the layout component.
+  content:
+    title: Content
+    description: >
+      Content displayed inside the layout component.
+  items:
+    title: Grid Items
+    description: >
+      Items displayed as grid items inside the layout component. Use either items or content.
+  footer:
+    title: Footer
+    description: >
+      Footer displayed inside the layout component.

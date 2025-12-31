@@ -1,0 +1,22 @@
+uuid: a4ed4f64-da80-40a8-b730-8584b851e219
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - daisyui_ext
+_core:
+  default_config_hash: miTrZGpGGnh-ZHzDFmr_av8WsSckaLVfRne1UYeBrt8
+id: daisyui_ext_content
+theme: daisyui_ext
+region: content
+weight: 1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

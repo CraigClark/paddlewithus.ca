@@ -1,0 +1,39 @@
+/* stylelint-disable */
+@import "./tailwind.config.pcss";
+
+@import "tailwindcss" source(none);
+
+/**
+ * Include additional plugins here
+ */
+@import "./plugins/daisyui.config.pcss";
+@import "./plugins/tailwindcss.typography.config.pcss";
+
+/**
+ * Import new base styles 
+ */
+@import "./base/base.pcss";
+
+/**
+ * Import new utilities 
+ */
+@import "./utilities/containers.pcss";
+@import "./utilities/gap.pcss";
+@import "./utilities/grid.pcss";
+@import "./utilities/margin.pcss";
+@import "./utilities/padding.pcss";
+@import "./utilities/typography.pcss";
+@import "./utilities/utilities.pcss";
+
+/**
+ * Declare all source files to take into account all utility classes used in the theme for the build process.
+ */
+@source "../templates/**/*.{twig,js}";
+@source "../components/**/*.{twig,js,yml}";
+@source "../*.ui_styles.yml";
+@source "../*.icons.yml";
+@source "./safelist.txt";
+@source "../../../contrib/ui_suite_daisyui/templates/**/*.{twig,js}";
+@source "../../../contrib/ui_suite_daisyui/components/**/*.{twig,js,yml}";
+@source "../../../contrib/ui_suite_daisyui/*.icons.yml";
+@source "../../../contrib/ui_suite_daisyui/*.ui_styles.yml";

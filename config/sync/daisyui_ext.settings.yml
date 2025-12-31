@@ -1,0 +1,16 @@
+features:
+  node_user_picture: 0
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: 1
+logo:
+  use_default: 1
+favicon:
+  use_default: 1
+form_display: fieldset
+form_label: label
+ui_skins_theme: ''
+ui_styles_entity_status_unpublished:
+  selected:
+    layout_container: container-lg
+    layout_grid: grid-1

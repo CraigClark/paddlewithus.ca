@@ -14,6 +14,7 @@ dependencies:
     - content_translation
     - file
     - filter
+    - media
     - rabbit_hole
     - shortcut
     - system
@@ -35,4 +36,5 @@ permissions:
   - 'use text format basic_html'
   - 'use text format webform_default'
   - 'view commerce_product'
+  - 'view media'
   - 'view own commerce_order'

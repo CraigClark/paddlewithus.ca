@@ -1,0 +1,31 @@
+name: daisyui_ext
+type: theme
+description: ''
+core_version_requirement: ^11
+'base theme': ui_suite_daisyui
+starterkit: true
+regions:
+  navbar_start: 'Navbar start'
+  navbar_center: 'Navbar center'
+  navbar_end: 'Navbar end'
+  header: 'Top Bar'
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  sidebar: Sidebar
+  footer: Footer
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+libraries:
+  - daisyui_ext/daisyui
+libraries-override:
+  ui_suite_daisyui/daisyui:
+    css:
+      theme:
+        dist/css/app.css: false
+ckeditor5-stylesheets:
+  - dist/css/app.css
+version: 1.0.0
+project: ui_suite_daisyui
+datestamp: 1763039897
+generator: 'ui_suite_daisyui_starterkit:5.0.0-alpha5'

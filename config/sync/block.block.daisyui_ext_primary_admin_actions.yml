@@ -1,0 +1,20 @@
+uuid: 98fb9cac-a0ee-4c2c-b94c-795b9348e6a2
+langcode: en
+status: true
+dependencies:
+  theme:
+    - daisyui_ext
+_core:
+  default_config_hash: KplREL6po8rqsHEfdUiw3kTEGes_mHoEcHuP-C6E1fU
+id: daisyui_ext_primary_admin_actions
+theme: daisyui_ext
+region: content
+weight: -3
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

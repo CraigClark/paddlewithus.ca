@@ -1,0 +1,87 @@
+name: Grid 33x33x33
+props:
+  grid_attributes:
+    class: [ "grid-3" ]
+  title_attributes:
+    class: [ "title-lg container-sm text-center" ]
+  content_attributes:
+    class: [ "text-base-content container-sm text-center" ]
+  footer_attributes:
+    class: [ "copy-sm text-base-content container-xs text-center" ]
+slots:
+  title: "This is a section with grid 33x33x33"
+  content: "This section display a title, a text, a grid with 3 cards and a footer text."
+  footer: "Hello I'm the footer of the section."
+  items:
+    - type: component
+      component: "ui_suite_daisyui:card"
+      slots:
+        image:
+          theme: image
+          uri: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+          alt: Shoes
+        title: "Card title"
+        text:
+          type: html_tag
+          tag: p
+          value: "A card component has a figure, a body part, and inside body there are title and actions parts"
+        actions:
+          type: component
+          component: "ui_suite_daisyui:button"
+          slots:
+            label: "Buy Now"
+          props:
+            variant: primary
+      props:
+        variant: default
+        heading_level: 2
+        attributes:
+          class: ["bg-base-100", "shadow-sm"]
+    - type: component
+      component: "ui_suite_daisyui:card"
+      slots:
+        image:
+          theme: image
+          uri: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+          alt: Shoes
+        title: "Card title"
+        text:
+          type: html_tag
+          tag: p
+          value: "A card component has a figure, a body part, and inside body there are title and actions parts"
+        actions:
+          type: component
+          component: "ui_suite_daisyui:button"
+          slots:
+            label: "Buy Now"
+          props:
+            variant: primary
+      props:
+        variant: default
+        heading_level: 2
+        attributes:
+          class: ["bg-base-100", "shadow-sm"]
+    - type: component
+      component: "ui_suite_daisyui:card"
+      slots:
+        image:
+          theme: image
+          uri: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+          alt: Shoes
+        title: "Card title"
+        text:
+          type: html_tag
+          tag: p
+          value: "A card component has a figure, a body part, and inside body there are title and actions parts"
+        actions:
+          type: component
+          component: "ui_suite_daisyui:button"
+          slots:
+            label: "Buy Now"
+          props:
+            variant: primary
+      props:
+        variant: default
+        heading_level: 2
+        attributes:
+          class: ["bg-base-100", "shadow-sm"]
