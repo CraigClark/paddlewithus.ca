@@ -1,0 +1,20 @@
+uuid: b88a9df5-7c34-4f81-9a4c-b371383b46e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - taxonomy
+id: commerce_product.field_acivity_type
+field_name: field_acivity_type
+entity_type: commerce_product
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

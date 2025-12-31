@@ -1,0 +1,29 @@
+uuid: 324a03d2-eaa3-4079-a732-b349c7247084
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.storage.commerce_product.field_primary_image
+    - media.type.image
+id: commerce_product.activity.field_primary_image
+field_name: field_primary_image
+entity_type: commerce_product
+bundle: activity
+label: 'Primary image'
+description: 'This image is used at the top of the page, previews such as the programs and activities list and it is used on social media when this page is shared. Upload high resolution images. The system will look after resizing and cropping as needed.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

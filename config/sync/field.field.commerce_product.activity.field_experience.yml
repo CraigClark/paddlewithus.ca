@@ -1,0 +1,22 @@
+uuid: e48269fa-b34f-47b5-a363-0e89e88b8256
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.storage.commerce_product.field_experience
+id: commerce_product.activity.field_experience
+field_name: field_experience
+entity_type: commerce_product
+bundle: activity
+label: Experience
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: eca
+  handler_settings:
+    field_name: field_experience
+field_type: entity_reference

@@ -1,0 +1,24 @@
+uuid: 25cbe976-f4a4-4383-97de-77dfbcadd222
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.storage.commerce_product.field_location
+    - filter.format.basic_html
+  module:
+    - text
+id: commerce_product.activity.field_location
+field_name: field_location
+entity_type: commerce_product
+bundle: activity
+label: Location
+description: '<p>Where the activity takes place, including any meeting or launch details.</p>'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

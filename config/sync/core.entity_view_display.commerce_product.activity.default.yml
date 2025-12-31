@@ -5,9 +5,22 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.activity
     - field.field.commerce_product.activity.body
+    - field.field.commerce_product.activity.field_acivity_type
+    - field.field.commerce_product.activity.field_age_range
+    - field.field.commerce_product.activity.field_audience
+    - field.field.commerce_product.activity.field_contact
+    - field.field.commerce_product.activity.field_equipmenet_provided
+    - field.field.commerce_product.activity.field_experience
+    - field.field.commerce_product.activity.field_location
+    - field.field.commerce_product.activity.field_primary_image
+    - field.field.commerce_product.activity.field_schedule
+    - field.field.commerce_product.activity.field_season
+    - field.field.commerce_product.activity.field_what_to_bring
   module:
     - field_label
     - layout_builder
+    - nomarkup
+    - range
     - text
 third_party_settings:
   layout_builder:
@@ -24,6 +37,104 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_acivity_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_age_range:
+    type: range_integer
+    label: above
+    settings:
+      range_separator: ''
+      thousand_separator: ''
+      range_combine: false
+      field_prefix_suffix: true
+      from_prefix_suffix: true
+      to_prefix_suffix: false
+      combined_prefix_suffix: false
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 5
+    region: content
+  field_audience:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_contact:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_equipmenet_provided:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_experience:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_location:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_primary_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_schedule:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_season:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_what_to_bring:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
     region: content
   title:
     type: string

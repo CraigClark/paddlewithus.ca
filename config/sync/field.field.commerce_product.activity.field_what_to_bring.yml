@@ -1,0 +1,24 @@
+uuid: fad27baf-136d-42f8-b12b-6386d6e86820
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.storage.commerce_product.field_what_to_bring
+    - filter.format.basic_html
+  module:
+    - text
+id: commerce_product.activity.field_what_to_bring
+field_name: field_what_to_bring
+entity_type: commerce_product
+bundle: activity
+label: 'What to bring'
+description: '<p>List the items participants need to bring. Please do not include things like <em>friends</em> or <em>enthusiasm</em>.</p>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

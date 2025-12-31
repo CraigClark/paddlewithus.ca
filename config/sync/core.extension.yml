@@ -94,6 +94,7 @@ module:
   login_emailusername: 0
   material_icons: 0
   media: 0
+  media_library: 0
   menu_item_role_access: 0
   menu_link_content: 0
   menu_ui: 0
@@ -111,11 +112,13 @@ module:
   profile: 0
   qrcode_fields: 0
   rabbit_hole: 0
+  range: 0
   realname: 0
   redirect: 0
   registration_role: 0
   responsive_image: 0
   rest: 0
+  rh_media: 0
   rh_node: 0
   rh_taxonomy: 0
   rh_user: 0

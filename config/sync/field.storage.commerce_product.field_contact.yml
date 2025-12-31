@@ -1,0 +1,19 @@
+uuid: 36f63f82-c4d8-49dd-a007-840ae898a81d
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - text
+id: commerce_product.field_contact
+field_name: field_contact
+entity_type: commerce_product
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

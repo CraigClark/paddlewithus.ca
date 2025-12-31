@@ -1,0 +1,35 @@
+uuid: 1ed7ee37-9f5f-4827-aada-ceac3ecd4c54
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.storage.commerce_product.field_age_range
+  module:
+    - range
+id: commerce_product.activity.field_age_range
+field_name: field_age_range
+entity_type: commerce_product
+bundle: activity
+label: 'Age range'
+description: '<p>The age range here should match the ages allowed for each session.</p>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  field:
+    prefix: 'This program is for people '
+    suffix: ' years old.'
+  from:
+    prefix: ''
+    suffix: ' to '
+  to:
+    prefix: ''
+    suffix: ''
+  combined:
+    prefix: ''
+    suffix: ''
+field_type: range_integer

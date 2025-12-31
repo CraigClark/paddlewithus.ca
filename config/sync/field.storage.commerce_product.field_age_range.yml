@@ -1,0 +1,19 @@
+uuid: d8fab5d5-4de9-4582-89a2-3e1f9e5ecddf
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - range
+id: commerce_product.field_age_range
+field_name: field_age_range
+entity_type: commerce_product
+type: range_integer
+settings: {  }
+module: range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

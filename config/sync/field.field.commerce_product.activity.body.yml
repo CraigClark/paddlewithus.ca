@@ -5,20 +5,22 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.activity
     - field.storage.commerce_product.body
+    - filter.format.basic_html
   module:
     - text
 id: commerce_product.activity.body
 field_name: body
 entity_type: commerce_product
 bundle: activity
-label: Body
-description: ''
-required: false
+label: Description
+description: "<p><b>Writing tips</b></p>\r\n<ul>\r\n<li><b>Keep it simple:</b> This page isn't where we sell the program, by the time they are here, people are sold.</li>\r\n<li><b>Formatting:</b> Go easy on bold, emphasis and capitals. It's hard to read for some people, this is an accessibility issue.</li>\r\n</ul>\r\n\r\n<p><b>Using the summary field</p>\r\n\r\n<p>This text appears in:</p>\r\n<ul>\r\n  <li>Activity listings</li>\r\n  <li>Search results</li>\r\n  <li>Preview snippets, for example in social media posts when the page is shared</li>\r\n</ul>\r\n\r\n<p>Keep it brief (1–2 sentences). Focus on <em>what the activity is</em> and <em>who it is for</em>.</p>\r\n\r\n"
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: null
 settings:
-  display_summary: false
-  required_summary: false
-  allowed_formats: {  }
+  display_summary: true
+  required_summary: true
+  allowed_formats:
+    - basic_html
 field_type: text_with_summary
