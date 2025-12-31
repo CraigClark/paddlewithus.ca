@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.page
-    - node.type.summer_program
     - taxonomy.vocabulary.activity
     - taxonomy.vocabulary.boat
     - taxonomy.vocabulary.competition_class
@@ -38,7 +37,6 @@ permissions:
   - 'administer url aliases'
   - 'create content translations'
   - 'create page content'
-  - 'create summer_program content'
   - 'create terms in activity'
   - 'create terms in boat'
   - 'create terms in competition_class'
@@ -48,7 +46,6 @@ permissions:
   - 'create terms in summer_program'
   - 'create terms in tags'
   - 'create url aliases'
-  - 'delete any summer_program content'
   - 'delete content translations'
   - 'delete own files'
   - 'delete own page content'
@@ -61,7 +58,6 @@ permissions:
   - 'delete terms in regatta'
   - 'delete terms in summer_program'
   - 'delete terms in tags'
-  - 'edit any summer_program content'
   - 'edit own page content'
   - 'edit terms in activity'
   - 'edit terms in boat'
@@ -81,7 +77,6 @@ permissions:
   - 'revert term revisions in summer_program'
   - 'translate any entity'
   - 'translate page node'
-  - 'translate summer_program node'
   - 'translate summer_program taxonomy_term'
   - 'update content translations'
   - 'view all revisions'
