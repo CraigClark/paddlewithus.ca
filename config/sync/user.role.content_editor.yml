@@ -10,7 +10,6 @@ dependencies:
     - taxonomy.vocabulary.day_time
     - taxonomy.vocabulary.program_types
     - taxonomy.vocabulary.regatta
-    - taxonomy.vocabulary.summer_program
     - taxonomy.vocabulary.tags
   module:
     - content_translation
@@ -43,7 +42,6 @@ permissions:
   - 'create terms in day_time'
   - 'create terms in program_types'
   - 'create terms in regatta'
-  - 'create terms in summer_program'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete content translations'
@@ -56,7 +54,6 @@ permissions:
   - 'delete terms in day_time'
   - 'delete terms in program_types'
   - 'delete terms in regatta'
-  - 'delete terms in summer_program'
   - 'delete terms in tags'
   - 'edit own page content'
   - 'edit terms in activity'
@@ -65,7 +62,6 @@ permissions:
   - 'edit terms in day_time'
   - 'edit terms in program_types'
   - 'edit terms in regatta'
-  - 'edit terms in summer_program'
   - 'edit terms in tags'
   - 'revert all revisions'
   - 'revert term revisions in activity'
@@ -74,10 +70,8 @@ permissions:
   - 'revert term revisions in day_time'
   - 'revert term revisions in program_types'
   - 'revert term revisions in regatta'
-  - 'revert term revisions in summer_program'
   - 'translate any entity'
   - 'translate page node'
-  - 'translate summer_program taxonomy_term'
   - 'update content translations'
   - 'view all revisions'
   - 'view own unpublished content'
@@ -87,5 +81,4 @@ permissions:
   - 'view term revisions in day_time'
   - 'view term revisions in program_types'
   - 'view term revisions in regatta'
-  - 'view term revisions in summer_program'
   - 'view term revisions in tags'
