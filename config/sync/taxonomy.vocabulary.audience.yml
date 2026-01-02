@@ -1,9 +1,0 @@
-uuid: 17989ba1-a3af-481e-bad8-3e55dae694a7
-langcode: en
-status: true
-dependencies: {  }
-name: Audience
-vid: audience
-description: 'Used to target programs, ie "youth program"'
-weight: 0
-new_revision: false

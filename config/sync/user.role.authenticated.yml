@@ -12,6 +12,7 @@ dependencies:
     - commerce_product
     - contact
     - content_translation
+    - field_permissions
     - file
     - filter
     - media
@@ -36,5 +37,6 @@ permissions:
   - 'use text format basic_html'
   - 'use text format webform_default'
   - 'view commerce_product'
+  - 'view field_all_ages_program'
   - 'view media'
   - 'view own commerce_order'

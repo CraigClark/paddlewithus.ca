@@ -11,8 +11,8 @@ label: Administrator
 weight: 3
 is_admin: true
 permissions:
-  - 'create field_current_club'
-  - 'edit field_current_club'
-  - 'edit own field_current_club'
-  - 'view field_current_club'
-  - 'view own field_current_club'
+  - 'create field_all_ages_program'
+  - 'edit field_all_ages_program'
+  - 'edit own field_all_ages_program'
+  - 'view field_all_ages_program'
+  - 'view own field_all_ages_program'

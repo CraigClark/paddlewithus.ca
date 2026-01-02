@@ -21,7 +21,7 @@ settings:
   min: 0
   max: null
   field:
-    prefix: 'This program is for people '
+    prefix: 'This program is for people from '
     suffix: ' years old.'
   from:
     prefix: ''

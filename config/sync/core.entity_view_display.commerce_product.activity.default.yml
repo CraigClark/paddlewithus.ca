@@ -20,8 +20,14 @@ dependencies:
     - field_label
     - layout_builder
     - nomarkup
+    - options
     - range
     - text
+    - token
+    - ui_patterns
+    - ui_patterns_field_formatters
+  theme:
+    - ui_suite_daisyui
 third_party_settings:
   layout_builder:
     enabled: false
@@ -36,27 +42,149 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
-    region: content
-  field_acivity_type:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 7
+    weight: 3
     region: content
   field_age_range:
     type: range_integer
     label: above
     settings:
-      range_separator: ''
+      range_separator: '-'
       thousand_separator: ''
-      range_combine: false
-      field_prefix_suffix: true
-      from_prefix_suffix: true
+      range_combine: true
+      field_prefix_suffix: false
+      from_prefix_suffix: false
       to_prefix_suffix: false
       combined_prefix_suffix: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_audience:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_contact:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_equipmenet_provided:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_experience:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      field_label:
+        label_class: font-semibold
+        label_value: 'Experience level'
+        plural_label: ''
+        label_tag: span
+      nomarkup:
+        enabled: false
+        separator: ', '
+        referenced_entity: ''
+    weight: 2
+    region: content
+  field_location:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_schedule:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_season:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_what_to_bring:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  title:
+    type: ui_patterns_component_per_item
+    label: hidden
+    settings:
+      ui_patterns:
+        component_id: 'ui_suite_daisyui:hero'
+        variant_id: null
+        props:
+          attributes:
+            source_id: attributes
+            source:
+              value: 'class="min-h-40 md:min-h-96"'
+          heading_level:
+            source_id: select
+            source:
+              value: '1'
+          reverse:
+            source_id: checkbox
+            source:
+              value: false
+          centered:
+            source_id: checkbox
+            source:
+              value: false
+          responsive_centered:
+            source_id: checkbox
+            source:
+              value: false
+          overlay_image:
+            source_id: entity_reference
+            source:
+              derivable_context: 'entity_reference:commerce_product::field_primary_image:media:image'
+              'entity_reference:commerce_product::field_primary_image:media:image':
+                value:
+                  source_id: token
+                  source:
+                    value: '[media:field_media_image:max_1300x1300:url]'
+        slots:
+          aside: {  }
+          title:
+            sources:
+              -
+                source_id: entity_field
+                source:
+                  derivable_context: 'field:commerce_product::title'
+                  'field:commerce_product::title':
+                    value:
+                      sources:
+                        -
+                          source_id: 'field_property:commerce_product:title:value'
+                          _weight: '0'
+                _weight: '0'
+          text:
+            sources:
+              1:
+                source_id: token
+                source:
+                  value: '<p>[commerce_product:field_audience] <span class="lowercase">[commerce_product:field_acivity_type:entity:name]</span></p>'
+                _weight: '1'
+          button: {  }
     third_party_settings:
       field_label:
         label_class: ''
@@ -66,82 +194,6 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 5
-    region: content
-  field_audience:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 4
-    region: content
-  field_contact:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 13
-    region: content
-  field_equipmenet_provided:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 11
-    region: content
-  field_experience:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  field_location:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
-    region: content
-  field_primary_image:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_schedule:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_season:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 8
-    region: content
-  field_what_to_bring:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 12
-    region: content
-  title:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
     weight: 0
     region: content
   variations:
@@ -156,10 +208,12 @@ content:
         label_value: ''
         plural_label: ''
         label_tag: ''
-    weight: 2
+    weight: 4
     region: content
 hidden:
   created: true
+  field_acivity_type: true
+  field_primary_image: true
   langcode: true
   search_api_excerpt: true
   stores: true

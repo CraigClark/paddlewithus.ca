@@ -5367,6 +5367,24 @@
   .h-full {
     height: 100%;
   }
+  .min-h-10 {
+    min-height: calc(var(--spacing) * 10);
+  }
+  .min-h-20 {
+    min-height: calc(var(--spacing) * 20);
+  }
+  .min-h-30 {
+    min-height: calc(var(--spacing) * 30);
+  }
+  .min-h-40 {
+    min-height: calc(var(--spacing) * 40);
+  }
+  .min-h-80 {
+    min-height: calc(var(--spacing) * 80);
+  }
+  .min-h-96 {
+    min-height: calc(var(--spacing) * 96);
+  }
   .min-h-\[30rem\] {
     min-height: 30rem;
   }
@@ -7246,6 +7264,9 @@
   .capitalize {
     text-transform: capitalize;
   }
+  .lowercase {
+    text-transform: lowercase;
+  }
   .uppercase {
     text-transform: uppercase;
   }
@@ -8248,6 +8269,31 @@
           --modal-br: var(--radius-box);
         }
       }
+    }
+  }
+  .md\:min-h-20 {
+    @media (width >= 48rem) {
+      min-height: calc(var(--spacing) * 20);
+    }
+  }
+  .md\:min-h-30 {
+    @media (width >= 48rem) {
+      min-height: calc(var(--spacing) * 30);
+    }
+  }
+  .md\:min-h-40 {
+    @media (width >= 48rem) {
+      min-height: calc(var(--spacing) * 40);
+    }
+  }
+  .md\:min-h-80 {
+    @media (width >= 48rem) {
+      min-height: calc(var(--spacing) * 80);
+    }
+  }
+  .md\:min-h-96 {
+    @media (width >= 48rem) {
+      min-height: calc(var(--spacing) * 96);
     }
   }
   .md\:grid-cols-1 {
@@ -9460,6 +9506,9 @@
 }
 html {
   font-size: 18px;
+}
+.ext-banner h1 {
+  padding: 2.25em 0;
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

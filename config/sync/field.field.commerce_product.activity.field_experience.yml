@@ -5,6 +5,7 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.activity
     - field.storage.commerce_product.field_experience
+    - taxonomy.vocabulary.experience_level
 id: commerce_product.activity.field_experience
 field_name: field_experience
 entity_type: commerce_product
@@ -16,7 +17,13 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: eca
+  handler: 'default:filter_existing_terms'
   handler_settings:
-    field_name: field_experience
+    target_bundles:
+      experience_level: experience_level
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
 field_type: entity_reference

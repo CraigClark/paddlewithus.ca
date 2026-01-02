@@ -1,29 +1,21 @@
-uuid: c76f5688-550a-470c-be74-e78f4c70ca33
+uuid: df65c778-0255-4bc0-b6f2-df69450c0a63
 langcode: en
 status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.activity
     - field.storage.commerce_product.field_audience
-    - taxonomy.vocabulary.audience
+  module:
+    - options
 id: commerce_product.activity.field_audience
 field_name: field_audience
 entity_type: commerce_product
 bundle: activity
 label: Audience
-description: '<p>You can edit these options or add new ones on the <a href="/admin/structure/taxonomy/manage/audience/overview>audience term page</a>.</p>'
+description: ''
 required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:filter_existing_terms'
-  handler_settings:
-    target_bundles:
-      audience: audience
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+settings: {  }
+field_type: list_string
