@@ -164,3 +164,26 @@ function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterfa
     ]);
   }
 }
+
+/**
+ * Implements hook_form_alter() for cart form.
+ *
+ * Customizes the cart page to remove "Update cart" and add "Register for more" link.
+ */
+function picc_registration_form_views_form_commerce_cart_form_default_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Remove the "Update cart" button - not needed since quantities are fixed at 1
+  if (isset($form['actions']['submit'])) {
+    $form['actions']['submit']['#access'] = FALSE;
+  }
+
+  // Add "Register for more activities" link
+  $form['actions']['register_more'] = [
+    '#type' => 'link',
+    '#title' => t('Register for More Activities'),
+    '#url' => \Drupal\Core\Url::fromUserInput('/program'),
+    '#attributes' => [
+      'class' => ['btn', 'btn-secondary'],
+    ],
+    '#weight' => -10,
+  ];
+}
