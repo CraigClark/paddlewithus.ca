@@ -1,0 +1,12 @@
+name: 'PICC Family Discount'
+description: 'Provides graduated multi-participant family discounts for Petrie Island Canoe Club'
+type: module
+core_version_requirement: ^10 || ^11
+package: 'PICC'
+
+dependencies:
+  - drupal:commerce
+  - drupal:commerce_order
+  - drupal:commerce_price
+  - drupal:commerce_product
+  - drupal:commerce_promotion
