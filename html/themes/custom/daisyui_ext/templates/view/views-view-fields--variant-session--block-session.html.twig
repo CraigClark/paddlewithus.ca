@@ -1,0 +1,59 @@
+{#
+/**
+ * Row template (Fields) for:
+ * View: variant_session
+ * Display: block_session
+ */
+#}
+
+{# Product id #}
+{% set pid = '' %}
+{% if fields.product_id is defined %}
+  {% set pid = fields.product_id.raw|default(fields.product_id.content|striptags|trim) %}
+{% endif %}
+
+{# Variation id #}
+{% set vid = '' %}
+{% if fields.variation_id is defined %}
+  {% set vid = fields.variation_id.raw|default(fields.variation_id.content|striptags|trim) %}
+{% endif %}
+
+{% set date_range = fields.field_date_range is defined ? fields.field_date_range.content : '' %}
+{% set capacity   = fields.field_capacity is defined ? fields.field_capacity.content : '' %}
+{% set price      = fields.price__number is defined ? fields.price__number.content : '' %}
+
+<div class="card bg-base-100 border border-base-300 mb-3">
+  <div class="card-body p-4">
+    {% if date_range %}
+      <div class="font-semibold">{{ date_range }}</div>
+    {% endif %}
+
+    {% if capacity %}
+      <div>{{ capacity }}</div>
+    {% endif %}
+
+    {% if price %}
+      <div>{{ price }}</div>
+    {% endif %}
+
+    {% if pid %}
+      <div class="mt-3">
+        {% if logged_in and vid %}
+          <a
+            class="btn btn-primary btn-sm"
+            href="{{ path('entity.webform.canonical', { webform: 'program_registration' }, { query: { product: pid, variation: vid } }) }}"
+          >
+            {{ 'Register for this session'|t }}
+          </a>
+        {% else %}
+          <a
+            class="btn btn-primary btn-sm"
+            href="{{ path('user.login', {}, { query: { destination: '/product/' ~ pid } }) }}"
+          >
+            {{ 'Log in or create account to register'|t }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

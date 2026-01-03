@@ -2,12 +2,16 @@ uuid: c95db7ab-3def-410e-b6f8-ce30e8b8c5b6
 langcode: en
 status: true
 dependencies:
+  config:
+    - field.storage.commerce_product_variation.field_capacity
+    - field.storage.commerce_product_variation.field_date_range
   module:
     - commerce_price
     - commerce_product
-    - commerce_stock_local
+    - commerce_stock_field
+    - datetime_range
 id: variant_session
-label: 'REMOVE Sessions'
+label: 'Activity session'
 module: views
 description: 'List of variants available | Duration, places available and price'
 tag: ''
@@ -33,7 +37,7 @@ display:
           entity_field: title
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -86,19 +90,19 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        qty:
-          id: qty
-          table: commerce_stock_location_level
-          field: qty
+        field_date_range_1:
+          id: field_date_range_1
+          table: commerce_product_variation__field_date_range
+          field: field_date_range
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
-          label: ''
-          exclude: false
+          plugin_id: field
+          label: Year
+          exclude: true
           alter:
-            alter_text: true
-            text: "{% if qty == 0 %}\r\n  Full\r\n{% elseif qty == 1 %}\r\n  {{ qty|round }} place left\r\n{% else %}\r\n  {{ qty|round }} places left\r\n{% endif %}"
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -135,14 +139,151 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ''
-          format_plural: true
-          format_plural_string: !!binary MSBwbGFjZSBsZWZ0A0Bjb3VudCBwbGFjZXMgYXZhaWxhYmxl
-          prefix: ''
-          suffix: ''
+          click_sort_column: value
+          type: daterange_default
+          settings:
+            timezone_override: ''
+            format_type: html_year
+            from_to: end_date
+            separator: '-'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_date_range:
+          id: field_date_range
+          table: commerce_product_variation__field_date_range
+          field: field_date_range
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '{{ field_date_range }} {{ field_date_range_1 }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: daterange_custom
+          settings:
+            timezone_override: ''
+            date_format: 'F d'
+            from_to: both
+            separator: '-'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_capacity:
+          id: field_capacity
+          table: commerce_product_variation__field_capacity
+          field: field_capacity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<p>{{ field_capacity }} places available.</p>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: commerce_stock_level_simple
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         price__number:
           id: price__number
           table: commerce_product_variation_field_data
@@ -156,8 +297,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "${{ price__number__number|number_format(2, '.', ',') }} per person."
             make_link: false
             path: ''
             absolute: false
@@ -209,15 +350,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        variations_target_id:
-          id: variations_target_id
-          table: commerce_product__variations
-          field: variations_target_id
+        product_id:
+          id: product_id
+          table: commerce_product_field_data
+          field: product_id
           relationship: product_id
           group_type: group
           admin_label: ''
           entity_type: commerce_product
-          entity_field: variations
+          entity_field: product_id
           plugin_id: field
           label: ''
           exclude: false
@@ -260,11 +401,78 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: commerce_add_to_cart
+          click_sort_column: value
+          type: number_integer
           settings:
-            combine: false
-          group_column: target_id
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        variation_id:
+          id: variation_id
+          table: commerce_product_variation_field_data
+          field: variation_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_product_variation
+          entity_field: variation_id
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -431,6 +639,10 @@ display:
             group_items: {  }
       style:
         type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: false
       row:
         type: fields
       query:
@@ -462,18 +674,23 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-      tags: {  }
+      tags:
+        - 'config:field.storage.commerce_product_variation.field_capacity'
+        - 'config:field.storage.commerce_product_variation.field_date_range'
   block_session:
     id: block_session
     display_title: Block
     display_plugin: block
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        ui_styles: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-      tags: {  }
+      tags:
+        - 'config:field.storage.commerce_product_variation.field_capacity'
+        - 'config:field.storage.commerce_product_variation.field_date_range'

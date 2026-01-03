@@ -19,64 +19,44 @@ targetEntityType: commerce_product_variation
 bundle: activity
 mode: default
 content:
-  commerce_stock_always_in_stock:
-    type: boolean_checkbox
-    weight: 4
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_age_calc_date:
     type: datetime_default
-    weight: 12
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   field_age_min:
     type: number
-    weight: 10
+    weight: 5
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_capacity:
     type: commerce_stock_level_simple_transaction
-    weight: 5
+    weight: 3
     region: content
     settings:
       step: '1'
-      custom_transaction_note: false
-      default_transaction_note: 'Transaction issued by stock level field.'
+      custom_transaction_note: true
+      default_transaction_note: ''
     third_party_settings: {  }
   field_date_range:
     type: daterange_default
-    weight: 6
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   field_maximum_age:
     type: number
-    weight: 11
+    weight: 6
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 8
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
-  list_price:
-    type: commerce_list_price
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   price:
     type: commerce_price_default
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -90,7 +70,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 9
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -103,11 +83,10 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  translation:
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  commerce_stock_always_in_stock: true
   created: true
+  langcode: true
+  list_price: true
+  translation: true
   uid: true

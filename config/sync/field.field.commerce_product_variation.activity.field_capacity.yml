@@ -12,7 +12,7 @@ field_name: field_capacity
 entity_type: commerce_product_variation
 bundle: activity
 label: Capacity
-description: ''
+description: "Enter the number of places to add or remove, not the total.\r\nExample: from 20 to 25 → enter 5. Entering 25 would increase capacity to 45."
 required: false
 translatable: false
 default_value: {  }

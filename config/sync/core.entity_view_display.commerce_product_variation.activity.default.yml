@@ -13,9 +13,11 @@ dependencies:
     - commerce_price
     - commerce_stock_field
     - commerce_variation_cart_form
+    - datetime
     - datetime_range
     - field_label
     - layout_builder
+    - layout_discovery
 third_party_settings:
   commerce_variation_cart_form:
     combine: false
@@ -87,12 +89,38 @@ third_party_settings:
                     label_tag: ''
             weight: 2
             additional: {  }
+          55651585-81b0-4d73-adb4-f063e3bb3d96:
+            uuid: 55651585-81b0-4d73-adb4-f063e3bb3d96
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_age_calc_date'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
 bundle: activity
 mode: default
 content:
+  field_age_calc_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_capacity:
     type: commerce_stock_level_simple
     label: above
@@ -130,7 +158,6 @@ content:
     region: content
 hidden:
   commerce_variation_cart_form: true
-  field_age_calc_date: true
   field_age_min: true
   field_maximum_age: true
   langcode: true
