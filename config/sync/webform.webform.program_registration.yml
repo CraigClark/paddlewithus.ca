@@ -40,12 +40,14 @@ elements: |-
   swim_test_acknowledgment:
     '#type': checkbox
     '#title': 'Swim Test Requirement'
-    '#description': 'All participants must pass a swim test before being allowed on the water or in boats. The test is administered by coaches at the first session. Participants who do not pass will NOT be permitted on the water until they successfully complete the test. Registration fees are non-refundable if a participant cannot pass the swim test.'
+    '#description': '<p>I understand and agree to the swim test policy</p>'
+    '#help': '<p>All participants under 18 yeas old must pass a swim test before being allowed on the water or in boats.&nbsp;</p><p>All participants over 18 must attest that they are competent swimmers.</p><p>The test is administered by coaches prior to the first session. Participants who do not pass will NOT be permitted on the water until they successfully complete the test. Registration fees are non-refundable if a participant cannot pass the swim test.</p>'
+    '#title_display': invisible
+    '#description_display': before
+    '#help_display': element_after
+    '#field_suffix': 'I understand the participant must pass a swim test before water activities'
     '#required': true
     '#return_value': '1'
-    '#title_display': before
-    '#description_display': before
-    '#field_prefix': 'I understand the participant must pass a swim test before water activities'
 css: ''
 javascript: ''
 settings:

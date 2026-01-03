@@ -1,0 +1,22 @@
+uuid: 5ed03bdb-8ebb-410b-9a0d-b817f1bbec03
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_cart
+  theme:
+    - daisyui_ext
+id: daisyui_ext_cart
+theme: daisyui_ext
+region: navbar_end
+weight: 0
+provider: null
+plugin: commerce_cart
+settings:
+  id: commerce_cart
+  label: Cart
+  label_display: '0'
+  provider: commerce_cart
+  dropdown: false
+  show_if_empty: true
+visibility: {  }

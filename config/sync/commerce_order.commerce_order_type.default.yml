@@ -1,7 +1,20 @@
 uuid: 95568d36-2b75-4f26-9968-d372e075372e
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - commerce_cart
+    - commerce_checkout
+third_party_settings:
+  commerce_cart:
+    cart_block_view: commerce_cart_block
+    cart_form_view: commerce_cart_form
+    cart_expiration:
+      number: 30
+      unit: day
+    enable_cart_message: true
+  commerce_checkout:
+    checkout_flow: default
 _core:
   default_config_hash: kYapI397yx2zFJGyDEs85Hyqgfc9jhmzxqPZMl2Fqhk
 id: default
