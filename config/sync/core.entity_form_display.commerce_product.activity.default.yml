@@ -176,7 +176,7 @@ content:
     third_party_settings: {  }
   field_experience:
     type: options_buttons
-    weight: 9
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }

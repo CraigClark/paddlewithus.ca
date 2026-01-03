@@ -1,17 +1,27 @@
-uuid: 1babb93d-d711-4047-aa4e-27fe12ae3361
+uuid: 45f7733c-02db-4344-b219-06441e923889
 langcode: en
 status: true
 dependencies:
   module:
     - commerce_product
-    - taxonomy
+    - options
 id: commerce_product.field_experience
 field_name: field_experience
 entity_type: commerce_product
-type: entity_reference
+type: list_string
 settings:
-  target_type: taxonomy_term
-module: core
+  allowed_values:
+    -
+      value: beginner
+      label: Beginner
+    -
+      value: intermediate
+      label: Intermediate
+    -
+      value: advanced
+      label: Advanced
+  allowed_values_function: ''
+module: options
 locked: false
 cardinality: -1
 translatable: true

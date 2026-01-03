@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override for field_experience as a list.
+ */
+#}
+
+
+{% if items %}
+  <div{{ attributes.addClass('field', 'field--name-field-experience') }}>
+
+    {% if not label_hidden %}
+      <h3{{ title_attributes }}>
+        {{ label }}
+      </h3>
+    {% endif %}
+
+    <ul class="list-disc list-inside">
+      {% for item in items %}
+        <li>{{ item.content }}</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+{% endif %}

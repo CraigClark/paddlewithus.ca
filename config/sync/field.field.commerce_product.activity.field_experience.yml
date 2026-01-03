@@ -1,29 +1,21 @@
-uuid: e48269fa-b34f-47b5-a363-0e89e88b8256
+uuid: 125b5901-ae7b-466a-95ad-7853e82312f5
 langcode: en
 status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.activity
     - field.storage.commerce_product.field_experience
-    - taxonomy.vocabulary.experience_level
+  module:
+    - options
 id: commerce_product.activity.field_experience
 field_name: field_experience
 entity_type: commerce_product
 bundle: activity
-label: Experience
+label: 'Experience level'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:filter_existing_terms'
-  handler_settings:
-    target_bundles:
-      experience_level: experience_level
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+settings: {  }
+field_type: list_string
