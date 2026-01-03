@@ -1,0 +1,20 @@
+uuid: 4851eb13-d06c-4a93-86c9-09d7a7d46313
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product_variation.field_discount_5_up
+field_name: field_discount_5_up
+entity_type: commerce_product_variation
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

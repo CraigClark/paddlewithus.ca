@@ -1,0 +1,25 @@
+uuid: d0ec06ee-0cbf-48df-bf6f-698f3fc88fc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_discount_3
+id: commerce_product_variation.activity.field_discount_3
+field_name: field_discount_3
+entity_type: commerce_product_variation
+bundle: activity
+label: 'Discount for 3ʳᵈ participant'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: 100
+  prefix: ''
+  suffix: '%'
+field_type: integer

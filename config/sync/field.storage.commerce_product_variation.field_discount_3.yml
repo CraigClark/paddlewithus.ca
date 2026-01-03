@@ -1,0 +1,20 @@
+uuid: dc9992fd-d565-4ce3-a750-0413c4e1d8d5
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product_variation.field_discount_3
+field_name: field_discount_3
+entity_type: commerce_product_variation
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

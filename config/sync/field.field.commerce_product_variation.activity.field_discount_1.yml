@@ -1,0 +1,25 @@
+uuid: a6b16303-6bdf-4148-ae2d-79186b0b5f4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_discount_1
+id: commerce_product_variation.activity.field_discount_1
+field_name: field_discount_1
+entity_type: commerce_product_variation
+bundle: activity
+label: 'Discount for 1ˢᵗ participant'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: 100
+  prefix: ''
+  suffix: '%'
+field_type: integer

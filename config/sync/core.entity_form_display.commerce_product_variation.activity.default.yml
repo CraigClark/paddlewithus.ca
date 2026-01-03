@@ -8,12 +8,40 @@ dependencies:
     - field.field.commerce_product_variation.activity.field_age_min
     - field.field.commerce_product_variation.activity.field_capacity
     - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_discount_1
+    - field.field.commerce_product_variation.activity.field_discount_2
+    - field.field.commerce_product_variation.activity.field_discount_3
+    - field.field.commerce_product_variation.activity.field_discount_4
+    - field.field.commerce_product_variation.activity.field_discount_5_up
     - field.field.commerce_product_variation.activity.field_maximum_age
   module:
     - commerce_price
     - commerce_stock_field
     - datetime
     - datetime_range
+    - field_group
+third_party_settings:
+  field_group:
+    group_add_discounts:
+      children:
+        - field_discount_1
+        - field_discount_2
+        - field_discount_3
+        - field_discount_4
+        - field_discount_5_up
+      label: 'Add discounts'
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: 'These discounts are applied in addition to other discounts. For example, coupon codes or early-bird discounts.'
+        required_fields: true
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
 bundle: activity
@@ -21,20 +49,20 @@ mode: default
 content:
   field_age_calc_date:
     type: datetime_default
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_age_min:
     type: number
-    weight: 5
+    weight: 6
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_capacity:
     type: commerce_stock_level_simple_transaction
-    weight: 3
+    weight: 4
     region: content
     settings:
       step: '1'
@@ -43,13 +71,48 @@ content:
     third_party_settings: {  }
   field_date_range:
     type: daterange_default
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_discount_1:
+    type: number
+    weight: 9
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_discount_2:
+    type: number
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_discount_3:
+    type: number
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_discount_4:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_discount_5_up:
+    type: number
+    weight: 13
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_maximum_age:
     type: number
-    weight: 6
+    weight: 7
     region: content
     settings:
       placeholder: ''
@@ -70,7 +133,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 9
     region: content
     settings:
       display_label: true

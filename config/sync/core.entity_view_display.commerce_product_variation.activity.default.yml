@@ -8,6 +8,11 @@ dependencies:
     - field.field.commerce_product_variation.activity.field_age_min
     - field.field.commerce_product_variation.activity.field_capacity
     - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_discount_1
+    - field.field.commerce_product_variation.activity.field_discount_2
+    - field.field.commerce_product_variation.activity.field_discount_3
+    - field.field.commerce_product_variation.activity.field_discount_4
+    - field.field.commerce_product_variation.activity.field_discount_5_up
     - field.field.commerce_product_variation.activity.field_maximum_age
   module:
     - commerce_price
@@ -106,6 +111,91 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 3
             additional: {  }
+          ed7de54e-9e2f-4c6d-a6d9-f00785c249b7:
+            uuid: ed7de54e-9e2f-4c6d-a6d9-f00785c249b7
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_discount_1'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: above
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          b819ef2e-a1d3-415d-9d1c-0ac4f7ff7c6e:
+            uuid: b819ef2e-a1d3-415d-9d1c-0ac4f7ff7c6e
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_discount_2'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: above
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          c76a0924-d5a9-4e6c-a083-6b58aa8a3e0b:
+            uuid: c76a0924-d5a9-4e6c-a083-6b58aa8a3e0b
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_discount_3'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: above
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          cd19fb8a-0b19-4245-afcb-7f9944a30509:
+            uuid: cd19fb8a-0b19-4245-afcb-7f9944a30509
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_discount_4'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: above
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          b35cd4cb-3a16-4cf2-b759-b5d0b44eba18:
+            uuid: b35cd4cb-3a16-4cf2-b759-b5d0b44eba18
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_discount_5_up'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: above
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
         third_party_settings: {  }
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
@@ -146,6 +236,51 @@ content:
         label_value: ''
         label_tag: ''
     weight: 2
+    region: content
+  field_discount_1:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_discount_2:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_discount_3:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_discount_4:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_discount_5_up:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 8
     region: content
   price:
     type: commerce_price_default
