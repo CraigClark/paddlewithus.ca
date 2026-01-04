@@ -62,10 +62,13 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       // Step 2: Validate age for all selected participants
       $this->validateParticipantsAge($selected_participants, $variation);
 
-      // Step 3: Create order with order items for each selected participant
+      // Step 3: Check stock availability before creating order
+      $this->checkStockAvailability($variation, $selected_participants, $user_id);
+
+      // Step 4: Create order with order items for each selected participant
       $order = $this->createCommerceOrder($selected_participants, $user_id, $variation);
 
-      // Step 4: Redirect to cart
+      // Step 5: Redirect to cart
       $cart_url = Url::fromRoute('commerce_cart.page');
       $form_state->setRedirectUrl($cart_url);
 
@@ -160,6 +163,108 @@ class PiccRegistrationHandler extends WebformHandlerBase {
   }
 
   /**
+   * Check stock availability for the variation.
+   */
+  protected function checkStockAvailability($variation, $participant_ids, $user_id) {
+    $variation_id = $variation->id();
+    
+    // Get the stock service manager
+    $stock_service_manager = \Drupal::service('commerce_stock.service_manager');
+    $stock_service = $stock_service_manager->getService($variation);
+    
+    // If no stock service or it's "always in stock", skip validation
+    if (!$stock_service || $stock_service->getId() === 'always_in_stock') {
+      return;
+    }
+    
+    // Count how many NEW participants will actually be added
+    // (same logic as createCommerceOrder to avoid false positives)
+    $existing_order = $this->findDraftOrder($user_id);
+    $existing_participants = [];
+    
+    if ($existing_order) {
+      foreach ($existing_order->getItems() as $item) {
+        $item_variation_id = $item->getPurchasedEntityId();
+        $item_participant_id = $item->get('field_participant')->target_id;
+        
+        if (!isset($existing_participants[$item_variation_id])) {
+          $existing_participants[$item_variation_id] = [];
+        }
+        $existing_participants[$item_variation_id][] = $item_participant_id;
+      }
+    }
+    
+    // Count participants that will actually be added
+    $participants_to_add = 0;
+    foreach ($participant_ids as $profile_id) {
+      // Skip if already in cart for this variation
+      if (isset($existing_participants[$variation_id]) && in_array($profile_id, $existing_participants[$variation_id])) {
+        continue;
+      }
+      
+      // Skip if in a completed order
+      if ($this->isInCompletedOrder($profile_id, $variation_id)) {
+        continue;
+      }
+      
+      $participants_to_add++;
+    }
+    
+    // If no new participants to add, skip stock check
+    if ($participants_to_add === 0) {
+      return;
+    }
+    
+    // Get the stock checker
+    $stock_checker = $stock_service->getStockChecker();
+    if (!$stock_checker) {
+      return;
+    }
+    
+    // Load active stock locations
+    $location_storage = \Drupal::entityTypeManager()->getStorage('commerce_stock_location');
+    $locations = $location_storage->loadByProperties(['status' => TRUE]);
+    
+    if (empty($locations)) {
+      \Drupal::logger('picc_registration')->warning('No active stock locations found for variation @vid', [
+        '@vid' => $variation_id,
+      ]);
+      return;
+    }
+    
+    // Get available stock
+    try {
+      $available = $stock_checker->getTotalStockLevel($variation, $locations);
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('picc_registration')->error('Stock check failed for variation @vid: @message', [
+        '@vid' => $variation_id,
+        '@message' => $e->getMessage(),
+      ]);
+      return;
+    }
+    
+    \Drupal::logger('picc_registration')->notice('Stock check: variation @vid has @available available, requesting @requested', [
+      '@vid' => $variation_id,
+      '@available' => $available,
+      '@requested' => $participants_to_add,
+    ]);
+    
+    // Block if insufficient stock
+    if ($available < $participants_to_add) {
+      if ($available > 0) {
+        throw new \Exception($this->t('Sorry, only @available spot(s) remain for this session. You selected @requested participants.', [
+          '@available' => $available,
+          '@requested' => $participants_to_add,
+        ]));
+      }
+      else {
+        throw new \Exception($this->t('Sorry, this session is at capacity. Please try a different session.'));
+      }
+    }
+  }
+
+  /**
    * Creates or updates a Commerce order with order items for selected participants.
    */
   protected function createCommerceOrder($participant_ids, $user_id, $variation) {
@@ -214,8 +319,29 @@ class PiccRegistrationHandler extends WebformHandlerBase {
         'field_participant' => $profile_id,
       ]);
 
-      $order_item->save();
-      $new_order_items[] = $order_item;
+      try {
+        $order_item->save();
+        
+        // Verify the item was actually saved with a purchased entity
+        // Commerce Stock Enforcement might block the save
+        if (!$order_item->id() || !$order_item->getPurchasedEntity()) {
+          throw new \Exception('Unable to create registration - session may be at capacity.');
+        }
+        
+        $new_order_items[] = $order_item;
+      }
+      catch (\Exception $e) {
+        // Stock enforcement or other issue prevented order item creation
+        $error_message = $e->getMessage();
+        
+        // Check if it's a stock-related error
+        if (strpos($error_message, 'stock') !== FALSE || strpos($error_message, 'capacity') !== FALSE) {
+          throw new \Exception($this->t('Sorry, this session is at capacity. Please try a different session.'));
+        }
+        
+        // Re-throw other errors
+        throw $e;
+      }
     }
 
     // If no new items to add, check what happened
@@ -294,10 +420,12 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       $participant_id = $fresh_item->get('field_participant')->target_id;
       if ($participant_id) {
         $profile = Profile::load($participant_id);
-        if ($profile) {
+        $purchased_entity = $fresh_item->getPurchasedEntity();
+        
+        if ($profile && $purchased_entity) {
           $name_field = $profile->get('field_name')->first();
           $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Participant';
-          $variation_title = $fresh_item->getPurchasedEntity()->getTitle();
+          $variation_title = $purchased_entity->getTitle();
           $new_title = $variation_title . ' - ' . $name;
 
           \Drupal::logger('picc_registration')->notice('Post-order title set: @title for item @iid', [
