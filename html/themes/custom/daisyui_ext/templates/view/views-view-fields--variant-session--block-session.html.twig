@@ -18,6 +18,73 @@
   {% set vid = fields.variation_id.raw|default(fields.variation_id.content|striptags|trim) %}
 {% endif %}
 
+{# Discount 1 (numeric) #}
+{% set dis_1 = 0 %}
+{% if fields.field_discount_1 is defined %}
+  {% set dis_1_raw = fields.field_discount_1.raw is defined and fields.field_discount_1.raw is not empty
+    ? fields.field_discount_1.raw
+    : fields.field_discount_1.content
+  %}
+  {% set dis_1_txt = dis_1_raw|render|striptags|trim
+    |replace({'%':'', '$':'', ',':'', ' ':'', "\n":'', "\r":'', "\t":''})
+  %}
+  {% set dis_1 = (dis_1_txt|default('0')) + 0 %}
+{% endif %}
+
+{# Discount 2 (numeric) #}
+{% set dis_2 = 0 %}
+{% if fields.field_discount_2 is defined %}
+  {% set dis_2_raw = fields.field_discount_2.raw is defined and fields.field_discount_2.raw is not empty
+    ? fields.field_discount_2.raw
+    : fields.field_discount_2.content
+  %}
+  {% set dis_2_txt = dis_2_raw|render|striptags|trim
+    |replace({'%':'', '$':'', ',':'', ' ':'', "\n":'', "\r":'', "\t":''})
+  %}
+  {% set dis_2 = (dis_2_txt|default('0')) + 0 %}
+{% endif %}
+
+{# Discount 3 (numeric) #}
+{% set dis_3 = 0 %}
+{% if fields.field_discount_3 is defined %}
+  {% set dis_3_raw = fields.field_discount_3.raw is defined and fields.field_discount_3.raw is not empty
+    ? fields.field_discount_3.raw
+    : fields.field_discount_3.content
+  %}
+  {% set dis_3_txt = dis_3_raw|render|striptags|trim
+    |replace({'%':'', '$':'', ',':'', ' ':'', "\n":'', "\r":'', "\t":''})
+  %}
+  {% set dis_3 = (dis_3_txt|default('0')) + 0 %}
+{% endif %}
+
+{# Discount 4 (numeric) #}
+{% set dis_4 = 0 %}
+{% if fields.field_discount_4 is defined %}
+  {% set dis_4_raw = fields.field_discount_4.raw is defined and fields.field_discount_4.raw is not empty
+    ? fields.field_discount_4.raw
+    : fields.field_discount_4.content
+  %}
+  {% set dis_4_txt = dis_4_raw|render|striptags|trim
+    |replace({'%':'', '$':'', ',':'', ' ':'', "\n":'', "\r":'', "\t":''})
+  %}
+  {% set dis_4 = (dis_4_txt|default('0')) + 0 %}
+{% endif %}
+
+{# Discount 5+ (numeric) #}
+{% set dis_5_up = 0 %}
+{% if fields.field_discount_5_up is defined %}
+  {% set dis_5_raw = fields.field_discount_5_up.raw is defined and fields.field_discount_5_up.raw is not empty
+    ? fields.field_discount_5_up.raw
+    : fields.field_discount_5_up.content
+  %}
+  {% set dis_5_txt = dis_5_raw|render|striptags|trim
+    |replace({'%':'', '$':'', ',':'', ' ':'', "\n":'', "\r":'', "\t":''})
+  %}
+  {% set dis_5_up = (dis_5_txt|default('0')) + 0 %}
+{% endif %}
+
+{% set has_discounts = dis_1 > 0 or dis_2 > 0 or dis_3 > 0 or dis_4 > 0 or dis_5_up > 0 %}
+
 {% set date_range = fields.field_date_range is defined ? fields.field_date_range.content : '' %}
 {% set capacity   = fields.field_capacity is defined ? fields.field_capacity.content : '' %}
 {% set price      = fields.price__number is defined ? fields.price__number.content : '' %}
@@ -34,6 +101,30 @@
 
     {% if price %}
       <div>{{ price }}</div>
+    {% endif %}
+
+    {% if has_discounts %}
+      <details class="mt-2">
+        <summary>{{ 'Family discounts'|t }}</summary>
+        <ul>
+          {% if dis_1 > 0 and fields.field_discount_1 is defined %}
+            <li>{{ fields.field_discount_1.content }}{{ '% for first person'|t }}</li>
+          {% endif %}
+          {% if dis_2 > 0 and fields.field_discount_2 is defined %}
+            <li>{{ fields.field_discount_2.content }}{{ '% for second person'|t }}</li>
+          {% endif %}
+          {% if dis_3 > 0 and fields.field_discount_3 is defined %}
+            <li>{{ fields.field_discount_3.content }}{{ '% for third person'|t }}</li>
+          {% endif %}
+          {% if dis_4 > 0 and fields.field_discount_4 is defined %}
+            <li>{{ fields.field_discount_4.content }}{{ '% for fourth person'|t }}</li>
+          {% endif %}
+          {% if dis_5_up > 0 and fields.field_discount_5_up is defined %}
+            <li>{{ fields.field_discount_5_up.content }}{{ '% for fifth and each additional person'|t }}</li>
+          {% endif %}
+        </ul>
+
+      </details>
     {% endif %}
 
     {% if pid %}
