@@ -7,6 +7,9 @@
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\WebformSubmissionInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_ENTITY_TYPE_view_alter() for commerce_order_item.
@@ -204,6 +207,50 @@ function picc_registration_commerce_product_presave(EntityInterface $product) {
       \Drupal::logger('picc_registration')->notice('Auto-assigned default store to product @title', [
         '@title' => $product->label(),
       ]);
+    }
+  }
+}
+
+/**
+ * Implements hook_webform_submission_validate().
+ * Prevent registering for past sessions
+ */
+function picc_registration_webform_submission_validate(array &$form, FormStateInterface $form_state, WebformSubmissionInterface $webform_submission) {
+  // Log at the very start - before ANY conditions
+  \Drupal::logger('picc_registration')->notice('VALIDATION HOOK FIRED!');
+
+  \Drupal::logger('picc_registration')->notice('Webform validation hook fired for: @webform', [
+    '@webform' => $webform_submission->getWebform()->id(),
+  ]);
+
+  if ($webform_submission->getWebform()->id() == 'program_registration') {
+    $variation_id = \Drupal::request()->query->get('variation');
+
+    \Drupal::logger('picc_registration')->notice('Variation ID from URL: @id', [
+      '@id' => $variation_id ?? 'NULL',
+    ]);
+
+    if ($variation_id) {
+      $variation = \Drupal::entityTypeManager()
+        ->getStorage('commerce_product_variation')
+        ->load($variation_id);
+
+      if ($variation && $variation->hasField('field_date_range')) {
+        $date_range = $variation->get('field_date_range')->first();
+        if ($date_range) {
+          $end_date = new DrupalDateTime($date_range->end_value);
+          $now = new DrupalDateTime('now');
+
+          \Drupal::logger('picc_registration')->notice('End date: @end, Now: @now', [
+            '@end' => $end_date->format('Y-m-d H:i:s'),
+            '@now' => $now->format('Y-m-d H:i:s'),
+          ]);
+
+          if ($end_date < $now) {
+            $form_state->setErrorByName('', t('This session has already ended. Please select a different session.'));
+          }
+        }
+      }
     }
   }
 }

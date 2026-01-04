@@ -59,20 +59,23 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       // Step 1: Validate product/variation exists
       $variation = $this->validateVariation($data);
 
-      // Step 2: Validate age for all selected participants
+      // Step 2: Validate session has not ended
+      $this->validateSessionDate($variation);
+
+      // Step 3: Validate age for all selected participants
       $this->validateParticipantsAge($selected_participants, $variation);
 
-      // Step 3: Check stock availability before creating order
+      // Step 4: Check stock availability before creating order
       $this->checkStockAvailability($variation, $selected_participants, $user_id);
 
-      // Step 4: Create order with order items for each selected participant
+      // Step 5: Create order with order items for each selected participant
       $order = $this->createCommerceOrder($selected_participants, $user_id, $variation);
 
-      // Step 5: Redirect to cart
+      // Step 6: Redirect to cart
       $cart_url = Url::fromRoute('commerce_cart.page');
       $form_state->setRedirectUrl($cart_url);
 
-      // Log success
+      // Step 7: Log success and show message
       \Drupal::logger('picc_registration')->notice('Successfully created order @oid with @count participants', [
         '@oid' => $order->id(),
         '@count' => count($selected_participants),
@@ -88,10 +91,8 @@ class PiccRegistrationHandler extends WebformHandlerBase {
         '@message' => $e->getMessage(),
       ]);
 
-      // Show user-friendly error
-      \Drupal::messenger()->addError($this->t('Sorry, registration failed: @message. Please try again or contact us for help.', [
-        '@message' => $e->getMessage(),
-      ]));
+      // Show the specific error message (our validation messages are already user-friendly)
+      \Drupal::messenger()->addError($e->getMessage());
     }
   }
 
@@ -163,37 +164,63 @@ class PiccRegistrationHandler extends WebformHandlerBase {
   }
 
   /**
+   * Validates that the session has not already ended.
+   */
+  protected function validateSessionDate($variation) {
+    // Check if variation has date range field
+    if (!$variation->hasField('field_date_range')) {
+      return;
+    }
+
+    $date_range = $variation->get('field_date_range')->first();
+    if (!$date_range) {
+      return;
+    }
+
+    // Get end date from the date range
+    $end_date = new \DateTime($date_range->end_value);
+    $now = new \DateTime('now');
+
+    // Check if session has ended
+    if ($end_date < $now) {
+      throw new \Exception($this->t('This session has already ended on @date. Please select a different session.', [
+        '@date' => $end_date->format('F j, Y'),
+      ]));
+    }
+  }
+
+  /**
    * Check stock availability for the variation.
    */
   protected function checkStockAvailability($variation, $participant_ids, $user_id) {
     $variation_id = $variation->id();
-    
+
     // Get the stock service manager
     $stock_service_manager = \Drupal::service('commerce_stock.service_manager');
     $stock_service = $stock_service_manager->getService($variation);
-    
+
     // If no stock service or it's "always in stock", skip validation
     if (!$stock_service || $stock_service->getId() === 'always_in_stock') {
       return;
     }
-    
+
     // Count how many NEW participants will actually be added
     // (same logic as createCommerceOrder to avoid false positives)
     $existing_order = $this->findDraftOrder($user_id);
     $existing_participants = [];
-    
+
     if ($existing_order) {
       foreach ($existing_order->getItems() as $item) {
         $item_variation_id = $item->getPurchasedEntityId();
         $item_participant_id = $item->get('field_participant')->target_id;
-        
+
         if (!isset($existing_participants[$item_variation_id])) {
           $existing_participants[$item_variation_id] = [];
         }
         $existing_participants[$item_variation_id][] = $item_participant_id;
       }
     }
-    
+
     // Count participants that will actually be added
     $participants_to_add = 0;
     foreach ($participant_ids as $profile_id) {
@@ -201,37 +228,37 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       if (isset($existing_participants[$variation_id]) && in_array($profile_id, $existing_participants[$variation_id])) {
         continue;
       }
-      
+
       // Skip if in a completed order
       if ($this->isInCompletedOrder($profile_id, $variation_id)) {
         continue;
       }
-      
+
       $participants_to_add++;
     }
-    
+
     // If no new participants to add, skip stock check
     if ($participants_to_add === 0) {
       return;
     }
-    
+
     // Get the stock checker
     $stock_checker = $stock_service->getStockChecker();
     if (!$stock_checker) {
       return;
     }
-    
+
     // Load active stock locations
     $location_storage = \Drupal::entityTypeManager()->getStorage('commerce_stock_location');
     $locations = $location_storage->loadByProperties(['status' => TRUE]);
-    
+
     if (empty($locations)) {
       \Drupal::logger('picc_registration')->warning('No active stock locations found for variation @vid', [
         '@vid' => $variation_id,
       ]);
       return;
     }
-    
+
     // Get available stock
     try {
       $available = $stock_checker->getTotalStockLevel($variation, $locations);
@@ -243,13 +270,13 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       ]);
       return;
     }
-    
+
     \Drupal::logger('picc_registration')->notice('Stock check: variation @vid has @available available, requesting @requested', [
       '@vid' => $variation_id,
       '@available' => $available,
       '@requested' => $participants_to_add,
     ]);
-    
+
     // Block if insufficient stock
     if ($available < $participants_to_add) {
       if ($available > 0) {
@@ -321,24 +348,24 @@ class PiccRegistrationHandler extends WebformHandlerBase {
 
       try {
         $order_item->save();
-        
+
         // Verify the item was actually saved with a purchased entity
         // Commerce Stock Enforcement might block the save
         if (!$order_item->id() || !$order_item->getPurchasedEntity()) {
           throw new \Exception('Unable to create registration - session may be at capacity.');
         }
-        
+
         $new_order_items[] = $order_item;
       }
       catch (\Exception $e) {
         // Stock enforcement or other issue prevented order item creation
         $error_message = $e->getMessage();
-        
+
         // Check if it's a stock-related error
         if (strpos($error_message, 'stock') !== FALSE || strpos($error_message, 'capacity') !== FALSE) {
           throw new \Exception($this->t('Sorry, this session is at capacity. Please try a different session.'));
         }
-        
+
         // Re-throw other errors
         throw $e;
       }
@@ -421,7 +448,7 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       if ($participant_id) {
         $profile = Profile::load($participant_id);
         $purchased_entity = $fresh_item->getPurchasedEntity();
-        
+
         if ($profile && $purchased_entity) {
           $name_field = $profile->get('field_name')->first();
           $name = $name_field ? trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? '')) : 'Participant';
