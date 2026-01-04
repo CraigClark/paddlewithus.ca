@@ -1,0 +1,19 @@
+uuid: 13fd91ac-0f1e-4a28-9d4f-5c12ba97f133
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_order
+id: commerce_order.field_order_notes
+field_name: field_order_notes
+entity_type: commerce_order
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,14 @@
+uuid: 65b6306e-8ee7-42aa-9348-fb15cabd0462
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.commerce_manager
+  module:
+    - user
+id: user_remove_role_action.commerce_manager
+label: 'Remove the Commerce manager role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: commerce_manager

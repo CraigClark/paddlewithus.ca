@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - commerce_order.commerce_order_type.default
+    - field.field.commerce_order.default.field_order_notes
   module:
     - commerce_order
 _core:
@@ -13,12 +14,6 @@ targetEntityType: commerce_order
 bundle: default
 mode: default
 content:
-  adjustments:
-    type: commerce_adjustment_default
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   billing_profile:
     type: commerce_billing_profile
     weight: 0
@@ -32,14 +27,12 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  coupons:
-    type: entity_reference_autocomplete
-    weight: 5
+  field_order_notes:
+    type: string_textarea
+    weight: 21
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
   mail:
@@ -55,16 +48,17 @@ content:
     weight: 1
     region: content
     settings:
-      allow_new: true
+      allow_new: false
       collapsible: false
       collapsed: false
       allow_duplicate: false
     third_party_settings: {  }
 hidden:
+  adjustments: true
+  coupons: true
   created: true
   customer_comments: true
   ip_address: true
-  mail: true
   order_number: true
   state: true
   store_id: true

@@ -5,6 +5,7 @@ dependencies:
   config:
     - commerce_order.commerce_order_type.default
     - core.entity_view_mode.commerce_order.user
+    - field.field.commerce_order.default.field_order_notes
   module:
     - commerce_order
     - commerce_price
@@ -109,6 +110,7 @@ content:
     region: content
 hidden:
   changed: true
+  field_order_notes: true
   ip_address: true
   search_api_excerpt: true
   store_id: true

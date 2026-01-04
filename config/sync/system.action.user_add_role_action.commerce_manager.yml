@@ -1,0 +1,14 @@
+uuid: e86ced54-87ef-429a-b102-34a42a680d51
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.commerce_manager
+  module:
+    - user
+id: user_add_role_action.commerce_manager
+label: 'Add the Commerce manager role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: commerce_manager

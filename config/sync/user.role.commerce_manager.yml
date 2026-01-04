@@ -1,0 +1,75 @@
+uuid: ab2e50ae-6228-4344-b573-281318cb3004
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - media.type.image
+    - user.role.account_holder
+    - user.role.authenticated
+  module:
+    - commerce
+    - commerce_order
+    - commerce_payment
+    - commerce_product
+    - commerce_promotion
+    - commerce_store
+    - commerce_stripe
+    - content_translation
+    - field_permissions
+    - masquerade
+    - media
+    - profile
+    - system
+    - toolbar
+id: commerce_manager
+label: 'Commerce manager'
+weight: 8
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access commerce administration pages'
+  - 'access commerce_order overview'
+  - 'access commerce_product overview'
+  - 'access commerce_promotion overview'
+  - 'access commerce_store overview'
+  - 'access media overview'
+  - 'access private fields'
+  - 'access profile overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer commerce_payment'
+  - 'administer commerce_promotion'
+  - 'administer users'
+  - 'bulk generate commerce_promotion_coupon'
+  - 'create activity commerce_product'
+  - 'create commerce_promotion'
+  - 'create default commerce_order'
+  - 'create image media'
+  - 'delete any activity commerce_product'
+  - 'delete any commerce_promotion'
+  - 'duplicate any commerce_promotion'
+  - 'edit any image media'
+  - 'manage activity commerce_product_variation'
+  - 'manage activity_registration commerce_order_item'
+  - 'masquerade as account_holder'
+  - 'masquerade as authenticated'
+  - 'translate activity commerce_product'
+  - 'translate commerce_product_variation'
+  - 'unlock orders'
+  - 'update any activity commerce_product'
+  - 'update any commerce_payment_method'
+  - 'update any commerce_promotion'
+  - 'update any participant profile'
+  - 'update default commerce_order'
+  - 'view activity commerce_product'
+  - 'view any commerce_payment_method'
+  - 'view any image media revisions'
+  - 'view any participant profile'
+  - 'view commerce_order'
+  - 'view commerce_promotion'
+  - 'view default commerce_order'
+  - 'view online commerce_store'
+  - 'view stripe dashboard links'
+  - 'view the administration theme'
+  - 'view user email addresses'
