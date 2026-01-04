@@ -40,7 +40,7 @@ third_party_settings:
       label: 'Who is this for'
       parent_name: ''
       region: content
-      weight: 1
+      weight: 2
       format_type: html_element
       format_settings:
         classes: prose
@@ -64,7 +64,7 @@ third_party_settings:
       label: Description
       parent_name: ''
       region: content
-      weight: 2
+      weight: 3
       format_type: html_element
       format_settings:
         classes: ''
@@ -163,7 +163,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 3
+    weight: 4
     region: content
   field_equipmenet_provided:
     type: text_default
@@ -178,7 +178,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 10
+    weight: 11
     region: content
   field_experience:
     type: list_default
@@ -239,7 +239,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 11
+    weight: 12
     region: content
   title:
     type: ui_patterns_component_per_item
