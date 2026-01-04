@@ -187,3 +187,23 @@ function picc_registration_form_views_form_commerce_cart_form_default_alter(&$fo
     '#weight' => -10,
   ];
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for commerce_product.
+ *
+ * Auto-assigns default store to products that don't have a store selected.
+ */
+function picc_registration_commerce_product_presave(EntityInterface $product) {
+  // Auto-assign default store if none selected
+  if ($product->get('stores')->isEmpty()) {
+    $store_storage = \Drupal::entityTypeManager()->getStorage('commerce_store');
+    $stores = $store_storage->loadByProperties(['is_default' => TRUE]);
+    if (!empty($stores)) {
+      $default_store = reset($stores);
+      $product->set('stores', $default_store);
+      \Drupal::logger('picc_registration')->notice('Auto-assigned default store to product @title', [
+        '@title' => $product->label(),
+      ]);
+    }
+  }
+}
