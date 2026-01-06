@@ -6,7 +6,7 @@ third_party_settings:
   commerce_order:
     customer_profile_type: false
 id: participant
-label: Participant
+label: 'Family members'
 display_label: ''
 multiple: true
 registration: false

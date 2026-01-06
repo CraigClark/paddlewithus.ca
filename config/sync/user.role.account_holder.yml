@@ -12,6 +12,5 @@ is_admin: false
 permissions:
   - 'access checkout'
   - 'create participant profile'
-  - 'delete own participant profile'
   - 'update own participant profile'
   - 'view own participant profile'

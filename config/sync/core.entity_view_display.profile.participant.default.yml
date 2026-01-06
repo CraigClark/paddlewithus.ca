@@ -20,165 +20,151 @@ dependencies:
     - field.field.profile.participant.field_photo_consent
     - profile.type.participant
   module:
-    - datetime
-    - field_group
-    - name
-    - options
-    - telephone
-    - text
+    - layout_builder
+    - ui_patterns
+    - ui_patterns_layouts
+  theme:
+    - ui_suite_daisyui
 third_party_settings:
-  field_group:
-    group_emergency_contact:
-      children:
-        - field_emercency_contact_1_name
-        - field_emercency_contact_1_phone
-        - field_emercency_contact_1_rel
-        - field_emercency_contact_2_name
-        - field_emercency_contact_2_phone
-        - field_emercency_contact_2_rel
-        - field_emercency_contact_3_name
-        - field_emercency_contact_3_phone
-        - field_emercency_contact_3_rel
-      label: 'Emergency contacts'
-      parent_name: ''
-      region: content
-      weight: 6
-      format_type: fieldset
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: emergency-contact
-        label_as_html: false
-        description: ''
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: 'ui_patterns:ui_suite_daisyui:accordion'
+        layout_settings:
+          label: 'Emergency contacts'
+          context_mapping:
+            entity: layout_builder.entity
+          ui_patterns:
+            component_id: 'ui_suite_daisyui:accordion'
+            variant_id: null
+            props:
+              attributes:
+                source_id: attributes
+                source:
+                  value: ''
+            slots: {  }
+        components:
+          2b4134d9-282f-4d42-a965-e6380b0f5558:
+            uuid: 2b4134d9-282f-4d42-a965-e6380b0f5558
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_emercency_contact_1_name'
+              label: 'Emercency contact 1 name'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings:
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: ''
+                  nomarkup:
+                    enabled: false
+                    separator: '|'
+                    referenced_entity: ''
+            weight: 0
+            additional:
+              ui_styles_wrapper: {  }
+              ui_styles_wrapper_extra: ''
+              ui_styles_title: {  }
+              ui_styles_title_extra: ''
+              ui_styles: {  }
+              ui_styles_extra: ''
+          5331b606-5e76-419d-a8f9-542942050445:
+            uuid: 5331b606-5e76-419d-a8f9-542942050445
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_emercency_contact_1_phone'
+              label: 'Emercency contact 1 phone'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: telephone_link
+                label: above
+                settings:
+                  title: ''
+                third_party_settings:
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: ''
+                  nomarkup:
+                    enabled: false
+                    separator: '|'
+                    referenced_entity: ''
+            weight: 1
+            additional:
+              ui_styles_wrapper: {  }
+              ui_styles_wrapper_extra: ''
+              ui_styles_title: {  }
+              ui_styles_title_extra: ''
+              ui_styles: {  }
+              ui_styles_extra: ''
+          766ace0a-7df7-4dc8-8035-f2d91ce3d428:
+            uuid: 766ace0a-7df7-4dc8-8035-f2d91ce3d428
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_emercency_contact_1_rel'
+              label: 'Emercency contact 1 relationship'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings:
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: ''
+                  nomarkup:
+                    enabled: false
+                    separator: '|'
+                    referenced_entity: ''
+            weight: 2
+            additional:
+              ui_styles_wrapper: {  }
+              ui_styles_wrapper_extra: ''
+              ui_styles_title: {  }
+              ui_styles_title_extra: ''
+              ui_styles: {  }
+              ui_styles_extra: ''
+        third_party_settings: {  }
 id: profile.participant.default
 targetEntityType: profile
 bundle: participant
 mode: default
-content:
-  field_allergies:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_birth_date:
-    type: datetime_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_emercency_contact_1_name:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_emercency_contact_1_phone:
-    type: telephone_link
-    label: above
-    settings:
-      title: ''
-    third_party_settings: {  }
-    weight: 8
-    region: content
-  field_emercency_contact_1_rel:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 10
-    region: content
-  field_emercency_contact_2_name:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 11
-    region: content
-  field_emercency_contact_2_phone:
-    type: telephone_link
-    label: above
-    settings:
-      title: ''
-    third_party_settings: {  }
-    weight: 12
-    region: content
-  field_emercency_contact_2_rel:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 13
-    region: content
-  field_emercency_contact_3_name:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 14
-    region: content
-  field_emercency_contact_3_phone:
-    type: telephone_link
-    label: above
-    settings:
-      title: ''
-    third_party_settings: {  }
-    weight: 15
-    region: content
-  field_emercency_contact_3_rel:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 16
-    region: content
-  field_medical_notes:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 4
-    region: content
-  field_name:
-    type: name_default
-    label: above
-    settings:
-      format: default
-      markup: none
-      list_format: ''
-      link_target: ''
-      preferred_field_reference: ''
-      preferred_field_reference_separator: ', '
-      alternative_field_reference: ''
-      alternative_field_reference_separator: ', '
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_owner:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_photo_consent:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
+content: {  }
 hidden:
+  field_allergies: true
+  field_birth_date: true
+  field_emercency_contact_1_name: true
+  field_emercency_contact_1_phone: true
+  field_emercency_contact_1_rel: true
+  field_emercency_contact_2_name: true
+  field_emercency_contact_2_phone: true
+  field_emercency_contact_2_rel: true
+  field_emercency_contact_3_name: true
+  field_emercency_contact_3_phone: true
+  field_emercency_contact_3_rel: true
+  field_medical_notes: true
+  field_name: true
+  field_owner: true
+  field_photo_consent: true
   search_api_excerpt: true

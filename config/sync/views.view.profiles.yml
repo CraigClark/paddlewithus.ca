@@ -2,8 +2,31 @@ uuid: 1df055ac-3815-4d5e-9fb6-eac4dc2deac7
 langcode: en
 status: true
 dependencies:
+  config:
+    - field.storage.profile.field_allergies
+    - field.storage.profile.field_birth_date
+    - field.storage.profile.field_emercency_contact_1_name
+    - field.storage.profile.field_emercency_contact_1_phone
+    - field.storage.profile.field_emercency_contact_1_rel
+    - field.storage.profile.field_emercency_contact_2_name
+    - field.storage.profile.field_emercency_contact_2_phone
+    - field.storage.profile.field_emercency_contact_2_rel
+    - field.storage.profile.field_emercency_contact_3_name
+    - field.storage.profile.field_emercency_contact_3_phone
+    - field.storage.profile.field_emercency_contact_3_rel
+    - field.storage.profile.field_medical_notes
+    - field.storage.profile.field_name
+    - field.storage.profile.field_photo_consent
   module:
+    - datetime
+    - name
     - profile
+    - telephone
+    - text
+    - ui_patterns
+    - ui_patterns_views
+  theme:
+    - ui_suite_daisyui
 _core:
   default_config_hash: xNZ1q8VAmjQSPC81nqH6taYXfcxsJO5bwHCzv4IMznw
 id: profiles
@@ -22,15 +45,330 @@ display:
     display_options:
       title: Profiles
       fields:
-        rendered_entity:
-          id: rendered_entity
-          table: profile
-          field: rendered_entity
+        field_name:
+          id: field_name
+          table: profile__field_name
+          field: field_name
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: profile
-          plugin_id: rendered_entity
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<h2>{{ field_name }}</h2>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: h2
+          element_class: my-class
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: title
+          type: name_default
+          settings:
+            format: default
+            markup: none
+            list_format: ''
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_birth_date:
+          id: field_birth_date
+          table: profile__field_birth_date
+          field: field_birth_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Date of birth'
+          exclude: false
+          alter:
+            alter_text: false
+            text: "<h3>Date of birth</h3>\r\n{{ field_birth_date }}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: h3
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_custom
+          settings:
+            timezone_override: ''
+            date_format: 'F d, Y'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_allergies:
+          id: field_allergies
+          table: profile__field_allergies
+          field: field_allergies
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Alleries
+          exclude: false
+          alter:
+            alter_text: false
+            text: "<h3>Allergies</h3>\r\n<p>{{ field_allergies }}</p>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: h3
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_medical_notes:
+          id: field_medical_notes
+          table: profile__field_medical_notes
+          field: field_medical_notes
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Medical notes'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: h3
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_1_name:
+          id: field_emercency_contact_1_name
+          table: profile__field_emercency_contact_1_name
+          field: field_emercency_contact_1_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Emergency contact'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: h4
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_1_phone:
+          id: field_emercency_contact_1_phone
+          table: profile__field_emercency_contact_1_phone
+          field: field_emercency_contact_1_phone
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -72,16 +410,154 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          view_mode: default
-        operations:
-          id: operations
-          table: profile
-          field: operations
+          click_sort_column: value
+          type: telephone_link
+          settings:
+            title: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_1_rel:
+          id: field_emercency_contact_1_rel
+          table: profile__field_emercency_contact_1_rel
+          field: field_emercency_contact_1_rel
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: profile
-          plugin_id: entity_operations
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<h4>Emergency contact</h4>\r\n  <p>{{ field_emercency_contact_1_name }}<br>\r\n    {{ field_emercency_contact_1_phone }}<br>\r\n    {{ field_emercency_contact_1_rel }}</p>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_2_name:
+          id: field_emercency_contact_2_name
+          table: profile__field_emercency_contact_2_name
+          field: field_emercency_contact_2_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Emergency contact 2'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: h4
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_2_phone:
+          id: field_emercency_contact_2_phone
+          table: profile__field_emercency_contact_2_phone
+          field: field_emercency_contact_2_phone
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -123,7 +599,504 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          destination: true
+          click_sort_column: value
+          type: telephone_link
+          settings:
+            title: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_2_rel:
+          id: field_emercency_contact_2_rel
+          table: profile__field_emercency_contact_2_rel
+          field: field_emercency_contact_2_rel
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<h4>Emergency contact 2</h4>\r\n  <p>{{ field_emercency_contact_2_name }}<br>\r\n    {{ field_emercency_contact_2_phone }}<br>\r\n    {{ field_emercency_contact_2_rel }}</p>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_3_name:
+          id: field_emercency_contact_3_name
+          table: profile__field_emercency_contact_3_name
+          field: field_emercency_contact_3_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Emergency contact 3'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: h4
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_3_phone:
+          id: field_emercency_contact_3_phone
+          table: profile__field_emercency_contact_3_phone
+          field: field_emercency_contact_3_phone
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: telephone_link
+          settings:
+            title: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_emercency_contact_3_rel:
+          id: field_emercency_contact_3_rel
+          table: profile__field_emercency_contact_3_rel
+          field: field_emercency_contact_3_rel
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<h4>Emergency contact 3</h4>\r\n  <p>{{ field_emercency_contact_3_name }}<br>\r\n    {{ field_emercency_contact_3_phone }}<br>\r\n    {{ field_emercency_contact_3_rel }}</p>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_name_1:
+          id: field_name_1
+          table: profile__field_name
+          field: field_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Given name'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: title
+          type: name_default
+          settings:
+            format: given
+            markup: none
+            list_format: ''
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        edit_profile:
+          id: edit_profile
+          table: profile_revision
+          field: edit_profile
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: profile
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "edit {{ field_name_1|striptags|trim }}'s profile"
+            make_link: true
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: 'btn btn-primary mt-3'
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: 'edit profile'
+          output_url_as_text: false
+          absolute: false
+        field_photo_consent:
+          id: field_photo_consent
+          table: profile__field_photo_consent
+          field: field_photo_consent
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Photo consent'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: h3
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: custom
+            format_custom_false: 'This person cannot be photographed'
+            format_custom_true: 'This person can be photographed for promotional purposes'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: 'Profile content'
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<section>\r\n  <p><b>Date of birth:</b> {{ field_birth_date }}<br>\r\n     <b>Photo consent:</b> {{ field_photo_consent }}\r\n  </p>\r\n</section>\r\n\r\n<section>\r\n  <h3 class=\"mt-3\">Allergies</h3>\r\n  <p>{{ field_allergies }}</p>\r\n  <h3 class=\"mt-3\">Medical notes</h3>\r\n  <p>{{ field_medical_notes }}</p>\r\n</section>\r\n\r\n<section>\r\n  <h3 class=\"mt-3\">Emergency contacts</h3>\r\n  {{ field_emercency_contact_1_rel }}\r\n  {{ field_emercency_contact_2_rel }}\r\n  {{ field_emercency_contact_3_rel }}\r\n</section>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       pager:
         type: none
         options:
@@ -304,23 +1277,67 @@ display:
           target_entity_type_id: profile
       filters: {  }
       style:
-        type: grid
+        type: default
         options:
           grouping: {  }
-          columns: 4
-          automatic_width: true
-          alignment: horizontal
-          row_class_custom: ''
-          row_class_default: true
-          col_class_custom: ''
-          col_class_default: true
+          row_class: ''
+          default_row_class: true
       row:
-        type: fields
+        type: ui_patterns
         options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
           hide_empty: false
+          ui_patterns:
+            component_id: 'ui_suite_daisyui:collapse'
+            variant_id: null
+            props:
+              attributes:
+                source_id: attributes
+                source:
+                  value: ''
+              collapse_type:
+                source_id: select
+                source:
+                  value: details
+              collapse_icon:
+                source_id: select
+                source:
+                  value: arrow
+              open:
+                source_id: checkbox
+                source:
+                  value: true
+              close:
+                source_id: checkbox
+                source:
+                  value: false
+              accordion_id:
+                source_id: textfield
+                source:
+                  value: ''
+              checked:
+                source_id: checkbox
+                source:
+                  value: false
+            slots:
+              title:
+                sources:
+                  -
+                    source_id: view_field
+                    source:
+                      ui_patterns_views_field: field_name
+                    _weight: '0'
+              content:
+                sources:
+                  -
+                    source_id: view_field
+                    source:
+                      ui_patterns_views_field: nothing
+                    _weight: '0'
+                  -
+                    source_id: view_field
+                    source:
+                      ui_patterns_views_field: edit_profile
+                    _weight: '1'
       query:
         type: views_query
         options:
@@ -332,13 +1349,29 @@ display:
       relationships: {  }
       header: {  }
       footer: {  }
-      display_extenders: {  }
+      display_extenders:
+        ui_styles: {  }
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
-      tags: {  }
+      tags:
+        - 'config:field.storage.profile.field_allergies'
+        - 'config:field.storage.profile.field_birth_date'
+        - 'config:field.storage.profile.field_emercency_contact_1_name'
+        - 'config:field.storage.profile.field_emercency_contact_1_phone'
+        - 'config:field.storage.profile.field_emercency_contact_1_rel'
+        - 'config:field.storage.profile.field_emercency_contact_2_name'
+        - 'config:field.storage.profile.field_emercency_contact_2_phone'
+        - 'config:field.storage.profile.field_emercency_contact_2_rel'
+        - 'config:field.storage.profile.field_emercency_contact_3_name'
+        - 'config:field.storage.profile.field_emercency_contact_3_phone'
+        - 'config:field.storage.profile.field_emercency_contact_3_rel'
+        - 'config:field.storage.profile.field_medical_notes'
+        - 'config:field.storage.profile.field_name'
+        - 'config:field.storage.profile.field_photo_consent'
   user_page:
     id: user_page
     display_title: 'User page'
@@ -346,10 +1379,26 @@ display:
     position: 1
     display_options:
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        ui_styles: {  }
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
-      tags: {  }
+      tags:
+        - 'config:field.storage.profile.field_allergies'
+        - 'config:field.storage.profile.field_birth_date'
+        - 'config:field.storage.profile.field_emercency_contact_1_name'
+        - 'config:field.storage.profile.field_emercency_contact_1_phone'
+        - 'config:field.storage.profile.field_emercency_contact_1_rel'
+        - 'config:field.storage.profile.field_emercency_contact_2_name'
+        - 'config:field.storage.profile.field_emercency_contact_2_phone'
+        - 'config:field.storage.profile.field_emercency_contact_2_rel'
+        - 'config:field.storage.profile.field_emercency_contact_3_name'
+        - 'config:field.storage.profile.field_emercency_contact_3_phone'
+        - 'config:field.storage.profile.field_emercency_contact_3_rel'
+        - 'config:field.storage.profile.field_medical_notes'
+        - 'config:field.storage.profile.field_name'
+        - 'config:field.storage.profile.field_photo_consent'

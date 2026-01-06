@@ -13,7 +13,7 @@ entity_type: profile
 bundle: participant
 label: Name
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -21,7 +21,7 @@ settings:
   components:
     title: false
     given: true
-    middle: true
+    middle: false
     family: true
     generational: false
     credentials: false
@@ -46,7 +46,7 @@ settings:
     family: Family
     generational: Generational
     credentials: Credentials
-  allow_family_or_given: true
+  allow_family_or_given: false
   autocomplete_source:
     title:
       title: title
@@ -92,7 +92,7 @@ settings:
   field_title_display: before
   component_layout: default
   show_component_required_marker: true
-  flag_required_input: false
+  flag_required_input: true
   credentials_inline: false
   override_format: default
   field_type:
@@ -111,9 +111,9 @@ settings:
     credentials: 35
   title_display:
     title: description
-    given: description
+    given: title
     middle: description
-    family: description
+    family: title
     generational: description
     credentials: description
   preferred_field_reference: ''
