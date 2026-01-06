@@ -185,8 +185,8 @@ display:
           label: Alleries
           exclude: false
           alter:
-            alter_text: false
-            text: "<h3>Allergies</h3>\r\n<p>{{ field_allergies }}</p>"
+            alter_text: true
+            text: "<h3 class=\"mt-3\">Allergies</h3>\r\n  <p>{{ field_allergies }}</p>"
             make_link: false
             path: ''
             absolute: false
@@ -247,8 +247,8 @@ display:
           label: 'Medical notes'
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "<h3 class=\"mt-3\">Medical notes</h3>\r\n  <p>{{ field_medical_notes }}</p>"
             make_link: false
             path: ''
             absolute: false
@@ -1060,7 +1060,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<section>\r\n  <p><b>Date of birth:</b> {{ field_birth_date }}<br>\r\n     <b>Photo consent:</b> {{ field_photo_consent }}\r\n  </p>\r\n</section>\r\n\r\n<section>\r\n  <h3 class=\"mt-3\">Allergies</h3>\r\n  <p>{{ field_allergies }}</p>\r\n  <h3 class=\"mt-3\">Medical notes</h3>\r\n  <p>{{ field_medical_notes }}</p>\r\n</section>\r\n\r\n<section>\r\n  <h3 class=\"mt-3\">Emergency contacts</h3>\r\n  {{ field_emercency_contact_1_rel }}\r\n  {{ field_emercency_contact_2_rel }}\r\n  {{ field_emercency_contact_3_rel }}\r\n</section>"
+            text: "<p><b>Date of birth:</b> {{ field_birth_date }}<br>\r\n  <b>Photo consent:</b> {{ field_photo_consent }}\r\n</p>\r\n{{ field_allergies }}\r\n{{ field_medical_notes }}\r\n<h3 class=\"mt-3\">Emergency contacts</h3>\r\n{{ field_emercency_contact_1_rel }}\r\n{{ field_emercency_contact_2_rel }}\r\n{{ field_emercency_contact_3_rel }}"
             make_link: false
             path: ''
             absolute: false
