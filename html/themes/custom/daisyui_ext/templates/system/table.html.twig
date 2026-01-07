@@ -1,0 +1,105 @@
+{#
+/**
+ * @file
+ * Theme override for a table element (non-Views tables).
+ *
+ * Available variables:
+ * - attributes: HTML attributes to apply to the <table> tag.
+ * - caption: A localized string for the <caption> tag.
+ * - colgroups: Column groups. Each group contains:
+ *   - attributes: HTML attributes to apply to the <col> tag.
+ * - header: Table header cells. Each cell contains:
+ *   - tag: The HTML tag name to use; either 'th' or 'td'.
+ *   - attributes: HTML attributes to apply to the tag.
+ *   - content: A localized string for the title of the column.
+ *   - field: The name of the field that this column represents.
+ *   - sort: Indicates the sorting order for this column.
+ * - sticky: A flag indicating whether to use a "sticky" table header.
+ * - rows: Table rows. Each row contains:
+ *   - attributes: HTML attributes to apply to the <tr> tag.
+ *   - data: Table cells.
+ *   - cells: Table cells of the row. Each cell contains:
+ *     - tag: The HTML tag name to use; either 'th' or 'td'.
+ *     - attributes: HTML attributes to apply to the tag.
+ *     - content: The string to display in the table cell.
+ * - footer: Table footer rows. Same structure as rows.
+ * - empty: The message to display in an empty table.
+ * - no_striping: A flag indicating that the table should not be striped.
+ * - responsive: A flag indicating whether table is responsive.
+ */
+#}
+{%
+  set classes = [
+    'table',
+    'table-zebra',
+    'w-full',
+  ]
+%}
+
+<div class="overflow-x-auto">
+  <table{{ attributes.addClass(classes).removeClass('responsive-enabled') }}>
+    {% if caption %}
+      <caption>{{ caption }}</caption>
+    {% endif %}
+
+    {% for colgroup in colgroups %}
+      {% if colgroup.cols %}
+        <colgroup{{ colgroup.attributes }}>
+          {% for col in colgroup.cols %}
+            <col{{ col.attributes }} />
+          {% endfor %}
+        </colgroup>
+      {% else %}
+        <colgroup{{ colgroup.attributes }} />
+      {% endif %}
+    {% endfor %}
+
+    {% if header %}
+      <thead>
+        <tr>
+          {% for cell in header %}
+            <{{ cell.tag }}{{ cell.attributes }}>
+              {{- cell.content -}}
+            </{{ cell.tag }}>
+          {% endfor %}
+        </tr>
+      </thead>
+    {% endif %}
+
+    {% if rows %}
+      <tbody>
+        {% for row in rows %}
+          <tr{{ row.attributes }}>
+            {% for cell in row.cells %}
+              <{{ cell.tag }}{{ cell.attributes }}>
+                {{- cell.content -}}
+              </{{ cell.tag }}>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    {% elseif empty %}
+      <tbody>
+        <tr>
+          <td colspan="{{ header|length }}" class="text-center py-4">
+            {{ empty }}
+          </td>
+        </tr>
+      </tbody>
+    {% endif %}
+
+    {% if footer %}
+      <tfoot>
+        {% for row in footer %}
+          <tr{{ row.attributes }}>
+            {% for cell in row.cells %}
+              <{{ cell.tag }}{{ cell.attributes }}>
+                {{- cell.content -}}
+              </{{ cell.tag }}>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tfoot>
+    {% endif %}
+  </table>
+</div>

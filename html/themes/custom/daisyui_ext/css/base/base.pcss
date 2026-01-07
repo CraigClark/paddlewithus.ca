@@ -23,10 +23,39 @@
   }
 }
 
+
+/* set global base font-size */
 html {
   font-size: 18px;
 }
 
+
 .ext-banner h1 {
   padding: 2.25em 0;
+}
+
+/**
+ * @file
+ * Global link styling for PICC site using daisyUI.
+ *
+ * Makes links visible in content while preserving navigation styles.
+ */
+
+/* Style links in main content areas */
+main a:not(.btn):not(.navbar *):not(.menu *):not(.tabs *):not([class*="card-"]),
+.region-content a:not(.btn):not(.navbar *):not(.menu *):not(.tabs *):not([class*="card-"]),
+.order-display a:not(.btn),
+.views-table a:not(.btn) {
+  @apply link link-primary link-hover;
+}
+
+/* Specific styling for table links to make them stand out */
+.views-table td a:not(.btn) {
+  @apply link link-primary font-medium;
+}
+
+/* Operation links styling */
+.views-field-operations a,
+.dropbutton a {
+  @apply link link-hover;
 }

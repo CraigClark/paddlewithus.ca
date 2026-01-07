@@ -9,8 +9,10 @@ favicon:
   use_default: 1
 form_display: fieldset
 form_label: label
-ui_skins_theme: ''
+ui_skins_theme: light
 ui_styles_entity_status_unpublished:
   selected:
+    effects_box_shadow: shadow
     layout_container: container-lg
     layout_grid: grid-1
+    text_align: text-left
