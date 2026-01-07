@@ -1,0 +1,94 @@
+{#
+/**
+ * @file
+ * Theme override for displaying a view as a table with daisyUI styling.
+ *
+ * Available variables:
+ * - attributes: Remaining HTML attributes for the element.
+ * - title : The title of this group of rows.
+ * - header: The table header columns.
+ * - caption: The caption for this table. (optional)
+ * - accessibility_description: Extended description for the table. (optional)
+ * - accessibility_summary: Summary for the table. (optional)
+ * - rows: Table row items.
+ * - responsive: A flag indicating whether table is responsive.
+ * - sticky: A flag indicating whether table header is sticky.
+ */
+#}
+{%
+  set classes = [
+    'table',
+    'views-table',
+    'views-view-table',
+    'cols-' ~ header|length,
+  ]
+%}
+<table{{ attributes.addClass(classes) }}>
+  {% if caption %}
+    <caption>{{ caption }}</caption>
+  {% endif %}
+  {% if header %}
+    <thead>
+      <tr>
+        {% for key, column in header %}
+          {% if column.default_classes %}
+            {%
+              set column_classes = [
+                'views-field',
+                'views-field-' ~ fields[key],
+              ]
+            %}
+          {% endif %}
+          <th{{ column.attributes.addClass(column_classes) }} scope="col">
+            {%- if column.wrapper_element -%}
+              <{{ column.wrapper_element }}>
+                {%- if column.url -%}
+                  <a href="{{ column.url }}" title="{{ column.title }}" rel="nofollow">{{ column.content }}{{ column.sort_indicator }}</a>
+                {%- else -%}
+                  {{ column.content }}{{ column.sort_indicator }}
+                {%- endif -%}
+              </{{ column.wrapper_element }}>
+            {%- else -%}
+              {%- if column.url -%}
+                <a href="{{ column.url }}" title="{{ column.title }}" rel="nofollow">{{ column.content }}{{ column.sort_indicator }}</a>
+              {%- else -%}
+                {{- column.content }}{{ column.sort_indicator }}
+              {%- endif -%}
+            {%- endif -%}
+          </th>
+        {% endfor %}
+      </tr>
+    </thead>
+  {% endif %}
+  <tbody>
+    {% for row in rows %}
+      <tr{{ row.attributes }}>
+        {% for key, column in row.columns %}
+          {% if column.default_classes %}
+            {%
+              set column_classes = [
+                'views-field'
+              ]
+            %}
+            {% if fields[key] %}
+              {% set column_classes = column_classes|merge(['views-field-' ~ fields[key]]) %}
+            {% endif %}
+          {% endif %}
+          <td{{ column.attributes.addClass(column_classes) }}>
+            {%- if column.wrapper_element -%}
+              <{{ column.wrapper_element }}>
+              {% for content in column.content %}
+                {{ content.separator }}{{ content.field_output }}
+              {% endfor %}
+              </{{ column.wrapper_element }}>
+            {%- else -%}
+              {% for content in column.content %}
+                {{- content.separator }}{{ content.field_output -}}
+              {% endfor %}
+            {%- endif %}
+          </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
