@@ -55,6 +55,7 @@ html/themes/*
 !/html/robots.txt
 /notes
 /tmp
+/ignore
 
 #Databases
 *.sql.gz
