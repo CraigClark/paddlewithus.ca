@@ -6,3 +6,127 @@
  */
 
 declare(strict_types=1);
+
+/**
+ * Implements hook_form_alter().
+ * Disables HTML5 validation so Drupal handles all validation.
+ * Adds error summary at top of forms with validation errors.
+ */
+function daisyui_ext_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Disable HTML5 validation on all forms
+  $form['#attributes']['novalidate'] = 'novalidate';
+  
+  // Only add error summary if form has validation errors
+  $errors = $form_state->getErrors();
+  if (empty($errors)) {
+    return;
+  }
+  
+  // Build error summary container
+  $error_summary = [
+    '#type' => 'container',
+    '#weight' => -1000, // Show at top of form
+    '#attributes' => [
+      'class' => ['alert', 'alert-error', 'mb-6'],
+      'role' => 'alert',
+    ],
+  ];
+  
+  // Error heading
+  $error_summary['heading'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'div',
+    '#attributes' => ['class' => ['font-bold', 'text-lg', 'mb-2']],
+    '#value' => t('Error message'),
+  ];
+  
+  // Error count message
+  $error_summary['message'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'div',
+    '#value' => \Drupal::translation()->formatPlural(
+      count($errors),
+      '1 error has been found:',
+      '@count errors have been found:'
+    ),
+  ];
+  
+  // List of errors with links
+  $items = [];
+  foreach ($errors as $name => $error) {
+    $field_id = 'edit-' . str_replace(['[', ']'], ['-', ''], $name);
+    $items[] = [
+      '#type' => 'html_tag',
+      '#tag' => 'a',
+      '#attributes' => [
+        'href' => '#' . $field_id,
+        'class' => ['underline'],
+      ],
+      '#value' => $error,
+    ];
+  }
+  
+  $error_summary['list'] = [
+    '#theme' => 'item_list',
+    '#items' => $items,
+    '#attributes' => ['class' => ['mt-2', 'space-y-1']],
+  ];
+  
+  $form['error_summary'] = $error_summary;
+}
+
+/**
+ * Implements hook_preprocess_form_element().
+ * Adds error styling to form elements with validation errors.
+ */
+function daisyui_ext_preprocess_form_element(&$variables) {
+  $element = $variables['element'];
+  
+  // Style fields that have validation errors
+  if (!empty($element['#errors'])) {
+    // Make label red
+    if (isset($variables['label']['#attributes']['class'])) {
+      $variables['label']['#attributes']['class'][] = 'text-error';
+      $variables['label']['#attributes']['class'][] = 'font-semibold';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_input().
+ * Adds red border to inputs with validation errors.
+ */
+function daisyui_ext_preprocess_input(&$variables) {
+  $element = $variables['element'];
+  
+  if (!empty($element['#errors'])) {
+    $variables['attributes']['class'][] = 'border-error';
+    $variables['attributes']['class'][] = 'border-2';
+  }
+}
+
+/**
+ * Implements hook_preprocess_textarea().
+ * Adds red border to textareas with validation errors.
+ */
+function daisyui_ext_preprocess_textarea(&$variables) {
+  $element = $variables['element'];
+  
+  if (!empty($element['#errors'])) {
+    $variables['attributes']['class'][] = 'border-error';
+    $variables['attributes']['class'][] = 'border-2';
+  }
+}
+
+/**
+ * Implements hook_preprocess_select().
+ * Adds red border to select elements with validation errors.
+ */
+function daisyui_ext_preprocess_select(&$variables) {
+  $element = $variables['element'];
+  
+  if (!empty($element['#errors'])) {
+    $variables['attributes']['class'][] = 'border-error';
+    $variables['attributes']['class'][] = 'border-2';
+  }
+}
