@@ -9697,6 +9697,7 @@ legend, label.label {
 .text-error {
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--color-error);
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

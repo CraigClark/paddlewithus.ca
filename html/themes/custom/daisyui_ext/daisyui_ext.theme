@@ -144,3 +144,27 @@ function daisyui_ext_theme_suggestions_form_alter(array &$suggestions, array $va
   }
 }
 
+/**
+ * Implements hook_preprocess_fieldset().
+ * Adds consistent error message class to fieldset errors.
+ */
+function daisyui_ext_preprocess_fieldset(&$variables) {
+  $element = $variables['element'];
+
+  if (!empty($element['#errors'])) {
+    // Mark that this fieldset has errors so we can style the message
+    $variables['has_errors'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_datetime_wrapper().
+ * Adds consistent error message class to datetime errors.
+ */
+function daisyui_ext_preprocess_datetime_wrapper(&$variables) {
+  $element = $variables['element'];
+
+  if (!empty($element['#errors'])) {
+    $variables['has_errors'] = TRUE;
+  }
+}
