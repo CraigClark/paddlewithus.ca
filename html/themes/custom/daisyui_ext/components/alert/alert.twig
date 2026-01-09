@@ -1,0 +1,30 @@
+{%
+  set classes = [
+    'alert',
+    variant and variant != 'default' ? 'alert-' ~ variant,
+    soft ? 'alert-soft',
+    outline ? 'alert-' ~ outline,
+    responsive ? 'alert-vertical sm:alert-horizontal',
+    'border-2',
+    'md:border-4',
+    'border-slate-950',
+    'bg-transparent',
+  ]
+%}
+
+{% set attributes = attributes.addClass(classes) %}
+
+<div {{ attributes.setAttribute('role', 'alert') }}>
+  {{ icon(icon.pack_id, icon.icon_id, icon.settings) }}
+  {% if title %}
+   <div>
+    {% set heading_level = heading_level|default(3) %}
+    <h{{ heading_level }} class="font-bold">{{ title }}</h{{ heading_level }}>
+    {% if message %}<div class="text-base">{{ message }}</div>{% endif %}
+  </div>
+  {{ buttons }}
+  {% else %}
+    {% if message %}<div class="text-base">{{ message }}</div>{% endif %}
+    {% if buttons %}<div>{{ buttons }}</div>{% endif %}
+  {% endif %}
+</div>

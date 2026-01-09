@@ -1,0 +1,11 @@
+name: Alert warning
+slots:
+  message: "12 unread messages. Tap to see."
+props:
+  variant: warning
+  icon:
+    pack_id: hero_outline_24
+    icon_id: information-circle
+    settings:
+      stroke_width: 2
+      stroke_color: stroke-warning-content

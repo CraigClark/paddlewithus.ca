@@ -1,18 +1,71 @@
 {#
 /**
  * @file
- * Default theme implementation for a 'form' element.
- *
- * Available variables
- * - attributes: A list of HTML attributes for the wrapper element.
- * - children: The child elements of the form.
- *
- * @see\Drupal\Core\Form\FormPreprocess::preprocessForm()
- *
- * @ingroup themeable
+ * Form template for participant profile.
  */
 #}
+
+{% set exclude = [
+  'actions',
+  'footer',
+
+  'field_allergies',
+  'field_medical_notes',
+
+  'field_emercency_contact_1_name',
+  'field_emercency_contact_1_phone',
+  'field_emercency_contact_1_rel',
+  'field_emercency_contact_2_name',
+  'field_emercency_contact_2_phone',
+  'field_emercency_contact_2_rel',
+  'field_emercency_contact_3_name',
+  'field_emercency_contact_3_phone',
+  'field_emercency_contact_3_rel'
+] %}
+
 <form{{ attributes }}>
-<p><strong>test</strong></p>
-{{ children }}
+
+  {# Render everything except the grouped fields + footer/actions #}
+  {% for key, item in element %}
+    {% if key|first != '#' and key not in exclude %}
+      {{ item }}
+    {% endif %}
+  {% endfor %}
+
+  <h2 class="mt-8">{{ 'Medical information'|t }}</h2>
+  {% if element.field_allergies is defined %}{{ element.field_allergies }}{% endif %}
+  {% if element.field_medical_notes is defined %}{{ element.field_medical_notes }}{% endif %}
+
+  <h2 class="mt-8">{{ 'Emergency contacts'|t }}</h2>
+
+  <div class="border rounded-sm border-slate-300 my-8 p-3">
+    <h3>{{ 'Primary emergency contact'|t }}</h3>
+    {% if element.field_emercency_contact_1_name is defined %}{{ element.field_emercency_contact_1_name }}{% endif %}
+    {% if element.field_emercency_contact_1_phone is defined %}{{ element.field_emercency_contact_1_phone }}{% endif %}
+    {% if element.field_emercency_contact_1_rel is defined %}{{ element.field_emercency_contact_1_rel }}{% endif %}
+  </div>
+
+  <div class="border rounded-sm border-slate-300 my-8 p-3">
+    <h3>{{ 'Secondary emergency contact'|t }}</h3>
+    {% if element.field_emercency_contact_2_name is defined %}{{ element.field_emercency_contact_2_name }}{% endif %}
+    {% if element.field_emercency_contact_2_phone is defined %}{{ element.field_emercency_contact_2_phone }}{% endif %}
+    {% if element.field_emercency_contact_2_rel is defined %}{{ element.field_emercency_contact_2_rel }}{% endif %}
+  </div>
+
+  <div class="border rounded-sm border-slate-300 my-8 p-3">
+    <h3>{{ 'Third emergency contact'|t }}</h3>
+    {% if element.field_emercency_contact_3_name is defined %}{{ element.field_emercency_contact_3_name }}{% endif %}
+    {% if element.field_emercency_contact_3_phone is defined %}{{ element.field_emercency_contact_3_phone }}{% endif %}
+    {% if element.field_emercency_contact_3_rel is defined %}{{ element.field_emercency_contact_3_rel }}{% endif %}
+  </div>
+
+  {# Put these at the very bottom #}
+  {% if element.footer is defined %}
+    {{ element.footer }}
+  {% endif %}
+
+  {% if element.actions is defined %}
+    {{ element.actions }}
+  {% endif %}
+
 </form>

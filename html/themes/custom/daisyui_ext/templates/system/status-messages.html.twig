@@ -37,7 +37,7 @@
         For example: we have 1st status message then the 2nd error message,
         so we will have the css classes from 1st in the 2nd.
       #}
-      {{ include('ui_suite_daisyui:alert', {
+      {{ include('daisyui_ext:alert', {
       variant: variant,
       message: message,
       }, with_context: false) }}

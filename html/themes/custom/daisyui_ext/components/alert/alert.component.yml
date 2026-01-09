@@ -1,0 +1,63 @@
+name: Alert
+description: "Alert informs users about important events."
+group: Feedback
+links:
+  - "https://daisyui.com/components/alert/"
+variants:
+  default:
+    title: Default
+  info:
+    title: Info
+  success:
+    title: Success
+  warning:
+    title: Warning
+  error:
+    title: Error
+slots:
+  title:
+    title: Title
+  message:
+    title: Message
+  buttons:
+    title: Buttons
+props:
+  type: object
+  properties:
+    heading_level:
+      title: "Heading level"
+      type: integer
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      "meta:enum":
+        2: h2
+        3: "h3 (Default)"
+        4: h4
+        5: h5
+        6: h6
+    soft:
+      title: "Soft?"
+      description: "It is possible to display a soft alert."
+      type: boolean
+    outline:
+      title: "Outlined?"
+      description: "It is possible to outline any alert."
+      type: string
+      enum:
+        - outline
+        - dash
+      "meta:enum":
+        outline: "Default"
+        dash: "Dash"
+    responsive:
+      title: "Responsive?"
+      description: "It is possible to display responsive alert?"
+      type: boolean
+    icon:
+      title: Icon
+      description: "Available alert icons."
+      $ref: ui-patterns://icon

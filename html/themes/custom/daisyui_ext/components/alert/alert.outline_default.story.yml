@@ -1,0 +1,5 @@
+name: "Outline: default"
+slots:
+  message: "12 unread messages. Tap to see."
+props:
+  outline: outline
