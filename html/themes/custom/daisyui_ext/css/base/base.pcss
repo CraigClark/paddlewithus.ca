@@ -24,6 +24,19 @@
 }
 
 
+@layer base {
+  ul {
+    @apply list-disc list-outside;
+    padding-left: 1.5rem; /* or 2rem - gives space for bullets */
+  }
+
+  ol {
+    @apply list-decimal list-outside;
+    padding-left: 1.5rem;
+  }
+}
+
+
 /* set global base font-size */
 html {
   font-size: 18px;

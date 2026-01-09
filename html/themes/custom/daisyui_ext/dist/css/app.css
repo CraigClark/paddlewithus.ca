@@ -9609,6 +9609,18 @@
     font-weight: var(--font-weight-bold);
   }
 }
+@layer base {
+  ul {
+    list-style-position: outside;
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+  ol {
+    list-style-position: outside;
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+  }
+}
 html {
   font-size: 18px;
 }

@@ -15,48 +15,15 @@ settings:
     items:
       - bold
       - italic
-      - '|'
-      - link
-      - '|'
       - bulletedList
       - numberedList
-      - '|'
-      - blockQuote
-      - drupalInsertImage
-      - '|'
-      - heading
-      - code
-      - '|'
-      - sourceEditing
   plugins:
-    ckeditor5_heading:
-      enabled_headings:
-        - heading2
-        - heading3
-        - heading4
-        - heading5
-        - heading6
-    ckeditor5_imageResize:
-      allow_resize: true
     ckeditor5_list:
       properties:
         reversed: false
-        startIndex: true
-        styles: true
-      multiBlock: true
-    ckeditor5_sourceEditing:
-      allowed_tags:
-        - '<cite>'
-        - '<dl>'
-        - '<dt>'
-        - '<dd>'
-        - '<a hreflang>'
-        - '<blockquote cite>'
-        - '<h2 id>'
-        - '<h3 id>'
-        - '<h4 id>'
-        - '<h5 id>'
-        - '<h6 id>'
+        startIndex: false
+        styles: false
+      multiBlock: false
 image_upload:
   status: true
   scheme: public
