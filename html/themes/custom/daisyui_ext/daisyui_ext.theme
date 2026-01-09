@@ -15,13 +15,13 @@ declare(strict_types=1);
 function daisyui_ext_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   // Disable HTML5 validation on all forms
   $form['#attributes']['novalidate'] = 'novalidate';
-  
+
   // Only add error summary if form has validation errors
   $errors = $form_state->getErrors();
   if (empty($errors)) {
     return;
   }
-  
+
   // Build error summary container
   $error_summary = [
     '#type' => 'container',
@@ -31,7 +31,7 @@ function daisyui_ext_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       'role' => 'alert',
     ],
   ];
-  
+
   // Error heading
   $error_summary['heading'] = [
     '#type' => 'html_tag',
@@ -39,7 +39,7 @@ function daisyui_ext_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
     '#attributes' => ['class' => ['font-bold', 'text-lg', 'mb-2']],
     '#value' => t('Error message'),
   ];
-  
+
   // Error count message
   $error_summary['message'] = [
     '#type' => 'html_tag',
@@ -50,7 +50,7 @@ function daisyui_ext_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       '@count errors have been found:'
     ),
   ];
-  
+
   // List of errors with links
   $items = [];
   foreach ($errors as $name => $error) {
@@ -65,13 +65,13 @@ function daisyui_ext_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
       '#value' => $error,
     ];
   }
-  
+
   $error_summary['list'] = [
     '#theme' => 'item_list',
     '#items' => $items,
     '#attributes' => ['class' => ['mt-2', 'space-y-1']],
   ];
-  
+
   $form['error_summary'] = $error_summary;
 }
 
@@ -81,7 +81,7 @@ function daisyui_ext_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $fo
  */
 function daisyui_ext_preprocess_form_element(&$variables) {
   $element = $variables['element'];
-  
+
   // Style fields that have validation errors
   if (!empty($element['#errors'])) {
     // Make label red
@@ -98,7 +98,7 @@ function daisyui_ext_preprocess_form_element(&$variables) {
  */
 function daisyui_ext_preprocess_input(&$variables) {
   $element = $variables['element'];
-  
+
   if (!empty($element['#errors'])) {
     $variables['attributes']['class'][] = 'border-error';
     $variables['attributes']['class'][] = 'border-2';
@@ -111,7 +111,7 @@ function daisyui_ext_preprocess_input(&$variables) {
  */
 function daisyui_ext_preprocess_textarea(&$variables) {
   $element = $variables['element'];
-  
+
   if (!empty($element['#errors'])) {
     $variables['attributes']['class'][] = 'border-error';
     $variables['attributes']['class'][] = 'border-2';
@@ -124,9 +124,23 @@ function daisyui_ext_preprocess_textarea(&$variables) {
  */
 function daisyui_ext_preprocess_select(&$variables) {
   $element = $variables['element'];
-  
+
   if (!empty($element['#errors'])) {
     $variables['attributes']['class'][] = 'border-error';
     $variables['attributes']['class'][] = 'border-2';
   }
 }
+
+/**
+ * Implements hook_theme_suggestions_form_alter().
+ * declare a twig template to use for editing/adding participants
+ */
+function daisyui_ext_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  $form_id = $variables['element']['#form_id'] ?? NULL;
+
+  // Add common suggestion for both add and edit forms
+  if ($form_id === 'profile_participant_add_form' || $form_id === 'profile_participant_edit_form') {
+    $suggestions[] = 'form__profile_participant';
+  }
+}
+

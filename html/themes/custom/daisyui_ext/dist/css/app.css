@@ -13,6 +13,7 @@
   --color-neutral-100: oklch(97% 0 0);
   --color-neutral-200: oklch(92.2% 0 0);
   --color-neutral-500: oklch(55.6% 0 0);
+  --color-neutral-950: oklch(14.5% 0 0);
   --color-black: #000;
   --color-white: #fff;
   --spacing: 0.25rem;
@@ -9683,6 +9684,19 @@ main a:not(.btn):not(.navbar *):not(.menu *):not(.tabs *):not([class*="card-"]),
       }
     }
   }
+}
+.form-required::after {
+  font-weight: 400;
+  content: "❗";
+}
+legend, label.label {
+  color: var(--color-neutral-950);
+  font-size: 1rem;
+  font-weight: 400;
+}
+.text-error {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

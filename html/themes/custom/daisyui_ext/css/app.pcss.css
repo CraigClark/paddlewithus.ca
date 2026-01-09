@@ -10,12 +10,12 @@
 @import "./plugins/tailwindcss.typography.config.pcss";
 
 /**
- * Import new base styles 
+ * Import new base styles
  */
 @import "./base/base.pcss";
 
 /**
- * Import new utilities 
+ * Import new utilities
  */
 @import "./utilities/containers.pcss";
 @import "./utilities/gap.pcss";

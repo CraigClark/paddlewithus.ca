@@ -1,8 +1,9 @@
-uuid: dc141795-393f-4407-a260-b615b7f6d4ef
+uuid: ec691760-7358-4302-bf54-bd918842097c
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.profile.participant
     - field.field.profile.participant.field_allergies
     - field.field.profile.participant.field_birth_date
     - field.field.profile.participant.field_emercency_contact_1_name
@@ -24,10 +25,10 @@ dependencies:
     - name
     - telephone
     - text
-id: profile.participant.default
+id: profile.participant.participant
 targetEntityType: profile
 bundle: participant
-mode: default
+mode: participant
 content:
   field_allergies:
     type: text_textarea
@@ -125,17 +126,17 @@ content:
     weight: 0
     region: content
     settings:
-      override_field_settings: true
+      override_field_settings: false
       labels:
         title: Title
-        given: 'First name'
+        given: Given
         middle: 'Middle name(s)'
-        family: 'Last name'
+        family: Family
         generational: Generational
         credentials: Credentials
       widget_layout: stacked
-      show_component_required_marker: true
-      flag_required_input: true
+      show_component_required_marker: false
+      flag_required_input: false
       credentials_inline: false
       size:
         title: 6
@@ -146,12 +147,12 @@ content:
         credentials: 35
       title_display:
         title: description
-        given: title
+        given: description
         middle: description
-        family: title
+        family: description
         generational: description
         credentials: description
-      field_title_display: none
+      field_title_display: before
     third_party_settings: {  }
   field_photo_consent:
     type: options_buttons

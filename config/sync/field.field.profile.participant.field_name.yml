@@ -13,7 +13,7 @@ entity_type: profile
 bundle: participant
 label: Name
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -41,9 +41,9 @@ settings:
     credentials: 255
   labels:
     title: Title
-    given: Given
+    given: 'First name'
     middle: 'Middle name(s)'
-    family: Family
+    family: 'Last name'
     generational: Generational
     credentials: Credentials
   allow_family_or_given: false
