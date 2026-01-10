@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.activity
+    - filter.format.basic_html
     - media.type.image
     - user.role.account_holder
     - user.role.authenticated
@@ -17,6 +18,7 @@ dependencies:
     - commerce_stripe
     - content_translation
     - field_permissions
+    - filter
     - masquerade
     - media
     - profile
@@ -62,6 +64,7 @@ permissions:
   - 'update any commerce_promotion'
   - 'update any participant profile'
   - 'update default commerce_order'
+  - 'use text format basic_html'
   - 'view activity commerce_product'
   - 'view any commerce_payment_method'
   - 'view any image media revisions'

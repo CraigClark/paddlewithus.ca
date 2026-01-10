@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
     - node.type.page
     - taxonomy.vocabulary.activity
     - taxonomy.vocabulary.boat
@@ -14,6 +15,7 @@ dependencies:
     - content_translation
     - contextual
     - file
+    - filter
     - node
     - path
     - system
@@ -68,6 +70,7 @@ permissions:
   - 'translate any entity'
   - 'translate page node'
   - 'update content translations'
+  - 'use text format basic_html'
   - 'view all revisions'
   - 'view own unpublished content'
   - 'view term revisions in activity'

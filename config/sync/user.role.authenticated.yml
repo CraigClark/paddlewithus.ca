@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.basic_html
+    - filter.format.restricted_html
     - filter.format.webform_default
   module:
     - commerce_checkout
@@ -33,7 +33,7 @@ permissions:
   - 'manage own commerce_payment_method'
   - 'rabbit hole bypass user'
   - 'translate editable entities'
-  - 'use text format basic_html'
+  - 'use text format restricted_html'
   - 'use text format webform_default'
   - 'view commerce_product'
   - 'view media'

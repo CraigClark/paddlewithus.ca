@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.profile.field_medical_notes
-    - filter.format.basic_html
+    - filter.format.restricted_html
     - profile.type.participant
   module:
     - text
@@ -20,5 +20,5 @@ default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats:
-    - basic_html
+    - restricted_html
 field_type: text_long
