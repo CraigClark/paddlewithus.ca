@@ -37,6 +37,13 @@ elements: |-
   manage_participants:
     '#type': webform_markup
     '#markup': '<p><a class="btn btn-sm ml-2" href="/user/[current-user:uid]/participant/add?destination=/webform/program_registration?variation=[current-page:query:variation]">➕ Add a new family member</a> <a class="btn btn-sm" href="/user/[current-user:uid]/participant/list">✏️ Edit your list of family members.</a></p>'
+  waiver_container:
+    '#type': details
+    '#title': Waiver
+    waiver:
+      '#type': processed_text
+      '#text': '<drupal-entity data-entity-type="node" data-entity-uuid="b92ff150-20a7-4406-8066-4be684f3f1fa" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
+      '#format': full_html
   swim_test_acknowledgment:
     '#type': checkbox
     '#title': 'Swim Test Requirement'

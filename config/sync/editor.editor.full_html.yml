@@ -35,6 +35,8 @@ settings:
       - codeBlock
       - '|'
       - sourceEditing
+      - node
+      - UiStylesBlock
   plugins:
     ckeditor5_codeBlock:
       languages:
@@ -82,7 +84,6 @@ settings:
           language: xml
     ckeditor5_heading:
       enabled_headings:
-        - heading1
         - heading2
         - heading3
         - heading4
@@ -99,6 +100,22 @@ settings:
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<i class>'
+    media_media:
+      allow_view_mode_override: false
+    ui_styles_ckeditor5_uiStylesBlock:
+      enabled_styles:
+        - colors_background_color
+        - colors_text_color
+        - daisyui_mask
+        - effects_box_shadow
+        - layout_container
+        - layout_grid
+        - sizing_width
+        - gap
+        - margin_bottom
+        - margin_top
+        - padding_bottom
+        - padding_top
 image_upload:
   status: true
   scheme: public

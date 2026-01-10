@@ -1,0 +1,11 @@
+uuid: 5f0977f5-bc2d-49e1-a22b-96428a00f08c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.details
+label: Details
+description: 'Display title as details summary and body as content'
+targetEntityType: node
+cache: true

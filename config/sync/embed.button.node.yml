@@ -1,0 +1,27 @@
+uuid: a841e658-989b-4ec4-ac93-a6aaaaa6c900
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.details
+    - core.entity_view_mode.node.full
+    - node.type.embed
+  module:
+    - entity_embed
+    - node
+_core:
+  default_config_hash: xgvZUh-eaMilacE1XYCQ9nLH-2-meOjCyofXSO82gqg
+label: Node
+id: node
+type_id: entity
+type_settings:
+  entity_type: node
+  bundles:
+    - embed
+  display_plugins:
+    - 'view_mode:node.details'
+    - 'view_mode:node.full'
+  entity_browser: ''
+  entity_browser_settings: {  }
+icon: {  }
+icon_uuid: null

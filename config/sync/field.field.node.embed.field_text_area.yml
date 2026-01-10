@@ -1,0 +1,24 @@
+uuid: ef286419-22d7-4ed6-893b-b9efaa1681ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_text_area
+    - filter.format.basic_html
+    - node.type.embed
+  module:
+    - text
+id: node.embed.field_text_area
+field_name: field_text_area
+entity_type: node
+bundle: embed
+label: 'Text area'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

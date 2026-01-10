@@ -1,0 +1,18 @@
+uuid: 2fe8ad4d-d7e2-4d7a-afe5-d7ecc3891dad
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Embed
+type: embed
+description: 'Embedded content cannot be directly accessed. It can only appear inside of other content.  '
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -4,6 +4,10 @@ status: true
 dependencies:
   module:
     - editor
+    - entity_embed
+    - media
+    - token_filter
+    - ui_icons_text
 _core:
   default_config_hash: vpZysv3RHJjhYzq7O_q5q8mVlHdrSzKELmXyiX6RtV0
 name: 'Full HTML'
@@ -15,6 +19,18 @@ filters:
     provider: editor
     status: true
     weight: 11
+    settings: {  }
+  entity_embed:
+    id: entity_embed
+    provider: entity_embed
+    status: true
+    weight: 100
+    settings: {  }
+  entity_links:
+    id: entity_links
+    provider: filter
+    status: true
+    weight: 0
     settings: {  }
   filter_align:
     id: filter_align
@@ -43,6 +59,12 @@ filters:
       allowed_html: '<i class>'
       filter_html_help: true
       filter_html_nofollow: false
+  filter_html_image_secure:
+    id: filter_html_image_secure
+    provider: filter
+    status: true
+    weight: 9
+    settings: {  }
   filter_htmlcorrector:
     id: filter_htmlcorrector
     provider: filter
@@ -55,3 +77,28 @@ filters:
     status: true
     weight: 15
     settings: {  }
+  icon_embed:
+    id: icon_embed
+    provider: ui_icons_text
+    status: true
+    weight: 100
+    settings:
+      allowed_icon_pack: {  }
+      result_format: list
+      max_result: 24
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_view_modes: {  }
+      allowed_media_types: {  }
+  token_filter:
+    id: token_filter
+    provider: token_filter
+    status: true
+    weight: 0
+    settings:
+      replace_empty: true
