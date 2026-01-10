@@ -9577,6 +9577,9 @@
     }
   }
 }
+:root {
+  --readable-width: 65ch;
+}
 @layer base {
   h1 {
     font-size: var(--text-title-xl);
@@ -9747,6 +9750,25 @@ legend, label.label {
 }
 .alert-warning {
   border-color: var(--color-warning);
+}
+.webform-type-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.webform-type-checkbox label {
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+h3 {
+  margin-top: calc(var(--spacing) * 4);
+}
+p, li {
+  margin-bottom: calc(var(--spacing) * 2);
+}
+p, li, label {
+  max-width: var(--readable-width);
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

@@ -2,6 +2,10 @@
  * Use this file to add styles of basic HTML elements.
  */
 
+ :root {
+   --readable-width: 65ch;
+ }
+
 @layer base {
   h1 {
     @apply title-xl font-bold;
@@ -105,5 +109,28 @@ font-weight: 400;
 }
 
 
+/* Target webform checkbox labels */
+.webform-type-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
 
+/* Fix the label */
+.webform-type-checkbox label {
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
 
+h3 {
+  margin-top: calc(var(--spacing) * 4);
+}
+
+p, li {
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+p, li, label {
+  max-width: var(--readable-width);
+}
