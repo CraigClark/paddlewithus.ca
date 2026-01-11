@@ -5677,6 +5677,9 @@
   .grid-flow-col {
     grid-auto-flow: column;
   }
+  .auto-rows-fr {
+    grid-auto-rows: minmax(0, 1fr);
+  }
   .grid-4 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     @media (width >= 48rem) {
@@ -5817,6 +5820,9 @@
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
   }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
@@ -9769,6 +9775,13 @@ p, li {
 }
 p, li, label {
   max-width: var(--readable-width);
+}
+.card img {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.card {
+  overflow: hidden;
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

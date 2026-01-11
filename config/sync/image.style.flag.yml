@@ -1,0 +1,17 @@
+uuid: 8d0420db-9ab7-4de7-8dbc-311a8a563149
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: flag
+label: 'flag dimensions 650 x 325'
+effects:
+  487aabd1-4970-4e88-83de-111b05f46edc:
+    uuid: 487aabd1-4970-4e88-83de-111b05f46edc
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 650
+      height: 325
+      crop_type: focal_point

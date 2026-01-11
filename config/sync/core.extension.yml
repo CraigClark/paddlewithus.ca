@@ -17,6 +17,7 @@ module:
   charts: 0
   charts_billboard: 0
   charts_blocks: 0
+  ck5_block_embed: 0
   ckeditor5: 0
   coffee: 0
   collapsiblock: 0

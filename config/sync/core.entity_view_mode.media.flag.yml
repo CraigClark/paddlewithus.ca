@@ -1,0 +1,11 @@
+uuid: 6be932c9-4541-41cb-a8d5-8e43c2160245
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.flag
+label: Flag
+description: 'Display image 2:1 ratio'
+targetEntityType: media
+cache: true

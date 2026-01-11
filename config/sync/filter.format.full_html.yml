@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
+    - ck5_block_embed
     - editor
     - entity_embed
     - media
@@ -14,6 +15,12 @@ name: 'Full HTML'
 format: full_html
 weight: -10
 filters:
+  ck5_block_embed:
+    id: ck5_block_embed
+    provider: ck5_block_embed
+    status: true
+    weight: 100
+    settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor

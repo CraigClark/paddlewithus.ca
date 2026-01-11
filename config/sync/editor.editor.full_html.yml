@@ -36,6 +36,7 @@ settings:
       - '|'
       - sourceEditing
       - node
+      - ck5BlockEmbed__default
       - UiStylesBlock
   plugins:
     ckeditor5_codeBlock:
