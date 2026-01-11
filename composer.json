@@ -38,6 +38,7 @@
         "drupal/coffee": "^2.0",
         "drupal/collapsiblock": "^4.3",
         "drupal/commerce": "^3.2",
+        "drupal/commerce_email": "^1.7",
         "drupal/commerce_stock": "^3.0",
         "drupal/commerce_stripe": "^2.1",
         "drupal/commerce_variation_cart_form": "^1.5",

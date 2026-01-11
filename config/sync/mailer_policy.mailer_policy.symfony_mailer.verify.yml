@@ -6,7 +6,7 @@ id: symfony_mailer.verify
 configuration:
   email_body:
     content:
-      value: '<p>This is my test mailer</p>'
+      value: '<h2>Test mail</h2><ol><li data-list-item-id="ecdc04abc1ca4621dabd8c72ddec76aa1">list item</li><li data-list-item-id="ef6d541be1891b13f2900a80d831864b8">list item</li><li data-list-item-id="ee41e21dec460c1eed01f030c790d2c27">list item</li></ol><p><strong>BOLD</strong></p><p>&nbsp;</p><p>&nbsp;</p>'
       format: full_html
     remove_button: Remove
   email_subject:

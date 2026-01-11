@@ -1,0 +1,28 @@
+uuid: 90ab4aaf-5bb1-48c2-b117-023792d4f126
+langcode: en
+status: true
+dependencies: {  }
+id: waiver
+label: Waiver
+from: no-reply@paddlewithus.ca
+toType: email
+to: '[commerce_order:uid:entity:mail]'
+toRole: ''
+cc: ''
+bcc: ''
+replyTo: ''
+subject: 'Waiver for order [commerce_order:id]'
+body:
+  value: '<p>Order ID: [commerce_order:id]<br>Order placed from [commerce_order:ip_address:value]</p><hr><drupal-entity data-entity-type="node" data-entity-uuid="7f452406-4e01-4f45-bf55-e57d1d596ca7" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
+  format: full_html
+conditions:
+  -
+    plugin: order_product_type
+    configuration:
+      product_types:
+        - activity
+conditionOperator: AND
+queue: false
+logToEntity: null
+event: checkout_completion_register
+targetEntityType: commerce_order

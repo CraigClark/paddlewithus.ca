@@ -1,0 +1,16 @@
+uuid: c288b613-4eb5-419d-a803-bd779094f520
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_type.default
+id: commerce_order.receipt..default
+configuration:
+  email_body:
+    content:
+      value: '<p>{ commerce_order }}</p><p>&nbsp;</p>'
+      format: full_html
+    remove_button: Remove
+  email_subject:
+    value: '{{ store }} - order {{ order_number }} '
+    remove_button: Remove

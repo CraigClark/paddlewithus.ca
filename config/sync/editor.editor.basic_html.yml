@@ -13,6 +13,7 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
+      - sourceEditing
       - heading
       - bold
       - italic
@@ -34,6 +35,8 @@ settings:
         startIndex: false
         styles: false
       multiBlock: false
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
 image_upload:
   status: true
   scheme: public
