@@ -5764,6 +5764,9 @@
   .items-center {
     align-items: center;
   }
+  .items-end {
+    align-items: flex-end;
+  }
   .justify-between {
     justify-content: space-between;
   }
@@ -9780,8 +9783,16 @@ p, li, label {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
+*/
 .card {
   overflow: hidden;
+}
+@media (min-width: 768px) {
+  #views-exposed-form-programs-block-card .form-actions {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: calc(var(--spacing) * 5);
+  }
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

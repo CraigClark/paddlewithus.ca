@@ -140,11 +140,15 @@ p, li, label {
   margin-bottom: 0 !important;
 }
 
-/*
-.card .card-body {
-  padding-top: 0;
-}
 */
 .card {
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  #views-exposed-form-programs-block-card .form-actions {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: calc(var(--spacing) * 5);
+  }
 }

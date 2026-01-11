@@ -11,7 +11,7 @@ id: commerce_product_variation.activity.field_date_range
 field_name: field_date_range
 entity_type: commerce_product_variation
 bundle: activity
-label: 'Camp date'
+label: Dates
 description: ''
 required: true
 translatable: false

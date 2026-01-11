@@ -206,7 +206,7 @@ content:
         label_value: ''
         label_tag: h3
       nomarkup:
-        enabled: true
+        enabled: false
         separator: '|'
         referenced_entity: ''
     weight: 8

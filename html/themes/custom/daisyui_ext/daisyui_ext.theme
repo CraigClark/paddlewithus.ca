@@ -201,3 +201,4 @@ function _daisyui_ext_participant_contact_labels(array &$form): void {
     }
   }
 }
+

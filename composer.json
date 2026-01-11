@@ -84,6 +84,7 @@
         "drupal/twig_tweak": "^3.4",
         "drupal/ui_suite_daisyui": "^5.0@alpha",
         "drupal/views_data_export": "^1.4",
+        "drupal/views_selective_filters": "^2.0@alpha",
         "drupal/webform": "^6.3@beta",
         "drupal/webform_analysis": "^1.0@beta",
         "drupal/webform_views": "^5.2",
