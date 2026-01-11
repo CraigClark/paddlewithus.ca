@@ -78,6 +78,7 @@
         "drupal/search_api": "^1.38",
         "drupal/search_api_block": "^1.2",
         "drupal/smart_trim": "^2.2",
+        "drupal/symfony_mailer": "^2.0@beta",
         "drupal/taxonomy_manager": "^2.0",
         "drupal/token_filter": "^2.2",
         "drupal/trash": "^3.0",

@@ -1,0 +1,14 @@
+uuid: adb564b9-08d2-4b35-aab8-aaa3cf3957f4
+langcode: en
+status: true
+dependencies: {  }
+id: symfony_mailer.verify
+configuration:
+  email_body:
+    content:
+      value: '<p>This is my test mailer</p>'
+      format: full_html
+    remove_button: Remove
+  email_subject:
+    value: Test
+    remove_button: Remove
