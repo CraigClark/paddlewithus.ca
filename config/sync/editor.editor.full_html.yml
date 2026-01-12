@@ -36,6 +36,7 @@ settings:
       - '|'
       - sourceEditing
       - node
+      - tokenBrowser
       - ck5BlockEmbed__default
       - UiStylesBlock
   plugins:
@@ -103,6 +104,9 @@ settings:
         - '<i class>'
     media_media:
       allow_view_mode_override: false
+    token_filter_token_browser:
+      token_types:
+        node: node
     ui_styles_ckeditor5_uiStylesBlock:
       enabled_styles:
         - colors_background_color

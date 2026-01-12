@@ -6,6 +6,6 @@ machine: remote
 description: null
 name: PROD
 weight: -10
-url: 'https://paddlewithus.ca'
+url: 'https://picc.paddlewithus.ca'
 fg_color: '#ffffff'
 bg_color: '#8a0000'

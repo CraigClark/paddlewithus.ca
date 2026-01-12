@@ -1,4 +1,4 @@
-uuid: 90ab4aaf-5bb1-48c2-b117-023792d4f126
+uuid: 2d529b3c-f652-4255-a0cc-9a65c1c84c28
 langcode: en
 status: true
 dependencies: {  }
@@ -11,9 +11,9 @@ toRole: ''
 cc: ''
 bcc: ''
 replyTo: ''
-subject: 'Waiver for order [commerce_order:id]'
+subject: 'Waiver for Order [commerce_order:order_number]'
 body:
-  value: '<p>Order ID: [commerce_order:id]<br>Order placed from [commerce_order:ip_address:value]</p><hr><drupal-entity data-entity-type="node" data-entity-uuid="7f452406-4e01-4f45-bf55-e57d1d596ca7" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
+  value: "<h2>Using twig</h2><p>{{ drupal_entity('node', '7f452406-4e01-4f45-bf55-e57d1d596ca7', 'full') }}</p>"
   format: full_html
 conditions:
   -
@@ -24,5 +24,5 @@ conditions:
 conditionOperator: AND
 queue: false
 logToEntity: null
-event: checkout_completion_register
+event: order_placed
 targetEntityType: commerce_order
