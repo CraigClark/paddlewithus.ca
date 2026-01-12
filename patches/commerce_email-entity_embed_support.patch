@@ -1,0 +1,22 @@
+--- a/src/EmailSender.php
++++ b/src/EmailSender.php
+@@ -102,12 +102,18 @@
+       return FALSE;
+     }
+     $subject = $this->replaceTokens($email->getSubject(), $replacements);
++    
++    // Process body through text format filters to support entity embeds.
++    $body_text = $this->replaceTokens($email->getBody(), $replacements);
++    $body_format = $email->getBodyFormat();
++    $processed_body = check_markup($body_text, $body_format);
++    
+     $body = [
+       '#theme' => 'commerce_email',
+       '#email' => $email,
+       '#target_entity' => $entity,
+       '#related_entities' => $related_entities,
+-      '#body' => Markup::create($this->replaceTokens($email->getBody(), $replacements)),
++      '#body' => $processed_body,
+     ];
+     // @todo Figure out how to get the langcode generically.
+     $params = [

@@ -27,6 +27,7 @@
     "require": {
         "billboardjs/billboard": "^3.10",
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.4",
         "drupal/antibot": "^2.0",
         "drupal/auto_entitylabel": "^3.4",
@@ -167,6 +168,14 @@
                 "mkdir -p web/libraries/bootstrap",
                 "cp -R vendor/twbs/bootstrap/dist web/libraries/bootstrap"
             ]
+        },
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "patches": {
+            "drupal/commerce_email": {
+                "Add entity embed support": "patches/commerce_email-entity_embed_support.patch"
+            }
         }
     },
     "require-dev": {
