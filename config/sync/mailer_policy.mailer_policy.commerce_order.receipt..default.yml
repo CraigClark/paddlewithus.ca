@@ -1,0 +1,12 @@
+uuid: 7e126853-b2e3-4786-ba93-e142bbd84292
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_order
+id: commerce_order
+configuration:
+  email_body:
+    content:
+      value: '<p>I am the body</p>'
+      format: full_html
