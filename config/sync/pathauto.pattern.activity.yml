@@ -7,12 +7,12 @@ dependencies:
 id: activity
 label: Activity
 type: 'canonical_entities:commerce_product'
-pattern: 'programs/[commerce_product:title]'
+pattern: 'program/[commerce_product:title]'
 selection_criteria:
-  722d4e99-0563-4708-ad11-905397eb6f1f:
+  ad084b80-9501-4e12-9733-6098a42ca155:
     id: 'entity_bundle:commerce_product'
     negate: false
-    uuid: 722d4e99-0563-4708-ad11-905397eb6f1f
+    uuid: ad084b80-9501-4e12-9733-6098a42ca155
     context_mapping:
       commerce_product: commerce_product
     bundles:
