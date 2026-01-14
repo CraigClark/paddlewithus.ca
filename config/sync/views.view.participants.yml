@@ -6,6 +6,7 @@ dependencies:
     - field.storage.profile.field_name
     - field.storage.profile.field_photo_consent
   module:
+    - datetime
     - name
     - profile
 id: participants
@@ -69,8 +70,8 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
-          hide_empty: false
-          empty_zero: false
+          hide_empty: true
+          empty_zero: true
           hide_alter_empty: true
           click_sort_column: given
           type: name_default
@@ -134,8 +135,8 @@ display:
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
-          hide_empty: false
-          empty_zero: false
+          hide_empty: true
+          empty_zero: true
           hide_alter_empty: true
           click_sort_column: value
           type: boolean
@@ -251,6 +252,48 @@ display:
           group: 1
           expose:
             operator: ''
+        field_birth_date_value:
+          id: field_birth_date_value
+          table: profile__field_birth_date
+          field: field_birth_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: 'not empty'
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          type: date
       style:
         type: default
         options:
@@ -312,7 +355,7 @@ display:
             field_name: field_name
             field_photo_consent: field_photo_consent
           separator: '-'
-          hide_empty: false
+          hide_empty: true
       display_description: ''
       display_extenders:
         ui_styles: {  }
