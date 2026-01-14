@@ -25,6 +25,6 @@ workflow: order_default
 numberPattern: order_default
 refresh_mode: customer
 refresh_frequency: 300
-sendReceipt: true
+sendReceipt: false
 receiptBcc: ''
 receiptSubject: ''

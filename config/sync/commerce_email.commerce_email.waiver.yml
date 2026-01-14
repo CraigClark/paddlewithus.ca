@@ -11,9 +11,9 @@ toRole: ''
 cc: ''
 bcc: ''
 replyTo: ''
-subject: 'Petrie Island Canoe Club - Waiver for Order [commerce_order:order_number]'
+subject: '[site:name] - Waiver for Order [commerce_order:order_number]'
 body:
-  value: '<p>Hi [commerce_order:uid:entity:display-name]</p><p>This is your copy of the waiver you agreed to when you registered for a program at the Petrie Island Canoe Club.<br><br>Please keep this for your records.&nbsp;<br>Order ID: [commerce_order:order_number]</p><hr><p>&nbsp;</p><drupal-entity data-entity-type="node" data-entity-uuid="7f452406-4e01-4f45-bf55-e57d1d596ca7" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity><p>&nbsp;</p>'
+  value: '<p>Hi [commerce_order:uid:entity:display-name]</p><p>This is your copy of the waiver you agreed to when you registered for a program at the Petrie Island Canoe Club.<br><br>Please keep this for your records.&nbsp;<br>Order ID: [commerce_order:order_number]<br>Order placed on: [commerce_order:completed]</p><hr><p>&nbsp;</p><drupal-entity data-entity-type="node" data-entity-uuid="7f452406-4e01-4f45-bf55-e57d1d596ca7" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity><p>&nbsp;</p>'
   format: full_html
 conditions:
   -

@@ -13,7 +13,7 @@ bcc: ''
 replyTo: ''
 subject: 'Petrie Island Canoe Club swim test policy'
 body:
-  value: '<p>Hi commerce_order:uid:entity:display-name]<br><br>Thank you for registering for a program with us!</p><p>For your records, here is a copy of the swim test policy you agreed to when you completed order [commerce_order:order_number].<br><br><strong>Swim test policy</strong></p><drupal-entity data-entity-type="node" data-entity-uuid="059c3a16-99e7-4339-bb5c-54cb9def9ec8" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
+  value: '<p>Hi [commerce_order:uid:entity:display-name]<br><br>Thank you for registering for a program with us!</p><p>For your records, here is a copy of the swim test policy you agreed to when you completed order [commerce_order:order_number].<br><br><strong>Swim test policy</strong></p><drupal-entity data-entity-type="node" data-entity-uuid="059c3a16-99e7-4339-bb5c-54cb9def9ec8" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
   format: full_html
 conditions: {  }
 conditionOperator: AND
