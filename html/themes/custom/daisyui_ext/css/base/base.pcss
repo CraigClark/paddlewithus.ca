@@ -152,3 +152,13 @@ p, li, label {
     margin-bottom: calc(var(--spacing) * 5);
   }
 }
+
+
+/* Remove native disclosure triangle */
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::marker {
+  display: none;
+}

@@ -1,0 +1,100 @@
+{#
+/**
+ * DaisyUI menu component override.
+ *
+ * Supports item.url as:
+ * - \Drupal\Core\Url object (preferred)
+ * - string internal path like "/en/page" (common in some menu builds)
+ *
+ * Collapsible behavior:
+ * - summary is toggle-only (not a link)
+ * - parent link appears as first submenu item
+ */
+#}
+
+{% if variant and variant != 'vertical__md' %}
+  {% set variants = variant|split('__')|map(v => v|replace({(v): 'menu-' ~ v})) %}
+  {% set attributes = attributes.addClass(variants) %}
+{% endif %}
+
+<ul{{ attributes.addClass('menu') }}>
+  {% if collapsible %}
+    {{ _self.menu_links_collapsible(items, collapsible) }}
+  {% else %}
+    {{ _self.menu_links(items) }}
+  {% endif %}
+</ul>
+
+{# -------------------------- helpers -------------------------- #}
+{% macro href(item) %}
+  {# Return a usable href whether item.url is an object or a string #}
+  {% if item.url is empty %}
+    {{- '' -}}
+  {% elseif item.url.toString is defined %}
+    {# Url object #}
+    {{- item.url.toString() -}}
+  {% else %}
+    {# String path, ensure leading slash if it's a bare path #}
+    {% set raw = item.url|trim %}
+    {{- (raw starts with '/' or raw matches '/^[a-zA-Z][a-zA-Z0-9+.-]*:/' ) ? raw : '/' ~ raw -}}
+  {% endif %}
+{% endmacro %}
+
+{# ----------------------- non-collapsible ---------------------- #}
+{% macro menu_links(items) %}
+  {% for item in items %}
+    {% set item_attributes = item.attributes|default(create_attribute()) %}
+    <li{{ (not item.url and loop.first) ? ' class="menu-title"' : '' }}>
+      {% if item.url %}
+        {% set href = _self.href(item) %}
+        <a{{ item_attributes.setAttribute('href', href) }}>
+          {{ item.title }}
+        </a>
+      {% else %}
+        <span{{ item_attributes }}>{{ item.title }}</span>
+      {% endif %}
+
+      {% if item.below %}
+        <ul>
+          {{ _self.menu_links(item.below) }}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+{% endmacro %}
+
+{# ------------------------- collapsible ------------------------ #}
+{% macro menu_links_collapsible(items, collapsible) %}
+  {% for item in items %}
+    {% set item_attributes = item.attributes|default(create_attribute()) %}
+    <li{{ (not item.url and loop.first) ? ' class="menu-title"' : '' }}>
+      {% if item.below %}
+        <details{{ collapsible == 'open' ? ' open' : '' }}>
+          {# Toggle only. (No caret span here to avoid duplicates.) #}
+          <summary{{ item_attributes.addClass('flex', 'items-center', 'justify-between', 'gap-2') }}>
+            <span>{{ item.title }}</span>
+          </summary>
+
+          <ul>
+            {# Parent destination as first submenu link #}
+            {% if item.url %}
+              {% set href = _self.href(item) %}
+              <li><a href="{{ href }}">{{ item.title }}</a></li>
+            {% endif %}
+
+            {{ _self.menu_links_collapsible(item.below, collapsible) }}
+          </ul>
+        </details>
+      {% else %}
+        {% if item.url %}
+          {% set href = _self.href(item) %}
+          <a{{ item_attributes.setAttribute('href', href) }}>
+            {{ item.title }}
+          </a>
+        {% else %}
+          <span{{ item_attributes }}>{{ item.title }}</span>
+        {% endif %}
+      {% endif %}
+    </li>
+  {% endfor %}
+{% endmacro %}

@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme implementation to display the Main menu using ui_suite_daisyui:menu.
+ *
+ * Outputs a single <ul> that is:
+ * - vertical by default (mobile)
+ * - horizontal at lg and up
+ * - 100% width on mobile
+ */
+#}
+
+{% if items %}
+  {{ include('daisyui_ext:menu', {
+    items: items,
+    variant: 'vertical',
+    collapsible: 'closed',
+    attributes: create_attribute().addClass(
+      'menu-vertical',
+      'md:menu-horizontal',
+      'bg-base-200',
+      'rounded-box',
+      'w-full'
+    )
+  }, with_context: false) }}
+{% endif %}
