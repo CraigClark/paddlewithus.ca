@@ -3449,8 +3449,14 @@
   .z-50 {
     z-index: 50;
   }
+  .z-\[1090\] {
+    z-index: 1090;
+  }
   .z-\[1100\] {
     z-index: 1100;
+  }
+  .z-\[1110\] {
+    z-index: 1110;
   }
   .mockup-phone-display {
     @layer daisyui.l1.l2.l3 {
@@ -5604,6 +5610,9 @@
   }
   .w-32 {
     width: calc(var(--spacing) * 32);
+  }
+  .w-72 {
+    width: calc(var(--spacing) * 72);
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
@@ -7904,6 +7913,11 @@
       max-width: none;
     }
   }
+  .max-\[767px\]\:hidden {
+    @media (width < 767px) {
+      display: none;
+    }
+  }
   .max-\[360px\]\:hidden {
     @media (width < 360px) {
       display: none;
@@ -8097,6 +8111,11 @@
   .sm\:col-end-13 {
     @media (width >= 40rem) {
       grid-column-end: 13;
+    }
+  }
+  .sm\:w-80 {
+    @media (width >= 40rem) {
+      width: calc(var(--spacing) * 80);
     }
   }
   .sm\:alert-horizontal {
