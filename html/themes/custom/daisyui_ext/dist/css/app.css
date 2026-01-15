@@ -3431,6 +3431,9 @@
       }
     }
   }
+  .z-10 {
+    z-index: 10;
+  }
   .mockup-phone-display {
     @layer daisyui.l1.l2.l3 {
       border-radius: 54px;
@@ -8323,6 +8326,11 @@
       grid-column-end: 13;
     }
   }
+  .md\:mt-6 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 6);
+    }
+  }
   .md\:mb-16 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing) * 16);
@@ -8448,6 +8456,11 @@
       min-height: calc(var(--spacing) * 96);
     }
   }
+  .md\:min-w-64 {
+    @media (width >= 48rem) {
+      min-width: calc(var(--spacing) * 64);
+    }
+  }
   .md\:grid-cols-1 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -8537,6 +8550,11 @@
     @media (width >= 48rem) {
       border-style: var(--tw-border-style);
       border-width: 4px;
+    }
+  }
+  .md\:bg-base-100 {
+    @media (width >= 48rem) {
+      background-color: var(--color-base-100);
     }
   }
   .md\:py-12 {
@@ -9843,6 +9861,14 @@ summary::-webkit-details-marker {
 }
 summary::marker {
   display: none;
+}
+.full-width-of-screen {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {

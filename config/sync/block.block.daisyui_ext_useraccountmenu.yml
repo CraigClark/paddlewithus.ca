@@ -25,7 +25,7 @@ _core:
 id: daisyui_ext_useraccountmenu
 theme: daisyui_ext
 region: navbar_end
-weight: 0
+weight: -3
 provider: null
 plugin: 'system_menu_block:account'
 settings:

@@ -74,8 +74,7 @@
           <summary{{ item_attributes.addClass('flex', 'items-center', 'justify-between', 'gap-2') }}>
             <span>{{ item.title }}</span>
           </summary>
-
-          <ul>
+          <ul class="p-2 md:mt-6 md:bg-base-100 rounded-box shadow z-10 md:min-w-64 whitespace-nowrap">
             {# Parent destination as first submenu link #}
             {% if item.url %}
               {% set href = _self.href(item) %}

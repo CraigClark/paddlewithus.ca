@@ -12,7 +12,7 @@ _core:
   default_config_hash: PjgNGk9Y76hZOTHQQ6EeSHNvVxLLQxj6UEFtsdnqQeM
 id: daisyui_ext_main_menu
 theme: daisyui_ext
-region: navbar_center
+region: header
 weight: -4
 provider: null
 plugin: 'system_menu_block:main'

@@ -9,7 +9,7 @@ dependencies:
 id: daisyui_ext_cart
 theme: daisyui_ext
 region: navbar_end
-weight: 0
+weight: -4
 provider: null
 plugin: commerce_cart
 settings:
