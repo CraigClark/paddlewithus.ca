@@ -7904,6 +7904,11 @@
       max-width: none;
     }
   }
+  .max-\[360px\]\:hidden {
+    @media (width < 360px) {
+      display: none;
+    }
+  }
   .max-md\:block {
     @media (width < 48rem) {
       display: block;
