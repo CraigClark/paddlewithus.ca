@@ -1,0 +1,31 @@
+{% extends 'block.html.twig' %}
+
+{% block content %}
+  <div class="flex items-center gap-4">
+    {% if site_logo %}
+      <a href="{{ path('<front>') }}" rel="home" class="shrink-0">
+        <div class="w-[100px] md:w-[180px]">
+          <img
+            src="{{ site_logo }}"
+            alt="{{ site_name ? site_name : 'Home'|t }}"
+            fetchpriority="high"
+            class="block w-full h-auto"
+          />
+        </div>
+      </a>
+    {% endif %}
+
+    {% if site_name %}
+      <a href="{{ path('<front>') }}" rel="home" class="leading-none font-semibold text-xl md:text-2xl">
+        <span class="block max-md:block md:hidden">{{ 'PICC'|t }}</span>
+        <span class="block max-md:hidden">{{ site_name }}</span>
+      </a>
+    {% endif %}
+  </div>
+
+  {% if site_slogan %}
+    <div class="mt-1 text-sm opacity-70">
+      {{ site_slogan }}
+    </div>
+  {% endif %}
+{% endblock %}
