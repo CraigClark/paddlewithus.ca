@@ -31,6 +31,7 @@
  * - page.navbar_start: Items for the navbar start region.
  * - page.navbar_center: Items for the navbar center region.
  * - page.navbar_end: Items for the navbar end region.
+ * - page.header: Header region (main menu is placed here).
  * - page.content: The main content of the current page.
  * - page.sidebar: Items for the sidebar.
  * - page.footer: Items for the footer region.
@@ -41,6 +42,8 @@
  * @ingroup themeable
  */
 #}
+
+
 {% set navbar %}
   {{ include('ui_suite_daisyui:navbar', {
     start: page.navbar_start,
@@ -51,22 +54,51 @@
 
 {{ include('daisyui_ext:section', {
   content: navbar,
-  attributes: create_attribute().addClass('pt-0 pb-0'),
-  layout_attributes: create_attribute().addClass('container-md'),
+  attributes: create_attribute().addClass('pt-0', 'pb-0'),
+  layout_attributes: create_attribute().addClass('container-sm'),
   content_attributes: create_attribute().addClass('mb-0')
-}, with_context: false)
-}}
-<div class="container-sm">
-  {{ page.header }}
+}, with_context: false) }}
+
+{# Main menu lives in page.header. #}
+{% set main_menu = page.header %}
+
+{# MOBILE: hamburger aligned to container-sm, drawer opens from the left. #}
+<div class="md:hidden">
+  <div class="drawer">
+    <input id="main-menu-drawer" type="checkbox" class="drawer-toggle" />
+
+    <div class="drawer-content">
+      <div class="container-sm">
+        <div class="flex justify-end">
+          <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Open menu'|t }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="block w-7 h-7">
+              <path fill="currentColor" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/>
+            </svg>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-side z-[1100]">
+      <label for="main-menu-drawer" class="drawer-overlay" aria-label="{{ 'Close menu'|t }}"></label>
+
+      <div class="w-80 min-h-full bg-base-100 p-4">
+        {{ main_menu }}
+      </div>
+    </div>
+  </div>
 </div>
 
+{# DESKTOP: menu always visible. #}
+<div class="max-md:hidden container-sm">
+  {{ main_menu }}
+</div>
 
 {{ page.breadcrumb }}
 
 {{ page.highlighted }}
 
 <a id="main-content" tabindex="-1"></a>
-{# link is in html.html.twig #}
 <main role="main" class="container-sm">
   {{ page.content }}
 </main>

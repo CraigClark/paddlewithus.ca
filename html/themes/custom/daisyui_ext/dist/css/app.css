@@ -1049,95 +1049,6 @@
       }
     }
   }
-  .dropdown {
-    @layer daisyui.l1.l2.l3 {
-      position: relative;
-      display: inline-block;
-      position-area: var(--anchor-v, bottom) var(--anchor-h, span-right);
-      & > *:not(:has(~ [class*="dropdown-content"])):focus {
-        --tw-outline-style: none;
-        outline-style: none;
-        @media (forced-colors: active) {
-          outline: 2px solid transparent;
-          outline-offset: 2px;
-        }
-      }
-      .dropdown-content {
-        position: absolute;
-      }
-      &.dropdown-close .dropdown-content, &:not(details, .dropdown-open, .dropdown-hover:hover, :focus-within) .dropdown-content, &.dropdown-hover:not(:hover) [tabindex]:first-child:focus:not(:focus-visible) ~ .dropdown-content {
-        display: none;
-        transform-origin: top;
-        opacity: 0%;
-        scale: 95%;
-      }
-      &[popover], .dropdown-content {
-        z-index: 999;
-        @media (prefers-reduced-motion: no-preference) {
-          animation: dropdown 0.2s;
-          transition-property: opacity, scale, display;
-          transition-behavior: allow-discrete;
-          transition-duration: 0.2s;
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-      }
-      @starting-style {
-        &[popover], .dropdown-content {
-          scale: 95%;
-          opacity: 0;
-        }
-      }
-      &:not(.dropdown-close) {
-        &.dropdown-open, &:not(.dropdown-hover):focus, &:focus-within {
-          > [tabindex]:first-child {
-            pointer-events: none;
-          }
-          .dropdown-content {
-            opacity: 100%;
-            scale: 100%;
-          }
-        }
-        &.dropdown-hover:hover {
-          .dropdown-content {
-            opacity: 100%;
-            scale: 100%;
-          }
-        }
-      }
-      &:is(details) {
-        summary {
-          &::-webkit-details-marker {
-            display: none;
-          }
-        }
-      }
-      &:where([popover]) {
-        background: #0000;
-      }
-      &[popover] {
-        position: fixed;
-        color: inherit;
-        @supports not (position-area: bottom) {
-          margin: auto;
-          &.dropdown-close, &.dropdown-open:not(:popover-open) {
-            display: none;
-            transform-origin: top;
-            opacity: 0%;
-            scale: 95%;
-          }
-          &::backdrop {
-            background-color: color-mix(in oklab, #000 30%, #0000);
-          }
-        }
-        &.dropdown-close, &:not(.dropdown-open, :popover-open) {
-          display: none;
-          transform-origin: top;
-          opacity: 0%;
-          scale: 95%;
-        }
-      }
-    }
-  }
   .btn {
     :where(&) {
       @layer daisyui.l1.l2.l3 {
@@ -3535,6 +3446,12 @@
   .z-10 {
     z-index: 10;
   }
+  .z-50 {
+    z-index: 50;
+  }
+  .z-\[1100\] {
+    z-index: 1100;
+  }
   .mockup-phone-display {
     @layer daisyui.l1.l2.l3 {
       border-radius: 54px;
@@ -5538,6 +5455,9 @@
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
+  .h-7 {
+    height: calc(var(--spacing) * 7);
+  }
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
@@ -5654,6 +5574,9 @@
   }
   .w-6 {
     width: calc(var(--spacing) * 6);
+  }
+  .w-7 {
+    width: calc(var(--spacing) * 7);
   }
   .w-8 {
     width: calc(var(--spacing) * 8);
