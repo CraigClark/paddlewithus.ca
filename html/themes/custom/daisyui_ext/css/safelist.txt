@@ -170,3 +170,8 @@ w-6
 h-6
 font-semibold
 sr-only
+
+w-72
+sm:w-80
+z-[1100]
+z-[1110]

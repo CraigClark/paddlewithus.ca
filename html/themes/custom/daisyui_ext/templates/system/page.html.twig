@@ -22,8 +22,8 @@
   content_attributes: create_attribute().addClass('mb-0')
 }, with_context: false) }}
 
-{# Main menu lives in page.header. #}
-{% set main_menu = page.header %}
+{# Render once, reuse safely everywhere. #}
+{% set main_menu = page.header|render %}
 
 {# MOBILE: hamburger aligned to container-sm, drawer opens from the left. #}
 <div class="md:hidden">
@@ -42,12 +42,9 @@
       </div>
     </div>
 
-    {# High z so it sits above Drupal toolbar when logged in. #}
     <div class="drawer-side z-[1100]">
-      {# Overlay must be under the panel so it doesn't block link clicks. #}
       <label for="main-menu-drawer" class="drawer-overlay z-[1100]" aria-label="{{ 'Close menu'|t }}"></label>
 
-      {# Panel: narrower on tiny screens + above overlay + includes a close button. #}
       <div class="relative z-[1110] w-72 sm:w-80 min-h-full bg-base-100 p-4">
         <div class="flex justify-end">
           <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Close menu'|t }}">
@@ -63,7 +60,7 @@
   </div>
 </div>
 
-{# DESKTOP: menu always visible (keep your original breakpoint logic). #}
+{# DESKTOP: menu always visible. #}
 <div class="max-md:hidden container-sm">
   {{ main_menu }}
 </div>

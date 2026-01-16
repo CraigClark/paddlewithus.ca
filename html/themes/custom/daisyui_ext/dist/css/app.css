@@ -3446,12 +3446,6 @@
   .z-10 {
     z-index: 10;
   }
-  .z-50 {
-    z-index: 50;
-  }
-  .z-\[1090\] {
-    z-index: 1090;
-  }
   .z-\[1100\] {
     z-index: 1100;
   }
@@ -7911,11 +7905,6 @@
   .active\:max-w-none {
     &:active {
       max-width: none;
-    }
-  }
-  .max-\[767px\]\:hidden {
-    @media (width < 767px) {
-      display: none;
     }
   }
   .max-\[360px\]\:hidden {
