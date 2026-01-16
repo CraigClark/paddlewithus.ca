@@ -22,55 +22,58 @@
   content_attributes: create_attribute().addClass('mb-0')
 }, with_context: false) }}
 
-{# Render once, reuse safely everywhere. #}
-{% set main_menu = page.header|render %}
+{#
+  One menu instance only:
+  - Mobile: drawer overlay + hamburger
+  - Desktop: drawer forced open, overlay hidden, panel becomes static in flow
+#}
+<div class="drawer relative md:drawer-open">
+  <input id="main-menu-drawer" type="checkbox" class="drawer-toggle" />
 
-{# MOBILE: hamburger aligned to container-sm, drawer opens from the left. #}
-<div class="md:hidden">
-  <div class="drawer relative">
-    <input id="main-menu-drawer" type="checkbox" class="drawer-toggle" />
-
-    <div class="drawer-content">
-      <div class="container-sm">
-        <div class="flex justify-end">
-          <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Open menu'|t }}">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="block w-7 h-7">
-              <path fill="currentColor" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/>
-            </svg>
-          </label>
-        </div>
+  {# Drawer content (page content area) #}
+  <div class="drawer-content">
+    {# MOBILE hamburger row (aligned to container-sm, icon on the right) #}
+    <div class="container-sm md:hidden">
+      <div class="flex justify-end">
+        <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Open menu'|t }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="block w-7 h-7">
+            <path fill="currentColor" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/>
+          </svg>
+        </label>
       </div>
     </div>
 
-    <div class="drawer-side z-[1100]">
-      <label for="main-menu-drawer" class="drawer-overlay z-[1100]" aria-label="{{ 'Close menu'|t }}"></label>
+    {{ page.breadcrumb }}
+    {{ page.highlighted }}
 
-      <div class="relative z-[1110] w-72 sm:w-80 min-h-full bg-base-100 p-4">
-        <div class="flex justify-end">
-          <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Close menu'|t }}">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="block w-7 h-7">
-              <path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/>
-            </svg>
-          </label>
-        </div>
+    <a id="main-content" tabindex="-1"></a>
+    <main role="main" class="container-sm">
+      {{ page.content }}
+    </main>
 
-        {{ main_menu }}
+    {{ page.footer }}
+  </div>
+
+  {# Drawer side (menu panel) #}
+  <div class="drawer-side z-[1100] md:z-auto md:static">
+    {# Overlay only on mobile; never on desktop (prevents click blocking) #}
+    <label for="main-menu-drawer" class="drawer-overlay md:hidden" aria-label="{{ 'Close menu'|t }}"></label>
+
+    {# Panel: fixed overlay on mobile, normal flow on desktop #}
+    <div class="relative z-[1110] w-72 sm:w-80 min-h-full bg-base-100 p-4 md:z-auto md:w-auto md:min-h-0 md:bg-transparent md:p-0">
+      {# Close button only on mobile #}
+      <div class="flex justify-end md:hidden">
+        <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Close menu'|t }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="block w-7 h-7">
+            <path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/>
+          </svg>
+        </label>
+      </div>
+
+      {# Desktop alignment wrapper #}
+      <div class="container-sm md:container-none">
+        {{ page.header }}
       </div>
     </div>
   </div>
 </div>
-
-{# DESKTOP: menu always visible. #}
-<div class="max-md:hidden container-sm">
-  {{ main_menu }}
-</div>
-
-{{ page.breadcrumb }}
-{{ page.highlighted }}
-
-<a id="main-content" tabindex="-1"></a>
-<main role="main" class="container-sm">
-  {{ page.content }}
-</main>
-
-{{ page.footer }}
