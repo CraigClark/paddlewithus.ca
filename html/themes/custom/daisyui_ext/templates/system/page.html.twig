@@ -26,7 +26,7 @@
 {{ include('daisyui_ext:section', {
   content: navbar,
   attributes: create_attribute().addClass('pt-0', 'pb-0'),
-  layout_attributes: create_attribute().addClass('container-sm'),
+  layout_attributes: create_attribute().addClass('container-md'),
   content_attributes: create_attribute().addClass('mb-0')
 }, with_context: false) }}
 
@@ -43,7 +43,7 @@
 
     {# Drawer content = page stays clickable #}
     <div class="drawer-content">
-      <div class="container-sm">
+      <div class="container-md">
         <div class="flex justify-end">
           <label
             for="main-menu-drawer"
@@ -91,7 +91,7 @@
 {# ------------------------------------------------------------
  # DESKTOP NAVIGATION (always visible)
  # ------------------------------------------------------------ #}
-<div class="max-md:hidden container-sm">
+<div class="max-md:hidden container-md">
   {{ page.header_desktop }}
 </div>
 
@@ -103,7 +103,7 @@
 
 <a id="main-content" tabindex="-1"></a>
 
-<main role="main" class="container-sm">
+<main role="main" class="container-md">
   {{ page.content }}
 </main>
 
