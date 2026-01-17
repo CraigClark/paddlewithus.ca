@@ -3,15 +3,18 @@
  * @file
  * Default theme implementation to display a single page.
  *
- * BigPipe Fix: Mobile and desktop menus use SEPARATE regions (header and
- * header_desktop) so each block instance gets a unique BigPipe placeholder ID.
- * Previously, rendering the same block twice caused duplicate placeholder IDs,
- * and only the first instance (mobile) would be replaced by BigPipe.
+ * BigPipe-safe navigation:
+ * - Mobile menu uses `header` region
+ * - Desktop menu uses `header_desktop` region
+ * Each is a separate block instance with a unique placeholder ID.
  *
  * @ingroup themeable
  */
 #}
 
+{# ------------------------------------------------------------
+ # Top navbar (branding, cart, account)
+ # ------------------------------------------------------------ #}
 {% set navbar %}
   {{ include('ui_suite_daisyui:navbar', {
     start: page.navbar_start,
@@ -27,56 +30,79 @@
   content_attributes: create_attribute().addClass('mb-0')
 }, with_context: false) }}
 
-{# MOBILE: hamburger aligned to container-sm, drawer opens from the LEFT. #}
+{# ------------------------------------------------------------
+ # MOBILE NAVIGATION (drawer)
+ # ------------------------------------------------------------ #}
 <div class="md:hidden">
   <div class="drawer relative">
-    <input id="main-menu-drawer" type="checkbox" class="drawer-toggle" />
+    <input
+      id="main-menu-drawer"
+      type="checkbox"
+      class="drawer-toggle"
+    />
 
-    {# Page content stays clickable; hamburger sits on the right. #}
+    {# Drawer content = page stays clickable #}
     <div class="drawer-content">
       <div class="container-sm">
         <div class="flex justify-end">
-          <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Open menu'|t }}">
+          <label
+            for="main-menu-drawer"
+            class="btn btn-ghost btn-square"
+            aria-label="{{ 'Open menu'|t }}"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="block w-7 h-7">
-              <path fill="currentColor" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/>
+              <path fill="currentColor"
+                d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z" />
             </svg>
           </label>
         </div>
       </div>
     </div>
 
-    {# High z so it sits above Drupal toolbar when logged in. #}
+    {# Drawer panel #}
     <div class="drawer-side z-[1100]">
-      {# Overlay must be BELOW the panel, or it blocks clicks. #}
-      <label for="main-menu-drawer" class="drawer-overlay z-[1100]" aria-label="{{ 'Close menu'|t }}"></label>
+      <label
+        for="main-menu-drawer"
+        class="drawer-overlay"
+        aria-label="{{ 'Close menu'|t }}"
+      ></label>
 
-      {# Panel ABOVE overlay so links are clickable. #}
       <div class="relative z-[1110] w-72 sm:w-80 min-h-full bg-base-100 p-4">
         <div class="flex justify-end">
-          <label for="main-menu-drawer" class="btn btn-ghost btn-square" aria-label="{{ 'Close menu'|t }}">
+          <label
+            for="main-menu-drawer"
+            class="btn btn-ghost btn-square"
+            aria-label="{{ 'Close menu'|t }}"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="block w-7 h-7">
-              <path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/>
+              <path fill="currentColor"
+                d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z" />
             </svg>
           </label>
         </div>
 
-        {# Mobile menu from 'header' region - separate block instance. #}
+        {# Mobile menu block #}
         {{ page.header }}
       </div>
     </div>
   </div>
 </div>
 
-{# DESKTOP: menu always visible under header (not inside the drawer grid). #}
-{# Uses 'header_desktop' region - separate block instance with unique BigPipe ID. #}
-<div class="max-md:hidden container-sm">
+{# ------------------------------------------------------------
+ # DESKTOP NAVIGATION (always visible)
+ # ------------------------------------------------------------ #}
+<div class="hidden md:block container-sm">
   {{ page.header_desktop }}
 </div>
 
+{# ------------------------------------------------------------
+ # Page chrome
+ # ------------------------------------------------------------ #}
 {{ page.breadcrumb }}
 {{ page.highlighted }}
 
 <a id="main-content" tabindex="-1"></a>
+
 <main role="main" class="container-sm">
   {{ page.content }}
 </main>
