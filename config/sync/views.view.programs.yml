@@ -9,6 +9,7 @@ dependencies:
     - field.storage.commerce_product.field_age_range
     - field.storage.commerce_product.field_audience
     - field.storage.commerce_product.field_primary_image
+    - system.menu.main
   module:
     - better_exposed_filters
     - commerce
@@ -528,7 +529,7 @@ display:
         type: bef
         options:
           submit_button: Search
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: false
@@ -816,6 +817,36 @@ display:
       display_description: ''
       display_extenders:
         ui_styles: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+      tags:
+        - 'config:field.storage.commerce_product.body'
+        - 'config:field.storage.commerce_product.field_acivity_type'
+        - 'config:field.storage.commerce_product.field_age_range'
+        - 'config:field.storage.commerce_product.field_audience'
+        - 'config:field.storage.commerce_product.field_primary_image'
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 2
+    display_options:
+      display_extenders:
+        ui_styles: {  }
+      path: program
+      menu:
+        type: normal
+        title: Programs
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:

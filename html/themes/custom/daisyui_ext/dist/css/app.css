@@ -9989,14 +9989,14 @@ p, li, label {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
-*/
 .card {
   overflow: hidden;
 }
 @media (min-width: 768px) {
-  #views-exposed-form-programs-block-card .form-actions {
+  .filter-programs .form-actions {
     display: flex;
     align-items: flex-end;
+    gap: .5em;
     margin-bottom: calc(var(--spacing) * 5);
   }
 }
