@@ -2,6 +2,9 @@ uuid: 0bcb0779-dc9b-4ba4-adc1-d8c85f3d0a62
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.narrow
+    - core.entity_view_mode.media.wide
   module:
     - ck5_block_embed
     - editor
@@ -100,7 +103,10 @@ filters:
     weight: 100
     settings:
       default_view_mode: default
-      allowed_view_modes: {  }
+      allowed_view_modes:
+        default: default
+        narrow: narrow
+        wide: wide
       allowed_media_types: {  }
   token_filter:
     id: token_filter

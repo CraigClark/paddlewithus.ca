@@ -26,8 +26,8 @@ settings:
       - numberedList
       - '|'
       - blockQuote
-      - drupalInsertImage
       - insertTable
+      - drupalMedia
       - materialIcons
       - horizontalLine
       - '|'
@@ -91,8 +91,6 @@ settings:
         - heading4
         - heading5
         - heading6
-    ckeditor5_imageResize:
-      allow_resize: true
     ckeditor5_list:
       properties:
         reversed: true
@@ -103,7 +101,7 @@ settings:
       allowed_tags:
         - '<i class>'
     media_media:
-      allow_view_mode_override: false
+      allow_view_mode_override: true
     token_filter_token_browser:
       token_types:
         node: node

@@ -178,3 +178,45 @@ summary::marker {
     display: flex;
     align-items: center;
 }
+
+#block-daisyui-ext-frontpagetitle {
+  background-color: var(--color-teal-100);
+  margin: 1em 0;
+  padding: 1em;
+  border-radius: var(--radius-box);
+  display: flex;
+  align-items: center;
+  min-height: 50vh;
+  background-image:
+  url(/themes/custom/daisyui_ext/images/sky.webp);
+  background-repeat: no-repeat;
+  box-shadow:
+  0 4px 6px -1px rgb(0 0 0 / 0.1),
+  0 2px 4px -2px rgb(0 0 0 / 0.1);}
+
+#block-daisyui-ext-frontpagetitle > div {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 1em;
+  justify-items: center;
+}
+
+#block-daisyui-ext-frontpagetitle .field--type-image {
+  max-width: 200px;
+}
+
+@media (min-width: 768px) {
+  #block-daisyui-ext-frontpagetitle {
+    padding: 2em;
+  }
+  #block-daisyui-ext-frontpagetitle > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    align-items: center;
+  }
+
+  #block-daisyui-ext-frontpagetitle .field--type-image {
+    max-width: 400px;
+  }
+}
