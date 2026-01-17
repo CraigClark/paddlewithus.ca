@@ -3,6 +3,11 @@
  * @file
  * Default theme implementation to display a single page.
  *
+ * BigPipe Fix: Mobile and desktop menus use SEPARATE regions (header and
+ * header_desktop) so each block instance gets a unique BigPipe placeholder ID.
+ * Previously, rendering the same block twice caused duplicate placeholder IDs,
+ * and only the first instance (mobile) would be replaced by BigPipe.
+ *
  * @ingroup themeable
  */
 #}
@@ -21,11 +26,6 @@
   layout_attributes: create_attribute().addClass('container-sm'),
   content_attributes: create_attribute().addClass('mb-0')
 }, with_context: false) }}
-
-{# Render ONCE (BigPipe-safe), then reuse for mobile + desktop. #}
-{% set main_menu %}
-  {{ page.header }}
-{% endset %}
 
 {# MOBILE: hamburger aligned to container-sm, drawer opens from the LEFT. #}
 <div class="md:hidden">
@@ -60,15 +60,17 @@
           </label>
         </div>
 
-        {{ main_menu }}
+        {# Mobile menu from 'header' region - separate block instance. #}
+        {{ page.header }}
       </div>
     </div>
   </div>
 </div>
 
 {# DESKTOP: menu always visible under header (not inside the drawer grid). #}
+{# Uses 'header_desktop' region - separate block instance with unique BigPipe ID. #}
 <div class="max-md:hidden container-sm">
-  {{ main_menu }}
+  {{ page.header_desktop }}
 </div>
 
 {{ page.breadcrumb }}

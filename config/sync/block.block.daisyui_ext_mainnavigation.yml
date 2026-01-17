@@ -1,0 +1,25 @@
+uuid: 3c1a14e0-0774-4a25-8721-7cf40080f82d
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - daisyui_ext
+id: daisyui_ext_mainnavigation
+theme: daisyui_ext
+region: header_desktop
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

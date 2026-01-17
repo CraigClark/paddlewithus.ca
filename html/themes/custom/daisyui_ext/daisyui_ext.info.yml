@@ -8,7 +8,8 @@ regions:
   navbar_start: 'Navbar start'
   navbar_center: 'Navbar center'
   navbar_end: 'Navbar end'
-  header: 'Top Bar'
+  header: 'Header (Mobile Menu)'
+  header_desktop: 'Header (Desktop Menu)'
   highlighted: Highlighted
   help: Help
   content: Content
