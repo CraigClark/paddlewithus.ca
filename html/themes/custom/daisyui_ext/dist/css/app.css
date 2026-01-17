@@ -2897,14 +2897,8 @@
   .absolute {
     position: absolute;
   }
-  .fixed {
-    position: fixed;
-  }
   .relative {
     position: relative;
-  }
-  .static {
-    position: static;
   }
   .sticky {
     position: sticky;
@@ -8231,59 +8225,6 @@
       }
     }
   }
-  .md\:drawer-open {
-    @media (width >= 48rem) {
-      @layer daisyui.l1.l2.l3 {
-        > .drawer-toggle:checked {
-          ~ .drawer-side {
-            scrollbar-color: revert-layer;
-          }
-          :root:has(&) {
-            --page-overflow: revert-layer;
-            --page-scroll-gutter: revert-layer;
-            --page-scroll-bg: revert-layer;
-            --page-scroll-transition: revert-layer;
-            --page-has-backdrop: revert-layer;
-            animation: revert-layer;
-            animation-timeline: revert-layer;
-          }
-        }
-      }
-      @layer daisyui.l1.l2 {
-        > .drawer-side {
-          overflow-y: auto;
-        }
-        > .drawer-toggle {
-          display: none;
-          ~ .drawer-side {
-            pointer-events: auto;
-            visibility: visible;
-            position: sticky;
-            display: block;
-            width: auto;
-            overscroll-behavior: auto;
-            opacity: 100%;
-            > .drawer-overlay {
-              cursor: default;
-              background-color: transparent;
-            }
-          }
-          &:checked ~ .drawer-side {
-            pointer-events: auto;
-            visibility: visible;
-          }
-        }
-      }
-      @layer daisyui.l1 {
-        > .drawer-toggle ~ .drawer-side > :not(.drawer-overlay) {
-          translate: 0%;
-          [dir="rtl"] & {
-            translate: 0%;
-          }
-        }
-      }
-    }
-  }
   .md\:menu-horizontal {
     @media (width >= 48rem) {
       @layer daisyui.l1.l2 {
@@ -8326,16 +8267,6 @@
           }
         }
       }
-    }
-  }
-  .md\:static {
-    @media (width >= 48rem) {
-      position: static;
-    }
-  }
-  .md\:z-auto {
-    @media (width >= 48rem) {
-      z-index: auto;
     }
   }
   .md\:col-span-1 {
@@ -8633,11 +8564,6 @@
       }
     }
   }
-  .md\:min-h-0 {
-    @media (width >= 48rem) {
-      min-height: calc(var(--spacing) * 0);
-    }
-  }
   .md\:min-h-20 {
     @media (width >= 48rem) {
       min-height: calc(var(--spacing) * 20);
@@ -8666,11 +8592,6 @@
   .md\:w-\[180px\] {
     @media (width >= 48rem) {
       width: 180px;
-    }
-  }
-  .md\:w-auto {
-    @media (width >= 48rem) {
-      width: auto;
     }
   }
   .md\:min-w-64 {
@@ -8772,16 +8693,6 @@
   .md\:bg-base-100 {
     @media (width >= 48rem) {
       background-color: var(--color-base-100);
-    }
-  }
-  .md\:bg-transparent {
-    @media (width >= 48rem) {
-      background-color: transparent;
-    }
-  }
-  .md\:p-0 {
-    @media (width >= 48rem) {
-      padding: calc(var(--spacing) * 0);
     }
   }
   .md\:py-12 {
