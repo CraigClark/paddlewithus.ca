@@ -107,6 +107,7 @@ settings:
     token_filter_token_browser:
       token_types:
         node: node
+        site: site
     ui_styles_ckeditor5_uiStylesBlock:
       enabled_styles:
         - colors_background_color
