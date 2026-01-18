@@ -4,6 +4,9 @@
 
  :root {
    --readable-width: 65ch;
+   --color-primary: oklch(0.3676 0.1011 145.06);
+   --color-primary-light: oklch(0.75 0.1011 145.06);
+   --color-primary-md: oklch(0.47 0.1011 145.06);
  }
 
 @layer base {
@@ -179,44 +182,73 @@ summary::marker {
     align-items: center;
 }
 
-#block-daisyui-ext-frontpagetitle {
-  background-color: var(--color-teal-100);
-  margin: 1em 0;
-  padding: 1em;
-  border-radius: var(--radius-box);
+/* helpers */
+
+.gradient-sky {
+  background: linear-gradient(
+    to bottom,
+    oklch(94% 0.025 230) 0%,
+    oklch(96% 0.015 235) 45%,
+    oklch(93% 0.02 225) 100%
+  );
+}
+
+.box-shadow-default {
+  box-shadow:
+  0 4px 6px -1px rgb(0 0 0 / 0.1),
+  0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.border-t-primary {
+  border-top: 1px solid var(--color-primary-light);
+}
+
+.color-bg-primary-md {
+  background: var(--color-primary-md);
+}
+
+.color-bg-primary-light {
+  background: var(--color-primary-light);
+}
+
+
+/* front page hero */
+
+.block-hero-front {
   display: flex;
   align-items: center;
   min-height: 50vh;
-  background-image:
-  url(/themes/custom/daisyui_ext/images/sky.webp);
-  background-repeat: no-repeat;
-  box-shadow:
-  0 4px 6px -1px rgb(0 0 0 / 0.1),
-  0 2px 4px -2px rgb(0 0 0 / 0.1);}
+  background: linear-gradient(
+    to bottom,
+    oklch(94% 0.025 230) 0%,
+    oklch(96% 0.015 235) 45%,
+    oklch(93% 0.02 225) 100%
+  );
+}
 
-#block-daisyui-ext-frontpagetitle > div {
+.block-hero-front > div {
   display: grid;
   grid-template-rows: 1fr;
   gap: 1em;
   justify-items: center;
 }
 
-#block-daisyui-ext-frontpagetitle .field--type-image {
+.block-hero-front .field--type-image {
   max-width: 200px;
 }
 
 @media (min-width: 768px) {
-  #block-daisyui-ext-frontpagetitle {
+  .block-hero-front {
     padding: 2em;
   }
-  #block-daisyui-ext-frontpagetitle > div {
+  .block-hero-front > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
     align-items: center;
   }
 
-  #block-daisyui-ext-frontpagetitle .field--type-image {
+  .block-hero-front .field--type-image {
     max-width: 400px;
   }
 }

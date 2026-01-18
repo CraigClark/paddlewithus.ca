@@ -91,7 +91,7 @@
 {# ------------------------------------------------------------
  # DESKTOP NAVIGATION (always visible)
  # ------------------------------------------------------------ #}
-<div class="max-md:hidden container-md">
+<div class="max-md:hidden container-md mt-3">
   {{ page.header_desktop }}
 </div>
 
@@ -102,9 +102,12 @@
 {{ page.highlighted }}
 
 <a id="main-content" tabindex="-1"></a>
-
+<div class="main-content-wrapper mb-8">
 <main role="main" class="container-md">
   {{ page.content }}
 </main>
+</div>
 
-{{ page.footer }}
+<div class="footer-content-wrapper color-bg-primary-md pt-3 pb-8">
+ {{ page.footer }}
+</div>

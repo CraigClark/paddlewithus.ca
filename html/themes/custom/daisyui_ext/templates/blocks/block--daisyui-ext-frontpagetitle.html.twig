@@ -1,0 +1,16 @@
+<div class="full-width-of-screen gradient-sky box-shadow-default mt-10 mb-8">
+
+{% if attributes is not empty %}
+<div{{ attributes }}>
+{% endif %}
+
+{% block content %}
+<div class="container-md block-hero-front">
+  {{ content }}
+</div>
+{% endblock %}
+
+{% if attributes is not empty %}
+</div>
+{% endif %}
+</div>

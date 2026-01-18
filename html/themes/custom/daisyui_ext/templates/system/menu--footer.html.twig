@@ -22,12 +22,13 @@
 #}
 
 {% if items %}
-  <nav class="flex gap-4">
+  <nav class="flex gap-4 container-md">
   {% for link in items %}
     {{ include('ui_suite_daisyui:link', {
       url: link.url,
       label: link.title,
-      underline_hover: false,
+      underline_hover: true,
+      color: 'neutral',
     }, with_context: false) }}
   {% endfor %}
   </nav>

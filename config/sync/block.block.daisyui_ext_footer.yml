@@ -1,0 +1,25 @@
+uuid: cd31e4d5-706b-4db3-a75a-9b58c63eb310
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - daisyui_ext
+id: daisyui_ext_footer
+theme: daisyui_ext
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: Footer
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: null
+  expand_all_items: false
+visibility: {  }
