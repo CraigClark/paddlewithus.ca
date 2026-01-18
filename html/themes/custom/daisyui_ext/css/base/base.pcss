@@ -7,6 +7,9 @@
    --color-primary: oklch(0.3676 0.1011 145.06);
    --color-primary-light: oklch(0.75 0.1011 145.06);
    --color-primary-md: oklch(0.47 0.1011 145.06);
+   --color-secondary: oklch(0.68 0.05 255);
+   --color-secondary-md: oklch(0.58 0.05 255);
+   --color-secondary-dark: oklch(0.48 0.05 255);
  }
 
 @layer base {
@@ -251,4 +254,12 @@ summary::marker {
   .block-hero-front .field--type-image {
     max-width: 400px;
   }
+}
+
+nav.footer a,
+nav.footer a:hover,
+nav.footer a:visited,
+nav.footer a:focus
+ {
+  color: var(--color-stone-50);
 }
