@@ -19,6 +19,7 @@ dependencies:
   module:
     - field_group
     - field_label
+    - formatter_suite
     - layout_builder
     - nomarkup
     - options
@@ -151,13 +152,18 @@ content:
     weight: 3
     region: content
   field_contact_email:
-    type: email_mailto
+    type: formatter_suite_general_email
     label: above
-    settings: {  }
+    settings:
+      emailStyle: mailto
+      linkText: Email
+      classes: font-semibold
+      listStyle: span
+      listSeparator: ', '
     third_party_settings:
       field_label:
         label_class: ''
-        label_value: ''
+        label_value: 'Questions? Contact'
         label_tag: h2
       nomarkup:
         enabled: false

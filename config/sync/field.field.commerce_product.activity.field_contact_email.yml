@@ -10,7 +10,7 @@ field_name: field_contact_email
 entity_type: commerce_product
 bundle: activity
 label: Contact
-description: ''
+description: 'Email address people can write to for more information'
 required: false
 translatable: false
 default_value:
