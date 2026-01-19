@@ -1,16 +1,15 @@
-uuid: 36f63f82-c4d8-49dd-a007-840ae898a81d
+uuid: c3eb1710-e867-4a83-a854-947cff4e0757
 langcode: en
 status: true
 dependencies:
   module:
     - commerce_product
-    - text
-id: commerce_product.field_contact
-field_name: field_contact
+id: commerce_product.field_contact_email
+field_name: field_contact_email
 entity_type: commerce_product
-type: text_long
+type: email
 settings: {  }
-module: text
+module: core
 locked: false
 cardinality: 1
 translatable: true

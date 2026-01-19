@@ -37,7 +37,7 @@ elements: |-
         arguments: {  }
   manage_participants:
     '#type': webform_markup
-    '#markup': '<p><a class="btn btn-sm ml-2" href="/user/[current-user:uid]/participant/add?destination=/webform/program_registration?variation=[current-page:query:variation]">➕ Add a new family member</a> <a class="btn btn-sm" href="/user/[current-user:uid]/participant/list">✏️ Edit your list of family members.</a></p>'
+    '#markup': '<p><a class="btn btn-sm ml-3 mb-3" href="/user/[current-user:uid]/participant/add?destination=/webform/program_registration?variation=[current-page:query:variation]">➕ Add a new family member</a> <a class="btn btn-sm mb-3" href="/user/[current-user:uid]/participant/list">✏️ Edit your list of family members.</a></p>'
   hr__1:
     '#type': processed_text
     '#text': '<hr class="h-px my-8 bg-neutral-quaternary border-0">'

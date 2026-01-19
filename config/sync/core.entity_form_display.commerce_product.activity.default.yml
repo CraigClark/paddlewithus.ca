@@ -8,7 +8,7 @@ dependencies:
     - field.field.commerce_product.activity.field_acivity_type
     - field.field.commerce_product.activity.field_age_range
     - field.field.commerce_product.activity.field_audience
-    - field.field.commerce_product.activity.field_contact
+    - field.field.commerce_product.activity.field_contact_email
     - field.field.commerce_product.activity.field_equipmenet_provided
     - field.field.commerce_product.activity.field_experience
     - field.field.commerce_product.activity.field_location
@@ -32,7 +32,7 @@ third_party_settings:
       label: 'Who is this activity for'
       region: content
       parent_name: ''
-      weight: 3
+      weight: 2
       format_type: fieldset
       format_settings:
         classes: ''
@@ -52,7 +52,7 @@ third_party_settings:
       label: 'About this activity'
       region: content
       parent_name: ''
-      weight: 4
+      weight: 3
       format_type: fieldset
       format_settings:
         classes: ''
@@ -158,13 +158,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_contact:
-    type: text_textarea
-    weight: 5
+  field_contact_email:
+    type: email_default
+    weight: 4
     region: content
     settings:
-      rows: 5
       placeholder: ''
+      size: 60
     third_party_settings: {  }
   field_equipmenet_provided:
     type: text_textarea
@@ -190,7 +190,7 @@ content:
     third_party_settings: {  }
   field_primary_image:
     type: media_library_widget
-    weight: 2
+    weight: 1
     region: content
     settings:
       media_types: {  }
@@ -213,7 +213,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 5
     region: content
     settings:
       display_label: true

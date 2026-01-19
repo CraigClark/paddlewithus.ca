@@ -7,9 +7,9 @@
    --color-primary: oklch(0.3676 0.1011 145.06);
    --color-primary-light: oklch(0.75 0.1011 145.06);
    --color-primary-md: oklch(0.47 0.1011 145.06);
-   --color-secondary: oklch(0.68 0.05 255);
-   --color-secondary-md: oklch(0.58 0.05 255);
-   --color-secondary-dark: oklch(0.48 0.05 255);
+   --color-primary-content: oklch(1 0 0 / 97%);
+   --color-secondary: oklch(0.5574 0.1153 68.37);
+   --color-secondary-content: oklch(0.9793 0.0176 81.83);
  }
 
 @layer base {
@@ -45,6 +45,7 @@
     padding-left: 1.5rem;
   }
 }
+
 
 
 /* set global base font-size */
@@ -262,4 +263,25 @@ nav.footer a:visited,
 nav.footer a:focus
  {
   color: var(--color-stone-50);
+}
+
+/* Align radio with multi-line label text */
+.form-item.js-form-type-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Prevent DaisyUI from vertically centering the radio */
+.form-item.js-form-type-radio .form-radio {
+  margin-top: 0.25rem; /* tweak if needed */
+  flex-shrink: 0;
+}
+
+/* Ensure label text wraps cleanly */
+.form-item.js-form-type-radio .option.label {
+  line-height: 1.5;
+  margin: 0;
+  white-space: wrap;
+  padding-top: .25em;
 }

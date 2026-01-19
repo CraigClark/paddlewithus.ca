@@ -8,7 +8,7 @@ dependencies:
     - field.field.commerce_product.activity.field_acivity_type
     - field.field.commerce_product.activity.field_age_range
     - field.field.commerce_product.activity.field_audience
-    - field.field.commerce_product.activity.field_contact
+    - field.field.commerce_product.activity.field_contact_email
     - field.field.commerce_product.activity.field_equipmenet_provided
     - field.field.commerce_product.activity.field_experience
     - field.field.commerce_product.activity.field_location
@@ -150,20 +150,20 @@ content:
         referenced_entity: ''
     weight: 3
     region: content
-  field_contact:
-    type: text_default
+  field_contact_email:
+    type: email_mailto
     label: above
     settings: {  }
     third_party_settings:
       field_label:
         label_class: ''
-        label_value: 'Questions? Contact'
+        label_value: ''
         label_tag: h2
       nomarkup:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 4
+    weight: 14
     region: content
   field_equipmenet_provided:
     type: text_default

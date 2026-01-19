@@ -185,7 +185,7 @@ function picc_registration_form_views_form_commerce_cart_form_default_alter(&$fo
     '#title' => t('Register for More Activities'),
     '#url' => \Drupal\Core\Url::fromUserInput('/program'),
     '#attributes' => [
-      'class' => ['btn', 'btn-secondary'],
+      'class' => ['btn', 'my-3', 'btn-secondary'],
     ],
     '#weight' => -10,
   ];

@@ -202,7 +202,15 @@ function _daisyui_ext_participant_contact_labels(array &$form): void {
   }
 }
 
-
+/**
+ * Implements hook_form_FORM_ID_alter() for the cart form.
+ * theme checkout button on cart
+ */
+function daisyui_ext_form_views_form_commerce_cart_form_default_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if (isset($form['actions']['checkout'])) {
+    $form['actions']['checkout']['#attributes']['class'] = ['btn', 'btn-primary', 'my-3'];
+  }
+}
 
 
 

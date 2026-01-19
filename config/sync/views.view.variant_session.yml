@@ -1033,9 +1033,11 @@ display:
           entity_field: product_id
           plugin_id: standard
           required: false
+      css_class: ''
       header: {  }
       footer: {  }
-      display_extenders: {  }
+      display_extenders:
+        ui_styles: {  }
     cache_metadata:
       max-age: -1
       contexts:
