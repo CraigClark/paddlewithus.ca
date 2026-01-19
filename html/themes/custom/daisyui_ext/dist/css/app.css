@@ -9834,6 +9834,14 @@
     font-weight: var(--font-weight-bold);
   }
 }
+@layer components {
+  .layout-region-checkout-footer {
+    margin-top: calc(var(--spacing) * 3);
+  }
+  .form-actions .link--previous {
+    margin-inline-start: calc(var(--spacing) * 3);
+  }
+}
 @layer base {
   ul {
     list-style-position: outside;
