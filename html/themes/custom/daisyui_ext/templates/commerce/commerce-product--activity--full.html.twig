@@ -29,15 +29,15 @@
   {{ title_prefix }}
   {{ title_suffix }}
 
-  {{- product|without('variation_attributes', 'field_contact') -}}
+  {{- product|without('variation_attributes', 'field_contact_email') -}}
 
   {% if activity_registration > 0 %}
     <h2 class="mt-5"> {{ 'Sessions'|t }}</h2>
     {{ drupal_view('variant_session', 'block_session') }}
   {% endif %}
 
-  {% if product.field_contact is not empty %}
-    {{ product.field_contact }}
+  {% if product.field_contact_email is not empty %}
+    {{ product.field_contact_email }}
   {% endif %}
 
 </article>
