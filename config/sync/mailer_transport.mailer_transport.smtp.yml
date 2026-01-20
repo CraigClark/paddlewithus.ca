@@ -6,10 +6,10 @@ id: smtp
 label: SMTP
 plugin: smtp
 configuration:
-  user: ''
+  user: 'see settings file'
   pass: ''
-  host: 127.0.0.1
-  port: 1025
+  host: s4943.can1.stableserver.net
+  port: 465
   query:
     verify_peer: true
     local_domain: ''
