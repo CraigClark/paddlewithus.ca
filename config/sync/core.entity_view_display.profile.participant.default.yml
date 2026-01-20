@@ -7,14 +7,16 @@ dependencies:
     - field.field.profile.participant.field_birth_date
     - field.field.profile.participant.field_emercency_contact_1_name
     - field.field.profile.participant.field_emercency_contact_1_phone
+    - field.field.profile.participant.field_emercency_contact_1_pickup
     - field.field.profile.participant.field_emercency_contact_1_rel
     - field.field.profile.participant.field_emercency_contact_2_name
     - field.field.profile.participant.field_emercency_contact_2_phone
+    - field.field.profile.participant.field_emercency_contact_2_pickup
     - field.field.profile.participant.field_emercency_contact_2_rel
     - field.field.profile.participant.field_emercency_contact_3_name
     - field.field.profile.participant.field_emercency_contact_3_phone
+    - field.field.profile.participant.field_emercency_contact_3_pickup
     - field.field.profile.participant.field_emercency_contact_3_rel
-    - field.field.profile.participant.field_medical_notes
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
     - field.field.profile.participant.field_photo_consent
@@ -145,12 +147,96 @@ third_party_settings:
               ui_styles_title_extra: ''
               ui_styles: {  }
               ui_styles_extra: ''
+          0c22d847-9673-4ac2-812e-03159eec7213:
+            uuid: 0c22d847-9673-4ac2-812e-03159eec7213
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_emercency_contact_1_pickup'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          bd676abf-7a37-41eb-ad6e-6576e094c4e7:
+            uuid: bd676abf-7a37-41eb-ad6e-6576e094c4e7
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_emercency_contact_2_pickup'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          6e69ee45-3e3f-488c-a80e-10677d2d4208:
+            uuid: 6e69ee45-3e3f-488c-a80e-10677d2d4208
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_emercency_contact_3_pickup'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
         third_party_settings: {  }
 id: profile.participant.default
 targetEntityType: profile
 bundle: participant
 mode: default
-content: {  }
+content:
+  field_emercency_contact_1_pickup:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 1
+    region: items
+  field_emercency_contact_2_pickup:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: items
+  field_emercency_contact_3_pickup:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: items
 hidden:
   field_allergies: true
   field_birth_date: true
@@ -163,7 +249,6 @@ hidden:
   field_emercency_contact_3_name: true
   field_emercency_contact_3_phone: true
   field_emercency_contact_3_rel: true
-  field_medical_notes: true
   field_name: true
   field_owner: true
   field_photo_consent: true

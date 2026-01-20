@@ -1,16 +1,15 @@
-uuid: aeec0008-b6d5-4cf9-86b6-e2289fa0d46d
+uuid: f76cc566-ef71-4450-91ad-75fe2fdc927b
 langcode: en
 status: true
 dependencies:
   module:
     - profile
-    - text
-id: profile.field_medical_notes
-field_name: field_medical_notes
+id: profile.field_emercency_contact_1_pickup
+field_name: field_emercency_contact_1_pickup
 entity_type: profile
-type: text_long
+type: boolean
 settings: {  }
-module: text
+module: core
 locked: false
 cardinality: 1
 translatable: true

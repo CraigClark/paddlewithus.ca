@@ -15,12 +15,15 @@
   'field_emercency_contact_1_name',
   'field_emercency_contact_1_phone',
   'field_emercency_contact_1_rel',
+  'field_emercency_contact_1_pickup',
   'field_emercency_contact_2_name',
   'field_emercency_contact_2_phone',
   'field_emercency_contact_2_rel',
+  'field_emercency_contact_2_pickup',
   'field_emercency_contact_3_name',
   'field_emercency_contact_3_phone',
-  'field_emercency_contact_3_rel'
+  'field_emercency_contact_3_rel',
+  'field_emercency_contact_3_pickup'
 ] %}
 
 <form{{ attributes }}>
@@ -43,6 +46,7 @@
     {% if element.field_emercency_contact_1_name is defined %}{{ element.field_emercency_contact_1_name }}{% endif %}
     {% if element.field_emercency_contact_1_phone is defined %}{{ element.field_emercency_contact_1_phone }}{% endif %}
     {% if element.field_emercency_contact_1_rel is defined %}{{ element.field_emercency_contact_1_rel }}{% endif %}
+    {% if element.field_emercency_contact_1_pickup is defined %}{{ element.field_emercency_contact_1_pickup }}{% endif %}
   </div>
 
   <div class="border rounded-sm border-slate-300 my-8 p-3">
@@ -50,6 +54,7 @@
     {% if element.field_emercency_contact_2_name is defined %}{{ element.field_emercency_contact_2_name }}{% endif %}
     {% if element.field_emercency_contact_2_phone is defined %}{{ element.field_emercency_contact_2_phone }}{% endif %}
     {% if element.field_emercency_contact_2_rel is defined %}{{ element.field_emercency_contact_2_rel }}{% endif %}
+    {% if element.field_emercency_contact_2_pickup is defined %}{{ element.field_emercency_contact_2_pickup }}{% endif %}
   </div>
 
   <div class="border rounded-sm border-slate-300 my-8 p-3">
@@ -57,6 +62,7 @@
     {% if element.field_emercency_contact_3_name is defined %}{{ element.field_emercency_contact_3_name }}{% endif %}
     {% if element.field_emercency_contact_3_phone is defined %}{{ element.field_emercency_contact_3_phone }}{% endif %}
     {% if element.field_emercency_contact_3_rel is defined %}{{ element.field_emercency_contact_3_rel }}{% endif %}
+    {% if element.field_emercency_contact_3_pickup is defined %}{{ element.field_emercency_contact_3_pickup }}{% endif %}
   </div>
 
   {# Put these at the very bottom #}

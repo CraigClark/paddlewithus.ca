@@ -1,0 +1,23 @@
+uuid: 721cbf08-6b27-4a58-878a-26cfddf05fac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_emercency_contact_1_pickup
+    - profile.type.participant
+id: profile.participant.field_emercency_contact_1_pickup
+field_name: field_emercency_contact_1_pickup
+entity_type: profile
+bundle: participant
+label: 'Authorized for pickup'
+description: 'When checked, program staff may release the participant to this person at pickup.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean
