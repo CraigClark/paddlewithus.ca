@@ -1,1 +1,1 @@
-default_transport: sendmail
+default_transport: smtp

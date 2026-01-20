@@ -1,15 +1,15 @@
-uuid: 572b539c-d9a6-4f10-867a-035354a4687c
+uuid: 701b7a84-0bf9-4682-8c31-c68b920fdb26
 langcode: en
 status: true
 dependencies: {  }
 id: smtp
-label: SMTP
+label: 'SMTP Sendgrid'
 plugin: smtp
 configuration:
-  user: 'see settings file'
+  user: apikey
   pass: ''
-  host: s4943.can1.stableserver.net
-  port: 465
+  host: smtp.sendgrid.net
+  port: 587
   query:
     verify_peer: true
     local_domain: ''
