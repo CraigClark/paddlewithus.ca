@@ -1,0 +1,24 @@
+uuid: 4ca31dfd-4a3a-4aa9-b295-2d2abfb4c47d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_additional_info
+    - filter.format.basic_html
+    - profile.type.participant
+  module:
+    - text
+id: profile.participant.field_additional_info
+field_name: field_additional_info
+entity_type: profile
+bundle: participant
+label: 'Additional information for coaches'
+description: "<p>If there is anything our coaches should know to help you or your family member take part safely and comfortably (for example: medical considerations, learning or sensory supports, or other relevant information), please share it here.</p>\r\n\r\n<p><em>This information is optional and will only be used by program staff for safety and support purposes.</em></p>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

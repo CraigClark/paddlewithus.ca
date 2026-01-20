@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.profile.participant.field_additional_info
     - field.field.profile.participant.field_allergies
     - field.field.profile.participant.field_birth_date
     - field.field.profile.participant.field_emercency_contact_1_name
@@ -31,6 +32,14 @@ targetEntityType: profile
 bundle: participant
 mode: default
 content:
+  field_additional_info:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_allergies:
     type: text_textarea
     weight: 3
@@ -62,7 +71,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_1_pickup:
     type: boolean_checkbox
-    weight: 15
+    weight: 14
     region: content
     settings:
       display_label: true
@@ -92,7 +101,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_2_pickup:
     type: boolean_checkbox
-    weight: 16
+    weight: 15
     region: content
     settings:
       display_label: true
@@ -122,7 +131,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_3_pickup:
     type: boolean_checkbox
-    weight: 17
+    weight: 16
     region: content
     settings:
       display_label: true

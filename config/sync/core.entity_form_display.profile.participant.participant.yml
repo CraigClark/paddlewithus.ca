@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.profile.participant
+    - field.field.profile.participant.field_additional_info
     - field.field.profile.participant.field_allergies
     - field.field.profile.participant.field_birth_date
     - field.field.profile.participant.field_emercency_contact_1_name
@@ -155,6 +156,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_additional_info: true
   field_emercency_contact_1_pickup: true
   field_emercency_contact_2_pickup: true
   field_emercency_contact_3_pickup: true
