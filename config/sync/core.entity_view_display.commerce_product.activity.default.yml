@@ -258,7 +258,7 @@ content:
           attributes:
             source_id: attributes
             source:
-              value: 'class="min-h-40 md:min-h-96"'
+              value: 'class="hero bg-base-200 min-h-screen"'
           heading_level:
             source_id: select
             source:
@@ -297,8 +297,12 @@ content:
                       sources:
                         -
                           source_id: 'field_property:commerce_product:title:value'
+                          node_id: ''
+                          third_party_settings: ''
                           _weight: '0'
                 _weight: '0'
+                node_id: ''
+                third_party_settings: ''
           text:
             sources:
               1:
@@ -306,7 +310,11 @@ content:
                 source:
                   value: '<p>[commerce_product:field_audience] <span class="lowercase">[commerce_product:field_acivity_type:entity:name]</span></p>'
                 _weight: '1'
+                node_id: ''
+                third_party_settings: ''
           button: {  }
+        third_party_settings: ''
+        node_id: ''
     third_party_settings:
       field_label:
         label_class: ''

@@ -1,0 +1,33 @@
+<article{{ attributes }}>
+
+  <div{{ content_attributes.addClass('hero', 'bg-base-200') }}>
+
+    <div class="hero-content w-full max-w-7xl mx-auto justify-start flex-col lg:flex-row gap-8">
+
+      {% if node.field_page_primary_image is not empty %}
+        <div class="max-w-sm rounded-lg shadow-2xl overflow-hidden">
+          {{ content.field_page_primary_image }}
+        </div>
+      {% endif %}
+
+      <div>
+        <h2>
+          {{ label }}
+        </h2>
+
+        {% if node.body.summary is not empty %}
+          <p class="py-6">
+            {{ node.body.summary }}
+          </p>
+        {% endif %}
+
+        <a href="{{ url }}" class="btn btn-primary">
+          Read more
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</article>

@@ -1,12 +1,26 @@
-uuid: 17b51dc8-f0b9-4201-9bd5-18dd5579f8aa
+uuid: 4b9c7d9e-9f2e-4c7b-ae68-6b0e8f0f8d12
 langcode: en
 status: true
-dependencies: {  }
-_core:
-  default_config_hash: rpwvgyEURXLz_JjgMCrkS1rUv-0k3L79BpO-ReN7fDI
+dependencies:
+  module:
+    - node
+    - image
 id: node
 label: Content
 tags:
+  canonical_url: '[current-page:url]'
   title: '[node:title] | [site:name]'
   description: '[node:summary]'
-  canonical_url: '[node:url]'
+  image_src: '[node:field_page_primary_image:social_share]'
+  og_site_name: 'Petrie Island Canoe Club'
+  og_title: '[node:title]'
+  og_description: '[node:summary]'
+  og_type: article
+  og_url: '[current-page:url]'
+  og_image: '[node:field_page_primary_image:social_share]'
+  og_image_url: '[node:field_page_primary_image:social_share]'
+  og_image_secure_url: '[node:field_page_primary_image:social_share]'
+  twitter_cards_type: summary_large_image
+  twitter_cards_title: '[node:title]'
+  twitter_cards_description: '[node:summary]'
+  twitter_cards_image: '[node:field_page_primary_image:social_share]'

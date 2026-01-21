@@ -11,7 +11,7 @@ _core:
 id: daisyui_ext_content
 theme: daisyui_ext
 region: content
-weight: 1
+weight: 0
 provider: null
 plugin: system_main_block
 settings:

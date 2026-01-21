@@ -5,9 +5,12 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.story.body
+    - field.field.node.story.field_date_control
     - field.field.node.story.field_page_primary_image
     - node.type.story
   module:
+    - field_label
+    - nomarkup
     - text
     - user
 id: node.story.teaser
@@ -19,16 +22,41 @@ content:
     type: text_summary_or_trimmed
     label: hidden
     settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 100
+      trim_length: 300
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 1
+    region: content
+  field_page_primary_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: square_1
+      link: false
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: '1'
+    weight: 0
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 2
     region: content
 hidden:
-  field_page_primary_image: true
+  field_date_control: true
   langcode: true
   search_api_excerpt: true

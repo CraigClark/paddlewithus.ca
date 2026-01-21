@@ -177,3 +177,5 @@ z-[1100]
 z-[1110]
 
 mb-0
+justify-start
+items-start

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.story.body
+    - field.field.node.story.field_date_control
     - field.field.node.story.field_page_primary_image
     - node.type.story
   module:
@@ -19,22 +20,15 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 102
-    region: content
-  field_page_primary_image:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
+  field_date_control: true
+  field_page_primary_image: true
   langcode: true
   search_api_excerpt: true

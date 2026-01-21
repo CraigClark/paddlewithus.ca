@@ -2,10 +2,22 @@ uuid: 21422d45-664e-4453-9392-700a680166ad
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
 id: global
 label: Global
 tags:
   canonical_url: '[current-page:url]'
   title: '[current-page:title] | [site:name]'
+  description: '[site:slogan]'
+  image_src: 'https://petriecanoe.ca/themes/custom/daisyui_ext/images/picc-default.jpg'
+  og_site_name: 'Petrie Island Canoe Club'
+  og_title: '[current-page:title]'
+  og_description: '[site:slogan]'
+  og_type: website
+  og_url: '[current-page:url]'
+  og_image: 'https://petriecanoe.ca/themes/custom/daisyui_ext/images/picc-default.jpg'
+  og_image_url: 'https://petriecanoe.ca/themes/custom/daisyui_ext/images/picc-default.jpg'
+  og_image_secure_url: 'https://petriecanoe.ca/themes/custom/daisyui_ext/images/picc-default.jpg'
+  twitter_cards_type: summary_large_image
+  twitter_cards_title: '[current-page:title]'
+  twitter_cards_description: '[site:slogan]'
+  twitter_cards_image: 'https://petriecanoe.ca/themes/custom/daisyui_ext/images/picc-default.jpg'
