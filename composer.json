@@ -65,6 +65,7 @@
         "drupal/masquerade": "^2.0",
         "drupal/material_icons": "^2.0",
         "drupal/menu_item_role_access": "^2.4",
+        "drupal/metatag": "^2.2",
         "drupal/name": "^1.0",
         "drupal/node_view_permissions": "^2.0",
         "drupal/nomarkup": "^1.0",
