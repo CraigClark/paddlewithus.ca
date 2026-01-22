@@ -5,9 +5,11 @@ dependencies:
   config:
     - field.field.node.story.body
     - field.field.node.story.field_date_control
+    - field.field.node.story.field_link_override
     - field.field.node.story.field_page_primary_image
     - node.type.story
   module:
+    - link
     - text
     - user
 id: node.story.default
@@ -21,6 +23,18 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_link_override:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
     region: content
   links:
     settings: {  }

@@ -5,11 +5,13 @@ dependencies:
   config:
     - field.field.node.story.body
     - field.field.node.story.field_date_control
+    - field.field.node.story.field_link_override
     - field.field.node.story.field_page_primary_image
     - node.type.story
   module:
     - datetime
     - hide_revision_field
+    - link
     - media_library
     - text
 id: node.story.default
@@ -32,6 +34,14 @@ content:
     weight: 4
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_link_override:
+    type: link_default
+    weight: 6
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_page_primary_image:
     type: media_library_widget
