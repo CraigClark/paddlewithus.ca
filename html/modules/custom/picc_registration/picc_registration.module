@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Render\BubbleableMetadata;
 
 /**
  * Implements hook_ENTITY_TYPE_view_alter() for commerce_order_item.
@@ -253,4 +254,70 @@ function picc_registration_webform_submission_validate(array &$form, FormStateIn
       }
     }
   }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function picc_registration_token_info() {
+  $info = [];
+
+  $info['tokens']['commerce_order']['order_items_formatted'] = [
+    'name' => t('Order items (formatted with participants)'),
+    'description' => t('Lists order items with participant names, one per line.'),
+  ];
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function picc_registration_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+
+  if ($type == 'commerce_order' && !empty($data['commerce_order'])) {
+    /** @var \Drupal\commerce_order\Entity\OrderInterface $order */
+    $order = $data['commerce_order'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'order_items_formatted':
+          $items = [];
+          foreach ($order->getItems() as $order_item) {
+            $title = $order_item->getTitle();
+
+            // Get participant name if available.
+            $participant_name = '';
+            if ($order_item->hasField('field_participant') && !$order_item->get('field_participant')->isEmpty()) {
+              /** @var \Drupal\profile\Entity\ProfileInterface $profile */
+              $profile = $order_item->get('field_participant')->entity;
+              if ($profile && $profile->hasField('field_name') && !$profile->get('field_name')->isEmpty()) {
+                // Get the formatted name from the Name field.
+                $name_field = $profile->get('field_name')->first();
+                if ($name_field) {
+                  $given = $name_field->given ?? '';
+                  $family = $name_field->family ?? '';
+                  $participant_name = trim($given . ' ' . $family);
+                }
+              }
+            }
+
+            // Format: "Participant Name: Program Title" or just "Program Title".
+            if (!empty($participant_name)) {
+              $items[] = '<strong>' . htmlspecialchars($participant_name) . '</strong>: ' . htmlspecialchars($title);
+            }
+            else {
+              $items[] = htmlspecialchars($title);
+            }
+          }
+
+          // Join with line breaks for HTML email.
+          $replacements[$original] = implode('<br>', $items);
+          break;
+      }
+    }
+  }
+
+  return $replacements;
 }
