@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformSubmissionInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Render\Markup;
 
 /**
  * Implements hook_ENTITY_TYPE_view_alter() for commerce_order_item.
@@ -312,8 +313,8 @@ function picc_registration_tokens($type, $tokens, array $data, array $options, B
             }
           }
 
-          // Join with line breaks for HTML email.
-          $replacements[$original] = implode('<br>', $items);
+          // Join with line breaks and mark as safe HTML.
+          $replacements[$original] = Markup::create(implode('<br>', $items));
           break;
       }
     }

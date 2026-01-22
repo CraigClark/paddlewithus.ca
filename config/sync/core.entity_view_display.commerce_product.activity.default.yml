@@ -258,7 +258,7 @@ content:
           attributes:
             source_id: attributes
             source:
-              value: 'class="hero bg-base-200 min-h-screen"'
+              value: 'class="hero bg-base-200 min-h-40 md:min-h-96"'
           heading_level:
             source_id: select
             source:
