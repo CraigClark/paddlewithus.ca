@@ -61,6 +61,7 @@
         "drupal/hide_revision_field": "^2.5",
         "drupal/key": "^1.21",
         "drupal/language_switcher_extended": "^1.1",
+        "drupal/linkit": "^7.0",
         "drupal/login_emailusername": "^3.0",
         "drupal/masquerade": "^2.0",
         "drupal/material_icons": "^2.0",

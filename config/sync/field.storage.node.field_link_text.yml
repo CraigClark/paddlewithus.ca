@@ -1,16 +1,18 @@
-uuid: 139942bb-706b-448c-86d6-3fb2597669da
+uuid: e1ef048e-b4f6-408b-bc44-a15b34ce9cdc
 langcode: en
 status: true
 dependencies:
   module:
-    - link
     - node
-id: node.field_link_override
-field_name: field_link_override
+id: node.field_link_text
+field_name: field_link_text
 entity_type: node
-type: link
-settings: {  }
-module: link
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
 locked: false
 cardinality: 1
 translatable: true
