@@ -9,6 +9,7 @@ dependencies:
     - field.field.commerce_product_variation.activity.field_age_min
     - field.field.commerce_product_variation.activity.field_capacity
     - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_desc
     - field.field.commerce_product_variation.activity.field_discount_1
     - field.field.commerce_product_variation.activity.field_discount_2
     - field.field.commerce_product_variation.activity.field_discount_3
@@ -72,6 +73,7 @@ hidden:
   commerce_variation_cart_form: true
   field_age_calc_date: true
   field_age_min: true
+  field_desc: true
   field_discount_1: true
   field_discount_2: true
   field_discount_3: true

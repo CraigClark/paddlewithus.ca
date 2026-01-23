@@ -5504,9 +5504,6 @@
   .min-h-full {
     min-height: 100%;
   }
-  .min-h-screen {
-    min-height: 100vh;
-  }
   .btn-wide {
     @layer daisyui.l1.l2 {
       width: 100%;

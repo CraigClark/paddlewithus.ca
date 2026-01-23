@@ -13,13 +13,13 @@ field_name: body
 entity_type: node
 bundle: story
 label: Body
-description: ''
-required: false
+description: "<p><b>Writing tips</b></p>\r\n<ul>\r\n<li><b>Formatting:</b> Go easy on bold, emphasis and capitals. It's hard to read for some people, this is an accessibility issue.</li>\r\n</ul>\r\n\r\n<p><b>Using the summary field</p>\r\n\r\n<p>This text appears in:</p>\r\n<ul>\r\n  <li>Lists within the site, such as the front page</li>\r\n  <li>Search results</li>\r\n  <li>Preview snippets, for example in social media posts when the page is shared</li>\r\n</ul>\r\n\r\n<p>Keep it brief (1–2 sentences).</p>\r\n\r\n"
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: false
+  display_summary: true
   required_summary: false
   allowed_formats:
     - full_html

@@ -8,6 +8,7 @@ dependencies:
     - field.field.commerce_product_variation.activity.field_age_min
     - field.field.commerce_product_variation.activity.field_capacity
     - field.field.commerce_product_variation.activity.field_date_range
+    - field.field.commerce_product_variation.activity.field_desc
     - field.field.commerce_product_variation.activity.field_discount_1
     - field.field.commerce_product_variation.activity.field_discount_2
     - field.field.commerce_product_variation.activity.field_discount_3
@@ -196,6 +197,22 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 8
             additional: {  }
+          308dc4d6-a92e-4407-926a-944f20058523:
+            uuid: 308dc4d6-a92e-4407-926a-944f20058523
+            region: content
+            configuration:
+              id: 'field_block:commerce_product_variation:activity:field_desc'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
         third_party_settings: {  }
 id: commerce_product_variation.activity.default
 targetEntityType: commerce_product_variation
@@ -236,6 +253,14 @@ content:
         label_value: ''
         label_tag: ''
     weight: 2
+    region: content
+  field_desc:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
     region: content
   field_discount_1:
     type: number_integer

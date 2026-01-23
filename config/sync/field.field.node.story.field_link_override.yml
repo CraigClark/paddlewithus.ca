@@ -1,17 +1,17 @@
-uuid: f68c6b81-a1d3-4fc7-b0d4-807e451468c6
+uuid: 7904d49b-9c54-43ac-b7c9-e8d0379fd83f
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_redirect_url
+    - field.storage.node.field_link_override
     - node.type.story
   module:
     - link
-id: node.story.field_redirect_url
-field_name: field_redirect_url
+id: node.story.field_link_override
+field_name: field_link_override
 entity_type: node
 bundle: story
-label: 'Redirect / destination URL'
+label: 'Link override'
 description: ''
 required: false
 translatable: false

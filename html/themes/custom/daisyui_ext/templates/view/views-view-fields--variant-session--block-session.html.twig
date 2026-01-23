@@ -89,10 +89,19 @@
 {% set capacity   = fields.field_capacity is defined ? fields.field_capacity.content : '' %}
 {% set price      = fields.price__number is defined ? fields.price__number.content : '' %}
 
+{# Description field (optional) - keep Views output as-is (prevents &amp;) #}
+{% set desc = fields.field_desc is defined ? fields.field_desc.content : '' %}
+
 <div class="card bg-base-100 border border-base-300 mb-3">
   <div class="card-body p-4">
     {% if date_range %}
-      <div class="font-semibold">{{ date_range }}</div>
+      <div class="font-semibold">
+        {% if desc %}
+          {{ desc }}, {{ date_range }}
+        {% else %}
+          {{ date_range }}
+        {% endif %}
+      </div>
     {% endif %}
 
     {% if capacity %}
@@ -123,8 +132,7 @@
             <li>{{ fields.field_discount_5_up.content }}{{ '% for fifth and each additional person'|t }}</li>
           {% endif %}
         </ul>
-        <p>{{ 'Discount codes are for members of the same family attending the same session. If you have family members participating in different programs, please contact us.'|t }}
-
+        <p>{{ 'Discount codes are for members of the same family attending the same session. If you have family members participating in different programs, please contact us.'|t }}</p>
       </details>
     {% endif %}
 

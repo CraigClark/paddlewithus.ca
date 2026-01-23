@@ -6,11 +6,8 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.story.body
     - field.field.node.story.field_date_control
-    - field.field.node.story.field_link_text
+    - field.field.node.story.field_link_override
     - field.field.node.story.field_page_primary_image
-    - field.field.node.story.field_redirect_enabled
-    - field.field.node.story.field_redirect_url
-    - field.field.node.story.field_summary
     - node.type.story
   module:
     - field_label
@@ -62,9 +59,6 @@ content:
     region: content
 hidden:
   field_date_control: true
-  field_link_text: true
-  field_redirect_enabled: true
-  field_redirect_url: true
-  field_summary: true
+  field_link_override: true
   langcode: true
   search_api_excerpt: true

@@ -1,12 +1,12 @@
-uuid: e1ef048e-b4f6-408b-bc44-a15b34ce9cdc
+uuid: 34c89967-8558-4f0a-9eea-97bb3597c786
 langcode: en
 status: true
 dependencies:
   module:
-    - node
-id: node.field_link_text
-field_name: field_link_text
-entity_type: node
+    - commerce_product
+id: commerce_product_variation.field_desc
+field_name: field_desc
+entity_type: commerce_product_variation
 type: string
 settings:
   max_length: 255
