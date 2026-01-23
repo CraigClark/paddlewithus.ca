@@ -1,22 +1,49 @@
+########################################
 # Drupal
-test-results
-scripts/local
-scripts/drupal
-files-private/
-tmp/
+########################################
+test-results/
+scripts/local/
+scripts/drupal/
+content/
 
-# Composer files
+# Private files (ignore everything under it)
+files-private/**
+
+# If you truly want this ignored, keep it. Otherwise remove.
+config/sync/.htaccess
+
+
+########################################
+# Composer
+########################################
+vendor/
+*/*/vendor/
+*/*/*/vendor/
+
+
+########################################
+# Built docroot (track only custom code)
+########################################
 html/*
+
 !html/modules/
+html/modules/*
+!html/modules/custom/
+
 !html/themes/
+html/themes/*
+!html/themes/custom/
 
-vendor
-*/*/*/vendor
-*/*/vendor
+!html/libraries/
+html/libraries/*
+!html/libraries/ckeditor5_plugins/
 
-# Ignore Development Files
+
+########################################
+# Local / dev artifacts
+########################################
 compass_app_log.txt
-*.DS_Store
+.DS_Store
 *.diff
 *.err
 *.orig
@@ -26,38 +53,78 @@ compass_app_log.txt
 *.swp
 *.vi
 *.sass-cache
-*.ddev
-*.prettierignore
-*.editorconfig
-.vscode/
-.nova
-notes/
+.env.local
 
+
+
+########################################
 # Node
+########################################
 node_modules/
 bower_components/
 
-# PhpStorm
-.idea
 
-# SASS
-.sass-cache
+########################################
+# IDEs
+########################################
+.idea/
+
+
+########################################
+# SASS / CSS caches
+########################################
+.sass-cache/
 *.sass-cache*
 **/sass/*.css
 
 
+########################################
+# DaisyUI Extended Theme
+########################################
+html/themes/custom/daisyui_ext/node_modules/
+# Uncomment if you do not commit build artifacts
+# html/themes/custom/daisyui_ext/dist/
+
+
+########################################
+# Starter DB snapshot (explicitly tracked)
+########################################
+!starter-db.sql.gz
+
+
+########################################
+# DDEV (track config, ignore generated/runtime)
+########################################
+
+# Generated / local-only
+.ddev/traefik/certs/
+.ddev/state.yaml
+.ddev/.dbimage/
+.ddev/db_snapshots/
+.ddev/imports/
+.ddev/.downloads/
+.ddev/.global_commands/
+.ddev/homeadditions/
+.ddev/commands/host/
+.ddev/logs/
+.ddev/traefik/
+
+# Local overrides
+.ddev/config.local.yaml
+.ddev/router-compose.yaml
+.ddev/docker-compose.web.local.yaml
+.ddev/docker-compose.database.local.yaml
+
+
+########################################
 # Custom
-docker
-html/modules/*
-html/themes/*
-!html/modules/custom/
-!html/themes/custom/
-!/html/robots.txt
-/notes
-/tmp
-/ignore
+########################################
+docker/
+notes/
+tmp/
 
-#Databases
-*.sql.gz
+########################################
+# DBs
+########################################
+
 *.sql
-
