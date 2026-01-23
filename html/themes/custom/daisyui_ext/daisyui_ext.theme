@@ -212,5 +212,15 @@ function daisyui_ext_form_views_form_commerce_cart_form_default_alter(&$form, \D
   }
 }
 
+/**
+ * Implements hook_preprocess_field().
+ */
+function daisyui_ext_preprocess_field(array &$variables): void {
+  // Target only field_coach_lang.
+  if ($variables['element']['#field_name'] === 'field_coach_lang') {
+    $variables['attributes']['class'][] = 'prose';
+  }
+}
+
 
 

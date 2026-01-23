@@ -8,6 +8,7 @@ dependencies:
     - field.field.commerce_product.activity.field_acivity_type
     - field.field.commerce_product.activity.field_age_range
     - field.field.commerce_product.activity.field_audience
+    - field.field.commerce_product.activity.field_coach_lang
     - field.field.commerce_product.activity.field_contact_email
     - field.field.commerce_product.activity.field_equipmenet_provided
     - field.field.commerce_product.activity.field_experience
@@ -58,6 +59,7 @@ third_party_settings:
     group_description:
       children:
         - body
+        - field_coach_lang
         - field_location
         - field_schedule
         - field_equipmenet_provided
@@ -89,7 +91,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 10
     region: content
   field_age_range:
     type: ui_patterns_component_per_item
@@ -151,6 +153,21 @@ content:
         referenced_entity: ''
     weight: 3
     region: content
+  field_coach_lang:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: 'Language used during coaching'
+        label_tag: h3
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 11
+    region: content
   field_contact_email:
     type: formatter_suite_general_email
     label: above
@@ -184,7 +201,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 11
+    weight: 14
     region: content
   field_experience:
     type: list_default
@@ -215,7 +232,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 8
+    weight: 12
     region: content
   field_schedule:
     type: text_default
@@ -230,7 +247,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 9
+    weight: 13
     region: content
   field_what_to_bring:
     type: text_default
@@ -245,7 +262,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 12
+    weight: 15
     region: content
   title:
     type: ui_patterns_component_per_item

@@ -1,0 +1,33 @@
+uuid: f53d4f7d-116e-4751-b66f-a0e6ba1231ab
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - options
+id: commerce_product.field_coach_lang
+field_name: field_coach_lang
+entity_type: commerce_product
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: fr
+      label: French
+    -
+      value: en
+      label: English
+    -
+      value: en_primary_bi
+      label: 'Primarily English (coach is bilingual)'
+    -
+      value: bilingual
+      label: 'Bilingual (English and French)'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
