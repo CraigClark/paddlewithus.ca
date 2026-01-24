@@ -54,6 +54,7 @@ compass_app_log.txt
 *.vi
 *.sass-cache
 .env.local
+.nova
 
 
 
