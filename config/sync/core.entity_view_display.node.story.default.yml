@@ -5,8 +5,12 @@ dependencies:
   config:
     - field.field.node.story.body
     - field.field.node.story.field_date_control
-    - field.field.node.story.field_link_override
+    - field.field.node.story.field_link_text
     - field.field.node.story.field_page_primary_image
+    - field.field.node.story.field_redirect
+    - field.field.node.story.field_redirect_destination
+    - field.field.node.story.field_sticky
+    - field.field.node.story.field_summary
     - node.type.story
   module:
     - link
@@ -24,7 +28,25 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_link_override:
+  field_link_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_redirect:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_redirect_destination:
     type: link
     label: above
     settings:
@@ -33,6 +55,23 @@ content:
       url_plain: false
       rel: ''
       target: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_sticky:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_summary:
+    type: basic_string
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
     weight: 2
     region: content

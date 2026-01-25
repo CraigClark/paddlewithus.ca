@@ -1,0 +1,19 @@
+uuid: 8160030a-b7b1-4131-8a2e-c1712acbc77e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_summary
+    - node.type.story
+id: node.story.field_summary
+field_name: field_summary
+entity_type: node
+bundle: story
+label: Summary
+description: 'Short description used in listings, search results and social media'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

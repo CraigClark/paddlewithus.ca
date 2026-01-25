@@ -1,0 +1,23 @@
+uuid: 13993e87-dea5-41fc-a0be-e7c911d3cabc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_redirect
+    - node.type.story
+id: node.story.field_redirect
+field_name: field_redirect
+entity_type: node
+bundle: story
+label: 'Redirect to a different page'
+description: ' If enabled, visitors will be sent to another page instead of this content.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

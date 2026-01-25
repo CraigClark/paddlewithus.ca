@@ -11,11 +11,14 @@ id: node.story.field_date_control
 field_name: field_date_control
 entity_type: node
 bundle: story
-label: 'Remove from home'
-description: 'Select the date you want the story to be removed from the home page. The page will still exist, just not on the home feed.'
+label: 'Remove from home on'
+description: 'Select the date after which this story should no longer appear on the home page. The page will remain accessible.'
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+90 days'
 default_value_callback: ''
 settings: {  }
 field_type: datetime

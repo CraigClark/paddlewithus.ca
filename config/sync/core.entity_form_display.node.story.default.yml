@@ -5,13 +5,18 @@ dependencies:
   config:
     - field.field.node.story.body
     - field.field.node.story.field_date_control
-    - field.field.node.story.field_link_override
+    - field.field.node.story.field_link_text
     - field.field.node.story.field_page_primary_image
+    - field.field.node.story.field_redirect
+    - field.field.node.story.field_redirect_destination
+    - field.field.node.story.field_sticky
+    - field.field.node.story.field_summary
     - node.type.story
   module:
+    - conditional_fields
     - datetime
     - hide_revision_field
-    - link
+    - linkit
     - media_library
     - text
 id: node.story.default
@@ -21,27 +26,45 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 2
+    weight: 3
     region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        2f4a397d-1276-4491-bcd1-dbfaaa7ac93c:
+          entity_type: node
+          bundle: story
+          dependee: field_redirect
+          settings:
+            state: '!visible'
+            reset: false
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: false
+            effect: show
+            effect_options: {  }
+            selector: ''
   field_date_control:
     type: datetime_default
-    weight: 4
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_link_override:
-    type: link_default
-    weight: 6
+  field_link_text:
+    type: string_textfield
+    weight: 4
     region: content
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_page_primary_image:
     type: media_library_widget
@@ -50,9 +73,76 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
+  field_redirect:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_redirect_destination:
+    type: linkit
+    weight: 6
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: false
+    third_party_settings:
+      conditional_fields:
+        cd65b48c-3433-4b18-8752-3dd123141bb7:
+          entity_type: node
+          bundle: story
+          dependee: field_redirect
+          settings:
+            state: disabled
+            reset: false
+            condition: '!checked'
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: false
+            effect: show
+            effect_options: {  }
+            selector: ''
+        8d879dc1-0275-4a6e-9295-cfc6bfe3ddd8:
+          entity_type: node
+          bundle: story
+          dependee: field_redirect
+          settings:
+            state: required
+            reset: false
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: false
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_sticky:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_summary:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   revision_log:
     type: hide_revision_field_log_widget
-    weight: 3
+    weight: 7
     region: content
     settings:
       rows: 5
@@ -65,7 +155,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 10
     region: content
     settings:
       display_label: true

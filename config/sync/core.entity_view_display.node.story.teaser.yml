@@ -6,11 +6,17 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.story.body
     - field.field.node.story.field_date_control
-    - field.field.node.story.field_link_override
+    - field.field.node.story.field_link_text
     - field.field.node.story.field_page_primary_image
+    - field.field.node.story.field_redirect
+    - field.field.node.story.field_redirect_destination
+    - field.field.node.story.field_sticky
+    - field.field.node.story.field_summary
     - node.type.story
   module:
+    - datetime
     - field_label
+    - link
     - nomarkup
     - text
     - user
@@ -35,6 +41,23 @@ content:
         referenced_entity: ''
     weight: 1
     region: content
+  field_date_control:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_link_text:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_page_primary_image:
     type: entity_reference_entity_view
     label: hidden
@@ -52,13 +75,41 @@ content:
         referenced_entity: '1'
     weight: 0
     region: content
+  field_redirect:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_redirect_destination:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_summary:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 2
     region: content
 hidden:
-  field_date_control: true
-  field_link_override: true
+  field_sticky: true
   langcode: true
   search_api_excerpt: true
