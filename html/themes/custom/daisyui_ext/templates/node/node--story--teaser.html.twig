@@ -15,9 +15,9 @@
           {{ label }}
         </h2>
 
-        {% if node.body.summary is not empty %}
+        {% if node.field_summary is defined and node.field_summary.value is not empty %}
           <p class="py-6">
-            {{ node.body.summary }}
+            {{ node.field_summary.value }}
           </p>
         {% endif %}
 
