@@ -1,0 +1,22 @@
+uuid: cc24318f-f8fa-4dcb-b21f-7f858c6a0b7f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: story_fr
+label: 'story FR'
+type: 'canonical_entities:node'
+pattern: '/histoires/[node:title]'
+selection_criteria:
+  98438a34-cacc-4d81-8864-b3c3512684fc:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 98438a34-cacc-4d81-8864-b3c3512684fc
+    context_mapping:
+      node: node
+    bundles:
+      story: story
+selection_logic: and
+weight: -5
+relationships: {  }
