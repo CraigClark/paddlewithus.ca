@@ -1,0 +1,5 @@
+name: PICC Extended
+type: module
+description: Redirect support for nodes with redirect fields and a bypass permission.
+core_version_requirement: ^10 || ^11
+package: PICC

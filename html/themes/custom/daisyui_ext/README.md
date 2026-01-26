@@ -12,7 +12,7 @@ Example command to generate your theme from your `web` folder
 php core/scripts/drupal generate-theme my_daisyui_theme --starterkit daisyui_ext --path themes/custom
 ```
 
-Then go to the new theme and run these commands to generate the CSS files: 
+Then go to the new theme and run these commands to generate the CSS files:
 - `npm install`
 - `npm run build`
 
@@ -47,7 +47,7 @@ For a detailed documentation on how to deal with DaisyUI themes, please refer to
 - `npm install`
 
 #### Build CSS (uses Vite)
-- `npm run build`
+- ``
 ```
 ❯ npm run build
 
@@ -73,7 +73,7 @@ For a detailed documentation on how to deal with DaisyUI themes, please refer to
 
 ### Updating an existing theme
 
-Let's focus on the DaiysUI Dark theme override already there in the starterkit, provided as an example. 
+Let's focus on the DaiysUI Dark theme override already there in the starterkit, provided as an example.
 
 #### Updating new .pcss.css file
 
@@ -104,11 +104,11 @@ daisyui:
     theme:
       ...
       "dist/css/themes/dark.css": { minified: true }
-``` 
+```
 
 #### About UI Skins awarness
 
-As the UI Skins definition of this theme is already present in the parent theme, nothing has to be updated on this part. 
+As the UI Skins definition of this theme is already present in the parent theme, nothing has to be updated on this part.
 
 The Dark DaisyUI theme is available under `/admin/appearance/settings/my_daisyui_theme` in the theme section.
 
@@ -116,7 +116,7 @@ The Dark DaisyUI theme is available under `/admin/appearance/settings/my_daisyui
 
 #### Adding new .pcss.css file
 
-To add a new (random) theme, a new `css/themes/random.pcss.css` file must be created: 
+To add a new (random) theme, a new `css/themes/random.pcss.css` file must be created:
 ```
 /**
  * Use this file to add DaisyUI random theme,
@@ -177,7 +177,7 @@ daisyui:
 
 If `my_daisyui_theme.ui_skins.themes.yml` file doesn't exist in your theme, just create it.
 
-In order to use this new DaisyUI theme as configuration thanks to UI Skins modules, add a new definition to the `my_daisyui_theme.ui_skins.themes.yml` file as follows: 
+In order to use this new DaisyUI theme as configuration thanks to UI Skins modules, add a new definition to the `my_daisyui_theme.ui_skins.themes.yml` file as follows:
 
 ```
 random:

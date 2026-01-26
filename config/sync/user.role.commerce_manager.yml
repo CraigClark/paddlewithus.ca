@@ -21,6 +21,7 @@ dependencies:
     - filter
     - masquerade
     - media
+    - picc_ext
     - profile
     - system
     - toolbar
@@ -56,6 +57,7 @@ permissions:
   - 'manage activity_registration commerce_order_item'
   - 'masquerade as account_holder'
   - 'masquerade as authenticated'
+  - 'skip node redirect'
   - 'translate activity commerce_product'
   - 'translate commerce_product_variation'
   - 'unlock orders'

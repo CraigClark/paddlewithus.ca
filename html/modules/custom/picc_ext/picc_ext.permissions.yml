@@ -1,0 +1,4 @@
+skip node redirect:
+  title: 'Skip node redirect'
+  description: 'View nodes that have redirect enabled without being redirected.'
+  restrict access: true

@@ -106,6 +106,7 @@ module:
   path: 0
   path_alias: 0
   picc_discount: 0
+  picc_ext: 0
   picc_registration: 0
   picc_sku: 0
   profile: 0

@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: Story
 type: story
-description: null
+description: 'Stories appear on the front page of the site.'
 help: null
 new_revision: true
 preview_mode: 1

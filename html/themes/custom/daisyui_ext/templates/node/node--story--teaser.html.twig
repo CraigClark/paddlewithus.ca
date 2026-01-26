@@ -10,6 +10,21 @@
         </div>
       {% endif %}
 
+      {% set destination = url %}
+      {% if node.field_redirect is defined
+        and node.field_redirect.value
+        and node.field_redirect_destination is defined
+        and node.field_redirect_destination is not empty
+      %}
+        {# Link field stores a Url object; toString gives the href #}
+        {% set destination = node.field_redirect_destination.0.url.toString %}
+      {% endif %}
+
+      {% set cta = 'Read more'|t %}
+      {% if node.field_link_text is defined and node.field_link_text.value is not empty %}
+        {% set cta = node.field_link_text.value %}
+      {% endif %}
+
       <div>
         <h2 class="text-5xl font-bold">
           {{ label }}
@@ -21,8 +36,8 @@
           </p>
         {% endif %}
 
-        <a href="{{ url }}" class="btn btn-primary">
-          Read more
+        <a href="{{ destination }}" class="btn btn-primary">
+          {{ cta }}
         </a>
       </div>
 

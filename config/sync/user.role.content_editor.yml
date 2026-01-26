@@ -18,6 +18,7 @@ dependencies:
     - filter
     - node
     - path
+    - picc_ext
     - system
     - taxonomy
     - taxonomy_manager
@@ -67,6 +68,7 @@ permissions:
   - 'revert term revisions in competition_class'
   - 'revert term revisions in program_types'
   - 'revert term revisions in regatta'
+  - 'skip node redirect'
   - 'translate any entity'
   - 'translate page node'
   - 'update content translations'
