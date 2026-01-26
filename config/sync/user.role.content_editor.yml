@@ -3,25 +3,44 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block_content.type.basic
     - filter.format.basic_html
+    - filter.format.full_html
+    - media.type.audio
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - node.type.embed
     - node.type.page
+    - node.type.story
     - taxonomy.vocabulary.activity
+    - taxonomy.vocabulary.activity_type
     - taxonomy.vocabulary.boat
+    - taxonomy.vocabulary.club
     - taxonomy.vocabulary.competition_class
+    - taxonomy.vocabulary.experience_level
     - taxonomy.vocabulary.program_types
     - taxonomy.vocabulary.regatta
+    - taxonomy.vocabulary.season
     - taxonomy.vocabulary.tags
   module:
+    - block_content
+    - coffee
     - content_translation
     - contextual
     - file
     - filter
+    - media
     - node
     - path
     - picc_ext
+    - rabbit_hole
+    - shortcut
     - system
     - taxonomy
     - taxonomy_manager
+    - trash
 _core:
   default_config_hash: e_wG1u7SrGaJbY2-Szgbgl-c8T3kdirU3uTNq2c_QJQ
 id: content_editor
@@ -30,31 +49,67 @@ weight: 2
 is_admin: false
 permissions:
   - 'access administration pages'
+  - 'access block library'
+  - 'access coffee'
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
+  - 'access media overview'
+  - 'access shortcuts'
   - 'access taxonomy manager list'
   - 'access taxonomy overview'
+  - 'access trash'
   - 'administer url aliases'
+  - 'create audio media'
   - 'create content translations'
+  - 'create document media'
+  - 'create embed content'
+  - 'create image media'
+  - 'create media'
   - 'create page content'
+  - 'create remote_video media'
+  - 'create story content'
   - 'create terms in activity'
+  - 'create terms in activity_type'
   - 'create terms in boat'
+  - 'create terms in club'
   - 'create terms in competition_class'
+  - 'create terms in experience_level'
   - 'create terms in program_types'
   - 'create terms in regatta'
+  - 'create terms in season'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'create video media'
+  - 'delete any audio media'
+  - 'delete any document media'
+  - 'delete any image media'
+  - 'delete any media'
+  - 'delete any page content'
+  - 'delete any remote_video media'
+  - 'delete any story content'
+  - 'delete any video media'
   - 'delete content translations'
+  - 'delete embed revisions'
   - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
+  - 'delete story revisions'
   - 'delete terms in activity'
   - 'delete terms in boat'
   - 'delete terms in competition_class'
   - 'delete terms in program_types'
   - 'delete terms in regatta'
   - 'delete terms in tags'
+  - 'edit any audio media'
+  - 'edit any basic block content'
+  - 'edit any document media'
+  - 'edit any embed content'
+  - 'edit any image media'
+  - 'edit any page content'
+  - 'edit any remote_video media'
+  - 'edit any story content'
+  - 'edit any video media'
   - 'edit own page content'
   - 'edit terms in activity'
   - 'edit terms in boat'
@@ -62,7 +117,12 @@ permissions:
   - 'edit terms in program_types'
   - 'edit terms in regatta'
   - 'edit terms in tags'
+  - 'rabbit hole bypass media'
+  - 'rabbit hole bypass node'
+  - 'rabbit hole bypass taxonomy_term'
+  - 'restore node entities'
   - 'revert all revisions'
+  - 'revert any basic block content revisions'
   - 'revert term revisions in activity'
   - 'revert term revisions in boat'
   - 'revert term revisions in competition_class'
@@ -70,10 +130,19 @@ permissions:
   - 'revert term revisions in regatta'
   - 'skip node redirect'
   - 'translate any entity'
-  - 'translate page node'
+  - 'translate editable entities'
+  - 'update any media'
   - 'update content translations'
   - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'view all media revisions'
   - 'view all revisions'
+  - 'view any basic block content history'
+  - 'view any image media revisions'
+  - 'view any remote_video media revisions'
+  - 'view any video media revisions'
+  - 'view deleted entities'
+  - 'view media'
   - 'view own unpublished content'
   - 'view term revisions in activity'
   - 'view term revisions in boat'
@@ -81,3 +150,4 @@ permissions:
   - 'view term revisions in program_types'
   - 'view term revisions in regatta'
   - 'view term revisions in tags'
+  - 'view the administration theme'

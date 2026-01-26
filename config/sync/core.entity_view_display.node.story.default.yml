@@ -9,11 +9,9 @@ dependencies:
     - field.field.node.story.field_page_primary_image
     - field.field.node.story.field_redirect
     - field.field.node.story.field_redirect_destination
-    - field.field.node.story.field_sticky
     - field.field.node.story.field_summary
     - node.type.story
   module:
-    - link
     - text
     - user
 id: node.story.default
@@ -28,53 +26,6 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_link_text:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_redirect:
-    type: boolean
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 4
-    region: content
-  field_redirect_destination:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  field_sticky:
-    type: boolean
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  field_summary:
-    type: basic_string
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -82,6 +33,10 @@ content:
     region: content
 hidden:
   field_date_control: true
+  field_link_text: true
   field_page_primary_image: true
+  field_redirect: true
+  field_redirect_destination: true
+  field_summary: true
   langcode: true
   search_api_excerpt: true

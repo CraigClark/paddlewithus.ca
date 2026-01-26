@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.story.field_page_primary_image
     - field.field.node.story.field_redirect
     - field.field.node.story.field_redirect_destination
-    - field.field.node.story.field_sticky
     - field.field.node.story.field_summary
     - node.type.story
   module:
@@ -110,6 +109,5 @@ content:
     weight: 2
     region: content
 hidden:
-  field_sticky: true
   langcode: true
   search_api_excerpt: true

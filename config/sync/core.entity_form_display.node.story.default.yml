@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.story.field_page_primary_image
     - field.field.node.story.field_redirect
     - field.field.node.story.field_redirect_destination
-    - field.field.node.story.field_sticky
     - field.field.node.story.field_summary
     - node.type.story
   module:
@@ -125,13 +124,6 @@ content:
             effect: show
             effect_options: {  }
             selector: ''
-  field_sticky:
-    type: boolean_checkbox
-    weight: 9
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_summary:
     type: string_textarea
     weight: 2
