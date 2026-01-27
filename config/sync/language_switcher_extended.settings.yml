@@ -5,5 +5,5 @@ current_language_mode: hide_link
 untranslated_handler: hide_link
 translation_detection: default
 hide_single_link: false
-show_langcode: false
+show_langcode: true
 hide_single_link_block: 0

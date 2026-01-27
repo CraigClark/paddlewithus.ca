@@ -17,6 +17,7 @@ dependencies:
     - field.field.commerce_product.activity.field_schedule
     - field.field.commerce_product.activity.field_season
     - field.field.commerce_product.activity.field_what_to_bring
+    - filter.format.full_html
   module:
     - field_group
     - field_label
@@ -24,8 +25,8 @@ dependencies:
     - layout_builder
     - nomarkup
     - options
+    - range
     - text
-    - token
     - ui_patterns
     - ui_patterns_field_formatters
   theme:
@@ -265,73 +266,10 @@ content:
     weight: 15
     region: content
   title:
-    type: ui_patterns_component_per_item
+    type: string
     label: hidden
     settings:
-      ui_patterns:
-        component_id: 'ui_suite_daisyui:hero'
-        variant_id: null
-        props:
-          attributes:
-            source_id: attributes
-            source:
-              value: 'class="hero bg-base-200 min-h-40 md:min-h-96"'
-          heading_level:
-            source_id: select
-            source:
-              value: '1'
-          reverse:
-            source_id: checkbox
-            source:
-              value: false
-          centered:
-            source_id: checkbox
-            source:
-              value: false
-          responsive_centered:
-            source_id: checkbox
-            source:
-              value: false
-          overlay_image:
-            source_id: entity_reference
-            source:
-              derivable_context: 'entity_reference:commerce_product::field_primary_image:media:image'
-              'entity_reference:commerce_product::field_primary_image:media:image':
-                value:
-                  source_id: token
-                  source:
-                    value: '[media:field_media_image:max_1300x1300:url]'
-        slots:
-          aside: {  }
-          title:
-            sources:
-              -
-                source_id: entity_field
-                source:
-                  derivable_context: 'field:commerce_product::title'
-                  'field:commerce_product::title':
-                    value:
-                      sources:
-                        -
-                          source_id: 'field_property:commerce_product:title:value'
-                          node_id: ''
-                          third_party_settings: ''
-                          _weight: '0'
-                _weight: '0'
-                node_id: ''
-                third_party_settings: ''
-          text:
-            sources:
-              1:
-                source_id: token
-                source:
-                  value: '<p>[commerce_product:field_audience] <span class="lowercase">[commerce_product:field_acivity_type:entity:name]</span></p>'
-                _weight: '1'
-                node_id: ''
-                third_party_settings: ''
-          button: {  }
-        third_party_settings: ''
-        node_id: ''
+      link_to_entity: false
     third_party_settings:
       field_label:
         label_class: ''

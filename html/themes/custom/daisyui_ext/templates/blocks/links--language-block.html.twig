@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Plain inline implementation for a set of links.
+ *
+ * - No list markup.
+ * - Outputs links inline.
+ */
+#}
+
+{% if links %}
+  <nav{{ attributes.addClass(['ml-4']) }}>
+    {%- for item in links -%}
+      {%- if item.link -%}
+        <span class="underline underline-offset-4 hover:no-underline">
+          {{ item.link }}
+        </span>
+      {%- elseif item.text_attributes -%}
+        <span{{ item.text_attributes }}>{{ item.text }}</span>
+      {%- else -%}
+        {{ item.text }}
+      {%- endif -%}
+    {%- endfor -%}
+  </nav>
+{% endif %}
