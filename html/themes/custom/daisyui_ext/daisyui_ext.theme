@@ -1,200 +1,12 @@
 <?php
 
 /**
- * @file
- * Functions to support theming in the UI Suite DaisyUI theme.
- */
-
-declare(strict_types=1);
-
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\file\Entity\File;
-use Drupal\image\Entity\ImageStyle;
-use Drupal\file\FileInterface;
-use Drupal\media\MediaInterface;
-
-/**
- * Implements hook_form_alter().
- * Disables HTML5 validation so Drupal handles all validation.
- * Adds error summary at top of forms with validation errors.
- */
-function daisyui_ext_form_alter(array &$form, FormStateInterface $form_state, $form_id): void {
-  $form['#attributes']['novalidate'] = 'novalidate';
-
-  $real_form_id = $form['#form_id'] ?? '';
-  if ($real_form_id === 'profile_participant_add_form' || $real_form_id === 'profile_participant_edit_form') {
-    _daisyui_ext_participant_contact_labels($form);
-  }
-
-  $errors = $form_state->getErrors();
-  if (empty($errors)) {
-    return;
-  }
-
-  $error_summary = [
-    '#type' => 'container',
-    '#weight' => -1000,
-    '#attributes' => [
-      'class' => ['alert', 'alert-error', 'mb-6'],
-      'role' => 'alert',
-    ],
-  ];
-
-  $error_summary['heading'] = [
-    '#type' => 'html_tag',
-    '#tag' => 'div',
-    '#attributes' => ['class' => ['font-bold', 'text-lg', 'mb-2']],
-    '#value' => t('Error message'),
-  ];
-
-  $error_summary['message'] = [
-    '#type' => 'html_tag',
-    '#tag' => 'div',
-    '#value' => \Drupal::translation()->formatPlural(
-      count($errors),
-      '1 error has been found:',
-      '@count errors have been found:'
-    ),
-  ];
-
-  $items = [];
-  foreach ($errors as $name => $error) {
-    $field_id = 'edit-' . str_replace(['[', ']'], ['-', ''], (string) $name);
-    $items[] = [
-      '#type' => 'html_tag',
-      '#tag' => 'a',
-      '#attributes' => [
-        'href' => '#' . $field_id,
-        'class' => ['underline'],
-      ],
-      '#value' => $error,
-    ];
-  }
-
-  $error_summary['list'] = [
-    '#theme' => 'item_list',
-    '#items' => $items,
-    '#attributes' => ['class' => ['mt-2', 'space-y-1']],
-  ];
-
-  $form['error_summary'] = $error_summary;
-}
-
-/**
- * Implements hook_preprocess_form_element().
- */
-function daisyui_ext_preprocess_form_element(array &$variables): void {
-  if (!empty($variables['element']['#errors'])) {
-    if (isset($variables['label']['#attributes']['class'])) {
-      $variables['label']['#attributes']['class'][] = 'text-error';
-      $variables['label']['#attributes']['class'][] = 'font-semibold';
-    }
-  }
-}
-
-/**
- * Implements hook_preprocess_input().
- */
-function daisyui_ext_preprocess_input(array &$variables): void {
-  if (!empty($variables['element']['#errors'])) {
-    $variables['attributes']['class'][] = 'border-error';
-    $variables['attributes']['class'][] = 'border-2';
-  }
-}
-
-/**
- * Implements hook_preprocess_textarea().
- */
-function daisyui_ext_preprocess_textarea(array &$variables): void {
-  if (!empty($variables['element']['#errors'])) {
-    $variables['attributes']['class'][] = 'border-error';
-    $variables['attributes']['class'][] = 'border-2';
-  }
-}
-
-/**
- * Implements hook_preprocess_select().
- */
-function daisyui_ext_preprocess_select(array &$variables): void {
-  if (!empty($variables['element']['#errors'])) {
-    $variables['attributes']['class'][] = 'border-error';
-    $variables['attributes']['class'][] = 'border-2';
-  }
-}
-
-/**
- * Implements hook_theme_suggestions_form_alter().
- */
-function daisyui_ext_theme_suggestions_form_alter(array &$suggestions, array $variables): void {
-  $form_id = $variables['element']['#form_id'] ?? NULL;
-
-  if ($form_id === 'profile_participant_add_form' || $form_id === 'profile_participant_edit_form') {
-    $suggestions[] = 'form__profile_participant';
-  }
-}
-
-/**
- * Rename emergency contact field labels.
- */
-function _daisyui_ext_participant_contact_labels(array &$form): void {
-  $map = [
-    'field_emercency_contact_1_name'  => 'Name',
-    'field_emercency_contact_1_phone' => 'Phone',
-    'field_emercency_contact_1_rel'   => 'Relationship',
-
-    'field_emercency_contact_2_name'  => 'Name',
-    'field_emercency_contact_2_phone' => 'Phone',
-    'field_emercency_contact_2_rel'   => 'Relationship',
-
-    'field_emercency_contact_3_name'  => 'Name',
-    'field_emercency_contact_3_phone' => 'Phone',
-    'field_emercency_contact_3_rel'   => 'Relationship',
-  ];
-
-  foreach ($map as $field_key => $title) {
-    if (!isset($form[$field_key])) {
-      continue;
-    }
-
-    if (isset($form[$field_key]['widget'][0]['value']['#title'])) {
-      $form[$field_key]['widget'][0]['value']['#title'] = t($title);
-      continue;
-    }
-
-    if (isset($form[$field_key]['#title'])) {
-      $form[$field_key]['#title'] = t($title);
-      continue;
-    }
-
-    if (isset($form[$field_key]['widget'][0]) && is_array($form[$field_key]['widget'][0])) {
-      foreach ($form[$field_key]['widget'][0] as $child_key => $child) {
-        if (is_array($child) && isset($form[$field_key]['widget'][0][$child_key]['#title'])) {
-          $form[$field_key]['widget'][0][$child_key]['#title'] = t($title);
-          break;
-        }
-      }
-    }
-  }
-}
-
-/**
- * Implements hook_form_FORM_ID_alter() for the cart form.
- */
-function daisyui_ext_form_views_form_commerce_cart_form_default_alter(
-  array &$form,
-  FormStateInterface $form_state,
-  $form_id
-): void {
-  if (isset($form['actions']['checkout'])) {
-    $form['actions']['checkout']['#attributes']['class'] = ['btn', 'btn-primary', 'my-3'];
-  }
-}
-
-/**
  * Implements hook_preprocess_field().
  *
  * - Adds prose class to field_coach_lang
  * - Injects hero variables for commerce_product:activity title field
+ * - Builds subtitle per UI language using translated labels from Drupal
+ * - Finds hero image on product OR default variation (File or Media)
  */
 function daisyui_ext_preprocess_field(array &$variables): void {
   $element = $variables['element'] ?? [];
@@ -220,44 +32,74 @@ function daisyui_ext_preprocess_field(array &$variables): void {
     return;
   }
 
+  // UI language (you said this is 'fr' for French).
+  $langcode = \Drupal::languageManager()
+    ->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_INTERFACE)
+    ->getId();
+
+  $is_fr = ($langcode === 'fr');
+
+  /** @var \Drupal\Core\Entity\EntityRepositoryInterface $repo */
+  $repo = \Drupal::service('entity.repository');
+
+  // Get product translation from context (so labels resolve in current UI lang).
+  $product = $repo->getTranslationFromContext($product, $langcode);
+
   // Title.
   $variables['product_title'] = $product->label();
 
-  // Audience.
+  // Audience label (from allowed values). These labels MUST be translated via config translation.
   $variables['audience_label'] = '';
   if ($product->hasField('field_audience') && !$product->get('field_audience')->isEmpty()) {
-    $value = $product->get('field_audience')->value;
+    $raw = (string) $product->get('field_audience')->value;
     $allowed = $product->getFieldDefinition('field_audience')->getSetting('allowed_values') ?? [];
-    $variables['audience_label'] = $allowed[$value] ?? (string) $value;
+    $variables['audience_label'] = $allowed[$raw] ?? $raw;
   }
 
-  // Activity type (supports both machine names).
+  // Activity type label (taxonomy term). Term must be translated; we also pull translation from context.
   $variables['activity_type_label'] = '';
   foreach (['field_activity_type', 'field_acivity_type'] as $fname) {
     if ($product->hasField($fname) && !$product->get($fname)->isEmpty()) {
       $term = $product->get($fname)->entity;
       if ($term) {
+        $term = $repo->getTranslationFromContext($term, $langcode);
         $variables['activity_type_label'] = $term->label();
       }
       break;
     }
   }
 
-  // Hero background image (File or Media).
+  // Hero image: try product first, then default variation (common in Commerce).
   $variables['hero_image_url'] = '';
+  $image_entity = NULL;
+
   if ($product->hasField('field_primary_image') && !$product->get('field_primary_image')->isEmpty()) {
     $image_entity = $product->get('field_primary_image')->entity;
+  }
+
+  if (!$image_entity && method_exists($product, 'getDefaultVariation')) {
+    $variation = $product->getDefaultVariation();
+    if ($variation) {
+      $variation = $repo->getTranslationFromContext($variation, $langcode);
+      if ($variation->hasField('field_primary_image') && !$variation->get('field_primary_image')->isEmpty()) {
+        $image_entity = $variation->get('field_primary_image')->entity;
+      }
+    }
+  }
+
+  // Resolve File from File or Media.
+  if ($image_entity) {
     $file = NULL;
 
-    if ($image_entity instanceof FileInterface) {
+    if ($image_entity instanceof \Drupal\file\FileInterface) {
       $file = $image_entity;
     }
-
-    if (!$file && $image_entity instanceof MediaInterface) {
+    elseif ($image_entity instanceof \Drupal\media\MediaInterface) {
+      $image_entity = $repo->getTranslationFromContext($image_entity, $langcode);
       foreach (['field_media_image', 'image', 'field_image'] as $media_field) {
         if ($image_entity->hasField($media_field) && !$image_entity->get($media_field)->isEmpty()) {
           $file = $image_entity->get($media_field)->entity;
-          if ($file instanceof FileInterface) {
+          if ($file instanceof \Drupal\file\FileInterface) {
             break;
           }
           $file = NULL;
@@ -265,12 +107,23 @@ function daisyui_ext_preprocess_field(array &$variables): void {
       }
     }
 
-    if ($file instanceof FileInterface) {
+    if ($file instanceof \Drupal\file\FileInterface) {
       $uri = $file->getFileUri();
-      $style = ImageStyle::load('max_1300x1300');
-      $variables['hero_image_url'] = $style
-        ? $style->buildUrl($uri)
-        : file_create_url($uri);
+      $style = \Drupal\image\Entity\ImageStyle::load('max_1300x1300');
+      $variables['hero_image_url'] = $style ? $style->buildUrl($uri) : file_create_url($uri);
     }
+  }
+
+  // Subtitle assembly ONLY (no translation mapping).
+  $audience = trim((string) $variables['audience_label']);
+  $program_type = trim((string) $variables['activity_type_label']);
+
+  if ($is_fr) {
+    // FR: program type then audience.
+    $variables['subtitle'] = trim(implode(' ', array_filter([$program_type, $audience])));
+  }
+  else {
+    // EN: audience then program type (lowercase program type for style, if desired).
+    $variables['subtitle'] = trim(implode(' ', array_filter([$audience, $program_type ? strtolower($program_type) : ''])));
   }
 }
