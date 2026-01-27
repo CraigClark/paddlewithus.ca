@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * field--commerce-product--title--activity.html.twig
+ *
+ * Render the product title field as a DaisyUI hero header.
+ */
+#}
+
+{% set hero_classes = [
+  'hero',
+  'bg-base-200',
+  'min-h-40',
+  'md:min-h-96'
+] %}
+
+<div{{ attributes.addClass('field', 'field--name-title', 'field--type-string', 'field--label-hidden', 'field__item') }}>
+  <div class="{{ hero_classes|join(' ') }}"
+    {% if hero_image_url %}
+      style="background-image: url({{ hero_image_url }})"
+    {% endif %}
+  >
+    {% if hero_image_url %}
+      <div class="hero-overlay bg-opacity-60"></div>
+    {% endif %}
+
+    <div class="hero-content">
+      <div class="max-w-md{% if hero_image_url %} text-neutral-content{% endif %}">
+        <h1 class="text-5xl font-bold">
+          {{ product_title|default(items|first.content) }}
+        </h1>
+
+        {% if audience_label or activity_type_label %}
+          <p>
+            {% if audience_label %}{{ audience_label }}{% endif %}
+            {% if audience_label and activity_type_label %} {% endif %}
+            {% if activity_type_label %}<span class="lowercase">{{ activity_type_label }}</span>{% endif %}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
