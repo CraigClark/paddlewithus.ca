@@ -42,6 +42,7 @@ module:
   conditional_fields: 0
   config: 0
   config_translation: 0
+  config_translation_po: 0
   contact: 0
   contextual: 0
   crop: 0
