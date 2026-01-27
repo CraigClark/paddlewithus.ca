@@ -12,7 +12,7 @@ bundle: activity
 label: Description
 description: "<p><small>Optional information for this variation, for example: <em>Session A: Monday & Wednesday</em><br>\r\n<b>Alert:</b> only use this field if you need it. This field gets added to the title on the order.</small></p>\r\n"
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
