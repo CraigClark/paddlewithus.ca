@@ -330,12 +330,21 @@ function daisyui_ext_preprocess_field(array &$variables): void {
   $audience = trim((string) $variables['audience_label']);
   $program_type = trim((string) $variables['activity_type_label']);
 
+  // Case fix: in French, audience should be sentence-case continuation (lowercase).
+  // In English, keep as-is (e.g., "All ages").
+  if ($is_fr && $audience !== '') {
+    $audience = mb_strtolower($audience);
+  }
+
   if ($is_fr) {
     // FR: program type then audience.
     $variables['subtitle'] = trim(implode(' ', array_filter([$program_type, $audience])));
   }
   else {
     // EN: audience then program type (lowercase program type for style, if desired).
-    $variables['subtitle'] = trim(implode(' ', array_filter([$audience, $program_type ? strtolower($program_type) : ''])));
+    $variables['subtitle'] = trim(implode(' ', array_filter([
+      $audience,
+      $program_type ? strtolower($program_type) : '',
+    ])));
   }
 }

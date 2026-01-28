@@ -12,7 +12,7 @@ dependencies:
 id: daisyui_ext_frontpagetitle
 theme: daisyui_ext
 region: content
-weight: -6
+weight: -5
 provider: null
 plugin: 'block_content:ce5bae8e-33ae-48de-b280-14fb8f678097'
 settings:
