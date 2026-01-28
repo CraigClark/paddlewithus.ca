@@ -1,2 +1,2 @@
 label: Capacité
-description: "Enter the number of places to add or remove, not the total.\r\nExample: from 20 to 25 → enter 5. Entering 25 would increase capacity to 45."
+description: "Saisissez le nombre de places à ajouter ou à retirer, et non le total.\r\nExemple : de 20 à 25 → saisissez 5. Saisir 25 augmenterait la capacité à 45."

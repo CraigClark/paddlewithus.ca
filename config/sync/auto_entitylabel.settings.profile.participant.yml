@@ -1,0 +1,10 @@
+status: 1
+pattern: '[profile:field_name]'
+escape: false
+preserve_titles: false
+save: true
+chunk: 50
+dependencies:
+  config:
+    - profile.type.participant
+new_content_behavior: 0

@@ -149,7 +149,7 @@ content:
     weight: 0
     region: content
     settings:
-      override_field_settings: true
+      override_field_settings: false
       labels:
         title: Title
         given: 'First name'

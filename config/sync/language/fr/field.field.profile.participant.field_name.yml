@@ -8,24 +8,11 @@ settings:
     generational: Intergénérationnel
     credentials: Identifiants
   title_options:
-    - '-- --'
-    - M.
-    - Mme
-    - Mlle
-    - Mme
-    - Dr
-    - Prof.
+    1: M.
+    2: Mme
+    3: Mlle
+    4: Mme
+    5: Dr
   generational_options:
-    - '-- --'
-    - Jr
-    - Sr
-    - I
-    - II
-    - III
-    - IV
-    - V
-    - VI
-    - VII
-    - VIII
-    - IX
-    - X
+    1: Jr
+    2: Sr

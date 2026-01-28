@@ -5,6 +5,7 @@ test-results/
 scripts/local/
 scripts/drupal/
 content/
+.htaccess
 
 # Private files (ignore everything under it)
 files-private/**
