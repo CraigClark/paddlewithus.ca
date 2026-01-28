@@ -1,0 +1,3 @@
+label: 'Stripe test'
+configuration:
+  display_label: 'Credit Card / Apple Pay / Google Pay'

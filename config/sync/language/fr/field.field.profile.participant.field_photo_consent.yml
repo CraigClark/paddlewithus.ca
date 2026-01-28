@@ -1,0 +1,5 @@
+label: 'Consentement photo'
+description: "<p>The club may take photos and videos during programs for promotional use on our  website, social media, newsletters, and marketing materials. Photos and videos are never sold or shared with third parties for commercial purposes.</p>\r\n<p><em>This consent applies to all programs this participant registers for. You can update it at any time by editing this participant's profile.</em></p>\r\n"
+settings:
+  on_label: 'Je consens à ce que ce participant soit photographié ou filmé à des fins promotionnelles.'
+  off_label: 'Je ne consens pas à ce que ce participant soit photographié ou filmé.'

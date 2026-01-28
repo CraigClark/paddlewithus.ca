@@ -1,0 +1,6 @@
+third_party_settings:
+  field_group:
+    group_add_discounts:
+      label: 'Ajouter des rabais'
+      format_settings:
+        description: 'These discounts are applied in addition à other discounts. Par exemple, coupon codes or early-bird discounts.'

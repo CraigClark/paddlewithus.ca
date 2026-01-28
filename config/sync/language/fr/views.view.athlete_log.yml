@@ -1,0 +1,228 @@
+label: "Journal de l'athlète"
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      fields:
+        field_date:
+          separator: ', '
+        field_self_eval:
+          separator: ', '
+        field_activity_logged:
+          alter:
+            text: '&nbsp;{{ field_activity_logged }}&nbsp;'
+          separator: ', '
+        field_regatta:
+          alter:
+            text: '{{ field_regatta }}<br>'
+          separator: ', '
+        field_race_type:
+          alter:
+            text: '{{ field_race_type }}<br>'
+          separator: ', '
+        field_tc_type:
+          alter:
+            text: '{{ field_tc_type }}<br>'
+          separator: ', '
+        field_training_type:
+          alter:
+            text: '{{ field_training_type }}<br>'
+          separator: ', '
+        field_position:
+          alter:
+            text: ' | Position : {{ field_position }}'
+          separator: ', '
+        field_time:
+          alter:
+            text: 'Time: {{ field_time }}{{ field_position }}'
+          separator: ', '
+        field_notes:
+          alter:
+            text: '<p>{{ field_notes }}</p>'
+          separator: ', '
+        nid:
+          alter:
+            text: Modifier
+            path: '/node/{{ nid }}/edit'
+          separator: ', '
+          fallback_options:
+            format_plural_string: !!binary MQNAY291bnQ=
+        uid:
+          separator: ', '
+        nothing:
+          alter:
+            text: "<section>\r\n  <h3 class=\"mb-0 h5\">\r\n    {{ field_date }}\r\n    {{ field_activity_logged }}\r\n    {{ field_self_eval }}\r\n  </h3>\r\n\r\n  <div class=\"athlete-log-content\">\r\n    <div class=\"athlete-log-data\">\r\n      {{ field_regatta }}\r\n      {{ field_tc_type }}\r\n      {{ field_training_type }}\r\n      {{ field_race_type }}\r\n      {{ field_time }}\r\n      {{ field_notes }}\r\n    </div>\r\n\r\n    <div class=\"athlete-log-action\">\r\n      {{ nid }}\r\n    </div>\r\n  </div>\r\n</section>"
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+          text_input_required: 'Sélectionnez un filtre et cliquez sur Appliquer pour voir les résultats'
+          text_input_required_format: full_html
+          bef:
+            general:
+              secondary_label: 'Options avancées'
+      arguments:
+        uid_1:
+          exception:
+            title: Tous
+          title: '{{ uid }} | Athlete log'
+      filters:
+        search_api_fulltext:
+          expose:
+            label: "Rechercher dans votre journal d'athlète"
+            description: 'For example, "September 2025 regattas".'
+      header:
+        result:
+          content: '<h2>Affichage de @start à @end sur @total activités consignées.</h2>'
+        area:
+          content:
+            value: '<a class="btn btn-primary btn-lg my-3" href="/node/add/athlete_log" role="button">Log an activity</a>'
+  data_export_1:
+    display_title: 'Exportation des données'
+    display_options:
+      title: "Données du journal de l'athlète"
+      fields:
+        field_date:
+          label: Date
+          separator: ', '
+        field_activity_logged:
+          label: "Type d'événement"
+          alter:
+            text: '&nbsp;{{ field_activity_logged }}&nbsp;'
+          separator: ', '
+        field_regatta:
+          label: Régate
+          alter:
+            text: '{{ field_regatta }}<br>'
+          separator: ', '
+        field_tc_type:
+          label: 'Type de contrôle de temps'
+          alter:
+            text: '{{ field_tc_type }}<br>'
+          separator: ', '
+        field_race_type:
+          label: 'Type de course'
+          alter:
+            text: '{{ field_race_type }}<br>'
+          separator: ', '
+        field_training_type:
+          label: "Type d'entraînement"
+          alter:
+            text: '{{ field_training_type }}<br>'
+          separator: ', '
+        field_time:
+          label: Heure
+          alter:
+            text: 'Time: {{ field_time }}{{ field_position }}'
+          separator: ', '
+        field_position:
+          label: Position
+          alter:
+            text: ' | Position : {{ field_position }}'
+          separator: ', '
+        field_self_eval:
+          label: Auto-évaluation
+          separator: ', '
+        field_notes:
+          label: Notes
+          alter:
+            text: '<p>{{ field_notes }}</p>'
+          separator: ', '
+        nid:
+          alter:
+            text: Modifier
+            path: '/node/{{ nid }}/edit'
+          separator: ', '
+          fallback_options:
+            format_plural_string: !!binary MQNAY291bnQ=
+        uid:
+          separator: ', '
+  log:
+    display_title: 'PG | mon journal'
+    display_options:
+      menu:
+        title: "Mon journal d'athlète"
+  page_my_athletes_logs:
+    display_title: 'PG | journal de mes athlètes'
+    display_options:
+      fields:
+        field_date:
+          separator: ', '
+        field_self_eval:
+          separator: ', '
+        field_activity_logged:
+          alter:
+            text: '&nbsp;{{ field_activity_logged }}&nbsp;'
+          separator: ', '
+        field_regatta:
+          alter:
+            text: '{{ field_regatta }}<br>'
+          separator: ', '
+        field_race_type:
+          alter:
+            text: '{{ field_race_type }}<br>'
+          separator: ', '
+        field_tc_type:
+          alter:
+            text: '{{ field_tc_type }}<br>'
+          separator: ', '
+        field_training_type:
+          alter:
+            text: '{{ field_training_type }}<br>'
+          separator: ', '
+        field_position:
+          alter:
+            text: ' | Position : {{ field_position }}'
+          separator: ', '
+        field_time:
+          alter:
+            text: 'Time: {{ field_time }}{{ field_position }}'
+          separator: ', '
+        field_notes:
+          alter:
+            text: '<p>{{ field_notes }}</p>'
+          separator: ', '
+        nid:
+          alter:
+            text: Modifier
+            path: '/node/{{ nid }}/edit'
+          separator: ', '
+          fallback_options:
+            format_plural_string: !!binary MQNAY291bnQ=
+        uid:
+          separator: ', '
+        nothing:
+          alter:
+            text: "<section>\r\n  <h3 class=\"mb-0 h5\">\r\n    {{ field_date }}\r\n    {{ field_activity_logged }}\r\n    {{ field_self_eval }}\r\n  </h3>\r\n\r\n  <div class=\"athlete-log-content\">\r\n    <div class=\"athlete-log-data\">\r\n      {{ field_regatta }}\r\n      {{ field_tc_type }}\r\n      {{ field_training_type }}\r\n      {{ field_race_type }}\r\n      {{ field_time }}\r\n      {{ field_notes }}\r\n    </div>\r\n  </div>\r\n</section>"
+      arguments:
+        uid_1:
+          exception:
+            title: Tous
+          title: '{{ uid }} | Athlete log'
+        uid_2:
+          exception:
+            title: Tous
+      filters:
+        search_api_fulltext:
+          expose:
+            label: 'Rechercher dans le journal de votre athlète'
+            description: 'For example, "September 2025 regattas".'
+      header:
+        result:
+          content: '<h2>Affichage de @start à @end sur @total activités consignées.</h2>'
+      menu:
+        title: "dupliquer Mon journal d'athlète"

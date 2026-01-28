@@ -1,0 +1,4 @@
+label: 'Story EN'
+relationships:
+  'node:langcode:language':
+    label: Language

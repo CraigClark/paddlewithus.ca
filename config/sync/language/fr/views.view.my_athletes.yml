@@ -1,0 +1,48 @@
+label: 'Mes athlètes'
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      title: 'Journaux de mes athlètes'
+      fields:
+        name:
+          alter:
+            text: '{{ name }}'
+          separator: ', '
+        field_current_club:
+          separator: ', '
+        uid:
+          separator: ', '
+        nid:
+          alter:
+            text: 'node edits {{ nid }}'
+          separator: ', '
+          format_plural_string: !!binary MQNAY291bnQ=
+        nothing:
+          alter:
+            text: '<b>{{ name }}:</b> {{ nid }} log entries | <a href="/user/{{ uid }}/athlete-log">View log</a>'
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+      arguments:
+        field_coach_target_id:
+          exception:
+            title: Tous
+  page_1:
+    display_title: Page
+    display_options:
+      menu:
+        title: 'Mes athlètes'

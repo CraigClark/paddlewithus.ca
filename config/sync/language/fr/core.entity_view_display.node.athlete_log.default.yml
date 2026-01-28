@@ -1,0 +1,14 @@
+content:
+  field_regatta:
+    third_party_settings:
+      field_label:
+        label_value: Regatta
+  field_self_eval:
+    third_party_settings:
+      field_label:
+        label_value: 'Self evaluation'
+  field_training_type:
+    third_party_settings:
+      field_label:
+        label_value: 'Training type'
+        plural_label: 'Training types'

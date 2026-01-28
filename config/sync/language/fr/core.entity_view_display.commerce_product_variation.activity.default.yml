@@ -1,0 +1,24 @@
+third_party_settings:
+  layout_builder:
+    sections:
+      -
+        components:
+          3a0e9060-6dc3-4f59-9cf5-eed1136c7823:
+            configuration:
+              formatter:
+                third_party_settings:
+                  field_label:
+                    label_value: 'Places disponibles'
+          8d7f0e9b-7885-4e3e-9075-279bd214bd2a:
+            configuration:
+              formatter:
+                settings:
+                  separator: ' to '
+content:
+  field_capacity:
+    third_party_settings:
+      field_label:
+        label_value: 'Places disponibles'
+  field_date_range:
+    settings:
+      separator: ' to '

@@ -1,0 +1,20 @@
+third_party_settings:
+  layout_builder:
+    sections:
+      -
+        layout_settings:
+          label: Ddetails
+        components:
+          40bc724b-fd22-47a7-9e71-c1a273c1cce2:
+            configuration:
+              label: Title
+          97832918-c2a3-46a8-9e7d-5aab1693e8ba:
+            configuration:
+              label: 'Text area'
+      -
+        layout_settings:
+          label: collapse
+        components:
+          997e7fa0-1ebb-4c50-91b5-15ccb6d48c5f:
+            configuration:
+              label: 'Text area'

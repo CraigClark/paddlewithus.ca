@@ -1,0 +1,5 @@
+content:
+  purchased_entity:
+    settings:
+      not_found_message: 'Le terme « @term » sera ajouté'
+      no_empty_message: 'Aucun terme trouvé. Veuillez taper pour ajouter un nouveau terme.'

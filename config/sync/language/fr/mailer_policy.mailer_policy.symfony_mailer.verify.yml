@@ -1,0 +1,6 @@
+configuration:
+  email_body:
+    content:
+      value: '<h2>Test mail</h2><ol><li data-list-item-id="ecdc04abc1ca4621dabd8c72ddec76aa1">list item</li><li data-list-item-id="ef6d541be1891b13f2900a80d831864b8">list item</li><li data-list-item-id="ee41e21dec460c1eed01f030c790d2c27">list item</li></ol><p><strong>BOLD</strong></p><drupal-entity data-entity-type="node" data-entity-uuid="7f452406-4e01-4f45-bf55-e57d1d596ca7" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity><p>&nbsp;</p><p>&nbsp;</p>'
+  email_subject:
+    value: Test

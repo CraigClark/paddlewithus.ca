@@ -1,0 +1,30 @@
+label: 'Sélectionner un entraîneur'
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      fields:
+        name:
+          alter:
+            text: '{{ name }} > {{ field_current_club }}'
+          separator: ', '
+        field_current_club:
+          separator: ', '
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+  entity_reference_1:
+    display_title: "Référence d'entité"

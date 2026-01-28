@@ -1,0 +1,69 @@
+title: 'Inscription au programme'
+categories:
+  - Commerce
+elements: |-
+  product_id:
+    '#type': hidden
+    '#title': 'Product ID'
+    '#default_value': '[current-page:query:product]'
+  variation_id:
+    '#type': hidden
+    '#title': 'Variation ID'
+    '#default_value': '[current-page:query:variation]'
+  participants:
+    '#type': webform_entity_checkboxes
+    '#title': '<h2>Select Participants</h2>'
+    '#required': true
+    '#target_type': profile
+    '#selection_handler': views
+    '#selection_settings':
+      view:
+        view_name: participants
+        display_name: er_participants
+        arguments: {  }
+  manage_participants:
+    '#type': webform_markup
+    '#markup': '<p><a class="btn btn-sm ml-3 mb-3" href="/user/[current-user:uid]/participant/add?destination=/webform/program_registration?variation=[current-page:query:variation]">➕ Add a new family member</a> <a class="btn btn-sm mb-3" href="/user/[current-user:uid]/participant/list">✏️ Edit your list of family members.</a></p>'
+  hr__1:
+    '#type': processed_text
+    '#text': '<hr class="h-px my-8 bg-neutral-quaternary border-0">'
+    '#format': full_html
+  waiver_info:
+    '#type': processed_text
+    '#wrapper_attributes':
+      class:
+        - mt-12
+    '#text': '<h2>Important Information</h2><h3>Waiver</h3><p>Paddling activities can be risky. Injuries can happen, even when safety rules are followed.</p><p>By registering, you agree that:</p><ul><li data-list-item-id="ee41f32dec4c5ad8a51f0c9d64409ed3f">Taking part is your choice</li><li data-list-item-id="e0dbc720343bbff3d0e3682364f5df34c">You understand the risks involved</li><li data-list-item-id="eed6307378e0914cc17a352c74d0023ec">You (or your child) are healthy enough to participate</li><li data-list-item-id="e417790ec7bf7045aceac1cbc770236f2">You will follow all safety rules and instructions</li><li data-list-item-id="e8308ea06d603c8abf02152c1774970c3">Petrie Island Canoe Club is not responsible for injuries, losses, or damage that may happen during activities</li></ul><p>If the participant is under 18, a parent or legal guardian is agreeing for them.</p><details class="collapse collapse-arrow bg-base-100 border-base-300 border border-primary my-8"><summary class="collapse-title font-semibold">Please read the full waiver below before continuing.</summary><div class="p-3"><drupal-entity data-entity-type="node" data-entity-uuid="7f452406-4e01-4f45-bf55-e57d1d596ca7" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity></div></details><h3>Swim test policy</h3><drupal-entity data-entity-type="node" data-entity-uuid="059c3a16-99e7-4339-bb5c-54cb9def9ec8" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
+    '#format': full_html
+  hr_2:
+    '#type': processed_text
+    '#text': '<hr class="h-px my-8 bg-neutral-quaternary border-0">'
+    '#format': full_html
+  waiver_agreement_authority:
+    '#type': checkbox
+    '#title': 'I confirm that I am at least 18 years of age and have the legal authority to agree to this waiver on behalf of myself and all participants I am registering.'
+    '#required': true
+  waiver_agreement:
+    '#type': checkbox
+    '#title': ' I have read and agree to the waiver and assumption of risk.'
+    '#required': true
+  swim_test_acknowledgment:
+    '#type': checkbox
+    '#title': 'I understand and agree to the swim test policy.'
+    '#required': true
+  notify_by_email:
+    '#type': processed_text
+    '#text': '<p class="text-gray-500 text-sm">You will be emailed a copy of the waiver and swim test policy.</p>'
+    '#format': full_html
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#attributes':
+      class:
+        - my-8
+    '#submit__label': Register
+settings:
+  form_access_denied_message: '<p>Connectez-vous ou créez un compte pour vous inscrire.</p>'
+handlers:
+  picc_registration_handler:
+    label: "Gestionnaire d'inscription CICIP"

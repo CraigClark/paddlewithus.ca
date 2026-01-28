@@ -1,0 +1,12 @@
+settings:
+  allowed_values:
+    -
+      label: '<span class="eval-icon">😃</span><span class="responsive-hide"> Amazing</span>'
+    -
+      label: '<span class="eval-icon">🙂</span><span class="responsive-hide"> Good</span>'
+    -
+      label: '<span class="eval-icon">😐</span><span class="responsive-hide"> Okay</span>'
+    -
+      label: '<span class="eval-icon">🙁</span><span class="responsive-hide"> Poor</span>'
+    -
+      label: '<span class="eval-icon">😡</span><span class="responsive-hide"> Terrible</span>'

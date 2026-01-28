@@ -1,0 +1,8 @@
+label: "Tranche d'âge"
+description: "<p>La tranche d'âge ici doit correspondre aux âges autorisés pour chaque séance.</p>"
+settings:
+  field:
+    prefix: "Ce programme s'adresse aux personnes de "
+    suffix: ' ans.'
+  from:
+    suffix: ' à '

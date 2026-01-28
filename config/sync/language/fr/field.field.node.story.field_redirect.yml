@@ -1,0 +1,5 @@
+label: 'Rediriger vers une autre page'
+description: ' Si activé, les visiteurs seront redirigés vers une autre page au lieu de ce contenu.'
+settings:
+  on_label: Oui
+  off_label: Non

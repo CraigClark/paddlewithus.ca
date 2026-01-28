@@ -1,0 +1,5 @@
+label: 'Texte du lien'
+description: "Texte utilisé pour le lien ou le bouton d'appel à l'action (par exemple: “Read more”, “Register now”)."
+default_value:
+  -
+    value: 'En savoir plus'

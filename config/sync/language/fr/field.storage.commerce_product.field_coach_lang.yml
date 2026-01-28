@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    -
+      label: Français
+    -
+      label: Anglais
+    -
+      label: 'Principalement en anglais (entraîneur bilingue)'
+    -
+      label: 'Bilingue (anglais et français)'

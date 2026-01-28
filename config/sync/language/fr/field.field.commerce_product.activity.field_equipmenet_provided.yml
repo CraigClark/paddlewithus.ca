@@ -1,0 +1,4 @@
+label: 'Équipement fourni'
+default_value:
+  -
+    value: "<p>Le Club de canoë de l'île Petrie fournira tout l'équipement sportif et de pagaie.</p>"

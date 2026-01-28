@@ -1,0 +1,5 @@
+label: 'Autorisé pour la cueillette'
+description: 'Si coché, le personnel du programme peut remettre le participant à cette personne lors de la cueillette.'
+settings:
+  on_label: Oui
+  off_label: Non

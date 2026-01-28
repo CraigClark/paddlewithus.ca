@@ -1,0 +1,196 @@
+label: 'Résultats du sondage'
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      title: 'Vos compétences se sont-elles améliorées?'
+      fields:
+        webform_submission_value:
+          label: 'Les compétences en pagaie se sont-elles améliorées?'
+        webform_submission_value_1:
+          label: 'Avez-vous eu du plaisir?'
+        webform_submission_value_2:
+          label: 'Reviendrez-vous?'
+        webform_submission_value_4:
+          label: 'résultat compétences'
+        webform_submission_value_5:
+          label: 'résultat plaisir'
+        webform_submission_value_6:
+          label: 'résultat retour'
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+          text_input_required: 'Sélectionnez un filtre et cliquez sur Appliquer pour voir les résultats'
+          text_input_required_format: basic_html
+          bef:
+            general:
+              secondary_label: 'Options avancées'
+      arguments:
+        entity_id:
+          exception:
+            title: Tous
+      style:
+        options:
+          chart_settings:
+            xaxis:
+              title: horizontal
+            yaxis:
+              title: vertical
+  block_1:
+    display_title: 'liste des soumissions'
+  block_2:
+    display_title: retour
+    display_options:
+      title: 'Reviendrez-vous?'
+      style:
+        options:
+          chart_settings:
+            xaxis:
+              title: horizontal
+            yaxis:
+              title: vertical
+  block_camp:
+    display_title: Camp
+    display_options:
+      fields:
+        sid:
+          alter:
+            text: '<i>{{ sid }} soumissions</i>'
+          separator: ', '
+          format_plural_string: !!binary MQNAY291bnQ=
+      empty:
+        area:
+          content:
+            value: "<h1>No Results found</h1>\r\n\r\n<p>The survey likely hasn't had any submissions yet</p>"
+  block_comment:
+    display_title: Commentaires
+    display_options:
+      title: Commentaires
+      fields:
+        completed:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: "<div class=\"card mt-3 mb-4\">\r\n  <div class=\"card-body\">\r\n    <p class=\"card-text\"> {{ webform_submission_value }}</p>\r\n  </div>\r\n  <div class=\"card-footer text-muted\">\r\n    Submitted to <i>{{ webform_submission_value_1 }}</i> on {{ completed }}\r\n  </div>\r\n</div>"
+  block_comments_all:
+    display_title: 'Commentaires - tous'
+    display_options:
+      title: Commentaires
+      fields:
+        completed:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            text: "<div class=\"card mt-3 mb-4\">\r\n  <div class=\"card-body\">\r\n    <p class=\"card-text\"> {{ webform_submission_value }}</p>\r\n  </div>\r\n  <div class=\"card-footer text-muted\">\r\n    Submitted to <i>{{ webform_submission_value_1 }}</i> on {{ completed }}\r\n  </div>\r\n</div>"
+  block_fun:
+    display_title: plaisir
+    display_options:
+      title: 'Avez-vous eu du plaisir?'
+      style:
+        options:
+          chart_settings:
+            xaxis:
+              title: horizontal
+            yaxis:
+              title: vertical
+  block_fun_all:
+    display_title: 'plaisir - tous'
+    display_options:
+      title: 'Avez-vous eu du plaisir?'
+      style:
+        options:
+          chart_settings:
+            xaxis:
+              title: horizontal
+            yaxis:
+              title: vertical
+  block_link_to_result:
+    display_title: 'Lien vers le résultat'
+    display_options:
+      fields:
+        entity_id:
+          separator: ', '
+        webform_submission_value:
+          alter:
+            path: '/node/17?id={{ entity_id }}'
+      empty:
+        area:
+          content:
+            value: "<h1>No Results found</h1>\r\n\r\n<p>The survey likely hasn't had any submissions yet</p>"
+      header:
+        area:
+          content:
+            value: '<a href="/node/16">All camps</a>'
+  block_paddle_skills:
+    display_title: compétences
+    display_options:
+      style:
+        options:
+          chart_settings:
+            xaxis:
+              title: horizontal
+            yaxis:
+              title: vertical
+  block_responses_all:
+    display_title: réponses-tous
+    display_options:
+      title: Réponses
+      fields:
+        sid:
+          alter:
+            text: '{{ webform_submission_value }} <i>{{ sid }}  submissions</i>'
+          separator: ', '
+          format_plural_string: !!binary MSBzdWJtaXNzaW9uA0Bjb3VudCBzdWJtaXNzaW9ucw==
+        webform_submission_value:
+          alter:
+            text: '{{ webform_submission_value }} |  {{ sid }}'
+      empty:
+        area:
+          content:
+            value: "<h1>No Results found</h1>\r\n\r\n<p>The survey likely hasn't had any submissions yet</p>"
+      filters:
+        sid:
+          expose:
+            label: 'ID de soumission'
+  block_return_all:
+    display_title: 'retour - tous'
+    display_options:
+      title: 'Reviendrez-vous?'
+      style:
+        options:
+          chart_settings:
+            xaxis:
+              title: horizontal
+            yaxis:
+              title: vertical
+  block_skills_all:
+    display_title: 'compétences - tous'
+    display_options:
+      style:
+        options:
+          chart_settings:
+            xaxis:
+              title: horizontal
+            yaxis:
+              title: vertical
+  data_export_1:
+    display_title: 'Exportation des données'
+    display_options:
+      fields:
+        webform_submission_value_4:
+          label: 'Soumis depuis'
+        completed:
+          label: Terminé
+          separator: ', '
+        webform_submission_value:
+          label: "Avez-vous l'impression que vous ou votre/vos enfant(s) avez amélioré vos compétences en pagaie?"
+        webform_submission_value_1:
+          label: "Combien de plaisir avez-vous eu, vous ou votre/vos enfant(s), pendant votre programme d'été au CICIP?"
+        webform_submission_value_2:
+          label: 'Est-ce que vous ou votre/vos enfant(s) reviendriez faire le programme à nouveau ou vous joindriez à un autre programme du CICIP?'
+        webform_submission_value_3:
+          label: Commentaires

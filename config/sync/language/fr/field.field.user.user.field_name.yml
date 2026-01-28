@@ -1,0 +1,31 @@
+label: Nom
+settings:
+  labels:
+    title: Titre
+    given: Prénom
+    middle: 'Deuxième(s) prénom(s)'
+    family: Famille
+    generational: Intergénérationnel
+    credentials: Identifiants
+  title_options:
+    - '-- --'
+    - M.
+    - Mme
+    - Mlle
+    - Mme
+    - Dr
+    - Prof.
+  generational_options:
+    - '-- --'
+    - Jr
+    - Sr
+    - I
+    - II
+    - III
+    - IV
+    - V
+    - VI
+    - VII
+    - VIII
+    - IX
+    - X

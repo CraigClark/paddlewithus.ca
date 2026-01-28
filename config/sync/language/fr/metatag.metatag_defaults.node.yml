@@ -1,0 +1,14 @@
+label: Content
+tags:
+  canonical_url: '[current-page:url]'
+  title: '[node:title] | [site:name]'
+  description: '[node:summary]'
+  image_src: '[node:field_page_primary_image:social_share]'
+  og_site_name: "Club de canoë de l'île Petrie"
+  og_title: '[node:title]'
+  og_description: '[node:summary]'
+  og_type: article
+  og_url: '[current-page:url]'
+  og_image: '[node:field_page_primary_image:social_share]'
+  og_image_url: '[node:field_page_primary_image:social_share]'
+  og_image_secure_url: '[node:field_page_primary_image:social_share]'

@@ -1,0 +1,62 @@
+label: 'Camps et programmes'
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      title: 'Camps et programmes'
+      fields:
+        field_primary_image:
+          separator: ', '
+        title:
+          separator: ', '
+        field_audience:
+          separator: ', '
+        field_acivity_type:
+          alter:
+            text: '{{ field_audience }} <span class="lowercase">{{ field_acivity_type }}</span>'
+          separator: ', '
+        view_commerce_product:
+          alter:
+            text: 'En savoir plus'
+          text: voir
+        body:
+          alter:
+            text: '<p>{{ body }}</p>'
+          separator: ', '
+        field_age_range:
+          alter:
+            text: '<div class="badge badge-outline badge-primary">Ages {{ field_age_range__from }} to {{ field_age_range__to }}</div>'
+          separator: ', '
+        nothing:
+          alter:
+            text: "<div class=\"card bg-base-100 shadow-sm h-full\">\r\n  {{ field_primary_image }} \r\n  <div class=\"card-body prose pt-4\">\r\n\r\n    <h2 class=\"mt-0\">{{ title }}</h2>\r\n    {{ field_age_range }} \r\n    {{ body }}\r\n\r\n    <div class=\"card-actions justify-end\">\r\n      {{ view_commerce_product }}\r\n    </div>\r\n  </div>\r\n</div>"
+      exposed_form:
+        options:
+          submit_button: Rechercher
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+          text_input_required: 'Sélectionnez un filtre et cliquez sur Appliquer pour voir les résultats'
+          text_input_required_format: full_html
+          bef:
+            general:
+              secondary_label: 'Options avancées'
+      empty:
+        area:
+          content:
+            value: 'Aucun résultat'
+      filters:
+        field_audience_value_selective:
+          expose:
+            label: 'Programmes pour'
+        field_acivity_type_target_id_selective:
+          expose:
+            label: 'Type de programme'
+  block_card:
+    display_title: 'BL: activités'
+  page_1:
+    display_title: Page
+    display_options:
+      menu:
+        title: Programmes

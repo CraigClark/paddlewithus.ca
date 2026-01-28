@@ -1,0 +1,10 @@
+content:
+  field_name:
+    settings:
+      labels:
+        title: Title
+        given: 'First name'
+        middle: 'Middle name(s)'
+        family: 'Last name'
+        generational: Generational
+        credentials: Credentials

@@ -1,0 +1,4 @@
+label: 'Sticky at top of lists'
+settings:
+  on_label: 'On'
+  off_label: 'Off'

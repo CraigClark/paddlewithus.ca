@@ -1,0 +1,36 @@
+label: Participants
+description: "Ceci est la liste que les gens voient lorsqu'ils sélectionnent des participants sur un formulaire d'inscription"
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      fields:
+        field_name:
+          separator: ', '
+        field_photo_consent:
+          settings:
+            format_custom_false: 'pas de photos'
+            format_custom_true: 'photos autorisées'
+          separator: ', '
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+      arguments:
+        uid:
+          exception:
+            title: Tous
+  er_participants:
+    display_title: "Référence d'entité"

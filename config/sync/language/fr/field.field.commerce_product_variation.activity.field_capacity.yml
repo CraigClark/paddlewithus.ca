@@ -1,0 +1,2 @@
+label: Capacité
+description: "Enter the number of places to add or remove, not the total.\r\nExample: from 20 to 25 → enter 5. Entering 25 would increase capacity to 45."

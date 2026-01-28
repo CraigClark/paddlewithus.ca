@@ -1,0 +1,33 @@
+third_party_settings:
+  field_group:
+    group_who_is_this_for:
+      label: "À qui s'adresse cette activité"
+    group_description:
+      label: Description
+content:
+  field_age_range:
+    settings:
+      ui_patterns:
+        slots:
+          content:
+            sources:
+              1:
+                source:
+                  value:
+                    value: "<h3>Tranche d'âge</h3>"
+    third_party_settings:
+      field_label:
+        label_value: "Tranche d'âge"
+  field_coach_lang:
+    third_party_settings:
+      field_label:
+        label_value: "Langue utilisée pendant l'entraînement"
+  field_contact_email:
+    third_party_settings:
+      field_label:
+        label_value: 'Des questions? Contactez'
+  field_experience:
+    third_party_settings:
+      field_label:
+        label_value: "Niveau d'expérience"
+        plural_label: "Niveaux d'expérience"

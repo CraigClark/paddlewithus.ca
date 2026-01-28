@@ -1,0 +1,8 @@
+settings:
+  allowed_values:
+    -
+      label: Jeune
+    -
+      label: Adulte
+    -
+      label: 'Tous les âges'

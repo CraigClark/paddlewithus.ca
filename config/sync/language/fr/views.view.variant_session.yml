@@ -1,0 +1,59 @@
+label: "Séance d'activité"
+description: 'Liste des options disponibles | Durée, places disponibles et prix'
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      title: Séances
+      fields:
+        title:
+          separator: ', '
+        field_date_range_1:
+          label: Année
+          settings:
+            separator: '-'
+          separator: ', '
+        field_date_range:
+          alter:
+            text: '{{ field_date_range }} {{ field_date_range_1 }}'
+          settings:
+            date_format: 'F d'
+            separator: '-'
+          separator: ', '
+        field_capacity:
+          alter:
+            text: '<p>{{ field_capacity }} places disponibles.</p>'
+          separator: ', '
+        price__number:
+          alter:
+            text: "{{ price__number__number|number_format(2, '.', ',') }} $ par personne."
+          separator: ', '
+        product_id:
+          separator: ', '
+        variation_id:
+          separator: ', '
+        field_discount_1:
+          separator: ', '
+        field_discount_2:
+          separator: ', '
+        field_discount_3:
+          separator: ', '
+        field_discount_4:
+          separator: ', '
+        field_discount_5_up:
+          separator: ', '
+        field_desc:
+          separator: ', '
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+      arguments:
+        product_id:
+          exception:
+            title: Tous
+  block_session:
+    display_title: Bloc

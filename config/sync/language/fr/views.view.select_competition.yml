@@ -1,0 +1,29 @@
+label: 'Sélectionner une compétition'
+description: "Cette vue est utilisée pour peupler un champ qui permet aux athlètes de choisir parmi une liste de types de régates ou d'entraînements"
+display:
+  default:
+    display_title: 'Par défaut'
+    display_options:
+      fields:
+        name:
+          separator: ', '
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Croissant
+          sort_desc_label: Décroissant
+  entity_reference_1:
+    display_title: 'ER | Régate'
+  entity_reference_2:
+    display_title: 'ER | Contrôle de temps'

@@ -1,0 +1,8 @@
+content:
+  field_capacity:
+    third_party_settings:
+      field_label:
+        label_value: 'Places disponibles'
+  field_date_range:
+    settings:
+      separator: ' to '

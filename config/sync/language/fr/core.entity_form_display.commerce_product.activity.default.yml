@@ -1,0 +1,12 @@
+third_party_settings:
+  field_group:
+    group_target_audience:
+      label: "À qui s'adresse cette activité"
+    group_activity_info:
+      label: 'À propos de cette activité'
+content:
+  field_age_range:
+    settings:
+      label:
+        from: De
+        to: à

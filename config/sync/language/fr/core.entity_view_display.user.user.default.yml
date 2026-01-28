@@ -1,0 +1,16 @@
+content:
+  field_coach:
+    third_party_settings:
+      field_label:
+        label_value: Coach
+        plural_label: Coaches
+  field_current_club:
+    third_party_settings:
+      field_label:
+        label_value: 'Current club'
+        plural_label: 'Current clubs'
+  field_past_club:
+    third_party_settings:
+      field_label:
+        label_value: 'Past club'
+        plural_label: 'Past clubs'

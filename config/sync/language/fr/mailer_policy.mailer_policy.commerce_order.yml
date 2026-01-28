@@ -1,0 +1,4 @@
+configuration:
+  email_body:
+    content:
+      value: '<p>I am the body</p>'

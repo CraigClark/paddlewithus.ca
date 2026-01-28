@@ -1,0 +1,4 @@
+label: Surveys
+relationships:
+  'node:langcode:language':
+    label: Language

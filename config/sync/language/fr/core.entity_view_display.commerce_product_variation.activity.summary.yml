@@ -1,0 +1,4 @@
+content:
+  field_date_range:
+    settings:
+      separator: ' to '
