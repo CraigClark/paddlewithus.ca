@@ -8,8 +8,6 @@ display:
           submit_button: Appliquer
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
       arguments:
         uid:
           exception:
@@ -21,5 +19,39 @@ display:
           exception:
             title: Tout
       title: Profils
+      fields:
+        field_birth_date:
+          label: 'Date de naissance'
+          alter:
+            text: "<h3>Date de naissance</h3>\r\n{{ field_birth_date }}"
+        field_additional_info:
+          alter:
+            text: "<h3 class=\"mt-3 text-base\">Renseignements supplémentaires pour les entraîneurs</h3>\r\n<p>{{ field_additional_info }} </p>"
+        field_name_1:
+          label: Prénom
+        field_photo_consent:
+          label: 'Consentement à la photographie'
+          settings:
+            format_custom_false: 'Cette personne ne peut pas être photographiée'
+            format_custom_true: 'Cette personne peut être photographiée à des fins promotionnelles'
+        field_emercency_contact_2_name:
+          label: 'Personne à contacter en cas d’urgence 2'
+          alter:
+            text: "<p class=\"mt-3\">{{ field_emercency_contact_2_name }} (<em>Contact secondaire</em>)<br>\r\n    {{ field_emercency_contact_2_phone }}<br>\r\n    {{ field_emercency_contact_2_rel }}\r\n    {{ field_emercency_contact_2_pickup }} \r\n</p>"
+        field_emercency_contact_3_name:
+          label: 'Personne à contacter en cas d’urgence 3'
+        nothing:
+          alter:
+            text: "<p><b>Date de naissance :</b> {{ field_birth_date }}<br>\r\n  <b>Consentement à la photographie :</b> {{ field_photo_consent }}\r\n</p>\r\n{{ field_allergies }}\r\n{{ field_additional_info }} \r\n<h3 class=\"mt-3 text-base\">Contacts d’urgence</h3>\r\n{{ field_emercency_contact_1_name }}\r\n{{ field_emercency_contact_2_name }}\r\n{{ field_emercency_contact_3_name }}"
+        edit_profile:
+          label: 'Modifier le profil'
+          alter:
+            text: 'Modifier le profil de {{ field_name_1|striptags|trim }}'
+          text: 'Modifier le profil'
+      empty:
+        area:
+          content:
+            value: '<p>Il n’y a encore aucun profil.</p>'
+            format: basic_html
   user_page:
     display_title: "Page d'utilisateur"
