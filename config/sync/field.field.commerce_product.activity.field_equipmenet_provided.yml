@@ -12,15 +12,14 @@ id: commerce_product.activity.field_equipmenet_provided
 field_name: field_equipmenet_provided
 entity_type: commerce_product
 bundle: activity
-label: 'Equipmenet provided'
-description: ''
+label: "Equipment provided"
+description: ""
 required: false
 translatable: true
 default_value:
-  -
-    value: '<p>Petrie Island Canoe Club will provide all athletic and paddling equipment.</p>'
+  - value: "<p>Petrie Island Canoe Club will provide all athletic and paddling equipment.</p>"
     format: basic_html
-default_value_callback: ''
+default_value_callback: ""
 settings:
   allowed_formats:
     - basic_html
