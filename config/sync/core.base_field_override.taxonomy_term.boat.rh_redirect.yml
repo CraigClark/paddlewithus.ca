@@ -1,0 +1,18 @@
+uuid: 9558b54b-633d-4fd9-b6e6-30380fc993a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+id: taxonomy_term.boat.rh_redirect
+field_name: rh_redirect
+entity_type: taxonomy_term
+bundle: boat
+label: 'Rabbit Hole redirect path.'
+description: 'The path to where the user should get redirected to.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

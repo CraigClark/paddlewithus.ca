@@ -1,0 +1,20 @@
+uuid: b59c66b2-c49a-4c1a-961b-0205bbc42a5d
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_stock_local.commerce_stock_location_type.default
+id: commerce_stock_location.default.uid
+field_name: uid
+entity_type: commerce_stock_location
+bundle: default
+label: 'User ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\commerce_stock_local\Entity\StockLocation::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

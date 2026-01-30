@@ -1,0 +1,20 @@
+uuid: ed13797c-3432-47ed-87e7-5be1a91b64d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_promotion
+id: commerce_promotion.commerce_promotion.uid
+field_name: uid
+entity_type: commerce_promotion
+bundle: commerce_promotion
+label: Owner
+description: 'The promotion owner.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\commerce_promotion\Entity\Promotion::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

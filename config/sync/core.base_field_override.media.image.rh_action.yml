@@ -1,0 +1,18 @@
+uuid: 653bd568-4a08-4589-b1cb-e758087c641c
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.image
+id: media.image.rh_action
+field_name: rh_action
+entity_type: media
+bundle: image
+label: 'Rabbit Hole action'
+description: 'Specifies which action that Rabbit Hole should take.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

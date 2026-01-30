@@ -1,0 +1,18 @@
+uuid: 2f7ef6f7-9728-45d3-8c8b-5ba3fe52d7dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_promotion
+id: commerce_promotion.commerce_promotion.display_name
+field_name: display_name
+entity_type: commerce_promotion
+bundle: commerce_promotion
+label: 'Display name'
+description: 'If provided, shown on the order instead of "Discount".'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

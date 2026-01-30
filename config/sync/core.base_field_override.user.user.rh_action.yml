@@ -1,0 +1,18 @@
+uuid: 6ce44017-0305-4203-91cf-55343416e125
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.user.rh_action
+field_name: rh_action
+entity_type: user
+bundle: user
+label: 'Rabbit Hole action'
+description: 'Specifies which action that Rabbit Hole should take.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

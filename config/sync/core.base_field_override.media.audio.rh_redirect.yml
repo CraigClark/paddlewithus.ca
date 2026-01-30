@@ -1,0 +1,18 @@
+uuid: 124d5450-644c-4dcc-9de8-7f9051a91087
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.audio
+id: media.audio.rh_redirect
+field_name: rh_redirect
+entity_type: media
+bundle: audio
+label: 'Rabbit Hole redirect path.'
+description: 'The path to where the user should get redirected to.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

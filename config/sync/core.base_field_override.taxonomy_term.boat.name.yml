@@ -1,0 +1,18 @@
+uuid: 6160c2f7-5196-4e7c-9c82-5c4b987af444
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+id: taxonomy_term.boat.name
+field_name: name
+entity_type: taxonomy_term
+bundle: boat
+label: Name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

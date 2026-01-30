@@ -1,0 +1,18 @@
+uuid: d62295e3-2dc2-4db0-90d7-a40ddb3c2b2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+id: taxonomy_term.boat.rh_redirect_fallback_action
+field_name: rh_redirect_fallback_action
+entity_type: taxonomy_term
+bundle: boat
+label: 'Rabbit Hole redirect fallback action'
+description: 'Specifies the action that should be used when the redirect path is invalid or empty.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

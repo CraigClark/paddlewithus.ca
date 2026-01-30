@@ -1,0 +1,18 @@
+uuid: 51e95b96-a7e8-4283-9a64-94f1b1d76ee5
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.audio
+id: media.audio.rh_action
+field_name: rh_action
+entity_type: media
+bundle: audio
+label: 'Rabbit Hole action'
+description: 'Specifies which action that Rabbit Hole should take.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

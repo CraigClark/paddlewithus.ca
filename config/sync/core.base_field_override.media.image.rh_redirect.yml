@@ -1,0 +1,18 @@
+uuid: 8bbd4273-70fa-4fb6-a0fb-4027076ff551
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.image
+id: media.image.rh_redirect
+field_name: rh_redirect
+entity_type: media
+bundle: image
+label: 'Rabbit Hole redirect path.'
+description: 'The path to where the user should get redirected to.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

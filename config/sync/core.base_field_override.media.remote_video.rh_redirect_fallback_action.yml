@@ -1,0 +1,18 @@
+uuid: 6bb3faae-3afb-4333-8b7b-8b9b53b9ace0
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.remote_video
+id: media.remote_video.rh_redirect_fallback_action
+field_name: rh_redirect_fallback_action
+entity_type: media
+bundle: remote_video
+label: 'Rabbit Hole redirect fallback action'
+description: 'Specifies the action that should be used when the redirect path is invalid or empty.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

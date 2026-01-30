@@ -1,0 +1,18 @@
+uuid: 827f1e10-b3c2-4391-a383-569c785073e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+id: taxonomy_term.boat.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: boat
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

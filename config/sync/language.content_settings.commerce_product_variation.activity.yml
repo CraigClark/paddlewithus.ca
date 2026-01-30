@@ -9,6 +9,8 @@ dependencies:
 third_party_settings:
   content_translation:
     enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
 id: commerce_product_variation.activity
 target_entity_type_id: commerce_product_variation
 target_bundle: activity

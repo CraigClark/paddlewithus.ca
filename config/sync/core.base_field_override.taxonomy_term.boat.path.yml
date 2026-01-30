@@ -1,0 +1,20 @@
+uuid: abf420c3-a6ba-4519-8361-63b0fc2aebd3
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+  module:
+    - path
+id: taxonomy_term.boat.path
+field_name: path
+entity_type: taxonomy_term
+bundle: boat
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

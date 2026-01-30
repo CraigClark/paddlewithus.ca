@@ -1,0 +1,22 @@
+uuid: fcd62892-07d2-4125-af43-6035bd39dcf4
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.boat
+id: taxonomy_term.boat.rh_redirect_response
+field_name: rh_redirect_response
+entity_type: taxonomy_term
+bundle: boat
+label: 'Rabbit Hole redirect response code'
+description: 'Specifies the HTTP response code that should be used when perform a redirect.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
