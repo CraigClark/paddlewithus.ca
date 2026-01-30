@@ -1,0 +1,216 @@
+diff --git a/ckeditor5_paste_filter.install b/ckeditor5_paste_filter.install
+new file mode 100644
+index 0000000..cdcfb36
+--- /dev/null
++++ b/ckeditor5_paste_filter.install
+@@ -0,0 +1,40 @@
++<?php
++
++/**
++ * @file
++ * Install, update and uninstall functions for ckeditor5_paste_filter.
++ */
++
++/**
++ * Update editor filters for existing sites to add the 'description' field.
++ */
++function ckeditor5_paste_filter_update_8001() {
++  $config_factory = \Drupal::configFactory();
++
++  // Get all editor configs.
++  foreach ($config_factory->listAll('editor.editor.') as $editor_config_name) {
++    // Set a flag so we only update the settings which have changed.
++    $updated = FALSE;
++
++    $editor = $config_factory->getEditable($editor_config_name);
++    $settings = $editor->get('settings');
++    foreach ($settings['plugins'] as $plugin_name => $plugin) {
++      if ($plugin_name == 'ckeditor5_paste_filter_pasteFilter') {
++        $updated_filters = [];
++        foreach ($plugin['filters'] as $filter) {
++          if (!isset($filter['description'])) {
++            $updated = TRUE;
++            $filter['description'] = '';
++          }
++          $updated_filters[] = $filter;
++        }
++        $settings['plugins'][$plugin_name]['filters'] = $updated_filters;
++      }
++    }
++    // Save the settings if they have changed.
++    if ($updated) {
++      $editor->set('settings', $settings);
++      $editor->save();
++    }
++  }
++}
+diff --git a/config/schema/ckeditor5_paste_filter.schema.yml b/config/schema/ckeditor5_paste_filter.schema.yml
+index a66889f..338299a 100644
+--- a/config/schema/ckeditor5_paste_filter.schema.yml
++++ b/config/schema/ckeditor5_paste_filter.schema.yml
+@@ -24,3 +24,6 @@ ckeditor5.plugin.ckeditor5_paste_filter_pasteFilter:
+           replace:
+             type: text
+             label: "Replacement"
++          description:
++            type: text
++            label: "Description"
+diff --git a/src/Plugin/CKEditor5Plugin/PasteFilter.php b/src/Plugin/CKEditor5Plugin/PasteFilter.php
+index ecfb944..c42463e 100644
+--- a/src/Plugin/CKEditor5Plugin/PasteFilter.php
++++ b/src/Plugin/CKEditor5Plugin/PasteFilter.php
+@@ -31,84 +31,98 @@ class PasteFilter extends CKEditor5PluginDefault implements CKEditor5PluginConfi
+           'weight' => -10,
+           'search' => '<o:p><\/o:p>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -9,
+           'search' => '(<[^>]*) (style="[^"]*")',
+           'replace' => '$1',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -8,
+           'search' => '(<[^>]*) (face="[^"]*")',
+           'replace' => '$1',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -7,
+           'search' => '(<[^>]*) (class="[^"]*")',
+           'replace' => '$1',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -6,
+           'search' => '(<[^>]*) (valign="[^"]*")',
+           'replace' => '$1',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -5,
+           'search' => '<font[^>]*>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -4,
+           'search' => '<\/font>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -3,
+           'search' => '<span[^>]*>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -2,
+           'search' => '<\/span>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => -1,
+           'search' => '<p>&nbsp;<\/p>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => 0,
+           'search' => '<p><\/p>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => 1,
+           'search' => '<b><\/b>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => 2,
+           'search' => '<i><\/i>',
+           'replace' => '',
++          'description' => '',
+         ],
+         [
+           'enabled' => TRUE,
+           'weight' => 3,
+           'search' => '<a name="OLE_LINK[^"]*">(.*?)<\/a>',
+           'replace' => '$1',
++          'description' => '',
+         ],
+       ],
+     ];
+@@ -241,6 +255,7 @@ class PasteFilter extends CKEditor5PluginDefault implements CKEditor5PluginConfi
+         'search' => '',
+         'replace' => '',
+         'weight' => NULL,
++        'description' => '',
+       ];
+     }
+ 
+@@ -272,6 +287,15 @@ class PasteFilter extends CKEditor5PluginDefault implements CKEditor5PluginConfi
+       '#ajax' => FALSE,
+     ];
+ 
++    $row['filter']['description'] = [
++      '#type' => 'textfield',
++      '#rows' => 1,
++      '#title' => $this->t('Description'),
++      '#default_value' => $filter['description'],
++      // See ckeditor5_form_filter_format_form_alter().
++      '#ajax' => FALSE,
++    ];
++
+     $row['weight']['weight'] = [
+       '#type' => 'weight',
+       '#title' => $this->t('Weight for filter replacing @title', ['@title' => $filter['search']]),
+@@ -400,6 +424,7 @@ class PasteFilter extends CKEditor5PluginDefault implements CKEditor5PluginConfi
+         'enabled' => (bool) $filter['enabled'],
+         'search' => (string) $filter['filter']['search'],
+         'replace' => (string) $filter['filter']['replace'],
++        'description' => (string) $filter['filter']['description'],
+         'weight' => (int) $filter['weight']['weight'],
+       ];
+     }
+diff --git a/tests/ckeditor5_paste_filter_test/config/install/editor.editor.ckeditor5_paste_filter_test.yml b/tests/ckeditor5_paste_filter_test/config/install/editor.editor.ckeditor5_paste_filter_test.yml
+index 3263581..6abacf9 100644
+--- a/tests/ckeditor5_paste_filter_test/config/install/editor.editor.ckeditor5_paste_filter_test.yml
++++ b/tests/ckeditor5_paste_filter_test/config/install/editor.editor.ckeditor5_paste_filter_test.yml
+@@ -20,16 +20,19 @@ settings:
+           weight: 1
+           search: Hello
+           replace: World
++          description: "Replace Hello with World"
+         -
+           enabled: false
+           weight: 2
+           search: Before
+           replace: After
++          description: "Replace Before with After"
+         -
+           enabled: true
+           weight: 3
+           search: Third!
+           replace: 3rd!
++          description: "Replace Third! with 3rd!"
+     ckeditor5_sourceEditing:
+       allowed_tags: {  }
+ image_upload:

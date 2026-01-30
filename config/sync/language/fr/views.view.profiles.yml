@@ -1,24 +1,6 @@
-label: Profils
 display:
   default:
-    display_title: Principal
     display_options:
-      exposed_form:
-        options:
-          submit_button: Appliquer
-          reset_button_label: Réinitialiser
-          exposed_sorts_label: 'Trier par'
-      arguments:
-        uid:
-          exception:
-            title: Tout
-        type:
-          exception:
-            title: Tout
-        status:
-          exception:
-            title: Tout
-      title: Profils
       fields:
         field_birth_date:
           label: 'Date de naissance'
@@ -51,7 +33,27 @@ display:
       empty:
         area:
           content:
-            value: '<p>Il n’y a encore aucun profil.</p>'
             format: basic_html
+            value: '<p>Il n’y a encore aucun profil.</p>'
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      arguments:
+        uid:
+          exception:
+            title: Tout
+        type:
+          exception:
+            title: Tout
+        status:
+          exception:
+            title: Tout
+      title: Profils
+    display_title: Principal
   user_page:
     display_title: "Page d'utilisateur"
+label: Profils

@@ -1,188 +1,192 @@
 {
-    "name": "drupal/drupal_vanilla",
-    "description": "Plain ol drupal site",
-    "type": "project",
-    "license": "GPL-2.0-or-later",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
+  "name": "drupal/drupal_vanilla",
+  "description": "Plain ol drupal site",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "billboardjs/billboard",
+        "version": "3.10.3",
+        "type": "drupal-library",
+        "extra": {
+          "installer-name": "billboard"
         },
-        {
-            "type": "package",
-            "package": {
-                "name": "billboardjs/billboard",
-                "version": "3.10.3",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "billboard"
-                },
-                "dist": {
-                    "url": "https://registry.npmjs.org/billboard.js/-/billboard.js-3.10.3.tgz",
-                    "type": "tar"
-                }
-            }
+        "dist": {
+          "url": "https://registry.npmjs.org/billboard.js/-/billboard.js-3.10.3.tgz",
+          "type": "tar"
         }
+      }
+    }
+  ],
+  "require": {
+    "billboardjs/billboard": "^3.10",
+    "composer/installers": "^2.0",
+    "cweagans/composer-patches": "^1.7",
+    "drupal/admin_toolbar": "^3.4",
+    "drupal/antibot": "^2.0",
+    "drupal/auto_entitylabel": "^3.4",
+    "drupal/autocomplete_deluxe": "^2.1",
+    "drupal/better_exposed_filters": "^7.0@beta",
+    "drupal/charts": "^5.1",
+    "drupal/ck5_block_embed": "^1.0",
+    "drupal/ckeditor5_paste_filter": "^1.1",
+    "drupal/coffee": "^2.0",
+    "drupal/collapsiblock": "^4.3",
+    "drupal/commerce": "^3.2",
+    "drupal/commerce_email": "^1.7",
+    "drupal/commerce_stock": "^3.0",
+    "drupal/commerce_stripe": "^2.1",
+    "drupal/commerce_variation_cart_form": "^1.5",
+    "drupal/conditional_fields": "^4.0@alpha",
+    "drupal/config_translation_po": "^1.0",
+    "drupal/core-composer-scaffold": "^11",
+    "drupal/core-project-message": "^11",
+    "drupal/core-recommended": "^11",
+    "drupal/cshs": "^4.0",
+    "drupal/date_filter": "^1.0",
+    "drupal/entity_embed": "^1.7",
+    "drupal/environment_indicator": "^4.0",
+    "drupal/facets": "^3.0",
+    "drupal/field_group": "^4.0",
+    "drupal/field_label": "^1.5",
+    "drupal/field_permissions": "^1.4",
+    "drupal/focal_point": "^2.1",
+    "drupal/formatter_suite": "^2.1",
+    "drupal/gin": "^5.0",
+    "drupal/gin_toolbar": "^3.0",
+    "drupal/hide_revision_field": "^2.5",
+    "drupal/key": "^1.21",
+    "drupal/language_switcher_extended": "^1.1",
+    "drupal/linkit": "^7.0",
+    "drupal/login_emailusername": "^3.0",
+    "drupal/masquerade": "^2.0",
+    "drupal/material_icons": "^2.0",
+    "drupal/meaofd": "^1.1",
+    "drupal/menu_item_role_access": "^2.4",
+    "drupal/metatag": "^2.2",
+    "drupal/name": "^1.0",
+    "drupal/node_view_permissions": "^2.0",
+    "drupal/nomarkup": "^1.0",
+    "drupal/pathauto": "^1.12",
+    "drupal/qrcode_fields": "^2.1",
+    "drupal/rabbit_hole": "^1.0",
+    "drupal/range": "^1.6",
+    "drupal/realname": "^2.0",
+    "drupal/redirect": "^1.11",
+    "drupal/registration_role": "^2.0",
+    "drupal/search_api": "^1.38",
+    "drupal/search_api_block": "^1.2",
+    "drupal/smart_trim": "^2.2",
+    "drupal/symfony_mailer": "^2.0@beta",
+    "drupal/taxonomy_manager": "^2.0",
+    "drupal/token_filter": "^2.2",
+    "drupal/trash": "^3.0",
+    "drupal/twig_tweak": "^3.4",
+    "drupal/ui_suite_daisyui": "^5.0@alpha",
+    "drupal/views_data_export": "^1.4",
+    "drupal/views_selective_filters": "^2.0@alpha",
+    "drupal/webform": "^6.3@beta",
+    "drupal/webform_analysis": "^1.0@beta",
+    "drupal/webform_views": "^5.2",
+    "drush/drush": "^13"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "drupal/core-composer-scaffold": true,
+      "drupal/core-project-message": true,
+      "drupal/core-vendor-hardening": true,
+      "php-http/discovery": true,
+      "phpstan/extension-installer": true,
+      "tbachert/spi": true
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "clean-billboardjs": "./scripts/clean-billboardjs.sh",
+    "post-install-cmd": [
+      "@clean-billboardjs"
     ],
-    "require": {
-        "billboardjs/billboard": "^3.10",
-        "composer/installers": "^2.0",
-        "cweagans/composer-patches": "^1.7",
-        "drupal/admin_toolbar": "^3.4",
-        "drupal/antibot": "^2.0",
-        "drupal/auto_entitylabel": "^3.4",
-        "drupal/autocomplete_deluxe": "^2.1",
-        "drupal/better_exposed_filters": "^7.0@beta",
-        "drupal/charts": "^5.1",
-        "drupal/ck5_block_embed": "^1.0",
-        "drupal/coffee": "^2.0",
-        "drupal/collapsiblock": "^4.3",
-        "drupal/commerce": "^3.2",
-        "drupal/commerce_email": "^1.7",
-        "drupal/commerce_stock": "^3.0",
-        "drupal/commerce_stripe": "^2.1",
-        "drupal/commerce_variation_cart_form": "^1.5",
-        "drupal/conditional_fields": "^4.0@alpha",
-        "drupal/config_translation_po": "^1.0",
-        "drupal/core-composer-scaffold": "^11",
-        "drupal/core-project-message": "^11",
-        "drupal/core-recommended": "^11",
-        "drupal/cshs": "^4.0",
-        "drupal/date_filter": "^1.0",
-        "drupal/entity_embed": "^1.7",
-        "drupal/environment_indicator": "^4.0",
-        "drupal/facets": "^3.0",
-        "drupal/field_group": "^4.0",
-        "drupal/field_label": "^1.5",
-        "drupal/field_permissions": "^1.4",
-        "drupal/focal_point": "^2.1",
-        "drupal/formatter_suite": "^2.1",
-        "drupal/gin": "^5.0",
-        "drupal/gin_toolbar": "^3.0",
-        "drupal/hide_revision_field": "^2.5",
-        "drupal/key": "^1.21",
-        "drupal/language_switcher_extended": "^1.1",
-        "drupal/linkit": "^7.0",
-        "drupal/login_emailusername": "^3.0",
-        "drupal/masquerade": "^2.0",
-        "drupal/material_icons": "^2.0",
-        "drupal/meaofd": "^1.1",
-        "drupal/menu_item_role_access": "^2.4",
-        "drupal/metatag": "^2.2",
-        "drupal/name": "^1.0",
-        "drupal/node_view_permissions": "^2.0",
-        "drupal/nomarkup": "^1.0",
-        "drupal/pathauto": "^1.12",
-        "drupal/qrcode_fields": "^2.1",
-        "drupal/rabbit_hole": "^1.0",
-        "drupal/range": "^1.6",
-        "drupal/realname": "^2.0",
-        "drupal/redirect": "^1.11",
-        "drupal/registration_role": "^2.0",
-        "drupal/search_api": "^1.38",
-        "drupal/search_api_block": "^1.2",
-        "drupal/smart_trim": "^2.2",
-        "drupal/symfony_mailer": "^2.0@beta",
-        "drupal/taxonomy_manager": "^2.0",
-        "drupal/token_filter": "^2.2",
-        "drupal/trash": "^3.0",
-        "drupal/twig_tweak": "^3.4",
-        "drupal/ui_suite_daisyui": "^5.0@alpha",
-        "drupal/views_data_export": "^1.4",
-        "drupal/views_selective_filters": "^2.0@alpha",
-        "drupal/webform": "^6.3@beta",
-        "drupal/webform_analysis": "^1.0@beta",
-        "drupal/webform_views": "^5.2",
-        "drush/drush": "^13"
+    "post-update-cmd": [
+      "@clean-billboardjs"
+    ]
+  },
+  "extra": {
+    "drupal-scaffold": {
+      "file-mapping": {
+        "[web-root]/robots.txt": false
+      },
+      "locations": {
+        "web-root": "html/"
+      }
     },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true,
-            "drupal/core-vendor-hardening": true,
-            "php-http/discovery": true,
-            "phpstan/extension-installer": true,
-            "tbachert/spi": true
-        },
-        "sort-packages": true
+    "installer-paths": {
+      "html/core": [
+        "type:drupal-core"
+      ],
+      "html/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "html/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "html/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "html/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/Commands/contrib/{$name}": [
+        "type:drupal-drush"
+      ],
+      "html/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
+      "html/profiles/custom/{$name}": [
+        "type:drupal-custom-profile"
+      ],
+      "html/themes/custom/{$name}": [
+        "type:drupal-custom-theme"
+      ]
     },
     "scripts": {
-        "clean-billboardjs": "./scripts/clean-billboardjs.sh",
-        "post-install-cmd": [
-            "@clean-billboardjs"
-        ],
-        "post-update-cmd": [
-            "@clean-billboardjs"
-        ]
+      "post-install-cmd": [
+        "@composer drupal-scaffold"
+      ],
+      "post-update-cmd": [
+        "@composer drupal-scaffold",
+        "mkdir -p web/libraries/bootstrap",
+        "cp -R vendor/twbs/bootstrap/dist web/libraries/bootstrap"
+      ]
     },
-    "extra": {
-        "drupal-scaffold": {
-            "file-mapping": {
-                "[web-root]/robots.txt": false
-            },
-            "locations": {
-                "web-root": "html/"
-            }
-        },
-        "installer-paths": {
-            "html/core": [
-                "type:drupal-core"
-            ],
-            "html/libraries/{$name}": [
-                "type:drupal-library"
-            ],
-            "html/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "html/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "html/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "drush/Commands/contrib/{$name}": [
-                "type:drupal-drush"
-            ],
-            "html/modules/custom/{$name}": [
-                "type:drupal-custom-module"
-            ],
-            "html/profiles/custom/{$name}": [
-                "type:drupal-custom-profile"
-            ],
-            "html/themes/custom/{$name}": [
-                "type:drupal-custom-theme"
-            ]
-        },
-        "scripts": {
-            "post-install-cmd": [
-                "@composer drupal-scaffold"
-            ],
-            "post-update-cmd": [
-                "@composer drupal-scaffold",
-                "mkdir -p web/libraries/bootstrap",
-                "cp -R vendor/twbs/bootstrap/dist web/libraries/bootstrap"
-            ]
-        },
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
-        "patches": {
-            "drupal/commerce_email": {
-                "Add entity embed support": "patches/commerce_email-entity_embed_support.patch"
-            }
-        }
+    "patchLevel": {
+      "drupal/core": "-p2"
     },
-    "require-dev": {
-        "drupal/core-dev": "^11",
-        "drupal/devel": "^5.4",
-        "kint-php/kint": "^6.1"
+    "patches": {
+      "drupal/ckeditor5_paste_filter": {
+        "3482261 - Add support for description field": "patches/ckeditor5_paste_filter-add_text_field-3482261.patch"
+      },
+      "drupal/commerce_email": {
+        "Add entity embed support": "patches/commerce_email-entity_embed_support.patch"
+      }
     }
+  },
+  "require-dev": {
+    "drupal/core-dev": "^11",
+    "drupal/devel": "^5.4",
+    "kint-php/kint": "^6.1"
+  }
 }
