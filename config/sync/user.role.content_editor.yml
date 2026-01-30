@@ -6,6 +6,7 @@ dependencies:
     - block_content.type.basic
     - filter.format.basic_html
     - filter.format.full_html
+    - filter.format.restricted_html
     - media.type.audio
     - media.type.document
     - media.type.image
@@ -40,6 +41,7 @@ dependencies:
     - system
     - taxonomy
     - taxonomy_manager
+    - toolbar
     - trash
 _core:
   default_config_hash: e_wG1u7SrGaJbY2-Szgbgl-c8T3kdirU3uTNq2c_QJQ
@@ -58,7 +60,9 @@ permissions:
   - 'access shortcuts'
   - 'access taxonomy manager list'
   - 'access taxonomy overview'
+  - 'access toolbar'
   - 'access trash'
+  - 'administer menu'
   - 'administer url aliases'
   - 'create audio media'
   - 'create content translations'
@@ -135,6 +139,7 @@ permissions:
   - 'update content translations'
   - 'use text format basic_html'
   - 'use text format full_html'
+  - 'use text format restricted_html'
   - 'view all media revisions'
   - 'view all revisions'
   - 'view any basic block content history'
