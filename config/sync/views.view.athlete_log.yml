@@ -1,6 +1,6 @@
 uuid: 26468d4d-2fa8-4af2-98f5-cfe805984f1b
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - field.storage.node.field_activity_logged
@@ -1296,7 +1296,6 @@ display:
         - url
         - url.query_args
         - user
-        - 'user.node_grants:view'
         - user.roles
       tags:
         - 'config:field.storage.node.field_activity_logged'
@@ -1309,8 +1308,6 @@ display:
         - 'config:field.storage.node.field_tc_type'
         - 'config:field.storage.node.field_time'
         - 'config:field.storage.node.field_training_type'
-        - 'config:search_api.index.athlete_log'
-        - 'search_api_list:athlete_log'
   data_export_1:
     id: data_export_1
     display_title: 'Data export'
@@ -2292,7 +2289,6 @@ display:
         - request_format
         - url
         - user
-        - 'user.node_grants:view'
         - user.roles
       tags:
         - 'config:field.storage.node.field_activity_logged'
@@ -2305,8 +2301,6 @@ display:
         - 'config:field.storage.node.field_tc_type'
         - 'config:field.storage.node.field_time'
         - 'config:field.storage.node.field_training_type'
-        - 'config:search_api.index.athlete_log'
-        - 'search_api_list:athlete_log'
   log:
     id: log
     display_title: 'PG | my log'
@@ -2333,7 +2327,6 @@ display:
         - url
         - url.query_args
         - user
-        - 'user.node_grants:view'
         - user.roles
       tags:
         - 'config:field.storage.node.field_activity_logged'
@@ -2346,8 +2339,6 @@ display:
         - 'config:field.storage.node.field_tc_type'
         - 'config:field.storage.node.field_time'
         - 'config:field.storage.node.field_training_type'
-        - 'config:search_api.index.athlete_log'
-        - 'search_api_list:athlete_log'
   page_my_athletes_logs:
     id: page_my_athletes_logs
     display_title: "PG | my athletes' log"
@@ -3524,7 +3515,6 @@ display:
         - url
         - url.query_args
         - user
-        - 'user.node_grants:view'
         - user.roles
       tags:
         - 'config:field.storage.node.field_activity_logged'
@@ -3537,5 +3527,3 @@ display:
         - 'config:field.storage.node.field_tc_type'
         - 'config:field.storage.node.field_time'
         - 'config:field.storage.node.field_training_type'
-        - 'config:search_api.index.athlete_log'
-        - 'search_api_list:athlete_log'
