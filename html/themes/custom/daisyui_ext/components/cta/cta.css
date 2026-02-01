@@ -1,1 +1,98 @@
-/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from red r g b)))){*,:before,:after,::backdrop{--tw-font-weight:initial;--tw-tracking:initial}}}.cta{max-width:var(--container-7xl,80rem);padding-inline:calc(var(--spacing,.25rem)*6);padding-block:calc(var(--spacing,.25rem)*24);margin-inline:auto}@media(min-width:40rem){.cta{padding-block:calc(var(--spacing,.25rem)*32)}}@media(min-width:64rem){.cta{padding-inline:calc(var(--spacing,.25rem)*8)}}.cta-centered{text-align:center}.cta-centered .cta-title,.cta-centered .cta-text{margin-inline:auto}.cta-centered .cta-buttons{justify-content:center}.cta-title{max-width:var(--container-xl,36rem);font-size:var(--text-4xl,2.25rem);line-height:var(--tw-leading,var(--text-4xl--line-height,calc(2.5/2.25)));--tw-font-weight:var(--font-weight-semibold,600);font-weight:var(--font-weight-semibold,600);--tw-tracking:var(--tracking-tight,-.025em);letter-spacing:var(--tracking-tight,-.025em);text-wrap:balance;color:var(--color-base-content)}@media(min-width:40rem){.cta-title{font-size:var(--text-5xl,3rem);line-height:var(--tw-leading,var(--text-5xl--line-height,1))}}.cta-text{margin-top:calc(var(--spacing,.25rem)*6);max-width:var(--container-xl,36rem);font-size:var(--text-lg,1.125rem);line-height:calc(var(--spacing,.25rem)*8);text-wrap:pretty;color:var(--color-base-content)}@supports (color:color-mix(in lab,red,red)){.cta-text{color:color-mix(in oklab,var(--color-base-content)70%,transparent)}}.cta-buttons{margin-top:calc(var(--spacing,.25rem)*10);align-items:center;column-gap:calc(var(--spacing,.25rem)*6);display:flex}.cta-primary{background-color:var(--color-primary)}.cta-primary .cta-title,.cta-primary .cta-text{color:var(--color-primary-content)}@supports (color:color-mix(in lab,red,red)){.cta-primary .cta-text{color:color-mix(in oklab,var(--color-primary-content)70%,transparent)}}.cta-secondary{background-color:var(--color-secondary)}.cta-secondary .cta-title,.cta-secondary .cta-text{color:var(--color-secondary-content)}@supports (color:color-mix(in lab,red,red)){.cta-secondary .cta-text{color:color-mix(in oklab,var(--color-secondary-content)70%,transparent)}}@property --tw-font-weight{syntax:"*";inherits:false}@property --tw-tracking{syntax:"*";inherits:false}
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+@layer properties;
+.cta {
+  margin-inline: auto;
+  max-width: var(--container-7xl, 80rem);
+  padding-inline: calc(var(--spacing, 0.25rem) * 6);
+  padding-block: calc(var(--spacing, 0.25rem) * 24);
+  @media (width >= 40rem) {
+    padding-block: calc(var(--spacing, 0.25rem) * 32);
+  }
+  @media (width >= 64rem) {
+    padding-inline: calc(var(--spacing, 0.25rem) * 8);
+  }
+}
+.cta-centered {
+  text-align: center;
+  .cta-title {
+    margin-inline: auto;
+  }
+  .cta-text {
+    margin-inline: auto;
+  }
+  .cta-buttons {
+    justify-content: center;
+  }
+}
+.cta-title {
+  max-width: var(--container-xl, 36rem);
+  font-size: var(--text-4xl, 2.25rem);
+  line-height: var(--tw-leading, var(--text-4xl--line-height, calc(2.5 / 2.25)));
+  --tw-font-weight: var(--font-weight-semibold, 600);
+  font-weight: var(--font-weight-semibold, 600);
+  --tw-tracking: var(--tracking-tight, -0.025em);
+  letter-spacing: var(--tracking-tight, -0.025em);
+  text-wrap: balance;
+  color: var(--color-base-content);
+  @media (width >= 40rem) {
+    font-size: var(--text-5xl, 3rem);
+    line-height: var(--tw-leading, var(--text-5xl--line-height, 1));
+  }
+}
+.cta-text {
+  margin-top: calc(var(--spacing, 0.25rem) * 6);
+  max-width: var(--container-xl, 36rem);
+  font-size: var(--text-lg, 1.125rem);
+  line-height: calc(var(--spacing, 0.25rem) * 8);
+  text-wrap: pretty;
+  color: var(--color-base-content);
+  @supports (color: color-mix(in lab, red, red)) {
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+}
+.cta-buttons {
+  margin-top: calc(var(--spacing, 0.25rem) * 10);
+  display: flex;
+  align-items: center;
+  column-gap: calc(var(--spacing, 0.25rem) * 6);
+}
+.cta-primary {
+  background-color: var(--color-primary);
+  .cta-title {
+    color: var(--color-primary-content);
+  }
+  .cta-text {
+    color: var(--color-primary-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-primary-content) 70%, transparent);
+    }
+  }
+}
+.cta-secondary {
+  background-color: var(--color-secondary);
+  .cta-title {
+    color: var(--color-secondary-content);
+  }
+  .cta-text {
+    color: var(--color-secondary-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-secondary-content) 70%, transparent);
+    }
+  }
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+    }
+  }
+}

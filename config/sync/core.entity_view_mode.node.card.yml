@@ -1,0 +1,11 @@
+uuid: 7e66d606-4e9d-436b-beda-65cb19560343
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.card
+label: Card
+description: 'Displays embedded content as a DaisyUI card'
+targetEntityType: node
+cache: true

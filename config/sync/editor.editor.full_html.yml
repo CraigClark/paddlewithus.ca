@@ -39,6 +39,7 @@ settings:
       - tokenBrowser
       - ck5BlockEmbed__default
       - UiStylesBlock
+      - showBlocks
   plugins:
     ckeditor5_codeBlock:
       languages:
@@ -350,9 +351,7 @@ settings:
         - daisyui_mask
         - effects_box_shadow
         - layout_container
-        - layout_grid
         - sizing_width
-        - gap
         - margin_bottom
         - margin_top
         - padding_bottom
