@@ -1,5 +1,4 @@
 title: 'Inscription au programme'
-categories: {  }
 elements: |
   product_id:
     '#title': 'ID du produit'

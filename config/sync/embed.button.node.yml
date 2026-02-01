@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.card
     - core.entity_view_mode.node.details
     - core.entity_view_mode.node.full
-    - node.type.embed
     - node.type.page
   module:
     - entity_embed
@@ -20,7 +19,6 @@ type_settings:
   entity_type: node
   bundles:
     - page
-    - embed
   display_plugins:
     - 'view_mode:node.card'
     - 'view_mode:node.details'

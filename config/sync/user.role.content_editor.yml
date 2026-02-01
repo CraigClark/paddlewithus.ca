@@ -12,7 +12,6 @@ dependencies:
     - media.type.image
     - media.type.remote_video
     - media.type.video
-    - node.type.embed
     - node.type.page
     - node.type.story
     - taxonomy.vocabulary.activity
@@ -67,7 +66,6 @@ permissions:
   - 'create audio media'
   - 'create content translations'
   - 'create document media'
-  - 'create embed content'
   - 'create image media'
   - 'create media'
   - 'create page content'
@@ -94,7 +92,6 @@ permissions:
   - 'delete any story content'
   - 'delete any video media'
   - 'delete content translations'
-  - 'delete embed revisions'
   - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
@@ -108,7 +105,6 @@ permissions:
   - 'edit any audio media'
   - 'edit any basic block content'
   - 'edit any document media'
-  - 'edit any embed content'
   - 'edit any image media'
   - 'edit any page content'
   - 'edit any remote_video media'

@@ -35,6 +35,7 @@
     "drupal/better_exposed_filters": "^7.0@beta",
     "drupal/charts": "^5.1",
     "drupal/ck5_block_embed": "^1.0",
+    "drupal/ckeditor5_fullscreen": "^1.0",
     "drupal/ckeditor5_paste_filter": "^1.1",
     "drupal/coffee": "^2.0",
     "drupal/collapsiblock": "^4.3",

@@ -42,16 +42,12 @@ elements: |-
     '#type': processed_text
     '#text': '<hr class="h-px my-8 bg-neutral-quaternary border-0">'
     '#format': full_html
-  waiver_info:
+  policy_info:
     '#type': processed_text
     '#wrapper_attributes':
       class:
         - mt-12
-    '#text': '<h2>Important Information</h2><h3>Waiver</h3><p>Paddling activities can be risky. Injuries can happen, even when safety rules are followed.</p><p>By registering, you agree that:</p><ul><li data-list-item-id="ee41f32dec4c5ad8a51f0c9d64409ed3f">Taking part is your choice</li><li data-list-item-id="e0dbc720343bbff3d0e3682364f5df34c">You understand the risks involved</li><li data-list-item-id="eed6307378e0914cc17a352c74d0023ec">You (or your child) are healthy enough to participate</li><li data-list-item-id="e417790ec7bf7045aceac1cbc770236f2">You will follow all safety rules and instructions</li><li data-list-item-id="e8308ea06d603c8abf02152c1774970c3">Petrie Island Canoe Club is not responsible for injuries, losses, or damage that may happen during activities</li></ul><p>If the participant is under 18, a parent or legal guardian is agreeing for them.</p><details class="collapse collapse-arrow bg-base-100 border-base-300 border border-primary my-8"><summary class="collapse-title font-semibold">Please read the full waiver below before continuing.</summary><div class="p-3"><drupal-entity data-entity-type="node" data-entity-uuid="7f452406-4e01-4f45-bf55-e57d1d596ca7" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity></div></details><h3>Swim test policy</h3><drupal-entity data-entity-type="node" data-entity-uuid="059c3a16-99e7-4339-bb5c-54cb9def9ec8" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
-    '#format': full_html
-  hr_2:
-    '#type': processed_text
-    '#text': '<hr class="h-px my-8 bg-neutral-quaternary border-0">'
+    '#text': '<h3>Policies and safety expectations</h3><p>The policies below are in place to help keep everyone safe, supported, and able to enjoy paddling. They explain how we manage risk, what we expect from participants and families, and how we respond to safety issues on and off the water.</p><p>Please take a moment to review each policy. By agreeing, you confirm that you understand these expectations and are committed to helping create a safe and positive experience for all participants.</p><drupal-entity data-entity-type="node" data-entity-uuid="75bda914-483e-4dfb-bd8e-b46a5e53b10a" data-embed-button="node" data-entity-embed-display="view_mode:node.details">&nbsp;</drupal-entity><drupal-entity data-entity-type="node" data-entity-uuid="4787287a-681d-46f6-b289-839820928e70" data-embed-button="node" data-entity-embed-display="view_mode:node.details">&nbsp;</drupal-entity><drupal-entity data-entity-type="node" data-entity-uuid="e668b1df-3897-4a27-a3dd-1aad94ca113f" data-embed-button="node" data-entity-embed-display="view_mode:node.details">&nbsp;</drupal-entity><drupal-entity data-entity-type="node" data-entity-uuid="91bf1982-5de8-4eec-afc4-b7f5cea54bdb" data-embed-button="node" data-entity-embed-display="view_mode:node.details">&nbsp;</drupal-entity>'
     '#format': full_html
   waiver_agreement_authority:
     '#type': checkbox
@@ -59,15 +55,23 @@ elements: |-
     '#required': true
   waiver_agreement:
     '#type': checkbox
-    '#title': ' I have read and agree to the waiver and assumption of risk.'
+    '#title': ' I have read and agree to the <em>Release of Liability and Waiver of Claims</em>.'
+    '#required': true
+  concussion_acknowledgment:
+    '#type': checkbox
+    '#title': 'I understand and agree to the <em>Concussion Code of Conduct</em>.'
+    '#required': true
+  code_of_conduct_acknowledgment:
+    '#type': checkbox
+    '#title': 'I understand and agree to the <em>Code of Conduct</em>.'
     '#required': true
   swim_test_acknowledgment:
     '#type': checkbox
-    '#title': 'I understand and agree to the swim test policy.'
+    '#title': 'I understand and agree to the <em>Swim Test Policy</em>.'
     '#required': true
   notify_by_email:
     '#type': processed_text
-    '#text': '<p class="text-gray-500 text-sm">You will be emailed a copy of the waiver and swim test policy.</p>'
+    '#text': '<p class="text-gray-500 text-sm">You will be emailed a copy of all policies and the waiver that you agreed to.</p>'
     '#format': full_html
   actions:
     '#type': webform_actions
