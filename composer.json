@@ -58,7 +58,6 @@
     "drupal/field_label": "^1.5",
     "drupal/field_permissions": "^1.4",
     "drupal/focal_point": "^2.1",
-    "drupal/form_mode_control": "^2.5",
     "drupal/formatter_suite": "^2.1",
     "drupal/gin": "^5.0",
     "drupal/gin_toolbar": "^3.0",
