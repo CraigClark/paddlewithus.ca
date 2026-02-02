@@ -92,7 +92,8 @@
     "drupal/webform": "^6.3@beta",
     "drupal/webform_analysis": "^1.0@beta",
     "drupal/webform_views": "^5.2",
-    "drush/drush": "^13"
+    "drush/drush": "^13",
+    "litespeedtech/lscache-drupal": "^1.6"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -170,12 +171,12 @@
         "cp -R vendor/twbs/bootstrap/dist web/libraries/bootstrap"
       ]
     },
-    "patchLevel": {
-      "drupal/core": "-p2"
-    },
     "patches": {
       "drupal/ckeditor5_paste_filter": {
         "3482261 - Add support for description field": "patches/ckeditor5_paste_filter-add_text_field-3482261.patch"
+      },
+      "drupal/core": {
+        "Enable LiteSpeed CacheLookup in scaffolded .htaccess": "patches/drupal-core-scaffold-htaccess-litespeed-cachelookup.patch"
       },
       "drupal/commerce_email": {
         "Add entity embed support": "patches/commerce_email-entity_embed_support.patch"

@@ -1,0 +1,9 @@
+_core:
+  default_config_hash: guQYgRzocm6S-Ua-Zxr3tg7CUntCc47I1Bj8BCAzbyg
+lite_speed_cache:
+  max_age: '64800'
+  cache_status: '1'
+  debug: '0'
+  private_max_age: '3600'
+  private_cache_status: '0'
+  esi_blocks: id=toolbar-administration

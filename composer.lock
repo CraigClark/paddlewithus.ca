@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84f13564499e83a58a20442ff33ba4d4",
+    "content-hash": "f6814ebc2bf05ba1a7dea58a42c31f3d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8238,6 +8238,38 @@
                 }
             ],
             "time": "2025-12-27T15:18:42+00:00"
+        },
+        {
+            "name": "litespeedtech/lscache-drupal",
+            "version": "v1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/litespeedtech/lscache-drupal.git",
+                "reference": "a042dbd0f22f28743e1435005de0078a0792ac99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/litespeedtech/lscache-drupal/zipball/a042dbd0f22f28743e1435005de0078a0792ac99",
+                "reference": "a042dbd0f22f28743e1435005de0078a0792ac99",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "description": "Page Cache for LiteSpeed Web Server. Caches pages for any user, handling dynamic content correctly.",
+            "homepage": "https://www.litespeedtech.com/products/cache-plugins",
+            "keywords": [
+                "cache",
+                "drupal",
+                "litespeed"
+            ],
+            "support": {
+                "issues": "https://github.com/litespeedtech/lscache-drupal/issues",
+                "source": "https://github.com/litespeedtech/lscache-drupal/tree/v1.6"
+            },
+            "time": "2024-11-07T12:33:04+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
@@ -18848,5 +18880,5 @@
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
