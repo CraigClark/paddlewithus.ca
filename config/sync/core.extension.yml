@@ -69,6 +69,7 @@ module:
   file: 0
   filter: 0
   focal_point: 0
+  form_mode_control: 0
   formatter_suite: 0
   gin_toolbar: 0
   help: 0
