@@ -76,7 +76,6 @@
     "drupal/node_view_permissions": "^2.0",
     "drupal/nomarkup": "^1.0",
     "drupal/pathauto": "^1.12",
-    "drupal/qrcode_fields": "^2.1",
     "drupal/rabbit_hole": "^1.0",
     "drupal/range": "^1.6",
     "drupal/realname": "^2.0",

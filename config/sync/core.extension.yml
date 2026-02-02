@@ -114,7 +114,6 @@ module:
   picc_registration: 0
   picc_sku: 0
   profile: 0
-  qrcode_fields: 0
   rabbit_hole: 0
   range: 0
   realname: 0

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "343eef7552e255582ccbdbb883aae6f4",
+    "content-hash": "3909920edaf1110ce40a11058999a9af",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5694,55 +5694,6 @@
             "homepage": "https://drupal.org/project/profile",
             "support": {
                 "source": "https://git.drupalcode.org/project/profile"
-            }
-        },
-        {
-            "name": "drupal/qrcode_fields",
-            "version": "2.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/qrcode_fields.git",
-                "reference": "2.1.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/qrcode_fields-2.1.4.zip",
-                "reference": "2.1.4",
-                "shasum": "3bcf1730a4745629026e27a17674374874033a36"
-            },
-            "require": {
-                "drupal/core": "^10 || ^11",
-                "drupal/token": "^1.11"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.1.4",
-                    "datestamp": "1763221933",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Sujan Shrestha",
-                    "homepage": "https://www.drupal.org/user/2574226"
-                },
-                {
-                    "name": "sujan shrestha",
-                    "homepage": "https://www.drupal.org/user/3475737"
-                }
-            ],
-            "description": "Generate QR codes and display based on specified fields",
-            "homepage": "https://www.drupal.org/project/qrcode_fields",
-            "support": {
-                "source": "https://git.drupalcode.org/project/qrcode_fields"
             }
         },
         {
