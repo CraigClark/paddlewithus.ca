@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - profile.type.participant
     - taxonomy.vocabulary.activity
     - taxonomy.vocabulary.boat
     - taxonomy.vocabulary.club
@@ -12,7 +11,6 @@ dependencies:
   module:
     - content_translation
     - field_permissions
-    - form_mode_control
     - rabbit_hole
     - system
     - taxonomy
@@ -51,7 +49,6 @@ permissions:
   - 'translate editable entities'
   - 'translate regatta taxonomy_term'
   - 'update content translations'
-  - 'use  The form mode swim_test linked to  profile entity( participant )'
   - 'view field_coach'
   - 'view field_current_club'
   - 'view field_passed_swim_test'

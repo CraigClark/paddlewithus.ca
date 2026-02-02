@@ -14,7 +14,6 @@ dependencies:
     - media.type.video
     - node.type.page
     - node.type.story
-    - profile.type.participant
     - taxonomy.vocabulary.activity
     - taxonomy.vocabulary.activity_type
     - taxonomy.vocabulary.boat
@@ -33,7 +32,6 @@ dependencies:
     - field_permissions
     - file
     - filter
-    - form_mode_control
     - media
     - node
     - path
@@ -135,7 +133,6 @@ permissions:
   - 'translate editable entities'
   - 'update any media'
   - 'update content translations'
-  - 'use  The form mode swim_test linked to  profile entity( participant )'
   - 'use text format basic_html'
   - 'use text format full_html'
   - 'use text format restricted_html'
