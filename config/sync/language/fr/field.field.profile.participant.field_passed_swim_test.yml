@@ -1,0 +1,4 @@
+description: 'Test de natation réussi'
+settings:
+  on_label: oui
+  off_label: non

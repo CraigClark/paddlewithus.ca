@@ -1,0 +1,21 @@
+uuid: 4af81af2-e012-440b-a0ff-1d916548c0b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_swim_test_passed_date
+    - profile.type.participant
+  module:
+    - datetime
+id: profile.participant.field_swim_test_passed_date
+field_name: field_swim_test_passed_date
+entity_type: profile
+bundle: participant
+label: 'Passed swim test (date)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

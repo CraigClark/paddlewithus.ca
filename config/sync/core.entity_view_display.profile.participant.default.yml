@@ -20,10 +20,15 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_3_rel
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
+    - field.field.profile.participant.field_passed_swim_test
     - field.field.profile.participant.field_photo_consent
+    - field.field.profile.participant.field_shirt_size
+    - field.field.profile.participant.field_swim_test_passed_date
     - profile.type.participant
   module:
+    - datetime
     - layout_builder
+    - options
     - text
     - ui_patterns
     - ui_patterns_layouts
@@ -218,6 +223,56 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 7
             additional: {  }
+          f01697b4-d55d-48bd-af98-cf6c7c7f841c:
+            uuid: f01697b4-d55d-48bd-af98-cf6c7c7f841c
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_shirt_size'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: list_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          21366686-5764-45e3-8f3f-d85c24756841:
+            uuid: 21366686-5764-45e3-8f3f-d85c24756841
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_passed_swim_test'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
+          5a39a7c8-3089-41db-acd2-57f1c45ac2f6:
+            uuid: 5a39a7c8-3089-41db-acd2-57f1c45ac2f6
+            region: items
+            configuration:
+              id: 'field_block:profile:participant:field_swim_test_passed_date'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 10
+            additional: {  }
         third_party_settings: {  }
 id: profile.participant.default
 targetEntityType: profile
@@ -260,6 +315,32 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 3
+    region: items
+  field_passed_swim_test:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 6
+    region: items
+  field_shirt_size:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: items
+  field_swim_test_passed_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 7
     region: items
 hidden:
   field_allergies: true

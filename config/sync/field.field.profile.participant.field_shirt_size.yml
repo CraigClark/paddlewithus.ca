@@ -1,0 +1,21 @@
+uuid: ef6df734-78ba-4c7f-aff0-652d5c221230
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_shirt_size
+    - profile.type.participant
+  module:
+    - options
+id: profile.participant.field_shirt_size
+field_name: field_shirt_size
+entity_type: profile
+bundle: participant
+label: 'T-shirt size'
+description: 'Shirt size for club t-shirt'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

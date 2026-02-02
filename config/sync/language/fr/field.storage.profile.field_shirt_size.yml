@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    -
+      label: "\tpetit"
+    -
+      label: moyen
+    -
+      label: grand
+    -
+      label: 'Très grand'

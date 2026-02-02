@@ -1,0 +1,33 @@
+uuid: f2a92494-c792-4192-9a1b-3e8422168528
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - profile
+id: profile.field_shirt_size
+field_name: field_shirt_size
+entity_type: profile
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: small
+      label: small
+    -
+      value: medium
+      label: medium
+    -
+      value: large
+      label: large
+    -
+      value: x_large
+      label: x-large
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,11 @@
+uuid: a1306121-55b9-4dfc-8ce9-e27d7d3fa0d8
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.swim_test
+label: 'Swim test'
+description: 'Fields for swim test'
+targetEntityType: profile
+cache: true

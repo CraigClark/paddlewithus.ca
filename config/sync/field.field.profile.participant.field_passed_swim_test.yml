@@ -1,0 +1,23 @@
+uuid: 1946c3d9-8c65-437e-a6b7-faf356a2c9fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_passed_swim_test
+    - profile.type.participant
+id: profile.participant.field_passed_swim_test
+field_name: field_passed_swim_test
+entity_type: profile
+bundle: participant
+label: 'Passed swim test'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'yes'
+  off_label: 'no'
+field_type: boolean

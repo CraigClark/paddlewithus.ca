@@ -1,0 +1,70 @@
+uuid: 6117981b-321f-4283-9879-2f4579fcb6bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.profile.swim_test
+    - field.field.profile.participant.field_additional_info
+    - field.field.profile.participant.field_allergies
+    - field.field.profile.participant.field_birth_date
+    - field.field.profile.participant.field_emercency_contact_1_name
+    - field.field.profile.participant.field_emercency_contact_1_phone
+    - field.field.profile.participant.field_emercency_contact_1_pickup
+    - field.field.profile.participant.field_emercency_contact_1_rel
+    - field.field.profile.participant.field_emercency_contact_2_name
+    - field.field.profile.participant.field_emercency_contact_2_phone
+    - field.field.profile.participant.field_emercency_contact_2_pickup
+    - field.field.profile.participant.field_emercency_contact_2_rel
+    - field.field.profile.participant.field_emercency_contact_3_name
+    - field.field.profile.participant.field_emercency_contact_3_phone
+    - field.field.profile.participant.field_emercency_contact_3_pickup
+    - field.field.profile.participant.field_emercency_contact_3_rel
+    - field.field.profile.participant.field_name
+    - field.field.profile.participant.field_owner
+    - field.field.profile.participant.field_passed_swim_test
+    - field.field.profile.participant.field_photo_consent
+    - field.field.profile.participant.field_shirt_size
+    - field.field.profile.participant.field_swim_test_passed_date
+    - profile.type.participant
+  module:
+    - datetime
+id: profile.participant.swim_test
+targetEntityType: profile
+bundle: participant
+mode: swim_test
+content:
+  field_passed_swim_test:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_swim_test_passed_date:
+    type: datetime_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_additional_info: true
+  field_allergies: true
+  field_birth_date: true
+  field_emercency_contact_1_name: true
+  field_emercency_contact_1_phone: true
+  field_emercency_contact_1_pickup: true
+  field_emercency_contact_1_rel: true
+  field_emercency_contact_2_name: true
+  field_emercency_contact_2_phone: true
+  field_emercency_contact_2_pickup: true
+  field_emercency_contact_2_rel: true
+  field_emercency_contact_3_name: true
+  field_emercency_contact_3_phone: true
+  field_emercency_contact_3_pickup: true
+  field_emercency_contact_3_rel: true
+  field_name: true
+  field_owner: true
+  field_photo_consent: true
+  field_shirt_size: true
+  is_default: true
+  revision_log_message: true

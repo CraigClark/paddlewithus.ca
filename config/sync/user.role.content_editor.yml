@@ -29,6 +29,7 @@ dependencies:
     - coffee
     - content_translation
     - contextual
+    - field_permissions
     - file
     - filter
     - media
@@ -110,6 +111,8 @@ permissions:
   - 'edit any remote_video media'
   - 'edit any story content'
   - 'edit any video media'
+  - 'edit field_passed_swim_test'
+  - 'edit field_swim_test_passed_date'
   - 'edit own page content'
   - 'edit terms in activity'
   - 'edit terms in boat'
@@ -143,6 +146,7 @@ permissions:
   - 'view any remote_video media revisions'
   - 'view any video media revisions'
   - 'view deleted entities'
+  - 'view field_passed_swim_test'
   - 'view media'
   - 'view own unpublished content'
   - 'view term revisions in activity'

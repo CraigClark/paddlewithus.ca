@@ -1,0 +1,24 @@
+uuid: e698aaae-4278-4df8-9e7c-75d4439116df
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - field_permissions
+    - profile
+third_party_settings:
+  field_permissions:
+    permission_type: custom
+id: profile.field_swim_test_passed_date
+field_name: field_swim_test_passed_date
+entity_type: profile
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

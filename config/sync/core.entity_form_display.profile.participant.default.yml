@@ -20,7 +20,10 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_3_rel
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
+    - field.field.profile.participant.field_passed_swim_test
     - field.field.profile.participant.field_photo_consent
+    - field.field.profile.participant.field_shirt_size
+    - field.field.profile.participant.field_swim_test_passed_date
     - profile.type.participant
   module:
     - datetime
@@ -34,7 +37,7 @@ mode: default
 content:
   field_additional_info:
     type: text_textarea
-    weight: 4
+    weight: 5
     region: content
     settings:
       rows: 5
@@ -42,7 +45,7 @@ content:
     third_party_settings: {  }
   field_allergies:
     type: text_textarea
-    weight: 3
+    weight: 4
     region: content
     settings:
       rows: 5
@@ -56,7 +59,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_1_name:
     type: string_textfield
-    weight: 5
+    weight: 6
     region: content
     settings:
       size: 60
@@ -64,27 +67,19 @@ content:
     third_party_settings: {  }
   field_emercency_contact_1_phone:
     type: telephone_default
-    weight: 6
+    weight: 7
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_1_pickup:
     type: boolean_checkbox
-    weight: 14
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_emercency_contact_1_rel:
-    type: string_textfield
-    weight: 7
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_emercency_contact_2_name:
     type: string_textfield
     weight: 8
     region: content
@@ -92,29 +87,29 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_emercency_contact_2_name:
+    type: string_textfield
+    weight: 9
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_emercency_contact_2_phone:
     type: telephone_default
-    weight: 9
+    weight: 10
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_2_pickup:
     type: boolean_checkbox
-    weight: 15
+    weight: 16
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_emercency_contact_2_rel:
-    type: string_textfield
-    weight: 10
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_emercency_contact_3_name:
     type: string_textfield
     weight: 11
     region: content
@@ -122,23 +117,31 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_emercency_contact_3_name:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_emercency_contact_3_phone:
     type: telephone_default
-    weight: 12
+    weight: 13
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_3_pickup:
     type: boolean_checkbox
-    weight: 16
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_emercency_contact_3_rel:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -183,7 +186,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_shirt_size:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_owner: true
+  field_passed_swim_test: true
+  field_swim_test_passed_date: true
   is_default: true
   revision_log_message: true

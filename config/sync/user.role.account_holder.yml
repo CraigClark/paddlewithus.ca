@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - commerce_checkout
+    - field_permissions
     - profile
 id: account_holder
 label: 'Account holder'
@@ -13,4 +14,6 @@ permissions:
   - 'access checkout'
   - 'create participant profile'
   - 'update own participant profile'
+  - 'view own field_passed_swim_test'
+  - 'view own field_swim_test_passed_date'
   - 'view own participant profile'

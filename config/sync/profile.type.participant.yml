@@ -11,5 +11,5 @@ display_label: 'Family member'
 multiple: true
 registration: false
 roles: {  }
-allow_revisions: false
-new_revision: false
+allow_revisions: true
+new_revision: true
