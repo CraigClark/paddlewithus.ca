@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3909920edaf1110ce40a11058999a9af",
+    "content-hash": "5418dfbf460699f723c662387ce5d826",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4785,81 +4785,6 @@
             }
         },
         {
-            "name": "drupal/key",
-            "version": "1.22.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/key.git",
-                "reference": "8.x-1.22"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/key-8.x-1.22.zip",
-                "reference": "8.x-1.22",
-                "shasum": "14b4b8ce1917dcbcf2d67955564b8b484f30cdda"
-            },
-            "require": {
-                "drupal/core": "^9.1 || ^10 || ^11"
-            },
-            "require-dev": {
-                "drush/drush": ">=9"
-            },
-            "suggest": {
-                "drush/drush": ">=11"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.22",
-                    "datestamp": "1768921252",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "drush": {
-                    "services": {
-                        "drush.services.yml": ">=9"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "cellar door",
-                    "homepage": "https://www.drupal.org/user/658076"
-                },
-                {
-                    "name": "crashtest_",
-                    "homepage": "https://www.drupal.org/user/261457"
-                },
-                {
-                    "name": "japerry",
-                    "homepage": "https://www.drupal.org/user/45640"
-                },
-                {
-                    "name": "nerdstein",
-                    "homepage": "https://www.drupal.org/user/1557710"
-                },
-                {
-                    "name": "rlhawk",
-                    "homepage": "https://www.drupal.org/user/352283"
-                }
-            ],
-            "description": "Provides the ability to manage site-wide keys",
-            "homepage": "http://drupal.org/project/key",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/key",
-                "issues": "http://drupal.org/project/key"
-            }
-        },
-        {
             "name": "drupal/language_switcher_extended",
             "version": "1.2.0",
             "source": {
@@ -6628,60 +6553,6 @@
             "homepage": "https://www.drupal.org/project/token_filter",
             "support": {
                 "source": "https://git.drupalcode.org/project/token_filter"
-            }
-        },
-        {
-            "name": "drupal/trash",
-            "version": "3.0.24",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/trash.git",
-                "reference": "3.0.24"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/trash-3.0.24.zip",
-                "reference": "3.0.24",
-                "shasum": "0fc08a9a13b94e6990d13f4eec9ef25436db9e51"
-            },
-            "require": {
-                "drupal/core": "^10.3 | ^11"
-            },
-            "conflict": {
-                "drush/drush": "<12.5.1"
-            },
-            "require-dev": {
-                "drupal/redirect": "*",
-                "drupal/wse": "*"
-            },
-            "suggest": {
-                "drush/drush": "^12 || ^13"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "3.0.24",
-                    "datestamp": "1769810434",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "amateescu",
-                    "homepage": "https://www.drupal.org/user/729614"
-                }
-            ],
-            "description": "This module adds a trash bin for all content entities.",
-            "homepage": "https://www.drupal.org/project/trash",
-            "support": {
-                "source": "https://git.drupalcode.org/project/trash"
             }
         },
         {

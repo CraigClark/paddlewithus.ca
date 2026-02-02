@@ -79,7 +79,6 @@ module:
   inline_form_errors: 0
   jquery_ui: 0
   js_cookie: 0
-  key: 0
   language: 0
   language_switcher_extended: 0
   layout_builder: 0
@@ -133,7 +132,6 @@ module:
   shortcut: 0
   state_machine: 0
   symfony_mailer: 0
-  syslog: 0
   system: 0
   taxonomy: 0
   taxonomy_manager: 0
@@ -142,7 +140,6 @@ module:
   token: 0
   token_filter: 0
   toolbar: 0
-  trash: 0
   twig_tweak: 0
   ui_icons: 0
   ui_icons_ckeditor5: 0

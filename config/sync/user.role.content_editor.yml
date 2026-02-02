@@ -44,7 +44,6 @@ dependencies:
     - taxonomy
     - taxonomy_manager
     - toolbar
-    - trash
 _core:
   default_config_hash: e_wG1u7SrGaJbY2-Szgbgl-c8T3kdirU3uTNq2c_QJQ
 id: content_editor
@@ -63,7 +62,6 @@ permissions:
   - 'access taxonomy manager list'
   - 'access taxonomy overview'
   - 'access toolbar'
-  - 'access trash'
   - 'administer menu'
   - 'administer url aliases'
   - 'create audio media'
@@ -125,7 +123,6 @@ permissions:
   - 'rabbit hole bypass media'
   - 'rabbit hole bypass node'
   - 'rabbit hole bypass taxonomy_term'
-  - 'restore node entities'
   - 'revert all revisions'
   - 'revert any basic block content revisions'
   - 'revert term revisions in activity'
@@ -148,7 +145,6 @@ permissions:
   - 'view any image media revisions'
   - 'view any remote_video media revisions'
   - 'view any video media revisions'
-  - 'view deleted entities'
   - 'view field_passed_swim_test'
   - 'view media'
   - 'view own unpublished content'
