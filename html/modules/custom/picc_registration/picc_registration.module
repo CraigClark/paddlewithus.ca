@@ -184,7 +184,7 @@ function picc_registration_form_views_form_commerce_cart_form_default_alter(&$fo
   // Add "Register for more activities" link
   $form['actions']['register_more'] = [
     '#type' => 'link',
-    '#title' => t('Register for More Activities'),
+    '#title' => t('Register for more activities'),
     '#url' => \Drupal\Core\Url::fromUserInput('/program'),
     '#attributes' => [
       'class' => ['btn', 'my-3', 'btn-secondary'],

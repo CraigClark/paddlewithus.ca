@@ -9,11 +9,15 @@ display:
           label: Paiement
           separator: ', '
         refunded_amount__number:
+          alter:
+            text: 'Remboursé : {{ refunded_amount__number }}'
           separator: ', '
         avs_response_code_label:
           separator: ', '
         avs_response_code:
           label: 'Code de réponse AVS'
+          alter:
+            text: 'Réponse AVS : [{{ avs_response_code }}] {{ avs_response_code_label }}'
           separator: ', '
         state:
           label: État
@@ -39,6 +43,9 @@ display:
           exposed_sorts_label: 'Trier par'
           sort_asc_label: Asc
           sort_desc_label: Desc
+      empty:
+        area_text_custom:
+          content: 'Aucun paiement pour le moment.'
       arguments:
         order_id:
           exception:

@@ -274,6 +274,9 @@ settings:
           description: 'Remove cell padding from tables'
     ckeditor5_sourceEditing:
       allowed_tags: {  }
+    linkit_extension:
+      linkit_enabled: true
+      linkit_profile: default
 image_upload:
   status: true
   scheme: public

@@ -15,7 +15,7 @@ bundle: activity
 label: 'What to bring'
 description: '<p>List the items participants need to bring. Please do not include things like <em>friends</em> or <em>enthusiasm</em>.</p>'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

@@ -26,15 +26,15 @@
   {# Order header with number and status #}
   <div class="stats shadow mb-6">
     <div class="stat">
-      <div class="stat-title">Order Number</div>
+      <div class="stat-title">{{ 'Order Number'|t }}</div>
       <div class="stat-value text-primary">{{ order_number }}</div>
     </div>
     <div class="stat">
-      <div class="stat-title">Status</div>
+      <div class="stat-title">{{ 'Status'|t }}</div>
       <div class="stat-value text-sm">{{ state_label }}</div>
     </div>
     <div class="stat">
-      <div class="stat-title">Order Date</div>
+      <div class="stat-title">{{ 'Order Date'|t }}</div>
       <div class="stat-value text-sm">{{ placed_date|format_date('medium') }}</div>
     </div>
   </div>
@@ -42,17 +42,17 @@
   {# Customer Information #}
   <div class="card bg-base-200 mb-6">
     <div class="card-body">
-      <h2 class="card-title">Contact Information</h2>
+      <h2 class="card-title">{{ 'Contact Information'|t }}</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <div class="text-sm opacity-70">Email</div>
+          <div class="text-sm opacity-70">{{ 'Email'|t }}</div>
           <div class="font-medium">{{ email }}</div>
         </div>
 
         {% if order.billing_information is not empty %}
           <div>
-            <div class="text-sm opacity-70">Billing Address</div>
+            <div class="text-sm opacity-70">{{ 'Billing Address'|t }}</div>
             <div class="font-medium">
               {{ order.billing_information }}
             </div>
@@ -61,7 +61,7 @@
 
         {% if order.shipping_information is not empty %}
           <div>
-            <div class="text-sm opacity-70">Shipping Address</div>
+            <div class="text-sm opacity-70">{{ 'Shipping Address'|t }}</div>
             <div class="font-medium">
               {{ order.shipping_information }}
             </div>
@@ -73,7 +73,7 @@
 
   {# Order Items Table - render the view normally #}
   <div class="mb-6">
-    <h2 class="text-2xl font-bold mb-4">Registration Details</h2>
+    <h2 class="text-2xl font-bold mb-4">{{ 'Registration Details'|t }}</h2>
     {{ order.order_items }}
   </div>
 
@@ -93,7 +93,7 @@
 
         {% if has_adjustments %}
           <div class="flex justify-between text-lg">
-            <span>Subtotal</span>
+            <span>{{ 'Subtotal'|t }}</span>
             <span>{{ subtotal|commerce_price_format }}</span>
           </div>
 
@@ -109,7 +109,7 @@
         {% endif %}
 
         <div class="flex justify-between text-2xl font-bold">
-          <span>Total</span>
+          <span>{{ 'Total'|t }}</span>
           <span>{{ total|commerce_price_format }}</span>
         </div>
       </div>

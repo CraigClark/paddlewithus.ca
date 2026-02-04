@@ -15,7 +15,7 @@ bundle: activity
 label: Schedule
 description: "<p><b>For example</b></p>\r\n<ol>\r\n<li>Monday 6am to 7am - swimming</li>\r\n<li>Monday 4pm to 6pm - weights and running</li>\r\n<li>Tuesday 4pm to 6pm - weights and running</li>\r\n</ol>"
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

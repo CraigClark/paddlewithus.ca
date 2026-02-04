@@ -8,22 +8,27 @@ display:
           submit_button: Appliquer
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
       fields:
         title:
           label: Titre
-          separator: ', '
         unit_price__number:
           label: 'Prix unitaire'
-          separator: ', '
         quantity:
           label: Quantité
-          separator: ', '
         total_price__number:
           label: 'Prix total'
-          separator: ', '
+        field_name:
+          label: Nom
+        field_date_range:
+          label: 'Date du camp'
+        product_id:
+          label: Activité
+        payment_method:
+          label: 'Mode de paiement'
       arguments:
         order_item_id:
           exception:
             title: Tout
+      empty:
+        area_text_custom:
+          content: 'Il n’y a pas encore d’articles dans la commande.'

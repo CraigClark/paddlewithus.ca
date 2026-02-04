@@ -152,6 +152,13 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -165,7 +172,6 @@ hidden:
   langcode: true
   path: true
   promote: true
-  sticky: true
   translation: true
   uid: true
   url_redirects: true

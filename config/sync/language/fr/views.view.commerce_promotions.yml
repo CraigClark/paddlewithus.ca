@@ -1,8 +1,25 @@
-label: Promotions
 display:
   default:
-    display_title: 'Par défaut'
     display_options:
+      filters:
+        offer__target_plugin_id:
+          expose:
+            description: 'Type d’offre'
+            label: 'Offer type'
+        name:
+          expose:
+            label: Nom
+        code:
+          expose:
+            label: 'Code promotionnel'
+        status:
+          expose:
+            label: État
+      empty:
+        area:
+          content:
+            format: basic_html
+            value: '<p>Il n’y a pas encore de promotions.</p>'
       exposed_form:
         options:
           submit_button: Appliquer
@@ -32,6 +49,7 @@ display:
           label: Utilisation
           separator: ', '
         usage_limit_customer:
+          label: 'Limite par client'
           separator: ', '
         start_date:
           label: 'Date de début'
@@ -41,20 +59,8 @@ display:
           separator: ', '
         operations:
           label: Actions
-      filters:
-        name:
-          expose:
-            label: Nom
-        offer__target_plugin_id:
-          expose:
-            label: 'Offer type'
-        code:
-          expose:
-            label: 'Coupon code'
-        status:
-          expose:
-            label: État
       title: Promotions
+    display_title: 'Par défaut'
   admin:
     display_title: Page
     display_options:
@@ -62,3 +68,4 @@ display:
         title: Lister
       tab_options:
         title: Lister
+label: Promotions

@@ -13,8 +13,8 @@ bcc: ''
 replyTo: ''
 subject: '[site:name] - Registration info for order [commerce_order:order_number]'
 body:
-  value: '<p>Hi [commerce_order:uid:entity:display-name]</p><p>This is your copy of the waiver you agreed to when you registered for a program at the Petrie Island Canoe Club.<br><br>Please keep this for your records.&nbsp;<br>Order ID: [commerce_order:order_number]<br>Order placed on: [commerce_order:completed]</p>'
-  format: basic_html
+  value: '<p>Hi [commerce_order:uid:entity:display-name]</p><p>Thank you for signing up with [site:name]!&nbsp;</p><p>This is your copy of the waiver and other policies you agreed to when you registered for a program at the Petrie Island Canoe Club.</p><p>If anybody you registered requires a swim test, we will be in touch with further details.<br><br>Please keep this for your records.&nbsp;<br>Order ID: [commerce_order:order_number]<br>Order placed on: [commerce_order:completed]</p><hr><h2>Informed Consent, Assumption of Risk, Release of Liability and Waiver of Claims</h2><drupal-entity data-entity-type="node" data-entity-uuid="75bda914-483e-4dfb-bd8e-b46a5e53b10a" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity><hr><h2>Concussion Code of Conduct for Athletes and Parents/Legal Guardians</h2><drupal-entity data-entity-type="node" data-entity-uuid="4787287a-681d-46f6-b289-839820928e70" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity><hr><h2>Code of conduct</h2><drupal-entity data-entity-type="node" data-entity-uuid="e668b1df-3897-4a27-a3dd-1aad94ca113f" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity><hr><h2>Swim test policy</h2><drupal-entity data-entity-type="node" data-entity-uuid="91bf1982-5de8-4eec-afc4-b7f5cea54bdb" data-embed-button="node" data-entity-embed-display="view_mode:node.full">&nbsp;</drupal-entity>'
+  format: full_html
 conditions:
   -
     plugin: order_product_type
