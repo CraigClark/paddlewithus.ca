@@ -78,6 +78,9 @@ toast-start toast-center toast-end toast-top toast-middle toast-bottom
 tooltip-primary tooltip-neutral tooltip-secondary tooltip-accent tooltip-info tooltip-success tooltip-warning tooltip-error
 tooltip-top tooltip-bottom tooltip-left tooltip-right
 w-8 w-10 w-12 w-16 w-20 w-24 w-28 w-32
+max-w-sm
+max-w-md
+max-w-lg
 min-h-10
 min-h-20
 min-h-30

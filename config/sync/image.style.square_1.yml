@@ -5,13 +5,13 @@ dependencies:
   module:
     - focal_point
 name: square_1
-label: 'Square 400 x 400'
+label: 'Square 500 x 500'
 effects:
   159edf8f-6e9a-441b-9018-aa1868118dcb:
     uuid: 159edf8f-6e9a-441b-9018-aa1868118dcb
     id: focal_point_scale_and_crop
     weight: 1
     data:
-      width: 400
-      height: 400
+      width: 500
+      height: 500
       crop_type: focal_point

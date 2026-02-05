@@ -4081,6 +4081,9 @@
   .my-8 {
     margin-block: calc(var(--spacing) * 8);
   }
+  .my-12 {
+    margin-block: calc(var(--spacing) * 12);
+  }
   .label {
     @layer daisyui.l1.l2.l3 {
       display: inline-flex;
@@ -5303,6 +5306,9 @@
   }
   .aspect-\[16\/9\] {
     aspect-ratio: 16/9;
+  }
+  .aspect-square {
+    aspect-ratio: 1 / 1;
   }
   .modal-bottom {
     @layer daisyui.l1.l2 {
@@ -9222,6 +9228,11 @@
       grid-template-columns: repeat(12, minmax(0, 1fr));
     }
   }
+  .lg\:grid-cols-\[24rem_1fr\] {
+    @media (width >= 64rem) {
+      grid-template-columns: 24rem 1fr;
+    }
+  }
   .lg\:flex-row {
     @media (width >= 64rem) {
       flex-direction: row;
@@ -10044,8 +10055,11 @@ h3 {
 p, li {
   margin-bottom: calc(var(--spacing) * 2);
 }
-p, li, label {
+h1, h2, h3, h4, h5, p, li, label {
   max-width: var(--readable-width);
+}
+.card-max-label {
+  max-width: 45ch;
 }
 .card img {
   margin-top: 0 !important;

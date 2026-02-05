@@ -1,22 +1,24 @@
 <article{{ attributes }}>
 
-  <div{{ content_attributes.addClass('hero', 'bg-base-200') }}>
+  <div{{ content_attributes.addClass('hero', 'bg-base-200', 'my-12') }}>
 
-    <div class="hero-content w-full max-w-7xl mx-auto justify-start flex-col lg:flex-row gap-8">
+    <div class="hero-content w-full max-w-7xl mx-auto gap-8
+                grid grid-cols-1 lg:grid-cols-[24rem_1fr] items-start">
 
+      {# Image column #}
       {% if node.field_page_primary_image is not empty %}
-        <div class="max-w-sm rounded-lg shadow-2xl overflow-hidden">
+        <div class="aspect-square overflow-hidden rounded-lg shadow-2xl">
           {{ content.field_page_primary_image }}
         </div>
       {% endif %}
 
+      {# Destination logic #}
       {% set destination = url %}
       {% if node.field_redirect is defined
         and node.field_redirect.value
         and node.field_redirect_destination is defined
         and node.field_redirect_destination is not empty
       %}
-        {# Link field stores a Url object; toString gives the href #}
         {% set destination = node.field_redirect_destination.0.url.toString %}
       {% endif %}
 
@@ -25,6 +27,7 @@
         {% set cta = node.field_link_text.value %}
       {% endif %}
 
+      {# Content column #}
       <div>
         <h2 class="text-5xl font-bold">
           {{ label }}
