@@ -10174,6 +10174,9 @@ nav.footer a:focus {
 .field--name-field-birth-date legend {
   font-weight: bold;
 }
+#block-daisyui-ext-languageswitcher > .contextual {
+  display: none !important;
+}
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {
     color-scheme: light;
