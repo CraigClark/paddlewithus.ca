@@ -1,7 +1,7 @@
-label: 'Par défaut'
 configuration:
   panes:
     completion_message:
       message:
-        value: "Votre numéro de commande est [commerce_order:order_number].\r\nVous pouvez consulter votre commande sur la page de votre compte lorsque vous êtes connecté."
         format: plain_text
+        value: "Votre numéro de commande est [commerce_order:order_number].\r\nVous pouvez consulter votre commande sur la page de votre compte lorsque vous êtes connecté."
+label: 'Par défaut'

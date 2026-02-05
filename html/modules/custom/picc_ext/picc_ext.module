@@ -1,109 +1,132 @@
 <?php
 
-declare(strict_types=1);
-
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Mark self-registered users for a one-time post-login redirect to /{lang}/program.
+ * Self-register form: set a first-login flag and redirect back to show message.
+ */
+function picc_ext_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Only on the self-register route.
+  if (\Drupal::routeMatch()->getRouteName() !== 'user.register') {
+    return;
+  }
+
+  // Attach to the submit button.
+  if (isset($form['actions']['submit'])) {
+    // After core creates the user, mark them for the one-time redirect.
+    $form['actions']['submit']['#submit'][] = 'picc_ext_register_set_first_login_flag_submit';
+
+    // Redirect back so the core "check your email" message shows immediately.
+    $form['actions']['submit']['#submit'][] = 'picc_ext_register_redirect_back_submit';
+  }
+}
+
+/**
+ * After self-register, mark the user as needing the one-time redirect.
+ */
+function picc_ext_register_set_first_login_flag_submit(&$form, FormStateInterface $form_state) {
+  $form_object = $form_state->getFormObject();
+  if (!$form_object || !method_exists($form_object, 'getEntity')) {
+    return;
+  }
+
+  $account = $form_object->getEntity();
+  if (!$account || !$account->id()) {
+    return;
+  }
+
+  \Drupal::service('user.data')->set('picc_ext', (int) $account->id(), 'first_login_pending', 1);
+}
+
+/**
+ * After self-register, redirect back to /{lang}/user/register so "check email" shows now.
+ */
+function picc_ext_register_redirect_back_submit(&$form, FormStateInterface $form_state) {
+  // If validation failed, don't redirect.
+  if ($form_state->hasAnyErrors()) {
+    return;
+  }
+
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $form_state->setRedirectUrl(Url::fromUserInput('/' . $langcode . '/user/register'));
+}
+
+/**
+ * Global form alter:
+ * - Attach handler on password reset request route (user.pass) regardless of form_id.
+ * - Attach handler on user edit form to redirect once after first one-time login save.
+ */
+function picc_ext_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  // Password reset request page: /user/password (routes to user.pass).
+  if ($route_name === 'user.pass') {
+    if (!isset($form['#submit']) || !is_array($form['#submit'])) {
+      $form['#submit'] = [];
+    }
+    $form['#submit'][] = 'picc_ext_pass_redirect_back_submit';
+    return;
+  }
+
+  // User edit form: attach one-time post-first-login redirect logic.
+  if ($form_id === 'user_form' && isset($form['actions']['submit'])) {
+    $form['actions']['submit']['#submit'][] = 'picc_ext_user_form_first_login_redirect_submit';
+  }
+}
+
+/**
+ * After requesting password reset email, redirect back so the "check your email"
+ * message shows immediately — but ONLY if there were no validation errors.
+ */
+function picc_ext_pass_redirect_back_submit(&$form, FormStateInterface $form_state) {
+  if ($form_state->hasAnyErrors()) {
+    return;
+  }
+
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $form_state->setRedirectUrl(Url::fromUserInput('/' . $langcode . '/user/password'));
+}
+
+/**
+ * Redirect once after first-login profile completion (token flow only).
  *
- * This runs only on /user/register (self-registration), not for admin-created users.
+ * - First login (flag set) + token flow => redirect to /{lang}/program + message.
+ * - Password reset token flow or normal profile edit => leave default behaviour.
  */
-function picc_ext_form_user_register_form_alter(
-    array &$form,
-    FormStateInterface $form_state,
-    $form_id
-): void {
-    if (\Drupal::routeMatch()->getRouteName() !== "user.register") {
-        return;
-    }
+function picc_ext_user_form_first_login_redirect_submit(&$form, FormStateInterface $form_state) {
+  $request = \Drupal::request();
 
-    // Run after core saves the new user entity.
-    $form["actions"]["submit"]["#submit"][] =
-        "picc_ext_mark_first_login_pending_submit";
-}
+  // Only for the one-time login link flow.
+  if (!$request->query->has('pass-reset-token')) {
+    return;
+  }
 
-/**
- * Submit handler: set first-login flag for self-registered users.
- */
-function picc_ext_mark_first_login_pending_submit(
-    array &$form,
-    FormStateInterface $form_state
-): void {
-    /** @var \Drupal\user\UserInterface $account */
-    $account = $form_state->getFormObject()->getEntity();
+  $form_object = $form_state->getFormObject();
+  if (!$form_object || !method_exists($form_object, 'getEntity')) {
+    return;
+  }
 
-    \Drupal::service("user.data")->set(
-        "picc_ext",
-        (int) $account->id(),
-        "first_login_pending",
-        1
-    );
-}
+  $account = $form_object->getEntity();
+  if (!$account || !$account->id()) {
+    return;
+  }
 
-/**
- * Implements hook_form_alter().
- */
-function picc_ext_form_alter(
-    array &$form,
-    FormStateInterface $form_state,
-    $form_id
-): void {
-    if ($form_id !== "user_form") {
-        return;
-    }
+  $user_data = \Drupal::service('user.data');
+  $pending = (int) $user_data->get('picc_ext', (int) $account->id(), 'first_login_pending');
 
-    // Run after Drupal saves the user.
-    $form["actions"]["submit"]["#submit"][] =
-        "picc_ext_user_form_first_login_redirect_submit";
-}
+  // Not pending => password reset or other token flow: do nothing.
+  if ($pending !== 1) {
+    return;
+  }
 
-/**
- * Submit handler: redirect once after first-login profile completion.
- *
- * - If it's the first time logging in (flag set) AND we are in a token-based flow,
- *   redirect to /en/program or /fr/program and show a status message.
- * - If it's a password reset or normal profile edit, leave Drupal's default behavior.
- */
-function picc_ext_user_form_first_login_redirect_submit(
-    array &$form,
-    FormStateInterface $form_state
-): void {
-    $request = \Drupal::request();
+  // Clear flag so it happens only once.
+  $user_data->set('picc_ext', (int) $account->id(), 'first_login_pending', 0);
 
-    // Only consider redirecting for token-based flows (one-time login link).
-    if (!$request->query->has("pass-reset-token")) {
-        return;
-    }
+  \Drupal::messenger()->addStatus(t(
+    "Your account is ready! You can now explore programs and register yourself or others."
+  ));
 
-    /** @var \Drupal\user\UserInterface $account */
-    $account = $form_state->getFormObject()->getEntity();
-
-    $user_data = \Drupal::service("user.data");
-    $pending = (int) $user_data->get(
-        "picc_ext",
-        (int) $account->id(),
-        "first_login_pending"
-    );
-
-    // Not pending => password reset or other token flow: do nothing.
-    if ($pending !== 1) {
-        return;
-    }
-
-    // Clear the flag so this happens only once.
-    $user_data->set("picc_ext", (int) $account->id(), "first_login_pending", 0);
-
-    \Drupal::messenger()->addStatus(
-        t(
-            "Your account is ready! You can now explore programs and register yourself or others."
-        )
-    );
-
-    // You explicitly use /en/program and /fr/program.
-    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $form_state->setRedirectUrl(
-        Url::fromUserInput("/" . $langcode . "/program")
-    );
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $form_state->setRedirectUrl(Url::fromUserInput('/' . $langcode . '/program'));
 }

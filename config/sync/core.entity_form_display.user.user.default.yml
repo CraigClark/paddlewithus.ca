@@ -22,11 +22,7 @@ dependencies:
 third_party_settings:
   field_group:
     group_co_guardian:
-      children:
-        - field_co_guardian_name
-        - field_co_guardian_phone
-        - field_co_guardian_phone_2
-        - field_co_guardian_email
+      children: {  }
       label: Co-guardian
       region: content
       parent_name: ''
@@ -156,12 +152,22 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 10
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  language:
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   commerce_remote_id: true
   contact: true
   customer_profiles: true
-  langcode: true
-  language: true
   participant_profiles: true
   path: true
   timezone: true

@@ -1,15 +1,23 @@
 display:
   default:
-    display_title: Principal
     display_options:
+      empty:
+        area:
+          content:
+            format: basic_html
+            value: '<p>Il n’y a pas encore de codes promotionnels.</p>'
       exposed_form:
         options:
           submit_button: Filtrer
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         options:
           tags:
+            previous: ‹‹
+            next: ››
             first: '« Premier'
             last: 'Dernier »'
           expose:
@@ -17,22 +25,27 @@ display:
             items_per_page_options_all_label: '- Tout -'
             offset_label: Décalage
       fields:
-        code: {  }
+        code:
+          label: Code
+          separator: ', '
         usage_limit:
           label: Utilisation
-        usage_limit_customer: {  }
+          separator: ', '
+        usage_limit_customer:
+          label: 'Per-customer limit'
+          separator: ', '
         operations:
           label: Actions
       filters:
         code:
-          expose: {  }
+          expose:
+            label: Code
+      title: Coupons
       arguments:
         promotion_id:
           exception:
             title: Tout
-      empty:
-        area:
-          content:
-            value: '<p>Il n’y a pas encore de codes promotionnels.</p>'
-            format: basic_html
-  page_1: {  }
+    display_title: Principal
+  page_1:
+    display_title: Page
+label: Coupons
