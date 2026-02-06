@@ -1,6 +1,6 @@
 uuid: 11aa4452-4c2d-4714-964f-c86830dae863
 langcode: en
-status: open
+status: closed
 dependencies:
   module:
     - picc_registration
@@ -95,7 +95,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: ''
+  form_close_message: '<p>Registration will be open soon!<br>Admin February 5, 2026</p>'
   form_exception_message: ''
   form_previous_submissions: false
   form_confidential: false

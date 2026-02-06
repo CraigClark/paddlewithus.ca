@@ -1,23 +1,23 @@
-uuid: 35e25e25-38da-43cb-88cc-b7cc38239854
+uuid: a19b9cd2-9578-4a9f-874e-37cde0fc2c45
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:ce5bae8e-33ae-48de-b280-14fb8f678097'
+    - 'block_content:basic:325a769a-a6d9-481d-b6c5-f79e43e892ae'
   module:
     - block_content
     - system
   theme:
     - daisyui_ext
-id: daisyui_ext_frontpagetitle
+id: daisyui_ext_weareworkingonthings
 theme: daisyui_ext
 region: content
-weight: -6
+weight: -4
 provider: null
-plugin: 'block_content:ce5bae8e-33ae-48de-b280-14fb8f678097'
+plugin: 'block_content:325a769a-a6d9-481d-b6c5-f79e43e892ae'
 settings:
-  id: 'block_content:ce5bae8e-33ae-48de-b280-14fb8f678097'
-  label: 'Front page title'
+  id: 'block_content:325a769a-a6d9-481d-b6c5-f79e43e892ae'
+  label: 'We are working on things'
   label_display: '0'
   provider: block_content
   view_mode: full
