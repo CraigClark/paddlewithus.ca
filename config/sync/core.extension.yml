@@ -118,6 +118,8 @@ module:
   realname: 0
   redirect: 0
   registration_role: 0
+  reroute_email: 0
+  reroute_email_symfony_mailer: 0
   responsive_image: 0
   rest: 0
   rh_media: 0
@@ -129,6 +131,7 @@ module:
   search_api_db: 0
   serialization: 0
   settings_tray: 0
+  shield: 0
   shortcut: 0
   state_machine: 0
   symfony_mailer: 0
