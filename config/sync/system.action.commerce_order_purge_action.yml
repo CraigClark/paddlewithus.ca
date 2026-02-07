@@ -1,0 +1,12 @@
+uuid: 85e5511e-5b75-4569-ac1e-24a9e03fa391
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_order
+    - trash
+id: commerce_order_purge_action
+label: 'Permanently delete order'
+type: commerce_order
+plugin: 'entity:purge_action:commerce_order'
+configuration: {  }

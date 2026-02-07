@@ -1,0 +1,12 @@
+uuid: e7998674-5753-4caa-9d27-a8eaed2623f2
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - trash
+id: commerce_product_purge_action
+label: 'Permanently delete product'
+type: commerce_product
+plugin: 'entity:purge_action:commerce_product'
+configuration: {  }

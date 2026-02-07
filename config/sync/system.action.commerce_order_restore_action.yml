@@ -1,0 +1,12 @@
+uuid: 76c552bb-386d-4731-b476-1714e8db0c55
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_order
+    - trash
+id: commerce_order_restore_action
+label: 'Restore order from trash'
+type: commerce_order
+plugin: 'entity:restore_action:commerce_order'
+configuration: {  }

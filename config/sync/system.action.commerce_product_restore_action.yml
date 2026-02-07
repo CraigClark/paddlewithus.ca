@@ -1,0 +1,12 @@
+uuid: 26a9688e-4c35-4ed9-b948-0ef7eb0da1e4
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - trash
+id: commerce_product_restore_action
+label: 'Restore product from trash'
+type: commerce_product
+plugin: 'entity:restore_action:commerce_product'
+configuration: {  }

@@ -1,0 +1,12 @@
+uuid: f8523506-0b2e-4f3c-be6b-5ef7b3e368d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - trash
+id: commerce_product_variation_purge_action
+label: 'Permanently delete product variation'
+type: commerce_product_variation
+plugin: 'entity:purge_action:commerce_product_variation'
+configuration: {  }

@@ -1,0 +1,12 @@
+uuid: f855a1ab-ae0d-464f-b027-932e85c1e5ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - trash
+id: block_content_restore_action
+label: 'Restore content block from trash'
+type: block_content
+plugin: 'entity:restore_action:block_content'
+configuration: {  }

@@ -1,0 +1,12 @@
+uuid: 793d7183-85cc-426e-8531-0c1cc8c7d787
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - trash
+id: commerce_product_variation_restore_action
+label: 'Restore product variation from trash'
+type: commerce_product_variation
+plugin: 'entity:restore_action:commerce_product_variation'
+configuration: {  }

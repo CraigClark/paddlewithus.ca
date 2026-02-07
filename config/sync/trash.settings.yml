@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: oE_T7Du8mMCGKYgI_9c_8IuU9G8sx19FvC8UshASX6k
+enabled_entity_types:
+  node: {  }
+  block_content: {  }
+  media: {  }
+  commerce_order: {  }
+  commerce_order_item: {  }
+  commerce_product: {  }
+  commerce_product_variation: {  }
+  path_alias: {  }
+auto_purge:
+  enabled: true
+  after: '30 days'
+compact_overview: false
