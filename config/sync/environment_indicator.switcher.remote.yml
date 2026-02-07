@@ -5,7 +5,7 @@ dependencies: {  }
 machine: remote
 description: null
 name: PROD
-weight: -10
-url: 'https://picc.paddlewithus.ca'
+weight: 4
+url: 'https://petriecanoe.ca'
 fg_color: '#ffffff'
 bg_color: '#8a0000'

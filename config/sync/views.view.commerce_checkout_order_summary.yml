@@ -433,12 +433,54 @@ display:
           break_phrase: false
           not: false
           target_entity_type_id: commerce_order
-      filters: {  }
+      filters:
+        langcode:
+          id: langcode
+          table: commerce_product_variation_field_data
+          field: langcode
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_product_variation
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
         type: default
         options:
           grouping: {  }
-          row_class: ''
+          row_class: mb-3
           default_row_class: true
       row:
         type: fields
@@ -497,7 +539,11 @@ display:
           admin_label: ''
           plugin_id: commerce_order_total
           empty: false
-      display_extenders: {  }
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:

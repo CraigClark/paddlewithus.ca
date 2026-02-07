@@ -4,8 +4,8 @@ status: true
 dependencies: {  }
 machine: local_ddev
 description: null
-name: ddev.local
-weight: -10
+name: 'ddev (local)'
+weight: 0
 url: 'https://picc.ddev.site'
 fg_color: '#000000'
 bg_color: '#2aff32'
