@@ -3,6 +3,8 @@
   "description": "Plain ol drupal site",
   "type": "project",
   "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "repositories": [
     {
       "type": "composer",
@@ -99,11 +101,14 @@
     "drush/drush": "^13",
     "litespeedtech/lscache-drupal": "^1.6"
   },
+  "require-dev": {
+    "drupal/core-dev": "^11",
+    "drupal/devel": "^5.4",
+    "kint-php/kint": "^6.1"
+  },
   "conflict": {
     "drupal/drupal": "*"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "config": {
     "allow-plugins": {
       "composer/installers": true,
@@ -118,22 +123,13 @@
     },
     "sort-packages": true
   },
-  "scripts": {
-    "clean-billboardjs": "./scripts/clean-billboardjs.sh",
-    "post-install-cmd": [
-      "@clean-billboardjs"
-    ],
-    "post-update-cmd": [
-      "@clean-billboardjs"
-    ]
-  },
   "extra": {
     "drupal-scaffold": {
-      "file-mapping": {
-        "[web-root]/robots.txt": false
-      },
       "locations": {
         "web-root": "html/"
+      },
+      "file-mapping": {
+        "[web-root]/robots.txt": false
       }
     },
     "installer-paths": {
@@ -165,16 +161,6 @@
         "type:drupal-custom-theme"
       ]
     },
-    "scripts": {
-      "post-install-cmd": [
-        "@composer drupal-scaffold"
-      ],
-      "post-update-cmd": [
-        "@composer drupal-scaffold",
-        "mkdir -p web/libraries/bootstrap",
-        "cp -R vendor/twbs/bootstrap/dist web/libraries/bootstrap"
-      ]
-    },
     "patches": {
       "drupal/ckeditor5_paste_filter": {
         "3482261 - Add support for description field": "patches/ckeditor5_paste_filter-add_text_field-3482261.patch"
@@ -187,9 +173,15 @@
       }
     }
   },
-  "require-dev": {
-    "drupal/core-dev": "^11",
-    "drupal/devel": "^5.4",
-    "kint-php/kint": "^6.1"
+  "scripts": {
+    "clean-billboardjs": "./scripts/clean-billboardjs.sh",
+    "post-install-cmd": [
+      "@composer drupal:scaffold",
+      "@clean-billboardjs"
+    ],
+    "post-update-cmd": [
+      "@composer drupal:scaffold",
+      "@clean-billboardjs"
+    ]
   }
 }
