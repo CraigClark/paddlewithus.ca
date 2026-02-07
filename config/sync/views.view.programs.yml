@@ -485,7 +485,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<p><strong>Coaching language:</strong> {{ field_coach_lang }}</p>'
+            text: '<p class="lang-{{ field_coach_lang__value }}"><strong>Coaching language:</strong> {{ field_coach_lang }}</p>'
             make_link: false
             path: ''
             absolute: false
@@ -517,7 +517,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false

@@ -12,7 +12,7 @@ display:
         field_coach_lang:
           label: 'Langue d’entraînement'
           alter:
-            text: '<p><strong>Langue d’entraînement :</strong> {{ field_coach_lang }}</p>'
+            text: '<p class="lang-{{ field_coach_lang__value }}"><strong>Langue d’entraînement :</strong> {{ field_coach_lang }}</p>'
         field_age_range:
           label: 'Tranche d’âge'
           alter:
