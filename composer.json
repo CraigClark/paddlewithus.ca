@@ -11,6 +11,10 @@
       "url": "https://packages.drupal.org/8"
     },
     {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    },
+    {
       "type": "package",
       "package": {
         "name": "billboardjs/billboard",
@@ -99,7 +103,10 @@
     "drupal/webform_analysis": "^1.0@beta",
     "drupal/webform_views": "^5.2",
     "drush/drush": "^13",
-    "litespeedtech/lscache-drupal": "^1.6"
+    "litespeedtech/lscache-drupal": "^1.6",
+    "npm-asset/js-cookie": "^3.0",
+    "oomphinc/composer-installers-extender": "^2",
+    "wikimedia/composer-merge-plugin": "^2.1"
   },
   "require-dev": {
     "drupal/core-dev": "^11",
@@ -117,9 +124,11 @@
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
       "drupal/core-vendor-hardening": true,
+      "oomphinc/composer-installers-extender": true,
       "php-http/discovery": true,
       "phpstan/extension-installer": true,
-      "tbachert/spi": true
+      "tbachert/spi": true,
+      "wikimedia/composer-merge-plugin": true
     },
     "sort-packages": true
   },
@@ -137,7 +146,9 @@
         "type:drupal-core"
       ],
       "html/libraries/{$name}": [
-        "type:drupal-library"
+        "type:drupal-library",
+        "type:npm-asset",
+        "type:bower-asset"
       ],
       "html/modules/contrib/{$name}": [
         "type:drupal-module"
@@ -161,6 +172,10 @@
         "type:drupal-custom-theme"
       ]
     },
+    "installer-types": [
+      "npm-asset",
+      "bower-asset"
+    ],
     "patches": {
       "drupal/ckeditor5_paste_filter": {
         "3482261 - Add support for description field": "patches/ckeditor5_paste_filter-add_text_field-3482261.patch"
@@ -171,6 +186,14 @@
       "drupal/commerce_email": {
         "Add entity embed support": "patches/commerce_email-entity_embed_support.patch"
       }
+    },
+    "merge-plugin": {
+      "include": [
+        "html/modules/contrib/webform/composer.libraries.json"
+      ],
+      "recurse": false,
+      "replace": false,
+      "ignore-duplicates": true
     }
   },
   "scripts": {
