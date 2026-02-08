@@ -1,0 +1,51 @@
+uuid: ff049715-69ba-4b4b-bb9e-be690d2e2c32
+langcode: en
+status: false
+dependencies:
+  module:
+    - commerce_stripe
+id: stripe_test
+label: 'Stripe test'
+weight: null
+plugin: stripe_payment_element
+configuration:
+  display_label: 'Credit Card / Apple Pay / Google Pay'
+  mode: test
+  payment_method_types:
+    - stripe_card
+  collect_billing_information: true
+  api_version: null
+  authentication_method: api_keys
+  access_token: ''
+  stripe_user_id: ''
+  publishable_key: 'stored in settings'
+  secret_key: 'stored in settings'
+  webhook_signing_secret: ''
+  payment_method_usage: on_session
+  capture_method: automatic_async
+  style:
+    theme: stripe
+    layout: tabs
+  checkout_form_display_label:
+    custom_label: ''
+    show_payment_method_logos: 'no'
+    include_logos:
+      amex: amex
+      discover: discover
+      mastercard: mastercard
+      visa: visa
+      dinersclub: '0'
+      jcb: '0'
+      maestro: '0'
+      unionpay: '0'
+      applepay: '0'
+      googlepay: '0'
+      us_bank_account: '0'
+      alipay: '0'
+      amazon_pay: '0'
+      wechat_pay: '0'
+      affirm: '0'
+      klarna: '0'
+      cashapp: '0'
+conditions: {  }
+conditionOperator: AND

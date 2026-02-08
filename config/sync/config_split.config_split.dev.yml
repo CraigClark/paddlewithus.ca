@@ -1,0 +1,18 @@
+uuid: 7455f1a1-c26a-4fc0-bd12-9b0fd0d22fcc
+langcode: en
+status: true
+dependencies: {  }
+id: dev
+label: dev
+description: ''
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/dev
+module: {  }
+theme: {  }
+complete_list:
+  - commerce_payment.commerce_payment_gateway.stripe_test
+  - commerce_payment.commerce_payment_gateway.stripe_test
+partial_list: {  }

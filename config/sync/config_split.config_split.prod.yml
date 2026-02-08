@@ -1,0 +1,17 @@
+uuid: 52198c3b-242a-42e6-b8f2-8b074ac0d584
+langcode: en
+status: true
+dependencies: {  }
+id: prod
+label: prod
+description: ''
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/prod
+module: {  }
+theme: {  }
+complete_list:
+  - commerce_payment.commerce_payment_gateway.stripe_test
+partial_list: {  }

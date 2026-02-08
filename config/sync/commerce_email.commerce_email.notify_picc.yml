@@ -1,0 +1,28 @@
+uuid: 24dd3079-778b-4efd-9ff8-305cbd2fd2ad
+langcode: en
+status: true
+dependencies: {  }
+id: notify_picc
+label: 'Notify PICC or order'
+from: '[site:mail]'
+toType: email
+to: petriecanoe@gmail.com
+toRole: ''
+cc: ''
+bcc: ''
+replyTo: ''
+subject: '[commerce_order:uid:entity:display-name] has placed an order'
+body:
+  value: '<table class="table" style="color:#333333;font-family:Arial, sans-serif;margin-bottom:0;margin-top:0;max-width:600px;width:100%px;" cellpadding="0" cellspacing="0"><tbody><tr><td style="background-color:#0066cc;padding:20px;text-align:center;"><h1 style="color:#ffffff;font-size:24px;margin:0;">Order Details</h1></td></tr><tr><td style="background-color:#ffffff;padding:20px;"><p style="font-size:16px;margin:0 0 15px;">Order placed by: [commerce_order:uid:entity:display-name]<br>Contact: [commerce_order:uid:entity:mail]</p></td></tr><tr><td style="background-color:#ffffff;padding:0 20px 20px;"><table class="table" style="background-color:#f5f5f5;border-color:#dddddd;border-style:solid;width:100%px;" cellpadding="0" cellspacing="0"><tbody><tr><td style="padding:15px;"><table class="table" style="width:100%px;" cellpadding="5" cellspacing="0"><tbody><tr><td style="font-size:14px;"><strong>Order Number:</strong></td><td style="font-size:14px;text-align:right;">[commerce_order:order_number]</td></tr><tr><td style="font-size:14px;"><strong>Order Date:</strong></td><td style="font-size:14px;text-align:right;">[commerce_order:completed]</td></tr><tr><td style="border-top:2px solid #0066cc;font-size:14px;padding-top:10px;"><strong>Total:</strong></td><td style="border-top:2px solid #0066cc;color:#0066cc;font-size:16px;padding-top:10px;text-align:right;"><strong>[commerce_order:total_price]</strong></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td style="background-color:#ffffff;padding:0 20px 20px;"><h2 style="color:#0066cc;font-size:18px;margin:0 0 15px;">Registration Details:</h2><div style="background-color:#fafafa;border:1px solid #dddddd;padding:15px;">[commerce_order:order_items_formatted]</div></td></tr><tr><td style="background-color:#ffffff;border-top:1px solid #dddddd;padding:20px;"><p>[commerce_order:uid:entity:display-name] has been sent:</p><ul><li data-list-item-id="ef591947f756f3ba77c53b83569cef8ec">a receipt</li><li data-list-item-id="e6e447c008a538b666655a90825bf390c">a copy of the waiver</li><li data-list-item-id="ee3ee4962d2e9dd29588f4544c230edb6">a copy of the concussion policy</li><li data-list-item-id="e0232ee1a38ad74e8a51d2ec63a7a4af6">a copy of the code of conduct</li><li data-list-item-id="ed1d74155a78916c91ec710fbaddefbc1">a copy of the swim test policy</li></ul></td></tr><tr><td style="background-color:#f5f5f5;color:#999999;font-size:12px;padding:20px;text-align:center;"><p style="margin:0;">This is an automated message. Please do not reply to this email.</p></td></tr></tbody><!-- Header --><!-- Greeting --><!-- Order Details Box --><!-- Items Ordered --><!-- Footer --><!-- Bottom spacer --></table>'
+  format: full_html
+conditions:
+  -
+    plugin: order_product_type
+    configuration:
+      product_types:
+        - activity
+conditionOperator: AND
+queue: false
+logToEntity: null
+event: order_placed
+targetEntityType: commerce_order
