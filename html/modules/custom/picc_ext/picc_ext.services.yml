@@ -1,6 +1,14 @@
 services:
   picc_ext.node_redirect_subscriber:
     class: Drupal\picc_ext\EventSubscriber\NodeRedirectSubscriber
-    arguments: ['@current_user', '@router.admin_context']
+    arguments: ["@current_user", "@router.admin_context"]
+    tags:
+      - { name: event_subscriber }
+  picc_ext.payment_method_add_redirect_subscriber:
+    class: Drupal\picc_ext\EventSubscriber\PaymentMethodAddRedirectSubscriber
+    arguments:
+      - "@messenger"
+      - "@current_user"
+      - "@redirect.destination"
     tags:
       - { name: event_subscriber }

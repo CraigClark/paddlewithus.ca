@@ -6,50 +6,69 @@ use Drupal\Core\Url;
 /**
  * Self-register form: set a first-login flag and redirect back to show message.
  */
-function picc_ext_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Only on the self-register route.
-  if (\Drupal::routeMatch()->getRouteName() !== 'user.register') {
-    return;
-  }
+function picc_ext_form_user_register_form_alter(
+    &$form,
+    FormStateInterface $form_state,
+    $form_id
+) {
+    // Only on the self-register route.
+    if (\Drupal::routeMatch()->getRouteName() !== "user.register") {
+        return;
+    }
 
-  // Attach to the submit button.
-  if (isset($form['actions']['submit'])) {
-    // After core creates the user, mark them for the one-time redirect.
-    $form['actions']['submit']['#submit'][] = 'picc_ext_register_set_first_login_flag_submit';
+    // Attach to the submit button.
+    if (isset($form["actions"]["submit"])) {
+        // After core creates the user, mark them for the one-time redirect.
+        $form["actions"]["submit"]["#submit"][] =
+            "picc_ext_register_set_first_login_flag_submit";
 
-    // Redirect back so the core "check your email" message shows immediately.
-    $form['actions']['submit']['#submit'][] = 'picc_ext_register_redirect_back_submit';
-  }
+        // Redirect back so the core "check your email" message shows immediately.
+        $form["actions"]["submit"]["#submit"][] =
+            "picc_ext_register_redirect_back_submit";
+    }
 }
 
 /**
  * After self-register, mark the user as needing the one-time redirect.
  */
-function picc_ext_register_set_first_login_flag_submit(&$form, FormStateInterface $form_state) {
-  $form_object = $form_state->getFormObject();
-  if (!$form_object || !method_exists($form_object, 'getEntity')) {
-    return;
-  }
+function picc_ext_register_set_first_login_flag_submit(
+    &$form,
+    FormStateInterface $form_state
+) {
+    $form_object = $form_state->getFormObject();
+    if (!$form_object || !method_exists($form_object, "getEntity")) {
+        return;
+    }
 
-  $account = $form_object->getEntity();
-  if (!$account || !$account->id()) {
-    return;
-  }
+    $account = $form_object->getEntity();
+    if (!$account || !$account->id()) {
+        return;
+    }
 
-  \Drupal::service('user.data')->set('picc_ext', (int) $account->id(), 'first_login_pending', 1);
+    \Drupal::service("user.data")->set(
+        "picc_ext",
+        (int) $account->id(),
+        "first_login_pending",
+        1
+    );
 }
 
 /**
  * After self-register, redirect back to /{lang}/user/register so "check email" shows now.
  */
-function picc_ext_register_redirect_back_submit(&$form, FormStateInterface $form_state) {
-  // If validation failed, don't redirect.
-  if ($form_state->hasAnyErrors()) {
-    return;
-  }
+function picc_ext_register_redirect_back_submit(
+    &$form,
+    FormStateInterface $form_state
+) {
+    // If validation failed, don't redirect.
+    if ($form_state->hasAnyErrors()) {
+        return;
+    }
 
-  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $form_state->setRedirectUrl(Url::fromUserInput('/' . $langcode . '/user/register'));
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $form_state->setRedirectUrl(
+        Url::fromUserInput("/" . $langcode . "/user/register")
+    );
 }
 
 /**
@@ -57,35 +76,42 @@ function picc_ext_register_redirect_back_submit(&$form, FormStateInterface $form
  * - Attach handler on password reset request route (user.pass) regardless of form_id.
  * - Attach handler on user edit form to redirect once after first one-time login save.
  */
-function picc_ext_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $route_name = \Drupal::routeMatch()->getRouteName();
+function picc_ext_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+    $route_name = \Drupal::routeMatch()->getRouteName();
 
-  // Password reset request page: /user/password (routes to user.pass).
-  if ($route_name === 'user.pass') {
-    if (!isset($form['#submit']) || !is_array($form['#submit'])) {
-      $form['#submit'] = [];
+    // Password reset request page: /user/password (routes to user.pass).
+    if ($route_name === "user.pass") {
+        if (!isset($form["#submit"]) || !is_array($form["#submit"])) {
+            $form["#submit"] = [];
+        }
+        $form["#submit"][] = "picc_ext_pass_redirect_back_submit";
+        return;
     }
-    $form['#submit'][] = 'picc_ext_pass_redirect_back_submit';
-    return;
-  }
 
-  // User edit form: attach one-time post-first-login redirect logic.
-  if ($form_id === 'user_form' && isset($form['actions']['submit'])) {
-    $form['actions']['submit']['#submit'][] = 'picc_ext_user_form_first_login_redirect_submit';
-  }
+    // User edit form: attach one-time post-first-login redirect logic.
+    if ($form_id === "user_form" && isset($form["actions"]["submit"])) {
+        $form["actions"]["submit"]["#submit"][] =
+            "picc_ext_user_form_first_login_redirect_submit";
+    }
 }
 
 /**
  * After requesting password reset email, redirect back so the "check your email"
  * message shows immediately — but ONLY if there were no validation errors.
  */
-function picc_ext_pass_redirect_back_submit(&$form, FormStateInterface $form_state) {
-  if ($form_state->hasAnyErrors()) {
-    return;
-  }
+function picc_ext_pass_redirect_back_submit(
+    &$form,
+    FormStateInterface $form_state
+) {
+    if ($form_state->hasAnyErrors()) {
+        return;
+    }
 
-  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $form_state->setRedirectUrl(Url::fromUserInput('/' . $langcode . '/user/password'));
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $form_state->setRedirectUrl(
+        Url::fromUserInput("/" . $langcode . "/user/password")
+    );
 }
 
 /**
@@ -94,39 +120,85 @@ function picc_ext_pass_redirect_back_submit(&$form, FormStateInterface $form_sta
  * - First login (flag set) + token flow => redirect to /{lang}/program + message.
  * - Password reset token flow or normal profile edit => leave default behaviour.
  */
-function picc_ext_user_form_first_login_redirect_submit(&$form, FormStateInterface $form_state) {
-  $request = \Drupal::request();
+function picc_ext_user_form_first_login_redirect_submit(
+    &$form,
+    FormStateInterface $form_state
+) {
+    $request = \Drupal::request();
 
-  // Only for the one-time login link flow.
-  if (!$request->query->has('pass-reset-token')) {
-    return;
-  }
+    // Only for the one-time login link flow.
+    if (!$request->query->has("pass-reset-token")) {
+        return;
+    }
 
-  $form_object = $form_state->getFormObject();
-  if (!$form_object || !method_exists($form_object, 'getEntity')) {
-    return;
-  }
+    $form_object = $form_state->getFormObject();
+    if (!$form_object || !method_exists($form_object, "getEntity")) {
+        return;
+    }
 
-  $account = $form_object->getEntity();
-  if (!$account || !$account->id()) {
-    return;
-  }
+    $account = $form_object->getEntity();
+    if (!$account || !$account->id()) {
+        return;
+    }
 
-  $user_data = \Drupal::service('user.data');
-  $pending = (int) $user_data->get('picc_ext', (int) $account->id(), 'first_login_pending');
+    $user_data = \Drupal::service("user.data");
+    $pending = (int) $user_data->get(
+        "picc_ext",
+        (int) $account->id(),
+        "first_login_pending"
+    );
 
-  // Not pending => password reset or other token flow: do nothing.
-  if ($pending !== 1) {
-    return;
-  }
+    // Not pending => password reset or other token flow: do nothing.
+    if ($pending !== 1) {
+        return;
+    }
 
-  // Clear flag so it happens only once.
-  $user_data->set('picc_ext', (int) $account->id(), 'first_login_pending', 0);
+    // Clear flag so it happens only once.
+    $user_data->set("picc_ext", (int) $account->id(), "first_login_pending", 0);
 
-  \Drupal::messenger()->addStatus(t(
-    "Your account is ready! You can now explore programs and register yourself or others."
-  ));
+    \Drupal::messenger()->addStatus(
+        t(
+            "Your account is ready! You can now explore programs and register yourself or others."
+        )
+    );
 
-  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $form_state->setRedirectUrl(Url::fromUserInput('/' . $langcode . '/program'));
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $form_state->setRedirectUrl(
+        Url::fromUserInput("/" . $langcode . "/program")
+    );
+}
+
+/**
+ * Implements hook_menu_local_actions_alter().
+ */
+function picc_ext_menu_local_actions_alter(array &$local_actions): void
+{
+    // Remove the "Add payment method" local action from the Payment methods tab.
+    // This local action points to entity.commerce_payment_method.add_form and
+    // appears on the payment method collection route.
+    foreach ($local_actions as $plugin_id => $definition) {
+        // $definition is an array (plugin definition), not an object.
+        $route_name = $definition["route_name"] ?? "";
+        $appears_on = $definition["appears_on"] ?? [];
+
+        // Remove the add form action anywhere it appears.
+        if ($route_name === "entity.commerce_payment_method.add_form") {
+            unset($local_actions[$plugin_id]);
+            continue;
+        }
+
+        // Extra safety: remove any action that appears on the payment method collection route.
+        if (
+            in_array(
+                "entity.commerce_payment_method.collection",
+                $appears_on,
+                true
+            )
+        ) {
+            // Only remove if it's specifically the "add" action (avoid nuking other actions).
+            if ($route_name === "entity.commerce_payment_method.add_form") {
+                unset($local_actions[$plugin_id]);
+            }
+        }
+    }
 }

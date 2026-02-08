@@ -52,6 +52,7 @@
     "drupal/commerce_stripe": "^2.1",
     "drupal/commerce_variation_cart_form": "^1.5",
     "drupal/conditional_fields": "^4.0@alpha",
+    "drupal/config_ignore": "^3.3",
     "drupal/config_translation_po": "^1.0",
     "drupal/core-composer-scaffold": "^11",
     "drupal/core-project-message": "^11",

@@ -7,7 +7,7 @@ third_party_settings:
     customer_profile_type: false
 id: participant
 label: 'Family members'
-display_label: 'Family member'
+display_label: 'Family members'
 multiple: true
 registration: false
 roles: {  }
