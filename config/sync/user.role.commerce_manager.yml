@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.activity
+    - environment_indicator.switcher.dev
+    - environment_indicator.switcher.remote
     - filter.format.basic_html
     - media.type.image
     - user.role.account_holder
@@ -17,6 +19,7 @@ dependencies:
     - commerce_store
     - commerce_stripe
     - content_translation
+    - environment_indicator
     - field_permissions
     - filter
     - masquerade
@@ -36,6 +39,9 @@ permissions:
   - 'access commerce_product overview'
   - 'access commerce_promotion overview'
   - 'access commerce_store overview'
+  - 'access environment indicator'
+  - 'access environment indicator dev'
+  - 'access environment indicator remote'
   - 'access media overview'
   - 'access private fields'
   - 'access profile overview'
