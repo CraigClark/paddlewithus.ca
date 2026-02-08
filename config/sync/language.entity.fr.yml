@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: fr
-label: French
+label: FR
 direction: ltr
 weight: 1
 locked: false
