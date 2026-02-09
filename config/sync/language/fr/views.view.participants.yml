@@ -1,22 +1,20 @@
-label: Participants
 description: "Ceci est la liste que les gens voient lorsqu'ils sélectionnent des participants sur un formulaire d'inscription"
 display:
   default:
     display_title: 'Par défaut'
     display_options:
       fields:
-        field_name:
-          separator: ', '
+        field_name: {  }
         field_photo_consent:
           settings:
             format_custom_false: 'pas de photos'
             format_custom_true: 'photos autorisées'
-          separator: ', '
+        field_shirt_size:
+          alter:
+            text: 'taille de t-shirt : {{ field_shirt_size }}'
       pager:
         options:
-          tags:
-            next: ››
-            previous: ‹‹
+          tags: {  }
           expose:
             items_per_page_label: 'Éléments par page'
             items_per_page_options_all_label: '- Tous -'

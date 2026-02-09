@@ -1,20 +1,19 @@
 name: picc
 type: drupal11
 docroot: html
-php_version: "8.4"
+php_version: "8.3"
 webserver_type: nginx-fpm
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
-    type: mariadb
-    version: "11.4"
+  type: mariadb
+  version: "11.4"
 performance_mode: none
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
 corepack_enable: true
-
 # Key features of DDEV's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides

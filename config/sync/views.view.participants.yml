@@ -5,9 +5,11 @@ dependencies:
   config:
     - field.storage.profile.field_name
     - field.storage.profile.field_photo_consent
+    - field.storage.profile.field_shirt_size
   module:
     - datetime
     - name
+    - options
     - profile
 id: participants
 label: Participants
@@ -144,6 +146,68 @@ display:
             format: custom
             format_custom_false: 'no photos'
             format_custom_true: 'photos OK'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_shirt_size:
+          id: field_shirt_size
+          table: profile__field_shirt_size
+          field: field_shirt_size
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: 'shirt size: {{ field_shirt_size }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -334,6 +398,7 @@ display:
       tags:
         - 'config:field.storage.profile.field_name'
         - 'config:field.storage.profile.field_photo_consent'
+        - 'config:field.storage.profile.field_shirt_size'
   er_participants:
     id: er_participants
     display_title: 'Entity Reference'
@@ -354,11 +419,15 @@ display:
           inline:
             field_name: field_name
             field_photo_consent: field_photo_consent
+            field_shirt_size: field_shirt_size
           separator: '-'
           hide_empty: true
       display_description: ''
       display_extenders:
         ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -369,3 +438,4 @@ display:
       tags:
         - 'config:field.storage.profile.field_name'
         - 'config:field.storage.profile.field_photo_consent'
+        - 'config:field.storage.profile.field_shirt_size'
