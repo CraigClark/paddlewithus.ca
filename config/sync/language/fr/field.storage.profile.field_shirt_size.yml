@@ -1,10 +1,12 @@
 settings:
   allowed_values:
     -
-      label: "\tpetit"
+      label: 'très petit'
+    -
+      label: petit
     -
       label: moyen
     -
       label: grand
     -
-      label: 'Très grand'
+      label: 'très grand'
