@@ -10,10 +10,12 @@ field_name: field_emercency_contact_2_pickup
 entity_type: profile
 bundle: participant
 label: 'Authorized for pickup'
-description: 'When checked, program staff may release the participant to this person at pickup.'
-required: false
+description: 'Selecting <b>Yes</b> authorizes program staff to release the participant to this person at pickup time.'
+required: true
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: 0
 default_value_callback: ''
 settings:
   on_label: 'Yes'

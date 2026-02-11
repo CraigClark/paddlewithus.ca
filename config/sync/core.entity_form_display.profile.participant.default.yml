@@ -73,11 +73,10 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_1_pickup:
-    type: boolean_checkbox
+    type: options_buttons
     weight: 15
     region: content
-    settings:
-      display_label: true
+    settings: {  }
     third_party_settings: {  }
   field_emercency_contact_1_rel:
     type: string_textfield
@@ -103,11 +102,10 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_2_pickup:
-    type: boolean_checkbox
+    type: options_buttons
     weight: 16
     region: content
-    settings:
-      display_label: true
+    settings: {  }
     third_party_settings: {  }
   field_emercency_contact_2_rel:
     type: string_textfield
@@ -133,11 +131,10 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_3_pickup:
-    type: boolean_checkbox
+    type: options_buttons
     weight: 17
     region: content
-    settings:
-      display_label: true
+    settings: {  }
     third_party_settings: {  }
   field_emercency_contact_3_rel:
     type: string_textfield
