@@ -14,6 +14,7 @@ settings:
   toolbar:
     items:
       - Fullscreen
+      - heading
       - bold
       - italic
       - strikethrough
@@ -22,24 +23,20 @@ settings:
       - removeFormat
       - '|'
       - link
-      - '|'
+      - blockQuote
       - bulletedList
       - numberedList
-      - '|'
-      - blockQuote
       - insertTable
+      - '|'
       - drupalMedia
       - materialIcons
       - horizontalLine
-      - '|'
-      - heading
-      - codeBlock
-      - '|'
+      - '-'
       - sourceEditing
+      - UiStylesBlock
+      - codeBlock
       - node
       - tokenBrowser
-      - ck5BlockEmbed__default
-      - UiStylesBlock
       - showBlocks
   plugins:
     ckeditor5_codeBlock:
@@ -342,9 +339,7 @@ settings:
     media_media:
       allow_view_mode_override: true
     token_filter_token_browser:
-      token_types:
-        node: node
-        site: site
+      token_types: {  }
     ui_styles_ckeditor5_uiStylesBlock:
       enabled_styles:
         - colors_background_color
