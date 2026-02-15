@@ -1,6 +1,6 @@
 uuid: 11aa4452-4c2d-4714-964f-c86830dae863
 langcode: en
-status: closed
+status: open
 dependencies:
   module:
     - picc_registration

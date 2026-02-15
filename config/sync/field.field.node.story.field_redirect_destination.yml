@@ -14,7 +14,7 @@ bundle: story
 label: 'Redirect destination'
 description: 'Page or URL visitors will be sent to when redirect is enabled.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

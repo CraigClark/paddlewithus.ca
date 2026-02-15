@@ -32,9 +32,19 @@
   {{- product|without('variation_attributes', 'field_contact_email') -}}
 
   {% if activity_registration > 0 %}
-    <h2 class="mt-5"> {{ 'Sessions'|t }}</h2>
+    <h2 class="mt-5">{{ 'Sessions'|t }}</h2>
     {{ drupal_view('variant_session', 'block_session') }}
+  {% else %}
+  <div class="card bg-base-100 border border-base-300 my-5 p-4 alert-warning">
+    <h2 class="mt-5">{{ 'Registration closed'|t }}</h2>
+
+  <p>{% trans %}
+      All sessions may be complete for the season, or details such as coaching, schedule, and fees may still be in development. Please <a href="/contact">contact us</a> for more information.
+    {% endtrans %}</p>
+  </div>
+
   {% endif %}
+
 
   {% if product.field_contact_email is not empty %}
     {{ product.field_contact_email }}
