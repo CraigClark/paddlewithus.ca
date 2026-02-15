@@ -65,11 +65,8 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       // Step 3: Validate age for all selected participants
       $this->validateParticipantsAge($selected_participants, $variation);
 
-      // Step 4: Check stock availability before creating order
-      $this->checkStockAvailability($variation, $selected_participants, $user_id);
-
-      // Step 5: Create order with order items for each selected participant
-      $order = $this->createCommerceOrder($selected_participants, $user_id, $variation);
+      // Step 4 & 5: Atomically check stock + create order (locked)
+      $order = $this->createCommerceOrderWithStockLock($selected_participants, $user_id, $variation);
 
       // Step 6: Redirect to cart
       $cart_url = Url::fromRoute('commerce_cart.page');
@@ -271,17 +268,35 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       return;
     }
 
-    \Drupal::logger('picc_registration')->notice('Stock check: variation @vid has @available available, requesting @requested', [
+    // Account for items in ALL draft carts for this variation.
+    // getTotalStockLevel() only reflects committed stock transactions;
+    // items sitting in draft/cart orders have not decremented stock yet.
+    $draft_cart_count = $this->countDraftCartItemsForVariation($variation_id);
+
+    // The current user's own cart items are already excluded from
+    // $participants_to_add (filtered above), so add them back to avoid
+    // double-counting against the user.
+    $current_user_cart_count = 0;
+    if (isset($existing_participants[$variation_id])) {
+      $current_user_cart_count = count($existing_participants[$variation_id]);
+    }
+
+    $effective_available = $available - $draft_cart_count + $current_user_cart_count;
+
+    \Drupal::logger('picc_registration')->notice('Stock check: variation @vid has @raw raw, @draft in draft carts, @effective effective available, requesting @requested', [
       '@vid' => $variation_id,
-      '@available' => $available,
+      '@raw' => $available,
+      '@draft' => $draft_cart_count,
+      '@effective' => $effective_available,
       '@requested' => $participants_to_add,
     ]);
 
     // Block if insufficient stock
-    if ($available < $participants_to_add) {
-      if ($available > 0) {
+    if ($effective_available < $participants_to_add) {
+      $spots = max(0, $effective_available);
+      if ($spots > 0) {
         throw new \Exception($this->t('Sorry, only @available spot(s) remain for this session. You selected @requested participants.', [
-          '@available' => $available,
+          '@available' => $spots,
           '@requested' => $participants_to_add,
         ]));
       }
@@ -521,6 +536,80 @@ class PiccRegistrationHandler extends WebformHandlerBase {
     }
 
     return FALSE;
+  }
+
+  /**
+   * Atomically checks stock and creates the commerce order under a lock.
+   *
+   * Prevents race conditions where concurrent requests both pass the stock
+   * check before either creates order items.
+   *
+   * @param array $participant_ids
+   *   Array of participant profile IDs.
+   * @param int $user_id
+   *   The user ID.
+   * @param \Drupal\commerce_product\Entity\ProductVariation $variation
+   *   The product variation.
+   *
+   * @return \Drupal\commerce_order\Entity\OrderInterface
+   *   The created or updated order.
+   *
+   * @throws \Exception
+   *   If stock is insufficient or lock cannot be acquired.
+   */
+  protected function createCommerceOrderWithStockLock($participant_ids, $user_id, $variation) {
+    $variation_id = $variation->id();
+    $lock_name = 'picc_registration_stock_' . $variation_id;
+    /** @var \Drupal\Core\Lock\LockBackendInterface $lock */
+    $lock = \Drupal::lock();
+
+    // Attempt to acquire the lock. If another request holds it, wait and retry.
+    $lock_acquired = $lock->acquire($lock_name, 15.0);
+    if (!$lock_acquired) {
+      $lock->wait($lock_name, 10);
+      $lock_acquired = $lock->acquire($lock_name, 15.0);
+    }
+
+    if (!$lock_acquired) {
+      throw new \Exception($this->t('The registration system is busy. Please try again in a moment.'));
+    }
+
+    try {
+      // Inside the lock: re-check stock availability with current data.
+      $this->checkStockAvailability($variation, $participant_ids, $user_id);
+
+      // Stock is sufficient — create the order items while holding the lock.
+      return $this->createCommerceOrder($participant_ids, $user_id, $variation);
+    }
+    finally {
+      $lock->release($lock_name);
+    }
+  }
+
+  /**
+   * Counts order items in all draft carts for a given variation.
+   *
+   * Commerce Stock's getTotalStockLevel() only reflects committed stock
+   * transactions, not items sitting in draft/cart orders. This method
+   * bridges that gap.
+   *
+   * @param int $variation_id
+   *   The product variation ID.
+   *
+   * @return int
+   *   The number of order items across all draft carts for this variation.
+   */
+  protected function countDraftCartItemsForVariation($variation_id) {
+    $database = \Drupal::database();
+    $query = $database->select('commerce_order_item', 'oi');
+    $query->join('commerce_order__order_items', 'ooi', 'ooi.order_items_target_id = oi.order_item_id');
+    $query->join('commerce_order', 'o', 'o.order_id = ooi.entity_id');
+    $query->condition('oi.type', 'activity_registration')
+      ->condition('oi.purchased_entity', $variation_id)
+      ->condition('o.state', 'draft');
+    $query->addExpression('COUNT(*)', 'item_count');
+    $result = $query->execute()->fetchField();
+    return (int) $result;
   }
 
   /**

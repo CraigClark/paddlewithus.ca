@@ -124,6 +124,7 @@ html/themes/custom/daisyui_ext/node_modules/
 docker/
 notes/
 tmp/
+.claude/
 
 ########################################
 # DBs

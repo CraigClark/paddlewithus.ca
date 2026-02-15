@@ -580,7 +580,20 @@ display:
           admin_label: 'field_participant: Profile'
           plugin_id: standard
           required: false
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: "<div data-component-id=\"daisyui_ext:alert\" class=\"alert alert-error border-2 mb-3 md:border-4 border-slate-950 bg-transparent\" role=\"alert\">\r\n  <div class=\"text-base\">\r\n   <strong>Registration will be held in your cart for 24 hours.</strong>\r\n  </div>\r\n</div>"
+            format: full_html
+          tokenize: false
       footer:
         commerce_order_total:
           id: commerce_order_total
