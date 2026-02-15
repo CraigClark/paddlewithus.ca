@@ -4,10 +4,9 @@ enabled_entity_types:
   node: {  }
   block_content: {  }
   media: {  }
-  commerce_order: {  }
-  commerce_order_item: {  }
   commerce_product: {  }
   commerce_product_variation: {  }
+  commerce_store: {  }
   path_alias: {  }
 auto_purge:
   enabled: true

@@ -1,0 +1,12 @@
+uuid: 66d3d5c5-e2f0-43e6-94e8-1e73ee6627ff
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_store
+    - trash
+id: commerce_store_purge_action
+label: 'Permanently delete store'
+type: commerce_store
+plugin: 'entity:purge_action:commerce_store'
+configuration: {  }
