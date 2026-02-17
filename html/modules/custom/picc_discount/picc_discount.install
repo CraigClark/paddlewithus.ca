@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the PICC Family Discount module.
+ */
+
+use Drupal\commerce_promotion\Entity\Promotion;
+
+/**
+ * Implements hook_install().
+ *
+ * Creates the Family Discount promotion entity if one does not already exist.
+ * Promotions are content entities (stored in the database, not config), so they
+ * are lost on database refreshes. This hook ensures the promotion is always
+ * present when the module is enabled.
+ */
+function picc_discount_install() {
+  picc_discount_ensure_promotion();
+}
+
+/**
+ * Ensure the Family Discount promotion entity exists.
+ *
+ * Creates a promotion using the picc_family_discount offer plugin if no
+ * promotion with that offer type exists in the database.
+ *
+ * @return \Drupal\commerce_promotion\Entity\PromotionInterface|null
+ *   The existing or newly created promotion, or NULL on failure.
+ */
+function picc_discount_ensure_promotion() {
+  $promotion_storage = \Drupal::entityTypeManager()->getStorage('commerce_promotion');
+
+  // Check if a promotion with this offer type already exists.
+  $existing = $promotion_storage->getQuery()
+    ->condition('offer.target_plugin_id', 'picc_family_discount')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (!empty($existing)) {
+    \Drupal::logger('picc_discount')->notice('Family Discount promotion already exists (ID: @id).', [
+      '@id' => reset($existing),
+    ]);
+    return $promotion_storage->load(reset($existing));
+  }
+
+  // Load all stores for the promotion (typically just one).
+  $store_storage = \Drupal::entityTypeManager()->getStorage('commerce_store');
+  $store_ids = $store_storage->getQuery()
+    ->condition('status', TRUE)
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (empty($store_ids)) {
+    \Drupal::logger('picc_discount')->error('Cannot create Family Discount promotion: no stores found.');
+    return NULL;
+  }
+
+  // Load all order types.
+  $order_type_storage = \Drupal::entityTypeManager()->getStorage('commerce_order_type');
+  $order_types = $order_type_storage->loadMultiple();
+  $order_type_ids = array_keys($order_types);
+
+  if (empty($order_type_ids)) {
+    \Drupal::logger('picc_discount')->error('Cannot create Family Discount promotion: no order types found.');
+    return NULL;
+  }
+
+  // Create the promotion entity.
+  $promotion = Promotion::create([
+    'name' => 'Family Multi-Participant Discount',
+    'display_name' => 'Family Discount',
+    'description' => 'Automatically applies graduated discounts when multiple participants are registered for the same session. Discount percentages are configured per product variation.',
+    'offer' => [
+      'target_plugin_id' => 'picc_family_discount',
+      'target_plugin_configuration' => [],
+    ],
+    'conditions' => [],
+    'condition_operator' => 'AND',
+    'compatibility' => 'any',
+    'status' => TRUE,
+    'order_types' => $order_type_ids,
+    'stores' => $store_ids,
+    // Weight of 10 ensures this runs after early bird / coupon promotions.
+    'weight' => 10,
+    'start_date' => '2024-01-01T00:00:00',
+    'require_coupon' => FALSE,
+  ]);
+
+  $promotion->save();
+
+  \Drupal::logger('picc_discount')->notice('Created Family Discount promotion (ID: @id).', [
+    '@id' => $promotion->id(),
+  ]);
+
+  return $promotion;
+}
+
+/**
+ * Create the Family Discount promotion if it does not exist.
+ *
+ * This update hook ensures the promotion is created for sites that already
+ * have the module installed but are missing the promotion entity.
+ */
+function picc_discount_update_10001() {
+  $promotion = picc_discount_ensure_promotion();
+  if ($promotion) {
+    return t('Family Discount promotion ensured (ID: @id).', ['@id' => $promotion->id()]);
+  }
+  return t('Failed to create Family Discount promotion. Check the logs.');
+}
