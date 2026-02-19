@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the PICC Family Discount module.
+ */
+
+/**
+ * Implements hook_cron().
+ *
+ * Ensures the Family Discount promotion entity exists. Promotions are content
+ * entities stored in the database. If the database is refreshed or the
+ * promotion is accidentally deleted, this hook will re-create it.
+ */
+function picc_discount_cron() {
+  // Only run this check once per day to avoid unnecessary queries.
+  $last_check = \Drupal::state()->get('picc_discount.last_promotion_check', 0);
+  if (\Drupal::time()->getRequestTime() - $last_check < 86400) {
+    return;
+  }
+
+  \Drupal::state()->set('picc_discount.last_promotion_check', \Drupal::time()->getRequestTime());
+
+  // Use the ensure function from the install file.
+  \Drupal::moduleHandler()->loadInclude('picc_discount', 'install');
+  picc_discount_ensure_promotion();
+}
