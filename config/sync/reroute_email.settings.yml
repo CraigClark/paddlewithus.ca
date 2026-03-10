@@ -3,7 +3,9 @@ _core:
 enable: false
 address: clark.craig@gmail.com
 roles: {  }
-allowed: ''
+allowed: |-
+  petriecanoe@gmail.com
+  sarahkennedy2357@gmail.com
 description: true
 message: true
 mailkeys: ''
