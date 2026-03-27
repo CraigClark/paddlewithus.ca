@@ -12,3 +12,7 @@ services:
       - "@redirect.destination"
     tags:
       - { name: event_subscriber }
+  picc_ext.profile_label_subscriber:
+    class: Drupal\picc_ext\EventSubscriber\ProfileLabelSubscriber
+    tags:
+      - { name: event_subscriber }
