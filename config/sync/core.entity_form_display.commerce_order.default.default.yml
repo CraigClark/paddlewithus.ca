@@ -53,6 +53,12 @@ content:
       collapsed: false
       allow_duplicate: false
     third_party_settings: {  }
+  state:
+    type: state_transition_form
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   adjustments: true
   coupons: true
@@ -60,6 +66,5 @@ hidden:
   customer_comments: true
   ip_address: true
   order_number: true
-  state: true
   store_id: true
   uid: true

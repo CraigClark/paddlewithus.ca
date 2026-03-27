@@ -14,6 +14,19 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\Markup;
 
 /**
+ * Implements hook_workflows_alter().
+ *
+ * Adds a "completed → canceled" transition to the default order workflow
+ * so that completed orders can be canceled (e.g. after issuing a refund).
+ * Commerce Stock will automatically return inventory on cancellation.
+ */
+function picc_registration_workflows_alter(array &$workflows) {
+  if (isset($workflows['order_default'])) {
+    $workflows['order_default']['transitions']['cancel']['from'][] = 'completed';
+  }
+}
+
+/**
  * Implements hook_ENTITY_TYPE_view_alter() for commerce_order_item.
  *
  * Ensures order item titles include participant names when displayed.
