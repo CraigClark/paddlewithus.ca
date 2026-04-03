@@ -5,6 +5,7 @@ dependencies:
   config:
     - commerce_order.commerce_order_item_type.activity_registration
     - field.storage.commerce_product_variation.field_date_range
+    - field.storage.commerce_product_variation.field_desc
     - field.storage.profile.field_name
     - user.role.coach
     - user.role.commerce_manager
@@ -14,7 +15,9 @@ dependencies:
     - commerce_product
     - datetime_range
     - name
+    - picc_registration
     - profile
+    - state_machine
     - user
 id: registration
 label: 'Program registration'
@@ -32,6 +35,68 @@ display:
     display_options:
       title: 'Program registration'
       fields:
+        field_desc:
+          id: field_desc
+          table: commerce_product_variation__field_desc
+          field: field_desc
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_date_range:
           id: field_date_range
           table: commerce_product_variation__field_date_range
@@ -41,10 +106,10 @@ display:
           admin_label: ''
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{{ field_desc }} {{ field_date_range }}'
             make_link: false
             path: ''
             absolute: false
@@ -163,6 +228,55 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        participant_status_icons:
+          id: participant_status_icons
+          table: profile
+          field: participant_status_icons
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: participant_status_icons
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
         product_id:
           id: product_id
           table: commerce_product_variation_field_data
@@ -173,7 +287,7 @@ display:
           entity_type: commerce_product_variation
           entity_field: product_id
           plugin_id: field
-          label: Product
+          label: ''
           exclude: true
           alter:
             alter_text: false
@@ -434,7 +548,9 @@ display:
         type: fields
         options:
           default_field_elements: true
-          inline: {  }
+          inline:
+            field_name: field_name
+            participant_status_icons: participant_status_icons
           separator: ''
           hide_empty: false
       query:
@@ -475,7 +591,18 @@ display:
           entity_type: commerce_order_item
           plugin_id: standard
           required: true
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: Legend
+          plugin_id: text_custom
+          empty: true
+          content: '<div role="note" aria-label="Icon legend" class="participant-legend" style="margin-bottom: 1em; font-size: 0.9em;"><h4 style="margin: 0 0 0.25em;">Legend</h4><p style="margin: 0;"><span role="img" aria-label="Passed swim test">🏊</span> Passed swim test</p><p style="margin: 0;"><span role="img" aria-label="Medical concerns">🔴</span> Medical concerns</p><p style="margin: 0;"><span role="img" aria-label="Photo consent given">📷</span> Photo OK</p></div>'
+          tokenize: false
       footer: {  }
       display_extenders:
         ui_styles: {  }
@@ -492,8 +619,6 @@ display:
       tags:
         - 'config:field.storage.commerce_product_variation.field_date_range'
         - 'config:field.storage.commerce_product_variation.field_desc'
-        - 'config:field.storage.profile.field_emercency_contact_1_name'
-        - 'config:field.storage.profile.field_emercency_contact_1_phone'
         - 'config:field.storage.profile.field_name'
   page_1:
     id: page_1
@@ -517,6 +642,4 @@ display:
       tags:
         - 'config:field.storage.commerce_product_variation.field_date_range'
         - 'config:field.storage.commerce_product_variation.field_desc'
-        - 'config:field.storage.profile.field_emercency_contact_1_name'
-        - 'config:field.storage.profile.field_emercency_contact_1_phone'
         - 'config:field.storage.profile.field_name'
