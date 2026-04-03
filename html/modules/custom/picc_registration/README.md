@@ -62,6 +62,26 @@ All registration attempts logged to watchdog:
 
 View logs: `drush watchdog:show --type=picc_registration`
 
+## Drush Commands
+
+### Clean Up Orphaned Order Items
+
+When an order is deleted, its order items (line items) can be left behind in the database. These orphans no longer belong to any order and can clutter views and reports.
+
+The `picc:cleanup-orphans` command finds order items whose parent order no longer exists and deletes them using the entity API, so all related field data and revisions are properly cleaned up. Product variations are not affected.
+
+Preview orphans without deleting:
+
+```
+drush picc:cleanup-orphans --dry-run
+```
+
+Delete orphans (prompts for confirmation):
+
+```
+drush picc:cleanup-orphans
+```
+
 ## Troubleshooting
 
 ### Module won't enable
