@@ -27,253 +27,129 @@ dependencies:
     - profile.type.participant
   module:
     - datetime
+    - field_group
+    - field_label
     - layout_builder
+    - nomarkup
     - options
+    - telephone
     - text
-    - ui_patterns
-    - ui_patterns_layouts
-  theme:
-    - ui_suite_daisyui
 third_party_settings:
   layout_builder:
-    enabled: true
+    enabled: false
     allow_custom: false
-    sections:
-      -
-        layout_id: 'ui_patterns:ui_suite_daisyui:accordion'
-        layout_settings:
-          label: 'Emergency contacts'
-          context_mapping:
-            entity: layout_builder.entity
-          ui_patterns:
-            component_id: 'ui_suite_daisyui:accordion'
-            variant_id: null
-            props:
-              attributes:
-                source_id: attributes
-                source:
-                  value: ''
-            slots: {  }
-        components:
-          2b4134d9-282f-4d42-a965-e6380b0f5558:
-            uuid: 2b4134d9-282f-4d42-a965-e6380b0f5558
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_emercency_contact_1_name'
-              label: 'Emercency contact 1 name'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings:
-                  field_label:
-                    label_class: ''
-                    label_value: ''
-                    label_tag: ''
-                  nomarkup:
-                    enabled: false
-                    separator: '|'
-                    referenced_entity: ''
-            weight: 0
-            additional:
-              ui_styles_wrapper: {  }
-              ui_styles_wrapper_extra: ''
-              ui_styles_title: {  }
-              ui_styles_title_extra: ''
-              ui_styles: {  }
-              ui_styles_extra: ''
-          5331b606-5e76-419d-a8f9-542942050445:
-            uuid: 5331b606-5e76-419d-a8f9-542942050445
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_emercency_contact_1_phone'
-              label: 'Emercency contact 1 phone'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: telephone_link
-                label: above
-                settings:
-                  title: ''
-                third_party_settings:
-                  field_label:
-                    label_class: ''
-                    label_value: ''
-                    label_tag: ''
-                  nomarkup:
-                    enabled: false
-                    separator: '|'
-                    referenced_entity: ''
-            weight: 1
-            additional:
-              ui_styles_wrapper: {  }
-              ui_styles_wrapper_extra: ''
-              ui_styles_title: {  }
-              ui_styles_title_extra: ''
-              ui_styles: {  }
-              ui_styles_extra: ''
-          766ace0a-7df7-4dc8-8035-f2d91ce3d428:
-            uuid: 766ace0a-7df7-4dc8-8035-f2d91ce3d428
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_emercency_contact_1_rel'
-              label: 'Emercency contact 1 relationship'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings:
-                  field_label:
-                    label_class: ''
-                    label_value: ''
-                    label_tag: ''
-                  nomarkup:
-                    enabled: false
-                    separator: '|'
-                    referenced_entity: ''
-            weight: 2
-            additional:
-              ui_styles_wrapper: {  }
-              ui_styles_wrapper_extra: ''
-              ui_styles_title: {  }
-              ui_styles_title_extra: ''
-              ui_styles: {  }
-              ui_styles_extra: ''
-          0c22d847-9673-4ac2-812e-03159eec7213:
-            uuid: 0c22d847-9673-4ac2-812e-03159eec7213
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_emercency_contact_1_pickup'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          bd676abf-7a37-41eb-ad6e-6576e094c4e7:
-            uuid: bd676abf-7a37-41eb-ad6e-6576e094c4e7
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_emercency_contact_2_pickup'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
-          6e69ee45-3e3f-488c-a80e-10677d2d4208:
-            uuid: 6e69ee45-3e3f-488c-a80e-10677d2d4208
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_emercency_contact_3_pickup'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
-                third_party_settings: {  }
-            weight: 6
-            additional: {  }
-          38e0ceed-6351-40ac-97eb-acb531207948:
-            uuid: 38e0ceed-6351-40ac-97eb-acb531207948
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_additional_info'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 7
-            additional: {  }
-          f01697b4-d55d-48bd-af98-cf6c7c7f841c:
-            uuid: f01697b4-d55d-48bd-af98-cf6c7c7f841c
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_shirt_size'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: list_default
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-            weight: 8
-            additional: {  }
-          21366686-5764-45e3-8f3f-d85c24756841:
-            uuid: 21366686-5764-45e3-8f3f-d85c24756841
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_passed_swim_test'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: boolean
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
-                third_party_settings: {  }
-            weight: 9
-            additional: {  }
-          5a39a7c8-3089-41db-acd2-57f1c45ac2f6:
-            uuid: 5a39a7c8-3089-41db-acd2-57f1c45ac2f6
-            region: items
-            configuration:
-              id: 'field_block:profile:participant:field_swim_test_passed_date'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: datetime_default
-                label: above
-                settings:
-                  timezone_override: ''
-                  format_type: medium
-                third_party_settings: {  }
-            weight: 10
-            additional: {  }
-        third_party_settings: {  }
+  field_group:
+    group_care_notes:
+      children:
+        - field_allergies
+        - field_additional_info
+      label: 'Care notes'
+      parent_name: ''
+      region: content
+      weight: 5
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: section
+        show_label: true
+        label_element: h2
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_emergency_contacts:
+      children:
+        - group_emergency_contact_1
+        - field_emercency_contact_1_pickup
+        - group_emergency_contact_2
+        - field_emercency_contact_2_phone
+        - field_emercency_contact_2_pickup
+      label: 'Emergency contacts'
+      parent_name: ''
+      region: content
+      weight: 6
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: section
+        show_label: true
+        label_element: h2
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_emergency_contact_1:
+      children:
+        - field_emercency_contact_1_name
+        - field_emercency_contact_1_rel
+        - field_emercency_contact_1_phone
+      label: 'First emergency contact'
+      parent_name: group_emergency_contacts
+      region: content
+      weight: 7
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: true
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_emergency_contact_2:
+      children:
+        - field_emercency_contact_2_name
+        - field_emercency_contact_2_rel
+      label: 'Second emergency contact'
+      parent_name: group_emergency_contacts
+      region: content
+      weight: 9
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: true
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_emergency_contact_3:
+      children:
+        - field_emercency_contact_3_name
+        - field_emercency_contact_3_rel
+        - field_emercency_contact_3_phone
+        - field_emercency_contact_3_pickup
+      label: 'Third emergency contact'
+      parent_name: ''
+      region: content
+      weight: 7
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: true
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: profile.participant.default
 targetEntityType: profile
 bundle: participant
@@ -283,78 +159,228 @@ content:
     type: text_default
     label: above
     settings: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: 'Information for coaches'
+        label_tag: h3
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 5
+    region: content
+  field_allergies:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: h3
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
     weight: 4
-    region: items
+    region: content
+  field_birth_date:
+    type: datetime_custom
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: 'F j, Y'
+    third_party_settings:
+      field_label:
+        label_class: strong
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 0
+    region: content
+  field_emercency_contact_1_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_emercency_contact_1_phone:
+    type: telephone_link
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 9
+    region: content
   field_emercency_contact_1_pickup:
     type: boolean
-    label: above
+    label: hidden
     settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
+      format: custom
+      format_custom_false: 'Not autnorized for pick-up'
+      format_custom_true: 'Autnorized for pick-up'
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 8
+    region: content
+  field_emercency_contact_1_rel:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 1
-    region: items
+    weight: 8
+    region: content
+  field_emercency_contact_2_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_emercency_contact_2_phone:
+    type: telephone_link
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 10
+    region: content
   field_emercency_contact_2_pickup:
     type: boolean
-    label: above
+    label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 2
-    region: items
+    weight: 11
+    region: content
+  field_emercency_contact_2_rel:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_emercency_contact_3_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_emercency_contact_3_phone:
+    type: telephone_link
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 10
+    region: content
   field_emercency_contact_3_pickup:
     type: boolean
-    label: above
+    label: hidden
     settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
+      format: custom
+      format_custom_false: 'Not authorized for pickup'
+      format_custom_true: 'Authorized for pickup'
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 11
+    region: content
+  field_emercency_contact_3_rel:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 3
-    region: items
+    weight: 9
+    region: content
   field_passed_swim_test:
     type: boolean
-    label: above
+    label: hidden
     settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 6
-    region: items
+      format: custom
+      format_custom_false: 'Has not passed swim test'
+      format_custom_true: 'Passed swim test'
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 2
+    region: content
+  field_photo_consent:
+    type: boolean
+    label: hidden
+    settings:
+      format: custom
+      format_custom_false: 'Do not photograph this participant'
+      format_custom_true: 'Photos and videos are ok'
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: 'Photo consent'
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 1
+    region: content
   field_shirt_size:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 5
-    region: items
+    weight: 4
+    region: content
   field_swim_test_passed_date:
     type: datetime_default
-    label: above
+    label: inline
     settings:
       timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 7
-    region: items
+      format_type: html_date
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 3
+    region: content
 hidden:
-  field_allergies: true
-  field_birth_date: true
-  field_emercency_contact_1_name: true
-  field_emercency_contact_1_phone: true
-  field_emercency_contact_1_rel: true
-  field_emercency_contact_2_name: true
-  field_emercency_contact_2_phone: true
-  field_emercency_contact_2_rel: true
-  field_emercency_contact_3_name: true
-  field_emercency_contact_3_phone: true
-  field_emercency_contact_3_rel: true
   field_name: true
   field_owner: true
-  field_photo_consent: true
   search_api_excerpt: true
