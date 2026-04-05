@@ -2,4 +2,89 @@
  * Use this file to override Tailwind CSS style utilities.
  */
 
+/* ---- Registration view ---- */
 
+/* Participant card row */
+.participant-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  max-width: var(--readable-width);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-lg, 0.5rem);
+  padding: 0.75rem 1rem;
+  background: var(--color-base-100);
+}
+
+.participant-view-link {
+  flex-basis: 100%;
+}
+
+@media (min-width: 640px) {
+  .participant-view-link {
+    flex-basis: auto;
+  }
+}
+
+/* Status icons — large enough to spot at a glance on a phone. */
+.participant-icons {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: auto;
+}
+
+.participant-icon .material-icons {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+
+.participant-icon--swim .material-icons {
+  color: var(--color-info);
+}
+
+.participant-icon--medical .material-icons {
+  color: var(--color-error);
+}
+
+.participant-icon--photo .material-icons {
+  color: var(--color-success);
+}
+
+/* Result count */
+.registration-result-count {
+  margin-bottom: 0.5rem;
+}
+
+/* Legend */
+.participant-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.participant-legend-items > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.participant-legend-icon {
+  font-size: 1.5rem;
+  vertical-align: middle;
+}
+
+.participant-legend-icon--swim {
+  color: var(--color-info);
+}
+
+.participant-legend-icon--medical {
+  color: var(--color-error);
+}
+
+.participant-legend-icon--photo {
+  color: var(--color-success);
+}

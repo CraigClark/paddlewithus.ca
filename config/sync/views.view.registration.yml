@@ -26,6 +26,7 @@ dependencies:
     - field.storage.profile.field_photo_consent
     - field.storage.profile.field_shirt_size
     - field.storage.profile.field_swim_test_passed_date
+    - system.menu.main
     - user.role.coach
     - user.role.commerce_manager
   module:
@@ -38,7 +39,7 @@ dependencies:
     - datetime_range
     - name
     - options
-    - picc_registration
+    - picc_ext
     - profile
     - rest
     - serialization
@@ -48,9 +49,9 @@ dependencies:
     - views_data_export
     - views_selective_filters
 id: registration
-label: 'Program registration'
+label: 'Participant roster'
 module: views
-description: 'The list of participants in each camp'
+description: 'Roster of registered participants by program and session'
 tag: ''
 base_table: commerce_order_item
 base_field: order_item_id
@@ -61,7 +62,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Program registration'
+      title: 'Participant roster'
       fields:
         field_desc:
           id: field_desc
@@ -181,6 +182,71 @@ display:
             format_type: month_day
             from_to: both
             separator: '-'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        title:
+          id: title
+          table: commerce_product_variation_field_data
+          field: title
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: 'Variation title (for session filter)'
+          entity_type: commerce_product_variation
+          entity_field: title
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -393,7 +459,7 @@ display:
             trim_whitespace: false
             alt: ''
             rel: ''
-            link_class: ''
+            link_class: 'btn btn-ghost btn-sm'
             prefix: ''
             suffix: ''
             target: ''
@@ -420,7 +486,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: view
+          text: 'View profile'
           output_url_as_text: false
           absolute: false
       pager:
@@ -449,7 +515,7 @@ display:
         type: bef
         options:
           submit_button: Apply
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -473,6 +539,21 @@ display:
               reset_button_always_show: false
             filter:
               product_id_selective:
+                plugin_id: default
+                advanced:
+                  sort_options: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+              title_selective:
                 plugin_id: default
                 advanced:
                   sort_options: false
@@ -639,6 +720,52 @@ display:
           selective_aggregated_fields: ''
           selective_items_limit: 100
           selective_entity_type: ''
+        title_selective:
+          id: title_selective
+          table: commerce_product_variation_field_data
+          field: title_selective
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_product_variation
+          entity_field: title
+          plugin_id: views_selective_filters_filter
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Session
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title_selective
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          selective_display_field: title
+          selective_display_sort: ASC
+          selective_aggregated_fields: ''
+          selective_items_limit: 100
+          selective_entity_type: ''
       style:
         type: default
         options:
@@ -708,9 +835,20 @@ display:
           admin_label: Legend
           plugin_id: text_custom
           empty: true
-          content: '<div role="note" aria-label="Icon legend" class="participant-legend" style="margin-bottom: 1em; font-size: 0.9em;"><h4 style="margin: 0 0 0.25em;">Legend</h4><p style="margin: 0;"><span role="img" aria-label="Passed swim test">🏊</span> Passed swim test</p><p style="margin: 0;"><span role="img" aria-label="Medical concerns">🔴</span> Medical concerns</p><p style="margin: 0;"><span role="img" aria-label="Photo consent given">📷</span> Photo OK</p></div>'
+          content: '<div role="note" aria-label="Icon legend" class="participant-legend mb-4"><h4 class="font-semibold text-sm uppercase tracking-wide opacity-70 mb-1">Legend</h4><div class="participant-legend-items"><span><span class="material-icons participant-legend-icon participant-legend-icon--swim" aria-hidden="true">pool</span> Passed swim test</span><span><span class="material-icons participant-legend-icon participant-legend-icon--medical" aria-hidden="true">health_and_safety</span> Medical concerns</span><span><span class="material-icons participant-legend-icon participant-legend-icon--photo" aria-hidden="true">photo_camera</span> Photo OK</span></div></div>'
           tokenize: false
-      footer: {  }
+      footer:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: 'Result summary'
+          plugin_id: result
+          empty: false
+          content: '<div class="registration-result-count"><span class="text-xl font-semibold">@total</span> participants</div>'
+          tokenize: false
       display_extenders:
         ui_styles: {  }
         metatag_display_extender:
@@ -864,74 +1002,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        completed:
-          id: completed
-          table: commerce_order
-          field: completed
-          relationship: order_id
-          group_type: group
-          admin_label: ''
-          entity_type: commerce_order
-          entity_field: completed
-          plugin_id: field
-          label: 'Order date'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          type: timestamp
-          settings:
-            date_format: medium
-            custom_date_format: ''
-            timezone: ''
-            tooltip:
-              date_format: ''
-              custom_date_format: ''
-        field_name:
-          id: field_name
+        field_name_given:
+          id: field_name_given
           table: profile__field_name
-          field: field_name
+          field: field_name_given
           relationship: field_participant
           group_type: group
           admin_label: ''
-          plugin_id: field
-          label: Name
+          plugin_id: standard
+          label: 'First name'
           exclude: false
           alter:
             alter_text: false
@@ -964,7 +1043,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -972,22 +1051,55 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: title
-          type: name_default
-          settings:
-            format: default
-            markup: none
-            list_format: ''
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
+        field_name_family:
+          id: field_name_family
+          table: profile__field_name
+          field: field_name_family
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          label: 'Family name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
         field_birth_date:
           id: field_birth_date
           table: profile__field_birth_date
@@ -2319,11 +2431,11 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
-      path: 'program-registration/[date:html_date]-program-participants.csv'
+      path: 'participant-roster/[date:html_date]-picc-participant-roster.csv'
       displays:
         page_1: page_1
         default: '0'
-      filename: '[date:html_date]-rogram-participants.csv'
+      filename: '[date:html_date]-picc-participant-roster.csv'
       automatic_download: false
       store_in_public_file_directory: false
       custom_redirect_path: false
@@ -2352,7 +2464,6 @@ display:
         - 'config:field.storage.profile.field_emercency_contact_3_phone'
         - 'config:field.storage.profile.field_emercency_contact_3_pickup'
         - 'config:field.storage.profile.field_emercency_contact_3_rel'
-        - 'config:field.storage.profile.field_name'
         - 'config:field.storage.profile.field_passed_swim_test'
         - 'config:field.storage.profile.field_photo_consent'
         - 'config:field.storage.profile.field_shirt_size'
@@ -2368,7 +2479,16 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
-      path: program-registration
+      path: participant-roster
+      menu:
+        type: normal
+        title: 'Participant roster'
+        description: ''
+        weight: -46
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:

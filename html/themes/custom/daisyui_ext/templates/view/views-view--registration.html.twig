@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Theme override for the Program registration view.
+ *
+ * Order: filters → legend → result count → results.
+ */
+#}
+{%
+  set classes = [
+    'view-registration',
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title }}
+  {{ title_suffix }}
+
+  {% if exposed %}
+    <div class="mb-6">
+      {{ exposed }}
+    </div>
+  {% endif %}
+
+  {% if header %}
+    <div class="mb-4">
+      {{ header }}
+    </div>
+  {% endif %}
+
+  {% if footer %}
+    <div class="mb-6">
+      {{ footer }}
+    </div>
+  {% endif %}
+
+  {{ attachment_before }}
+
+  {% if rows -%}
+    <div class="registration-results">
+      {{ rows }}
+    </div>
+  {% elseif empty -%}
+    <div class="alert alert-warning">
+      {{ empty }}
+    </div>
+  {% endif %}
+
+  {% if pager %}
+    <div class="mt-6">
+      {{ pager }}
+    </div>
+  {% endif %}
+
+  {{ attachment_after }}
+
+  {% if more %}
+    {{ more }}
+  {% endif %}
+
+  {{ feed_icons }}
+</div>

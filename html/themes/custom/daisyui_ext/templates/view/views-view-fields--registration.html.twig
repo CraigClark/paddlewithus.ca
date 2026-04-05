@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Theme override for fields in the registration view.
+ *
+ * Each participant is a horizontal card-like row:
+ * - Name on the left
+ * - Large status icons in the middle (immediately visible)
+ * - View profile link on the right
+ *
+ * Designed for mobile use by coaches.
+ */
+#}
+<div class="participant-row">
+  <div class="font-medium text-base">
+    {% if fields.field_name is defined %}
+      {{ fields.field_name.content }}
+    {% endif %}
+  </div>
+  {% if fields.participant_status_icons is defined %}
+    {{ fields.participant_status_icons.content }}
+  {% endif %}
+  <div class="participant-view-link">
+    {% if fields.view_profile is defined %}
+      {{ fields.view_profile.content }}
+    {% endif %}
+  </div>
+</div>

@@ -679,7 +679,7 @@ display:
         type: normal
         title: 'My athletes'
         description: ''
-        weight: 10
+        weight: -49
         expanded: false
         menu_name: main
         parent: user.page

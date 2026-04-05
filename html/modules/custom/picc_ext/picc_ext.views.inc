@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Views integration for the PICC Registration module.
+ * Views integration for the PICC Extended module.
  */
 
 /**
  * Implements hook_views_data_alter().
  */
-function picc_registration_views_data_alter(array &$data) {
+function picc_ext_views_data_alter(array &$data) {
   // Add participant status icons field to the profile table.
   if (isset($data['profile'])) {
     $data['profile']['participant_status_icons'] = [

@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override for views grouping in the registration view.
+ *
+ * Uses proper heading hierarchy:
+ * - Level 0 (program name): h2
+ * - Level 1 (session dates): h3
+ */
+#}
+{% if grouping_level == 0 %}
+  <h2 class="text-2xl font-bold mt-12 mb-2 first:mt-0">{{ title }}</h2>
+{% else %}
+  <h3 class="text-lg font-semibold mt-6 mb-2 border-b border-base-300 pb-2">{{ title }}</h3>
+{% endif %}
+{{ content }}

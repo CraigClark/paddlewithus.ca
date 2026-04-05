@@ -193,3 +193,15 @@ items-start
 
 min-h-40
 md:min-h-96
+
+participant-icon
+participant-icons
+text-2xl
+text-lg
+border-b
+border-base-300
+pb-2
+overflow-x-auto
+hover:bg-base-200
+font-medium
+w-20
