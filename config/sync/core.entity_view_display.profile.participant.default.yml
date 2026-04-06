@@ -264,10 +264,18 @@ content:
     type: boolean
     label: hidden
     settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
+      format: custom
+      format_custom_false: 'NOT Autnorized for pick-up'
+      format_custom_true: 'Autnorized for pick-up'
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
     weight: 11
     region: content
   field_emercency_contact_2_rel:
