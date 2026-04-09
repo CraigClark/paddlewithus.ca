@@ -1,0 +1,22 @@
+uuid: 98b65570-437a-4384-b289-55b239b26b3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_item_type.swim_test_registration
+    - field.storage.commerce_order_item.field_swim_test_excuse_reason
+  module:
+    - text
+id: commerce_order_item.swim_test_registration.field_swim_test_excuse_reason
+field_name: field_swim_test_excuse_reason
+entity_type: commerce_order_item
+bundle: swim_test_registration
+label: 'Excuse reason'
+description: 'Set by the commerce manager when excusing a no-show.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,23 @@
+uuid: 95b76407-8648-4fcd-a187-af4fd252dd75
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_item_type.swim_test_registration
+    - field.storage.commerce_order_item.field_swim_test_status
+  module:
+    - options
+id: commerce_order_item.swim_test_registration.field_swim_test_status
+field_name: field_swim_test_status
+entity_type: commerce_order_item
+bundle: swim_test_registration
+label: Status
+description: 'Set by the swim test handler, coach actions, and the auto-no-show cron.'
+required: false
+translatable: false
+default_value:
+  -
+    value: pending
+default_value_callback: ''
+settings: {  }
+field_type: list_string

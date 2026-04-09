@@ -1,0 +1,19 @@
+uuid: 933fdb6d-a363-401e-b438-361125cbf33f
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.swim_test_attestation
+    - field.storage.commerce_product_variation.field_desc
+id: commerce_product_variation.swim_test_attestation.field_desc
+field_name: field_desc
+entity_type: commerce_product_variation
+bundle: swim_test_attestation
+label: 'Short description'
+description: 'Optional short note shown with the variant.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

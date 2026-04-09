@@ -1,0 +1,19 @@
+uuid: 6bbe4f48-2b55-43c0-b400-2e1d37ea9999
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.swim_test_slot
+    - field.storage.commerce_product_variation.field_desc
+id: commerce_product_variation.swim_test_slot.field_desc
+field_name: field_desc
+entity_type: commerce_product_variation
+bundle: swim_test_slot
+label: 'Short description'
+description: 'Optional short note shown with the variant (e.g. age group, pool location).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

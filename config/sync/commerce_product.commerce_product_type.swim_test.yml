@@ -1,0 +1,14 @@
+uuid: 33d5a0f7-54f8-48aa-a822-34e4d9a4477f
+langcode: en
+status: true
+dependencies: {  }
+id: swim_test
+label: 'Swim test'
+traits: {  }
+locked: false
+description: 'Swim test sessions and adult swim attestations.'
+variationTypes:
+  - swim_test_attestation
+  - swim_test_slot
+multipleVariations: true
+injectVariationFields: false

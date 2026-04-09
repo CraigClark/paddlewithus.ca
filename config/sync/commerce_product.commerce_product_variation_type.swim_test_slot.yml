@@ -1,0 +1,10 @@
+uuid: bd17fc9c-266f-4113-a5a8-86725a69cee9
+langcode: en
+status: true
+dependencies: {  }
+id: swim_test_slot
+label: 'Swim test slot'
+traits: {  }
+locked: false
+orderItemType: swim_test_registration
+generateTitle: false

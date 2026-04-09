@@ -45,9 +45,26 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_swim_test_passed_date:
+  field_swim_attestation:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_swim_attestation_by:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_swim_attestation_date:
     type: datetime_default
-    weight: 1
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -61,35 +78,18 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_swim_attestation:
-    type: boolean_checkbox
-    weight: 3
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_swim_attestation_date:
-    type: datetime_default
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_swim_attestation_by:
-    type: entity_reference_autocomplete
-    weight: 5
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_swim_test_exempt:
     type: boolean_checkbox
     weight: 6
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_swim_test_passed_date:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_additional_info: true

@@ -1,0 +1,19 @@
+uuid: a35cc108-b6f0-4196-8e71-7525ff0bf1b9
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_order
+    - text
+id: commerce_order_item.field_swim_test_excuse_reason
+field_name: field_swim_test_excuse_reason
+entity_type: commerce_order_item
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

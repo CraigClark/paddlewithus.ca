@@ -1,0 +1,10 @@
+uuid: af851760-1fb9-42e8-9286-2b8fe3863143
+langcode: en
+status: true
+dependencies: {  }
+id: swim_test_registration
+label: 'Swim test registration'
+traits: {  }
+locked: false
+purchasableEntityType: commerce_product_variation
+orderType: default

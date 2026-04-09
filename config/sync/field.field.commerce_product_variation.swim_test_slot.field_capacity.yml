@@ -1,0 +1,21 @@
+uuid: c05ef9a1-8cbb-449a-9d31-44d3f62d310b
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.swim_test_slot
+    - field.storage.commerce_product_variation.field_capacity
+  module:
+    - commerce_stock_field
+id: commerce_product_variation.swim_test_slot.field_capacity
+field_name: field_capacity
+entity_type: commerce_product_variation
+bundle: swim_test_slot
+label: Capacity
+description: "Number of spots available for this swim test slot. Enter the number to add or remove, not the total.\r\nExample: from 5 to 8 → enter 3."
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: commerce_stock_level

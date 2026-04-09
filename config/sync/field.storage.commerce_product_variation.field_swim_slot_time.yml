@@ -1,0 +1,20 @@
+uuid: 9befdf76-e49a-4361-9578-bd126ab4647d
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - datetime_range
+id: commerce_product_variation.field_swim_slot_time
+field_name: field_swim_slot_time
+entity_type: commerce_product_variation
+type: daterange
+settings:
+  datetime_type: datetime
+module: datetime_range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
