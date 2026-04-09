@@ -8,11 +8,12 @@
 User-agent: *
 Crawl-delay: 10
 
+# Sitemap
+Sitemap: https://petriecanoe.ca/sitemap.xml
+
 # Directories
 Disallow: /core/
 Disallow: /profiles/
-Disallow: /modules/
-Disallow: /themes/
 Disallow: /vendor/
 
 # Files

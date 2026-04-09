@@ -100,7 +100,9 @@ module:
   menu_link_content: 0
   menu_ui: 0
   metatag: 0
+  metatag_hreflang: 0
   metatag_open_graph: 0
+  metatag_verification: 0
   metatag_views: 0
   mysql: 0
   name: 0
@@ -135,6 +137,9 @@ module:
   settings_tray: 0
   shield: 0
   shortcut: 0
+  simple_sitemap: 0
+  simple_sitemap_engines: 0
+  simple_sitemap_views: 0
   state_machine: 0
   symfony_mailer: 0
   system: 0

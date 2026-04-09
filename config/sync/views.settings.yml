@@ -1,8 +1,9 @@
 _core:
   default_config_hash: 8oDr9oPVb_ostrNnVV6V7VdphwoH_u-NqTS0u7SE7qc
 display_extenders:
-  - ui_styles
-  - metatag_display_extender
+  0: ui_styles
+  1: metatag_display_extender
+  simple_sitemap_display_extender: simple_sitemap_display_extender
 sql_signature: false
 ui:
   show:
