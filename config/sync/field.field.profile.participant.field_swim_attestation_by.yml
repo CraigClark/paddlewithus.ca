@@ -1,0 +1,31 @@
+uuid: 8ae353d3-ab5c-4b65-8d71-90116b7d45d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_swim_attestation_by
+    - profile.type.participant
+  module:
+    - user
+id: profile.participant.field_swim_attestation_by
+field_name: field_swim_attestation_by
+entity_type: profile
+bundle: participant
+label: 'Swim attestation by'
+description: 'The user who submitted the swim attestation for this participant.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

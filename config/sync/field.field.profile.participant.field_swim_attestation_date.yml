@@ -1,0 +1,21 @@
+uuid: a237d569-523d-4407-8897-df3b5e2e3915
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_swim_attestation_date
+    - profile.type.participant
+  module:
+    - datetime
+id: profile.participant.field_swim_attestation_date
+field_name: field_swim_attestation_date
+entity_type: profile
+bundle: participant
+label: 'Swim attestation date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

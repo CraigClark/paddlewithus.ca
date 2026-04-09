@@ -1,0 +1,31 @@
+uuid: e855ec35-743f-4280-85bf-b337997ce2ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_swim_test_evaluated_by
+    - profile.type.participant
+  module:
+    - user
+id: profile.participant.field_swim_test_evaluated_by
+field_name: field_swim_test_evaluated_by
+entity_type: profile
+bundle: participant
+label: 'Swim test evaluated by'
+description: 'The coach who marked this participant as having passed the swim test.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

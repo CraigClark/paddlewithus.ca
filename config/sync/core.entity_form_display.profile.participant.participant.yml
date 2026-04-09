@@ -24,6 +24,11 @@ dependencies:
     - field.field.profile.participant.field_passed_swim_test
     - field.field.profile.participant.field_photo_consent
     - field.field.profile.participant.field_shirt_size
+    - field.field.profile.participant.field_swim_attestation
+    - field.field.profile.participant.field_swim_attestation_by
+    - field.field.profile.participant.field_swim_attestation_date
+    - field.field.profile.participant.field_swim_test_evaluated_by
+    - field.field.profile.participant.field_swim_test_exempt
     - field.field.profile.participant.field_swim_test_passed_date
     - profile.type.participant
   module:
@@ -166,6 +171,11 @@ hidden:
   field_owner: true
   field_passed_swim_test: true
   field_shirt_size: true
+  field_swim_attestation: true
+  field_swim_attestation_by: true
+  field_swim_attestation_date: true
+  field_swim_test_evaluated_by: true
+  field_swim_test_exempt: true
   field_swim_test_passed_date: true
   is_default: true
   revision_log_message: true
