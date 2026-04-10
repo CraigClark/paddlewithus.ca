@@ -1,0 +1,21 @@
+langcode: en
+status: true
+id: commerce_product
+label: 'Commerce Product'
+tags:
+  title: '[commerce_product:title] | [site:name]'
+  description: '[commerce_product:body:summary]'
+  canonical_url: '[commerce_product:url]'
+  og_title: '[commerce_product:title]'
+  og_description: '[commerce_product:body:summary]'
+  og_type: product
+  og_url: '[commerce_product:url]'
+  og_image: '[commerce_product:field_primary_image:entity:field_media_image:social_share:url]'
+  og_image_url: '[commerce_product:field_primary_image:entity:field_media_image:social_share:url]'
+  og_image_secure_url: '[commerce_product:field_primary_image:entity:field_media_image:social_share:url]'
+  og_image_width: '1200'
+  og_image_height: '630'
+  twitter_cards_type: summary_large_image
+  twitter_cards_title: '[commerce_product:title]'
+  twitter_cards_description: '[commerce_product:body:summary]'
+  twitter_cards_image: '[commerce_product:field_primary_image:entity:field_media_image:social_share:url]'

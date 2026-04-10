@@ -1,28 +1,34 @@
 display:
   default:
-    display_title: Principal
     display_options:
-      exposed_form:
-        options:
-          submit_button: Appliquer
-          reset_button_label: Réinitialiser
-          exposed_sorts_label: 'Trier par'
-      fields:
-        purchased_entity:
-          label: Élément
-        unit_price__number:
-          label: Prix
-        edit_quantity:
-          label: Quantité
-        remove_button:
-          label: Retirer
-        total_price__number: {  }
-      arguments:
-        order_id:
-          exception:
-            title: Tout
       header:
         area:
           content:
             value: '<div class="alert alert-error border-2 mb-3 md:border-4 border-slate-950 bg-transparent" data-component-id="daisyui_ext:alert" role="alert"><div class="text-base"><strong>L’inscription sera conservée dans votre panier pendant 24 heures.</strong></div></div>'
             format: full_html
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      fields:
+        purchased_entity:
+          label: Élément
+          separator: ', '
+        unit_price__number:
+          label: Prix
+          separator: ', '
+        edit_quantity:
+          label: Quantité
+        remove_button:
+          label: Retirer
+        total_price__number:
+          label: Total
+          separator: ', '
+      arguments:
+        order_id:
+          exception:
+            title: Tout
+    display_title: Principal

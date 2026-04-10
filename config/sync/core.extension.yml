@@ -102,6 +102,7 @@ module:
   metatag: 0
   metatag_hreflang: 0
   metatag_open_graph: 0
+  metatag_twitter_cards: 0
   metatag_verification: 0
   metatag_views: 0
   mysql: 0
