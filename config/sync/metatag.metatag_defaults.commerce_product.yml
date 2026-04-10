@@ -1,5 +1,7 @@
+uuid: b3a17d09-dafd-421b-943b-cba85df8fe27
 langcode: en
 status: true
+dependencies: {  }
 id: commerce_product
 label: 'Commerce Product'
 tags:
