@@ -96,6 +96,7 @@
     "drupal/smart_trim": "^2.2",
     "drupal/symfony_mailer": "^2.0@beta",
     "drupal/taxonomy_manager": "^2.0",
+    "drupal/time_range": "^9.0",
     "drupal/token_filter": "^2.2",
     "drupal/trash": "^3.0",
     "drupal/twig_tweak": "^3.4",

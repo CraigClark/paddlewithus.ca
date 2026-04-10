@@ -1,0 +1,21 @@
+uuid: 56591656-1b81-49d8-9d95-0bea885d360e
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.swim_test_slot
+    - field.storage.commerce_product_variation.field_date_range
+  module:
+    - datetime_range
+id: commerce_product_variation.swim_test_slot.field_date_range
+field_name: field_date_range
+entity_type: commerce_product_variation
+bundle: swim_test_slot
+label: Date
+description: 'The date of this swim test slot. For a single-day test, enter the same date for both start and end.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

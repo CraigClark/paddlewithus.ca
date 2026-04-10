@@ -148,6 +148,7 @@ module:
   taxonomy_manager: 0
   telephone: 0
   text: 0
+  time_range: 0
   token: 0
   token_filter: 0
   toolbar: 0
