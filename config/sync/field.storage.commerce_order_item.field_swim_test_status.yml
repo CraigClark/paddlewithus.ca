@@ -26,9 +26,6 @@ settings:
     -
       value: excused
       label: Excused
-    -
-      value: attested
-      label: Attested
   allowed_values_function: ''
 module: options
 locked: false

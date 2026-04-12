@@ -20,14 +20,12 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_3_rel
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
-    - field.field.profile.participant.field_passed_swim_test
     - field.field.profile.participant.field_photo_consent
     - field.field.profile.participant.field_shirt_size
-    - field.field.profile.participant.field_swim_attestation
     - field.field.profile.participant.field_swim_attestation_by
     - field.field.profile.participant.field_swim_attestation_date
+    - field.field.profile.participant.field_swim_status
     - field.field.profile.participant.field_swim_test_evaluated_by
-    - field.field.profile.participant.field_swim_test_exempt
     - field.field.profile.participant.field_swim_test_passed_date
     - profile.type.participant
   module:
@@ -182,13 +180,6 @@ content:
         credentials: description
       field_title_display: none
     third_party_settings: {  }
-  field_passed_swim_test:
-    type: boolean_checkbox
-    weight: 18
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_photo_consent:
     type: options_buttons
     weight: 2
@@ -200,13 +191,6 @@ content:
     weight: 3
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_swim_attestation:
-    type: boolean_checkbox
-    weight: 21
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   field_swim_attestation_by:
     type: entity_reference_autocomplete
@@ -224,6 +208,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_swim_status:
+    type: options_select
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_swim_test_evaluated_by:
     type: entity_reference_autocomplete
     weight: 20
@@ -233,13 +223,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_swim_test_exempt:
-    type: boolean_checkbox
-    weight: 24
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   field_swim_test_passed_date:
     type: datetime_default

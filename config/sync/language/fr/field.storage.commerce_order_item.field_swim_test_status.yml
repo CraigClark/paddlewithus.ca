@@ -1,0 +1,12 @@
+settings:
+  allowed_values:
+    -
+      label: 'En attente'
+    -
+      label: Réussi
+    -
+      label: Échoué
+    -
+      label: Absent
+    -
+      label: Excusé

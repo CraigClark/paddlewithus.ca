@@ -6,10 +6,9 @@ id: activity
 label: Activity
 traits: {  }
 locked: false
-description: 'Camps, competitive training, swim tests and attestations'
+description: 'Camps, competitive training and swim tests'
 variationTypes:
   - activity
-  - swim_test_attestation
   - swim_test_slot
 multipleVariations: true
 injectVariationFields: false

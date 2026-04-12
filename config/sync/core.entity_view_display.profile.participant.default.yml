@@ -20,9 +20,11 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_3_rel
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
-    - field.field.profile.participant.field_passed_swim_test
     - field.field.profile.participant.field_photo_consent
     - field.field.profile.participant.field_shirt_size
+    - field.field.profile.participant.field_swim_attestation_by
+    - field.field.profile.participant.field_swim_attestation_date
+    - field.field.profile.participant.field_swim_test_evaluated_by
     - field.field.profile.participant.field_swim_test_passed_date
     - profile.type.participant
   module:
@@ -328,24 +330,6 @@ content:
     third_party_settings: {  }
     weight: 9
     region: content
-  field_passed_swim_test:
-    type: boolean
-    label: hidden
-    settings:
-      format: custom
-      format_custom_false: 'Has not passed swim test'
-      format_custom_true: 'Passed swim test'
-    third_party_settings:
-      field_label:
-        label_class: ''
-        label_value: ''
-        label_tag: ''
-      nomarkup:
-        enabled: false
-        separator: '|'
-        referenced_entity: ''
-    weight: 2
-    region: content
   field_photo_consent:
     type: boolean
     label: hidden
@@ -391,4 +375,7 @@ content:
 hidden:
   field_name: true
   field_owner: true
+  field_swim_attestation_by: true
+  field_swim_attestation_date: true
+  field_swim_test_evaluated_by: true
   search_api_excerpt: true

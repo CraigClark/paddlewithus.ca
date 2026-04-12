@@ -1,6 +1,6 @@
 uuid: 30b9ce8b-65ce-45c9-b004-7fc10a4728dd
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - commerce_order.commerce_order_item_type.activity_registration
@@ -22,7 +22,6 @@ dependencies:
     - field.storage.profile.field_emercency_contact_3_pickup
     - field.storage.profile.field_emercency_contact_3_rel
     - field.storage.profile.field_name
-    - field.storage.profile.field_passed_swim_test
     - field.storage.profile.field_photo_consent
     - field.storage.profile.field_shirt_size
     - field.storage.profile.field_swim_test_passed_date
@@ -1226,71 +1225,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_passed_swim_test:
-          id: field_passed_swim_test
-          table: profile__field_passed_swim_test
-          field: field_passed_swim_test
-          relationship: field_participant
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'Passed swim test'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: boolean
-          settings:
-            format: yes-no
-            format_custom_false: ''
-            format_custom_true: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         field_swim_test_passed_date:
           id: field_swim_test_passed_date
           table: profile__field_swim_test_passed_date
@@ -2464,7 +2398,6 @@ display:
         - 'config:field.storage.profile.field_emercency_contact_3_phone'
         - 'config:field.storage.profile.field_emercency_contact_3_pickup'
         - 'config:field.storage.profile.field_emercency_contact_3_rel'
-        - 'config:field.storage.profile.field_passed_swim_test'
         - 'config:field.storage.profile.field_photo_consent'
         - 'config:field.storage.profile.field_shirt_size'
         - 'config:field.storage.profile.field_swim_test_passed_date'

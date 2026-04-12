@@ -1,0 +1,2 @@
+label: Capacité
+description: "Nombre de places disponibles pour cette plage horaire. Saisissez le nombre à ajouter ou à retirer, et non le total.\r\nExemple : de 5 à 8 → saisissez 3."

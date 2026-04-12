@@ -1,0 +1,23 @@
+uuid: d7356f37-72c1-4776-a75e-571f141cf249
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_swim_status
+    - profile.type.participant
+  module:
+    - options
+id: profile.participant.field_swim_status
+field_name: field_swim_status
+entity_type: profile
+bundle: participant
+label: 'Swim status'
+description: 'Current swim clearance status for the season. Reset annually.'
+required: false
+translatable: false
+default_value:
+  -
+    value: none
+default_value_callback: ''
+settings: {  }
+field_type: list_string
