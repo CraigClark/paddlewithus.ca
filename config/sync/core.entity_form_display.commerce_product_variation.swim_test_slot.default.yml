@@ -7,7 +7,7 @@ dependencies:
     - field.field.commerce_product_variation.swim_test_slot.field_capacity
     - field.field.commerce_product_variation.swim_test_slot.field_date_range
     - field.field.commerce_product_variation.swim_test_slot.field_desc
-    - field.field.commerce_product_variation.swim_test_slot.field_swim_slot_time
+    - field.field.commerce_product_variation.swim_test_slot.field_time_range
   module:
     - commerce_price
     - commerce_stock_field
@@ -41,11 +41,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_swim_slot_time:
+  field_time_range:
     type: time_range
     weight: 4
     region: content
-    settings: {  }
+    settings:
+      start_label: 'Start time'
+      end_label: 'End time'
     third_party_settings: {  }
   price:
     type: commerce_price_default

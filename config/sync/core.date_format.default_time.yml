@@ -1,0 +1,8 @@
+uuid: 0f631109-f62b-44c0-b2e5-8048963a80ea
+langcode: en
+status: true
+dependencies: {  }
+id: default_time
+label: 'Default time'
+locked: false
+pattern: 'g:ia'

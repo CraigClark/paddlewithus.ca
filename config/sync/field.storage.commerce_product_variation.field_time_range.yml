@@ -1,12 +1,12 @@
-uuid: 9befdf76-e49a-4361-9578-bd126ab4647d
+uuid: 825500d5-95ba-46d5-a2d5-32a79a706e40
 langcode: en
 status: true
 dependencies:
   module:
     - commerce_product
     - datetime_range
-id: commerce_product_variation.field_swim_slot_time
-field_name: field_swim_slot_time
+id: commerce_product_variation.field_time_range
+field_name: field_time_range
 entity_type: commerce_product_variation
 type: daterange
 settings:

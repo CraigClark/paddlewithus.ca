@@ -5,12 +5,15 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.swim_test_slot
     - field.field.commerce_product_variation.swim_test_slot.field_capacity
+    - field.field.commerce_product_variation.swim_test_slot.field_date_range
     - field.field.commerce_product_variation.swim_test_slot.field_desc
-    - field.field.commerce_product_variation.swim_test_slot.field_swim_slot_time
+    - field.field.commerce_product_variation.swim_test_slot.field_time_range
   module:
     - commerce_price
     - commerce_stock_field
     - datetime_range
+    - field_label
+    - nomarkup
 id: commerce_product_variation.swim_test_slot.default
 targetEntityType: commerce_product_variation
 bundle: swim_test_slot
@@ -31,15 +34,23 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_swim_slot_time:
+  field_time_range:
     type: daterange_default
     label: hidden
     settings:
       timezone_override: ''
-      format_type: medium
+      format_type: default_time
       from_to: both
-      separator: ' to '
-    third_party_settings: {  }
+      separator: ' - '
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
     weight: 0
     region: content
   price:
@@ -53,6 +64,7 @@ content:
     region: content
 hidden:
   commerce_variation_cart_form: true
+  field_date_range: true
   langcode: true
   list_price: true
   product_id: true
