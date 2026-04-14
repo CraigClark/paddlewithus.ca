@@ -17,13 +17,13 @@ settings:
   allowed_values:
     -
       value: none
-      label: 'Not cleared'
+      label: 'Swim test required'
     -
       value: passed
-      label: 'Passed swim test'
+      label: 'Swim test passed'
     -
       value: attested
-      label: 'Swim attestation on file'
+      label: 'Attestation on file'
     -
       value: exempt
       label: Exempt

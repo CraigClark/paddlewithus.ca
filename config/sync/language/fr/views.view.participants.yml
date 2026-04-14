@@ -4,7 +4,6 @@ display:
     display_title: 'Par défaut'
     display_options:
       fields:
-        field_name: {  }
         field_photo_consent:
           settings:
             format_custom_false: 'pas de photos'
@@ -14,7 +13,6 @@ display:
             text: 'taille de t-shirt : {{ field_shirt_size }}'
       pager:
         options:
-          tags: {  }
           expose:
             items_per_page_label: 'Éléments par page'
             items_per_page_options_all_label: '- Tous -'

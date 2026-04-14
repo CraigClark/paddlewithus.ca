@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for picc_registration.
+ */
+
+/**
+ * Backfill field_swim_status on existing participant profiles.
+ *
+ * Sets the default value 'none' (Swim test required) on all participant
+ * profiles that don't have a swim status set yet.
+ */
+function picc_registration_update_10001() {
+  $storage = \Drupal::entityTypeManager()->getStorage('profile');
+  $ids = $storage->getQuery()
+    ->condition('type', 'participant')
+    ->condition('status', 1)
+    ->accessCheck(FALSE)
+    ->execute();
+
+  $count = 0;
+  foreach ($storage->loadMultiple($ids) as $profile) {
+    $current = $profile->get('field_swim_status')->value;
+    if (empty($current)) {
+      $profile->set('field_swim_status', 'none');
+      $profile->save();
+      $count++;
+    }
+  }
+
+  return "Backfilled $count participant profiles with swim status 'none'.";
+}

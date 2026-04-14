@@ -75,6 +75,14 @@ function picc_registration_commerce_order_item_view_alter(array &$build, EntityI
  * Pre-populates billing address on checkout from user's profile address.
  */
 function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Swim test registration: disable checkboxes for passed/exempt participants.
+  if ($form_id === 'webform_submission_swim_test_registration_add_form') {
+    if (isset($form['elements']['participants'])) {
+      $form['elements']['participants']['#after_build'][] = '_picc_registration_disable_cleared_participants';
+    }
+    return;
+  }
+
   // Only act on commerce checkout forms
   if (strpos($form_id, 'commerce_checkout_flow_') !== 0) {
     return;
@@ -223,6 +231,66 @@ function picc_registration_commerce_product_presave(EntityInterface $product) {
         '@title' => $product->label(),
       ]);
     }
+  }
+}
+
+/**
+ * After-build callback: disables checkboxes for passed/exempt participants.
+ */
+function _picc_registration_disable_cleared_participants($element, FormStateInterface $form_state) {
+  $cleared_statuses = ['passed', 'exempt'];
+
+  foreach (\Drupal\Core\Render\Element::children($element) as $key) {
+    $profile = \Drupal\profile\Entity\Profile::load($key);
+    if (!$profile || !$profile->hasField('field_swim_status')) {
+      continue;
+    }
+
+    $swim_status = $profile->get('field_swim_status')->value ?? 'none';
+    if (in_array($swim_status, $cleared_statuses)) {
+      $element[$key]['#attributes']['disabled'] = 'disabled';
+      $element[$key]['#attributes']['class'][] = 'opacity-50';
+      $element[$key]['#wrapper_attributes']['class'][] = 'opacity-50';
+    }
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_preprocess_views_view_fields().
+ *
+ * Injects the variation bundle (machine name) into the template as
+ * $variables['variation_bundle'] for the variant_session view.
+ */
+function picc_registration_preprocess_views_view_fields(&$variables) {
+  $view = $variables['view'];
+  if ($view->id() !== 'variant_session') {
+    return;
+  }
+
+  $row = $variables['row'];
+  if (!empty($row->_entity) && $row->_entity->getEntityTypeId() === 'commerce_product_variation') {
+    $variables['variation_bundle'] = $row->_entity->bundle();
+  }
+  else {
+    $variables['variation_bundle'] = '';
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * Adds a dynamic birth-date filter to the er_swim_participants display
+ * so only participants under 15 (as of Dec 31 of the current year) appear.
+ */
+function picc_registration_views_query_alter($view, $query) {
+  if ($view->id() === 'participants' && $view->current_display === 'er_swim_participants') {
+    $current_year = (int) date('Y');
+    $cutoff_date = ($current_year - 15) . '-12-31';
+
+    // Add condition: birth_date > cutoff (i.e., born after Dec 31 of year-15).
+    $query->addWhere(0, 'profile__field_birth_date.field_birth_date_value', $cutoff_date, '>');
   }
 }
 

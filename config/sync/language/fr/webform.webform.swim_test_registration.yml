@@ -1,0 +1,19 @@
+title: 'Inscription au test de natation'
+elements: |
+  product_id:
+    '#title': 'ID du produit'
+  variation_id:
+    '#title': 'ID de la variation'
+  participants:
+    '#title': '<h2>Sélectionner les participants</h2>'
+  manage_participants:
+    '#markup': '<p><a class="btn btn-sm mb-3" href="/fr/user/[current-user:uid]/participant/list">✏️ Modifiez votre liste de membres de la famille.</a></p>'
+  actions:
+    '#title': "Bouton(s) d'envoi"
+    '#submit__label': "S'inscrire"
+settings:
+  form_close_message: "<p>L'inscription au test de natation n'est pas ouverte pour le moment.</p>"
+  form_access_denied_message: '<p>Connectez-vous ou créez un compte pour vous inscrire au test de natation.</p>'
+handlers:
+  picc_swim_test_registration_handler:
+    label: "Gestionnaire d'inscription au test de natation CICIP"

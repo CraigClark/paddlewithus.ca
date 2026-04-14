@@ -1,10 +1,10 @@
 settings:
   allowed_values:
     -
-      label: 'Non autorisé'
+      label: 'Test de natation requis'
     -
       label: 'Test de natation réussi'
     -
-      label: 'Attestation de natation au dossier'
+      label: 'Attestation au dossier'
     -
       label: Exempté
