@@ -1,0 +1,28 @@
+uuid: bb148017-300e-4d85-9f70-7a60fc394e4b
+langcode: en
+status: true
+dependencies: {  }
+id: swim_test_receipt
+label: 'Swim test confirmation to parent'
+from: '[site:mail]'
+toType: email
+to: '[commerce_order:uid:entity:mail]'
+toRole: ''
+cc: ''
+bcc: ''
+replyTo: ''
+subject: '[site:name] - Swim test registration confirmation'
+body:
+  value: '<table class="table" style="color:#333333;font-family:Arial, sans-serif;margin-bottom:0;margin-top:0;max-width:600px;width:100%px;" cellpadding="0" cellspacing="0"><tbody><tr><td style="background-color:#0066cc;padding:20px;text-align:center;"><h1 style="color:#ffffff;font-size:24px;margin:0;">Swim Test Registration</h1></td></tr><tr><td style="background-color:#ffffff;padding:20px;"><p style="font-size:16px;margin:0 0 15px;">Hi [commerce_order:uid:entity:display-name],</p><p style="font-size:14px;margin:0 0 15px;">Your swim test registration has been confirmed. Please see the details below.</p></td></tr><tr><td style="background-color:#ffffff;padding:0 20px 20px;"><h2 style="color:#0066cc;font-size:18px;margin:0 0 15px;">Registered Participants:</h2><div style="background-color:#fafafa;border:1px solid #dddddd;padding:15px;">[commerce_order:order_items_formatted]</div></td></tr><tr><td style="background-color:#ffffff;padding:0 20px 20px;"><table class="table" style="background-color:#fff8e1;border:1px solid #ffe082;width:100%px;" cellpadding="0" cellspacing="0"><tbody><tr><td style="padding:15px;"><p style="font-size:14px;margin:0 0 10px;"><strong>Important:</strong></p><ul style="font-size:14px;margin:0;padding-left:20px;"><li style="margin-bottom:8px;">Please arrive on time for your scheduled swim test.</li><li style="margin-bottom:8px;">If you are unable to attend, please contact us as soon as possible at <a href="mailto:petriecanoe@gmail.com">petriecanoe@gmail.com</a> to cancel your registration.</li><li style="margin-bottom:0;">A fee of $20 per participant will apply for the next swim test booking if a registered participant does not attend.</li></ul></td></tr></tbody></table></td></tr><tr><td style="background-color:#ffffff;border-top:1px solid #dddddd;padding:20px;"><p style="font-size:14px;margin:0 0 10px;">If you have any questions, please contact us.</p><p style="color:#666666;font-size:14px;margin:0;"><strong>Petrie Island Canoe Club</strong><br>Email: <a href="mailto:petriecanoe@gmail.com">petriecanoe@gmail.com</a></p></td></tr><tr><td style="background-color:#f5f5f5;color:#999999;font-size:12px;padding:20px;text-align:center;"><p style="margin:0;">This is an automated message. Please do not reply to this email.</p></td></tr></tbody></table>'
+  format: full_html
+conditions:
+  -
+    plugin: order_variation_type
+    configuration:
+      variation_types:
+        - swim_test_slot
+conditionOperator: AND
+queue: false
+logToEntity: null
+event: order_placed
+targetEntityType: commerce_order

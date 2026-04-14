@@ -17,9 +17,9 @@ body:
   format: full_html
 conditions:
   -
-    plugin: order_product_type
+    plugin: order_variation_type
     configuration:
-      product_types:
+      variation_types:
         - activity
 conditionOperator: AND
 queue: false

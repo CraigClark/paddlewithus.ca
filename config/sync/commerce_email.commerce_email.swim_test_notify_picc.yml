@@ -1,0 +1,28 @@
+uuid: da2dfcf8-74df-4cbb-8526-865e80220818
+langcode: en
+status: true
+dependencies: {  }
+id: swim_test_notify_picc
+label: 'Notify PICC of swim test registration'
+from: '[site:mail]'
+toType: email
+to: petriecanoe@gmail.com
+toRole: ''
+cc: ''
+bcc: ''
+replyTo: ''
+subject: 'Swim test registration - [commerce_order:uid:entity:display-name]'
+body:
+  value: '<table class="table" style="color:#333333;font-family:Arial, sans-serif;margin-bottom:0;margin-top:0;max-width:600px;width:100%px;" cellpadding="0" cellspacing="0"><tbody><tr><td style="background-color:#0066cc;padding:20px;text-align:center;"><h1 style="color:#ffffff;font-size:24px;margin:0;">Swim Test Registration</h1></td></tr><tr><td style="background-color:#ffffff;padding:20px;"><p style="font-size:16px;margin:0 0 15px;">Registration by: [commerce_order:uid:entity:display-name]<br>Contact: [commerce_order:uid:entity:mail]</p></td></tr><tr><td style="background-color:#ffffff;padding:0 20px 20px;"><table class="table" style="background-color:#f5f5f5;border-color:#dddddd;border-style:solid;width:100%px;" cellpadding="0" cellspacing="0"><tbody><tr><td style="padding:15px;"><table class="table" style="width:100%px;" cellpadding="5" cellspacing="0"><tbody><tr><td style="font-size:14px;"><strong>Order Number:</strong></td><td style="font-size:14px;text-align:right;">[commerce_order:order_number]</td></tr><tr><td style="font-size:14px;"><strong>Date:</strong></td><td style="font-size:14px;text-align:right;">[commerce_order:completed]</td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td style="background-color:#ffffff;padding:0 20px 20px;"><h2 style="color:#0066cc;font-size:18px;margin:0 0 15px;">Participants:</h2><div style="background-color:#fafafa;border:1px solid #dddddd;padding:15px;">[commerce_order:order_items_formatted]</div></td></tr><tr><td style="background-color:#f5f5f5;color:#999999;font-size:12px;padding:20px;text-align:center;"><p style="margin:0;">This is an automated message.</p></td></tr></tbody></table>'
+  format: full_html
+conditions:
+  -
+    plugin: order_variation_type
+    configuration:
+      variation_types:
+        - swim_test_slot
+conditionOperator: AND
+queue: false
+logToEntity: null
+event: order_placed
+targetEntityType: commerce_order

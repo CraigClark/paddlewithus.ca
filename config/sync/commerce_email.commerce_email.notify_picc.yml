@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: notify_picc
-label: 'Notify PICC or order'
+label: 'Notify PICC of activity order'
 from: '[site:mail]'
 toType: email
 to: petriecanoe@gmail.com
@@ -17,9 +17,9 @@ body:
   format: full_html
 conditions:
   -
-    plugin: order_product_type
+    plugin: order_variation_type
     configuration:
-      product_types:
+      variation_types:
         - activity
 conditionOperator: AND
 queue: false
