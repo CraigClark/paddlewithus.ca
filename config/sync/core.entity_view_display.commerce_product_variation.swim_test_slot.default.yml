@@ -5,12 +5,13 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.swim_test_slot
     - field.field.commerce_product_variation.swim_test_slot.field_capacity
-    - field.field.commerce_product_variation.swim_test_slot.field_date_range
+    - field.field.commerce_product_variation.swim_test_slot.field_date
     - field.field.commerce_product_variation.swim_test_slot.field_desc
     - field.field.commerce_product_variation.swim_test_slot.field_time_range
   module:
     - commerce_price
     - commerce_stock_field
+    - datetime
     - datetime_range
     - field_label
     - nomarkup
@@ -24,7 +25,24 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  field_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: month_day_year
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 0
     region: content
   field_desc:
     type: string
@@ -32,7 +50,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_time_range:
     type: daterange_default
@@ -51,7 +69,7 @@ content:
         enabled: false
         separator: '|'
         referenced_entity: ''
-    weight: 0
+    weight: 1
     region: content
   price:
     type: commerce_price_default
@@ -60,11 +78,10 @@ content:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
 hidden:
   commerce_variation_cart_form: true
-  field_date_range: true
   langcode: true
   list_price: true
   product_id: true

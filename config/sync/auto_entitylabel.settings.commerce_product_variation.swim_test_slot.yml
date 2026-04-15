@@ -1,5 +1,5 @@
 status: 1
-pattern: '[commerce_product_variation:product_id:entity:title] [commerce_product_variation:field_desc], [commerce_product_variation:field_date_range:start_date:custom:F j] - [commerce_product_variation:field_date_range:end_date:custom:F j, Y]'
+pattern: '[commerce_product_variation:product_id:entity:title] [commerce_product_variation:field_desc], [commerce_product_variation:field_date:date:month_day_year] [commerce_product_variation:field_time_range:start_date:default_time] - [commerce_product_variation:field_time_range:end_date:default_time]'
 escape: false
 preserve_titles: false
 save: false

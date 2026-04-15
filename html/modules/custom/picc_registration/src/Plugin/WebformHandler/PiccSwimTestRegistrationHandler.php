@@ -119,19 +119,19 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
    * @throws \Exception
    */
   protected function validateSessionDate($variation) {
-    if (!$variation->hasField('field_date_range')) {
+    if (!$variation->hasField('field_date')) {
       return;
     }
 
-    $date_range = $variation->get('field_date_range')->first();
-    if (!$date_range) {
+    $date_value = $variation->get('field_date')->value;
+    if (!$date_value) {
       return;
     }
 
-    $end_date = new \DateTime($date_range->end_value);
-    $now = new \DateTime('now');
+    $slot_date = new \DateTime($date_value);
+    $today = new \DateTime('today');
 
-    if ($end_date < $now) {
+    if ($slot_date < $today) {
       throw new \Exception($this->t('This swim test slot has already passed. Please select a different slot.'));
     }
   }
@@ -430,8 +430,8 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
       }
     }
 
-    $date_range = $variation->get('field_date_range')->first();
-    $date_str = $date_range ? (new \DateTime($date_range->value))->format('F j, Y') : '';
+    $date_value = $variation->get('field_date')->value;
+    $date_str = $date_value ? (new \DateTime($date_value))->format('F j, Y') : '';
 
     \Drupal::messenger()->addStatus($this->t('Registered @names for the swim test on @date.', [
       '@names' => implode(', ', array_filter($registered_names)),
@@ -472,22 +472,22 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
 
       // Check if this registration's slot is in the future.
       $variation = $order_item->getPurchasedEntity();
-      if (!$variation || !$variation->hasField('field_date_range')) {
+      if (!$variation || !$variation->hasField('field_date')) {
         continue;
       }
 
-      $date_range = $variation->get('field_date_range')->first();
-      if (!$date_range) {
+      $date_value = $variation->get('field_date')->value;
+      if (!$date_value) {
         continue;
       }
 
       // Only block if the slot is strictly in the future (after today).
       // Today's registrations don't block — allows re-booking after a same-day fail.
-      $slot_date = new \DateTime($date_range->value);
+      $slot_date = new \DateTime($date_value);
       $today = new \DateTime('today');
       if ($slot_date > $today) {
         // Build a human-readable description of the existing registration.
-        $date_str = (new \DateTime($date_range->value))->format('F j, Y');
+        $date_str = (new \DateTime($date_value))->format('F j, Y');
         $time_str = '';
         if ($variation->hasField('field_time_range') && !$variation->get('field_time_range')->isEmpty()) {
           $time_value = $variation->get('field_time_range')->value;

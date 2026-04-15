@@ -5,13 +5,13 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.swim_test_slot
     - field.field.commerce_product_variation.swim_test_slot.field_capacity
-    - field.field.commerce_product_variation.swim_test_slot.field_date_range
+    - field.field.commerce_product_variation.swim_test_slot.field_date
     - field.field.commerce_product_variation.swim_test_slot.field_desc
     - field.field.commerce_product_variation.swim_test_slot.field_time_range
   module:
     - commerce_price
     - commerce_stock_field
-    - datetime_range
+    - datetime
     - time_range
 id: commerce_product_variation.swim_test_slot.default
 targetEntityType: commerce_product_variation
@@ -27,8 +27,8 @@ content:
       custom_transaction_note: true
       default_transaction_note: ''
     third_party_settings: {  }
-  field_date_range:
-    type: daterange_default
+  field_date:
+    type: datetime_default
     weight: 3
     region: content
     settings: {  }

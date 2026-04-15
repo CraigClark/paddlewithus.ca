@@ -162,10 +162,14 @@
   or dis_5_up > 0
 %}
 
-{% set date_range = fields.field_date_range is defined
-  ? fields.field_date_range.content
-  : ''
-%}
+{# Use field_date for swim test slots, field_date_range for activities #}
+{% if vtype == 'swim_test_slot' and fields.field_date is defined %}
+  {% set date_range = fields.field_date.content %}
+{% elseif fields.field_date_range is defined %}
+  {% set date_range = fields.field_date_range.content %}
+{% else %}
+  {% set date_range = '' %}
+{% endif %}
 {% set capacity = fields.field_capacity is defined
   ? fields.field_capacity.content
   : ''
