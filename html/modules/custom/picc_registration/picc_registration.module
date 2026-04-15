@@ -14,6 +14,65 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\Markup;
 
 /**
+ * Implements hook_cron().
+ *
+ * Resets swim test fields on all participant profiles at the start of each
+ * new year. Uses a state variable to ensure it runs exactly once per year
+ * and self-heals if the site was offline on Jan 1.
+ */
+function picc_registration_cron() {
+  $current_year = (int) date('Y');
+  $state = \Drupal::state();
+  $last_reset_year = (int) $state->get('picc_registration.last_swim_reset_year', 0);
+
+  if ($last_reset_year >= $current_year) {
+    return;
+  }
+
+  \Drupal::logger('picc_registration')->notice('Starting annual swim status reset for @year (last reset: @last)', [
+    '@year' => $current_year,
+    '@last' => $last_reset_year ?: 'never',
+  ]);
+
+  $storage = \Drupal::entityTypeManager()->getStorage('profile');
+  $ids = $storage->getQuery()
+    ->condition('type', 'participant')
+    ->condition('status', 1)
+    ->accessCheck(FALSE)
+    ->execute();
+
+  $count = 0;
+  foreach ($storage->loadMultiple($ids) as $profile) {
+    $swim_status = $profile->get('field_swim_status')->value ?? 'none';
+
+    // Only update profiles that have swim data set.
+    if ($swim_status === 'none'
+      && empty($profile->get('field_swim_test_passed_date')->value)
+      && empty($profile->get('field_swim_attestation_date')->value)
+      && empty($profile->get('field_swim_test_evaluated_by')->target_id)
+      && empty($profile->get('field_swim_attestation_by')->target_id)
+    ) {
+      continue;
+    }
+
+    $profile->set('field_swim_status', 'none');
+    $profile->set('field_swim_test_passed_date', NULL);
+    $profile->set('field_swim_test_evaluated_by', NULL);
+    $profile->set('field_swim_attestation_date', NULL);
+    $profile->set('field_swim_attestation_by', NULL);
+    $profile->save();
+    $count++;
+  }
+
+  $state->set('picc_registration.last_swim_reset_year', $current_year);
+
+  \Drupal::logger('picc_registration')->notice('Annual swim status reset complete: @count profiles reset for @year.', [
+    '@count' => $count,
+    '@year' => $current_year,
+  ]);
+}
+
+/**
  * Implements hook_workflows_alter().
  *
  * Adds a "completed → canceled" transition to the default order workflow
