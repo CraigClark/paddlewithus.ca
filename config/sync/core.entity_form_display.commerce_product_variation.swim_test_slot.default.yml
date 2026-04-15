@@ -9,7 +9,6 @@ dependencies:
     - field.field.commerce_product_variation.swim_test_slot.field_desc
     - field.field.commerce_product_variation.swim_test_slot.field_time_range
   module:
-    - commerce_price
     - commerce_stock_field
     - datetime
     - time_range
@@ -20,7 +19,7 @@ mode: default
 content:
   field_capacity:
     type: commerce_stock_level_simple_transaction
-    weight: 5
+    weight: 4
     region: content
     settings:
       step: '1'
@@ -29,13 +28,13 @@ content:
     third_party_settings: {  }
   field_date:
     type: datetime_default
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   field_desc:
     type: string_textfield
-    weight: 6
+    weight: 5
     region: content
     settings:
       size: 60
@@ -43,17 +42,11 @@ content:
     third_party_settings: {  }
   field_time_range:
     type: time_range
-    weight: 4
+    weight: 3
     region: content
     settings:
       start_label: 'Start time'
       end_label: 'End time'
-    third_party_settings: {  }
-  price:
-    type: commerce_price_default
-    weight: 2
-    region: content
-    settings: {  }
     third_party_settings: {  }
   sku:
     type: string_textfield
@@ -65,7 +58,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
@@ -83,5 +76,6 @@ hidden:
   created: true
   langcode: true
   list_price: true
+  price: true
   translation: true
   uid: true

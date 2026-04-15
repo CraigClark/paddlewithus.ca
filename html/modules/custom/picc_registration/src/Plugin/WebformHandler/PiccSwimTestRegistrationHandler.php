@@ -490,8 +490,12 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
         $date_str = (new \DateTime($date_value))->format('F j, Y');
         $time_str = '';
         if ($variation->hasField('field_time_range') && !$variation->get('field_time_range')->isEmpty()) {
-          $time_value = $variation->get('field_time_range')->value;
-          $time_str = (new \DateTime($time_value))->format('g:i A');
+          $site_tz = new \DateTimeZone(date_default_timezone_get());
+          $start_value = $variation->get('field_time_range')->value;
+          $end_value = $variation->get('field_time_range')->end_value;
+          $start_time = (new \DateTime($start_value, new \DateTimeZone('UTC')))->setTimezone($site_tz)->format('g:i A');
+          $end_time = $end_value ? (new \DateTime($end_value, new \DateTimeZone('UTC')))->setTimezone($site_tz)->format('g:i A') : '';
+          $time_str = $end_time ? "$start_time - $end_time" : $start_time;
         }
 
         return [

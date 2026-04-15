@@ -386,7 +386,9 @@ function picc_registration_tokens($type, $tokens, array $data, array $options, B
             }
 
             // Format: "Participant Name: Program Title" or just "Program Title".
-            if (!empty($participant_name)) {
+            // Skip prepending the name if the title already ends with it
+            // (swim test handler appends "- Name" to the title).
+            if (!empty($participant_name) && !str_ends_with($title, '- ' . $participant_name)) {
               $items[] = '<strong>' . htmlspecialchars($participant_name) . '</strong>: ' . htmlspecialchars($title);
             }
             else {

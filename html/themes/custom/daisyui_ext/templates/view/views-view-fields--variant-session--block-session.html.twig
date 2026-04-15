@@ -200,7 +200,11 @@
       </div>
     {% endif %}
 
-    {% if price %}
+    {% if vtype == 'swim_test_slot' %}
+      <div>
+        {{ 'Free'|t }}
+      </div>
+    {% elseif price %}
       <div>
         {{ price }}
       </div>

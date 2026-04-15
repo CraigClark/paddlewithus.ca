@@ -9,7 +9,6 @@ dependencies:
     - field.field.commerce_product_variation.swim_test_slot.field_desc
     - field.field.commerce_product_variation.swim_test_slot.field_time_range
   module:
-    - commerce_price
     - commerce_stock_field
     - datetime
     - datetime_range
@@ -71,19 +70,11 @@ content:
         referenced_entity: ''
     weight: 1
     region: content
-  price:
-    type: commerce_price_default
-    label: hidden
-    settings:
-      strip_trailing_zeroes: false
-      currency_display: symbol
-    third_party_settings: {  }
-    weight: 4
-    region: content
 hidden:
   commerce_variation_cart_form: true
   langcode: true
   list_price: true
+  price: true
   product_id: true
   search_api_excerpt: true
   sku: true
