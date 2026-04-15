@@ -35,9 +35,12 @@ class ParticipantStatusIcons extends FieldPluginBase {
 
     $icons = [];
 
-    // Swim test: icon only if passed.
-    if ($profile->hasField('field_passed_swim_test') && $profile->get('field_passed_swim_test')->value) {
-      $icons[] = '<span class="participant-icon participant-icon--swim" title="Passed swim test"><span class="material-icons" aria-hidden="true">pool</span><span class="sr-only">Passed swim test</span></span>';
+    // Swim status: icon if participant meets swim requirements (passed, attested, or exempt).
+    if ($profile->hasField('field_swim_status')) {
+      $swim_status = $profile->get('field_swim_status')->value ?? 'none';
+      if (in_array($swim_status, ['passed', 'attested', 'exempt'])) {
+        $icons[] = '<span class="participant-icon participant-icon--swim" title="' . t('Meets swim requirements') . '"><span class="material-icons" aria-hidden="true">pool</span><span class="sr-only">' . t('Meets swim requirements') . '</span></span>';
+      }
     }
 
     // Medical: icon only when there is something to note.
