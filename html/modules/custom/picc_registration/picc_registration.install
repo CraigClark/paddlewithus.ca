@@ -105,3 +105,30 @@ function picc_registration_update_10002() {
   _picc_registration_import_translations();
   return 'Imported translations from picc_registration/translations/*.po.';
 }
+
+/**
+ * Force all swim_test_slot variations to $0 CAD.
+ *
+ * The price field is hidden from the admin form, so variations may have
+ * been saved with NULL or inconsistent prices. Ensures every swim test
+ * slot has a valid $0 price in the database.
+ */
+function picc_registration_update_10003() {
+  $storage = \Drupal::entityTypeManager()->getStorage('commerce_product_variation');
+  $ids = $storage->getQuery()
+    ->condition('type', 'swim_test_slot')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  $count = 0;
+  foreach ($storage->loadMultiple($ids) as $variation) {
+    $price = $variation->getPrice();
+    if (!$price || $price->getNumber() !== '0') {
+      $variation->setPrice(new \Drupal\commerce_price\Price('0', 'CAD'));
+      $variation->save();
+      $count++;
+    }
+  }
+
+  return "Set price to \$0 CAD on $count swim_test_slot variation(s).";
+}

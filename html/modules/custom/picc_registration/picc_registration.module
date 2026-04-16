@@ -304,6 +304,20 @@ function picc_registration_commerce_product_presave(EntityInterface $product) {
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_presave() for commerce_product_variation.
+ *
+ * Forces swim_test_slot variations to $0 CAD. The price field is hidden
+ * from the admin form so this guarantees every swim test slot has a
+ * valid price in the database.
+ */
+function picc_registration_commerce_product_variation_presave(EntityInterface $variation) {
+  if ($variation->bundle() !== 'swim_test_slot') {
+    return;
+  }
+  $variation->setPrice(new \Drupal\commerce_price\Price('0', 'CAD'));
+}
+
+/**
  * After-build callback: disables checkboxes for passed/exempt participants.
  */
 function _picc_registration_disable_cleared_participants($element, FormStateInterface $form_state) {
