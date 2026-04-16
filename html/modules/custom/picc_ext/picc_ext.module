@@ -202,3 +202,49 @@ function picc_ext_menu_local_actions_alter(array &$local_actions): void
         }
     }
 }
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * On the variant_session view, excludes variations whose effective stock level
+ * (sum of commerce_stock_transaction.qty) is <= 0. Variations mapped to
+ * "always_in_stock" are unaffected because they have no transactions tracked.
+ */
+function picc_ext_views_query_alter($view, $query) {
+    if ($view->id() !== 'variant_session') {
+        return;
+    }
+
+    // Get the list of variation bundles using a stock-tracked service.
+    $stock_service_manager = \Drupal::service('commerce_stock.service_manager');
+    $stock_config = \Drupal::config('commerce_stock.service_manager');
+    $tracked_bundles = [];
+    foreach ($stock_config->get() as $key => $service_id) {
+        if (strpos($key, 'commerce_product_variation_') === 0
+            && str_ends_with($key, '_service_id')
+            && $service_id !== 'always_in_stock'
+        ) {
+            $bundle = substr($key, strlen('commerce_product_variation_'), -strlen('_service_id'));
+            $tracked_bundles[] = $bundle;
+        }
+    }
+
+    if (empty($tracked_bundles)) {
+        return;
+    }
+
+    // Build a subquery returning variation IDs that have positive stock.
+    // Only the entity_id column is selected (IN requires a single column).
+    $connection = \Drupal::database();
+    $subquery = $connection->select('commerce_stock_transaction', 'st')
+        ->fields('st', ['entity_id']);
+    $subquery->condition('st.entity_type', 'commerce_product_variation');
+    $subquery->groupBy('st.entity_id');
+    $subquery->having('SUM(st.qty) > 0');
+
+    // Exclude any tracked-bundle variation not in the positive-stock subquery.
+    $condition = $query->getConnection()->condition('OR');
+    $condition->condition('commerce_product_variation_field_data.type', $tracked_bundles, 'NOT IN');
+    $condition->condition('commerce_product_variation_field_data.variation_id', $subquery, 'IN');
+    $query->addWhere(0, $condition);
+}
