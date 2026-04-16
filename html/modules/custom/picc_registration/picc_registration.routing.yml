@@ -1,0 +1,11 @@
+picc_registration.swim_test_mark:
+  path: '/swim-test/mark/{commerce_order_item}'
+  defaults:
+    _form: '\Drupal\picc_registration\Form\SwimTestMarkForm'
+    _title: 'Swim Test Evaluation'
+  requirements:
+    _permission: 'edit field_swim_status'
+  options:
+    parameters:
+      commerce_order_item:
+        type: entity:commerce_order_item

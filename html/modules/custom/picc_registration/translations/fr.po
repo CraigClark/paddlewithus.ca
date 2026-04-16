@@ -1,0 +1,155 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: picc_registration 1.0\n"
+"POT-Creation-Date: 2026-04-15 12:00+0000\n"
+"PO-Revision-Date: 2026-04-15 12:00+0000\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Swim test evaluation form
+msgid "Swim Test Evaluation"
+msgstr "Évaluation du test de natation"
+
+msgid "Participant: @name"
+msgstr "Participant : @name"
+
+msgid "Current status: <strong>@status</strong>"
+msgstr "Statut actuel : <strong>@status</strong>"
+
+msgid "Change only if backdating a previous evaluation."
+msgstr "Modifier uniquement pour antidater une évaluation précédente."
+
+msgid "Pass"
+msgstr "Réussir"
+
+msgid "Fail"
+msgstr "Échouer"
+
+msgid "Undo"
+msgstr "Annuler"
+
+msgid "Evaluate"
+msgstr "Évaluer"
+
+msgid "Passed"
+msgstr "Réussi"
+
+msgid "Failed"
+msgstr "Échoué"
+
+msgid "No show"
+msgstr "Absent"
+
+msgid "Excused"
+msgstr "Excusé"
+
+msgid "Pending"
+msgstr "En attente"
+
+msgid "Registration not found."
+msgstr "Inscription introuvable."
+
+msgid "@name marked as passed."
+msgstr "@name marqué comme ayant réussi."
+
+msgid "@name marked as failed."
+msgstr "@name marqué comme ayant échoué."
+
+msgid "@name reset to pending."
+msgstr "@name réinitialisé à en attente."
+
+# Swim test registration form
+msgid "Already registered for swim test on @date"
+msgstr "Déjà inscrit au test de natation le @date"
+
+msgid "@name is already registered for a swim test on @date at @time"
+msgstr "@name est déjà inscrit au test de natation le @date à @time"
+
+msgid "@name is already registered for a swim test on @date"
+msgstr "@name est déjà inscrit au test de natation le @date"
+
+msgid "Already registered for this slot: @names"
+msgstr "Déjà inscrit pour cette plage horaire : @names"
+
+msgid "Already meet swim requirements (skipped): @names"
+msgstr "Répond déjà aux exigences de natation (ignoré) : @names"
+
+msgid "No new registrations were created. All selected participants are either already registered or already meet swim requirements."
+msgstr "Aucune nouvelle inscription n'a été créée. Tous les participants sélectionnés sont déjà inscrits ou répondent déjà aux exigences de natation."
+
+msgid "Registered @names for the swim test on @date."
+msgstr "@names inscrit(s) au test de natation le @date."
+
+msgid "Registration confirmed! You will receive a confirmation by email."
+msgstr "Inscription confirmée ! Vous recevrez une confirmation par courriel."
+
+msgid "Please select at least one participant."
+msgstr "Veuillez sélectionner au moins un participant."
+
+msgid "The following participants cannot register for a swim test: @list"
+msgstr "Les participants suivants ne peuvent pas s'inscrire à un test de natation : @list"
+
+msgid "@name (no birth date on file)"
+msgstr "@name (aucune date de naissance au dossier)"
+
+msgid "@name (15 or older this year — use swim attestation instead)"
+msgstr "@name (15 ans ou plus cette année — utilisez plutôt l'attestation de natation)"
+
+msgid "@name (under 15 — register for a swim test instead)"
+msgstr "@name (moins de 15 ans — inscrivez-vous plutôt à un test de natation)"
+
+msgid "This swim test slot has already passed. Please select a different slot."
+msgstr "Cette plage horaire de test de natation est déjà passée. Veuillez en choisir une autre."
+
+msgid "No swim test slot specified."
+msgstr "Aucune plage horaire de test de natation spécifiée."
+
+msgid "Swim test slot not found."
+msgstr "Plage horaire de test de natation introuvable."
+
+msgid "Invalid registration type."
+msgstr "Type d'inscription invalide."
+
+msgid "This swim test slot is no longer available."
+msgstr "Cette plage horaire de test de natation n'est plus disponible."
+
+msgid "Sorry, this swim test slot is full. Please select a different slot."
+msgstr "Désolé, cette plage horaire de test de natation est complète. Veuillez en choisir une autre."
+
+msgid "Sorry, only @available spot(s) remain for this swim test slot. You selected @requested participants."
+msgstr "Désolé, il ne reste que @available place(s) pour cette plage horaire. Vous avez sélectionné @requested participants."
+
+msgid "The registration system is busy. Please try again in a moment."
+msgstr "Le système d'inscription est occupé. Veuillez réessayer dans un instant."
+
+msgid "No store configured. Please contact administrator."
+msgstr "Aucune boutique configurée. Veuillez contacter l'administrateur."
+
+# Swim attestation
+msgid "Swim attestation confirmed for: @names."
+msgstr "Attestation de natation confirmée pour : @names."
+
+msgid "Already meet swim requirements (skipped): @names."
+msgstr "Répond déjà aux exigences de natation (ignoré) : @names."
+
+msgid "Not eligible for attestation: @list"
+msgstr "Non admissible à l'attestation : @list"
+
+msgid "No attestations were recorded."
+msgstr "Aucune attestation n'a été enregistrée."
+
+# Swim test roster view
+msgid "Swim test roster"
+msgstr "Liste des tests de natation"
+
+msgid "Swim test action"
+msgstr "Action de test de natation"
+
+msgid "Pass/Fail/Undo buttons for swim test evaluation."
+msgstr "Boutons Réussir/Échouer/Annuler pour l'évaluation du test de natation."
+
+msgid "No swim test registrations found."
+msgstr "Aucune inscription au test de natation trouvée."

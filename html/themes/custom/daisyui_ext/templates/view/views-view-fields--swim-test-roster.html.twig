@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for fields in the swim test roster view.
+ *
+ * Same card-style row as the participant roster, but with an Evaluate
+ * button (or Passed/Failed state + Undo) in place of "View profile".
+ *
+ * Designed for mobile use by coaches standing at the pool.
+ */
+#}
+<div class="participant-row">
+  <div class="font-medium text-base">
+    {% if fields.field_name is defined %}
+      {{ fields.field_name.content }}
+    {% endif %}
+  </div>
+  <div class="participant-view-link">
+    {% if fields.swim_test_action is defined %}
+      {{ fields.swim_test_action.content }}
+    {% endif %}
+  </div>
+</div>

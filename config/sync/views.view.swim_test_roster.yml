@@ -1,0 +1,716 @@
+uuid: eecf38cc-bf66-4a4e-85c8-520db1dbd5b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_item_type.swim_test_registration
+    - field.storage.commerce_order_item.field_swim_test_status
+    - field.storage.commerce_product_variation.field_date
+    - field.storage.commerce_product_variation.field_time_range
+    - field.storage.profile.field_name
+    - system.menu.main
+    - user.role.coach
+    - user.role.commerce_manager
+    - user.role.content_editor
+  module:
+    - better_exposed_filters
+    - commerce
+    - commerce_order
+    - commerce_product
+    - datetime
+    - datetime_range
+    - name
+    - options
+    - picc_ext
+    - picc_registration
+    - profile
+    - state_machine
+    - user
+    - views_selective_filters
+id: swim_test_roster
+label: 'Swim test roster'
+module: views
+description: 'Coach view for evaluating swim test participants.'
+tag: ''
+base_table: commerce_order_item
+base_field: order_item_id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Swim test roster'
+      fields:
+        field_date:
+          id: field_date
+          table: commerce_product_variation__field_date
+          field: field_date
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: month_day_year
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_time_range:
+          id: field_time_range
+          table: commerce_product_variation__field_time_range
+          field: field_time_range
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: daterange_default
+          settings:
+            timezone_override: ''
+            format_type: default_time
+            from_to: both
+            separator: ' - '
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_name:
+          id: field_name
+          table: profile__field_name
+          field: field_name
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="/user/{{ uid }}/participant/{{ field_participant }}/edit">{{ field_name }}</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: given
+          type: name_default
+          settings:
+            format: given
+            markup: none
+            list_format: ''
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_swim_test_status:
+          id: field_swim_test_status
+          table: commerce_order_item__field_swim_test_status
+          field: field_swim_test_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        swim_test_action:
+          id: swim_test_action
+          table: commerce_order_item
+          field: swim_test_action
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: swim_test_action
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '25, 50, 100'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: false
+              auto_submit_sort_only: false
+              autosubmit_breakpoint: ''
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            filter:
+              field_swim_test_status_value:
+                plugin_id: bef
+                advanced:
+                  sort_options: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+      access:
+        type: role
+        options:
+          role:
+            coach: coach
+            content_editor: content_editor
+            commerce_manager: commerce_manager
+      cache:
+        type: none
+        options: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: '<p>No swim test registrations found.</p>'
+          tokenize: false
+      sorts:
+        field_date_value:
+          id: field_date_value
+          table: commerce_product_variation__field_date
+          field: field_date_value
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: day
+        field_time_range_value:
+          id: field_time_range_value
+          table: commerce_product_variation__field_time_range
+          field: field_time_range_value
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
+      arguments: {  }
+      filters:
+        type:
+          id: type
+          table: commerce_order_item
+          field: type
+          entity_type: commerce_order_item
+          entity_field: type
+          plugin_id: bundle
+          value:
+            swim_test_registration: swim_test_registration
+          group: 1
+          expose:
+            operator: ''
+        order_state:
+          id: order_state
+          table: commerce_order
+          field: state
+          relationship: order_id
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_order
+          entity_field: state
+          plugin_id: list_field
+          operator: in
+          value:
+            completed: completed
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_swim_test_status_value:
+          id: field_swim_test_status_value
+          table: commerce_order_item__field_swim_test_status
+          field: field_swim_test_status_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            pending: pending
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_swim_test_status_value_op
+            label: Status
+            description: ''
+            use_operator: false
+            operator: field_swim_test_status_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: status
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        field_date_value_selective:
+          id: field_date_value_selective
+          table: commerce_product_variation__field_date
+          field: field_date_value_selective
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          plugin_id: views_selective_filters_filter
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Date
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_date_value_selective
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          selective_display_field: field_date
+          selective_display_sort: ASC
+          selective_aggregated_fields: ''
+          selective_items_limit: 100
+          selective_entity_type: ''
+      style:
+        type: default
+        options:
+          grouping:
+            -
+              field: field_date
+              rendered: true
+              rendered_strip: false
+            -
+              field: field_time_range
+              rendered: true
+              rendered_strip: false
+          row_class: ''
+          default_row_class: false
+      row:
+        type: fields
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships:
+        commerce_product_variation:
+          id: commerce_product_variation
+          table: commerce_order_item
+          field: commerce_product_variation
+          relationship: none
+          group_type: group
+          admin_label: 'Product variation'
+          entity_type: commerce_order_item
+          plugin_id: standard
+          required: true
+        field_participant:
+          id: field_participant
+          table: commerce_order_item__field_participant
+          field: field_participant
+          relationship: none
+          group_type: group
+          admin_label: 'field_participant: Profile'
+          plugin_id: standard
+          required: true
+        order_id:
+          id: order_id
+          table: commerce_order_item
+          field: order_id
+          relationship: none
+          group_type: group
+          admin_label: Order
+          entity_type: commerce_order_item
+          plugin_id: standard
+          required: true
+      css_class: ''
+      header: {  }
+      footer: {  }
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.roles
+      tags:
+        - 'config:field.storage.commerce_order_item.field_swim_test_status'
+        - 'config:field.storage.commerce_product_variation.field_date'
+        - 'config:field.storage.commerce_product_variation.field_time_range'
+        - 'config:field.storage.profile.field_name'
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: swim-test-roster
+      menu:
+        type: normal
+        title: 'Swim test roster'
+        description: 'Evaluate swim test participants'
+        weight: 0
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.roles
+      tags:
+        - 'config:field.storage.commerce_order_item.field_swim_test_status'
+        - 'config:field.storage.commerce_product_variation.field_date'
+        - 'config:field.storage.commerce_product_variation.field_time_range'
+        - 'config:field.storage.profile.field_name'

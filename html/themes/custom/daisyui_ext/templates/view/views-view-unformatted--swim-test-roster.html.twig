@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Theme override for unformatted rows in the swim test roster view.
+ *
+ * Mobile-first card layout for participant rows.
+ * Headings are handled by the grouping template.
+ */
+#}
+{% if title %}
+  <h3 class="text-lg font-semibold mt-4 mb-2 border-b border-base-300 pb-2">{{ title }}</h3>
+{% endif %}
+<div class="flex flex-col gap-2 mb-4">
+  {% for row in rows %}
+    {{- row.content -}}
+  {% endfor %}
+</div>

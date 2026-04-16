@@ -134,10 +134,12 @@ function picc_registration_commerce_order_item_view_alter(array &$build, EntityI
  * Pre-populates billing address on checkout from user's profile address.
  */
 function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // Swim test registration: disable checkboxes for passed/exempt participants.
+  // Swim test registration: disable checkboxes for passed/exempt AND
+  // for participants already registered for a future swim test.
   if ($form_id === 'webform_submission_swim_test_registration_add_form') {
     if (isset($form['elements']['participants'])) {
       $form['elements']['participants']['#after_build'][] = '_picc_registration_disable_cleared_participants';
+      $form['elements']['participants']['#after_build'][] = '_picc_registration_disable_future_swim_registered';
     }
     return;
   }
@@ -318,6 +320,99 @@ function _picc_registration_disable_cleared_participants($element, FormStateInte
       $element[$key]['#attributes']['disabled'] = 'disabled';
       $element[$key]['#attributes']['class'][] = 'opacity-50';
       $element[$key]['#wrapper_attributes']['class'][] = 'opacity-50';
+    }
+  }
+
+  return $element;
+}
+
+/**
+ * After-build callback: disables checkboxes for participants already
+ * registered for a future swim test (strictly after today).
+ */
+function _picc_registration_disable_future_swim_registered($element, FormStateInterface $form_state) {
+  $order_item_storage = \Drupal::entityTypeManager()->getStorage('commerce_order_item');
+  $date_formatter = \Drupal::service('date.formatter');
+  $today = new \DateTime('today');
+  $site_tz = new \DateTimeZone(date_default_timezone_get());
+
+  foreach (\Drupal\Core\Render\Element::children($element) as $key) {
+    // Skip if already disabled by the cleared-participants callback.
+    if (!empty($element[$key]['#attributes']['disabled'])) {
+      continue;
+    }
+
+    // Look for existing swim test registrations for this participant.
+    $order_item_ids = $order_item_storage->getQuery()
+      ->condition('type', 'swim_test_registration')
+      ->condition('field_participant', $key)
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if (empty($order_item_ids)) {
+      continue;
+    }
+
+    $future_info = NULL;
+    foreach ($order_item_storage->loadMultiple($order_item_ids) as $order_item) {
+      $order = $order_item->getOrder();
+      if (!$order || !in_array($order->getState()->getId(), ['completed', 'fulfillment'])) {
+        continue;
+      }
+
+      $variation = $order_item->getPurchasedEntity();
+      if (!$variation || !$variation->hasField('field_date')) {
+        continue;
+      }
+
+      $date_value = $variation->get('field_date')->value;
+      if (!$date_value) {
+        continue;
+      }
+
+      $slot_date = new \DateTime($date_value);
+      if ($slot_date > $today) {
+        // Use date.formatter for locale-aware date rendering.
+        $date_str = $date_formatter->format($slot_date->getTimestamp(), 'custom', 'F j, Y', $site_tz->getName());
+        $time_str = '';
+        if ($variation->hasField('field_time_range') && !$variation->get('field_time_range')->isEmpty()) {
+          $start_value = $variation->get('field_time_range')->value;
+          $end_value = $variation->get('field_time_range')->end_value;
+          $start_ts = (new \DateTime($start_value, new \DateTimeZone('UTC')))->getTimestamp();
+          $start_time = $date_formatter->format($start_ts, 'custom', 'g:i A', $site_tz->getName());
+          $end_time = '';
+          if ($end_value) {
+            $end_ts = (new \DateTime($end_value, new \DateTimeZone('UTC')))->getTimestamp();
+            $end_time = $date_formatter->format($end_ts, 'custom', 'g:i A', $site_tz->getName());
+          }
+          $time_str = $end_time ? " $start_time - $end_time" : " $start_time";
+        }
+        $future_info = $date_str . $time_str;
+        break;
+      }
+    }
+
+    if ($future_info) {
+      // Get participant name from the profile to rebuild the label.
+      $profile = \Drupal\profile\Entity\Profile::load($key);
+      $name = '';
+      if ($profile) {
+        $name_field = $profile->get('field_name')->first();
+        if ($name_field) {
+          $name = trim(($name_field->given ?? '') . ' ' . ($name_field->family ?? ''));
+        }
+      }
+      $message = t('Already registered for swim test on @date', ['@date' => $future_info]);
+      $element[$key]['#attributes']['disabled'] = 'disabled';
+      $element[$key]['#attributes']['class'][] = 'opacity-50';
+      $element[$key]['#attributes']['title'] = $message;
+      $element[$key]['#wrapper_attributes']['class'][] = 'opacity-50';
+      $element[$key]['#wrapper_attributes']['title'] = $message;
+      // Replace the label so the "already registered" note sits right after the name.
+      $label = \Drupal\Core\Render\Markup::create(
+        htmlspecialchars($name) . ' <span class="text-sm italic opacity-75">(' . $message . ')</span>'
+      );
+      $element[$key]['#title'] = $label;
     }
   }
 

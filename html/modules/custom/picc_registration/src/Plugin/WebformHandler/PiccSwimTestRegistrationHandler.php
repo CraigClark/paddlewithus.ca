@@ -431,7 +431,12 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
     }
 
     $date_value = $variation->get('field_date')->value;
-    $date_str = $date_value ? (new \DateTime($date_value))->format('F j, Y') : '';
+    $date_str = '';
+    if ($date_value) {
+      $date_formatter = \Drupal::service('date.formatter');
+      $ts = (new \DateTime($date_value))->getTimestamp();
+      $date_str = $date_formatter->format($ts, 'custom', 'F j, Y');
+    }
 
     \Drupal::messenger()->addStatus($this->t('Registered @names for the swim test on @date.', [
       '@names' => implode(', ', array_filter($registered_names)),
@@ -486,15 +491,21 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
       $slot_date = new \DateTime($date_value);
       $today = new \DateTime('today');
       if ($slot_date > $today) {
+        $date_formatter = \Drupal::service('date.formatter');
+        $site_tz_name = date_default_timezone_get();
         // Build a human-readable description of the existing registration.
-        $date_str = (new \DateTime($date_value))->format('F j, Y');
+        $date_str = $date_formatter->format($slot_date->getTimestamp(), 'custom', 'F j, Y');
         $time_str = '';
         if ($variation->hasField('field_time_range') && !$variation->get('field_time_range')->isEmpty()) {
-          $site_tz = new \DateTimeZone(date_default_timezone_get());
           $start_value = $variation->get('field_time_range')->value;
           $end_value = $variation->get('field_time_range')->end_value;
-          $start_time = (new \DateTime($start_value, new \DateTimeZone('UTC')))->setTimezone($site_tz)->format('g:i A');
-          $end_time = $end_value ? (new \DateTime($end_value, new \DateTimeZone('UTC')))->setTimezone($site_tz)->format('g:i A') : '';
+          $start_ts = (new \DateTime($start_value, new \DateTimeZone('UTC')))->getTimestamp();
+          $start_time = $date_formatter->format($start_ts, 'custom', 'g:i A', $site_tz_name);
+          $end_time = '';
+          if ($end_value) {
+            $end_ts = (new \DateTime($end_value, new \DateTimeZone('UTC')))->getTimestamp();
+            $end_time = $date_formatter->format($end_ts, 'custom', 'g:i A', $site_tz_name);
+          }
           $time_str = $end_time ? "$start_time - $end_time" : $start_time;
         }
 
