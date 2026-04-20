@@ -15,12 +15,18 @@ use Drupal\Core\Render\Markup;
 
 /**
  * Implements hook_cron().
- *
+ */
+function picc_registration_cron() {
+  _picc_registration_annual_swim_status_reset();
+  _picc_registration_auto_no_show_sweep();
+}
+
+/**
  * Resets swim test fields on all participant profiles at the start of each
  * new year. Uses a state variable to ensure it runs exactly once per year
  * and self-heals if the site was offline on Jan 1.
  */
-function picc_registration_cron() {
+function _picc_registration_annual_swim_status_reset() {
   $current_year = (int) date('Y');
   $state = \Drupal::state();
   $last_reset_year = (int) $state->get('picc_registration.last_swim_reset_year', 0);
@@ -70,6 +76,83 @@ function picc_registration_cron() {
     '@count' => $count,
     '@year' => $current_year,
   ]);
+}
+
+/**
+ * Flips swim test registrations still marked "pending" to "no_show" once the
+ * slot ended more than 8 hours ago. Gives coaches a window to catch up on
+ * evaluations before the cron auto-flags misses.
+ */
+function _picc_registration_auto_no_show_sweep() {
+  $order_item_storage = \Drupal::entityTypeManager()->getStorage('commerce_order_item');
+  $site_tz = new \DateTimeZone(date_default_timezone_get());
+
+  // Find all pending swim test registrations.
+  $ids = $order_item_storage->getQuery()
+    ->condition('type', 'swim_test_registration')
+    ->condition('field_swim_test_status', 'pending')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (empty($ids)) {
+    return;
+  }
+
+  $now = new \DateTime('now');
+  $flipped = 0;
+
+  foreach ($order_item_storage->loadMultiple($ids) as $order_item) {
+    // Skip if the order isn't completed.
+    $order = $order_item->getOrder();
+    if (!$order || !in_array($order->getState()->getId(), ['completed', 'fulfillment'])) {
+      continue;
+    }
+
+    // Need both the date and the end time to compute slot end.
+    $variation = $order_item->getPurchasedEntity();
+    if (!$variation || !$variation->hasField('field_date') || !$variation->hasField('field_time_range')) {
+      continue;
+    }
+
+    $date_value = $variation->get('field_date')->value;
+    $end_value = $variation->get('field_time_range')->end_value;
+    if (!$date_value || !$end_value) {
+      continue;
+    }
+
+    // The slot date is a simple date (YYYY-MM-DD) in site timezone.
+    // The time range end is a datetime stored in UTC.
+    // Combine the date with the UTC time's H:i:s to get the slot end in site tz.
+    try {
+      $end_time_utc = new \DateTime($end_value, new \DateTimeZone('UTC'));
+      $end_time_local = $end_time_utc->setTimezone($site_tz);
+      $slot_end = new \DateTime($date_value . ' ' . $end_time_local->format('H:i:s'), $site_tz);
+    }
+    catch (\Exception $e) {
+      continue;
+    }
+
+    // Compare with now + 8h lag.
+    $cutoff = clone $now;
+    $cutoff->modify('-8 hours');
+
+    if ($slot_end < $cutoff) {
+      $order_item->set('field_swim_test_status', 'no_show');
+      $order_item->save();
+      $flipped++;
+
+      \Drupal::logger('picc_registration')->notice('Auto-flipped swim test order item @oid to no_show (slot ended @end).', [
+        '@oid' => $order_item->id(),
+        '@end' => $slot_end->format('c'),
+      ]);
+    }
+  }
+
+  if ($flipped > 0) {
+    \Drupal::logger('picc_registration')->notice('Auto no-show sweep: flipped @count registration(s).', [
+      '@count' => $flipped,
+    ]);
+  }
 }
 
 /**
