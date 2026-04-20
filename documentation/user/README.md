@@ -4,11 +4,11 @@ Practical guides for people who run the club day-to-day.
 
 ## Activity registration
 
-- [Overview](activity-registration-overview.md) — products vs. sessions, age requirements, waivers, family discounts
-- [Creating activities](creating-activities.md) — how the commerce manager sets up products and session variations
-- [Parents registering](parents-registering-activities.md) — registration flow, cart, checkout
-- [Participant roster](participant-roster.md) — coach's view of registered participants
-- [Cancellations and refunds](cancellations-and-refunds.md) — handling cancellations in admin
+- [Overview](activity-overview.md) — products vs. sessions, age requirements, waivers, family discounts
+- [Creating activities](activity-creating.md) — how the commerce manager sets up products and session variations
+- [Parents registering](activity-parents-registering.md) — registration flow, cart, checkout
+- [Participant roster](activity-participant-roster.md) — coach's view of registered participants
+- [Cancellations and refunds](activity-cancellations-and-refunds.md) — handling cancellations in admin
 
 ## Swim test
 
