@@ -148,6 +148,36 @@ msgstr "Aucune attestation n'a été enregistrée."
 msgid "Swim test roster"
 msgstr "Liste des tests de natation"
 
+msgid "Swim test no-shows"
+msgstr "Absences aux tests de natation"
+
+msgid "Review and resolve swim test no-shows"
+msgstr "Examiner et résoudre les absences aux tests de natation"
+
+msgid "Mark resolved"
+msgstr "Marquer comme résolu"
+
+msgid "Resolved"
+msgstr "Résolu"
+
+msgid "Mark this no-show as resolved once the fee has been handled or the absence has been excused."
+msgstr "Marquer cette absence comme résolue une fois que les frais ont été traités ou que l'absence a été excusée."
+
+msgid "Reason / notes"
+msgstr "Raison / notes"
+
+msgid "Example: \"Payment received\", \"Missed due to illness\", \"Waived\"."
+msgstr "Exemple : « Paiement reçu », « Absence pour maladie », « Frais annulés »."
+
+msgid "@name no-show marked as resolved."
+msgstr "Absence de @name marquée comme résolue."
+
+msgid "@name reset to @status."
+msgstr "@name réinitialisé à @status."
+
+msgid "No outstanding swim test no-shows. 🎉"
+msgstr "Aucune absence au test de natation en attente. 🎉"
+
 msgid "Swim test action"
 msgstr "Action de test de natation"
 

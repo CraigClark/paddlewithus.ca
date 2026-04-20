@@ -132,3 +132,19 @@ function picc_registration_update_10003() {
 
   return "Set price to \$0 CAD on $count swim_test_slot variation(s).";
 }
+
+/**
+ * Re-import module translations (adds no-show review strings).
+ */
+function picc_registration_update_10004() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}
+
+/**
+ * Re-import module translations (adds resolve reason field strings).
+ */
+function picc_registration_update_10005() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}

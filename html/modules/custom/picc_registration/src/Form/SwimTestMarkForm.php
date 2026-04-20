@@ -85,6 +85,28 @@ class SwimTestMarkForm extends FormBase {
         ],
       ];
     }
+    elseif ($current_status === 'no_show') {
+      // No-show review — commerce manager can mark as resolved.
+      $form['resolve_help'] = [
+        '#type' => 'markup',
+        '#markup' => '<p>' . $this->t('Mark this no-show as resolved once the fee has been handled or the absence has been excused.') . '</p>',
+      ];
+      $form['resolve_reason'] = [
+        '#type' => 'textarea',
+        '#title' => $this->t('Reason / notes'),
+        '#description' => $this->t('Example: "Payment received", "Missed due to illness", "Waived".'),
+        '#rows' => 2,
+        '#required' => TRUE,
+      ];
+      $form['actions']['resolve'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Mark resolved'),
+        '#name' => 'resolve',
+        '#attributes' => [
+          'class' => ['btn', 'btn-primary', 'btn-lg'],
+        ],
+      ];
+    }
     else {
       // Already evaluated — show undo.
       $form['actions']['undo'] = [
@@ -150,9 +172,29 @@ class SwimTestMarkForm extends FormBase {
         ]);
         break;
 
+      case 'resolve':
+        $reason = trim((string) $form_state->getValue('resolve_reason'));
+        $order_item->set('field_swim_test_status', 'excused');
+        $order_item->set('field_swim_test_excuse_reason', $reason);
+        $order_item->save();
+
+        $this->messenger()->addStatus($this->t('@name no-show marked as resolved.', ['@name' => $name]));
+        \Drupal::logger('picc_registration')->notice('Swim test NO-SHOW RESOLVED: @name by @user (reason: @reason)', [
+          '@name' => $name,
+          '@user' => $this->currentUser()->getDisplayName(),
+          '@reason' => $reason,
+        ]);
+        break;
+
       case 'undo':
         $previous_status = $order_item->get('field_swim_test_status')->value;
-        $order_item->set('field_swim_test_status', 'pending');
+        // Restore to no_show if undoing a resolution, otherwise pending.
+        $new_status = $previous_status === 'excused' ? 'no_show' : 'pending';
+        $order_item->set('field_swim_test_status', $new_status);
+        // Clear excuse reason if undoing a resolution.
+        if ($previous_status === 'excused' && $order_item->hasField('field_swim_test_excuse_reason')) {
+          $order_item->set('field_swim_test_excuse_reason', NULL);
+        }
         $order_item->save();
 
         // If was passed, clear profile swim fields.
@@ -163,17 +205,29 @@ class SwimTestMarkForm extends FormBase {
           $profile->save();
         }
 
-        $this->messenger()->addStatus($this->t('@name reset to pending.', ['@name' => $name]));
-        \Drupal::logger('picc_registration')->notice('Swim test UNDO: @name by @coach (was @status)', [
+        $this->messenger()->addStatus($this->t('@name reset to @status.', [
           '@name' => $name,
-          '@coach' => $this->currentUser()->getDisplayName(),
+          '@status' => $new_status,
+        ]));
+        \Drupal::logger('picc_registration')->notice('Swim test UNDO: @name by @user (was @status)', [
+          '@name' => $name,
+          '@user' => $this->currentUser()->getDisplayName(),
           '@status' => $previous_status,
         ]);
         break;
     }
 
-    // Redirect back to the swim test roster.
-    $form_state->setRedirectUrl(Url::fromRoute('view.swim_test_roster.page_1'));
+    // Redirect based on the (new) status after action.
+    $new_status = $order_item->get('field_swim_test_status')->value;
+    $target = 'view.swim_test_roster.page_1';
+    if (in_array($new_status, ['no_show', 'excused'])) {
+      // If the no-show review view exists, go there; otherwise fall back.
+      $route_provider = \Drupal::service('router.route_provider');
+      if (count($route_provider->getRoutesByNames(['view.swim_test_no_show_review.page_1']))) {
+        $target = 'view.swim_test_no_show_review.page_1';
+      }
+    }
+    $form_state->setRedirectUrl(Url::fromRoute($target));
   }
 
 }

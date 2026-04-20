@@ -58,10 +58,12 @@ class SwimTestAction extends FieldPluginBase {
 
       case 'no_show':
         $output .= '<span class="badge badge-error">' . t('No show') . '</span>';
+        $output .= '<a href="' . $link . '?action=resolve" class="btn btn-primary btn-sm use-ajax" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . t('Resolved') . '</a>';
         break;
 
       case 'excused':
-        $output .= '<span class="badge badge-neutral">' . t('Excused') . '</span>';
+        $output .= '<span class="badge badge-neutral">' . t('Resolved') . '</span>';
+        $output .= '<a href="' . $link . '" class="btn btn-ghost btn-sm use-ajax" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . t('Undo') . '</a>';
         break;
     }
 
