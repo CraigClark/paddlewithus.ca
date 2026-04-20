@@ -2,6 +2,12 @@
 
 For developers maintaining or extending the site.
 
+## Activity registration
+
+- [Architecture](activity-registration-architecture.md) — product/variation/order model, handler, family discount, views, emails, hooks
+- [Testing and troubleshooting](activity-registration-testing.md) — manual test scenarios, common issues, diagnostic snippets
+- [Deployment notes](activity-registration-deployment.md) — required modules, Stripe config, policy nodes, family discount promo setup
+
 ## Swim test
 
 - [Architecture](swim-test-architecture.md) — modules, data model, flows, key files
