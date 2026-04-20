@@ -250,6 +250,10 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
       if (in_array($swim_status, ['passed', 'exempt'])) {
         continue;
       }
+      // Skip if already registered for this specific slot.
+      if ($this->isRegisteredForSlot($profile_id, $variation_id)) {
+        continue;
+      }
       // Skip if already registered for any future swim test.
       if ($this->getExistingFutureSwimTestRegistration($profile_id)) {
         continue;
@@ -325,7 +329,15 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
         continue;
       }
 
-      // Check if already registered for ANY future swim test slot.
+      // Check if already registered for THIS specific slot.
+      if ($this->isRegisteredForSlot($profile_id, $variation_id)) {
+        $skipped_completed[] = $this->t('@name is already registered for this swim test slot.', [
+          '@name' => $name,
+        ]);
+        continue;
+      }
+
+      // Check if already registered for ANY other future swim test slot.
       $existing = $this->getExistingFutureSwimTestRegistration($profile_id);
       if ($existing) {
         $msg = $existing['time']
@@ -486,11 +498,13 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
         continue;
       }
 
-      // Only block if the slot is strictly in the future (after today).
-      // Today's registrations don't block — allows re-booking after a same-day fail.
+      // Block if the slot is today or future AND the registration is still pending.
+      // Once a coach marks it as passed/failed, the status changes and no longer blocks,
+      // allowing re-booking after a same-day fail.
       $slot_date = new \DateTime($date_value);
       $today = new \DateTime('today');
-      if ($slot_date > $today) {
+      $status = $order_item->get('field_swim_test_status')->value ?? 'pending';
+      if ($slot_date >= $today && $status === 'pending') {
         $date_formatter = \Drupal::service('date.formatter');
         $site_tz_name = date_default_timezone_get();
         // Build a human-readable description of the existing registration.
@@ -518,6 +532,37 @@ class PiccSwimTestRegistrationHandler extends WebformHandlerBase {
     }
 
     return NULL;
+  }
+
+  /**
+   * Check if participant is already registered for a specific variation/slot.
+   *
+   * Unlike getExistingFutureSwimTestRegistration() which checks ANY future slot,
+   * this checks for duplicates on the EXACT same slot regardless of date.
+   */
+  protected function isRegisteredForSlot($profile_id, $variation_id) {
+    $order_item_storage = \Drupal::entityTypeManager()->getStorage('commerce_order_item');
+
+    $order_item_ids = $order_item_storage->getQuery()
+      ->condition('type', 'swim_test_registration')
+      ->condition('field_participant', $profile_id)
+      ->condition('purchased_entity', $variation_id)
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if (empty($order_item_ids)) {
+      return FALSE;
+    }
+
+    foreach ($order_item_ids as $order_item_id) {
+      $order_item = $order_item_storage->load($order_item_id);
+      $order = $order_item->getOrder();
+      if ($order && in_array($order->getState()->getId(), ['completed', 'fulfillment'])) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
   }
 
   /**

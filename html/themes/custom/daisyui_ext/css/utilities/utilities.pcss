@@ -88,3 +88,16 @@
 .participant-legend-icon--photo {
   color: var(--color-success);
 }
+
+/* Dialog close button: core Claro applies transform: translate(-50%, -50%)
+ * which offsets the X from the centre of the circle since the icon element
+ * already fills its parent. Reset the transform so the X is centred. */
+.ui-dialog {
+    & .ui-dialog-titlebar {
+        & .ui-dialog-titlebar-close {
+            .ui-icon.ui-icon-closethick {
+              transform: none;
+            }
+        }
+    }
+}

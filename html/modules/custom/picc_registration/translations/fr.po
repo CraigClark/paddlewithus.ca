@@ -71,6 +71,9 @@ msgstr "@name est déjà inscrit au test de natation le @date à @time"
 msgid "@name is already registered for a swim test on @date"
 msgstr "@name est déjà inscrit au test de natation le @date"
 
+msgid "@name is already registered for this swim test slot."
+msgstr "@name est déjà inscrit pour cette plage horaire de test de natation."
+
 msgid "Already registered for this slot: @names"
 msgstr "Déjà inscrit pour cette plage horaire : @names"
 

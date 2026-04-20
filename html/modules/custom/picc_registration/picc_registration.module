@@ -385,7 +385,8 @@ function _picc_registration_disable_future_swim_registered($element, FormStateIn
       }
 
       $slot_date = new \DateTime($date_value);
-      if ($slot_date > $today) {
+      $status = $order_item->get('field_swim_test_status')->value ?? 'pending';
+      if ($slot_date >= $today && $status === 'pending') {
         // Use date.formatter for locale-aware date rendering.
         $date_str = $date_formatter->format($slot_date->getTimestamp(), 'custom', 'F j, Y', $site_tz->getName());
         $time_str = '';
