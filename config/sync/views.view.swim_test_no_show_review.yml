@@ -9,7 +9,7 @@ dependencies:
     - field.storage.commerce_product_variation.field_date
     - field.storage.commerce_product_variation.field_time_range
     - field.storage.profile.field_name
-    - system.menu.admin
+    - system.menu.main
     - user.role.administrator
     - user.role.commerce_manager
   module:
@@ -758,15 +758,15 @@ display:
           metatags: {  }
           tokenize: false
         simple_sitemap_display_extender: {  }
-      path: swim-test-no-shows
+      path: participants/swim-test-no-shows
       menu:
         type: normal
         title: 'Swim test no-shows'
         description: 'Review and resolve swim test no-shows'
         weight: 10
         expanded: false
-        menu_name: admin
-        parent: system.admin_commerce
+        menu_name: main
+        parent: 'views_view:views.registration.page_1'
         context: '0'
     cache_metadata:
       max-age: -1

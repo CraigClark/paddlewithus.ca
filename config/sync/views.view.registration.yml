@@ -61,7 +61,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Participant roster'
+      title: Participants
       fields:
         field_desc:
           id: field_desc
@@ -2365,7 +2365,8 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
-      path: 'participant-roster/[date:html_date]-picc-participant-roster.csv'
+        simple_sitemap_display_extender: {  }
+      path: 'participants/roster/[date:html_date]-picc-participant-roster.csv'
       displays:
         page_1: page_1
         default: '0'
@@ -2412,10 +2413,11 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
-      path: participant-roster
+        simple_sitemap_display_extender: {  }
+      path: participants/roster
       menu:
         type: normal
-        title: 'Participant roster'
+        title: Participants
         description: ''
         weight: -46
         expanded: false

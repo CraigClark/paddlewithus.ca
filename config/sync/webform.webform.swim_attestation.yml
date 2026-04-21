@@ -11,7 +11,7 @@ uid: 1
 template: false
 archive: false
 id: swim_attestation
-title: 'Swim Attestation'
+title: 'Swim skills declaration'
 description: ''
 categories:
   - Registration
@@ -250,8 +250,11 @@ handlers:
       to_mail: '[current-user:mail]'
       to_options: {  }
       bcc_mail: ''
+      bcc_options: {  }
       cc_mail: ''
+      cc_options: {  }
       from_mail: '[site:mail]'
+      from_options: {  }
       from_name: '[site:name]'
       reply_to: ''
       return_path: ''
@@ -268,6 +271,7 @@ handlers:
       attachments: false
       twig: false
       theme_name: ''
+      langcode: ''
       parameters: {  }
       debug: false
   email_picc:
@@ -284,8 +288,11 @@ handlers:
       to_mail: petriecanoe@gmail.com
       to_options: {  }
       bcc_mail: ''
+      bcc_options: {  }
       cc_mail: ''
+      cc_options: {  }
       from_mail: '[site:mail]'
+      from_options: {  }
       from_name: '[site:name]'
       reply_to: ''
       return_path: ''
@@ -302,6 +309,7 @@ handlers:
       attachments: false
       twig: false
       theme_name: ''
+      langcode: ''
       parameters: {  }
       debug: false
 variants: {  }

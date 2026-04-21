@@ -21,7 +21,6 @@ dependencies:
     - datetime_range
     - name
     - options
-    - picc_ext
     - picc_registration
     - profile
     - state_machine
@@ -690,8 +689,13 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: swim-test-roster
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+      path: participants/swim-test-roster
       menu:
         type: normal
         title: 'Swim test roster'
@@ -699,7 +703,7 @@ display:
         weight: 0
         expanded: false
         menu_name: main
-        parent: ''
+        parent: 'views_view:views.registration.page_1'
         context: '0'
     cache_metadata:
       max-age: -1
