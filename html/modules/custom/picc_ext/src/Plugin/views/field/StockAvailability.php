@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\picc_registration\Plugin\views\field;
+namespace Drupal\picc_ext\Plugin\views\field;
 
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
