@@ -144,6 +144,18 @@ msgstr "Non admissible à l'attestation : @list"
 msgid "No attestations were recorded."
 msgstr "Aucune attestation n'a été enregistrée."
 
+msgid "You're all set."
+msgstr "Tout est en règle."
+
+msgid "All eligible family members already have a current swim attestation or passed swim test on file. Nothing to do here."
+msgstr "Tous les membres admissibles de la famille ont déjà une attestation de natation ou un test réussi au dossier. Rien à faire ici."
+
+msgid "Nothing to attest."
+msgstr "Rien à attester."
+
+msgid "You have no family members 15 or older in your account. If you need to add someone, use the link below to edit your family members."
+msgstr "Vous n'avez aucun membre de la famille de 15 ans ou plus dans votre compte. Si vous devez en ajouter un, utilisez le lien ci-dessous pour modifier votre liste de membres de la famille."
+
 # Swim test roster view
 msgid "Swim test roster"
 msgstr "Liste des tests de natation"

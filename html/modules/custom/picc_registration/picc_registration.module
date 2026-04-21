@@ -229,6 +229,10 @@ function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterfa
 
   // Swim attestation: disable checkboxes for already attested/passed/exempt.
   if ($form_id === 'webform_submission_swim_attestation_add_form') {
+    // Check up-front whether this user has any actionable participants.
+    // If not, swap in a friendly message and lift the required flags so
+    // validation won't complain about empty fields.
+    _picc_registration_attestation_check_actionable($form);
     if (isset($form['elements']['participants'])) {
       $form['elements']['participants']['#after_build'][] = '_picc_registration_disable_cleared_participants';
     }
@@ -421,6 +425,84 @@ function _picc_registration_disable_cleared_participants($element, FormStateInte
   }
 
   return $element;
+}
+
+/**
+ * Checks whether the current user has any actionable adult family members
+ * for the swim attestation form. If not, replaces the form with a friendly
+ * message and lifts required flags so validation doesn't complain.
+ *
+ * Runs in hook_form_alter (before validation), not in after_build.
+ *
+ * @param array $form
+ *   The form render array, modified by reference.
+ */
+function _picc_registration_attestation_check_actionable(array &$form) {
+  $uid = (int) \Drupal::currentUser()->id();
+  if (!$uid) {
+    return;
+  }
+
+  // Cutoff for "15 or older as of Dec 31 this year": born on or before this date.
+  $cutoff_date = (date('Y') - 15) . '-12-31';
+
+  // Load this user's participant profiles that are 15+.
+  $profile_storage = \Drupal::entityTypeManager()->getStorage('profile');
+  $ids = $profile_storage->getQuery()
+    ->condition('type', 'participant')
+    ->condition('status', 1)
+    ->condition('uid', $uid)
+    ->condition('field_birth_date', $cutoff_date, '<=')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  $cleared = ['passed', 'attested', 'exempt'];
+  $has_any = FALSE;
+  $has_actionable = FALSE;
+
+  foreach ($profile_storage->loadMultiple($ids) as $profile) {
+    if (!$profile->get('field_birth_date')->value) {
+      continue;
+    }
+    $has_any = TRUE;
+    $status = $profile->get('field_swim_status')->value ?? 'none';
+    if (!in_array($status, $cleared, TRUE)) {
+      $has_actionable = TRUE;
+      break;
+    }
+  }
+
+  if ($has_actionable) {
+    return;
+  }
+
+  // Nothing to do — swap in a friendly message.
+  if ($has_any) {
+    $heading = t('You\'re all set.');
+    $body = t('All eligible family members already have a current swim attestation or passed swim test on file. Nothing to do here.');
+  }
+  else {
+    $heading = t('Nothing to attest.');
+    $body = t('You have no family members 15 or older in your account. If you need to add someone, use the link below to edit your family members.');
+  }
+
+  $form['all_done_message'] = [
+    '#markup' => '<div class="alert alert-success my-4 p-4 rounded"><p class="font-semibold">' . $heading . '</p><p>' . $body . '</p></div>',
+    '#weight' => -100,
+  ];
+
+  // Remove required flag and hide the inputs so validation won't fail.
+  if (isset($form['elements']['participants'])) {
+    $form['elements']['participants']['#required'] = FALSE;
+    $form['elements']['participants']['#access'] = FALSE;
+  }
+  if (isset($form['elements']['attestation_agreement'])) {
+    $form['elements']['attestation_agreement']['#required'] = FALSE;
+    $form['elements']['attestation_agreement']['#access'] = FALSE;
+  }
+  if (isset($form['actions'])) {
+    $form['actions']['#access'] = FALSE;
+  }
 }
 
 /**

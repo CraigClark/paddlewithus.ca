@@ -148,3 +148,19 @@ function picc_registration_update_10005() {
   _picc_registration_import_translations();
   return 'Re-imported translations from picc_registration/translations/*.po.';
 }
+
+/**
+ * Re-import module translations (adds attestation "all done" message).
+ */
+function picc_registration_update_10006() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}
+
+/**
+ * Re-import module translations (adds attestation "no eligible" message).
+ */
+function picc_registration_update_10007() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}
