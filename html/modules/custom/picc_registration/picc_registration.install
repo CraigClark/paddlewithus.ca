@@ -164,3 +164,11 @@ function picc_registration_update_10007() {
   _picc_registration_import_translations();
   return 'Re-imported translations from picc_registration/translations/*.po.';
 }
+
+/**
+ * Re-import module translations (adds variant_session template strings).
+ */
+function picc_registration_update_10008() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}

@@ -198,3 +198,16 @@ msgstr "Boutons Réussir/Échouer/Annuler pour l'évaluation du test de natation
 
 msgid "No swim test registrations found."
 msgstr "Aucune inscription au test de natation trouvée."
+
+# Variant session template (variant_session view)
+msgid "Register for this swim test"
+msgstr "S'inscrire à ce test de natation"
+
+msgid "Register for this session"
+msgstr "S'inscrire à cette session"
+
+msgid "Log in or create account to register"
+msgstr "Connectez-vous ou créez un compte pour vous inscrire"
+
+msgid "Free"
+msgstr "Gratuit"
