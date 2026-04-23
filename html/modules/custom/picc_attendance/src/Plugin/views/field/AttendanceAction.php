@@ -108,7 +108,12 @@ class AttendanceAction extends FieldPluginBase {
       $output .= $this->resetLink($attendance, AttendanceInterface::SLOT_CHECK_IN, $dialog_opts, $this->t('Reset check-in'));
     }
     elseif ($attendance->isCheckedOut()) {
-      // Checked out (may or may not have been checked in).
+      // Checked out. Only Reset check-out is exposed here — once check-out
+      // is present, Reset check-in is hidden to avoid leaving a record in
+      // the confusing "checked out without check-in" state via a single
+      // click. A coach who wants to clear everything resets check-out
+      // first; Reset check-in then becomes available on the resulting
+      // "checked in only" row.
       if ((bool) $attendance->get('checkout_without_checkin')->value) {
         $output .= '<span class="badge badge-warning" title="' . $this->t('Check-out recorded without prior check-in') . '">'
           . $this->t('Out @time (no check-in)', ['@time' => $this->formatTime((int) $attendance->get('check_out_at')->value)])
@@ -120,10 +125,6 @@ class AttendanceAction extends FieldPluginBase {
           . '</span>';
       }
       $output .= $this->resetLink($attendance, AttendanceInterface::SLOT_CHECK_OUT, $dialog_opts, $this->t('Reset check-out'));
-      if ($attendance->isCheckedIn()) {
-        // Edge case where both present — show reset check-in too.
-        $output .= $this->resetLink($attendance, AttendanceInterface::SLOT_CHECK_IN, $dialog_opts, $this->t('Reset check-in'));
-      }
     }
 
     $output .= '</div>';

@@ -207,6 +207,7 @@ class Attendance extends RevisionableContentEntityBase implements AttendanceInte
         AttendanceInterface::PICKUP_SOURCE_CONTACT_1 => 'Emergency contact 1',
         AttendanceInterface::PICKUP_SOURCE_CONTACT_2 => 'Emergency contact 2',
         AttendanceInterface::PICKUP_SOURCE_CONTACT_3 => 'Emergency contact 3',
+        AttendanceInterface::PICKUP_SOURCE_SELF => 'Self checkout',
         AttendanceInterface::PICKUP_SOURCE_FREETEXT => 'Other (free text)',
       ])
       ->setDisplayOptions('view', ['label' => 'inline', 'weight' => 23])

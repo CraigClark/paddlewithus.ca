@@ -29,6 +29,7 @@ interface AttendanceInterface extends ContentEntityInterface, EntityChangedInter
   public const PICKUP_SOURCE_CONTACT_1 = 'contact_1';
   public const PICKUP_SOURCE_CONTACT_2 = 'contact_2';
   public const PICKUP_SOURCE_CONTACT_3 = 'contact_3';
+  public const PICKUP_SOURCE_SELF = 'self';
   public const PICKUP_SOURCE_FREETEXT = 'freetext';
 
 }

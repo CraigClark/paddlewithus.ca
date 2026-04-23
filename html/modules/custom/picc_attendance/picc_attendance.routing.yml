@@ -60,7 +60,7 @@ picc_attendance.admin_collection:
     _entity_list: 'picc_attendance'
     _title: 'Attendance records'
   requirements:
-    _permission: 'administer picc attendance+view picc attendance history'
+    _permission: 'administer picc attendance'
 
 entity.picc_attendance.canonical:
   path: '/admin/attendance/{picc_attendance}'

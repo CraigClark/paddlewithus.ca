@@ -75,11 +75,12 @@ class AttendanceCheckOutForm extends FormBase implements ContainerInjectionInter
     }
 
     if ($contacts) {
-      // One or more authorised contacts — radio list with "Other" option.
+      // One or more authorised contacts — radio list with Self + Other.
       $options = [];
       foreach ($contacts as $source => $contact_name) {
         $options[$source] = $contact_name;
       }
+      $options[AttendanceInterface::PICKUP_SOURCE_SELF] = $this->t('Self checkout (@name)', ['@name' => $name]);
       $options[AttendanceInterface::PICKUP_SOURCE_FREETEXT] = $this->t('Other (enter name)');
 
       $form['pickup_source'] = [
@@ -105,24 +106,36 @@ class AttendanceCheckOutForm extends FormBase implements ContainerInjectionInter
       ];
     }
     else {
-      // Zero authorised contacts. Coach can still proceed, but freetext is
-      // required and the caution is shown.
+      // Zero authorised contacts. Coach can still proceed with self checkout
+      // or by entering a name manually.
       $form['no_contact_warning'] = [
         '#markup' => '<div class="alert alert-warning" role="alert">'
-          . $this->t('No authorised emergency contacts are on file for @name. Enter the name of the person picking up manually. This will be flagged in the record.', ['@name' => $name])
+          . $this->t('No authorised emergency contacts are on file for @name. Select self checkout or enter the name of the person picking up manually. This will be flagged in the record.', ['@name' => $name])
           . '</div>',
       ];
 
       $form['pickup_source'] = [
-        '#type' => 'value',
-        '#value' => AttendanceInterface::PICKUP_SOURCE_FREETEXT,
+        '#type' => 'radios',
+        '#title' => $this->t('Picked up by'),
+        '#options' => [
+          AttendanceInterface::PICKUP_SOURCE_SELF => $this->t('Self checkout (@name)', ['@name' => $name]),
+          AttendanceInterface::PICKUP_SOURCE_FREETEXT => $this->t('Other (enter name)'),
+        ],
+        '#required' => TRUE,
       ];
 
       $form['pickup_freetext'] = [
         '#type' => 'textfield',
-        '#title' => $this->t('Picked up by'),
-        '#required' => TRUE,
+        '#title' => $this->t('Name of other person'),
         '#maxlength' => 255,
+        '#states' => [
+          'visible' => [
+            ':input[name="pickup_source"]' => ['value' => AttendanceInterface::PICKUP_SOURCE_FREETEXT],
+          ],
+          'required' => [
+            ':input[name="pickup_source"]' => ['value' => AttendanceInterface::PICKUP_SOURCE_FREETEXT],
+          ],
+        ],
       ];
     }
 
@@ -174,6 +187,9 @@ class AttendanceCheckOutForm extends FormBase implements ContainerInjectionInter
 
     if ($source === AttendanceInterface::PICKUP_SOURCE_FREETEXT) {
       $pickup_name = $freetext;
+    }
+    elseif ($source === AttendanceInterface::PICKUP_SOURCE_SELF) {
+      $pickup_name = $this->participantName($order_item);
     }
     else {
       $pickup_name = $contacts[$source] ?? '';
