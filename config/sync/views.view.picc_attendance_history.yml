@@ -634,6 +634,48 @@ display:
               1: {  }
               2: {  }
               3: {  }
+        pickup_other_only:
+          id: pickup_other_only
+          table: picc_attendance
+          field: check_out_pickup_source
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pickup_other_only_op
+            label: 'Pickup type'
+            description: ''
+            use_operator: false
+            operator: pickup_other_only_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pickup_type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: true
+          group_info:
+            label: 'Pickup type'
+            description: ''
+            identifier: pickup_type
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Only unlisted-person pickups'
+                operator: '='
+                value: freetext
         field_name_given:
           id: field_name_given
           table: profile__field_name
