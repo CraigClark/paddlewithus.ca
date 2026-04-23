@@ -58,6 +58,37 @@
   margin-bottom: 0.5rem;
 }
 
+/* ---- Attendance view ---- */
+
+/* Card frame matches .participant-row visually but stacks its children:
+ * top = name + icons, bottom = attendance actions block. */
+.picc-attendance-card {
+  max-width: var(--readable-width);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-lg, 0.5rem);
+  padding: 0.75rem 1rem;
+  background: var(--color-base-100);
+}
+
+/* Name + icons row. Uses space-between so icons sit at the right when
+ * there's room; when the name pushes them to the next line, the icons
+ * become the sole item on their line and fall back to flex-start —
+ * i.e. left-aligned — which is what we want on mobile. */
+.picc-attendance-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Neutralise .participant-icons' margin-left: auto inside the card head
+ * so justify-content decides alignment. Outside the card head (e.g. on
+ * the registration roster) the original behaviour is preserved. */
+.picc-attendance-card__head .participant-icons {
+  margin-left: 0;
+}
+
 /* Legend */
 .participant-legend-items {
   display: flex;

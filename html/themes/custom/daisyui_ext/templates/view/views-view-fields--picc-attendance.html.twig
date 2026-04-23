@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Theme override for fields in the coach attendance view.
+ *
+ * Two-zone card:
+ *
+ * - Top: participant name + status icons. Name + icons share one flex
+ *   row; when the name is too long the icons wrap to their own line
+ *   and left-align (justify-content: space-between puts a single item
+ *   at flex-start on its line).
+ *
+ * - Bottom: attendance action block (check in / check out / reset).
+ *   The action plugin emits its own wrapper with .picc-attendance-actions
+ *   and .my-5.
+ *
+ * Matches the .participant-row card style used by the registration and
+ * swim test roster, minus the single-row assumption.
+ */
+#}
+<div class="picc-attendance-card">
+  <div class="picc-attendance-card__head">
+    <div class="font-medium text-base">
+      {% if fields.field_name is defined %}
+        {{ fields.field_name.content }}
+      {% endif %}
+    </div>
+    {% if fields.participant_status_icons is defined %}
+      {{ fields.participant_status_icons.content }}
+    {% endif %}
+  </div>
+  {% if fields.attendance_action is defined %}
+    {{ fields.attendance_action.content }}
+  {% endif %}
+</div>

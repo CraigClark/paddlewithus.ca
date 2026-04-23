@@ -83,7 +83,7 @@ class AttendanceAction extends FieldPluginBase {
       'commerce_order_item' => $order_item->id(),
     ])->toString();
 
-    $output = '<div class="picc-attendance-actions flex gap-2 items-center flex-wrap">';
+    $output = '<div class="picc-attendance-actions my-5 flex gap-2 items-center flex-wrap">';
 
     if (!$attendance || (!$attendance->isCheckedIn() && !$attendance->isCheckedOut())) {
       // No record, or record exists but empty (e.g. both slots were reset).
