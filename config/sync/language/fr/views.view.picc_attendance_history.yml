@@ -1,0 +1,64 @@
+label: 'Historique des présences'
+description: 'Vue admin/gestionnaire des dossiers de présence historiques pour tous les programmes. Export CSV disponible.'
+display:
+  default:
+    display_options:
+      title: 'Historique des présences'
+      fields:
+        date:
+          label: Date
+        product:
+          label: Programme
+        participant:
+          label: Participant
+        check_in_at:
+          label: Arrivée
+        check_in_by:
+          label: 'Arrivée enregistrée par'
+        check_out_at:
+          label: Départ
+        check_out_by:
+          label: 'Départ enregistré par'
+        check_out_pickup_name:
+          label: 'Récupéré par'
+        check_out_pickup_source:
+          label: Source
+        checkout_without_checkin:
+          label: 'Sans arrivée'
+        check_in_note:
+          label: "Note d'arrivée"
+        check_out_note:
+          label: 'Note de départ'
+      footer:
+        result:
+          content: '<div class="attendance-history-result-count"><span class="text-xl font-semibold">@total</span> dossiers</div>'
+      filters:
+        date_from:
+          expose:
+            label: 'À partir du'
+        date_to:
+          expose:
+            label: 'Jusqu''au'
+        product_selective:
+          expose:
+            label: Programme
+        checkout_without_checkin:
+          expose:
+            label: 'N''afficher que les départs sans arrivée'
+        pickup_other_only:
+          expose:
+            label: 'Type de récupération'
+          group_info:
+            label: 'Type de récupération'
+            group_items:
+              1:
+                title: 'Uniquement les récupérations par personne non autorisée'
+        field_name_given:
+          expose:
+            label: 'Nom du participant contient'
+            description: 'Recherche sur le prénom.'
+  page_1:
+    display_options:
+      menu:
+        title: 'Historique des présences'
+        description: 'Parcourir et exporter les dossiers de présence archivés.'

@@ -70,3 +70,11 @@ function _picc_attendance_import_translations() {
 function picc_attendance_install() {
   _picc_attendance_import_translations();
 }
+
+/**
+ * Re-import French translations (UAT round 7 — full translation pass).
+ */
+function picc_attendance_update_10001() {
+  _picc_attendance_import_translations();
+  return 'Re-imported translations from picc_attendance/translations/*.po.';
+}

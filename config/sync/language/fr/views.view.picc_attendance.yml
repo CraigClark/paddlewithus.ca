@@ -1,0 +1,27 @@
+label: 'Présences (aujourd''hui)'
+description: 'Liste quotidienne des présences pour les entraîneurs. N''affiche que les programmes avec suivi des présences activé dont la plage de dates couvre aujourd''hui.'
+display:
+  default:
+    display_options:
+      title: Présences
+      empty:
+        area_text_custom_empty:
+          content: '<p class="text-base opacity-70">Aucun participant à enregistrer aujourd''hui. Soit aucun programme avec suivi des présences n''est actif aujourd''hui, soit aucune inscription n''est complétée.</p>'
+      header:
+        today:
+          content: '<p class="attendance-today-date text-sm opacity-70">[current-date:custom:l j F Y]</p>'
+        result:
+          content: '<div class="attendance-result-count"><span class="text-xl font-semibold">@total</span> participants prévus aujourd''hui</div>'
+      filters:
+        product_id_selective:
+          expose:
+            label: Programme
+        field_name:
+          expose:
+            label: 'Nom du participant contient'
+            description: 'Recherche sur le prénom.'
+  attendance_page:
+    display_options:
+      menu:
+        title: Présences
+        description: 'Enregistrer les arrivées et les départs des participants pour les programmes du jour.'

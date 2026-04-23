@@ -1,34 +1,70 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: picc_attendance 1.0\n"
-"POT-Creation-Date: 2026-04-22 12:00+0000\n"
-"PO-Revision-Date: 2026-04-22 12:00+0000\n"
+"POT-Creation-Date: 2026-04-23 12:00+0000\n"
+"PO-Revision-Date: 2026-04-23 12:00+0000\n"
 "Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Coach attendance view — titles and empty state.
+# ============================================================
+# Menu links + admin group
+# ============================================================
 msgid "Attendance"
 msgstr "Présences"
 
+msgid "PICC"
+msgstr "PICC"
+
+msgid "Petrie Island Canoe Club settings."
+msgstr "Paramètres du Club de canoë de l'île Petrie."
+
+msgid "Check in and out participants for today's programs."
+msgstr "Enregistrer les arrivées et les départs des participants pour les programmes du jour."
+
+msgid "Configure retention, run manual purges, view last-run stats."
+msgstr "Configurer la rétention, lancer des suppressions manuelles, voir les statistiques."
+
+msgid "Administrative list of all attendance records."
+msgstr "Liste administrative de tous les dossiers de présence."
+
+msgid "Browse and export historical attendance records."
+msgstr "Parcourir et exporter les dossiers de présence archivés."
+
+# ============================================================
+# Entity labels
+# ============================================================
+msgid "Attendance record"
+msgstr "Dossier de présence"
+
+msgid "attendance record"
+msgstr "dossier de présence"
+
+msgid "attendance records"
+msgstr "dossiers de présence"
+
+msgid "Attendance records"
+msgstr "Dossiers de présence"
+
+msgid "@count attendance record"
+msgid_plural "@count attendance records"
+msgstr[0] "@count dossier de présence"
+msgstr[1] "@count dossiers de présence"
+
+# ============================================================
+# Coach attendance view — page titles, empty state, result count
+# ============================================================
 msgid "Attendance (today)"
 msgstr "Présences (aujourd'hui)"
 
 msgid "Attendance history"
 msgstr "Historique des présences"
 
-msgid "Check in and out participants for today's programs."
-msgstr "Enregistrer les arrivées et les départs des participants pour les programmes du jour."
-
-msgid "<p class=\"text-base opacity-70\">No participants to check in or out today. Either no programs with attendance tracking are running today, or there are no completed registrations.</p>"
-msgstr "<p class=\"text-base opacity-70\">Aucun participant à enregistrer aujourd'hui. Soit aucun programme avec suivi des présences n'est actif aujourd'hui, soit aucune inscription n'est complétée.</p>"
-
-msgid "<div class=\"attendance-result-count\"><span class=\"text-xl font-semibold\">@total</span> participants expected today</div>"
-msgstr "<div class=\"attendance-result-count\"><span class=\"text-xl font-semibold\">@total</span> participants prévus aujourd'hui</div>"
-
-# Action labels.
+# ============================================================
+# Action labels (buttons + badges on the coach roster)
+# ============================================================
 msgid "Check in"
 msgstr "Arrivée"
 
@@ -41,20 +77,43 @@ msgstr "Annuler l'arrivée"
 msgid "Reset check-out"
 msgstr "Annuler le départ"
 
-# Check-in form.
+msgid "Reset"
+msgstr "Annuler"
+
+# Status badges rendered by AttendanceAction views field plugin
+msgid "In @time"
+msgstr "Arrivé à @time"
+
+msgid "Out @time"
+msgstr "Parti à @time"
+
+msgid "Out @time (no check-in)"
+msgstr "Parti à @time (sans arrivée)"
+
+msgid "Check-out recorded without prior check-in"
+msgstr "Départ enregistré sans arrivée préalable"
+
+# ============================================================
+# Check-in form
+# ============================================================
 msgid "Check in @name"
 msgstr "Arrivée de @name"
 
 msgid "Note (optional)"
 msgstr "Note (optionnelle)"
 
-msgid "Anything worth recording — e.g. \"Arrived late\", \"Parent mentioned medication change.\""
-msgstr "Toute information utile — par ex. « Arrivé en retard », « Parent a mentionné un changement de médicaments »."
+msgid "Anything worth recording — e.g. \"Arrived late\". Do not record critical information like medication changes here; use the participant profile."
+msgstr "Toute information utile — par ex. « Arrivé en retard ». Ne pas inscrire ici d'information critique comme un changement de médicaments ; utiliser le profil du participant."
 
 msgid "@name checked in."
 msgstr "@name est arrivé."
 
-# Check-out form.
+msgid "Registration not found."
+msgstr "Inscription introuvable."
+
+# ============================================================
+# Check-out form
+# ============================================================
 msgid "Check out @name"
 msgstr "Départ de @name"
 
@@ -63,6 +122,9 @@ msgstr "Récupéré par"
 
 msgid "Select the person picking up @name. Only one person can be selected."
 msgstr "Sélectionner la personne qui récupère @name. Une seule personne peut être sélectionnée."
+
+msgid "Self checkout (@name)"
+msgstr "Départ autonome (@name)"
 
 msgid "Other (enter name)"
 msgstr "Autre (entrer le nom)"
@@ -73,19 +135,30 @@ msgstr "Nom de l'autre personne"
 msgid "Please enter the name of the person picking up."
 msgstr "Veuillez entrer le nom de la personne qui récupère le participant."
 
-msgid "Anything worth recording — e.g. \"Biked home with parent consent\", \"Sick, picked up early\"."
-msgstr "Toute information utile — par ex. « Rentré à vélo avec l'accord du parent », « Malade, récupéré plus tôt »."
+msgid "Please add a note explaining the pickup since \"Other\" was selected."
+msgstr "Veuillez ajouter une note expliquant la situation puisque « Autre » a été sélectionné."
+
+msgid "An unlisted person is picking up @name. Explain why in the note below — the record is flagged for manager review."
+msgstr "Une personne non autorisée récupère @name. Expliquer la situation dans la note ci-dessous — le dossier sera signalé pour examen par un gestionnaire."
+
+msgid "Note"
+msgstr "Note"
+
+msgid "Anything worth recording — e.g. \"Biked home with parent consent\", \"Sick, picked up early\". Required when \"Other\" is selected."
+msgstr "Toute information utile — par ex. « Rentré à vélo avec l'accord du parent », « Malade, récupéré plus tôt ». Requise si « Autre » est sélectionné."
 
 msgid "This participant was not checked in today. The check-out will be flagged as \"without check-in\"."
 msgstr "Ce participant n'a pas été enregistré à son arrivée aujourd'hui. Le départ sera marqué « sans arrivée »."
 
-msgid "No authorised emergency contacts are on file for @name. Enter the name of the person picking up manually. This will be flagged in the record."
-msgstr "Aucun contact d'urgence autorisé n'est enregistré pour @name. Entrer manuellement le nom de la personne qui récupère. Ceci sera noté au dossier."
+msgid "No authorised emergency contacts are on file for @name. Select self checkout or enter the name of the person picking up manually. This will be flagged in the record."
+msgstr "Aucun contact d'urgence autorisé n'est enregistré pour @name. Sélectionner le départ autonome ou entrer le nom de la personne qui récupère. Ceci sera noté au dossier."
 
 msgid "@name checked out with @pickup."
 msgstr "@name est parti avec @pickup."
 
-# Reset form.
+# ============================================================
+# Reset form
+# ============================================================
 msgid "Reset @slot for @name"
 msgstr "Annuler l'@slot pour @name"
 
@@ -104,9 +177,6 @@ msgstr "Raison"
 msgid "For example: \"Clicked the wrong participant\", \"Entered by mistake\"."
 msgstr "Par exemple : « Mauvais participant cliqué », « Entrée par erreur »."
 
-msgid "Reset"
-msgstr "Annuler"
-
 msgid "@slot reset."
 msgstr "@slot annulé."
 
@@ -116,20 +186,12 @@ msgstr "Arrivée"
 msgid "Check-out"
 msgstr "Départ"
 
-# Status badges.
-msgid "In @time"
-msgstr "Arrivé à @time"
+msgid "Attendance record or slot not found."
+msgstr "Dossier de présence ou champ introuvable."
 
-msgid "Out @time"
-msgstr "Parti à @time"
-
-msgid "Out @time (no check-in)"
-msgstr "Parti à @time (sans arrivée)"
-
-msgid "Check-out recorded without prior check-in"
-msgstr "Départ enregistré sans arrivée préalable"
-
-# Field labels & admin columns.
+# ============================================================
+# Admin list + history view columns + exposed filters
+# ============================================================
 msgid "Participant"
 msgstr "Participant"
 
@@ -148,14 +210,29 @@ msgstr "Actions"
 msgid "Date"
 msgstr "Date"
 
+msgid "From date"
+msgstr "À partir du"
+
+msgid "To date"
+msgstr "Jusqu'au"
+
 msgid "Checked in by"
 msgstr "Arrivée enregistrée par"
 
 msgid "Checked out by"
 msgstr "Départ enregistré par"
 
+msgid "Check-in time"
+msgstr "Heure d'arrivée"
+
+msgid "Check-out time"
+msgstr "Heure de départ"
+
 msgid "Pickup source"
 msgstr "Source"
+
+msgid "Pickup name"
+msgstr "Nom de la personne récupérant"
 
 msgid "Check-in note"
 msgstr "Note d'arrivée"
@@ -163,18 +240,119 @@ msgstr "Note d'arrivée"
 msgid "Check-out note"
 msgstr "Note de départ"
 
+msgid "Checked out without prior check-in"
+msgstr "Départ sans arrivée préalable"
+
 msgid "Without check-in"
 msgstr "Sans arrivée"
 
-msgid "Only show checkouts without check-in"
+msgid "Show checkouts without check-in"
 msgstr "N'afficher que les départs sans arrivée"
 
 msgid "Date range"
 msgstr "Plage de dates"
 
-# Settings form.
+msgid "Pickup"
+msgstr "Récupération"
+
+msgid "Flag"
+msgstr "Signalement"
+
+msgid "Checkout without check-in"
+msgstr "Départ sans arrivée"
+
+msgid "Pickup type"
+msgstr "Type de récupération"
+
+msgid "Only unlisted-person pickups"
+msgstr "Uniquement les récupérations par personne non autorisée"
+
+# ============================================================
+# Allowed values — pickup source list
+# ============================================================
+msgid "Emergency contact 1"
+msgstr "Contact d'urgence 1"
+
+msgid "Emergency contact 2"
+msgstr "Contact d'urgence 2"
+
+msgid "Emergency contact 3"
+msgstr "Contact d'urgence 3"
+
+msgid "Self checkout"
+msgstr "Départ autonome"
+
+msgid "Other (free text)"
+msgstr "Autre (texte libre)"
+
+# ============================================================
+# Entity field labels (admin view of a record)
+# ============================================================
+msgid "Order item"
+msgstr "Article de commande"
+
+msgid "The order item (registration) this attendance record belongs to."
+msgstr "L'article de commande (inscription) auquel ce dossier de présence est rattaché."
+
+msgid "Participant profile at the time of record creation."
+msgstr "Profil du participant au moment de la création du dossier."
+
+msgid "Program (Commerce product) at the time of record creation."
+msgstr "Programme (produit Commerce) au moment de la création du dossier."
+
+msgid "Calendar day of attendance, site timezone."
+msgstr "Jour de présence, fuseau horaire du site."
+
+msgid "When the coach tapped Check in. Null until checked in."
+msgstr "Moment où l'entraîneur a enregistré l'arrivée. Vide tant que non enregistré."
+
+msgid "When the coach tapped Check out. Null until checked out."
+msgstr "Moment où l'entraîneur a enregistré le départ. Vide tant que non enregistré."
+
+msgid "Coach who recorded the check-in."
+msgstr "Entraîneur qui a enregistré l'arrivée."
+
+msgid "Coach who recorded the check-out."
+msgstr "Entraîneur qui a enregistré le départ."
+
+msgid "Optional free-text note captured at check-in."
+msgstr "Note libre optionnelle saisie à l'arrivée."
+
+msgid "Optional free-text note captured at check-out."
+msgstr "Note libre optionnelle saisie au départ."
+
+msgid "Name of the person who picked up the participant."
+msgstr "Nom de la personne ayant récupéré le participant."
+
+msgid "Which emergency contact or free-text option was chosen."
+msgstr "Quel contact d'urgence ou option libre a été choisi."
+
+msgid "Checked out without prior check-in"
+msgstr "Départ sans arrivée préalable"
+
+msgid "True if at the moment of check-out no check-in was active. Reflects final non-reset state."
+msgstr "Vrai si, au moment du départ, aucune arrivée n'était active. Reflète l'état final hors annulation."
+
+msgid "Created"
+msgstr "Créé"
+
+msgid "Changed"
+msgstr "Modifié"
+
+msgid "When the record was created."
+msgstr "Moment de création du dossier."
+
+msgid "When the record was last changed."
+msgstr "Moment de la dernière modification du dossier."
+
+# ============================================================
+# Settings form
+# ============================================================
 msgid "PICC Attendance settings"
 msgstr "Paramètres de présences PICC"
+
+msgid "Attendance settings"
+msgstr "Paramètres des présences"
 
 msgid "Retention window (days)"
 msgstr "Période de rétention (jours)"
@@ -200,12 +378,29 @@ msgstr "Lancer la suppression maintenant"
 msgid "Purge complete. @count record(s) deleted."
 msgstr "Suppression terminée. @count dossier(s) supprimé(s)."
 
-# Permissions.
+# ============================================================
+# Permissions
+# ============================================================
 msgid "Record PICC attendance (check-in / check-out / reset today)"
 msgstr "Enregistrer les présences PICC (arrivée / départ / annulation du jour)"
+
+msgid "Allows coaches to record check-in and check-out for participants in programs that are active today. Limited to the current day."
+msgstr "Permet aux entraîneurs d'enregistrer arrivées et départs pour les participants des programmes actifs aujourd'hui. Limité au jour en cours."
 
 msgid "View PICC attendance history"
 msgstr "Voir l'historique des présences PICC"
 
+msgid "Allows viewing all historical attendance records (admin history view + CSV export)."
+msgstr "Permet de voir tous les dossiers de présence archivés (vue admin + export CSV)."
+
 msgid "Administer PICC attendance"
 msgstr "Administrer les présences PICC"
+
+msgid "Configure retention settings, run manual purges, edit and delete attendance records. Bypass the daily time-window rule."
+msgstr "Configurer la rétention, lancer des suppressions manuelles, modifier et supprimer des dossiers. Contourner la règle de fenêtre quotidienne."
+
+# ============================================================
+# Admin list builder columns
+# ============================================================
+msgid "Pickup"
+msgstr "Récupération"
