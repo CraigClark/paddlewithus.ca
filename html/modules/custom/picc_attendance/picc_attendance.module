@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the PICC Attendance module.
+ */
+
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_cron().
+ *
+ * Runs the 3-year retention purge once every 24 hours.
+ * @see \Drupal\picc_attendance\Service\AttendancePurger
+ */
+function picc_attendance_cron() {
+  if (\Drupal::hasService('picc_attendance.purger')) {
+    \Drupal::service('picc_attendance.purger')->runIfDue();
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * Injects two dynamic conditions on the coach attendance view:
+ *
+ * 1. Product must have field_track_attendance = 1.
+ * 2. Today (site timezone) must fall within the variation's
+ *    field_date_range [value, end_value].
+ *
+ * Kept in PHP rather than YAML because "today" is inherently dynamic
+ * and matching picc_registration's `hook_views_query_alter()` pattern
+ * for birth-date filtering in the `participants` view.
+ */
+function picc_attendance_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() !== 'picc_attendance') {
+    return;
+  }
+
+  /** @var \Drupal\views\Plugin\views\query\Sql $query */
+  $tz_name = \Drupal::config('system.date')->get('timezone.default') ?: date_default_timezone_get();
+  $today = (new \DateTimeImmutable('@' . \Drupal::time()->getRequestTime()))
+    ->setTimezone(new \DateTimeZone($tz_name))
+    ->format('Y-m-d');
+
+  // Single WHERE expression keyed off commerce_order_item.purchased_entity,
+  // which is always present on the base table — avoids the need to resolve
+  // the Views-aliased variation table. Using distinct placeholder names
+  // because PDO does not allow the same placeholder to appear twice.
+  $query->addWhereExpression(
+    0,
+    "commerce_order_item.purchased_entity IN (
+      SELECT v.variation_id
+      FROM {commerce_product_variation_field_data} v
+      INNER JOIN {commerce_product__field_track_attendance} t
+        ON t.entity_id = v.product_id
+        AND t.field_track_attendance_value = 1
+      INNER JOIN {commerce_product_variation__field_date_range} d
+        ON d.entity_id = v.variation_id
+        AND d.field_date_range_value <= :picc_att_today_start
+        AND d.field_date_range_end_value >= :picc_att_today_end
+    )",
+    [
+      ':picc_att_today_start' => $today,
+      ':picc_att_today_end' => $today,
+    ]
+  );
+}

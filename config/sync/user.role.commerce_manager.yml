@@ -24,6 +24,7 @@ dependencies:
     - filter
     - masquerade
     - media
+    - picc_attendance
     - picc_ext
     - profile
     - system
@@ -70,6 +71,7 @@ permissions:
   - 'manage swim_test_slot commerce_product_variation'
   - 'masquerade as account_holder'
   - 'masquerade as authenticated'
+  - 'record picc attendance'
   - 'skip node redirect'
   - 'translate activity commerce_product'
   - 'translate commerce_product_variation'
@@ -93,6 +95,7 @@ permissions:
   - 'view field_swim_test_evaluated_by'
   - 'view field_swim_test_passed_date'
   - 'view online commerce_store'
+  - 'view picc attendance history'
   - 'view stripe dashboard links'
   - 'view the administration theme'
   - 'view user email addresses'

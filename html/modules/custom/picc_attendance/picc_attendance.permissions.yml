@@ -1,0 +1,14 @@
+record picc attendance:
+  title: 'Record PICC attendance (check-in / check-out / reset today)'
+  description: 'Allows coaches to record check-in and check-out for participants in programs that are active today. Limited to the current day.'
+  restrict access: true
+
+view picc attendance history:
+  title: 'View PICC attendance history'
+  description: 'Allows viewing all historical attendance records (admin history view + CSV export).'
+  restrict access: true
+
+administer picc attendance:
+  title: 'Administer PICC attendance'
+  description: 'Configure retention settings, run manual purges, edit and delete attendance records. Bypass the daily time-window rule.'
+  restrict access: true

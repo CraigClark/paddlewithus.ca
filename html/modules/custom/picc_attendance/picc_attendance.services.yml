@@ -1,0 +1,30 @@
+services:
+  logger.channel.picc_attendance:
+    parent: logger.channel_base
+    arguments:
+      - 'picc_attendance'
+
+  picc_attendance.access_checker:
+    class: Drupal\picc_attendance\Service\AttendanceAccessChecker
+    arguments:
+      - '@entity_type.manager'
+      - '@datetime.time'
+      - '@current_user'
+
+  picc_attendance.recorder:
+    class: Drupal\picc_attendance\Service\AttendanceRecorder
+    arguments:
+      - '@entity_type.manager'
+      - '@lock'
+      - '@datetime.time'
+      - '@current_user'
+      - '@logger.channel.picc_attendance'
+
+  picc_attendance.purger:
+    class: Drupal\picc_attendance\Service\AttendancePurger
+    arguments:
+      - '@entity_type.manager'
+      - '@state'
+      - '@config.factory'
+      - '@datetime.time'
+      - '@logger.channel.picc_attendance'

@@ -1,0 +1,91 @@
+# Coach attendance actions — modal forms.
+picc_attendance.check_in:
+  path: '/attendance/check-in/{commerce_order_item}'
+  defaults:
+    _form: '\Drupal\picc_attendance\Form\AttendanceCheckInForm'
+    _title: 'Check in'
+  requirements:
+    _custom_access: 'picc_attendance.access_checker:accessCheckInRoute'
+  options:
+    parameters:
+      commerce_order_item:
+        type: entity:commerce_order_item
+
+picc_attendance.check_out:
+  path: '/attendance/check-out/{commerce_order_item}'
+  defaults:
+    _form: '\Drupal\picc_attendance\Form\AttendanceCheckOutForm'
+    _title: 'Check out'
+  requirements:
+    _custom_access: 'picc_attendance.access_checker:accessCheckOutRoute'
+  options:
+    parameters:
+      commerce_order_item:
+        type: entity:commerce_order_item
+
+picc_attendance.reset:
+  path: '/attendance/reset/{picc_attendance}/{slot}'
+  defaults:
+    _form: '\Drupal\picc_attendance\Form\AttendanceResetForm'
+    _title: 'Reset attendance'
+  requirements:
+    _custom_access: 'picc_attendance.access_checker:accessResetRoute'
+    slot: 'check_in|check_out'
+  options:
+    parameters:
+      picc_attendance:
+        type: entity:picc_attendance
+
+# Admin surfaces.
+picc_attendance.settings:
+  path: '/admin/config/picc/attendance'
+  defaults:
+    _form: '\Drupal\picc_attendance\Form\AttendanceSettingsForm'
+    _title: 'PICC Attendance settings'
+  requirements:
+    _permission: 'administer picc attendance'
+
+picc_attendance.admin_collection:
+  path: '/admin/attendance'
+  defaults:
+    _entity_list: 'picc_attendance'
+    _title: 'Attendance records'
+  requirements:
+    _permission: 'administer picc attendance+view picc attendance history'
+
+entity.picc_attendance.canonical:
+  path: '/admin/attendance/{picc_attendance}'
+  defaults:
+    _entity_view: 'picc_attendance'
+    _title_callback: '\Drupal\picc_attendance\Controller\AttendanceController::title'
+  requirements:
+    _entity_access: 'picc_attendance.view'
+  options:
+    parameters:
+      picc_attendance:
+        type: entity:picc_attendance
+
+entity.picc_attendance.edit_form:
+  path: '/admin/attendance/{picc_attendance}/edit'
+  defaults:
+    _entity_form: 'picc_attendance.default'
+    _title: 'Edit attendance record'
+  requirements:
+    _entity_access: 'picc_attendance.update'
+  options:
+    parameters:
+      picc_attendance:
+        type: entity:picc_attendance
+
+entity.picc_attendance.delete_form:
+  path: '/admin/attendance/{picc_attendance}/delete'
+  defaults:
+    _entity_form: 'picc_attendance.delete'
+    _title: 'Delete attendance record'
+  requirements:
+    _entity_access: 'picc_attendance.delete'
+  options:
+    parameters:
+      picc_attendance:
+        type: entity:picc_attendance
+

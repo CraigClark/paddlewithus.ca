@@ -1,6 +1,6 @@
 # Attendance Feature — Implementation Plan
 
-Status: approved, pending implementation.
+Status: **implemented**. See implementation notes at the end of this document.
 Last updated: 2026-04-22.
 Target branch: `program-attendance`.
 
@@ -500,4 +500,41 @@ Explicitly deferred:
 
 ---
 
-*End of plan. Implementation begins on green light; first commits will be: (a) `field_track_attendance` field add + export, (b) `picc_attendance` module skeleton, (c) entity definition + schema.*
+---
+
+## 12. Implementation notes (post-build)
+
+Everything in sections 1–11 was implemented as planned, with one material deviation and one minor addition:
+
+### Deviation: separate view instead of extending `views.view.registration.yml`
+
+The plan (§1.4) proposed adding an `attendance_page` display to the existing registration view. During implementation I created a standalone file `config/sync/views.view.picc_attendance.yml` instead.
+
+**Why:** the registration view YAML is ~2400 lines with heavy BEF + field customisations; overlaying a display on top risked silent regressions to the existing roster. A separate view file is ~500 lines, reviewable as a single diff, and semantically identical. Behaviour matches the plan.
+
+The admin history view is also its own file (`views.view.picc_attendance_history.yml`), as originally proposed.
+
+### Addition: manager window bypass
+
+Plan §4.7 says commerce_managers can use the modal forms "(can bypass window)". To implement this cleanly without a fifth permission, `AttendanceAccessChecker` bypasses the window for anyone with `view picc attendance history` OR `administer picc attendance`. Commerce managers get both `record picc attendance` and `view picc attendance history`; the effect is that they can correct attendance records from any day. Coaches, with only `record picc attendance`, remain today-only.
+
+### What's shipping
+
+- `field_track_attendance` boolean on `commerce_product` type `activity` (product form).
+- New module `picc_attendance` (entity, storage schema, access control handler, list builder, 3 services, 4 forms, 1 Views field plugin, cron, 3 permissions, French translations).
+- New view `picc_attendance` at `/participants/attendance` (coach-facing).
+- New view `picc_attendance_history` at `/admin/attendance/history` (manager + admin).
+- New admin config at `/admin/config/picc/attendance` (retention + manual purge).
+- Documentation: `documentation/technical/attendance-{architecture,deployment,testing}.md` and `documentation/user/attendance-{overview,coaches}.md`.
+
+### Next steps
+
+1. Review the diff.
+2. `ddev drush en picc_attendance -y` on a dev environment.
+3. `ddev drush cim -y` to import the product field, views, and role permissions.
+4. Walk through the manual test scenarios in `documentation/technical/attendance-testing.md`.
+5. Turn on **Track attendance** on one real program to pilot.
+
+---
+
+*End of plan.*

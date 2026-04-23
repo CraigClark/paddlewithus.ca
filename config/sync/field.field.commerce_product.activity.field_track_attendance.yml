@@ -1,0 +1,23 @@
+uuid: 94fd565c-4ad7-49cb-9fbd-ba0a03ab88c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.storage.commerce_product.field_track_attendance
+id: commerce_product.activity.field_track_attendance
+field_name: field_track_attendance
+entity_type: commerce_product
+bundle: activity
+label: 'Track attendance'
+description: '<p>When enabled, coaches can record check-in and check-out for each participant on the attendance roster. Leave off for programs that do not need daily attendance tracking.</p>'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes — enable attendance tracking for this program'
+  off_label: 'No'
+field_type: boolean

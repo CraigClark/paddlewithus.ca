@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for picc_attendance.
+ */
+
+/**
+ * Import the module's translations from translations/*.po.
+ */
+function _picc_attendance_import_translations() {
+  if (!\Drupal::moduleHandler()->moduleExists('locale')) {
+    return;
+  }
+
+  $module_path = \Drupal::service('extension.list.module')->getPath('picc_attendance');
+  $translations_dir = DRUPAL_ROOT . '/' . $module_path . '/translations';
+
+  if (!is_dir($translations_dir)) {
+    return;
+  }
+
+  $files = glob($translations_dir . '/*.po');
+  if (!$files) {
+    return;
+  }
+
+  foreach ($files as $file_path) {
+    $filename = basename($file_path);
+    if (!preg_match('/^([a-z-]+)\.po$/', $filename, $matches)) {
+      continue;
+    }
+    $langcode = $matches[1];
+
+    $file = new \stdClass();
+    $file->filename = $filename;
+    $file->uri = $file_path;
+    $file->langcode = $langcode;
+    $file->timestamp = filemtime($file_path);
+
+    $options = [
+      'langcode' => $langcode,
+      'overwrite_options' => [
+        'not_customized' => TRUE,
+        'customized' => FALSE,
+      ],
+      'customized' => LOCALE_NOT_CUSTOMIZED,
+      'seek' => 0,
+    ];
+
+    try {
+      \Drupal\locale\Gettext::fileToDatabase($file, $options);
+      \Drupal::logger('picc_attendance')->notice('Imported translations from @file for @lang.', [
+        '@file' => $filename,
+        '@lang' => $langcode,
+      ]);
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('picc_attendance')->error('Failed to import @file: @msg', [
+        '@file' => $filename,
+        '@msg' => $e->getMessage(),
+      ]);
+    }
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function picc_attendance_install() {
+  _picc_attendance_import_translations();
+}

@@ -1,0 +1,1264 @@
+uuid: ffeddd46-21fc-4155-8875-81e0e78bca41
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.admin
+  module:
+    - better_exposed_filters
+    - csv_serialization
+    - datetime
+    - options
+    - picc_attendance
+    - rest
+    - serialization
+    - user
+    - views_data_export
+    - views_selective_filters
+id: picc_attendance_history
+label: 'Attendance history'
+module: views
+description: 'Admin/manager view of historical attendance records across all programs. CSV export available.'
+tag: picc_attendance
+base_table: picc_attendance
+base_field: id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Attendance history'
+      fields:
+        date:
+          id: date
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Date
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: html_date
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        product:
+          id: product
+          table: picc_attendance
+          field: product
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Program
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        participant:
+          id: participant
+          table: picc_attendance
+          field: participant
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Participant
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_in_at:
+          id: check_in_at
+          table: picc_attendance
+          field: check_in_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Check-in
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: 'Y-m-d H:i'
+            timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_in_by:
+          id: check_in_by
+          table: picc_attendance
+          field: check_in_by
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Checked in by'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_at:
+          id: check_out_at
+          table: picc_attendance
+          field: check_out_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Check-out
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: 'Y-m-d H:i'
+            timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_by:
+          id: check_out_by
+          table: picc_attendance
+          field: check_out_by
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Checked out by'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_pickup_name:
+          id: check_out_pickup_name
+          table: picc_attendance
+          field: check_out_pickup_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Picked up by'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_pickup_source:
+          id: check_out_pickup_source
+          table: picc_attendance
+          field: check_out_pickup_source
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Pickup source'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        checkout_without_checkin:
+          id: checkout_without_checkin
+          table: picc_attendance
+          field: checkout_without_checkin
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Without check-in'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: yes-no
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_in_note:
+          id: check_in_note
+          table: picc_attendance
+          field: check_in_note
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Check-in note'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_note:
+          id: check_out_note
+          table: picc_attendance
+          field: check_out_note
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Check-out note'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h2
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '25, 50, 100, 250'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 5
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: false
+              auto_submit_sort_only: false
+              autosubmit_breakpoint: ''
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            filter:
+              date:
+                plugin_id: default
+                advanced:
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+                  sort_options_unsupported: ''
+              product:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+                  sort_options_unsupported: ''
+              checkout_without_checkin:
+                plugin_id: bef_single
+                advanced:
+                  sort_options: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+                treat_as_false: false
+      access:
+        type: perm
+        options:
+          perm: 'view picc attendance history'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        date:
+          id: date
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          order: DESC
+      arguments: {  }
+      filters:
+        date:
+          id: date
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: between
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: date_op
+            label: 'Date range'
+            description: ''
+            use_operator: false
+            operator: date_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+        product_selective:
+          id: product_selective
+          table: picc_attendance
+          field: product_selective
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: picc_attendance
+          entity_field: product
+          plugin_id: views_selective_filters_filter
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Program
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: product_selective
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          selective_display_field: product
+          selective_display_sort: ASC
+          selective_aggregated_fields: ''
+          selective_items_limit: 100
+          selective_entity_type: ''
+        checkout_without_checkin:
+          id: checkout_without_checkin
+          table: picc_attendance
+          field: checkout_without_checkin
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: '0'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Show checkouts without check-in'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: flag_only
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: 'Checked out without prior check-in'
+            description: null
+            identifier: checkout_without_checkin
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1: {  }
+              2: {  }
+              3: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            date: date
+            product: product
+            participant: participant
+            check_in_at: check_in_at
+            check_in_by: check_in_by
+            check_out_at: check_out_at
+            check_out_by: check_out_by
+            check_out_pickup_name: check_out_pickup_name
+            check_out_pickup_source: check_out_pickup_source
+            checkout_without_checkin: checkout_without_checkin
+          default: date
+          info:
+            date:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            product:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            participant:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            check_in_at:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            check_in_by:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            check_out_at:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            check_out_by:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            check_out_pickup_name:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            check_out_pickup_source:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            checkout_without_checkin:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: true
+          summary: ''
+          empty_table: true
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships: {  }
+      header: {  }
+      footer:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: 'Result summary'
+          plugin_id: result
+          empty: false
+          content: '<div class="attendance-history-result-count"><span class="text-xl font-semibold">@total</span> records</div>'
+          tokenize: false
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
+      tags: {  }
+  data_export_1:
+    id: data_export_1
+    display_title: 'CSV export'
+    display_plugin: data_export
+    position: 2
+    display_options:
+      fields:
+        date:
+          id: date
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Date
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: html_date
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        product:
+          id: product
+          table: picc_attendance
+          field: product
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Program
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        participant:
+          id: participant
+          table: picc_attendance
+          field: participant
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Participant
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_in_at:
+          id: check_in_at
+          table: picc_attendance
+          field: check_in_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Check-in
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: 'Y-m-d H:i'
+            timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: ''
+              past_format: ''
+              granularity: 2
+              refresh: 60
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_in_by:
+          id: check_in_by
+          table: picc_attendance
+          field: check_in_by
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Checked in by'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_at:
+          id: check_out_at
+          table: picc_attendance
+          field: check_out_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Check-out
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: 'Y-m-d H:i'
+            timezone: ''
+            tooltip:
+              date_format: ''
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: ''
+              past_format: ''
+              granularity: 2
+              refresh: 60
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_by:
+          id: check_out_by
+          table: picc_attendance
+          field: check_out_by
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Checked out by'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_pickup_name:
+          id: check_out_pickup_name
+          table: picc_attendance
+          field: check_out_pickup_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Picked up by'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_pickup_source:
+          id: check_out_pickup_source
+          table: picc_attendance
+          field: check_out_pickup_source
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Pickup source'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        checkout_without_checkin:
+          id: checkout_without_checkin
+          table: picc_attendance
+          field: checkout_without_checkin
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Without check-in'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: yes-no
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_in_note:
+          id: check_in_note
+          table: picc_attendance
+          field: check_in_note
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Check-in note'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        check_out_note:
+          id: check_out_note
+          table: picc_attendance
+          field: check_out_note
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Check-out note'
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      pager:
+        type: none
+        options:
+          offset: 0
+      sorts:
+        date:
+          id: date
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          order: DESC
+      filters:
+        date:
+          id: date
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: between
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: date_op
+            label: 'Date range'
+            description: ''
+            use_operator: false
+            operator: date_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+        product:
+          id: product
+          table: picc_attendance
+          field: product
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: in
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: product_op
+            label: Program
+            description: ''
+            use_operator: false
+            operator: product_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: program
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: true
+            trim: true
+            encoding: utf8
+            utf8_bom: '0'
+            use_serializer_encode_only: false
+            output_header: true
+          xml_settings:
+            encoding: UTF-8
+            root_node_name: response
+            item_node_name: item
+            format_output: false
+      row:
+        type: data_field
+        options:
+          field_options: {  }
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+      path: 'admin/attendance/history/[date:custom:Y-m-d]-picc-attendance.csv'
+      displays:
+        page_1: page_1
+        default: '0'
+      filename: '[date:custom:Y-m-d]-picc-attendance.csv'
+      automatic_download: false
+      export_filesystem: private
+      custom_redirect_path: false
+      redirect_to_display: none
+      include_query_params: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+        - url
+        - user.permissions
+      tags: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+      path: admin/attendance/history
+      menu:
+        type: normal
+        title: 'Attendance history'
+        description: 'Browse and export historical attendance records.'
+        weight: 0
+        expanded: false
+        menu_name: admin
+        parent: system.admin_content
+        context: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
+      tags: {  }

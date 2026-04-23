@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: picc_attendance 1.0\n"
+"POT-Creation-Date: 2026-04-22 12:00+0000\n"
+"PO-Revision-Date: 2026-04-22 12:00+0000\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Coach attendance view — titles and empty state.
+msgid "Attendance"
+msgstr "Présences"
+
+msgid "Attendance (today)"
+msgstr "Présences (aujourd'hui)"
+
+msgid "Attendance history"
+msgstr "Historique des présences"
+
+msgid "Check in and out participants for today's programs."
+msgstr "Enregistrer les arrivées et les départs des participants pour les programmes du jour."
+
+msgid "<p class=\"text-base opacity-70\">No participants to check in or out today. Either no programs with attendance tracking are running today, or there are no completed registrations.</p>"
+msgstr "<p class=\"text-base opacity-70\">Aucun participant à enregistrer aujourd'hui. Soit aucun programme avec suivi des présences n'est actif aujourd'hui, soit aucune inscription n'est complétée.</p>"
+
+msgid "<div class=\"attendance-result-count\"><span class=\"text-xl font-semibold\">@total</span> participants expected today</div>"
+msgstr "<div class=\"attendance-result-count\"><span class=\"text-xl font-semibold\">@total</span> participants prévus aujourd'hui</div>"
+
+# Action labels.
+msgid "Check in"
+msgstr "Arrivée"
+
+msgid "Check out"
+msgstr "Départ"
+
+msgid "Reset check-in"
+msgstr "Annuler l'arrivée"
+
+msgid "Reset check-out"
+msgstr "Annuler le départ"
+
+# Check-in form.
+msgid "Check in @name"
+msgstr "Arrivée de @name"
+
+msgid "Note (optional)"
+msgstr "Note (optionnelle)"
+
+msgid "Anything worth recording — e.g. \"Arrived late\", \"Parent mentioned medication change.\""
+msgstr "Toute information utile — par ex. « Arrivé en retard », « Parent a mentionné un changement de médicaments »."
+
+msgid "@name checked in."
+msgstr "@name est arrivé."
+
+# Check-out form.
+msgid "Check out @name"
+msgstr "Départ de @name"
+
+msgid "Picked up by"
+msgstr "Récupéré par"
+
+msgid "Select the person picking up @name. Only one person can be selected."
+msgstr "Sélectionner la personne qui récupère @name. Une seule personne peut être sélectionnée."
+
+msgid "Other (enter name)"
+msgstr "Autre (entrer le nom)"
+
+msgid "Name of other person"
+msgstr "Nom de l'autre personne"
+
+msgid "Please enter the name of the person picking up."
+msgstr "Veuillez entrer le nom de la personne qui récupère le participant."
+
+msgid "Anything worth recording — e.g. \"Biked home with parent consent\", \"Sick, picked up early\"."
+msgstr "Toute information utile — par ex. « Rentré à vélo avec l'accord du parent », « Malade, récupéré plus tôt »."
+
+msgid "This participant was not checked in today. The check-out will be flagged as \"without check-in\"."
+msgstr "Ce participant n'a pas été enregistré à son arrivée aujourd'hui. Le départ sera marqué « sans arrivée »."
+
+msgid "No authorised emergency contacts are on file for @name. Enter the name of the person picking up manually. This will be flagged in the record."
+msgstr "Aucun contact d'urgence autorisé n'est enregistré pour @name. Entrer manuellement le nom de la personne qui récupère. Ceci sera noté au dossier."
+
+msgid "@name checked out with @pickup."
+msgstr "@name est parti avec @pickup."
+
+# Reset form.
+msgid "Reset @slot for @name"
+msgstr "Annuler l'@slot pour @name"
+
+msgid "check-in"
+msgstr "arrivée"
+
+msgid "check-out"
+msgstr "départ"
+
+msgid "The original @slot value will remain in the audit history. Enter a short reason so the record is traceable."
+msgstr "La valeur d'@slot originale reste dans l'historique d'audit. Entrer une courte raison pour la traçabilité."
+
+msgid "Reason"
+msgstr "Raison"
+
+msgid "For example: \"Clicked the wrong participant\", \"Entered by mistake\"."
+msgstr "Par exemple : « Mauvais participant cliqué », « Entrée par erreur »."
+
+msgid "Reset"
+msgstr "Annuler"
+
+msgid "@slot reset."
+msgstr "@slot annulé."
+
+msgid "Check-in"
+msgstr "Arrivée"
+
+msgid "Check-out"
+msgstr "Départ"
+
+# Status badges.
+msgid "In @time"
+msgstr "Arrivé à @time"
+
+msgid "Out @time"
+msgstr "Parti à @time"
+
+msgid "Out @time (no check-in)"
+msgstr "Parti à @time (sans arrivée)"
+
+msgid "Check-out recorded without prior check-in"
+msgstr "Départ enregistré sans arrivée préalable"
+
+# Field labels & admin columns.
+msgid "Participant"
+msgstr "Participant"
+
+msgid "Participant name contains"
+msgstr "Nom du participant contient"
+
+msgid "Matches on first name."
+msgstr "Recherche sur le prénom."
+
+msgid "Program"
+msgstr "Programme"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Checked in by"
+msgstr "Arrivée enregistrée par"
+
+msgid "Checked out by"
+msgstr "Départ enregistré par"
+
+msgid "Pickup source"
+msgstr "Source"
+
+msgid "Check-in note"
+msgstr "Note d'arrivée"
+
+msgid "Check-out note"
+msgstr "Note de départ"
+
+msgid "Without check-in"
+msgstr "Sans arrivée"
+
+msgid "Only show checkouts without check-in"
+msgstr "N'afficher que les départs sans arrivée"
+
+msgid "Date range"
+msgstr "Plage de dates"
+
+# Settings form.
+msgid "PICC Attendance settings"
+msgstr "Paramètres de présences PICC"
+
+msgid "Retention window (days)"
+msgstr "Période de rétention (jours)"
+
+msgid "Attendance records whose date is older than this many days will be purged automatically (3 years = 1095)."
+msgstr "Les dossiers de présence plus anciens que ce nombre de jours sont supprimés automatiquement (3 ans = 1095)."
+
+msgid "Purge status"
+msgstr "État de la suppression"
+
+msgid "Last purge: @time"
+msgstr "Dernière suppression : @time"
+
+msgid "never"
+msgstr "jamais"
+
+msgid "Purges run automatically once every 24 hours via cron. Use the button below only if you need to force an immediate purge (e.g. after changing the retention window)."
+msgstr "Les suppressions s'exécutent automatiquement toutes les 24 heures via cron. N'utiliser le bouton ci-dessous que pour forcer une suppression immédiate (par ex. après un changement de la période de rétention)."
+
+msgid "Run purge now"
+msgstr "Lancer la suppression maintenant"
+
+msgid "Purge complete. @count record(s) deleted."
+msgstr "Suppression terminée. @count dossier(s) supprimé(s)."
+
+# Permissions.
+msgid "Record PICC attendance (check-in / check-out / reset today)"
+msgstr "Enregistrer les présences PICC (arrivée / départ / annulation du jour)"
+
+msgid "View PICC attendance history"
+msgstr "Voir l'historique des présences PICC"
+
+msgid "Administer PICC attendance"
+msgstr "Administrer les présences PICC"

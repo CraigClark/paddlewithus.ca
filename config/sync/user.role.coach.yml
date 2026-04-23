@@ -11,6 +11,7 @@ dependencies:
   module:
     - content_translation
     - field_permissions
+    - picc_attendance
     - rabbit_hole
     - system
     - taxonomy
@@ -40,6 +41,7 @@ permissions:
   - 'edit terms in regatta'
   - 'rabbit hole bypass taxonomy_term'
   - 'rabbit hole bypass user'
+  - 'record picc attendance'
   - 'revert term revisions in activity'
   - 'revert term revisions in boat'
   - 'revert term revisions in competition_class'

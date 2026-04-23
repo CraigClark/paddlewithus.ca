@@ -1,0 +1,11 @@
+picc_attendance.settings:
+  title: 'PICC Attendance'
+  description: 'Configure retention, run manual purges, view last-run stats.'
+  parent: system.admin_config_development
+  route_name: picc_attendance.settings
+
+picc_attendance.admin_collection:
+  title: 'Attendance records'
+  description: 'Administrative list of all attendance records.'
+  parent: system.admin_content
+  route_name: picc_attendance.admin_collection

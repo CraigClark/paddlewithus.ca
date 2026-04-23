@@ -1,0 +1,16 @@
+name: 'PICC Attendance'
+type: module
+description: 'Daily attendance tracking for paddling programs — coach check-in / check-out with emergency-contact pickup, revision-based audit, and 3-year retention.'
+package: PICC
+version: '1.0'
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:views
+  - drupal:datetime
+  - drupal:options
+  - drupal:user
+  - profile:profile
+  - commerce:commerce_product
+  - commerce:commerce_order
+  - name:name
+  - picc_registration:picc_registration

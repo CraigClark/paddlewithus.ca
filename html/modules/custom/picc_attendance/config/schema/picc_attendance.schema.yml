@@ -1,0 +1,8 @@
+picc_attendance.settings:
+  type: config_object
+  label: 'PICC Attendance settings'
+  mapping:
+    retention_days:
+      type: integer
+      label: 'Retention days'
+      description: 'Attendance records are purged once their date is older than this many days. Default 1095 (3 years).'

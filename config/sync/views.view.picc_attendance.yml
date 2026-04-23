@@ -1,0 +1,497 @@
+uuid: 827a97f6-fe31-4fc6-b1af-04a80e0b7733
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_order.commerce_order_item_type.activity_registration
+    - field.storage.profile.field_name
+    - system.menu.main
+    - user.role.coach
+    - user.role.commerce_manager
+  module:
+    - better_exposed_filters
+    - commerce
+    - commerce_order
+    - commerce_product
+    - name
+    - picc_attendance
+    - picc_ext
+    - profile
+    - state_machine
+    - user
+    - views_selective_filters
+id: picc_attendance
+label: 'Attendance (today)'
+module: views
+description: 'Coach-facing daily attendance list. Shows only programs with attendance tracking enabled whose session date range covers today.'
+tag: picc_attendance
+base_table: commerce_order_item
+base_field: order_item_id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: Attendance
+      fields:
+        product_id:
+          id: product_id
+          table: commerce_product_variation_field_data
+          field: product_id
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_product_variation
+          entity_field: product_id
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_name:
+          id: field_name
+          table: profile__field_name
+          field: field_name
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Participant
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+          click_sort_column: title
+          type: name_default
+          settings:
+            format: default
+            markup: none
+            list_format: ''
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        participant_status_icons:
+          id: participant_status_icons
+          table: profile
+          field: participant_status_icons
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: participant_status_icons
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+        attendance_action:
+          id: attendance_action
+          table: commerce_order_item
+          field: attendance_action
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: attendance_action
+          label: Actions
+          exclude: false
+          alter:
+            alter_text: false
+          element_label_colon: false
+        view_profile:
+          id: view_profile
+          table: profile
+          field: view_profile
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          entity_type: profile
+          plugin_id: entity_link
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            link_class: 'btn btn-ghost btn-sm'
+          element_label_colon: false
+          text: 'View profile'
+          output_url_as_text: false
+          absolute: false
+      pager:
+        type: none
+        options:
+          offset: 0
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Apply
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: true
+              auto_submit_sort_only: false
+              autosubmit_breakpoint: ''
+              autosubmit_exclude_textfield: true
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            filter:
+              product_id_selective:
+                plugin_id: default
+                advanced:
+                  sort_options: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+              field_name_given:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+                  sort_options_unsupported: ''
+      access:
+        type: role
+        options:
+          role:
+            coach: coach
+            commerce_manager: commerce_manager
+      cache:
+        type: none
+        options: {  }
+      empty:
+        area_text_custom_empty:
+          id: area_text_custom_empty
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: '<p class="text-base opacity-70">No participants to check in or out today. Either no programs with attendance tracking are running today, or there are no completed registrations.</p>'
+          tokenize: false
+      sorts:
+        product_id:
+          id: product_id
+          table: commerce_product_variation_field_data
+          field: product_id
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_product_variation
+          entity_field: product_id
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        field_name_family:
+          id: field_name_family
+          table: profile__field_name
+          field: field_name_family
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+        field_name_given:
+          id: field_name_given
+          table: profile__field_name
+          field: field_name_given
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+      arguments: {  }
+      filters:
+        type:
+          id: type
+          table: commerce_order_item
+          field: type
+          entity_type: commerce_order_item
+          entity_field: type
+          plugin_id: commerce_entity_bundle
+          value:
+            activity_registration: activity_registration
+          group: 1
+        state:
+          id: state
+          table: commerce_order
+          field: state
+          relationship: order_id
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_order
+          entity_field: state
+          plugin_id: state_machine_state
+          operator: in
+          value:
+            completed: completed
+          group: 1
+          exposed: false
+          is_grouped: false
+        langcode:
+          id: langcode
+          table: commerce_product_variation_field_data
+          field: langcode
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_product_variation
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          is_grouped: false
+        product_id_selective:
+          id: product_id_selective
+          table: commerce_product_variation_field_data
+          field: product_id_selective
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          entity_type: commerce_product_variation
+          entity_field: product_id
+          plugin_id: views_selective_filters_filter
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Program
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: product_id_selective
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          selective_display_field: product_id
+          selective_display_sort: ASC
+          selective_aggregated_fields: ''
+          selective_items_limit: 100
+          selective_entity_type: ''
+        field_name:
+          id: field_name
+          table: profile__field_name
+          field: field_name
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: name_fulltext
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_name_op
+            label: Name
+            description: 'You can enter a partial match'
+            use_operator: false
+            operator: field_name_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: default
+        options:
+          grouping:
+            -
+              field: product_id
+              rendered: true
+              rendered_strip: true
+          row_class: ''
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships:
+        commerce_product_variation:
+          id: commerce_product_variation
+          table: commerce_order_item
+          field: commerce_product_variation
+          relationship: none
+          group_type: group
+          admin_label: 'Product variation'
+          entity_type: commerce_order_item
+          plugin_id: standard
+          required: true
+        field_participant:
+          id: field_participant
+          table: commerce_order_item__field_participant
+          field: field_participant
+          relationship: none
+          group_type: group
+          admin_label: 'Participant (field_participant)'
+          plugin_id: standard
+          required: true
+        order_id:
+          id: order_id
+          table: commerce_order_item
+          field: order_id
+          relationship: none
+          group_type: group
+          admin_label: Order
+          entity_type: commerce_order_item
+          plugin_id: standard
+          required: true
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<div class="attendance-result-count"><span class="text-xl font-semibold">@total</span> participants expected today</div>'
+      footer: {  }
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user.roles
+      tags:
+        - 'config:field.storage.profile.field_name'
+  attendance_page:
+    id: attendance_page
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+      path: participants/attendance
+      menu:
+        type: normal
+        title: Attendance
+        description: "Check in and out participants for today's programs."
+        weight: -45
+        expanded: false
+        menu_name: main
+        parent: 'views_view:views.registration.page_1'
+        context: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user.roles
+      tags:
+        - 'config:field.storage.profile.field_name'
