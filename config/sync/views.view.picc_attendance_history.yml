@@ -1274,7 +1274,7 @@ display:
           metatags: {  }
           tokenize: false
         simple_sitemap_display_extender: {  }
-      path: 'admin/attendance/history/[date:custom:Y-m-d]-picc-attendance.csv'
+      path: 'admin/people/attendance/history/[date:custom:Y-m-d]-picc-attendance.csv'
       displays:
         page_1: page_1
         default: '0'
@@ -1305,7 +1305,7 @@ display:
           metatags: {  }
           tokenize: false
         simple_sitemap_display_extender: {  }
-      path: admin/attendance/history
+      path: admin/people/attendance/history
       menu:
         type: normal
         title: 'Attendance history'
@@ -1313,7 +1313,7 @@ display:
         weight: 0
         expanded: false
         menu_name: admin
-        parent: system.admin_content
+        parent: entity.user.collection
         context: '0'
     cache_metadata:
       max-age: -1

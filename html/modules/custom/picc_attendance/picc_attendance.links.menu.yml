@@ -13,5 +13,5 @@ picc_attendance.settings:
 picc_attendance.admin_collection:
   title: 'Attendance records'
   description: 'Administrative list of all attendance records.'
-  parent: system.admin_content
+  parent: entity.user.collection
   route_name: picc_attendance.admin_collection

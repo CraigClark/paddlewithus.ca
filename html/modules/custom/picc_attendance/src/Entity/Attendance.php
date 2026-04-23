@@ -58,10 +58,10 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  *     "revision_log_message" = "revision_log_message"
  *   },
  *   links = {
- *     "canonical" = "/admin/attendance/{picc_attendance}",
- *     "edit-form" = "/admin/attendance/{picc_attendance}/edit",
- *     "delete-form" = "/admin/attendance/{picc_attendance}/delete",
- *     "collection" = "/admin/attendance"
+ *     "canonical" = "/admin/people/attendance/{picc_attendance}",
+ *     "edit-form" = "/admin/people/attendance/{picc_attendance}/edit",
+ *     "delete-form" = "/admin/people/attendance/{picc_attendance}/delete",
+ *     "collection" = "/admin/people/attendance"
  *   }
  * )
  */

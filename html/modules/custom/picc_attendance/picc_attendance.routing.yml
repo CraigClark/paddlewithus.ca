@@ -55,7 +55,7 @@ picc_attendance.settings:
     _permission: 'administer picc attendance'
 
 picc_attendance.admin_collection:
-  path: '/admin/attendance'
+  path: '/admin/people/attendance'
   defaults:
     _entity_list: 'picc_attendance'
     _title: 'Attendance records'
@@ -63,36 +63,39 @@ picc_attendance.admin_collection:
     _permission: 'administer picc attendance'
 
 entity.picc_attendance.canonical:
-  path: '/admin/attendance/{picc_attendance}'
+  path: '/admin/people/attendance/{picc_attendance}'
   defaults:
     _entity_view: 'picc_attendance'
     _title: 'Attendance record'
   requirements:
     _entity_access: 'picc_attendance.view'
+    picc_attendance: \d+
   options:
     parameters:
       picc_attendance:
         type: entity:picc_attendance
 
 entity.picc_attendance.edit_form:
-  path: '/admin/attendance/{picc_attendance}/edit'
+  path: '/admin/people/attendance/{picc_attendance}/edit'
   defaults:
     _entity_form: 'picc_attendance.default'
     _title: 'Edit attendance record'
   requirements:
     _entity_access: 'picc_attendance.update'
+    picc_attendance: \d+
   options:
     parameters:
       picc_attendance:
         type: entity:picc_attendance
 
 entity.picc_attendance.delete_form:
-  path: '/admin/attendance/{picc_attendance}/delete'
+  path: '/admin/people/attendance/{picc_attendance}/delete'
   defaults:
     _entity_form: 'picc_attendance.delete'
     _title: 'Delete attendance record'
   requirements:
     _entity_access: 'picc_attendance.delete'
+    picc_attendance: \d+
   options:
     parameters:
       picc_attendance:
