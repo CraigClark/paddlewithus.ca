@@ -65,6 +65,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        profile_id:
+          id: profile_id
+          table: profile
+          field: profile_id
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          entity_type: profile
+          entity_field: profile_id
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+          element_label_colon: false
         field_name:
           id: field_name
           table: profile__field_name
@@ -73,10 +88,14 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Participant
+          label: ''
           exclude: false
           alter:
             alter_text: false
+            make_link: true
+            path: 'internal:/profile/{{ profile_id }}'
+            absolute: false
+          element_label_type: ''
           element_label_colon: false
           click_sort_column: title
           type: name_default
@@ -106,6 +125,7 @@ display:
           exclude: false
           alter:
             alter_text: false
+          element_label_type: ''
           element_label_colon: false
         attendance_action:
           id: attendance_action
@@ -115,29 +135,12 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: attendance_action
-          label: Actions
-          exclude: false
-          alter:
-            alter_text: false
-          element_label_colon: false
-        view_profile:
-          id: view_profile
-          table: profile
-          field: view_profile
-          relationship: field_participant
-          group_type: group
-          admin_label: ''
-          entity_type: profile
-          plugin_id: entity_link
           label: ''
           exclude: false
           alter:
             alter_text: false
-            link_class: 'btn btn-ghost btn-sm'
+          element_label_type: ''
           element_label_colon: false
-          text: 'View profile'
-          output_url_as_text: false
-          absolute: false
       pager:
         type: none
         options:
@@ -438,6 +441,17 @@ display:
           plugin_id: standard
           required: true
       header:
+        today:
+          id: today
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          plugin_id: area_text_custom
+          content: '<p class="attendance-today-date text-sm opacity-70">[current-date:custom:l, F j, Y]</p>'
+          tokenize: true
         result:
           id: result
           table: views

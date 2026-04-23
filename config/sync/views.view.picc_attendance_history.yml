@@ -482,15 +482,15 @@ display:
           order: DESC
       arguments: {  }
       filters:
-        date:
-          id: date
+        date_from:
+          id: date_from
           table: picc_attendance
           field: date
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          operator: between
+          operator: '>='
           value:
             min: ''
             max: ''
@@ -499,14 +499,45 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: date_op
-            label: 'Date range'
+            operator_id: date_from_op
+            label: 'From date'
             description: ''
             use_operator: false
-            operator: date_op
+            operator: date_from_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: date
+            identifier: date_from
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+        date_to:
+          id: date_to
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: <=
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: date_to_op
+            label: 'To date'
+            description: ''
+            use_operator: false
+            operator: date_to_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: date_to
             required: false
             remember: false
             multiple: false
@@ -1109,15 +1140,15 @@ display:
           plugin_id: datetime
           order: DESC
       filters:
-        date:
-          id: date
+        date_from:
+          id: date_from
           table: picc_attendance
           field: date
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          operator: between
+          operator: '>='
           value:
             min: ''
             max: ''
@@ -1126,14 +1157,45 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: date_op
-            label: 'Date range'
+            operator_id: date_from_op
+            label: 'From date'
             description: ''
             use_operator: false
-            operator: date_op
+            operator: date_from_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: date
+            identifier: date_from
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+        date_to:
+          id: date_to
+          table: picc_attendance
+          field: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: <=
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: date_to_op
+            label: 'To date'
+            description: ''
+            use_operator: false
+            operator: date_to_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: date_to
             required: false
             remember: false
             multiple: false

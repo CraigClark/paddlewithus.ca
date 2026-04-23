@@ -37,11 +37,20 @@ picc_attendance.reset:
         type: entity:picc_attendance
 
 # Admin surfaces.
+picc_attendance.admin_config_picc:
+  path: '/admin/config/picc'
+  defaults:
+    _controller: '\Drupal\picc_attendance\Controller\PiccAdminController::overview'
+    _title: PICC
+    link_id: picc_attendance.admin_config_picc
+  requirements:
+    _permission: 'access administration pages'
+
 picc_attendance.settings:
   path: '/admin/config/picc/attendance'
   defaults:
     _form: '\Drupal\picc_attendance\Form\AttendanceSettingsForm'
-    _title: 'PICC Attendance settings'
+    _title: 'Attendance settings'
   requirements:
     _permission: 'administer picc attendance'
 
@@ -57,7 +66,7 @@ entity.picc_attendance.canonical:
   path: '/admin/attendance/{picc_attendance}'
   defaults:
     _entity_view: 'picc_attendance'
-    _title_callback: '\Drupal\picc_attendance\Controller\AttendanceController::title'
+    _title: 'Attendance record'
   requirements:
     _entity_access: 'picc_attendance.view'
   options:

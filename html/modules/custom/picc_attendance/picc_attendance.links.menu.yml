@@ -1,7 +1,13 @@
+picc_attendance.admin_config_picc:
+  title: 'PICC'
+  description: 'Petrie Island Canoe Club settings.'
+  parent: system.admin_config
+  route_name: picc_attendance.admin_config_picc
+
 picc_attendance.settings:
-  title: 'PICC Attendance'
+  title: 'Attendance'
   description: 'Configure retention, run manual purges, view last-run stats.'
-  parent: system.admin_config_development
+  parent: picc_attendance.admin_config_picc
   route_name: picc_attendance.settings
 
 picc_attendance.admin_collection:

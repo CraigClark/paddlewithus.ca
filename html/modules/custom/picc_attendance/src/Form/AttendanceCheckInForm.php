@@ -53,7 +53,7 @@ class AttendanceCheckInForm extends FormBase implements ContainerInjectionInterf
     $form['note'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Note (optional)'),
-      '#description' => $this->t('Anything worth recording — e.g. "Arrived late", "Parent mentioned medication change."'),
+      '#description' => $this->t('Anything worth recording — e.g. "Arrived late". Do not record critical information like medication changes here; use the participant profile.'),
       '#rows' => 2,
     ];
 

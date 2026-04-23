@@ -128,9 +128,14 @@ class AttendanceCheckOutForm extends FormBase implements ContainerInjectionInter
 
     $form['note'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Note (optional)'),
-      '#description' => $this->t('Anything worth recording — e.g. "Biked home with parent consent", "Sick, picked up early".'),
+      '#title' => $this->t('Note'),
+      '#description' => $this->t('Anything worth recording — e.g. "Biked home with parent consent", "Sick, picked up early". Required when "Other" is selected so the reason for an unlisted pickup is on the record.'),
       '#rows' => 2,
+      '#states' => [
+        'required' => [
+          ':input[name="pickup_source"]' => ['value' => AttendanceInterface::PICKUP_SOURCE_FREETEXT],
+        ],
+      ],
     ];
 
     $form['actions'] = [
@@ -148,8 +153,14 @@ class AttendanceCheckOutForm extends FormBase implements ContainerInjectionInter
   public function validateForm(array &$form, FormStateInterface $form_state): void {
     $source = $form_state->getValue('pickup_source');
     $freetext = trim((string) $form_state->getValue('pickup_freetext'));
-    if ($source === AttendanceInterface::PICKUP_SOURCE_FREETEXT && $freetext === '') {
-      $form_state->setErrorByName('pickup_freetext', $this->t('Please enter the name of the person picking up.'));
+    $note = trim((string) $form_state->getValue('note'));
+    if ($source === AttendanceInterface::PICKUP_SOURCE_FREETEXT) {
+      if ($freetext === '') {
+        $form_state->setErrorByName('pickup_freetext', $this->t('Please enter the name of the person picking up.'));
+      }
+      if ($note === '') {
+        $form_state->setErrorByName('note', $this->t('Please add a note explaining the pickup since "Other" was selected.'));
+      }
     }
   }
 

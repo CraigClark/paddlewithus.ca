@@ -9,6 +9,8 @@ dependencies:
   - drupal:datetime
   - drupal:options
   - drupal:user
+  - better_exposed_filters:better_exposed_filters
+  - views_selective_filters:views_selective_filters
   - profile:profile
   - commerce:commerce_product
   - commerce:commerce_order
