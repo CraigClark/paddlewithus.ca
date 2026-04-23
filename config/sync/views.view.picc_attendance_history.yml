@@ -648,40 +648,13 @@ display:
           exposed: true
           expose:
             operator_id: field_name_given_op
-            label: 'Participant first name'
-            description: 'Case-insensitive, matches any part of the first name.'
+            label: 'Participant name contains'
+            description: 'Matches on first name.'
             use_operator: false
             operator: field_name_given_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: first_name
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-        field_name_family:
-          id: field_name_family
-          table: profile__field_name
-          field: field_name_family
-          relationship: participant
-          group_type: group
-          admin_label: ''
-          plugin_id: string
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_name_family_op
-            label: 'Participant last name'
-            description: 'Case-insensitive, matches any part of the family name.'
-            use_operator: false
-            operator: field_name_family_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: last_name
+            identifier: participant
             required: false
             remember: false
             multiple: false

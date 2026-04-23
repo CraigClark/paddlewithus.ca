@@ -139,10 +139,26 @@ class AttendanceCheckOutForm extends FormBase implements ContainerInjectionInter
       ];
     }
 
+    $form['other_warning'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['alert', 'alert-warning'],
+        'role' => 'alert',
+      ],
+      '#states' => [
+        'visible' => [
+          ':input[name="pickup_source"]' => ['value' => AttendanceInterface::PICKUP_SOURCE_FREETEXT],
+        ],
+      ],
+      'message' => [
+        '#markup' => $this->t('An unlisted person is picking up @name. Explain why in the note below — the record is flagged for manager review.', ['@name' => $name]),
+      ],
+    ];
+
     $form['note'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Note'),
-      '#description' => $this->t('Anything worth recording — e.g. "Biked home with parent consent", "Sick, picked up early". Required when "Other" is selected so the reason for an unlisted pickup is on the record.'),
+      '#description' => $this->t('Anything worth recording — e.g. "Biked home with parent consent", "Sick, picked up early". Required when "Other" is selected.'),
       '#rows' => 2,
       '#states' => [
         'required' => [
