@@ -62,3 +62,31 @@ display:
       menu:
         title: 'Historique des présences'
         description: 'Parcourir et exporter les dossiers de présence archivés.'
+  data_export_1:
+    display_title: 'Export CSV'
+    display_options:
+      fields:
+        date:
+          label: Date
+        product:
+          label: Programme
+        participant:
+          label: Participant
+        check_in_at:
+          label: Arrivée
+        check_in_by:
+          label: 'Arrivée enregistrée par'
+        check_out_at:
+          label: Départ
+        check_out_by:
+          label: 'Départ enregistré par'
+        check_out_pickup_name:
+          label: 'Récupéré par'
+        check_out_pickup_source:
+          label: Source
+        checkout_without_checkin:
+          label: 'Sans arrivée'
+        check_in_note:
+          label: "Note d'arrivée"
+        check_out_note:
+          label: 'Note de départ'
