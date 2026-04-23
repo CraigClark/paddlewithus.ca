@@ -3,13 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.profile.field_name
     - system.menu.admin
   module:
     - better_exposed_filters
     - csv_serialization
     - datetime
+    - name
     - options
     - picc_attendance
+    - profile
     - rest
     - serialization
     - user
@@ -631,6 +634,60 @@ display:
               1: {  }
               2: {  }
               3: {  }
+        field_name_given:
+          id: field_name_given
+          table: profile__field_name
+          field: field_name_given
+          relationship: participant
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_name_given_op
+            label: 'Participant first name'
+            description: 'Case-insensitive, matches any part of the first name.'
+            use_operator: false
+            operator: field_name_given_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: first_name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+        field_name_family:
+          id: field_name_family
+          table: profile__field_name
+          field: field_name_family
+          relationship: participant
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_name_family_op
+            label: 'Participant last name'
+            description: 'Case-insensitive, matches any part of the family name.'
+            use_operator: false
+            operator: field_name_family_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: last_name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
       filter_groups:
         operator: AND
         groups:
@@ -745,7 +802,18 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        participant:
+          id: participant
+          table: picc_attendance
+          field: participant
+          relationship: none
+          group_type: group
+          admin_label: 'Participant profile'
+          entity_type: picc_attendance
+          entity_field: participant
+          plugin_id: standard
+          required: false
       header: {  }
       footer:
         result:
