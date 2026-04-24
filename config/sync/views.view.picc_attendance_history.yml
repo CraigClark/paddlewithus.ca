@@ -906,9 +906,9 @@ display:
           relationship: none
           group_type: group
           admin_label: 'Row legend'
-          empty: false
           plugin_id: area_text_custom
-          content: "<div class=\"attendance-legend\"><span class=\"attendance-legend__label\">Legend:</span><span class=\"attendance-legend__item attendance-legend__item--no-show\"><span class=\"attendance-legend__swatch\"></span>No record / absent</span><span class=\"attendance-legend__item attendance-legend__item--incomplete\"><span class=\"attendance-legend__swatch\"></span>Incomplete record</span></div>"
+          empty: false
+          content: '<div class="attendance-legend"><span class="attendance-legend__label">Legend:</span><span class="attendance-legend__item attendance-legend__item--no-show"><span class="attendance-legend__swatch"></span>No record / absent</span><span class="attendance-legend__item attendance-legend__item--incomplete"><span class="attendance-legend__swatch"></span>Incomplete record</span></div>'
           tokenize: false
       footer:
         result:

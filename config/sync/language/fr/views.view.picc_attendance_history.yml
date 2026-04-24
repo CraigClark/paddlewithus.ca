@@ -31,7 +31,7 @@ display:
           label: 'Note de départ'
       header:
         legend:
-          content: "<div class=\"attendance-legend\"><span class=\"attendance-legend__label\">Légende :</span><span class=\"attendance-legend__item attendance-legend__item--no-show\"><span class=\"attendance-legend__swatch\"></span>Aucune présence</span><span class=\"attendance-legend__item attendance-legend__item--incomplete\"><span class=\"attendance-legend__swatch\"></span>Dossier incomplet</span></div>"
+          content: '<div class="attendance-legend"><span class="attendance-legend__label">Légende :</span><span class="attendance-legend__item attendance-legend__item--no-show"><span class="attendance-legend__swatch"></span>Aucune présence</span><span class="attendance-legend__item attendance-legend__item--incomplete"><span class="attendance-legend__swatch"></span>Dossier incomplet</span></div>'
       footer:
         result:
           content: '<div class="attendance-history-result-count"><span class="text-xl font-semibold">@total</span> dossiers</div>'
