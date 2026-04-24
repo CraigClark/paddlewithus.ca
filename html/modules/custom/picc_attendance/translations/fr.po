@@ -282,8 +282,8 @@ msgstr "Contact d'urgence 3"
 msgid "Self checkout"
 msgstr "Départ autonome"
 
-msgid "Other (free text)"
-msgstr "Autre (texte libre)"
+msgid "Other"
+msgstr "Autre"
 
 # ============================================================
 # Entity field labels (admin view of a record)

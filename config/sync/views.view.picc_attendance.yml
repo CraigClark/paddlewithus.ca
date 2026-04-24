@@ -448,8 +448,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: true
           plugin_id: area_text_custom
+          empty: true
           content: '<p class="attendance-today-date text-sm opacity-70">[current-date:custom:l, F j, Y]</p>'
           tokenize: true
         result:

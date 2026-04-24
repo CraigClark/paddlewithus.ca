@@ -40,4 +40,17 @@ function picc_attendance_views_data_alter(array &$data) {
     $data['picc_attendance']['date']['argument']['field_name'] = 'date';
     $data['picc_attendance']['date']['argument']['entity_type'] = 'picc_attendance';
   }
+
+  // Virtual filter: "Check-in without check-out". Matches rows where
+  // check_in_at IS NOT NULL AND check_out_at IS NULL. No storage column.
+  if (isset($data['picc_attendance'])) {
+    $data['picc_attendance']['checkin_without_checkout'] = [
+      'title' => t('Check-in without check-out'),
+      'help' => t('Matches rows where a participant was checked in but never checked out.'),
+      'filter' => [
+        'id' => 'picc_checkin_without_checkout',
+        'label' => t('Check-in without check-out'),
+      ],
+    ];
+  }
 }

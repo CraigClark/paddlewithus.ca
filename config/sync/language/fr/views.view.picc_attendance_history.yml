@@ -29,6 +29,9 @@ display:
           label: "Note d'arrivée"
         check_out_note:
           label: 'Note de départ'
+      header:
+        legend:
+          content: "<div class=\"attendance-legend\"><span class=\"attendance-legend__label\">Légende :</span><span class=\"attendance-legend__item attendance-legend__item--no-show\"><span class=\"attendance-legend__swatch\"></span>Aucune présence</span><span class=\"attendance-legend__item attendance-legend__item--incomplete\"><span class=\"attendance-legend__swatch\"></span>Dossier incomplet</span></div>"
       footer:
         result:
           content: '<div class="attendance-history-result-count"><span class="text-xl font-semibold">@total</span> dossiers</div>'
@@ -38,25 +41,24 @@ display:
             label: 'À partir du'
         date_to:
           expose:
-            label: 'Jusqu''au'
+            label: "Jusqu'au"
         product_selective:
           expose:
             label: Programme
         checkout_without_checkin:
           expose:
-            label: 'N''afficher que les départs sans arrivée'
+            label: "N'afficher que les départs sans arrivée"
+        checkin_without_checkout:
+          expose:
+            label: "N'afficher que les arrivées sans départ"
         pickup_other_only:
           expose:
-            label: 'Type de récupération'
+            label: "N'afficher que les récupérations par personne non autorisée"
           group_info:
-            label: 'Type de récupération'
+            label: "N'afficher que les récupérations par personne non autorisée"
             group_items:
               1:
-                title: 'Uniquement les récupérations par personne non autorisée'
-        field_name_given:
-          expose:
-            label: 'Nom du participant contient'
-            description: 'Recherche sur le prénom.'
+                title: "N'afficher que les récupérations par personne non autorisée"
   page_1:
     display_options:
       menu:

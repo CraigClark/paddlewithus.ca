@@ -5,6 +5,7 @@
  * Hook implementations for the PICC Attendance module.
  */
 
+use Drupal\Core\Template\Attribute;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 
@@ -66,4 +67,83 @@ function picc_attendance_views_query_alter(ViewExecutable $view, QueryPluginBase
       ':picc_att_today_end' => $today,
     ]
   );
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Reorders the attendance-history exposed filters so select- and text-style
+ * filters render on the top row (flex-wrapped in CSS) and the boolean
+ * toggles stack beneath them, with actions last. Only affects rendering —
+ * query semantics are untouched.
+ */
+function picc_attendance_form_views_exposed_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  if (($form['#id'] ?? '') !== 'views-exposed-form-picc-attendance-history-page-1') {
+    return;
+  }
+
+  // Lower weight renders earlier. Name field lives on its own top row
+  // (CSS gives it flex-basis: 100%). Date/program selects share the next
+  // row; the three toggles stack after; actions render last.
+  $weights = [
+    'field_name'               => 5,
+    'date_from_wrapper'        => 10,
+    'date_to_wrapper'          => 12,
+    'product_selective'        => 20,
+    'pickup_other_only'        => 40,
+    'flag_only'                => 42,
+    'checkin_without_checkout' => 44,
+    'actions'                  => 100,
+  ];
+  foreach ($weights as $key => $weight) {
+    if (isset($form[$key])) {
+      $form[$key]['#weight'] = $weight;
+    }
+  }
+  $form['#sorted'] = FALSE;
+}
+
+/**
+ * Implements hook_preprocess_views_view_table() for picc_attendance_history.
+ *
+ * Adds a CSS modifier class to each row reflecting the completeness of the
+ * attendance record, so the theme can highlight edge cases:
+ *
+ * - `attendance-row--no-show`   : no check-in and no check-out on record.
+ * - `attendance-row--incomplete`: exactly one of check-in / check-out is set.
+ *
+ * Fully complete rows (both present) get no extra class. Uses the row entity
+ * rather than the rendered markup — robust against label changes / translation.
+ */
+function picc_attendance_preprocess_views_view_table(array &$variables) {
+  if (($variables['view']->id() ?? '') !== 'picc_attendance_history') {
+    return;
+  }
+
+  foreach ($variables['rows'] as $delta => &$row) {
+    $result = $variables['view']->result[$delta] ?? NULL;
+    $entity = $result && isset($result->_entity) ? $result->_entity : NULL;
+    if (!$entity || !$entity instanceof \Drupal\picc_attendance\Entity\AttendanceInterface) {
+      continue;
+    }
+    $has_in = !empty($entity->get('check_in_at')->value);
+    $has_out = !empty($entity->get('check_out_at')->value);
+
+    if (!$has_in && !$has_out) {
+      $modifier = 'attendance-row--no-show';
+    }
+    elseif ($has_in xor $has_out) {
+      $modifier = 'attendance-row--incomplete';
+    }
+    else {
+      continue;
+    }
+
+    $existing = $row['attributes'] ?? new Attribute();
+    if (!$existing instanceof Attribute) {
+      $existing = new Attribute(is_array($existing) ? $existing : []);
+    }
+    $existing->addClass('attendance-row', $modifier);
+    $row['attributes'] = $existing;
+  }
 }

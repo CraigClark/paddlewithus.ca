@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.profile.field_name
     - system.menu.admin
   module:
     - better_exposed_filters
@@ -465,6 +464,38 @@ display:
                   hide_label: false
                   field_classes: ''
                 treat_as_false: false
+              checkin_without_checkout:
+                plugin_id: bef_single
+                advanced:
+                  sort_options: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+                treat_as_false: false
+              pickup_other_only:
+                plugin_id: bef_single
+                advanced:
+                  sort_options: false
+                  sort_options_method: alphabetical_asc
+                  sort_options_natural: true
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
+                treat_as_false: false
       access:
         type: perm
         options:
@@ -524,7 +555,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          operator: <=
+          operator: '<='
           value:
             min: ''
             max: ''
@@ -648,13 +679,13 @@ display:
           exposed: true
           expose:
             operator_id: pickup_other_only_op
-            label: 'Pickup type'
+            label: 'Show only unlisted-person pickups'
             description: ''
             use_operator: false
             operator: pickup_other_only_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: pickup_type
+            identifier: pickup_other_only
             required: false
             remember: false
             multiple: false
@@ -662,9 +693,9 @@ display:
               authenticated: authenticated
           is_grouped: true
           group_info:
-            label: 'Pickup type'
+            label: 'Show only unlisted-person pickups'
             description: ''
-            identifier: pickup_type
+            identifier: pickup_other_only
             optional: true
             widget: select
             multiple: false
@@ -673,36 +704,74 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: 'Only unlisted-person pickups'
+                title: 'Show only unlisted-person pickups'
                 operator: '='
                 value: freetext
-        field_name_given:
-          id: field_name_given
-          table: profile__field_name
-          field: field_name_given
-          relationship: participant
+        checkin_without_checkout:
+          id: checkin_without_checkout
+          table: picc_attendance
+          field: checkin_without_checkout
+          relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: string
-          operator: contains
-          value: ''
+          plugin_id: picc_checkin_without_checkout
+          operator: '='
+          value: '0'
           group: 1
           exposed: true
           expose:
-            operator_id: field_name_given_op
-            label: 'Participant name contains'
-            description: 'Matches on first name.'
+            operator_id: ''
+            label: 'Show check-ins without check-out'
+            description: ''
             use_operator: false
-            operator: field_name_given_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: participant
+            identifier: checkin_without_checkout
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
           is_grouped: false
+        field_name:
+          id: field_name
+          table: profile__field_name
+          field: field_name
+          relationship: participant
+          group_type: group
+          admin_label: ''
+          plugin_id: name_fulltext
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_name_op
+            label: Name
+            description: ''
+            use_operator: false
+            operator: field_name_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -829,7 +898,18 @@ display:
           entity_field: participant
           plugin_id: standard
           required: false
-      header: {  }
+      header:
+        legend:
+          id: legend
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: 'Row legend'
+          empty: false
+          plugin_id: area_text_custom
+          content: "<div class=\"attendance-legend\"><span class=\"attendance-legend__label\">Legend:</span><span class=\"attendance-legend__item attendance-legend__item--no-show\"><span class=\"attendance-legend__swatch\"></span>No record / absent</span><span class=\"attendance-legend__item attendance-legend__item--incomplete\"><span class=\"attendance-legend__swatch\"></span>Incomplete record</span></div>"
+          tokenize: false
       footer:
         result:
           id: result
@@ -1262,7 +1342,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          operator: <=
+          operator: '<='
           value:
             min: ''
             max: ''
