@@ -1,0 +1,14 @@
+/* stylelint-disable */
+@import "./tailwind.config.pcss";
+
+@import "tailwindcss" source(none);
+
+@import "./plugins/daisyui.config.pcss";
+
+@source "./admin-styles.pcss.css";
+
+/**
+ * Admin overrides — attached to node add/edit forms via picc_ext.
+ * Uses the daisyui_ext design tokens so styling stays consistent
+ * regardless of which admin theme is active.
+ */

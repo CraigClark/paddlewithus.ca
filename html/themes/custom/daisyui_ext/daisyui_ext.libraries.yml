@@ -3,3 +3,8 @@ daisyui:
     theme:
       "dist/css/app.css": { minified: true }
       "dist/css/themes/dark.css": { minified: true }
+
+framework-admin:
+  css:
+    theme:
+      "dist/css/admin-styles.css": { minified: true }

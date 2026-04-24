@@ -4,6 +4,20 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ *
+ * Attaches a stylesheet from the front-end theme so admin overrides apply
+ * regardless of which admin theme is active.
+ */
+function picc_ext_form_node_form_alter(
+    &$form,
+    FormStateInterface $form_state,
+    $form_id
+) {
+    $form["#attached"]["library"][] = "daisyui_ext/framework-admin";
+}
+
+/**
  * Self-register form: set a first-login flag and redirect back to show message.
  */
 function picc_ext_form_user_register_form_alter(
@@ -247,4 +261,14 @@ function picc_ext_views_query_alter($view, $query) {
     $condition->condition('commerce_product_variation_field_data.type', $tracked_bundles, 'NOT IN');
     $condition->condition('commerce_product_variation_field_data.variation_id', $subquery, 'IN');
     $query->addWhere(0, $condition);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ * Adds a stylesheet to theme that can be read by the
+ * admin theme
+ */
+function daisyui_ext_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+ // Admin css and js to node edit/add forms.
+ $form['#attached']['library'][] = 'daisyui_ext/framework-admin';
 }
