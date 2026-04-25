@@ -83,7 +83,17 @@ class AttendanceAction extends FieldPluginBase {
       'commerce_order_item' => $order_item->id(),
     ])->toString();
 
-    $output = '<div class="picc-attendance-actions my-5 flex gap-2 items-center flex-wrap">';
+    $output = '';
+
+    // Surface today's check-in note (if any) above the action buttons so
+    // coaches see it without opening the record. Stripped of HTML so a
+    // free-text note can't inject markup.
+    if ($attendance && !$attendance->get('check_in_note')->isEmpty()) {
+      $note = (string) $attendance->get('check_in_note')->value;
+      $output .= '<div class="my-5"><p>' . htmlspecialchars($note, ENT_QUOTES) . '</p></div>';
+    }
+
+    $output .= '<div class="picc-attendance-actions my-5 flex gap-2 items-center flex-wrap">';
 
     if (!$attendance || (!$attendance->isCheckedIn() && !$attendance->isCheckedOut())) {
       // No record, or record exists but empty (e.g. both slots were reset).
