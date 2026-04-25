@@ -322,6 +322,50 @@ p.lang-fr {
   border: 1px solid black;
 }
 
+/* Backdrop for jQuery UI dialogs (used by picc_attendance + picc_registration).
+ * Drupal's `data-dialog-type="dialog"` doesn't render a `.ui-widget-overlay`,
+ * so we fake one with a body pseudo-element: dim the page, block clicks,
+ * lock body scroll. Excludes off-canvas dialogs (Settings Tray etc).
+ *
+ * z-index 1259 sits just below the dialog (Gin sets `.ui-dialog` to 1260)
+ * so the backdrop covers admin toolbar and other high-z elements but stays
+ * behind the dialog itself. */
+body:has(.ui-dialog:not(.ui-dialog-off-canvas))::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+  z-index: 1259;
+}
+
+body:has(.ui-dialog:not(.ui-dialog-off-canvas)) {
+  overflow: hidden;
+}
+
+/* Prevent iOS Safari from auto-zooming when focusing a form control.
+ * iOS zooms whenever focused control font-size < 16px. DaisyUI's
+ * `--font-size` variable fix is bypassed inside jQuery UI dialogs because
+ * `.ui-widget textarea/input` sets `font-size: 1em` directly with higher
+ * specificity (which resolves below 16px). Force >= 16px on all
+ * text-entry controls under `pointer: coarse`. */
+@media (pointer: coarse) {
+  textarea,
+  .ui-widget textarea,
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input:not([type]),
+  .ui-widget input,
+  select,
+  .ui-widget select {
+    font-size: 16px;
+  }
+}
+
 /* wrap form items if there is an inline error */
 .form-item--error {
   flex-wrap: wrap;
