@@ -342,6 +342,41 @@ body:has(.ui-dialog:not(.ui-dialog-off-canvas)) {
   overflow: hidden;
 }
 
+/* Make the entire dialog scroll as one unit, not the content area alone.
+ * Gin defaults `.ui-dialog-content` to `overflow: auto` (sticky header +
+ * sticky buttonpane, scrollable middle), which traps the action buttons
+ * behind the iOS keyboard when a textarea is focused. With the whole
+ * dialog scrolling, the user can drag inside the modal to reach any
+ * field or button regardless of keyboard state. `dvh` shrinks the cap
+ * when the on-screen keyboard is up (iOS 15.4+); `vh` is the fallback. */
+.ui-dialog:not(.ui-dialog-off-canvas) {
+  /* Pin to viewport top so the full max-height fits in view. jQuery UI
+   * sets a variable `top` inline (20–30px depending on call); leaving it
+   * alone causes max-height: 100dvh to extend past the viewport and clip
+   * our trailing padding. */
+  top: 0 !important;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  /* Trailing space inside the modal so the user can see they've reached
+   * the end when scrolled to the bottom. */
+  padding-bottom: 1rem;
+}
+
+.ui-dialog:not(.ui-dialog-off-canvas) .ui-widget-content.ui-dialog-content {
+  overflow: visible;
+  /* jQuery UI sets inline `height: auto; max-height: 0px` on the content
+   * (leftovers from its dialog size calc). With overflow:auto that's
+   * harmless — the content scrolls within its allocated flex space. With
+   * our overflow:visible override the `max-height: 0` collapses the
+   * content box to just its padding, and the form paints below the
+   * buttonpane. Forcing both `height: auto` and `max-height: none` lets
+   * the content size to its natural height. */
+  height: auto !important;
+  max-height: none !important;
+}
+
+
 /* Prevent iOS Safari from auto-zooming when focusing a form control.
  * iOS zooms whenever focused control font-size < 16px. DaisyUI's
  * `--font-size` variable fix is bypassed inside jQuery UI dialogs because
