@@ -9,7 +9,7 @@ display:
           content: "<p class=\"text-base opacity-70\">Aucun participant à enregistrer aujourd'hui. Soit aucun programme avec suivi des présences n'est actif aujourd'hui, soit aucune inscription n'est complétée.</p>"
       header:
         today:
-          content: '<p class="attendance-today-date text-sm opacity-70">[current-date:custom:l j F Y]</p>'
+          content: "<p class=\"attendance-today-date text-sm opacity-70\">[current-date:custom:l j F Y]</p>\r\n<div role=\"note\" aria-label=\"Légende des icônes\" class=\"participant-legend my-4\"><h4 class=\"font-semibold text-sm uppercase tracking-wide opacity-70 mb-1\">Légende</h4><div class=\"participant-legend-items\"><span><span class=\"material-icons participant-legend-icon participant-legend-icon--swim\" aria-hidden=\"true\">pool</span> Répond aux exigences de natation</span><span><span class=\"material-icons participant-legend-icon participant-legend-icon--medical\" aria-hidden=\"true\">health_and_safety</span> Préoccupations médicales</span><span><span class=\"material-icons participant-legend-icon participant-legend-icon--photo\" aria-hidden=\"true\">photo_camera</span> Photo OK</span></div></div>"
         result:
           content: '<div class="attendance-result-count"><span class="text-xl font-semibold">@total</span> participants prévus aujourd''hui</div>'
       filters:

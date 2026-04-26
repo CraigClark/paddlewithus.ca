@@ -1,0 +1,74 @@
+label: 'Liste des participants'
+description: 'Liste des participants inscrits par programme et session'
+display:
+  default:
+    display_options:
+      title: Participants
+      fields:
+        view_profile:
+          text: 'Voir le profil'
+      filters:
+        product_id_selective:
+          expose:
+            label: Programme
+        title_selective:
+          expose:
+            label: Session
+      header:
+        area_text_custom:
+          content: "<div role=\"note\" aria-label=\"Légende des icônes\" class=\"participant-legend mb-4\"><h4 class=\"font-semibold text-sm uppercase tracking-wide opacity-70 mb-1\">Légende</h4><div class=\"participant-legend-items\"><span><span class=\"material-icons participant-legend-icon participant-legend-icon--swim\" aria-hidden=\"true\">pool</span> Répond aux exigences de natation</span><span><span class=\"material-icons participant-legend-icon participant-legend-icon--medical\" aria-hidden=\"true\">health_and_safety</span> Préoccupations médicales</span><span><span class=\"material-icons participant-legend-icon participant-legend-icon--photo\" aria-hidden=\"true\">photo_camera</span> Photo OK</span></div></div>"
+      footer:
+        result:
+          content: '<div class="registration-result-count"><span class="text-xl font-semibold">@total</span> participants</div>'
+  data_export_1:
+    display_title: 'Export CSV'
+    display_options:
+      fields:
+        product_id:
+          label: Programme
+        title:
+          label: Session
+        field_name_given:
+          label: Prénom
+        field_name_family:
+          label: 'Nom de famille'
+        field_birth_date:
+          label: 'Date de naissance'
+        field_shirt_size:
+          label: 'Taille de t-shirt'
+        field_swim_test_passed_date:
+          label: 'Date du test de natation'
+        field_photo_consent:
+          label: 'Consentement photo'
+        field_allergies:
+          label: Allergies
+        field_additional_info:
+          label: 'Informations supplémentaires'
+        field_emercency_contact_1_name:
+          label: 'Contact d''urgence 1 - nom'
+        field_emercency_contact_1_phone:
+          label: 'Contact d''urgence 1 - téléphone'
+        field_emercency_contact_1_rel:
+          label: 'Contact d''urgence 1 - lien'
+        field_emercency_contact_1_pickup:
+          label: 'Contact d''urgence 1 - autorisé à récupérer'
+        field_emercency_contact_2_name:
+          label: 'Contact d''urgence 2 - nom'
+        field_emercency_contact_2_phone:
+          label: 'Contact d''urgence 2 - téléphone'
+        field_emercency_contact_2_rel:
+          label: 'Contact d''urgence 2 - lien'
+        field_emercency_contact_2_pickup:
+          label: 'Contact d''urgence 2 - autorisé à récupérer'
+        field_emercency_contact_3_name:
+          label: 'Contact d''urgence 3 - nom'
+        field_emercency_contact_3_phone:
+          label: 'Contact d''urgence 3 - téléphone'
+        field_emercency_contact_3_rel:
+          label: 'Contact d''urgence 3 - lien'
+        field_emercency_contact_3_pickup:
+          label: 'Contact d''urgence 3 - autorisé à récupérer'
+  page_1:
+    display_options:
+      menu:
+        title: Participants
