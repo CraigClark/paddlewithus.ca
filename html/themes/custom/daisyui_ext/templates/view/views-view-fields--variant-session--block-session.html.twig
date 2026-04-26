@@ -25,6 +25,10 @@
 {# Variation type (bundle) — injected by picc_registration_preprocess_views_view_fields() #}
 {% set vtype = variation_bundle|default('') %}
 
+{# Registration status — 'available' | 'low' | 'full' (also from preprocess). #}
+{% set status = registration_status|default('available') %}
+{% set spots = spots_remaining %}
+
 {# Discount 1 (numeric) #}
 {% set dis_1 = 0 %}
 {% if fields.field_discount_1 is defined %}
@@ -194,8 +198,19 @@
       </div>
     {% endif %}
 
-    {% if capacity %}
+    {% if status == 'full' %}
       <div>
+        <span class="badge badge-error">{{ 'Full'|t }}</span>
+      </div>
+    {% elseif capacity %}
+      <div>
+        {% if status == 'low' %}
+          <p>
+            <span class="badge badge-warning">
+              {{ 'Almost full'|t }}
+            </span>
+          </p>
+        {% endif %}
         {{ capacity }}
       </div>
     {% endif %}
@@ -255,7 +270,16 @@
 #}
     {% if pid %}
       <div class="mt-3">
-        {% if logged_in and vid %}
+        {% if status == 'full' %}
+          <button
+            type="button"
+            class="btn btn-disabled btn-sm"
+            disabled
+            aria-disabled="true"
+          >
+            {{ 'Session full'|t }}
+          </button>
+        {% elseif logged_in and vid %}
           {% set webform_id = vtype == 'swim_test_slot' ? 'swim_test_registration' : 'program_registration' %}
           {% set button_label = vtype == 'swim_test_slot' ? 'Register for this swim test'|t : 'Register for this session'|t %}
           <a

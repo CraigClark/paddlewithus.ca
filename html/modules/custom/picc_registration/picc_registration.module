@@ -12,6 +12,13 @@ use Drupal\webform\WebformSubmissionInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\Markup;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Spots-remaining threshold for the "low availability" status on the activity
+ * page. At this many or fewer remaining spots, the row gets a warning badge.
+ */
+const PICC_REGISTRATION_LOW_STOCK_THRESHOLD = 3;
 
 /**
  * Implements hook_cron().
@@ -600,10 +607,92 @@ function _picc_registration_disable_future_swim_registered($element, FormStateIn
 }
 
 /**
+ * Implements hook_views_post_execute().
+ *
+ * Prefetches remaining-stock totals and completed-registration counts for all
+ * variations rendered by the variant_session view in one query each, then
+ * stores per-variation status in a static cache for the row preprocess to
+ * read. This avoids N per-row DB hits when a product has many sessions.
+ */
+function picc_registration_views_post_execute(ViewExecutable $view) {
+  if ($view->id() !== 'variant_session') {
+    return;
+  }
+
+  $variation_ids = [];
+  foreach ($view->result as $row) {
+    if (!empty($row->_entity) && $row->_entity->getEntityTypeId() === 'commerce_product_variation') {
+      $variation_ids[] = (int) $row->_entity->id();
+    }
+  }
+
+  if (empty($variation_ids)) {
+    return;
+  }
+
+  $connection = \Drupal::database();
+
+  // Remaining stock per variation = SUM(commerce_stock_transaction.qty).
+  // Untracked bundles (always_in_stock) have no transactions; they fall
+  // through to the "no entry" branch below and end up as 'available'.
+  $stock_query = $connection->select('commerce_stock_transaction', 'st')
+    ->fields('st', ['entity_id'])
+    ->condition('st.entity_type', 'commerce_product_variation')
+    ->condition('st.entity_id', $variation_ids, 'IN')
+    ->groupBy('st.entity_id');
+  $stock_query->addExpression('SUM(st.qty)', 'total');
+  $stock_totals = $stock_query->execute()->fetchAllKeyed(0, 1);
+
+  // Completed/fulfilled registration counts per variation.
+  $reg_query = $connection->select('commerce_order_item', 'oi');
+  $reg_query->join('commerce_order__order_items', 'ooi', 'ooi.order_items_target_id = oi.order_item_id');
+  $reg_query->join('commerce_order', 'o', 'o.order_id = ooi.entity_id');
+  $reg_query->fields('oi', ['purchased_entity']);
+  $reg_query->condition('oi.type', ['activity_registration', 'swim_test_registration'], 'IN');
+  $reg_query->condition('oi.purchased_entity', $variation_ids, 'IN');
+  $reg_query->condition('o.state', ['completed', 'fulfillment'], 'IN');
+  $reg_query->groupBy('oi.purchased_entity');
+  $reg_query->addExpression('COUNT(oi.order_item_id)', 'cnt');
+  $reg_counts = $reg_query->execute()->fetchAllKeyed(0, 1);
+
+  $cache = &drupal_static('picc_registration_session_status', []);
+  foreach ($variation_ids as $vid) {
+    $has_stock_record = array_key_exists($vid, $stock_totals);
+    $stock = $has_stock_record ? (int) $stock_totals[$vid] : 0;
+    $registrations = isset($reg_counts[$vid]) ? (int) $reg_counts[$vid] : 0;
+
+    if (!$has_stock_record) {
+      // Untracked bundle (always_in_stock) — treat as available.
+      $status = 'available';
+      $spots = NULL;
+    }
+    elseif ($stock <= 0) {
+      $status = 'full';
+      $spots = 0;
+    }
+    elseif ($stock <= PICC_REGISTRATION_LOW_STOCK_THRESHOLD) {
+      $status = 'low';
+      $spots = $stock;
+    }
+    else {
+      $status = 'available';
+      $spots = $stock;
+    }
+
+    $cache[$vid] = [
+      'status' => $status,
+      'spots_remaining' => $spots,
+      'registrations' => $registrations,
+    ];
+  }
+}
+
+/**
  * Implements hook_preprocess_views_view_fields().
  *
  * Injects the variation bundle (machine name) into the template as
- * $variables['variation_bundle'] for the variant_session view.
+ * $variables['variation_bundle'] for the variant_session view, plus the
+ * registration status and spots-remaining computed in views_post_execute.
  */
 function picc_registration_preprocess_views_view_fields(&$variables) {
   $view = $variables['view'];
@@ -613,10 +702,22 @@ function picc_registration_preprocess_views_view_fields(&$variables) {
 
   $row = $variables['row'];
   if (!empty($row->_entity) && $row->_entity->getEntityTypeId() === 'commerce_product_variation') {
-    $variables['variation_bundle'] = $row->_entity->bundle();
+    $variation = $row->_entity;
+    $variables['variation_bundle'] = $variation->bundle();
+
+    $cache = &drupal_static('picc_registration_session_status', []);
+    $info = $cache[(int) $variation->id()] ?? [
+      'status' => 'available',
+      'spots_remaining' => NULL,
+      'registrations' => 0,
+    ];
+    $variables['registration_status'] = $info['status'];
+    $variables['spots_remaining'] = $info['spots_remaining'];
   }
   else {
     $variables['variation_bundle'] = '';
+    $variables['registration_status'] = 'available';
+    $variables['spots_remaining'] = NULL;
   }
 }
 

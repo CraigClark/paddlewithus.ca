@@ -211,3 +211,9 @@ msgstr "Connectez-vous ou créez un compte pour vous inscrire"
 
 msgid "Free"
 msgstr "Gratuit"
+
+msgid "Almost full"
+msgstr "Presque complet"
+
+msgid "Session full"
+msgstr "Séance complète"

@@ -218,9 +218,11 @@ function picc_ext_menu_local_actions_alter(array &$local_actions): void
 /**
  * Implements hook_views_query_alter().
  *
- * On the variant_session view, excludes variations whose effective stock level
- * (sum of commerce_stock_transaction.qty) is <= 0. Variations mapped to
- * "always_in_stock" are unaffected because they have no transactions tracked.
+ * On the variant_session view, keeps a tracked-bundle variation visible if it
+ * either has positive remaining stock OR has at least one completed/fulfilled
+ * registration. The second clause lets sold-out sessions render as "Full"
+ * while still hiding misconfigured sessions that were never stocked AND never
+ * registered against.
  */
 function picc_ext_views_query_alter($view, $query) {
     if ($view->id() !== 'variant_session') {
@@ -228,7 +230,6 @@ function picc_ext_views_query_alter($view, $query) {
     }
 
     // Get the list of variation bundles using a stock-tracked service.
-    $stock_service_manager = \Drupal::service('commerce_stock.service_manager');
     $stock_config = \Drupal::config('commerce_stock.service_manager');
     $tracked_bundles = [];
     foreach ($stock_config->get() as $key => $service_id) {
@@ -245,19 +246,30 @@ function picc_ext_views_query_alter($view, $query) {
         return;
     }
 
-    // Build a subquery returning variation IDs that have positive stock.
-    // Only the entity_id column is selected (IN requires a single column).
     $connection = \Drupal::database();
-    $subquery = $connection->select('commerce_stock_transaction', 'st')
-        ->fields('st', ['entity_id']);
-    $subquery->condition('st.entity_type', 'commerce_product_variation');
-    $subquery->groupBy('st.entity_id');
-    $subquery->having('SUM(st.qty) > 0');
 
-    // Exclude any tracked-bundle variation not in the positive-stock subquery.
+    // Variation IDs that have positive remaining stock.
+    $stock_subquery = $connection->select('commerce_stock_transaction', 'st')
+        ->fields('st', ['entity_id']);
+    $stock_subquery->condition('st.entity_type', 'commerce_product_variation');
+    $stock_subquery->groupBy('st.entity_id');
+    $stock_subquery->having('SUM(st.qty) > 0');
+
+    // Variation IDs that have at least one completed/fulfilled registration.
+    $registration_subquery = $connection->select('commerce_order_item', 'oi');
+    $registration_subquery->join('commerce_order__order_items', 'ooi', 'ooi.order_items_target_id = oi.order_item_id');
+    $registration_subquery->join('commerce_order', 'o', 'o.order_id = ooi.entity_id');
+    $registration_subquery->fields('oi', ['purchased_entity']);
+    $registration_subquery->condition('oi.type', ['activity_registration', 'swim_test_registration'], 'IN');
+    $registration_subquery->condition('o.state', ['completed', 'fulfillment'], 'IN');
+    $registration_subquery->isNotNull('oi.purchased_entity');
+
+    // Include a variation if it's an untracked bundle, OR has positive stock,
+    // OR has a real registration (sold out but still legitimate).
     $condition = $query->getConnection()->condition('OR');
     $condition->condition('commerce_product_variation_field_data.type', $tracked_bundles, 'NOT IN');
-    $condition->condition('commerce_product_variation_field_data.variation_id', $subquery, 'IN');
+    $condition->condition('commerce_product_variation_field_data.variation_id', $stock_subquery, 'IN');
+    $condition->condition('commerce_product_variation_field_data.variation_id', $registration_subquery, 'IN');
     $query->addWhere(0, $condition);
 }
 

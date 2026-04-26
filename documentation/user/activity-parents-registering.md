@@ -5,7 +5,11 @@
 1. Parent visits the activity catalog (`/programs` or similar).
 2. Clicks through to the activity page of interest.
 3. Reviews the description, schedule, what to bring, etc.
-4. Scrolls down to **Sessions** — shows available dated offerings.
+4. Scrolls down to **Sessions** — shows all dated offerings with status:
+   - **Available** — normal display, register button active.
+   - **Almost full** — yellow badge appears when 3 or fewer spots remain. Register button still active.
+   - **Full** — red "Full" badge replaces the capacity line and a disabled "Session full" button replaces the register button. Parents can see the session existed (so they don't wonder if it was missing or cancelled) but can't register.
+   - Sessions that were never properly stocked AND have no registrations don't appear at all (treated as misconfigured).
 
 ## Registering
 

@@ -401,6 +401,23 @@ body:has(.ui-dialog:not(.ui-dialog-off-canvas)) {
   }
 }
 
+/* Accessible disabled buttons. DaisyUI's default washes text out below
+ * WCAG AA contrast. Keep text fully readable and signal "non-interactive"
+ * via neutral background + not-allowed cursor instead of low opacity.
+ * Match DaisyUI's :not(.btn-link, .btn-ghost) specificity so we override
+ * its background; also reset --btn-fg since DaisyUI sets it to a 20%
+ * mix that's the actual cause of the washout. */
+.btn:disabled:not(.btn-link, .btn-ghost),
+.btn[disabled]:not(.btn-link, .btn-ghost),
+.btn-disabled:not(.btn-link, .btn-ghost) {
+  background-color: var(--color-base-300);
+  color: var(--color-base-content);
+  border-color: var(--color-base-300);
+  --btn-fg: var(--color-base-content);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
 /* wrap form items if there is an inline error */
 .form-item--error {
   flex-wrap: wrap;

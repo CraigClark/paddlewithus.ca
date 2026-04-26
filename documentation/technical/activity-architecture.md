@@ -133,6 +133,45 @@ Discounts are visible in the cart and on the order receipt.
 
 Note: the plugin groups per-variation. So if a family registers for two different sessions, each session's discount is calculated independently.
 
+## Session listing on the activity page
+
+Each activity product page renders a **Sessions** block listing its variations as cards (date range, capacity, price, family discounts, register button). The block is the `variant_session` view (display `block_session`) embedded in `commerce-product--activity--full.html.twig` via `drupal_view()`.
+
+### Row template
+
+`html/themes/custom/daisyui_ext/templates/view/views-view-fields--variant-session--block-session.html.twig` handles per-row rendering. Beyond the visible fields, the template also reads three preprocess-injected variables: `variation_bundle`, `registration_status`, and `spots_remaining`.
+
+### Visibility filter
+
+`picc_ext_views_query_alter()` in `html/modules/custom/picc_ext/picc_ext.module` keeps a tracked-bundle variation visible if **either**:
+
+- `SUM(commerce_stock_transaction.qty) > 0` (positive remaining stock), OR
+- it has at least one `activity_registration` or `swim_test_registration` order item in a `completed` or `fulfillment` state order.
+
+This means a sold-out session with real registrations stays on the page (rendered as **Full**), while a misconfigured session that was never stocked AND has no registrations stays hidden — so a manager who forgets to set capacity doesn't surface a broken row. Only `activity` and `swim_test_slot` bundles are filtered (those marked stock-tracked in `commerce_stock.service_manager.yml`).
+
+### Status computation
+
+`picc_registration_views_post_execute()` in `picc_registration.module` runs after the view query and prefetches per-variation data in two batched queries (one for stock totals, one for completed-registration counts). It writes a static cache keyed by variation ID with: `status`, `spots_remaining`, `registrations`.
+
+`picc_registration_preprocess_views_view_fields()` reads from that static and exposes `registration_status` + `spots_remaining` to the row template.
+
+The three statuses:
+
+| Stock | Status | Display |
+|---|---|---|
+| `> PICC_REGISTRATION_LOW_STOCK_THRESHOLD` | `available` | Capacity line + active register button |
+| `1` to `PICC_REGISTRATION_LOW_STOCK_THRESHOLD` | `low` | Capacity line + warning badge "Almost full" + active register button |
+| `<= 0` | `full` | Red badge "Full" (replaces capacity line) + disabled "Session full" button |
+
+### Hardcoded threshold
+
+`PICC_REGISTRATION_LOW_STOCK_THRESHOLD = 3` is a module-level `const` at the top of `picc_registration.module`. To change the spots-remaining cutoff for the "Almost full" badge, edit that constant and `drush cr`. There's no admin UI for this yet — see GitHub issue [#38](https://github.com/CraigClark/paddlewithus.ca/issues/38) for the deferred follow-up to expose it as a config form.
+
+### Accessible disabled buttons
+
+DaisyUI's default `:disabled` styling washes button text below WCAG AA contrast. `daisyui_ext/css/base/base.pcss` overrides `.btn:disabled / .btn[disabled] / .btn-disabled` (matching DaisyUI's `:not(.btn-link, .btn-ghost)` specificity, including a `--btn-fg` reset) to use a solid `--color-base-300` background with full-contrast `--color-base-content` text and a `not-allowed` cursor. This is global — every disabled `.btn` on the site uses the accessible styling. Style changes require `npm run build` in `html/themes/custom/daisyui_ext/`.
+
 ## Participant roster view
 
 File: `config/sync/views.view.registration.yml`
