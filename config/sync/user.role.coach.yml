@@ -12,6 +12,7 @@ dependencies:
     - content_translation
     - field_permissions
     - picc_attendance
+    - profile
     - rabbit_hole
     - system
     - taxonomy
@@ -52,6 +53,7 @@ permissions:
   - 'translate editable entities'
   - 'translate regatta taxonomy_term'
   - 'update content translations'
+  - 'view any participant profile'
   - 'view field_coach'
   - 'view field_current_club'
   - 'view field_past_club'
