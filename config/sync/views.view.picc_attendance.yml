@@ -450,8 +450,8 @@ display:
           admin_label: ''
           plugin_id: area_text_custom
           empty: true
-          content: '<p class="attendance-today-date text-sm opacity-70">[current-date:custom:l, F j, Y]</p>'
-          tokenize: true
+          tokenize: 1
+          content: "<p class=\"attendance-today-date text-sm opacity-70\">[current-date:custom:l, F j, Y]</p>\r\n<div role=\"note\" aria-label=\"Icon legend\" class=\"participant-legend my-4\"><h4 class=\"font-semibold text-sm uppercase tracking-wide opacity-70 mb-1\">Legend</h4><div class=\"participant-legend-items\"><span><span class=\"material-icons participant-legend-icon participant-legend-icon--swim\" aria-hidden=\"true\">pool</span> Meets swim requirements</span><span><span class=\"material-icons participant-legend-icon participant-legend-icon--medical\" aria-hidden=\"true\">health_and_safety</span> Medical concerns</span><span><span class=\"material-icons participant-legend-icon participant-legend-icon--photo\" aria-hidden=\"true\">photo_camera</span> Photo OK</span></div></div>"
         result:
           id: result
           table: views
