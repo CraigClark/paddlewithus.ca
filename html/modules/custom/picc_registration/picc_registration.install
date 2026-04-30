@@ -183,14 +183,24 @@ function picc_registration_update_10009() {
 
 /**
  * Migrate field_swim_test_passed_date values into the new field_evaluation_date.
- * Run drush cim first so the new field config is in place. After this hook
- * succeeds, the old field can be dropped via picc_registration_update_10011.
+ *
+ * Defensive about deploy order: if `drush cim` was run first and removed the
+ * old field config (the deploy-time order on a server without the legacy
+ * config in sync), the source table won't exist any more — so we skip the
+ * copy with a notice instead of hard-failing. New environments that never
+ * had the old field also pass through cleanly.
  */
 function picc_registration_update_10010() {
   $database = \Drupal::database();
+  $schema = $database->schema();
 
-  if (!$database->schema()->tableExists('profile__field_evaluation_date')) {
+  if (!$schema->tableExists('profile__field_evaluation_date')) {
     throw new \Drupal\Core\Utility\UpdateException('field_evaluation_date storage not found. Run "drush cim" before running updates.');
+  }
+
+  if (!$schema->tableExists('profile__field_swim_test_passed_date')) {
+    _picc_registration_import_translations();
+    return 'Old field_swim_test_passed_date table is already gone — nothing to copy. Translations re-imported.';
   }
 
   // Bulk copy. Same row shape: entity_id, revision_id, langcode, delta, value.
@@ -214,17 +224,14 @@ function picc_registration_update_10010() {
 
 /**
  * Drop the old field_swim_test_passed_date now that field_evaluation_date is
- * in use. Removes both the field instance and its storage; Drupal cleans up
- * the underlying tables. Re-run drush cex after this to capture removed
- * configs from active sync.
+ * in use. Idempotent: if the field is already gone (e.g. removed by an earlier
+ * drush cim on the same deploy), this hook is a no-op.
  */
 function picc_registration_update_10011() {
   $field = \Drupal\field\Entity\FieldConfig::loadByName('profile', 'participant', 'field_swim_test_passed_date');
   if ($field) {
     $field->delete();
   }
-  // Force purge so the storage definition can be removed in this same run
-  // rather than across multiple cron cycles.
   field_purge_batch(100);
 
   $storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('profile', 'field_swim_test_passed_date');
@@ -233,7 +240,9 @@ function picc_registration_update_10011() {
   }
   field_purge_batch(100);
 
-  return 'Removed field_swim_test_passed_date. Run drush cex to capture removed configs.';
+  return $field || $storage
+    ? 'Removed field_swim_test_passed_date. Run drush cex to capture removed configs.'
+    : 'field_swim_test_passed_date already removed — nothing to drop.';
 }
 
 /**
