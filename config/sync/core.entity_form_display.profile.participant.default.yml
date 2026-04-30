@@ -26,7 +26,7 @@ dependencies:
     - field.field.profile.participant.field_swim_attestation_date
     - field.field.profile.participant.field_swim_status
     - field.field.profile.participant.field_swim_test_evaluated_by
-    - field.field.profile.participant.field_swim_test_passed_date
+    - field.field.profile.participant.field_evaluation_date
     - profile.type.participant
   module:
     - datetime
@@ -147,6 +147,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_evaluation_date:
+    type: datetime_default
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_name:
     type: name_default
     weight: 0
@@ -223,12 +229,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_swim_test_passed_date:
-    type: datetime_default
-    weight: 19
-    region: content
-    settings: {  }
     third_party_settings: {  }
 hidden:
   field_owner: true

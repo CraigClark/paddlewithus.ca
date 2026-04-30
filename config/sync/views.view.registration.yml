@@ -24,7 +24,7 @@ dependencies:
     - field.storage.profile.field_name
     - field.storage.profile.field_photo_consent
     - field.storage.profile.field_shirt_size
-    - field.storage.profile.field_swim_test_passed_date
+    - field.storage.profile.field_evaluation_date
     - system.menu.main
     - user.role.coach
     - user.role.commerce_manager
@@ -1225,10 +1225,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_swim_test_passed_date:
-          id: field_swim_test_passed_date
-          table: profile__field_swim_test_passed_date
-          field: field_swim_test_passed_date
+        field_evaluation_date:
+          id: field_evaluation_date
+          table: profile__field_evaluation_date
+          field: field_evaluation_date
           relationship: field_participant
           group_type: group
           admin_label: ''
@@ -2401,7 +2401,7 @@ display:
         - 'config:field.storage.profile.field_emercency_contact_3_rel'
         - 'config:field.storage.profile.field_photo_consent'
         - 'config:field.storage.profile.field_shirt_size'
-        - 'config:field.storage.profile.field_swim_test_passed_date'
+        - 'config:field.storage.profile.field_evaluation_date'
   page_1:
     id: page_1
     display_title: Page

@@ -3,11 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - commerce_order.commerce_order_item_type.swim_test_registration
     - field.storage.commerce_order_item.field_swim_test_status
     - field.storage.commerce_product_variation.field_date
     - field.storage.commerce_product_variation.field_time_range
+    - field.storage.profile.field_birth_date
     - field.storage.profile.field_name
+    - field.storage.profile.field_swim_status
+    - profile.type.participant
     - system.menu.main
     - user.role.coach
     - user.role.commerce_manager
@@ -23,16 +25,14 @@ dependencies:
     - options
     - picc_registration
     - profile
-    - state_machine
     - user
-    - views_selective_filters
 id: swim_test_roster
 label: 'Swim test roster'
 module: views
-description: 'Coach view for evaluating swim test participants.'
+description: 'Coach view for evaluating swim test participants. One row per under-15 participant. Pre-registered kids cluster under their slot heading; walk-ups (unregistered) appear in the "Walk-up" group at the bottom.'
 tag: ''
-base_table: commerce_order_item
-base_field: order_item_id
+base_table: profile
+base_field: profile_id
 display:
   default:
     id: default
@@ -54,31 +54,6 @@ display:
           exclude: true
           alter:
             alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: true
-            trim: false
-            preserve_tags: ''
-            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -92,10 +67,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: datetime_default
+          type: datetime_custom
           settings:
             timezone_override: ''
-            format_type: month_day_year
+            date_format: 'l, F j'
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -118,31 +93,6 @@ display:
           exclude: true
           alter:
             alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: true
-            trim: false
-            preserve_tags: ''
-            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -161,7 +111,7 @@ display:
             timezone_override: ''
             format_type: default_time
             from_to: both
-            separator: ' - '
+            separator: ' to '
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -176,39 +126,14 @@ display:
           id: field_name
           table: profile__field_name
           field: field_name
-          relationship: field_participant
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
           label: ''
           exclude: false
           alter:
-            alter_text: true
-            text: '<a href="/user/{{ uid }}/participant/{{ field_participant }}/edit">{{ field_name }}</a>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
+            alter_text: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -221,10 +146,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: given
+          click_sort_column: family
           type: name_default
           settings:
-            format: given
+            format: default
             markup: none
             list_format: ''
           group_column: ''
@@ -237,43 +162,18 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_swim_test_status:
-          id: field_swim_test_status
-          table: commerce_order_item__field_swim_test_status
-          field: field_swim_test_status
+        participant_swim_status_badge:
+          id: participant_swim_status_badge
+          table: profile
+          field: participant_swim_status_badge
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
+          plugin_id: participant_swim_status_badge
           label: ''
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -286,56 +186,18 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: list_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        swim_test_action:
-          id: swim_test_action
-          table: commerce_order_item
-          field: swim_test_action
+        participant_swim_action:
+          id: participant_swim_action
+          table: profile
+          field: participant_swim_action
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: swim_test_action
+          plugin_id: participant_swim_action
           label: ''
           exclude: false
           alter:
             alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -349,24 +211,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
       pager:
-        type: full
+        type: some
         options:
           offset: 0
-          pagination_heading_level: h4
-          items_per_page: 50
-          total_pages: null
-          id: 0
-          tags:
-            next: ››
-            previous: ‹‹
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '25, 50, 100'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
+          items_per_page: 250
       exposed_form:
         type: bef
         options:
@@ -381,7 +229,7 @@ display:
           text_input_required_format: full_html
           bef:
             general:
-              autosubmit: false
+              autosubmit: true
               auto_submit_sort_only: false
               autosubmit_breakpoint: ''
               autosubmit_exclude_textfield: false
@@ -393,28 +241,7 @@ display:
               secondary_label: 'Advanced options'
               secondary_open: false
               reset_button_always_show: false
-            filter:
-              field_swim_test_status_value:
-                plugin_id: bef
-                advanced:
-                  sort_options: false
-                  sort_options_method: alphabetical_asc
-                  sort_options_natural: true
-                  rewrite:
-                    filter_rewrite_values: ''
-                    filter_rewrite_values_key: false
-                  collapsible: false
-                  collapsible_disable_automatic_open: false
-                  open_by_default: false
-                  is_secondary: false
-                  hide_label: false
-                  field_classes: ''
-                select_all_none: false
-                select_all_none_nested: false
-                display_inline: false
-                soft_limit: 0
-                soft_limit_label_less: 'Show less'
-                soft_limit_label_more: 'Show more'
+            filter: {  }
       access:
         type: role
         options:
@@ -435,7 +262,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: '<p>No swim test registrations found.</p>'
+          content: '<p>No participants currently need a swim test. \U0001f389</p>'
           tokenize: false
       sorts:
         field_date_value:
@@ -445,13 +272,12 @@ display:
           relationship: commerce_product_variation
           group_type: group
           admin_label: ''
-          plugin_id: datetime
+          plugin_id: standard
           order: ASC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
-          granularity: day
         field_time_range_value:
           id: field_time_range_value
           table: commerce_product_variation__field_time_range
@@ -459,137 +285,128 @@ display:
           relationship: commerce_product_variation
           group_type: group
           admin_label: ''
-          plugin_id: datetime
+          plugin_id: standard
           order: ASC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
-          granularity: second
+        field_name_family:
+          id: field_name_family
+          table: profile__field_name
+          field: field_name_family
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        field_name_given:
+          id: field_name_given
+          table: profile__field_name
+          field: field_name_given
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         type:
           id: type
-          table: commerce_order_item
+          table: profile
           field: type
-          entity_type: commerce_order_item
+          entity_type: profile
           entity_field: type
           plugin_id: bundle
           value:
-            swim_test_registration: swim_test_registration
+            participant: participant
           group: 1
           expose:
             operator: ''
-        order_state:
-          id: order_state
-          table: commerce_order
-          field: state
-          relationship: order_id
+        status:
+          id: status
+          table: profile
+          field: status
+          entity_type: profile
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        field_birth_date_value:
+          id: field_birth_date_value
+          table: profile__field_birth_date
+          field: field_birth_date_value
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: commerce_order
-          entity_field: state
-          plugin_id: list_field
-          operator: in
+          plugin_id: datetime
+          operator: 'not empty'
           value:
-            completed: completed
+            min: ''
+            max: ''
+            value: ''
           group: 1
           exposed: false
           expose:
             operator_id: ''
             label: ''
             description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
           is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_swim_test_status_value:
-          id: field_swim_test_status_value
-          table: commerce_order_item__field_swim_test_status
-          field: field_swim_test_status_value
+        field_swim_status_value:
+          id: field_swim_status_value
+          table: profile__field_swim_status
+          field: field_swim_status_value
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: list_field
-          operator: or
+          operator: not
           value:
-            pending: pending
+            attested: attested
+            exempt: exempt
           group: 1
-          exposed: true
-          expose:
-            operator_id: field_swim_test_status_value_op
-            label: Status
-            description: ''
-            use_operator: false
-            operator: field_swim_test_status_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: status
-            required: false
-            remember: false
-            multiple: true
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-        field_date_value_selective:
-          id: field_date_value_selective
-          table: commerce_product_variation__field_date
-          field: field_date_value_selective
-          relationship: commerce_product_variation
-          group_type: group
-          admin_label: ''
-          plugin_id: views_selective_filters_filter
-          operator: in
-          value: {  }
-          group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: ''
-            label: Date
+            label: ''
             description: ''
+          is_grouped: false
+        field_name:
+          id: field_name
+          table: profile__field_name
+          field: field_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: name_fulltext
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_name_op
+            label: Name
+            description: 'Search by first or last name'
             use_operator: false
-            operator: ''
+            operator: field_name_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_date_value_selective
+            identifier: name
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -602,11 +419,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          selective_display_field: field_date
-          selective_display_sort: ASC
-          selective_aggregated_fields: ''
-          selective_items_limit: 100
-          selective_entity_type: ''
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: default
         options:
@@ -628,39 +444,28 @@ display:
         options:
           query_comment: ''
           disable_sql_rewrite: false
-          distinct: false
+          distinct: true
           replica: false
           query_tags: {  }
       relationships:
+        reverse__commerce_order_item__field_participant:
+          id: reverse__commerce_order_item__field_participant
+          table: profile
+          field: reverse__commerce_order_item__field_participant
+          relationship: none
+          group_type: group
+          admin_label: 'Pending swim test registration'
+          plugin_id: entity_reverse
+          required: false
         commerce_product_variation:
           id: commerce_product_variation
           table: commerce_order_item
           field: commerce_product_variation
-          relationship: none
+          relationship: reverse__commerce_order_item__field_participant
           group_type: group
-          admin_label: 'Product variation'
-          entity_type: commerce_order_item
+          admin_label: 'Slot variation'
           plugin_id: standard
-          required: true
-        field_participant:
-          id: field_participant
-          table: commerce_order_item__field_participant
-          field: field_participant
-          relationship: none
-          group_type: group
-          admin_label: 'field_participant: Profile'
-          plugin_id: standard
-          required: true
-        order_id:
-          id: order_id
-          table: commerce_order_item
-          field: order_id
-          relationship: none
-          group_type: group
-          admin_label: Order
-          entity_type: commerce_order_item
-          plugin_id: standard
-          required: true
+          required: false
       css_class: ''
       header: {  }
       footer: {  }
@@ -670,6 +475,7 @@ display:
           metatags: {  }
           tokenize: false
         simple_sitemap_display_extender: {  }
+      relationships_metadata: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -677,12 +483,15 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - user.roles
       tags:
         - 'config:field.storage.commerce_order_item.field_swim_test_status'
         - 'config:field.storage.commerce_product_variation.field_date'
         - 'config:field.storage.commerce_product_variation.field_time_range'
+        - 'config:field.storage.profile.field_birth_date'
         - 'config:field.storage.profile.field_name'
+        - 'config:field.storage.profile.field_swim_status'
   page_1:
     id: page_1
     display_title: Page
@@ -712,9 +521,12 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - user.roles
       tags:
         - 'config:field.storage.commerce_order_item.field_swim_test_status'
         - 'config:field.storage.commerce_product_variation.field_date'
         - 'config:field.storage.commerce_product_variation.field_time_range'
+        - 'config:field.storage.profile.field_birth_date'
         - 'config:field.storage.profile.field_name'
+        - 'config:field.storage.profile.field_swim_status'

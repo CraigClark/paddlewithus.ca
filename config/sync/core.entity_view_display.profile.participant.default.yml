@@ -25,7 +25,7 @@ dependencies:
     - field.field.profile.participant.field_swim_attestation_by
     - field.field.profile.participant.field_swim_attestation_date
     - field.field.profile.participant.field_swim_test_evaluated_by
-    - field.field.profile.participant.field_swim_test_passed_date
+    - field.field.profile.participant.field_evaluation_date
     - profile.type.participant
   module:
     - datetime
@@ -330,6 +330,23 @@ content:
     third_party_settings: {  }
     weight: 9
     region: content
+  field_evaluation_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: html_date
+    third_party_settings:
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 3
+    region: content
   field_photo_consent:
     type: boolean
     label: hidden
@@ -355,27 +372,11 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
-  field_swim_test_passed_date:
-    type: datetime_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: html_date
-    third_party_settings:
-      field_label:
-        label_class: ''
-        label_value: ''
-        label_tag: ''
-      nomarkup:
-        enabled: false
-        separator: '|'
-        referenced_entity: ''
-    weight: 3
-    region: content
 hidden:
   field_name: true
   field_owner: true
   field_swim_attestation_by: true
   field_swim_attestation_date: true
+  field_swim_status: true
   field_swim_test_evaluated_by: true
   search_api_excerpt: true

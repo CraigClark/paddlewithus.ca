@@ -60,7 +60,7 @@ function _picc_registration_annual_swim_status_reset() {
 
     // Only update profiles that have swim data set.
     if ($swim_status === 'none'
-      && empty($profile->get('field_swim_test_passed_date')->value)
+      && empty($profile->get('field_evaluation_date')->value)
       && empty($profile->get('field_swim_attestation_date')->value)
       && empty($profile->get('field_swim_test_evaluated_by')->target_id)
       && empty($profile->get('field_swim_attestation_by')->target_id)
@@ -69,7 +69,7 @@ function _picc_registration_annual_swim_status_reset() {
     }
 
     $profile->set('field_swim_status', 'none');
-    $profile->set('field_swim_test_passed_date', NULL);
+    $profile->set('field_evaluation_date', NULL);
     $profile->set('field_swim_test_evaluated_by', NULL);
     $profile->set('field_swim_attestation_date', NULL);
     $profile->set('field_swim_attestation_by', NULL);
@@ -724,24 +724,110 @@ function picc_registration_preprocess_views_view_fields(&$variables) {
 /**
  * Implements hook_views_query_alter().
  *
- * Adds a dynamic birth-date filter to the er_swim_participants display
- * so only participants under 15 (as of Dec 31 of the current year) appear.
+ * - participants view: dynamic birth-date filter (under-15 / 15+) on the
+ *   webform er_swim_participants and er_attestation_participants displays.
+ * - swim_test_roster view (profile-based): under-15 cutoff plus rewrites
+ *   the entity_reverse relationship's JOIN to commerce_order_item so it
+ *   only matches PENDING swim_test_registration order items on completed
+ *   orders. Profiles with no matching pending registration become
+ *   walk-ups (NULL on the joined columns).
  */
 function picc_registration_views_query_alter($view, $query) {
-  if ($view->id() !== 'participants') {
-    return;
-  }
-
   $current_year = (int) date('Y');
   $cutoff_date = ($current_year - 15) . '-12-31';
 
-  if ($view->current_display === 'er_swim_participants') {
-    // Under 15: born after Dec 31 of (current year - 15).
-    $query->addWhere(0, 'profile__field_birth_date.field_birth_date_value', $cutoff_date, '>');
+  if ($view->id() === 'participants') {
+    if ($view->current_display === 'er_swim_participants') {
+      $query->addWhere(0, 'profile__field_birth_date.field_birth_date_value', $cutoff_date, '>');
+    }
+    elseif ($view->current_display === 'er_attestation_participants') {
+      $query->addWhere(0, 'profile__field_birth_date.field_birth_date_value', $cutoff_date, '<=');
+    }
+    return;
   }
-  elseif ($view->current_display === 'er_attestation_participants') {
-    // 15 or older: born on or before Dec 31 of (current year - 15).
-    $query->addWhere(0, 'profile__field_birth_date.field_birth_date_value', $cutoff_date, '<=');
+
+  if ($view->id() !== 'swim_test_roster') {
+    return;
+  }
+
+  // Under-15 cutoff for the swim test roster.
+  $query->addWhere(0, 'profile__field_birth_date.field_birth_date_value', $cutoff_date, '>');
+
+  // Constrain the entity_reverse relationship's joins so only pending
+  // swim_test_registration rows on completed/fulfillment orders match.
+  // Putting these in the JOIN ON clauses (instead of WHERE) keeps the
+  // joins LEFT — profiles with no match still come through as walk-ups
+  // with NULL variant fields.
+  $table_queue = &$query->getTableQueue();
+  if (empty($table_queue)) {
+    return;
+  }
+  $field_date_alias = NULL;
+  foreach ($table_queue as $a => &$info) {
+    $table = $info['table'] ?? '';
+    // Field_participant join (first hop of the reverse reference): constrain
+    // to the swim_test_registration bundle so paddle-camp registrations
+    // don't double rows.
+    if ($table === 'commerce_order_item__field_participant'
+        && isset($info['join']) && is_array($info['join']->extra)) {
+      $info['join']->extra[] = ['field' => 'bundle', 'value' => 'swim_test_registration'];
+      continue;
+    }
+    // Order_item entity join (second hop): constrain by type, status
+    // (via EXISTS subquery on the status field table), and order state.
+    if ($table === 'commerce_order_item' && isset($info['join'])) {
+      $oi = $info['alias'];
+      $info['join']->extra = "{$oi}.type = 'swim_test_registration'"
+        . " AND EXISTS (SELECT 1 FROM {commerce_order_item__field_swim_test_status} _sts WHERE _sts.entity_id = {$oi}.order_item_id AND _sts.field_swim_test_status_value = 'pending')"
+        . " AND EXISTS (SELECT 1 FROM {commerce_order} _o WHERE _o.order_id = {$oi}.order_id AND _o.state IN ('completed', 'fulfillment'))";
+      continue;
+    }
+    // Track the variation date field table so we can prepend a NULL-last
+    // sort below.
+    if ($table === 'commerce_product_variation__field_date') {
+      $field_date_alias = $a;
+    }
+  }
+  unset($info);
+
+  // Stash the field-date alias so the query-tag alter below can prepend an
+  // "IS NULL" expression to ORDER BY (walk-ups at the bottom). We can't add
+  // it via $query->orderby here — Drupal's escapeField mangles formulas.
+  if ($field_date_alias) {
+    $query->options['picc_swim_field_date_alias'] = $field_date_alias;
+  }
+}
+
+/**
+ * Implements hook_query_TAG_alter() for the swim_test_roster view.
+ *
+ * Prepends a "field_date IS NULL" sort to ORDER BY so walk-ups (rows where
+ * the joined variant date is NULL) cluster at the bottom of the page. Done
+ * here rather than in views_query_alter because Views' Sql::query()
+ * pipes orderby fields through escapeField, which mangles formulas.
+ */
+function picc_registration_query_views_swim_test_roster_alter($query) {
+  $view = $query->getMetaData('view');
+  $views_query = $view ? $view->query : NULL;
+  $alias = $views_query->options['picc_swim_field_date_alias'] ?? NULL;
+  if (!$alias) {
+    return;
+  }
+  // Add the CASE expression as a SELECT field; orderBy by its alias.
+  $expr_alias = $query->addExpression(
+    "CASE WHEN {$alias}.field_date_value IS NULL THEN 1 ELSE 0 END",
+    'picc_swim_walk_up_last'
+  );
+  $query->orderBy($expr_alias, 'ASC');
+  // Reorder $order so this sort comes first. Use reflection because the
+  // property is protected; this is a known pattern in Drupal contrib.
+  $reflection = new \ReflectionProperty($query, 'order');
+  $order = $reflection->getValue($query);
+  if (isset($order[$expr_alias])) {
+    $value = $order[$expr_alias];
+    unset($order[$expr_alias]);
+    $order = [$expr_alias => $value] + $order;
+    $reflection->setValue($query, $order);
   }
 }
 

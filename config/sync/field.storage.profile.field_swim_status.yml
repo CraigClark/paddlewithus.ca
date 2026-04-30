@@ -22,6 +22,9 @@ settings:
       value: passed
       label: 'Swim test passed'
     -
+      value: failed
+      label: 'Swim test failed'
+    -
       value: attested
       label: 'Attestation on file'
     -

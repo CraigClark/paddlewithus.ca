@@ -27,7 +27,7 @@ dependencies:
     - field.field.profile.participant.field_swim_attestation_date
     - field.field.profile.participant.field_swim_status
     - field.field.profile.participant.field_swim_test_evaluated_by
-    - field.field.profile.participant.field_swim_test_passed_date
+    - field.field.profile.participant.field_evaluation_date
     - profile.type.participant
   module:
     - datetime
@@ -37,6 +37,12 @@ targetEntityType: profile
 bundle: participant
 mode: swim_test
 content:
+  field_evaluation_date:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_swim_attestation_by:
     type: entity_reference_autocomplete
     weight: 5
@@ -68,12 +74,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_swim_test_passed_date:
-    type: datetime_default
-    weight: 1
-    region: content
-    settings: {  }
     third_party_settings: {  }
 hidden:
   field_additional_info: true

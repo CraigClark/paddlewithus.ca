@@ -1,0 +1,21 @@
+uuid: 2a2d6e54-957a-41fc-9215-cee3c18dd36c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_evaluation_date
+    - profile.type.participant
+  module:
+    - datetime
+id: profile.participant.field_evaluation_date
+field_name: field_evaluation_date
+entity_type: profile
+bundle: participant
+label: 'Last swim test evaluation (date)'
+description: 'Date of the most recent pass or fail evaluation. Cleared annually.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

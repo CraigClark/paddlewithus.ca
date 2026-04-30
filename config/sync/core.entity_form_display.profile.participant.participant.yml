@@ -27,7 +27,7 @@ dependencies:
     - field.field.profile.participant.field_swim_attestation_date
     - field.field.profile.participant.field_swim_status
     - field.field.profile.participant.field_swim_test_evaluated_by
-    - field.field.profile.participant.field_swim_test_passed_date
+    - field.field.profile.participant.field_evaluation_date
     - profile.type.participant
   module:
     - datetime
@@ -166,12 +166,12 @@ hidden:
   field_emercency_contact_1_pickup: true
   field_emercency_contact_2_pickup: true
   field_emercency_contact_3_pickup: true
+  field_evaluation_date: true
   field_owner: true
   field_shirt_size: true
   field_swim_attestation_by: true
   field_swim_attestation_date: true
   field_swim_status: true
   field_swim_test_evaluated_by: true
-  field_swim_test_passed_date: true
   is_default: true
   revision_log_message: true
