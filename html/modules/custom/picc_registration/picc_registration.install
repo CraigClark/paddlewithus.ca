@@ -182,73 +182,16 @@ function picc_registration_update_10009() {
 }
 
 /**
- * Migrate field_swim_test_passed_date values into the new field_evaluation_date.
- *
- * Defensive about deploy order: if `drush cim` was run first and removed the
- * old field config (the deploy-time order on a server without the legacy
- * config in sync), the source table won't exist any more — so we skip the
- * copy with a notice instead of hard-failing. New environments that never
- * had the old field also pass through cleanly.
- */
-function picc_registration_update_10010() {
-  $database = \Drupal::database();
-  $schema = $database->schema();
-
-  if (!$schema->tableExists('profile__field_evaluation_date')) {
-    throw new \Drupal\Core\Utility\UpdateException('field_evaluation_date storage not found. Run "drush cim" before running updates.');
-  }
-
-  if (!$schema->tableExists('profile__field_swim_test_passed_date')) {
-    _picc_registration_import_translations();
-    return 'Old field_swim_test_passed_date table is already gone — nothing to copy. Translations re-imported.';
-  }
-
-  // Bulk copy. Same row shape: entity_id, revision_id, langcode, delta, value.
-  $database->query("
-    INSERT INTO {profile__field_evaluation_date}
-      (bundle, deleted, entity_id, revision_id, langcode, delta, field_evaluation_date_value)
-    SELECT bundle, deleted, entity_id, revision_id, langcode, delta, field_swim_test_passed_date_value
-    FROM {profile__field_swim_test_passed_date} src
-    WHERE NOT EXISTS (
-      SELECT 1 FROM {profile__field_evaluation_date} dst
-      WHERE dst.entity_id = src.entity_id AND dst.delta = src.delta
-    )
-  ");
-
-  $count = (int) $database->query('SELECT COUNT(*) FROM {profile__field_evaluation_date}')->fetchField();
-
-  _picc_registration_import_translations();
-
-  return "Copied passed-date values to field_evaluation_date ($count rows total). Translations re-imported.";
-}
-
-/**
- * Drop the old field_swim_test_passed_date now that field_evaluation_date is
- * in use. Idempotent: if the field is already gone (e.g. removed by an earlier
- * drush cim on the same deploy), this hook is a no-op.
- */
-function picc_registration_update_10011() {
-  $field = \Drupal\field\Entity\FieldConfig::loadByName('profile', 'participant', 'field_swim_test_passed_date');
-  if ($field) {
-    $field->delete();
-  }
-  field_purge_batch(100);
-
-  $storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('profile', 'field_swim_test_passed_date');
-  if ($storage) {
-    $storage->delete();
-  }
-  field_purge_batch(100);
-
-  return $field || $storage
-    ? 'Removed field_swim_test_passed_date. Run drush cex to capture removed configs.'
-    : 'field_swim_test_passed_date already removed — nothing to drop.';
-}
-
-/**
  * Re-import module translations: adds Pending/Failed/Attested/Exempt badge
  * labels, the Status filter, the Unscheduled group heading, and updates to
  * the new evaluation form strings.
+ *
+ * The 10010 / 10011 slots in this module's history were a data migration
+ * for the field_swim_test_passed_date → field_evaluation_date rename.
+ * They were dropped as no-ops once it was clear no real swim-test data
+ * existed yet — drush cim handles the field deletion on its own when the
+ * old config is gone from disk. Numbers are intentionally skipped so
+ * environments that already advanced past them stay consistent.
  */
 function picc_registration_update_10012() {
   _picc_registration_import_translations();
