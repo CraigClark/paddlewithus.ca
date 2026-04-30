@@ -1,0 +1,38 @@
+label: 'Liste des tests de natation'
+description: 'Vue pour les coachs : un participant par ligne. Les inscrits sont regroupés sous leur plage horaire ; les non planifiés (sans inscription) apparaissent dans le groupe « Non planifié » au bas de la liste.'
+display:
+  default:
+    display_options:
+      title: 'Liste des tests de natation'
+      empty:
+        area_text_custom:
+          content: '<p>Aucun participant n''a besoin d''un test de natation pour le moment. 🎉</p>'
+      filters:
+        field_swim_status_value:
+          expose:
+            label: Statut
+          group_info:
+            label: Statut
+            group_items:
+              1:
+                title: 'En attente'
+              2:
+                title: Réussi
+              3:
+                title: 'Échoués seulement'
+              4:
+                title: Attesté
+              5:
+                title: Exempté
+        field_name:
+          expose:
+            label: Nom
+            description: 'Rechercher par prénom ou nom de famille'
+        field_date_value_selective:
+          expose:
+            label: Date
+  page_1:
+    display_options:
+      menu:
+        title: 'Liste des tests de natation'
+        description: 'Évaluer les participants au test de natation'

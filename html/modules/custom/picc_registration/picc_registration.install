@@ -235,3 +235,13 @@ function picc_registration_update_10011() {
 
   return 'Removed field_swim_test_passed_date. Run drush cex to capture removed configs.';
 }
+
+/**
+ * Re-import module translations: adds Pending/Failed/Attested/Exempt badge
+ * labels, the Status filter, the Unscheduled group heading, and updates to
+ * the new evaluation form strings.
+ */
+function picc_registration_update_10012() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}

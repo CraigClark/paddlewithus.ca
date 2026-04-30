@@ -10,7 +10,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 # Swim test evaluation form
-msgid "Swim Test Evaluation"
+msgid "Swim test review"
+msgstr "Examen du test de natation"
+
+msgid "Swim test evaluation"
 msgstr "Évaluation du test de natation"
 
 msgid "Participant: @name"
@@ -19,8 +22,11 @@ msgstr "Participant : @name"
 msgid "Current status: <strong>@status</strong>"
 msgstr "Statut actuel : <strong>@status</strong>"
 
-msgid "Change only if backdating a previous evaluation."
-msgstr "Modifier uniquement pour antidater une évaluation précédente."
+msgid "Evaluation date"
+msgstr "Date d'évaluation"
+
+msgid "Defaults to today. Change only when backdating."
+msgstr "Aujourd'hui par défaut. À modifier uniquement pour antidater."
 
 msgid "Pass"
 msgstr "Réussir"
@@ -40,6 +46,15 @@ msgstr "Réussi"
 msgid "Failed"
 msgstr "Échoué"
 
+msgid "Attested"
+msgstr "Attesté"
+
+msgid "Exempt"
+msgstr "Exempté"
+
+msgid "Swim test required"
+msgstr "Test de natation requis"
+
 msgid "No show"
 msgstr "Absent"
 
@@ -48,6 +63,15 @@ msgstr "Excusé"
 
 msgid "Pending"
 msgstr "En attente"
+
+msgid "Unknown"
+msgstr "Inconnu"
+
+msgid "Participant"
+msgstr "Participant"
+
+msgid "Participant or registration not found."
+msgstr "Participant ou inscription introuvable."
 
 msgid "Registration not found."
 msgstr "Inscription introuvable."
@@ -160,6 +184,42 @@ msgstr "Vous n'avez aucun membre de la famille de 15 ans ou plus dans votre comp
 msgid "Swim test roster"
 msgstr "Liste des tests de natation"
 
+msgid "Evaluate swim test participants"
+msgstr "Évaluer les participants au test de natation"
+
+msgid "Unscheduled"
+msgstr "Non planifié"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Failed only"
+msgstr "Échoués seulement"
+
+msgid "Search by first or last name"
+msgstr "Rechercher par prénom ou nom de famille"
+
+msgid "No participants currently need a swim test. 🎉"
+msgstr "Aucun participant n'a besoin d'un test de natation pour le moment. 🎉"
+
+msgid "Last swim test evaluation (date)"
+msgstr "Dernière évaluation du test de natation (date)"
+
+msgid "Date of the most recent pass or fail evaluation. Cleared annually."
+msgstr "Date de la dernière évaluation (réussite ou échec). Réinitialisée chaque année."
+
+msgid "Swim status badge (participant)"
+msgstr "Badge de statut de natation (participant)"
+
+msgid "Renders a colored badge from field_swim_status."
+msgstr "Affiche un badge coloré à partir de field_swim_status."
+
+msgid "Swim test action (participant)"
+msgstr "Action de test de natation (participant)"
+
+msgid "Evaluate button for participants whose status is none or failed; nothing for cleared statuses."
+msgstr "Bouton Évaluer pour les participants dont le statut est aucun ou échoué; rien pour les statuts validés."
+
 msgid "Swim test no-shows"
 msgstr "Absences aux tests de natation"
 
@@ -193,8 +253,8 @@ msgstr "Aucune absence au test de natation en attente. 🎉"
 msgid "Swim test action"
 msgstr "Action de test de natation"
 
-msgid "Pass/Fail/Undo buttons for swim test evaluation."
-msgstr "Boutons Réussir/Échouer/Annuler pour l'évaluation du test de natation."
+msgid "Resolved/Undo buttons for swim test no-show review."
+msgstr "Boutons Résolu/Annuler pour l'examen des absences au test de natation."
 
 msgid "No swim test registrations found."
 msgstr "Aucune inscription au test de natation trouvée."

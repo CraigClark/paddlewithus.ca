@@ -3,12 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.commerce_order_item.field_swim_test_status
     - field.storage.commerce_product_variation.field_date
     - field.storage.commerce_product_variation.field_time_range
-    - field.storage.profile.field_birth_date
     - field.storage.profile.field_name
-    - field.storage.profile.field_swim_status
     - profile.type.participant
     - system.menu.main
     - user.role.coach
@@ -16,7 +13,6 @@ dependencies:
     - user.role.content_editor
   module:
     - better_exposed_filters
-    - commerce
     - commerce_order
     - commerce_product
     - datetime
@@ -26,6 +22,7 @@ dependencies:
     - picc_registration
     - profile
     - user
+    - views_selective_filters
 id: swim_test_roster
 label: 'Swim test roster'
 module: views
@@ -362,25 +359,6 @@ display:
             label: ''
             description: ''
           is_grouped: false
-        field_swim_status_value:
-          id: field_swim_status_value
-          table: profile__field_swim_status
-          field: field_swim_status_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: list_field
-          operator: not
-          value:
-            attested: attested
-            exempt: exempt
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-          is_grouped: false
         field_name:
           id: field_name
           table: profile__field_name
@@ -419,6 +397,116 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_swim_status_value:
+          id: field_swim_status_value
+          table: profile__field_swim_status
+          field: field_swim_status_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            none: none
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_swim_status_value_op
+            label: Status
+            description: ''
+            use_operator: false
+            operator: field_swim_status_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: status
+            required: true
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: true
+          group_info:
+            label: Status
+            description: ''
+            identifier: status
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '1'
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Pending
+                operator: or
+                value:
+                  none: none
+                  failed: failed
+              2:
+                title: Passed
+                operator: or
+                value:
+                  passed: passed
+              3:
+                title: 'Failed only'
+                operator: or
+                value:
+                  failed: failed
+              4:
+                title: Attested
+                operator: or
+                value:
+                  attested: attested
+              5:
+                title: Exempt
+                operator: or
+                value:
+                  exempt: exempt
+        field_date_value_selective:
+          id: field_date_value_selective
+          table: commerce_product_variation__field_date
+          field: field_date_value_selective
+          relationship: commerce_product_variation
+          group_type: group
+          admin_label: ''
+          plugin_id: views_selective_filters_filter
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Date
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_date_value_selective
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          selective_display_field: field_date
+          selective_display_sort: ASC
+          selective_aggregated_fields: ''
+          selective_items_limit: 100
+          selective_entity_type: ''
       filter_groups:
         operator: AND
         groups:
@@ -482,16 +570,11 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - url.query_args
-        - user
         - user.roles
       tags:
-        - 'config:field.storage.commerce_order_item.field_swim_test_status'
         - 'config:field.storage.commerce_product_variation.field_date'
         - 'config:field.storage.commerce_product_variation.field_time_range'
-        - 'config:field.storage.profile.field_birth_date'
         - 'config:field.storage.profile.field_name'
-        - 'config:field.storage.profile.field_swim_status'
   page_1:
     id: page_1
     display_title: Page
@@ -520,13 +603,8 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - url.query_args
-        - user
         - user.roles
       tags:
-        - 'config:field.storage.commerce_order_item.field_swim_test_status'
         - 'config:field.storage.commerce_product_variation.field_date'
         - 'config:field.storage.commerce_product_variation.field_time_range'
-        - 'config:field.storage.profile.field_birth_date'
         - 'config:field.storage.profile.field_name'
-        - 'config:field.storage.profile.field_swim_status'

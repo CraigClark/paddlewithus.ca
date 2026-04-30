@@ -134,9 +134,12 @@ my-7
 my-8
 
 flex
+flex-1
 items-center
+gap-3
 gap-4
 shrink-0
+ml-auto
 block
 w-full
 h-auto

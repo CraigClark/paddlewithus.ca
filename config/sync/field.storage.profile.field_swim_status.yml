@@ -26,7 +26,7 @@ settings:
       label: 'Swim test failed'
     -
       value: attested
-      label: 'Attestation on file'
+      label: 'Swim attestation on file'
     -
       value: exempt
       label: Exempt

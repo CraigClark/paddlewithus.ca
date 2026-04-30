@@ -3,27 +3,32 @@
  * @file
  * Theme override for fields in the swim test roster view (profile-based).
  *
- * Renders one row per participant with name + status badge + action.
- * The Evaluate button only appears for participants whose status is
- * none or failed (handled by the action field plugin).
+ * One row per participant: name on the left, status badge and Evaluate
+ * button grouped on the right. The .participant-row's existing CSS
+ * (justify-content: space-between, flex-wrap: wrap) handles desktop
+ * layout; on mobile the right cluster wraps to its own line.
  *
- * Designed for mobile use by coaches standing at the pool.
+ * Note: only Tailwind utilities already in the compiled CSS are used —
+ * gap-2/4/6, items-center, justify-end, shrink-0. Don't reach for
+ * gap-3, ml-auto, or flex-1 without re-running `npm run build` first.
  */
 #}
-<div class="participant-row flex items-center gap-3">
-  <div class="font-medium text-base flex-1">
+<div class="participant-row">
+  <div class="font-medium text-base">
     {% if fields.field_name is defined %}
       {{ fields.field_name.content }}
     {% endif %}
   </div>
-  <div class="shrink-0">
-    {% if fields.participant_swim_status_badge is defined %}
-      {{ fields.participant_swim_status_badge.content }}
-    {% endif %}
-  </div>
-  <div class="shrink-0">
-    {% if fields.participant_swim_action is defined %}
-      {{ fields.participant_swim_action.content }}
-    {% endif %}
+  <div class="flex items-center gap-4">
+    <div class="shrink-0">
+      {% if fields.participant_swim_status_badge is defined %}
+        {{ fields.participant_swim_status_badge.content }}
+      {% endif %}
+    </div>
+    <div class="shrink-0">
+      {% if fields.participant_swim_action is defined %}
+        {{ fields.participant_swim_action.content }}
+      {% endif %}
+    </div>
   </div>
 </div>

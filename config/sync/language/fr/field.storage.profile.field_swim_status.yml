@@ -5,6 +5,8 @@ settings:
     -
       label: 'Test de natation réussi'
     -
-      label: 'Attestation au dossier'
+      label: 'Test de natation échoué'
+    -
+      label: 'Attestation de natation au dossier'
     -
       label: Exempté
