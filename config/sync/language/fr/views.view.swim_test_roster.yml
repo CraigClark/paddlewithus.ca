@@ -6,7 +6,7 @@ display:
       title: 'Liste des tests de natation'
       empty:
         area_text_custom:
-          content: '<p>Aucun participant n''a besoin d''un test de natation pour le moment. 🎉</p>'
+          content: "<p>Aucun participant n'a besoin d'un test de natation pour le moment. 🎉</p>"
       filters:
         field_swim_status_value:
           expose:
