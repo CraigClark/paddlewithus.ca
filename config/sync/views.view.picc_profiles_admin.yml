@@ -124,7 +124,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: ''
+          empty: n/a
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -527,7 +527,8 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 50
+          pagination_heading_level: h4
+          items_per_page: 100
           total_pages: null
           id: 0
           tags:
@@ -619,6 +620,39 @@ display:
           exposed: false
       arguments: {  }
       filters:
+        uid_anonymous:
+          id: uid_anonymous
+          table: profile
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: 'Hide anonymous (machine-created) profiles'
+          entity_type: profile
+          entity_field: uid
+          plugin_id: numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         type:
           id: type
           table: profile
@@ -699,35 +733,32 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        uid:
-          id: uid
-          table: profile
-          field: uid
-          relationship: none
+        field_name_1:
+          id: field_name_1
+          table: user__field_name
+          field: field_name
+          relationship: uid
           group_type: group
           admin_label: ''
-          entity_type: profile
-          entity_field: uid
-          plugin_id: user_name
-          operator: in
-          value: {  }
+          plugin_id: name_fulltext
+          operator: contains
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: uid_op
+            operator_id: field_name_1_op
             label: Owner
-            description: 'Filter by user (account holder)'
+            description: "Search by the account holder's first or last name"
             use_operator: false
-            operator: uid_op
+            operator: field_name_1_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: uid
+            identifier: owner
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -822,9 +853,30 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        uid:
+          id: uid
+          table: profile
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: 'Owner (user)'
+          entity_type: profile
+          entity_field: uid
+          plugin_id: standard
+          required: true
       css_class: ''
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<h2>Displaying @start - @end of @total profiles</h2>'
       footer: {  }
       display_extenders:
         ui_styles: {  }
