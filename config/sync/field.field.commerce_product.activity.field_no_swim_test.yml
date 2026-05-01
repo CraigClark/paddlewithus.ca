@@ -1,0 +1,23 @@
+uuid: 1e8c5a72-4f9d-4b3a-9e2c-7d6f1a8c5e94
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
+    - field.storage.commerce_product.field_no_swim_test
+id: commerce_product.activity.field_no_swim_test
+field_name: field_no_swim_test
+entity_type: commerce_product
+bundle: activity
+label: 'Skip swim test for this program'
+description: '<p>When enabled, participants registered to this program are automatically marked exempt from the swim test (unless they already passed, failed, or were attested). Use for programs that do not involve open water — adult dryland sessions, polo, etc.</p>'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes — no swim test required for this program'
+  off_label: 'No'
+field_type: boolean

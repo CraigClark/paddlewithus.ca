@@ -3,3 +3,11 @@ services:
     class: Drupal\picc_registration\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
+  logger.channel.picc_registration:
+    parent: logger.channel_base
+    arguments: ['picc_registration']
+  picc_registration.swim_exemption_applier:
+    class: Drupal\picc_registration\Service\SwimExemptionApplier
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.picc_registration'

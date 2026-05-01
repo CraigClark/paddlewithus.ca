@@ -3,6 +3,7 @@
 namespace Drupal\picc_registration\Drush\Commands;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\picc_registration\Service\SwimExemptionApplier;
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -14,6 +15,7 @@ final class PiccRegistrationCommands extends DrushCommands {
 
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly SwimExemptionApplier $swimExemptionApplier,
   ) {
     parent::__construct();
   }
@@ -21,6 +23,7 @@ final class PiccRegistrationCommands extends DrushCommands {
   public static function create(ContainerInterface $container): self {
     return new self(
       $container->get('entity_type.manager'),
+      $container->get('picc_registration.swim_exemption_applier'),
     );
   }
 
@@ -71,6 +74,32 @@ final class PiccRegistrationCommands extends DrushCommands {
     $storage->delete($entities);
 
     $this->io()->success(sprintf('Deleted %d orphaned order item(s).', count($entities)));
+  }
+
+  /**
+   * Apply swim test exemptions to participants in flagged programs.
+   *
+   * Sweeps every activity_registration order item; for any whose program
+   * has field_no_swim_test = TRUE, sets the participant's swim status to
+   * 'exempt' (only if currently 'none' — does not overwrite real
+   * evaluation outcomes).
+   */
+  #[CLI\Command(name: 'picc:apply-swim-exemptions', aliases: ['picc-ase'])]
+  #[CLI\Usage(name: 'picc:apply-swim-exemptions', description: 'Apply exemptions to all current registrations.')]
+  public function applySwimExemptions(): void {
+    $stats = $this->swimExemptionApplier->applyToAll();
+
+    if ($stats['programs'] === 0) {
+      $this->io()->note('No programs are flagged with field_no_swim_test.');
+      return;
+    }
+
+    $this->io()->success(sprintf(
+      'Scanned %d registration(s) across %d flagged program(s); marked %d participant(s) exempt.',
+      $stats['scanned'],
+      $stats['programs'],
+      $stats['updated'],
+    ));
   }
 
 }

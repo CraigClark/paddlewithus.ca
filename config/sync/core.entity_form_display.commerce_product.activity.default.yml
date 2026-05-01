@@ -13,6 +13,7 @@ dependencies:
     - field.field.commerce_product.activity.field_equipmenet_provided
     - field.field.commerce_product.activity.field_experience
     - field.field.commerce_product.activity.field_location
+    - field.field.commerce_product.activity.field_no_swim_test
     - field.field.commerce_product.activity.field_primary_image
     - field.field.commerce_product.activity.field_schedule
     - field.field.commerce_product.activity.field_season
@@ -215,6 +216,13 @@ content:
   field_track_attendance:
     type: boolean_checkbox
     weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_no_swim_test:
+    type: boolean_checkbox
+    weight: 6
     region: content
     settings:
       display_label: true

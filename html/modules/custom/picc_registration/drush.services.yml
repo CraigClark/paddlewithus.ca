@@ -3,5 +3,6 @@ services:
     class: Drupal\picc_registration\Drush\Commands\PiccRegistrationCommands
     arguments:
       - '@entity_type.manager'
+      - '@picc_registration.swim_exemption_applier'
     tags:
       - { name: drush.command }

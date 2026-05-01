@@ -479,6 +479,10 @@ class PiccRegistrationHandler extends WebformHandlerBase {
           $fresh_item->save();
         }
       }
+
+      // Apply swim test exemption if the program is flagged.
+      \Drupal::service('picc_registration.swim_exemption_applier')
+        ->applyToOrderItem($fresh_item);
     }
 
     return $order;

@@ -1,0 +1,18 @@
+uuid: 9f2a4d31-8b5c-4e7f-a1d6-3c9e8b2d7e15
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product.field_no_swim_test
+field_name: field_no_swim_test
+entity_type: commerce_product
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
