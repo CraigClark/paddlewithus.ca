@@ -198,6 +198,13 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_no_swim_test:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_primary_image:
     type: media_library_widget
     weight: 1
@@ -216,13 +223,6 @@ content:
   field_track_attendance:
     type: boolean_checkbox
     weight: 5
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_no_swim_test:
-    type: boolean_checkbox
-    weight: 6
     region: content
     settings:
       display_label: true
