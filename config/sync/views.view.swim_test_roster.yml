@@ -453,16 +453,12 @@ display:
                 operator: or
                 value:
                   failed: failed
-              4:
-                title: Attested
-                operator: or
-                value:
-                  attested: attested
               5:
                 title: Exempt
                 operator: or
                 value:
                   exempt: exempt
+          reduce_duplicates: false
         field_date_value_selective:
           id: field_date_value_selective
           table: commerce_product_variation__field_date

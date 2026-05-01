@@ -20,8 +20,6 @@ display:
                 title: Réussi
               3:
                 title: 'Échoués seulement'
-              4:
-                title: Attesté
               5:
                 title: Exempté
         field_name:
