@@ -1,0 +1,5 @@
+services:
+  picc_registration.route_subscriber:
+    class: Drupal\picc_registration\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
