@@ -463,7 +463,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 50
+          items_per_page: 100
           total_pages: 0
           id: 0
           tags:
@@ -874,9 +874,25 @@ display:
       use_more_text: more
       link_display: page_1
       link_url: ''
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<h2>Displaying @start - @end of @total users.</h2>'
       display_comment: ''
       hide_attachment_summary: false
-      display_extenders: {  }
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
     cache_metadata:
       max-age: 0
       contexts:
