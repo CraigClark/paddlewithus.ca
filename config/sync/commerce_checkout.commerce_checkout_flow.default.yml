@@ -28,17 +28,37 @@ configuration:
       allow_registration: false
       registration_form_mode: register
     contact_information:
-      display_label: null
       step: order_information
       weight: 1
       wrapper_element: fieldset
       double_entry: true
       always_display: false
+    payment_information:
+      display_label: null
+      step: order_information
+      weight: 2
+      wrapper_element: fieldset
+      always_display: false
+      require_payment_method: false
     review:
       display_label: null
       step: review
       weight: 3
       wrapper_element: null
+    stripe_review:
+      display_label: null
+      step: review
+      weight: 4
+      wrapper_element: container
+      button_id: edit-actions-next
+      auto_submit_review_form: false
+      setup_future_usage: ''
+    payment_process:
+      display_label: null
+      step: payment
+      weight: 5
+      wrapper_element: container
+      capture: true
     completion_message:
       display_label: null
       step: complete
@@ -48,46 +68,24 @@ configuration:
         value: "Your order number is [commerce_order:order_number].\r\nYou can view your order on your account page when logged in."
         format: plain_text
       display_pane_summaries: true
+    completion_register:
+      display_label: null
+      step: complete
+      weight: 7
+      wrapper_element: null
     order_summary:
       display_label: null
       step: _sidebar
       weight: 8
       wrapper_element: container
       view: commerce_checkout_order_summary
-    completion_register:
-      display_label: null
-      step: complete
-      weight: 7
-      wrapper_element: null
+    coupon_redemption:
+      step: _sidebar
+      weight: 9
+      wrapper_element: container
+      allow_multiple: true
     customer_comments:
       display_label: null
       step: _disabled
       weight: 10
       wrapper_element: fieldset
-    payment_information:
-      display_label: null
-      step: order_information
-      weight: 2
-      wrapper_element: fieldset
-      always_display: false
-      require_payment_method: false
-    payment_process:
-      display_label: null
-      step: payment
-      weight: 5
-      wrapper_element: container
-      capture: true
-    coupon_redemption:
-      display_label: null
-      step: _sidebar
-      weight: 9
-      wrapper_element: container
-      allow_multiple: false
-    stripe_review:
-      display_label: null
-      step: review
-      weight: 4
-      wrapper_element: container
-      button_id: edit-actions-next
-      auto_submit_review_form: false
-      setup_future_usage: ''
