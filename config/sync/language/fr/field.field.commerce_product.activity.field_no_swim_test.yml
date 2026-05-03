@@ -1,0 +1,5 @@
+label: 'Ignorer l’exigence de test de natation pour ce programme'
+description: "<p>Lorsque cette option est activée, les participants inscrits à ce programme sont automatiquement exemptés du test de natation (sauf s’ils l’ont déjà réussi, échoué ou s’ils ont été attestés). À utiliser pour les programmes qui ne se déroulent pas en eau libre — séances adultes hors de l’eau, polo, etc.</p>\r\n"
+settings:
+  on_label: 'Oui — aucun test de natation requis pour ce programme'
+  off_label: Non

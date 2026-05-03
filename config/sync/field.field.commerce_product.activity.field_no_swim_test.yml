@@ -9,7 +9,7 @@ id: commerce_product.activity.field_no_swim_test
 field_name: field_no_swim_test
 entity_type: commerce_product
 bundle: activity
-label: 'Skip swim test for this program'
+label: 'Skip swim requirement for this program'
 description: '<p>When enabled, participants registered to this program are automatically marked exempt from the swim test (unless they already passed, failed, or were attested). Use for programs that do not involve open water — adult dryland sessions, polo, etc.</p>'
 required: false
 translatable: false
