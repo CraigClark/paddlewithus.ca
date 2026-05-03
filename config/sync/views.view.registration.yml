@@ -21,10 +21,10 @@ dependencies:
     - field.storage.profile.field_emercency_contact_3_phone
     - field.storage.profile.field_emercency_contact_3_pickup
     - field.storage.profile.field_emercency_contact_3_rel
+    - field.storage.profile.field_evaluation_date
     - field.storage.profile.field_name
     - field.storage.profile.field_photo_consent
     - field.storage.profile.field_shirt_size
-    - field.storage.profile.field_evaluation_date
     - system.menu.main
     - user.role.coach
     - user.role.commerce_manager
@@ -765,6 +765,44 @@ display:
           selective_aggregated_fields: ''
           selective_items_limit: 100
           selective_entity_type: ''
+        field_name:
+          id: field_name
+          table: profile__field_name
+          field: field_name
+          relationship: field_participant
+          group_type: group
+          admin_label: ''
+          plugin_id: name_fulltext
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_name_op
+            label: Name
+            description: ''
+            use_operator: false
+            operator: field_name_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
         type: default
         options:
@@ -2399,9 +2437,9 @@ display:
         - 'config:field.storage.profile.field_emercency_contact_3_phone'
         - 'config:field.storage.profile.field_emercency_contact_3_pickup'
         - 'config:field.storage.profile.field_emercency_contact_3_rel'
+        - 'config:field.storage.profile.field_evaluation_date'
         - 'config:field.storage.profile.field_photo_consent'
         - 'config:field.storage.profile.field_shirt_size'
-        - 'config:field.storage.profile.field_evaluation_date'
   page_1:
     id: page_1
     display_title: Page
