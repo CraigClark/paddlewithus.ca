@@ -19,6 +19,7 @@ Activities are **products**; each offering of an activity is a **variation** (a.
    - **Equipment provided**: what the club provides.
    - **What to bring**: what participants need.
    - **Season**: taxonomy reference.
+   - **Skip swim test for this program** (checkbox): leave off for water programs. Turn on for programs that don't involve open water (adult dryland sessions, polo, etc.) — registered participants are automatically marked exempt from the swim test. See "Skipping the swim test" below.
 3. Save. The product page is now live, but with no sessions yet.
 
 ## Creating session variations
@@ -59,3 +60,20 @@ Click the Translate tab on a product or variation to add French. Only translatab
 ## SKU
 
 Automatically generated — format `ACT-` + 8 hex chars. Hidden from the form. You don't need to do anything.
+
+## Skipping the swim test
+
+The **Skip swim test for this program** checkbox on the product form controls whether registered participants need to clear the swim test.
+
+- **Off (default)**: participants need a passed, attested, or admin-set exempt swim status to count as cleared.
+- **On**: every participant registered to this program is automatically marked **Exempt** on registration. They don't appear on the coach roster as needing evaluation.
+
+When you turn this on for a program that **already has registrations**, those existing participants are not updated automatically. Ask the site admin to run:
+
+```
+drush picc:apply-swim-exemptions
+```
+
+That sweeps every existing registration in flagged programs and applies the exemption. Already-evaluated participants (passed / failed / attested) are never overwritten — only `none` becomes `exempt`.
+
+Turning the checkbox off later does not revert anyone — exempt statuses stay until cleared by the annual Jan 1 reset or by manual edit.

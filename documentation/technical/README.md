@@ -13,3 +13,7 @@ For developers maintaining or extending the site.
 - [Architecture](swim-test-architecture.md) — modules, data model, flows, key files
 - [Testing and troubleshooting](swim-test-testing.md) — manual test scenarios, common issues, field permissions reference
 - [Deployment notes](swim-test-deployment.md) — first deploy, update hooks, cron setup, translation updates
+
+## Profiles admin
+
+- [Profiles admin](profile-admin.md) — Views-based replacement for `/admin/people/profiles`, customer profile labels

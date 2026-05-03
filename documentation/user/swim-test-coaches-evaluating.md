@@ -17,7 +17,7 @@ Coaches see the swim test roster at `/participants/swim-test-roster` (or via the
 | **Failed** | Tested and didn't pass — needs another attempt. |
 | **Passed** | Tested and passed; cleared for the season. |
 | **Attested** | Adult who self-attested they meet swim requirements. |
-| **Exempt** | Marked exempt by an admin (e.g. medical accommodation). |
+| **Exempt** | Either admin-set (e.g. medical accommodation) or auto-applied because the kid is only registered to programs flagged "skip swim test". |
 
 Only **Pending** and **Failed** rows have an Evaluate button. Cleared statuses (Passed, Attested, Exempt) show the badge alone — there's nothing for you to do on those rows.
 
@@ -28,10 +28,11 @@ Two exposed filters at the top of the page:
 - **Status** — defaults to **Pending**, which shows both never-tested kids (`Pending` badge) and kids who failed and need a re-test (`Failed` badge). Other options:
   - **Passed** — kids who already cleared this season.
   - **Failed only** — drill down to just the kids who failed (a subset of the default Pending view).
-  - **Attested** — adults who self-attested.
-  - **Exempt** — kids who are exempt.
+  - **Exempt** — kids who are exempt (admin-set, or auto-applied via a "skip swim test" program).
   - **- Any -** — every participant regardless of status.
 - **Name** — type a first or last name (or part of one) to narrow the list. Searches both columns.
+
+(There's no **Attested** filter option — attestation is a 15+ workflow and the roster only shows under-15s, so it would always return 0 rows.)
 
 The Status filter narrows who appears in the list; the badges still show on every row so you can see at a glance what state each kid is in.
 

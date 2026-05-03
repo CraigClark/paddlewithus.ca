@@ -49,6 +49,19 @@ When a coach evaluates a participant (registered or walk-up), `SwimTestMarkForm:
 1. Writes the outcome to the profile: `field_swim_status` (passed/failed), `field_evaluation_date`, `field_swim_test_evaluated_by`.
 2. If the participant has any **pending** `swim_test_registration` order item, mirrors the same outcome onto its `field_swim_test_status`. This pulls the row out of the `pending` bucket so the no-show cron skips it.
 
+### Program-level swim-test exemption
+
+Some activity programs don't involve open water (adult dryland sessions, polo, etc.) and don't require a swim test. Rather than evaluating each participant manually as exempt, the program itself is flagged.
+
+- **Field**: `field_no_swim_test` (boolean) on `commerce_product` bundle `activity`. Edited as a checkbox on the product form ("Skip swim test for this program").
+- **Service**: `picc_registration.swim_exemption_applier` (class `SwimExemptionApplier`).
+  - `applyToOrderItem(OrderItem $item): bool` — for one order item, loads the variation's parent product, checks the flag, and if set, marks the participant `field_swim_status = 'exempt'`. Only writes when current status is `none` — never overwrites `passed`, `failed`, or `attested`.
+  - `applyToAll(): array` — sweeps every `activity_registration` order item across every flagged program and applies. Returns `['scanned', 'updated', 'programs']` stats.
+- **Realtime path**: `PiccRegistrationHandler::createCommerceOrderWithStockLock()` calls `applyToOrderItem()` on each new order item right after it's persisted, so a registration to a flagged program is exempted on the spot.
+- **Retroactive path**: `drush picc:apply-swim-exemptions` (alias `picc-ase`) runs `applyToAll()`. Use after toggling the flag on a program that already has registrations. Idempotent — re-running after everything is exempted reports 0 updates.
+
+There is intentionally **no update hook** for this. At deploy time the flag is empty on every program, so a hook would be a no-op. The drush command is the only retroactive entry point.
+
 ## Flows
 
 ### Parent registers a kid for a pool test
@@ -78,7 +91,9 @@ When a coach evaluates a participant (registered or walk-up), `SwimTestMarkForm:
 4. Click → off-canvas dialog at `/swim-test/evaluate/{profile}` handled by `SwimTestMarkForm::buildEvaluationForm()`. Date field (defaults to today) + Pass and Fail buttons.
 5. Submit calls `SwimTestMarkForm::applyEvaluation()` → profile + mirrored order item update (see "Status flow" above).
 
-The view's status filter is exposed and **defaults to "Pending"**, which expands to `none + failed` (kids who still need a coach test). Other options: Passed, Failed only, Attested, Exempt, or "- Any -" to show every participant regardless of status.
+The view's status filter is exposed and **defaults to "Pending"**, which expands to `none + failed` (kids who still need a coach test). Other options: Passed, Failed only, Exempt, or "- Any -" to show every participant regardless of status.
+
+The **Attested** option was removed from the grouped filter — attestation is a 15+ workflow and the roster filters under-15 only via `picc_registration_views_query_alter()`, so an Attested filter against an under-15-only result set always returns 0 rows.
 
 ### Commerce manager resolves a no-show
 
@@ -180,6 +195,8 @@ To add new translations:
 - `src/Plugin/views/field/ParticipantSwimAction.php` — Evaluate button on the roster (profile-based).
 - `src/Plugin/views/field/ParticipantSwimStatusBadge.php` — colored badge from `field_swim_status`.
 - `src/Form/SwimTestMarkForm.php` — single form serving both routes; profile-mode (Pass/Fail) or order-item-mode (Resolve/Undo) chosen by the route param.
+- `src/Service/SwimExemptionApplier.php` — applies `field_swim_status = exempt` for participants registered to flagged programs.
+- `src/Drush/Commands/PiccRegistrationCommands.php` — `picc:cleanup-orphans` and `picc:apply-swim-exemptions`.
 - `translations/fr.po` — French strings for t() in module code.
 
 ### Config
@@ -191,6 +208,7 @@ To add new translations:
 - `commerce_email.commerce_email.swim_test_*.yml` — receipt + PICC notification.
 - `field.storage.profile.field_swim_status.yml` — five allowed values, including `failed`.
 - `field.storage.profile.field_evaluation_date.yml` — replaces the old `field_swim_test_passed_date`.
+- `field.storage.commerce_product.field_no_swim_test.yml` and `field.field.commerce_product.activity.field_no_swim_test.yml` — the program-level exemption flag.
 - `language/fr/*` — French overlays for all of the above.
 
 ### Templates

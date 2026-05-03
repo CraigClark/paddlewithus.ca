@@ -31,6 +31,22 @@ The site must run cron regularly for:
 
 Default Drupal cron frequency is fine. Recommended: external cron every 15–30 min (standard for commerce sites).
 
+## Backfilling swim-test exemptions
+
+Activity products have a `field_no_swim_test` boolean ("Skip swim test for this program"). Toggling it on a program does **not** retroactively update existing registrations — new registrations get exempted in real time by the webform handler, but anything already in the system needs a sweep:
+
+```
+drush picc:apply-swim-exemptions
+```
+
+(Alias: `drush picc-ase`.)
+
+The command scans every `activity_registration` order item, checks whether its program is flagged, and sets `field_swim_status = 'exempt'` on the participant — but only if the current status is `none`. Already-evaluated participants (passed / failed / attested) are never overwritten. Re-running is safe; it reports `0 updated` once everything is in sync.
+
+Run it after:
+- Toggling `field_no_swim_test` on for a program with existing registrations.
+- Any data import or manual order-item creation that bypassed the webform handler.
+
 ## Adding new `t()` strings
 
 When a PHP file gets a new translatable string:
