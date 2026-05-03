@@ -6,6 +6,7 @@ dependencies:
     - commerce
     - commerce_product
     - user
+    - views_bulk_operations
 _core:
   default_config_hash: tu0PL5GIB4nIjUfFst2N0WsTO6Ju1WtX7lFr-ya9vAs
 id: commerce_products
@@ -24,16 +25,15 @@ display:
     display_options:
       title: Products
       fields:
-        commerce_product_bulk_form:
-          id: commerce_product_bulk_form
-          table: commerce_product
-          field: commerce_product_bulk_form
+        views_bulk_operations_bulk_form:
+          id: views_bulk_operations_bulk_form
+          table: views
+          field: views_bulk_operations_bulk_form
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: commerce_product
-          plugin_id: bulk_form
-          label: ''
+          plugin_id: views_bulk_operations_bulk_form
+          label: 'Views bulk operations'
           exclude: false
           alter:
             alter_text: false
@@ -74,9 +74,45 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          action_title: 'With selection'
-          include_exclude: exclude
-          selected_actions: {  }
+          batch: true
+          batch_size: 10
+          form_step: true
+          ajax_loader: false
+          buttons: false
+          action_title: Action
+          clear_on_exposed: true
+          show_multipage_selection_box: default
+          show_select_all: default
+          selected_actions:
+            -
+              action_id: commerce_publish_product
+              preconfiguration:
+                add_confirmation: false
+                confirm_help_text: ''
+                label_override: ''
+                message_override: ''
+            -
+              action_id: commerce_unpublish_product
+              preconfiguration:
+                add_confirmation: false
+                confirm_help_text: ''
+                label_override: ''
+                message_override: ''
+            -
+              action_id: views_bulk_edit
+              preconfiguration:
+                add_confirmation: true
+                confirm_help_text: ''
+                label_override: ''
+                message_override: ''
+                get_bundles_from_results: true
+            -
+              action_id: views_bulk_operations_delete_entity
+              preconfiguration:
+                add_confirmation: true
+                confirm_help_text: 'Do you really want to delete?'
+                label_override: ''
+                message_override: ''
         title:
           id: title
           table: commerce_product_field_data

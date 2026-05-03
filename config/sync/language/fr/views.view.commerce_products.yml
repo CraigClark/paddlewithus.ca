@@ -22,8 +22,6 @@ display:
             first: "«\_premier"
             last: "dernier\_»"
       fields:
-        commerce_product_bulk_form:
-          action_title: 'Pour la sélection'
         title:
           label: Titre
           separator: ', '
