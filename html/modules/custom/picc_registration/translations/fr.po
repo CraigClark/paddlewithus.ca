@@ -277,3 +277,23 @@ msgstr "Presque complet"
 
 msgid "Session full"
 msgstr "Séance complète"
+
+# Participant status icons (medical / coach notes)
+msgid "Medical concerns"
+msgstr "Préoccupations médicales"
+
+msgid "Medical concerns — view profile for details"
+msgstr "Préoccupations médicales — consulter le profil pour les détails"
+
+# Participant profile boolean fields (label, description, on/off labels)
+msgid "Does this participant have any allergies?"
+msgstr "Ce participant a-t-il des allergies?"
+
+msgid "Select Yes if there are allergies coaches should know about (food, environmental, insect stings, medication, etc.). Select No if there are none."
+msgstr "Sélectionnez Oui s’il y a des allergies que les entraîneurs devraient connaître (alimentaires, environnementales, piqûres d’insectes, médicaments, etc.). Sélectionnez Non s’il n’y en a pas."
+
+msgid "Is there anything coaches should know to support this participant?"
+msgstr "Y a-t-il des informations que les entraîneurs devraient connaître pour mieux soutenir ce participant?"
+
+msgid "<p>This may include medical considerations (other than allergies), as well as worries, anxieties, attention or focus needs, or emotional or social considerations. Include anything that helps coaches provide a safe, positive experience.</p>\r\n<p>Please do not include general comments (for example, \"excited for camp\"). Select \"No\" if there is nothing specific to share.</p>"
+msgstr "<p>Cela peut inclure des considérations médicales (autres que les allergies), ainsi que des inquiétudes, de l’anxiété, des besoins liés à l’attention ou à la concentration, ou des aspects émotionnels ou sociaux. Incluez toute information utile pour aider les entraîneurs à offrir une expérience sécuritaire et positive.</p>\r\n<p>Veuillez ne pas inclure de commentaires généraux (par exemple, « enthousiaste pour le camp »). Sélectionnez « Non » s’il n’y a rien de particulier à signaler.</p>"

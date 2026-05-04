@@ -1,0 +1,5 @@
+label: 'Y a-t-il des informations que les entraîneurs devraient connaître pour mieux soutenir ce participant?'
+description: "<p>Cela peut inclure des considérations médicales (autres que les allergies), ainsi que des inquiétudes, de l’anxiété, des besoins liés à l’attention ou à la concentration, ou des aspects émotionnels ou sociaux. Incluez toute information utile pour aider les entraîneurs à offrir une expérience sécuritaire et positive.</p>\r\n<p>Veuillez ne pas inclure de commentaires généraux (par exemple, « enthousiaste pour le camp »). Sélectionnez « Non » s’il n’y a rien de particulier à signaler.</p>"
+settings:
+  on_label: 'Oui'
+  off_label: 'Non'

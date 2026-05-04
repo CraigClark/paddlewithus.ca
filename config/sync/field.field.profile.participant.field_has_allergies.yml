@@ -1,0 +1,21 @@
+uuid: c17b27c4-bd25-476b-8c03-b233c0479a53
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_has_allergies
+    - profile.type.participant
+id: profile.participant.field_has_allergies
+field_name: field_has_allergies
+entity_type: profile
+bundle: participant
+label: 'Does this participant have any allergies?'
+description: 'Select Yes if there are allergies coaches should know about (food, environmental, insect stings, medication, etc.). Select No if there are none.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

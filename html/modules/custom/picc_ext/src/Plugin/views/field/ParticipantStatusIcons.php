@@ -43,16 +43,18 @@ class ParticipantStatusIcons extends FieldPluginBase {
       }
     }
 
-    // Medical: icon only when there is something to note.
+    // Medical: icon only when a boolean flag is explicitly set. Free-text
+    // fields (field_allergies, field_additional_info) are details, not the
+    // source of truth — that avoids "n/a" or "none" triggering the icon.
     $has_medical = FALSE;
-    if ($profile->hasField('field_allergies') && !$profile->get('field_allergies')->isEmpty()) {
+    if ($profile->hasField('field_has_allergies') && (bool) $profile->get('field_has_allergies')->value) {
       $has_medical = TRUE;
     }
-    if ($profile->hasField('field_additional_info') && !$profile->get('field_additional_info')->isEmpty()) {
+    if ($profile->hasField('field_has_additional_info') && (bool) $profile->get('field_has_additional_info')->value) {
       $has_medical = TRUE;
     }
     if ($has_medical) {
-      $icons[] = '<span class="participant-icon participant-icon--medical" title="Medical concerns — view profile for details"><span class="material-icons" aria-hidden="true">health_and_safety</span><span class="sr-only">Medical concerns</span></span>';
+      $icons[] = '<span class="participant-icon participant-icon--medical" title="' . t('Medical concerns — view profile for details') . '"><span class="material-icons" aria-hidden="true">health_and_safety</span><span class="sr-only">' . t('Medical concerns') . '</span></span>';
     }
 
     // Photo consent: icon only if consent given.

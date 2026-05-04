@@ -1,0 +1,5 @@
+label: 'Ce participant a-t-il des allergies?'
+description: "Sélectionnez Oui s’il y a des allergies que les entraîneurs devraient connaître (alimentaires, environnementales, piqûres d’insectes, médicaments, etc.). Sélectionnez Non s’il n’y en a pas."
+settings:
+  on_label: 'Oui'
+  off_label: 'Non'

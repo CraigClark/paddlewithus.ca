@@ -18,6 +18,8 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_3_phone
     - field.field.profile.participant.field_emercency_contact_3_pickup
     - field.field.profile.participant.field_emercency_contact_3_rel
+    - field.field.profile.participant.field_has_additional_info
+    - field.field.profile.participant.field_has_allergies
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
     - field.field.profile.participant.field_photo_consent
@@ -40,7 +42,7 @@ mode: default
 content:
   field_additional_info:
     type: text_textarea
-    weight: 5
+    weight: 7
     region: content
     settings:
       rows: 5
@@ -48,7 +50,7 @@ content:
     third_party_settings: {  }
   field_allergies:
     type: text_textarea
-    weight: 4
+    weight: 5
     region: content
     settings:
       rows: 5
@@ -62,7 +64,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_1_name:
     type: string_textfield
-    weight: 6
+    weight: 8
     region: content
     settings:
       size: 60
@@ -70,20 +72,20 @@ content:
     third_party_settings: {  }
   field_emercency_contact_1_phone:
     type: telephone_default
-    weight: 7
+    weight: 9
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_1_pickup:
     type: options_buttons
-    weight: 15
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   field_emercency_contact_1_rel:
     type: string_textfield
-    weight: 8
+    weight: 10
     region: content
     settings:
       size: 60
@@ -91,7 +93,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_2_name:
     type: string_textfield
-    weight: 9
+    weight: 11
     region: content
     settings:
       size: 60
@@ -99,20 +101,20 @@ content:
     third_party_settings: {  }
   field_emercency_contact_2_phone:
     type: telephone_default
-    weight: 10
+    weight: 12
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_2_pickup:
     type: options_buttons
-    weight: 16
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   field_emercency_contact_2_rel:
     type: string_textfield
-    weight: 11
+    weight: 13
     region: content
     settings:
       size: 60
@@ -120,7 +122,7 @@ content:
     third_party_settings: {  }
   field_emercency_contact_3_name:
     type: string_textfield
-    weight: 12
+    weight: 14
     region: content
     settings:
       size: 60
@@ -128,20 +130,20 @@ content:
     third_party_settings: {  }
   field_emercency_contact_3_phone:
     type: telephone_default
-    weight: 13
+    weight: 15
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_emercency_contact_3_pickup:
     type: options_buttons
-    weight: 17
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   field_emercency_contact_3_rel:
     type: string_textfield
-    weight: 14
+    weight: 16
     region: content
     settings:
       size: 60
@@ -149,7 +151,19 @@ content:
     third_party_settings: {  }
   field_evaluation_date:
     type: datetime_default
-    weight: 19
+    weight: 21
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_has_additional_info:
+    type: options_buttons
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_has_allergies:
+    type: options_buttons
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -200,7 +214,7 @@ content:
     third_party_settings: {  }
   field_swim_attestation_by:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 25
     region: content
     settings:
       match_operator: CONTAINS
@@ -210,19 +224,19 @@ content:
     third_party_settings: {  }
   field_swim_attestation_date:
     type: datetime_default
-    weight: 22
+    weight: 24
     region: content
     settings: {  }
     third_party_settings: {  }
   field_swim_status:
     type: options_select
-    weight: 18
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   field_swim_test_evaluated_by:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS

@@ -19,6 +19,8 @@ dependencies:
     - field.field.profile.participant.field_emercency_contact_3_phone
     - field.field.profile.participant.field_emercency_contact_3_pickup
     - field.field.profile.participant.field_emercency_contact_3_rel
+    - field.field.profile.participant.field_has_additional_info
+    - field.field.profile.participant.field_has_allergies
     - field.field.profile.participant.field_name
     - field.field.profile.participant.field_owner
     - field.field.profile.participant.field_photo_consent
@@ -91,6 +93,8 @@ hidden:
   field_emercency_contact_3_phone: true
   field_emercency_contact_3_pickup: true
   field_emercency_contact_3_rel: true
+  field_has_additional_info: true
+  field_has_allergies: true
   field_name: true
   field_owner: true
   field_photo_consent: true

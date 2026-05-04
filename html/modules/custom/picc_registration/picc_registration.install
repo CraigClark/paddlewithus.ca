@@ -209,3 +209,14 @@ function picc_registration_update_10013() {
   \Drupal::service('router.builder')->rebuild();
   return 'Rebuilt router; /admin/people/profiles now renders picc_profiles_admin.';
 }
+
+/**
+ * Re-import module translations: adds boolean medical/coach-note field
+ * strings (labels, help text, on/off) and the medical icon's title and
+ * screen-reader text. The new field configs themselves are imported via
+ * drush cim.
+ */
+function picc_registration_update_10014() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}

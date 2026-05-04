@@ -1,0 +1,21 @@
+uuid: aae73666-3019-41c8-868b-441ad0fe5f5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_has_additional_info
+    - profile.type.participant
+id: profile.participant.field_has_additional_info
+field_name: field_has_additional_info
+entity_type: profile
+bundle: participant
+label: 'Is there anything coaches should know to support this participant?'
+description: "<p>This may include medical considerations (other than allergies), as well as worries, anxieties, attention or focus needs, or emotional or social considerations. Include anything that helps coaches provide a safe, positive experience.</p>\r\n<p>Please do not include general comments (for example, \"excited for camp\"). Select \"No\" if there is nothing specific to share.</p>"
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean
