@@ -9,7 +9,9 @@
   'actions',
   'footer',
 
+  'field_has_allergies',
   'field_allergies',
+  'field_has_additional_info',
   'field_additional_info',
   'field_emercency_contact_1_name',
   'field_emercency_contact_1_phone',
@@ -35,7 +37,9 @@
   {% endfor %}
 
   <h2 class="mt-8">{{ 'Medical information'|t }}</h2>
+  {% if element.field_has_allergies is defined %}{{ element.field_has_allergies }}{% endif %}
   {% if element.field_allergies is defined %}{{ element.field_allergies }}{% endif %}
+  {% if element.field_has_additional_info is defined %}{{ element.field_has_additional_info }}{% endif %}
   {% if element.field_additional_info is defined %}{{ element.field_additional_info }}{% endif %}
 
 

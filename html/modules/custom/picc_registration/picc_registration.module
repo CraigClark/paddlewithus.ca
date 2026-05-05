@@ -224,15 +224,6 @@ function picc_registration_commerce_order_item_view_alter(array &$build, EntityI
  * Pre-populates billing address on checkout from user's profile address.
  */
 function picc_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // Participant profile add/edit: hide the medical/coach-note textareas
-  // unless the matching boolean is set to Yes. The boolean is the source
-  // of truth for the coach status icon on the registration and attendance
-  // views, so this keeps the form aligned with that contract.
-  if (strpos($form_id, 'profile_participant_') === 0
-    && (str_ends_with($form_id, '_add_form') || str_ends_with($form_id, '_edit_form'))) {
-    _picc_registration_apply_participant_medical_states($form);
-  }
-
   // Swim test registration: disable checkboxes for passed/exempt AND
   // for participants already registered for a future swim test.
   if ($form_id === 'webform_submission_swim_test_registration_add_form') {
@@ -418,30 +409,6 @@ function picc_registration_commerce_product_variation_presave(EntityInterface $v
     return;
   }
   $variation->setPrice(new \Drupal\commerce_price\Price('0', 'CAD'));
-}
-
-/**
- * Applies #states so the medical/coach-note textareas only appear when the
- * matching Yes/No boolean is set to "Yes". Skips silently if the form is
- * configured without one of the pairs (e.g. the default mode hides the
- * textareas entirely).
- */
-function _picc_registration_apply_participant_medical_states(array &$form): void {
-  $pairs = [
-    'field_allergies' => 'field_has_allergies',
-    'field_additional_info' => 'field_has_additional_info',
-  ];
-
-  foreach ($pairs as $detail_field => $boolean_field) {
-    if (!isset($form[$detail_field], $form[$boolean_field])) {
-      continue;
-    }
-    $form[$detail_field]['#states'] = [
-      'visible' => [
-        ':input[name="' . $boolean_field . '"]' => ['value' => '1'],
-      ],
-    ];
-  }
 }
 
 /**
