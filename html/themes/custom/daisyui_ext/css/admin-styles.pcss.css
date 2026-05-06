@@ -1,16 +1,19 @@
 /* stylelint-disable */
-@import "./tailwind.config.pcss";
-
-@import "tailwindcss" source(none);
-
-@import "./plugins/daisyui.config.pcss";
-
-@source "./admin-styles.pcss.css";
 
 /**
  * Admin overrides — attached to all admin routes via picc_ext.
- * Uses daisyui_ext design tokens so styling is consistent regardless of
- * which admin theme is active (seven, claro, gin, etc.).
+ *
+ * IMPORTANT: do not import `tailwindcss` here. Tailwind v4's preflight
+ * applies `* { box-sizing: border-box }` to every element, which breaks
+ * Drupal admin UI. Most visibly: the gear icon next to each row on
+ * "Manage form display" / "Manage display" (.field-plugin-settings-edit)
+ * has width:1rem + padding:1px 0.5rem — with border-box, the content
+ * area becomes 0px wide and the cog SVG can't render, collapsing the
+ * button to ~2px tall.
+ *
+ * Keep this file as plain CSS. Each rule references daisyui design
+ * tokens via `var(--color-…, fallback)`, so it still works on admin
+ * pages where those variables aren't defined.
  */
 
 /* ============================================================
