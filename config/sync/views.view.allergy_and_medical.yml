@@ -5,14 +5,18 @@ dependencies:
   config:
     - field.storage.profile.field_additional_info
     - field.storage.profile.field_allergies
+    - field.storage.profile.field_has_additional_info
+    - field.storage.profile.field_has_allergies
     - field.storage.profile.field_name
     - profile.type.participant
+    - system.menu.admin
   module:
     - name
     - profile
     - text
+    - views_bulk_operations
 id: allergy_and_medical
-label: 'Allergy and medical'
+label: 'Medical admin'
 module: views
 description: ''
 tag: ''
@@ -25,7 +29,75 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: 'Allergy and medical admin'
       fields:
+        views_bulk_operations_bulk_form:
+          id: views_bulk_operations_bulk_form
+          table: views
+          field: views_bulk_operations_bulk_form
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_bulk_operations_bulk_form
+          label: VBO
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          batch: true
+          batch_size: 10
+          form_step: true
+          ajax_loader: false
+          buttons: false
+          action_title: Action
+          clear_on_exposed: true
+          show_multipage_selection_box: default
+          show_select_all: default
+          selected_actions:
+            -
+              action_id: views_bulk_edit
+              preconfiguration:
+                add_confirmation: false
+                confirm_help_text: ''
+                label_override: ''
+                message_override: ''
+                get_bundles_from_results: true
         field_name:
           id: field_name
           table: profile__field_name
@@ -82,6 +154,136 @@ display:
             markup: none
             list_format: ''
           group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_has_allergies:
+          id: field_has_allergies
+          table: profile__field_has_allergies
+          field: field_has_allergies
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Allergies y/n'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: yes-no
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_has_additional_info:
+          id: field_has_additional_info
+          table: profile__field_has_additional_info
+          field: field_has_additional_info
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Info y/n'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: yes-no
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -366,6 +568,82 @@ display:
           value:
             participant: participant
           group: 1
+        field_has_allergies_value:
+          id: field_has_allergies_value
+          table: profile__field_has_allergies
+          field: field_has_allergies_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Allergies
+            description: ''
+            use_operator: false
+            operator: field_has_allergies_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_has_allergies_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_has_additional_info_value:
+          id: field_has_additional_info_value
+          table: profile__field_has_additional_info
+          field: field_has_additional_info_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Info
+            description: ''
+            use_operator: false
+            operator: field_has_additional_info_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_has_additional_info_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         field_allergies_value:
           id: field_allergies_value
           table: profile__field_allergies
@@ -376,17 +654,17 @@ display:
           plugin_id: string
           operator: 'not empty'
           value: ''
-          group: 2
-          exposed: false
+          group: 1
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: field_allergies_value_op
+            label: 'Allergies (text)'
             description: ''
-            use_operator: false
-            operator: ''
+            use_operator: true
+            operator: field_allergies_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: ''
+            identifier: field_allergies_value
             required: false
             remember: false
             multiple: false
@@ -415,17 +693,17 @@ display:
           plugin_id: string
           operator: 'not empty'
           value: ''
-          group: 2
-          exposed: false
+          group: 1
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: field_additional_info_value_op
+            label: 'Info (text)'
             description: ''
-            use_operator: false
-            operator: ''
+            use_operator: true
+            operator: field_additional_info_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: ''
+            identifier: field_additional_info_value
             required: false
             remember: false
             multiple: false
@@ -448,7 +726,6 @@ display:
         operator: AND
         groups:
           1: AND
-          2: OR
       style:
         type: table
         options:
@@ -504,11 +781,48 @@ display:
           tokenize: false
         simple_sitemap_display_extender: {  }
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
       tags:
         - 'config:field.storage.profile.field_additional_info'
         - 'config:field.storage.profile.field_allergies'
+        - 'config:field.storage.profile.field_has_additional_info'
+        - 'config:field.storage.profile.field_has_allergies'
+        - 'config:field.storage.profile.field_name'
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders:
+        ui_styles: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+      path: admin/people/medical
+      menu:
+        type: normal
+        title: 'Medical admin'
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: admin
+        parent: entity.user.collection
+        context: '0'
+    cache_metadata:
+      max-age: 0
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+      tags:
+        - 'config:field.storage.profile.field_additional_info'
+        - 'config:field.storage.profile.field_allergies'
+        - 'config:field.storage.profile.field_has_additional_info'
+        - 'config:field.storage.profile.field_has_allergies'
         - 'config:field.storage.profile.field_name'
