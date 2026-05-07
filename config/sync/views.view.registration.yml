@@ -489,27 +489,9 @@ display:
           output_url_as_text: false
           absolute: false
       pager:
-        type: full
+        type: none
         options:
           offset: 0
-          pagination_heading_level: h2
-          items_per_page: 25
-          total_pages: null
-          id: 0
-          tags:
-            next: ››
-            previous: ‹‹
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 5
       exposed_form:
         type: bef
         options:
@@ -897,7 +879,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - url.query_args
         - user.roles
       tags:
         - 'config:field.storage.commerce_product_variation.field_date_range'
@@ -2468,7 +2449,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - url.query_args
         - user.roles
       tags:
         - 'config:field.storage.commerce_product_variation.field_date_range'
