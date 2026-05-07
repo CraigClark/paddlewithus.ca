@@ -1,0 +1,119 @@
+{#
+/**
+ * @file
+ * Theme override for displaying a participant profile.
+ *
+ * Section order mirrors form--profile-participant.html.twig.
+ */
+#}
+{%
+  set classes = [
+    'profile',
+    'profile--' ~ profile.id,
+    'profile--type--' ~ profile.bundle|clean_class,
+    profile.isDefault() ? 'profile--is-default',
+    view_mode ? 'profile--view-mode--' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+{% set owner = profile.getOwner() %}
+{% set owner_phone = owner and owner.hasField('field_phone') and not owner.field_phone.isEmpty() ? owner.field_phone.0.value : '' %}
+{% set owner_email = owner ? owner.getEmail() : '' %}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_suffix.contextual_links }}
+
+  {# Participant details. #}
+  <section class="profile-section profile-section--details my-4">
+    <h2 class="title-lg font-bold mt-6 mb-3">{{ 'Participant details'|t }}</h2>
+    {% if profile.hasField('field_birth_date') and not profile.field_birth_date.isEmpty() %}
+      <div>
+        <span class="font-medium">{{ 'Birth date'|t }}:</span>
+        {{ content.field_birth_date.0 }}
+      </div>
+    {% endif %}
+    {% if profile.hasField('field_shirt_size') and not profile.field_shirt_size.isEmpty() %}
+      <div>
+        <span class="font-medium">{{ 'T-shirt size'|t }}:</span>
+        {{ content.field_shirt_size.0 }}
+      </div>
+    {% endif %}
+    {% if content.field_photo_consent %}
+      <div>{{ content.field_photo_consent }}</div>
+    {% endif %}
+    {% if profile.hasField('field_passed_swim_test') and not profile.field_passed_swim_test.isEmpty() and profile.field_passed_swim_test.0.value %}
+      <div>{{ content.field_passed_swim_test }}</div>
+      {% if profile.hasField('field_swim_test_passed_date') and not profile.field_swim_test_passed_date.isEmpty() %}
+        <div>{{ content.field_swim_test_passed_date }}</div>
+      {% endif %}
+    {% endif %}
+  </section>
+
+  {# Care notes. #}
+  {% set has_allergies = profile.hasField('field_allergies') and not profile.field_allergies.isEmpty() %}
+  {% set has_additional = profile.hasField('field_additional_info') and not profile.field_additional_info.isEmpty() %}
+  {% if has_allergies or has_additional %}
+    <section class="profile-section profile-section--care-notes my-4">
+      <h2 class="title-lg font-bold mt-6 mb-3">{{ 'Care notes'|t }}</h2>
+      {% if has_allergies %}{{ content.field_allergies }}{% endif %}
+      {% if has_additional %}{{ content.field_additional_info }}{% endif %}
+    </section>
+  {% endif %}
+
+  {# Registered by — surface owner contact info first. #}
+  {% if owner %}
+    <section class="profile-section profile-section--owner border rounded-sm border-slate-300 my-4 p-4">
+      <h2 class="title-lg font-bold mt-6 mb-3">{{ 'Registered by'|t }}</h2>
+      <div class="font-medium">{{ owner.getDisplayName() }}</div>
+      {% if owner_phone %}
+        <div>
+          <span class="font-medium">{{ 'Phone'|t }}:</span>
+          <a href="tel:{{ owner_phone }}">{{ owner_phone }}</a>
+        </div>
+      {% endif %}
+      {% if owner_email %}
+        <div>
+          <span class="font-medium">{{ 'Email'|t }}:</span>
+          <a href="mailto:{{ owner_email }}">{{ owner_email }}</a>
+        </div>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  {# Emergency contacts. #}
+  <section class="profile-section profile-section--emergency-contacts my-4">
+    <h2 class="title-lg font-bold mt-6 mb-3">{{ 'Emergency contacts'|t }}</h2>
+
+    {# Primary contact — always shown (required). #}
+    <div class="emergency-contact border rounded-sm border-slate-300 my-4 p-3">
+      <h3 class="title-sm font-semibold mb-1">{{ 'Primary contact'|t }}</h3>
+      {{ content.field_emercency_contact_1_name }}
+      {{ content.field_emercency_contact_1_rel }}
+      {{ content.field_emercency_contact_1_phone }}
+      {{ content.field_emercency_contact_1_pickup }}
+    </div>
+
+    {# Secondary contact — only when a name is provided. #}
+    {% if not profile.field_emercency_contact_2_name.isEmpty() %}
+      <div class="emergency-contact border rounded-sm border-slate-300 my-4 p-3">
+        <h3 class="title-sm font-semibold mb-1">{{ 'Secondary contact'|t }}</h3>
+        {{ content.field_emercency_contact_2_name }}
+        {{ content.field_emercency_contact_2_rel }}
+        {{ content.field_emercency_contact_2_phone }}
+        {{ content.field_emercency_contact_2_pickup }}
+      </div>
+    {% endif %}
+
+    {# Third contact — only when a name is provided. #}
+    {% if not profile.field_emercency_contact_3_name.isEmpty() %}
+      <div class="emergency-contact border rounded-sm border-slate-300 my-4 p-3">
+        <h3 class="title-sm font-semibold mb-1">{{ 'Third contact'|t }}</h3>
+        {{ content.field_emercency_contact_3_name }}
+        {{ content.field_emercency_contact_3_rel }}
+        {{ content.field_emercency_contact_3_phone }}
+        {{ content.field_emercency_contact_3_pickup }}
+      </div>
+    {% endif %}
+  </section>
+
+</div>
