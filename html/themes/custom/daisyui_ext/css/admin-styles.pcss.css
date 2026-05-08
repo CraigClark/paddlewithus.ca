@@ -248,3 +248,9 @@ form[id^="views-exposed-form-picc-attendance"] > input[type="hidden"] {
 .view-picc-attendance-history tr.attendance-row--no-show > td:first-child {
   box-shadow: inset 3px 0 0 0 var(--color-error, #ef4444);
 }
+
+.views-exposed-form.bef-exposed-form .form-actions {
+  display: block;
+  width: 100%;
+
+}
