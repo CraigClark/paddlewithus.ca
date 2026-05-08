@@ -25,3 +25,105 @@ definitions:
     weight: -50
     expanded: true
     enabled: true
+  'admin_toolbar_tools__extra_links:user__admin_create':
+    weight: 2
+    menu_name: admin
+    parent: entity.user.collection
+    expanded: false
+    enabled: true
+  picc_attendance__admin_collection:
+    weight: 5
+    menu_name: admin
+    parent: entity.user.collection
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:user__admin_permissions':
+    weight: 7
+    menu_name: admin
+    parent: entity.user.collection
+    expanded: false
+    enabled: true
+  entity__profile__collection:
+    weight: 8
+    menu_name: admin
+    parent: entity.user.collection
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__collection':
+    weight: 9
+    menu_name: admin
+    parent: entity.user.collection
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__anonymous':
+    weight: -49
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__authenticated':
+    weight: -47
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__content_editor':
+    weight: -46
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__administrator':
+    weight: -45
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__board_member':
+    weight: -44
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__delete_form__board_member':
+    weight: 1
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.edit_form.board_member'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__athlete':
+    weight: -43
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__coach':
+    weight: -42
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__account_holder':
+    weight: -41
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_permissions_form__account_holder':
+    weight: 1
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.edit_form.account_holder'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__delete_form__account_holder':
+    weight: 2
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.edit_form.account_holder'
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:entity__user_role__edit_form__commerce_manager':
+    weight: -40
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:entity.user_role.collection'
+    expanded: false
+    enabled: true
