@@ -7,7 +7,10 @@ use Drupal\views\ResultRow;
 use Drupal\Core\Url;
 
 /**
- * Renders Pass/Fail/Undo action buttons for swim test evaluation.
+ * Renders a Resolve / Undo action button for the swim test no-show review
+ * (admin/people/swim-test-no-shows). The view's status column already shows
+ * the state, and the page title already says "no-show", so this column is
+ * action-only — no badges duplicated here.
  *
  * @ViewsField("swim_test_action")
  */
@@ -25,52 +28,37 @@ class SwimTestAction extends FieldPluginBase {
    */
   public function render(ResultRow $values) {
     $order_item = $this->getEntity($values);
-
     if (!$order_item || $order_item->bundle() !== 'swim_test_registration') {
       return '';
     }
 
     $status = $order_item->get('field_swim_test_status')->value ?? 'pending';
-    $item_id = $order_item->id();
-
     $url = Url::fromRoute('picc_registration.swim_test_mark', [
-      'commerce_order_item' => $item_id,
-    ]);
-    $link = $url->toString();
-
+      'commerce_order_item' => $order_item->id(),
+    ])->toString();
     $dialog_opts = htmlspecialchars(json_encode(['width' => 400]), ENT_QUOTES);
-    $output = '<div class="swim-test-actions flex gap-2 items-center">';
 
+    $label = NULL;
+    $classes = 'button button--small use-ajax';
+    $href = $url;
     switch ($status) {
-      case 'pending':
-        $output .= '<a href="' . $link . '" class="btn btn-primary btn-sm use-ajax" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . t('Evaluate') . '</a>';
-        break;
-
-      case 'passed':
-        $output .= '<span class="badge badge-success">' . t('Passed') . '</span>';
-        $output .= '<a href="' . $link . '" class="btn btn-ghost btn-sm use-ajax" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . t('Undo') . '</a>';
-        break;
-
-      case 'failed':
-        $output .= '<span class="badge badge-warning">' . t('Failed') . '</span>';
-        $output .= '<a href="' . $link . '" class="btn btn-ghost btn-sm use-ajax" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . t('Undo') . '</a>';
-        break;
-
       case 'no_show':
-        $output .= '<span class="badge badge-error">' . t('No show') . '</span>';
-        $output .= '<a href="' . $link . '?action=resolve" class="btn btn-primary btn-sm use-ajax" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . t('Resolved') . '</a>';
+        $label = t('Resolve');
+        $classes = 'button button--primary button--small use-ajax';
+        $href = $url . '?action=resolve';
         break;
 
       case 'excused':
-        $output .= '<span class="badge badge-neutral">' . t('Resolved') . '</span>';
-        $output .= '<a href="' . $link . '" class="btn btn-ghost btn-sm use-ajax" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . t('Undo') . '</a>';
+        $label = t('Undo');
         break;
     }
 
-    $output .= '</div>';
+    if (!$label) {
+      return '';
+    }
 
     return [
-      '#markup' => $output,
+      '#markup' => '<a href="' . $href . '" class="' . $classes . '" data-dialog-type="dialog" data-dialog-options=\'' . $dialog_opts . '\'>' . $label . '</a>',
       '#attached' => [
         'library' => ['core/drupal.dialog.ajax'],
       ],

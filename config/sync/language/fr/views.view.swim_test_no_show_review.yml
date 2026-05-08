@@ -1,0 +1,37 @@
+label: 'Examen des absences au test de natation'
+description: 'Vue admin pour examiner et résoudre les absences au test de natation.'
+display:
+  default:
+    display_options:
+      title: 'Absences au test de natation'
+      empty:
+        area_text_custom:
+          content: '<p>Aucune absence au test de natation en attente. 🎉</p>'
+      fields:
+        field_date:
+          label: Date
+        field_time_range:
+          label: Heure
+        field_name:
+          label: Participant
+        field_swim_test_excuse_reason:
+          label: Raison
+      filters:
+        field_swim_test_status_value:
+          expose:
+            label: Statut
+          group_info:
+            label: Statut
+            group_items:
+              1:
+                title: 'En attente'
+              2:
+                title: Résolu
+        field_date_value_selective:
+          expose:
+            label: Date
+  page_1:
+    display_options:
+      menu:
+        title: 'Absences au test de natation'
+        description: 'Examiner et résoudre les absences au test de natation'

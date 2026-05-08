@@ -232,6 +232,21 @@ msgstr "Marquer comme résolu"
 msgid "Resolved"
 msgstr "Résolu"
 
+msgid "Resolve"
+msgstr "Résoudre"
+
+msgid "Outstanding"
+msgstr "En attente"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Time"
+msgstr "Heure"
+
+msgid "Reason"
+msgstr "Raison"
+
 msgid "Mark this no-show as resolved once the fee has been handled or the absence has been excused."
 msgstr "Marquer cette absence comme résolue une fois que les frais ont été traités ou que l'absence a été excusée."
 
