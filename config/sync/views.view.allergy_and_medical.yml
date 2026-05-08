@@ -644,84 +644,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_allergies_value:
-          id: field_allergies_value
-          table: profile__field_allergies
-          field: field_allergies_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: string
-          operator: 'not empty'
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_allergies_value_op
-            label: 'Allergies (text)'
-            description: ''
-            use_operator: true
-            operator: field_allergies_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: field_allergies_value
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_additional_info_value:
-          id: field_additional_info_value
-          table: profile__field_additional_info
-          field: field_additional_info_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: string
-          operator: 'not empty'
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_additional_info_value_op
-            label: 'Info (text)'
-            description: ''
-            use_operator: true
-            operator: field_additional_info_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: field_additional_info_value
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -772,7 +694,17 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
       footer: {  }
       display_extenders:
         ui_styles: {  }
