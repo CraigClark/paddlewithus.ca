@@ -6,7 +6,53 @@ material_icons:
   config:
     sources:
       - "icons/material-icons.codepoints"
-  template: '<span class="material-icons" aria-hidden="true">{{ icon_id }}</span>'
+  settings:
+    size:
+      title: Size
+      type: "integer"
+      minimum: 12
+      maximum: 128
+      multipleOf: 4
+      default: 24
+    alt:
+      title: "Alt text"
+      type: "string"
+      description: "Accessibility alternative text, leave empty for decorative icon."
+    title:
+      title: "Tooltip"
+      type: "string"
+      description: "Tooltip text shown on hover. Leave empty for no tooltip."
+    color:
+      title: "Color"
+      type: "string"
+      enum:
+        - text-primary
+        - text-primary-content
+        - text-secondary
+        - text-secondary-content
+        - text-accent
+        - text-accent-content
+        - text-neutral
+        - text-neutral-content
+        - text-base-100
+        - text-base-200
+        - text-base-300
+        - text-base-content
+        - text-info
+        - text-info-content
+        - text-success
+        - text-success-content
+        - text-warning
+        - text-warning-content
+        - text-error
+        - text-error-content
+  template: >
+    <span
+      class="material-icons {{ color|default('') }}"
+      {% if size %}style="font-size: {{ size }}px;"{% endif %}
+      {% if title %}title="{{ title }}"{% endif %}
+      {% if alt %}role="img" aria-label="{{ alt }}"{% else %}aria-hidden="true"{% endif %}
+    >{{ icon_id }}</span>
   preview: '<span class="material-icons" style="font-size: {{ size|default(32) }}px;" aria-hidden="true">{{ icon_id }}</span>'
 
 daisyui_ext_icon_pack:
