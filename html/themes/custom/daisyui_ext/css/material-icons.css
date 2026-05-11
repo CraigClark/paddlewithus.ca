@@ -1,0 +1,35 @@
+/**
+ * Local copy of the Material Icons baseline web font.
+ *
+ * Replaces the CDN library the material_icons module installs by default;
+ * the swap is wired in picc_ext_library_info_alter().
+ *
+ * The font file in fonts/ contains the full set of ~2,000 baseline glyphs;
+ * which icons are pickable in the menu link form is controlled separately
+ * by icons/material-icons.codepoints + the material_icons pack registered
+ * in daisyui_ext.icons.yml.
+ */
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(../fonts/MaterialIcons-Regular.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

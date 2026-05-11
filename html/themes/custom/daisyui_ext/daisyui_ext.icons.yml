@@ -1,11 +1,22 @@
+material_icons:
+  enabled: true
+  label: "Material Icons"
+  description: "Curated subset of Material Icons baseline glyphs available to authors. To expose more icons, add their name + codepoint to icons/material-icons.codepoints and clear cache."
+  extractor: font
+  config:
+    sources:
+      - "icons/material-icons.codepoints"
+  template: '<span class="material-icons" aria-hidden="true">{{ icon_id }}</span>'
+  preview: '<span class="material-icons" style="font-size: {{ size|default(32) }}px;" aria-hidden="true">{{ icon_id }}</span>'
+
 daisyui_ext_icon_pack:
   enabled: true
-  label: "DaisyUI starterkit spritemap example"
-  description: "Sample spritemap to use as a starting point for custom icon packs."
+  label: "Site icons"
+  description: "Custom SVG icons (brand logos, etc.) bundled into the theme. To add an icon, drop the .svg file in icons/default/ and run npm run build."
   extractor: svg_sprite
   config:
     sources:
-      - "dist/default-icons.svg"
+      - "dist/assets/default-icons.svg"
   settings:
     size:
       title: Size

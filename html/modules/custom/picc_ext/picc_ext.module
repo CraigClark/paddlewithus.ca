@@ -16,6 +16,50 @@ function picc_ext_page_attachments(array &$attachments) {
 }
 
 /**
+ * Implements hook_link_alter().
+ *
+ * Suppresses ui_icons_menu_link_alter() on admin routes so menu link titles
+ * stay readable in the admin menu management list (otherwise an icon_only
+ * link displays as just the icon, with no text to identify which link is
+ * which). Front-end menu rendering goes through hook_preprocess_menu, which
+ * is not affected by this flag.
+ *
+ * Runs before ui_icons_menu_link_alter (picc_ext comes before ui_icons_menu
+ * alphabetically); the flag tells that hook to skip rewriting the text.
+ */
+function picc_ext_link_alter(array &$variables): void {
+    if (!isset($variables['url'])) {
+        return;
+    }
+    if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+        return;
+    }
+    $variables['url']->setOption('ui_icons_processed', TRUE);
+}
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * Swaps the material_icons module's Google Fonts CDN libraries for a locally
+ * hosted copy shipped from the daisyui_ext theme. The font is the same
+ * Material Icons baseline glyph set; only the source changes (CDN -> local).
+ *
+ * Applies regardless of active theme, so the picker on admin pages and the
+ * icons on the front end both load the local font.
+ */
+function picc_ext_library_info_alter(array &$libraries, string $extension): void {
+    if ($extension !== 'material_icons') {
+        return;
+    }
+    if (!isset($libraries['baseline'])) {
+        return;
+    }
+    $libraries['baseline']['css']['theme'] = [
+        '/themes/custom/daisyui_ext/css/material-icons.css' => [],
+    ];
+}
+
+/**
  * Self-register form: set a first-login flag and redirect back to show message.
  */
 function picc_ext_form_user_register_form_alter(

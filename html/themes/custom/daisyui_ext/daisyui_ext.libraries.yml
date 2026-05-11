@@ -8,3 +8,8 @@ framework-admin:
   css:
     theme:
       "dist/css/admin-styles.css": { minified: true }
+
+material-icons:
+  css:
+    theme:
+      "css/material-icons.css": {}
