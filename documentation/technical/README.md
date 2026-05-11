@@ -17,3 +17,7 @@ For developers maintaining or extending the site.
 ## Profiles admin
 
 - [Profiles admin](profile-admin.md) — Views-based replacement for `/admin/people/profiles`, customer profile labels
+
+## Icons
+
+- [Icon system](icons.md) — how Material Icons + custom SVGs are wired into menu pickers and content; how to add new icons
