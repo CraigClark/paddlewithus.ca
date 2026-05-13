@@ -1,0 +1,21 @@
+purgers:
+  -
+    instance_id: 21ce01ef02
+    plugin_id: lscache
+    order_index: 2
+processors:
+  -
+    plugin_id: drush_purge_invalidate
+    status: false
+  -
+    plugin_id: drush_purge_queue_work
+    status: true
+  -
+    plugin_id: cron
+    status: true
+  -
+    plugin_id: lateruntime
+    status: true
+  -
+    plugin_id: purge_ui_block_processor
+    status: true

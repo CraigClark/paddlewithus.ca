@@ -89,6 +89,8 @@ module:
   lite_speed_cache: 0
   locale: 0
   login_emailusername: 0
+  lscache: 0
+  lscache_purger: 0
   mailer_override: 0
   mailer_policy: 0
   mailer_transport: 0
@@ -120,6 +122,11 @@ module:
   picc_registration: 0
   picc_sku: 0
   profile: 0
+  purge: 0
+  purge_processor_cron: 0
+  purge_processor_lateruntime: 0
+  purge_queuer_coretags: 0
+  purge_ui: 0
   rabbit_hole: 0
   range: 0
   realname: 0
