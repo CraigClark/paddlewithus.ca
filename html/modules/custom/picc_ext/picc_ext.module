@@ -1,7 +1,12 @@
 <?php
 
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
+use Drupal\commerce_product\Entity\ProductInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Implements hook_page_attachments().
@@ -325,4 +330,192 @@ function picc_ext_views_query_alter($view, $query) {
 function daisyui_ext_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
  // Admin css and js to node edit/add forms.
  $form['#attached']['library'][] = 'daisyui_ext/framework-admin';
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view() for commerce_product.
+ *
+ * Emits Schema.org Event JSON-LD on the full product page for activity
+ * products. One Event per published variation; wrapped in an EventSeries
+ * when a product has more than one variation. Pulls dates and prices from
+ * the variation (field_date_range + Commerce price), the location from
+ * the clubhouse address constants below, and the organizer from the site
+ * config (matching the Organization JSON-LD set in metatag.metatag_defaults.global).
+ *
+ * Variation tokens don't traverse from product context in metatag, which is
+ * why this lives in PHP instead of schema_metatag config.
+ */
+function picc_ext_commerce_product_view(array &$build, ProductInterface $product, EntityViewDisplayInterface $display, $view_mode) {
+    if ($product->bundle() !== 'activity' || $view_mode !== 'full') {
+        return;
+    }
+
+    $events = _picc_ext_build_activity_events($product);
+    if (!$events) {
+        return;
+    }
+
+    if (count($events) === 1) {
+        $graph = ['@context' => 'https://schema.org'] + $events[0];
+    }
+    else {
+        $graph = [
+            '@context' => 'https://schema.org',
+            '@type' => 'EventSeries',
+            'name' => $product->label(),
+            'url' => $product->toUrl('canonical', ['absolute' => TRUE])->toString(),
+            'subEvent' => $events,
+        ];
+    }
+
+    // Markup::create() bypasses Drupal's HTML escaping so ampersands and other
+    // characters in JSON values (e.g. image style query strings) round-trip
+    // intact as JSON, not as HTML entities.
+    $build['#attached']['html_head'][] = [
+        [
+            '#tag' => 'script',
+            '#attributes' => ['type' => 'application/ld+json'],
+            '#value' => Markup::create(json_encode($graph, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)),
+        ],
+        'picc_activity_event_' . $product->id(),
+    ];
+
+    // Cache by variation list too — when variations get added/edited the
+    // emitted Events need to refresh.
+    $metadata = CacheableMetadata::createFromRenderArray($build);
+    foreach ($product->getVariations() as $variation) {
+        $metadata->addCacheableDependency($variation);
+    }
+    $metadata->applyTo($build);
+}
+
+/**
+ * Builds one Schema.org Event array per published variation of $product.
+ *
+ * Returns an indexed array of associative arrays ready to be JSON-encoded.
+ * Empty array if no variation has a usable start date.
+ */
+function _picc_ext_build_activity_events(ProductInterface $product): array {
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $product_url = $product->toUrl('canonical', ['absolute' => TRUE])->toString();
+    $front_url = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+    $site_name = \Drupal::config('system.site')->get('name');
+
+    $organizer = [
+        '@type' => 'Organization',
+        'name' => $site_name,
+        'url' => $front_url,
+    ];
+
+    $location = [
+        '@type' => 'Place',
+        'name' => $site_name,
+        'address' => [
+            '@type' => 'PostalAddress',
+            'streetAddress' => '795 Tweddle Rd.',
+            'addressLocality' => 'Orléans',
+            'addressRegion' => 'ON',
+            'postalCode' => 'K4A 3P4',
+            'addressCountry' => 'CA',
+        ],
+    ];
+
+    $description = _picc_ext_event_description($product);
+    $image_url = _picc_ext_event_image_url($product);
+
+    $published_variations = array_filter($product->getVariations(), fn($v) => $v->isPublished());
+    $single_variation = count($published_variations) === 1;
+
+    $events = [];
+    foreach ($published_variations as $variation) {
+        $date_range = $variation->get('field_date_range');
+        if ($date_range->isEmpty() || empty($date_range->value)) {
+            continue;
+        }
+
+        $event = [
+            '@type' => 'SportsEvent',
+            'name' => $single_variation ? $product->label() : $variation->label(),
+            'startDate' => $date_range->value,
+            'endDate' => $date_range->end_value ?: $date_range->value,
+            'eventStatus' => 'https://schema.org/EventScheduled',
+            'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+            'inLanguage' => $langcode,
+            'url' => $product_url,
+            'location' => $location,
+            'organizer' => $organizer,
+        ];
+
+        if ($description !== '') {
+            $event['description'] = $description;
+        }
+        if ($image_url !== '') {
+            $event['image'] = $image_url;
+        }
+
+        $price = $variation->getPrice();
+        if ($price) {
+            $event['offers'] = [
+                '@type' => 'Offer',
+                'price' => (float) $price->getNumber(),
+                'priceCurrency' => $price->getCurrencyCode(),
+                'availability' => 'https://schema.org/InStock',
+                'url' => $product_url,
+            ];
+            if ((float) $price->getNumber() === 0.0) {
+                $event['isAccessibleForFree'] = TRUE;
+            }
+        }
+
+        $events[] = $event;
+    }
+
+    return $events;
+}
+
+/**
+ * Extracts a plain-text description for the Event from the product body.
+ *
+ * Prefers the body summary; falls back to a 200-char excerpt of the body
+ * value; returns an empty string if neither is available.
+ */
+function _picc_ext_event_description(ProductInterface $product): string {
+    if (!$product->hasField('body') || $product->get('body')->isEmpty()) {
+        return '';
+    }
+    $body = $product->get('body')->first();
+    $summary = trim((string) ($body->summary ?? ''));
+    if ($summary !== '') {
+        return trim(strip_tags($summary));
+    }
+    $value = trim((string) ($body->value ?? ''));
+    if ($value === '') {
+        return '';
+    }
+    $plain = trim(preg_replace('/\s+/', ' ', strip_tags($value)));
+    return mb_substr($plain, 0, 200);
+}
+
+/**
+ * Resolves the activity's primary image to an absolute social_share URL.
+ *
+ * Returns an empty string if no image is set or the image style is missing.
+ */
+function _picc_ext_event_image_url(ProductInterface $product): string {
+    if (!$product->hasField('field_primary_image') || $product->get('field_primary_image')->isEmpty()) {
+        return '';
+    }
+    $media = $product->get('field_primary_image')->first()->entity;
+    if (!$media || !$media->hasField('field_media_image') || $media->get('field_media_image')->isEmpty()) {
+        return '';
+    }
+    $file = $media->get('field_media_image')->first()->entity;
+    if (!$file) {
+        return '';
+    }
+    $style = ImageStyle::load('social_share');
+    if (!$style) {
+        return '';
+    }
+    return $style->buildUrl($file->getFileUri());
 }
