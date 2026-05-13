@@ -1,0 +1,50 @@
+title: 'Bénévolat avec CCIP'
+description: '<p>Dites-nous comment vous aimeriez aider. Les membres authentifiés peuvent enregistrer un brouillon et mettre à jour leurs choix à tout moment.</p>'
+elements: |
+  intro:
+    '#markup': '<p class="p1">Merci de votre intérêt à faire du bénévolat avec le PICC. Choisissez les rôles qui vous intéressent. Nous ferons un suivi avec vous.</p>'
+  first_name:
+    '#title': Prénom
+  last_name:
+    '#title': Nom
+  email:
+    '#title': Courriel
+  roles:
+    '#title': 'Quels rôles aimeriez-vous remplir?'
+    '#options':
+      on_water_safety: "Sur l'eau : conducteur et observateur du bateau de sécurité"
+      on_water_adaptive: "Sur l'eau : pagayeur de soutien (programme adapté / Olympiques spéciaux)"
+      maintenance: 'Entretien des équipements et des installations'
+      dock: 'Installation et retrait des quais'
+      repairs: 'Réparation des bateaux et des pagaies'
+      grounds: 'Entretien du clubhouse et du terrain'
+      events: 'Bénévolat aux régates et aux événements'
+      fundraising: 'Collecte de fonds et commandites'
+      communications: 'Communications et médias sociaux'
+      registration: 'Inscriptions et administration'
+      governance: "Gouvernance et conseil d'administration"
+      photography: Photographie
+  comments:
+    '#title': 'Avez-vous quelque chose à partager, à demander ou à suggérer?'
+  retention_notice:
+    '#markup': '<p class="p1"><em>Nous conserverons votre intérêt pour le bénévolat au dossier pendant 3 ans.</em></p>'
+  actions:
+    '#submit__label': Envoyer
+    '#draft__label': 'Enregistrer le brouillon'
+settings:
+  form_access_denied_message: '<p><a class="btn btn-primary" href="/user/login?destination=[current-page:url:path]">Connectez-vous ou créez un compte pour devenir bénévole</a></p>'
+  draft_saved_message: '<p>Votre brouillon a été enregistré. Vous pouvez revenir à tout moment pour le terminer.</p>'
+  draft_loaded_message: '<p>Bon retour. Nous avons chargé votre brouillon.</p>'
+  confirmation_title: 'Merci de votre intérêt'
+  confirmation_message: '<p>Merci! Nous avons reçu votre intérêt et nous vous recontacterons. Vous pouvez mettre à jour vos réponses à tout moment depuis cette page.</p>'
+handlers:
+  email_confirmation:
+    label: 'Courriel de confirmation au bénévole'
+    settings:
+      subject: 'Merci de votre intérêt pour le bénévolat au CCIP'
+      body: '<table style="font-family:arial, sans-serif;margin:15px auto 0 auto;max-width:768px;"><tbody><tr><td><table style="margin:0 auto;max-width:768px;text-align:center;"><tbody><tr><td><p><a style="color:#0e69be;margin-top:15px;text-decoration:none;" href="[site:url]"><strong>[site:name]</strong></a></p></td></tr></tbody></table><table style="border-radius:5px;border:1px solid #cccccc;margin:5px auto 0 auto;min-width:450px;padding:40px 30px 30px 30px;text-align:left;"><tbody><tr><td style="font-size:30px;padding-bottom:30px;text-align:center;"><p>Merci de votre intérêt</p></td></tr><tr><td><p style="margin-top:0;">Bonjour [webform_submission:values:first_name:raw],</p><p>Merci de votre intérêt pour le bénévolat au CCIP. Nous communiquerons avec vous au sujet des rôles qui vous intéressent.</p><p>Nous conservons votre intérêt de bénévolat à nos dossiers pendant 3 ans.</p></td></tr><tr><td style="border-bottom:1px solid #cccccc;border-top:1px solid #cccccc;padding-bottom:15px;padding-top:15px;"><div style="margin-bottom:8px;"><strong>Vous avez offert votre aide pour</strong></div><div>[webform_submission:values:roles]</div></td></tr><tr><td style="padding-top:20px;"><p style="margin-bottom:0;">— [site:name]</p></td></tr></tbody></table></td></tr></tbody></table>'
+  email_notification:
+    label: 'Notification par courriel au CCIP'
+    settings:
+      subject: 'Nouveau bénévole : [webform_submission:values:first_name:raw] [webform_submission:values:last_name:raw]'
+      body: '<table style="font-family:arial, sans-serif;margin:15px auto 0 auto;max-width:768px;"><tbody><tr><td><table style="margin:0 auto;max-width:768px;text-align:center;"><tbody><tr><td><p><a style="color:#0e69be;margin-top:15px;text-decoration:none;" href="[site:url]"><strong>[site:name]</strong></a></p></td></tr></tbody></table><table style="border-radius:5px;border:1px solid #cccccc;margin:5px auto 0 auto;min-width:450px;padding:40px 30px 30px 30px;text-align:left;"><tbody><tr><td style="font-size:30px;padding-bottom:30px;text-align:center;"><p>Nouveau bénévole</p></td></tr><tr><td style="border-bottom:1px solid #cccccc;border-top:1px solid #cccccc;padding-bottom:15px;padding-top:15px;"><div><strong>Nom :</strong> [webform_submission:values:first_name:raw] [webform_submission:values:last_name:raw]</div><div style="margin-top:5px;"><strong>Courriel :</strong> <a href="mailto:[webform_submission:values:email:raw]">[webform_submission:values:email:raw]</a></div><div style="margin-top:5px;"><strong>Soumis le :</strong> [webform_submission:completed:html_date]</div></td></tr><tr><td style="border-bottom:1px solid #cccccc;padding-bottom:15px;padding-top:15px;"><div style="margin-bottom:8px;"><strong>Rôles choisis</strong></div><div>[webform_submission:values:roles]</div></td></tr><tr><td style="padding-bottom:15px;padding-top:15px;"><div style="margin-bottom:8px;"><strong>Commentaires</strong></div><div>[webform_submission:values:comments]</div></td></tr><tr><td style="padding-top:20px;text-align:center;"><p><a style="color:#0e69be;" href="[webform_submission:url]">Voir cette soumission</a></p></td></tr></tbody></table></td></tr></tbody></table>'

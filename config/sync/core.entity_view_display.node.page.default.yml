@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_form
     - field.field.node.page.layout_builder__layout
     - node.type.page
   module:
@@ -11,6 +12,7 @@ dependencies:
     - layout_discovery
     - text
     - user
+    - webform
 third_party_settings:
   layout_builder:
     enabled: true
@@ -46,6 +48,40 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: 1
             additional: {  }
+          1ec1d1ee-b3b2-4a1e-a060-dea2c9106465:
+            uuid: 1ec1d1ee-b3b2-4a1e-a060-dea2c9106465
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_form'
+              label: Form
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: webform_entity_reference_entity_view
+                label: hidden
+                settings:
+                  source_entity: true
+                  lazy: false
+                third_party_settings:
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: ''
+                  nomarkup:
+                    enabled: false
+                    separator: '|'
+                    referenced_entity: ''
+            weight: 2
+            additional:
+              ui_styles_wrapper: {  }
+              ui_styles_wrapper_extra: ''
+              ui_styles_title: {  }
+              ui_styles_title_extra: ''
+              ui_styles: {  }
+              ui_styles_extra: ''
         third_party_settings: {  }
 _core:
   default_config_hash: M_Y8L5tfmhx7DR143E05YyZSpvgil6VFvqcfBWykalg
@@ -60,6 +96,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 100
+    region: content
+  field_form:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 102
     region: content
   links:
     settings: {  }

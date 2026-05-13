@@ -1,0 +1,20 @@
+uuid: dddacc0f-6b95-49db-a691-44c503a06904
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - webform
+id: node.field_form
+field_name: field_form
+entity_type: node
+type: webform
+settings:
+  target_type: webform
+module: webform
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
