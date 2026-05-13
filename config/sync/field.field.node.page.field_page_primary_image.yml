@@ -1,0 +1,29 @@
+uuid: 4fd9c916-9e2c-4ce3-b2b2-e9f232955c90
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_page_primary_image
+    - media.type.image
+    - node.type.page
+id: node.page.field_page_primary_image
+field_name: field_page_primary_image
+entity_type: node
+bundle: page
+label: 'Primary image'
+description: 'This image is used at the top of the page, previews such as the stories list on the front page. It is also used on social media when this page is shared. Upload high resolution images. The system will look after resizing and cropping as needed.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

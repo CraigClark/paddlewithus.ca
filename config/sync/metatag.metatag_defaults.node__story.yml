@@ -1,0 +1,12 @@
+uuid: 88adad42-13cd-46de-a965-0681ec1ee687
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.story
+id: node__story
+label: Story
+tags:
+  description: '[node:field_summary]'
+  og_description: '[node:field_summary]'
+  twitter_cards_description: '[node:field_summary]'
