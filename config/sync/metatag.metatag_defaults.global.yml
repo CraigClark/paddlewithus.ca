@@ -1,7 +1,10 @@
 uuid: 21422d45-664e-4453-9392-700a680166ad
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - schema_organization
+    - schema_web_page
 id: global
 label: Global
 tags:
@@ -21,3 +24,10 @@ tags:
   twitter_cards_title: '[current-page:title]'
   twitter_cards_description: '[site:slogan]'
   twitter_cards_image: 'https://petriecanoe.ca/themes/custom/daisyui_ext/images/picc-default.jpg'
+  schema_organization_type: Organization
+  schema_organization_name: '[site:name]'
+  schema_organization_url: '[site:url]'
+  schema_organization_description: '[site:slogan]'
+  schema_organization_logo: 'a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:57:"https://petriecanoe.ca/themes/custom/daisyui_ext/logo.svg";}'
+  schema_organization_same_as: 'https://www.facebook.com/petriecanoe/'
+  schema_web_page_type: WebPage
