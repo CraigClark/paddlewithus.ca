@@ -336,11 +336,15 @@ function daisyui_ext_form_node_form_alter(&$form, FormStateInterface $form_state
  * Implements hook_ENTITY_TYPE_view() for commerce_product.
  *
  * Emits Schema.org Event JSON-LD on the full product page for activity
- * products. One Event per published variation; wrapped in an EventSeries
- * when a product has more than one variation. Pulls dates and prices from
- * the variation (field_date_range + Commerce price), the location from
- * the clubhouse address constants below, and the organizer from the site
- * config (matching the Organization JSON-LD set in metatag.metatag_defaults.global).
+ * products. One Event per published variation. Multiple variations are
+ * emitted as a flat list under @graph rather than wrapped in EventSeries,
+ * because Google's Event rich results explicitly do NOT support EventSeries
+ * (https://developers.google.com/search/docs/appearance/structured-data/event)
+ * — each performance has to stand on its own.
+ *
+ * Dates and prices come from the variation (field_date_range + Commerce
+ * price); location is the clubhouse PostalAddress below; organizer matches
+ * the Organization JSON-LD set in metatag.metatag_defaults.global.
  *
  * Variation tokens don't traverse from product context in metatag, which is
  * why this lives in PHP instead of schema_metatag config.
@@ -361,10 +365,7 @@ function picc_ext_commerce_product_view(array &$build, ProductInterface $product
     else {
         $graph = [
             '@context' => 'https://schema.org',
-            '@type' => 'EventSeries',
-            'name' => $product->label(),
-            'url' => $product->toUrl('canonical', ['absolute' => TRUE])->toString(),
-            'subEvent' => $events,
+            '@graph' => $events,
         ];
     }
 
