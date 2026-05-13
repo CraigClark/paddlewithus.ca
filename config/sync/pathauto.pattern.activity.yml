@@ -7,7 +7,7 @@ dependencies:
 id: activity
 label: Activity
 type: 'canonical_entities:commerce_product'
-pattern: 'program/[commerce_product:title]'
+pattern: '/program/[commerce_product:title]'
 selection_criteria:
   ad084b80-9501-4e12-9733-6098a42ca155:
     id: 'entity_bundle:commerce_product'

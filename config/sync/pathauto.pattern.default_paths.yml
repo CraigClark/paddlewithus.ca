@@ -7,7 +7,7 @@ dependencies:
 id: default_paths
 label: 'default paths'
 type: 'canonical_entities:node'
-pattern: '[node:title]'
+pattern: '/[node:title]'
 selection_criteria:
   07d24a24-e318-44a5-9409-a045486e578c:
     id: 'entity_bundle:node'

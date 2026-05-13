@@ -8,7 +8,7 @@ dependencies:
 id: story_en
 label: 'Story EN'
 type: 'canonical_entities:node'
-pattern: 'story/[node:title]'
+pattern: '/story/[node:title]'
 selection_criteria:
   270314c8-b75f-4089-8049-fdf8a097c85b:
     id: 'entity_bundle:node'
