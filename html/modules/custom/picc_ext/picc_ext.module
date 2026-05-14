@@ -429,6 +429,13 @@ function _picc_ext_build_activity_events(ProductInterface $product): array {
 
     $events = [];
     foreach ($published_variations as $variation) {
+        // Skip variation types without a single date_range field (e.g.
+        // swim_test_slot uses field_date + field_time_range instead).
+        // No JSON-LD Event is emitted for those — the markup is only
+        // relevant for paddle camp / program variations anyway.
+        if (!$variation->hasField('field_date_range')) {
+            continue;
+        }
         $date_range = $variation->get('field_date_range');
         if ($date_range->isEmpty() || empty($date_range->value)) {
             continue;
