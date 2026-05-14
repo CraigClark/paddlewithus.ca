@@ -6,7 +6,14 @@ dependencies:
     - field.storage.media.field_media_audio_file
     - media.type.audio
   module:
+    - content_translation
     - file
+third_party_settings:
+  content_translation:
+    translation_sync:
+      target_id: target_id
+      display: display
+      description: description
 _core:
   default_config_hash: UlZPIbHcLyNqGY5bvydCTijGcKDmwn4Fo8oYZT85wlk
 id: media.audio.field_media_audio_file
@@ -16,7 +23,7 @@ bundle: audio
 label: 'Audio file'
 description: ''
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

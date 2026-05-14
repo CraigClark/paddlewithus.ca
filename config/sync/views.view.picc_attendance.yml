@@ -495,7 +495,7 @@ display:
         type: normal
         title: Attendance
         description: "Check in and out participants for today's programs."
-        weight: -45
+        weight: -49
         expanded: false
         menu_name: main
         parent: 'views_view:views.registration.page_1'

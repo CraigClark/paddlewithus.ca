@@ -11,7 +11,7 @@ bundle: audio
 label: 'Rabbit Hole redirect path.'
 description: 'The path to where the user should get redirected to.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

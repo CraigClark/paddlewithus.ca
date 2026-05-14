@@ -4,8 +4,8 @@ status: true
 dependencies: {  }
 _core:
   default_config_hash: GHMHNAh7hM4N25z48TG32SRwofbKS4KXs4CT_Q9k59U
-id: freeform
 label: Freeform
+id: freeform
 description: 'Crops without enforcing any aspect ratio.'
 aspect_ratio: ''
 soft_limit_width: null

@@ -11,7 +11,7 @@ bundle: video
 label: 'Rabbit Hole action'
 description: 'Specifies which action that Rabbit Hole should take.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

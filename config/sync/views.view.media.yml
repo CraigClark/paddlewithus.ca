@@ -767,12 +767,13 @@ display:
           entity_field: langcode
           plugin_id: language
           operator: in
-          value: {  }
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
           group: 1
           exposed: true
           expose:
             operator_id: langcode_op
-            label: Language
+            label: 'Translation language'
             description: ''
             use_operator: false
             operator: langcode_op

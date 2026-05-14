@@ -1,0 +1,18 @@
+uuid: 428195ab-891c-4a4a-beb3-217f0d997e79
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_store.commerce_store_type.online
+id: commerce_store.online.mail
+field_name: mail
+entity_type: commerce_store
+bundle: online
+label: Email
+description: 'Store email notifications are sent from this address. If omitted, the "site" email address will be used.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email
