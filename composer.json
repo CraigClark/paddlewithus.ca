@@ -148,7 +148,10 @@
         "web-root": "html/"
       },
       "file-mapping": {
-        "[web-root]/robots.txt": false
+        "[web-root]/robots.txt": false,
+        "[web-root]/.htaccess": {
+          "prepend": "assets/htaccess-litespeed.txt"
+        }
       }
     },
     "installer-paths": {
@@ -189,9 +192,6 @@
     "patches": {
       "drupal/ckeditor5_paste_filter": {
         "3482261 - Add support for description field": "patches/ckeditor5_paste_filter-add_text_field-3482261.patch"
-      },
-      "drupal/core": {
-        "Enable LiteSpeed CacheLookup in scaffolded .htaccess": "patches/drupal-core-scaffold-htaccess-litespeed-cachelookup.patch"
       },
       "drupal/commerce_email": {
         "Add entity embed support": "patches/commerce_email-entity_embed_support.patch"
