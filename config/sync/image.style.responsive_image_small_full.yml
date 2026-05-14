@@ -1,0 +1,17 @@
+uuid: e967f63b-75fc-43ca-a05a-64ddea7e7ae2
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: U2MufaLcOwPRM4wfYmurQh03DTlYBjlLdhnlOVjn2n8
+name: responsive_image_small_full
+label: 'Responsive image small | screen full (342*342)'
+effects:
+  8ac7a8ec-2704-474f-90d9-84de3957988d:
+    uuid: 8ac7a8ec-2704-474f-90d9-84de3957988d
+    id: image_scale
+    weight: 1
+    data:
+      width: 342
+      height: 342
+      upscale: false

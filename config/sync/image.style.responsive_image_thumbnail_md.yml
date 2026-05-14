@@ -1,0 +1,19 @@
+uuid: 98e55518-0bb9-4aca-b240-bb70a1c010dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: wxAKmOWuY20gcwFti5hzFq9e-7XTnV2xnWx5UR8ZwE8
+name: responsive_image_thumbnail_md
+label: 'Responsive image thumbnail | screen medium (80*80)'
+effects:
+  1ec36c81-fc2b-42f7-9688-8dd181681b0c:
+    uuid: 1ec36c81-fc2b-42f7-9688-8dd181681b0c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 80
+      height: 80
+      crop_type: focal_point

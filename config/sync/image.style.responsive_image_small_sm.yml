@@ -1,0 +1,17 @@
+uuid: d4f6abc9-9e9b-47ad-9da2-4456e68f44de
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: qS8idrEriDShRTF4BDnZQYgBU5XkLYH6AqmvDoOlmzs
+name: responsive_image_small_sm
+label: 'Responsive image small | screen small (138*138)'
+effects:
+  d962a81c-aca1-40eb-ad50-7f18f6b0cdf7:
+    uuid: d962a81c-aca1-40eb-ad50-7f18f6b0cdf7
+    id: image_scale
+    weight: 1
+    data:
+      width: 138
+      height: 138
+      upscale: false

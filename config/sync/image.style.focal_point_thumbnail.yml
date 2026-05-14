@@ -1,0 +1,17 @@
+uuid: 52967043-260c-4005-b259-b46f00c47e3c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: knnjVfuKL3ie8sc1xo-bEsSAa4hQn41mhia9Owd1Wt0
+name: focal_point_thumbnail
+label: 'Focal point thumbnail (300 x 300)'
+effects:
+  cb164133-e5d9-49fc-ac29-158f7f209cdf:
+    uuid: cb164133-e5d9-49fc-ac29-158f7f209cdf
+    id: image_scale
+    weight: 1
+    data:
+      width: 300
+      height: 300
+      upscale: false

@@ -1,0 +1,13 @@
+uuid: 8162d49f-e912-452d-8a01-25e769f658d3
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: xWzq-jb9I94869Rw_JSXhz-XDR7O0KPKYqsPL-oJJMg
+id: media.responsive_image_medium
+label: Medium
+description: null
+targetEntityType: media
+cache: true

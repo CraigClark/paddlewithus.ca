@@ -1,0 +1,19 @@
+uuid: 6ae13a12-80d5-4b42-94c4-5603607afd19
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: RACRH05goNmM7QAxSZZ_vYrkwAClqoELuF-fk0t9aGg
+name: responsive_image_landscape_full
+label: 'Responsive image landscape | screen full (1368x684) '
+effects:
+  4dfeacd6-50bf-4e2c-9e7e-b191dad0e61f:
+    uuid: 4dfeacd6-50bf-4e2c-9e7e-b191dad0e61f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1368
+      height: 684
+      crop_type: focal_point

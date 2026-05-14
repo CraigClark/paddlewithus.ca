@@ -1,0 +1,13 @@
+uuid: ea62a684-8f33-48fe-b677-76219e8d7ed0
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: 1RhYwltwUs2SEyWf91Owo6J6qpvxLcUrv8VCVK5Ltzs
+id: media.responsive_image_portrait
+label: Portrait
+description: null
+targetEntityType: media
+cache: true

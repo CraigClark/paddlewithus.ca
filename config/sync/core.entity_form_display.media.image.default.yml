@@ -29,7 +29,7 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
+      preview_image_style: focal_point_thumbnail
       preview_link: true
       offsets: '50,50'
     third_party_settings: {  }

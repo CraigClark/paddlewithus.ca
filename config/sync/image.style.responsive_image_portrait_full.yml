@@ -1,0 +1,19 @@
+uuid: 3bfd8fc0-7865-4c12-951d-d90fe455c138
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: RdKys8h8lYh-2m70MnThRDCDK4qxcXGiz6HURMb8V2I
+name: responsive_image_portrait_full
+label: 'Responsive image portrait | screen full (456*738)'
+effects:
+  858db4ae-1337-43a7-add6-4128175aa59e:
+    uuid: 858db4ae-1337-43a7-add6-4128175aa59e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 456
+      height: 738
+      crop_type: focal_point

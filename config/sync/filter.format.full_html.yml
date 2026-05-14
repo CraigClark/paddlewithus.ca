@@ -102,11 +102,15 @@ filters:
     status: true
     weight: 100
     settings:
-      default_view_mode: default
+      default_view_mode: responsive_image_medium
       allowed_view_modes:
-        default: default
-        narrow: narrow
-        wide: wide
+        responsive_image_full: responsive_image_full
+        responsive_image_landscape: responsive_image_landscape
+        responsive_image_medium: responsive_image_medium
+        responsive_image_portrait: responsive_image_portrait
+        responsive_image_small: responsive_image_small
+        responsive_image_square: responsive_image_square
+        responsive_image_thumbnail: responsive_image_thumbnail
       allowed_media_types: {  }
   token_filter:
     id: token_filter

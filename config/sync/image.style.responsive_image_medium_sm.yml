@@ -1,0 +1,17 @@
+uuid: 2b39e6cc-8f81-4c31-bb7d-1a99892b21df
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: al6xaEN8bwgWbFHGbkNPJLtFJgp8CtVTzANa0RF_kwg
+name: responsive_image_medium_sm
+label: 'Responsive image medium | screen small (576 w)'
+effects:
+  1cf046a8-be99-41db-bdf0-9da09aa49a58:
+    uuid: 1cf046a8-be99-41db-bdf0-9da09aa49a58
+    id: image_scale
+    weight: 1
+    data:
+      width: 576
+      height: null
+      upscale: false
