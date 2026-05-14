@@ -5,5 +5,5 @@ lite_speed_cache:
   cache_status: '1'
   debug: '0'
   private_max_age: '3600'
-  private_cache_status: '0'
-  esi_blocks: id=toolbar-administration
+  private_cache_status: '1'
+  esi_blocks: ''
