@@ -1,0 +1,17 @@
+uuid: b7503299-2ab0-4918-af6a-ae4de6a52877
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 3n5UjQHYykwj4IB1ZypWOabLrf6soP3FyZ8vtCx1KGE
+name: responsive_image_medium_md
+label: 'Responsive image medium | screen medium (307*307)'
+effects:
+  d740243d-8c0c-446f-99ba-88bd3341d470:
+    uuid: d740243d-8c0c-446f-99ba-88bd3341d470
+    id: image_scale
+    weight: 1
+    data:
+      width: 307
+      height: 307
+      upscale: false

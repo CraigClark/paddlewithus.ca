@@ -1,0 +1,19 @@
+uuid: c0a3b3d5-c775-4df7-852b-dc96a4d1bd6b
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: N1HviuJEMVxxBp7TNg_aqD-YIL3t1aVYp2U0PGY92ZM
+name: responsive_image_landscape_sm
+label: 'Responsive image landscape | screen small (576x288)'
+effects:
+  7a683935-5c38-4f2b-8577-7302a7af81d3:
+    uuid: 7a683935-5c38-4f2b-8577-7302a7af81d3
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 576
+      height: 288
+      crop_type: focal_point

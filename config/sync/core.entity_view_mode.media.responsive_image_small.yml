@@ -1,0 +1,13 @@
+uuid: 7e31d331-040a-49bb-a3f8-a0e7aab41514
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: 1pfIk61BlIvrRLb_TZB_YKVuq2b_leyeoXxiSWbBbCs
+id: media.responsive_image_small
+label: Small
+description: null
+targetEntityType: media
+cache: true

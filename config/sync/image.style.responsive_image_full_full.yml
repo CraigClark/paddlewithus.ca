@@ -1,0 +1,17 @@
+uuid: 62678ad5-f380-483b-8bf4-e1f45290faa9
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: o9U7vfgZsxd4RyWLvEEvVCi1Jw5MOKieVOq2kAZx1iE
+name: responsive_image_full_full
+label: 'Responsive image full | screen full (1368w)'
+effects:
+  75b32f7e-8081-46c8-8ddb-c8e92d7c72bd:
+    uuid: 75b32f7e-8081-46c8-8ddb-c8e92d7c72bd
+    id: image_scale
+    weight: 1
+    data:
+      width: 1368
+      height: null
+      upscale: false

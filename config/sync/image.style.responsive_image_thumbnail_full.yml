@@ -1,0 +1,19 @@
+uuid: c5e58692-68b3-4223-a7cb-a3795d0075cb
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: AfCvXXI9QiyoWrSqvoyYJbsLVEmG6V8KmYIk2ZB4iD4
+name: responsive_image_thumbnail_full
+label: 'Responsive image thumbnail | screen full (100*100)'
+effects:
+  fc41f743-6b0e-43dc-8c60-a53266500fae:
+    uuid: fc41f743-6b0e-43dc-8c60-a53266500fae
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 100
+      height: 100
+      crop_type: focal_point

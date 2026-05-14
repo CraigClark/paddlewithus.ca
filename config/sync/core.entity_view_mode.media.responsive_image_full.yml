@@ -1,0 +1,13 @@
+uuid: 4c175b02-bc8e-416a-9a7a-2bd8f2049692
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: LtcuDHdA4K22e9KNHd2PhGZAidMGy7SfDzG3ZsXnLN0
+id: media.responsive_image_full
+label: Full-width
+description: null
+targetEntityType: media
+cache: true

@@ -1,0 +1,27 @@
+uuid: 09c1b5c7-409e-4085-a70e-edc699b5dbd7
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.responsive_image_portrait_full
+    - image.style.responsive_image_portrait_md
+    - image.style.responsive_image_portrait_sm
+  theme:
+    - daisyui_ext
+_core:
+  default_config_hash: eshFBNlP0TrGuTbWS2yB4eyG2GP5eedyynjPZc7nBuU
+id: responsive_image_portrait
+label: portrait
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: responsive_image_portrait_full
+    breakpoint_id: gcds.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: responsive_image_portrait_md
+    breakpoint_id: gcds.standard
+    multiplier: 1x
+breakpoint_group: daisyui_ext
+fallback_image_style: responsive_image_portrait_sm

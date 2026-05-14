@@ -1,0 +1,13 @@
+uuid: 243c82be-4f01-4173-8077-893ab5097c77
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: 0zegKQOQbXvZlgJ5DUjbArBCJc1KI8Ymmjy2Lg6UoiI
+id: media.responsive_image_landscape
+label: Landscape
+description: null
+targetEntityType: media
+cache: true

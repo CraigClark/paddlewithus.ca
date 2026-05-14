@@ -1,0 +1,27 @@
+uuid: a3de8aad-2f9b-414c-bdcf-2dca99936b1d
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.responsive_image_medium_full
+    - image.style.responsive_image_medium_md
+    - image.style.responsive_image_medium_sm
+  theme:
+    - daisyui_ext
+_core:
+  default_config_hash: C9uQNOh6htYLrW6fatwNXW8Ck6Mejw1hHIHRU0tLR-w
+id: responsive_image_medium
+label: medium
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: responsive_image_medium_full
+    breakpoint_id: gcds.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: responsive_image_medium_md
+    breakpoint_id: gcds.standard
+    multiplier: 1x
+breakpoint_group: daisyui_ext
+fallback_image_style: responsive_image_medium_sm

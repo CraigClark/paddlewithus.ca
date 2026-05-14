@@ -1,0 +1,19 @@
+uuid: 502e6309-1ed9-44ff-91ad-c93b5edafa03
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: T8Ncw0uFwDoCxMMkK__sJLQFJYTquwWY06j891DQGlQ
+name: responsive_image_square_full
+label: 'Responsive image square | screen full (700*700)'
+effects:
+  9b45d1dc-d932-4e73-ab03-2a271356169a:
+    uuid: 9b45d1dc-d932-4e73-ab03-2a271356169a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 700
+      height: 700
+      crop_type: focal_point

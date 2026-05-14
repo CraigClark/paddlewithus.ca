@@ -1,0 +1,13 @@
+# These breakpoints come from gcds-css-shortcuts.min.css
+gcds.standard:
+  label: Standard
+  mediaQuery: 'all and (min-width: 30em)'
+  weight: 0
+  multipliers:
+    - 1x
+gcds.wide:
+  label: Wide
+  mediaQuery: 'all and (min-width: 48em)'
+  weight: 1
+  multipliers:
+    - 1x

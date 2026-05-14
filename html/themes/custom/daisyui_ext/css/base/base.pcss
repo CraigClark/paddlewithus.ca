@@ -233,6 +233,26 @@ summary::marker {
 }
 
 
+/* Sticky footer: pin footer to viewport bottom on short pages,
+   without affecting the responsive nav (which lives outside this
+   wrapper or uses fixed/sticky positioning). */
+.dialog-off-canvas-main-canvas {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content-wrapper {
+  flex: 1 0 auto;
+}
+
+/* Contain floated images (e.g. CKEditor align-left/right) inside the
+   body field so they can't bleed past the content into the footer. */
+.field--name-body {
+  display: flow-root;
+}
+
+
 /* front page hero */
 
 .block-hero-front {
@@ -441,4 +461,11 @@ body:has(.ui-dialog:not(.ui-dialog-off-canvas)) {
    @apply font-medium;
  }
 
+/* cke image alignment */
+.align-right {
+  margin: 0 0 .75rem 1.5rem;
+}
 
+.align-left {
+  margin: 0 1.5rem .75rem 0;
+}
