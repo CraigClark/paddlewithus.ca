@@ -7,12 +7,11 @@ dependencies:
 id: surveys
 label: Surveys
 type: 'canonical_entities:node'
-pattern: 'survey/[node:title]'
+pattern: '/survey/[node:title]'
 selection_criteria:
   1933dda2-1e99-4a96-ab3b-42f42301cdbe:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 1933dda2-1e99-4a96-ab3b-42f42301cdbe
     context_mapping:
       node: node
     bundles:

@@ -2,17 +2,18 @@ uuid: faf99afe-17d5-4f1f-b8f8-7eab36b90e97
 langcode: en
 status: true
 dependencies:
+  config:
+    - commerce_product.commerce_product_type.activity
   module:
     - commerce_product
 id: activity
 label: Activity
 type: 'canonical_entities:commerce_product'
-pattern: 'program/[commerce_product:title]'
+pattern: '/program/[commerce_product:title]'
 selection_criteria:
   ad084b80-9501-4e12-9733-6098a42ca155:
     id: 'entity_bundle:commerce_product'
     negate: false
-    uuid: ad084b80-9501-4e12-9733-6098a42ca155
     context_mapping:
       commerce_product: commerce_product
     bundles:

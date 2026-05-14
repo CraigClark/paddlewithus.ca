@@ -2,17 +2,18 @@ uuid: 7bd137db-b12f-45fc-a7be-6fe5f91a97b1
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.page
   module:
     - node
 id: default_paths
 label: 'default paths'
 type: 'canonical_entities:node'
-pattern: '[node:title]'
+pattern: '/[node:title]'
 selection_criteria:
   07d24a24-e318-44a5-9409-a045486e578c:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 07d24a24-e318-44a5-9409-a045486e578c
     context_mapping:
       node: node
     bundles:
