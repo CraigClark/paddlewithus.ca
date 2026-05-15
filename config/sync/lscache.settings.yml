@@ -1,6 +1,6 @@
 _core:
   default_config_hash: ewGBqsQJWO7cFpEkFFQ9vXZw12noXH_87GNNodkFFXM
-enabled: false
+enabled: true
 default_ttl: 3600
 tag_prefix: ''
 tag_filter: true

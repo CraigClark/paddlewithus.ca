@@ -1,4 +1,11 @@
 <IfModule LiteSpeed>
   CacheLookup public on
   php_flag output_buffering off
+
+  # Bypass the LSCache lookup whenever a Drupal session cookie (SESS/SSESS)
+  # or NO_CACHE marker is present. Authenticated users never see a public
+  # cache hit, regardless of LSWS vhost defaults.
+  RewriteEngine On
+  RewriteCond %{HTTP_COOKIE} (SESS[a-f0-9]{32}|SSESS[a-f0-9]{32}|NO_CACHE) [NC]
+  RewriteRule .* - [E=Cache-Control:no-cache]
 </IfModule>
