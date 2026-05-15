@@ -333,6 +333,50 @@ function daisyui_ext_form_node_form_alter(&$form, FormStateInterface $form_state
 }
 
 /**
+ * Implements hook_metatags_alter().
+ *
+ * Substitutes a default social-share image whenever an entity's primary
+ * image field is missing or empty. Without this, the token-based og:image
+ * resolves to nothing and Facebook/LinkedIn fall back to scraping the
+ * first <img> they find on the page, which looks terrible.
+ *
+ * Covered fields:
+ *   - node: field_page_primary_image (page, story; missing on athlete_log)
+ *   - commerce_product: field_primary_image (activity; missing on default)
+ *
+ * Replaces the unresolved token string in $metatags with an absolute URL
+ * to the default image; that URL passes through subsequent token
+ * replacement untouched because no [...] brackets remain.
+ */
+function picc_ext_metatags_alter(array &$metatags, array &$context): void {
+    $entity = $context['entity'] ?? NULL;
+    if (!$entity) {
+        return;
+    }
+
+    $field_name = match ($entity->getEntityTypeId()) {
+        'node' => 'field_page_primary_image',
+        'commerce_product' => 'field_primary_image',
+        default => NULL,
+    };
+    if (!$field_name) {
+        return;
+    }
+
+    if ($entity->hasField($field_name) && !$entity->get($field_name)->isEmpty()) {
+        return;
+    }
+
+    $default = Url::fromUserInput('/themes/custom/daisyui_ext/images/picc-default.jpg', ['absolute' => TRUE])->toString();
+
+    foreach (['image_src', 'og_image', 'og_image_url', 'og_image_secure_url', 'twitter_cards_image'] as $tag) {
+        if (array_key_exists($tag, $metatags)) {
+            $metatags[$tag] = $default;
+        }
+    }
+}
+
+/**
  * Implements hook_ENTITY_TYPE_view() for commerce_product.
  *
  * Emits Schema.org Event JSON-LD on the full product page for activity
