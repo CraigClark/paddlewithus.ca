@@ -74,7 +74,6 @@
     "drupal/language_switcher_extended": "^1.1",
     "drupal/linkit": "^7.0",
     "drupal/login_emailusername": "^3.0",
-    "drupal/lscache": "^1.0",
     "drupal/masquerade": "^2.0",
     "drupal/material_icons": "^2.0",
     "drupal/meaofd": "^1.1",
@@ -85,7 +84,6 @@
     "drupal/node_view_permissions": "^2.0",
     "drupal/nomarkup": "^1.0",
     "drupal/pathauto": "^1.12",
-    "drupal/purge": "^3.6",
     "drupal/rabbit_hole": "^1.0",
     "drupal/range": "^1.6",
     "drupal/realname": "^2.0",
@@ -113,7 +111,6 @@
     "drupal/webform_analysis": "^1.0@beta",
     "drupal/webform_views": "^5.2",
     "drush/drush": "^13",
-    "litespeedtech/lscache-drupal": "^1.6",
     "npm-asset/js-cookie": "^3.0",
     "oomphinc/composer-installers-extender": "^2",
     "wikimedia/composer-merge-plugin": "^2.1"
