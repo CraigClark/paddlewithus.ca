@@ -10,7 +10,7 @@ dependencies:
     - node
     - user
 id: front_page_feed
-label: 'Front page feed'
+label: Home
 module: views
 description: ''
 tag: ''
@@ -23,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Front page feed'
+      title: Home
       fields:
         title:
           id: title
@@ -337,6 +337,7 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
+        simple_sitemap_display_extender: {  }
     cache_metadata:
       max-age: -1
       contexts:
