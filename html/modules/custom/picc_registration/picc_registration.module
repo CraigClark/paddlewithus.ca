@@ -730,7 +730,9 @@ function picc_registration_preprocess_views_view_fields(&$variables) {
  *   the entity_reverse relationship's JOIN to commerce_order_item so it
  *   only matches PENDING swim_test_registration order items on completed
  *   orders. Profiles with no matching pending registration become
- *   walk-ups (NULL on the joined columns).
+ *   walk-ups (NULL on the joined columns). Also restricts the variation
+ *   data join to the source-language row so FR-translated slots don't
+ *   duplicate rows.
  */
 function picc_registration_views_query_alter($view, $query) {
   $current_year = (int) date('Y');
@@ -780,6 +782,19 @@ function picc_registration_views_query_alter($view, $query) {
       $info['join']->extra = "{$oi}.type = 'swim_test_registration'"
         . " AND EXISTS (SELECT 1 FROM {commerce_order_item__field_swim_test_status} _sts WHERE _sts.entity_id = {$oi}.order_item_id AND _sts.field_swim_test_status_value = 'pending')"
         . " AND EXISTS (SELECT 1 FROM {commerce_order} _o WHERE _o.order_id = {$oi}.order_id AND _o.state IN ('completed', 'fulfillment'))";
+      continue;
+    }
+    // Variation data join: restrict to the source-language row. The
+    // swim_test_slot bundle is translatable (for the description field),
+    // so a slot with a FR translation has two rows in
+    // commerce_product_variation_field_data — without this predicate the
+    // join doubles every registered participant. In the ON clause (not
+    // WHERE) so walk-ups still pass through as NULL.
+    if ($table === 'commerce_product_variation_field_data' && isset($info['join'])) {
+      if (!is_array($info['join']->extra)) {
+        $info['join']->extra = [];
+      }
+      $info['join']->extra[] = ['field' => 'default_langcode', 'value' => 1];
       continue;
     }
     // Track the variation date field table so we can prepend a NULL-last
