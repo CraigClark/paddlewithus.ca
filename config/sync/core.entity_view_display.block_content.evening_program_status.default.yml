@@ -1,0 +1,24 @@
+uuid: 292d9a9d-3bff-4d18-b46f-dd2bc2995246
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.evening_program_status
+    - field.field.block_content.evening_program_status.field_evening_program_status
+  module:
+    - options
+id: block_content.evening_program_status.default
+targetEntityType: block_content
+bundle: evening_program_status
+mode: default
+content:
+  field_evening_program_status:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
