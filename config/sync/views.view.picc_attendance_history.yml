@@ -436,7 +436,6 @@ display:
                   is_secondary: false
                   hide_label: false
                   field_classes: ''
-                  sort_options_unsupported: ''
               product:
                 plugin_id: default
                 advanced:
@@ -447,7 +446,6 @@ display:
                   is_secondary: false
                   hide_label: false
                   field_classes: ''
-                  sort_options_unsupported: ''
               checkout_without_checkin:
                 plugin_id: bef_single
                 advanced:

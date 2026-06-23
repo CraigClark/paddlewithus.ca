@@ -1,0 +1,14 @@
+uuid: e436286b-23fd-40d9-a049-be0a67a7d6f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.coach_manager
+  module:
+    - user
+id: user_remove_role_action.coach_manager
+label: 'Remove the Coach manager role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: coach_manager

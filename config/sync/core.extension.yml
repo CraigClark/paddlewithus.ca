@@ -132,6 +132,7 @@ module:
   rh_node: 0
   rh_taxonomy: 0
   rh_user: 0
+  role_delegation: 0
   schema_event: 0
   schema_metatag: 0
   schema_organization: 0

@@ -1,0 +1,14 @@
+uuid: 48829fb3-29ea-4deb-a946-e28cccdd3133
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.coach_manager
+  module:
+    - user
+id: user_add_role_action.coach_manager
+label: 'Add the Coach manager role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: coach_manager

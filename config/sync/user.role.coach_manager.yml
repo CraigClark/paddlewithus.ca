@@ -1,0 +1,23 @@
+uuid: 9e50d3ac-fcae-4caf-99fc-9c99f1473ab0
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - rabbit_hole
+    - role_delegation
+    - system
+    - toolbar
+id: coach_manager
+label: 'Coach manager'
+weight: 9
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access private fields'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer users'
+  - 'assign coach role'
+  - 'rabbit hole bypass user'
+  - 'view the administration theme'
