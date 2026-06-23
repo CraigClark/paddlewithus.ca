@@ -21,4 +21,8 @@ settings:
   provider: views
   views_label: ''
   items_per_page: null
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
