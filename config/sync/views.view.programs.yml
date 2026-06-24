@@ -535,6 +535,55 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        picc_sale_badge:
+          id: picc_sale_badge
+          table: commerce_product_field_data
+          field: picc_sale_badge
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: picc_sale_badge
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
         nothing:
           id: nothing
           table: views
@@ -547,7 +596,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card bg-base-100 shadow-sm h-full\">\r\n  {{ field_primary_image }}\r\n\r\n  <div class=\"card-body prose pt-4 flex flex-col\">\r\n    <h2 class=\"mt-0\">{{ title }}</h2>\r\n\r\n    {{ field_age_range }}\r\n\r\n    <div>\r\n      {{ field_coach_lang }}\r\n      {{ body }}\r\n    </div>\r\n\r\n    <div class=\"card-actions justify-end mt-auto\">\r\n      {{ view_commerce_product }}\r\n    </div>\r\n  </div>\r\n</div>"
+            text: "<div class=\"card bg-base-100 shadow-sm h-full\">\r\n  {{ field_primary_image }}\r\n\r\n  <div class=\"card-body prose pt-4 flex flex-col\">\r\n    {{ picc_sale_badge }}\r\n\r\n    <h2 class=\"mt-0\">{{ title }}</h2>\r\n\r\n    {{ field_age_range }}\r\n\r\n    <div>\r\n      {{ field_coach_lang }}\r\n      {{ body }}\r\n    </div>\r\n\r\n    <div class=\"card-actions justify-end mt-auto\">\r\n      {{ view_commerce_product }}\r\n    </div>\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -879,6 +928,35 @@ display:
     position: 2
     display_options:
       display_description: ''
+      display_extenders:
+        ui_styles: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+      tags:
+        - 'config:field.storage.commerce_product.body'
+        - 'config:field.storage.commerce_product.field_acivity_type'
+        - 'config:field.storage.commerce_product.field_age_range'
+        - 'config:field.storage.commerce_product.field_audience'
+        - 'config:field.storage.commerce_product.field_coach_lang'
+        - 'config:field.storage.commerce_product.field_primary_image'
+  block_sale:
+    id: block_sale
+    display_title: 'BL: on sale'
+    display_plugin: block
+    position: 4
+    display_options:
+      title: 'On sale now'
+      cache:
+        type: none
+        options: {  }
+      defaults:
+        cache: false
+        title: false
+      display_description: 'Shows only programs that currently have a session on sale. Place it on a story to promote the sale.'
       display_extenders:
         ui_styles: {  }
     cache_metadata:

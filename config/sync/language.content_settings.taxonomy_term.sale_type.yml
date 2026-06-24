@@ -1,0 +1,11 @@
+uuid: af1efb8d-c617-4002-8a8d-335881943271
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.sale_type
+id: taxonomy_term.sale_type
+target_entity_type_id: taxonomy_term
+target_bundle: sale_type
+default_langcode: site_default
+language_alterable: false

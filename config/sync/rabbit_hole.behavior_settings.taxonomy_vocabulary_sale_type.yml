@@ -1,0 +1,14 @@
+uuid: 58d06ac0-b505-472a-98f4-f6dd0b8fb5ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.sale_type
+id: taxonomy_vocabulary_sale_type
+entity_type_id: taxonomy_vocabulary
+entity_id: sale_type
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

@@ -15,12 +15,15 @@ dependencies:
     - field.field.commerce_product_variation.activity.field_discount_4
     - field.field.commerce_product_variation.activity.field_discount_5_up
     - field.field.commerce_product_variation.activity.field_maximum_age
+    - field.field.commerce_product_variation.activity.field_sale_type
+    - taxonomy.vocabulary.sale_type
   module:
     - commerce_price
     - commerce_stock_field
     - datetime
     - datetime_range
     - field_group
+    - options
 third_party_settings:
   field_group:
     group_add_discounts:
@@ -125,6 +128,12 @@ content:
     region: content
     settings:
       placeholder: ''
+    third_party_settings: {  }
+  field_sale_type:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
     third_party_settings: {  }
   price:
     type: commerce_price_default

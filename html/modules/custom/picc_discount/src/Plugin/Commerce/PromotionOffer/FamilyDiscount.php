@@ -64,6 +64,15 @@ class FamilyDiscount extends PromotionOfferBase {
       return;
     }
 
+    // Sales replace the family discount: if this session is currently on sale,
+    // skip it so only the sale applies. The family discount returns on its own
+    // once the sale ends. Guarded with hasService() so the unit test (which has
+    // no sale_manager in its container) keeps exercising the discount math.
+    if (\Drupal::hasService('picc_discount.sale_manager')
+      && \Drupal::service('picc_discount.sale_manager')->getVariationSale($variation)) {
+      return;
+    }
+
     // Get discount values from variation fields.
     $discount_1 = $this->getFieldValue($variation, 'field_discount_1');
     $discount_2 = $this->getFieldValue($variation, 'field_discount_2');

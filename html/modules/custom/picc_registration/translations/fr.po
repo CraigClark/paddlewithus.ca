@@ -312,3 +312,13 @@ msgstr "Y a-t-il des informations que les entraîneurs devraient connaître pour
 
 msgid "<p>This may include medical considerations (other than allergies), as well as worries, anxieties, attention or focus needs, or emotional or social considerations. Include anything that helps coaches provide a safe, positive experience.</p>\r\n<p>Please do not include general comments (for example, \"excited for camp\"). Select \"No\" if there is nothing specific to share.</p>"
 msgstr "<p>Cela peut inclure des considérations médicales (autres que les allergies), ainsi que des inquiétudes, de l’anxiété, des besoins liés à l’attention ou à la concentration, ou des aspects émotionnels ou sociaux. Incluez toute information utile pour aider les entraîneurs à offrir une expérience sécuritaire et positive.</p>\r\n<p>Veuillez ne pas inclure de commentaires généraux (par exemple, « enthousiaste pour le camp »). Sélectionnez « Non » s’il n’y a rien de particulier à signaler.</p>"
+
+# Sale / discount badge and price (picc_ext SaleBadge / SalePrice)
+msgid "@percent% off"
+msgstr "@percent % de rabais"
+
+msgid "Sale ends @date"
+msgstr "Fin du rabais le @date"
+
+msgid "per person."
+msgstr "par personne."

@@ -1,0 +1,20 @@
+uuid: 93b20a0b-75af-4fe4-b9ed-197bdf98db2c
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - taxonomy
+id: taxonomy_term.field_sale_ends
+field_name: field_sale_ends
+entity_type: taxonomy_term
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

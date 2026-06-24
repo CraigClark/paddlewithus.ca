@@ -8,6 +8,7 @@ dependencies:
     - environment_indicator.switcher.remote
     - filter.format.basic_html
     - media.type.image
+    - taxonomy.vocabulary.sale_type
     - user.role.account_holder
     - user.role.authenticated
   module:
@@ -28,6 +29,7 @@ dependencies:
     - picc_ext
     - profile
     - system
+    - taxonomy
     - toolbar
 id: commerce_manager
 label: 'Commerce manager'
@@ -56,8 +58,11 @@ permissions:
   - 'create commerce_promotion'
   - 'create default commerce_order'
   - 'create image media'
+  - 'create terms in sale_type'
   - 'delete any activity commerce_product'
   - 'delete any commerce_promotion'
+  - 'delete term revisions in sale_type'
+  - 'delete terms in sale_type'
   - 'duplicate any commerce_promotion'
   - 'edit any image media'
   - 'edit field_evaluation_date'
@@ -65,6 +70,7 @@ permissions:
   - 'edit field_swim_attestation_date'
   - 'edit field_swim_status'
   - 'edit field_swim_test_evaluated_by'
+  - 'edit terms in sale_type'
   - 'manage activity commerce_product_variation'
   - 'manage activity_registration commerce_order_item'
   - 'manage swim_test_registration commerce_order_item'
@@ -72,6 +78,7 @@ permissions:
   - 'masquerade as account_holder'
   - 'masquerade as authenticated'
   - 'record picc attendance'
+  - 'revert term revisions in sale_type'
   - 'skip node redirect'
   - 'translate activity commerce_product'
   - 'translate commerce_product_variation'
@@ -97,5 +104,6 @@ permissions:
   - 'view online commerce_store'
   - 'view picc attendance history'
   - 'view stripe dashboard links'
+  - 'view term revisions in sale_type'
   - 'view the administration theme'
   - 'view user email addresses'

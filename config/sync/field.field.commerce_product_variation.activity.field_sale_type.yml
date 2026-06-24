@@ -1,0 +1,29 @@
+uuid: 5bcee263-ea3c-471c-aba5-0955bf0d17a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.activity
+    - field.storage.commerce_product_variation.field_sale_type
+    - taxonomy.vocabulary.sale_type
+id: commerce_product_variation.activity.field_sale_type
+field_name: field_sale_type
+entity_type: commerce_product_variation
+bundle: activity
+label: Sale
+description: 'Put this session on sale by choosing a sale campaign. The campaign sets the discount and end date, and replaces the family discount for this session while it runs. Leave empty for no sale.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sale_type: sale_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

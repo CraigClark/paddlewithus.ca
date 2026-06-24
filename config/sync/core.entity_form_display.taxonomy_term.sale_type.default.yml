@@ -1,0 +1,57 @@
+uuid: 2ced4276-fdbf-4fe1-b81e-27c7c98732f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sale_type.field_discount_percent
+    - field.field.taxonomy_term.sale_type.field_sale_ends
+    - taxonomy.vocabulary.sale_type
+  module:
+    - datetime
+id: taxonomy_term.sale_type.default
+targetEntityType: taxonomy_term
+bundle: sale_type
+mode: default
+content:
+  field_discount_percent:
+    type: number
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_sale_ends:
+    type: datetime_default
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  revision_log_message: true
+  status: true

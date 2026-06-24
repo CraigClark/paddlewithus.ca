@@ -21,7 +21,8 @@ function picc_discount_cron() {
 
   \Drupal::state()->set('picc_discount.last_promotion_check', \Drupal::time()->getRequestTime());
 
-  // Use the ensure function from the install file.
+  // Use the ensure functions from the install file.
   \Drupal::moduleHandler()->loadInclude('picc_discount', 'install');
   picc_discount_ensure_promotion();
+  picc_discount_ensure_sale_promotion();
 }

@@ -1,0 +1,9 @@
+uuid: 341cf3bb-82f1-459e-8c77-1b330783df16
+langcode: en
+status: true
+dependencies: {  }
+name: 'Sale type'
+vid: sale_type
+description: 'Reusable sale campaigns. Each one sets a discount and an end date once; every program put on that sale uses it.'
+weight: 0
+new_revision: false
