@@ -100,20 +100,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        edit_block_content:
-          id: edit_block_content
-          table: block_content
-          field: edit_block_content
+        changed_1:
+          id: changed_1
+          table: block_content_field_data
+          field: changed
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: block_content
-          plugin_id: entity_link_edit
+          entity_field: changed
+          plugin_id: field
           label: ''
           exclude: true
           alter:
-            alter_text: true
-            text: '<p>{{ edit_block_content }}</p>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -145,6 +146,81 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: Y-m-d
+            timezone: ''
+            tooltip:
+              date_format: medium
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        edit_block_content:
+          id: edit_block_content
+          table: block_content
+          field: edit_block_content
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: block_content
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: '<p class="btn-sm">{{ edit_block_content }}</p>'
+            make_link: true
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: btn-sm
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: btn-sm
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
           element_default_classes: false
           empty: ''
           hide_empty: false
@@ -165,7 +241,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<section class=\"evening-prog-status {{ field_evening_program_status__value }}\">\r\n<p><strong> {{ field_evening_program_status }}</strong></p>\r\n{{ changed }}\r\n{{ edit_block_content }}\r\n</section>"
+            text: "{% if changed_1|striptags|trim == \"now\"|date(\"Y-m-d\") %}<section class=\"container-md evening-prog-status {{ field_evening_program_status__value }}\">\r\n<p><strong>{{ field_evening_program_status }}</strong></p>\r\n{{ changed }}\r\n{{ edit_block_content }}\r\n</section>{% else %}<section class=\"container-md bg-base-300 evening-prog-status program_pending\">\r\n<p>Evening program status has not been updated today.</p>\r\n{{ edit_block_content }}\r\n</section>{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -219,7 +295,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 0
+          items_per_page: 1
       exposed_form:
         type: basic
         options:
@@ -247,10 +323,25 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: "<section class=\"evening-prog-status program_pending\">\r\n<p>Evening program status has not been updated today</p>\r\n"
+            value: "<section class=\"container-md bg-base-200 evening-prog-status program_pending\">\r\n<p>Evening program status has not been updated today TEST</p>\r\n"
             format: full_html
           tokenize: false
-      sorts: {  }
+      sorts:
+        changed:
+          id: changed
+          table: block_content_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: block_content
+          entity_field: changed
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+          exposed: false
+          granularity: second
       arguments: {  }
       filters:
         status:
@@ -281,50 +372,6 @@ display:
           plugin_id: bundle
           value:
             evening_program_status: evening_program_status
-        changed:
-          id: changed
-          table: block_content_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: block_content
-          entity_field: changed
-          plugin_id: date
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: today
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          type: date
         langcode:
           id: langcode
           table: block_content_field_data
@@ -367,13 +414,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        changed_1:
-          id: changed_1
-          table: block_content_field_data
-          field: changed
-          entity_type: block_content
-          entity_field: changed
-          plugin_id: date
       style:
         type: default
         options:
