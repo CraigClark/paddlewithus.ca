@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.story.field_date_control
     - field.field.node.story.field_link_text
     - field.field.node.story.field_page_primary_image
+    - field.field.node.story.field_promo_img
     - field.field.node.story.field_redirect
     - field.field.node.story.field_redirect_destination
     - field.field.node.story.field_summary
@@ -35,6 +36,7 @@ hidden:
   field_date_control: true
   field_link_text: true
   field_page_primary_image: true
+  field_promo_img: true
   field_redirect: true
   field_redirect_destination: true
   field_summary: true

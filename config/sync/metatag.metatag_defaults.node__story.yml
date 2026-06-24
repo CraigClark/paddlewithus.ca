@@ -8,5 +8,10 @@ id: node__story
 label: Story
 tags:
   description: '[node:field_summary]'
+  image_src: '[node:field_promo_img:entity:field_media_image:social_share:url]'
   og_description: '[node:field_summary]'
+  og_image: '[node:field_promo_img:entity:field_media_image:social_share:url]'
+  og_image_url: '[node:field_promo_img:entity:field_media_image:social_share:url]'
+  og_image_secure_url: '[node:field_promo_img:entity:field_media_image:social_share:url]'
   twitter_cards_description: '[node:field_summary]'
+  twitter_cards_image: '[node:field_promo_img:entity:field_media_image:social_share:url]'

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.story.field_date_control
     - field.field.node.story.field_link_text
     - field.field.node.story.field_page_primary_image
+    - field.field.node.story.field_promo_img
     - field.field.node.story.field_redirect
     - field.field.node.story.field_redirect_destination
     - field.field.node.story.field_summary
@@ -25,7 +26,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 4
     region: content
     settings:
       rows: 9
@@ -53,13 +54,13 @@ content:
             selector: ''
   field_date_control:
     type: datetime_default
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_link_text:
     type: string_textfield
-    weight: 4
+    weight: 5
     region: content
     settings:
       size: 60
@@ -72,16 +73,23 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
+  field_promo_img:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
   field_redirect:
     type: boolean_checkbox
-    weight: 5
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_redirect_destination:
     type: linkit
-    weight: 6
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -126,7 +134,7 @@ content:
             selector: ''
   field_summary:
     type: string_textarea
-    weight: 2
+    weight: 3
     region: content
     settings:
       rows: 5
@@ -134,7 +142,7 @@ content:
     third_party_settings: {  }
   revision_log:
     type: hide_revision_field_log_widget
-    weight: 7
+    weight: 8
     region: content
     settings:
       rows: 5
@@ -145,16 +153,26 @@ content:
       allow_user_settings: true
       hide_revision: false
     third_party_settings: {  }
+  simple_sitemap:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 10
+    weight: 11
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 9
+    weight: 10
     region: content
     settings:
       display_label: true
