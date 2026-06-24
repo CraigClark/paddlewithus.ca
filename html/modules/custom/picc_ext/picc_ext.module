@@ -364,7 +364,9 @@ function picc_ext_metatags_alter(array &$metatags, array &$context): void {
     }
 
     $field_name = match ($entity->getEntityTypeId()) {
-        'node' => 'field_page_primary_image',
+        // Stories use a dedicated promo image for social sharing; other node
+        // bundles (e.g. page) keep using the primary image.
+        'node' => $entity->bundle() === 'story' ? 'field_promo_img' : 'field_page_primary_image',
         'commerce_product' => 'field_primary_image',
         default => NULL,
     };
