@@ -208,3 +208,6 @@ overflow-x-auto
 hover:bg-base-200
 font-medium
 w-20
+line-through
+text-error
+opacity-60

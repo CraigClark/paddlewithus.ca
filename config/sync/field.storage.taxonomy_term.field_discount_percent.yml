@@ -1,0 +1,20 @@
+uuid: b25aa364-9700-40c3-88e7-9df71c767e60
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.field_discount_percent
+field_name: field_discount_percent
+entity_type: taxonomy_term
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

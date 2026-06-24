@@ -183,6 +183,12 @@
   : ''
 %}
 
+{# Sale price markup (original struck through + discounted price in red).
+   Rendered once; non-empty only when the session is on sale. See the picc_ext
+   SalePrice field plugin. #}
+{% set sale_price_markup = fields.picc_sale_price is defined ? fields.picc_sale_price.content|render : '' %}
+{% set on_sale = sale_price_markup|trim is not empty %}
+
 {# Description field (optional) - keep Views output as-is (prevents &amp;) #}
 {% set desc = fields.field_desc is defined ? fields.field_desc.content : '' %}
 
@@ -221,11 +227,15 @@
       </div>
     {% elseif price %}
       <div>
-        {{ price }}
+        {% if on_sale %}
+          {{ sale_price_markup }}
+        {% else %}
+          {{ price }}
+        {% endif %}
       </div>
     {% endif %}
 
-    {% if has_discounts %}
+    {% if has_discounts and not on_sale %}
       <details class="mt-2">
         <summary>
           {{ 'Family discounts'|t }}

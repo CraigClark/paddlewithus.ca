@@ -274,6 +274,15 @@ function picc_ext_menu_local_actions_alter(array &$local_actions): void
  * registered against.
  */
 function picc_ext_views_query_alter($view, $query) {
+    // Limit the programs "on sale" block to products with an active sale.
+    if ($view->id() === 'programs' && $view->current_display === 'block_sale') {
+        $product_ids = \Drupal::service('picc_discount.sale_manager')->getProductIdsOnSale();
+        // An empty IN list matches nothing, so the block is empty when no sale
+        // is running.
+        $query->addWhere(0, 'commerce_product_field_data.product_id', $product_ids ?: [0], 'IN');
+        return;
+    }
+
     if ($view->id() !== 'variant_session') {
         return;
     }

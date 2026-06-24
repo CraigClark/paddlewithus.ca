@@ -1,0 +1,21 @@
+uuid: 9c9b11c7-3d93-4808-bd8c-2c2ae7066375
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_sale_ends
+    - taxonomy.vocabulary.sale_type
+  module:
+    - datetime
+id: taxonomy_term.sale_type.field_sale_ends
+field_name: field_sale_ends
+entity_type: taxonomy_term
+bundle: sale_type
+label: 'Sale ends'
+description: 'Last day of the sale. The discount applies through the end of this day, then stops automatically everywhere it is used.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

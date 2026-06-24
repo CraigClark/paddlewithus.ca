@@ -1,0 +1,27 @@
+uuid: 7c34ae50-7241-4be2-8631-1f98dad9d47a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sale_type.field_discount_percent
+    - field.field.taxonomy_term.sale_type.field_sale_ends
+    - taxonomy.vocabulary.sale_type
+  module:
+    - datetime
+id: taxonomy_term.sale_type.default
+targetEntityType: taxonomy_term
+bundle: sale_type
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_discount_percent: true
+  field_sale_ends: true
+  langcode: true
+  search_api_excerpt: true

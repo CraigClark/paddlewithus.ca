@@ -17,6 +17,7 @@ use Drupal\commerce_promotion\Entity\Promotion;
  */
 function picc_discount_install() {
   picc_discount_ensure_promotion();
+  picc_discount_ensure_sale_promotion();
 }
 
 /**
@@ -108,4 +109,144 @@ function picc_discount_update_10001() {
     return t('Family Discount promotion ensured (ID: @id).', ['@id' => $promotion->id()]);
   }
   return t('Failed to create Family Discount promotion. Check the logs.');
+}
+
+/**
+ * Ensure the Sale promotion entity exists.
+ *
+ * Creates a promotion using the picc_sale offer plugin if no promotion with
+ * that offer type exists. Like the family discount, this promotion is a
+ * content entity (not config), so it is recreated by cron if it is lost.
+ *
+ * @return \Drupal\commerce_promotion\Entity\PromotionInterface|null
+ *   The existing or newly created promotion, or NULL on failure.
+ */
+function picc_discount_ensure_sale_promotion() {
+  $promotion_storage = \Drupal::entityTypeManager()->getStorage('commerce_promotion');
+
+  // Check if a promotion with this offer type already exists.
+  $existing = $promotion_storage->getQuery()
+    ->condition('offer.target_plugin_id', 'picc_sale')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (!empty($existing)) {
+    return $promotion_storage->load(reset($existing));
+  }
+
+  // Load all active stores for the promotion (typically just one).
+  $store_ids = \Drupal::entityTypeManager()->getStorage('commerce_store')->getQuery()
+    ->condition('status', TRUE)
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (empty($store_ids)) {
+    \Drupal::logger('picc_discount')->error('Cannot create Sale promotion: no stores found.');
+    return NULL;
+  }
+
+  // Apply to every order type.
+  $order_type_ids = array_keys(\Drupal::entityTypeManager()->getStorage('commerce_order_type')->loadMultiple());
+
+  if (empty($order_type_ids)) {
+    \Drupal::logger('picc_discount')->error('Cannot create Sale promotion: no order types found.');
+    return NULL;
+  }
+
+  $promotion = Promotion::create([
+    'name' => 'Seasonal Sale',
+    'display_name' => 'Sale',
+    'description' => 'Applies the per-session sale discount. The percentage and end date come from the Sale type chosen on each product variation.',
+    'offer' => [
+      'target_plugin_id' => 'picc_sale',
+      'target_plugin_configuration' => [],
+    ],
+    // Only apply to orders that actually contain an on-sale item, so the
+    // promotion's "none" compatibility does not suppress other promotions
+    // (e.g. the family discount) on orders without a sale item.
+    'conditions' => [
+      [
+        'target_plugin_id' => 'picc_order_has_sale_item',
+        'target_plugin_configuration' => [],
+      ],
+    ],
+    'condition_operator' => 'AND',
+    // The family discount yields to active sales per item (see the Sale offer
+    // and FamilyDiscount), so a sale and the family discount never both apply
+    // to the same session. 'any' lets the family discount still apply to
+    // non-sale items in the same order.
+    'compatibility' => 'any',
+    'status' => TRUE,
+    'order_types' => $order_type_ids,
+    'stores' => $store_ids,
+    // Order no longer matters now that the sale and the family discount never
+    // apply to the same session; kept low for determinism.
+    'weight' => 0,
+    'start_date' => '2024-01-01T00:00:00',
+    'require_coupon' => FALSE,
+  ]);
+
+  $promotion->save();
+
+  \Drupal::logger('picc_discount')->notice('Created Sale promotion (ID: @id).', [
+    '@id' => $promotion->id(),
+  ]);
+
+  return $promotion;
+}
+
+/**
+ * Create the Sale promotion if it does not exist.
+ */
+function picc_discount_update_10002() {
+  $promotion = picc_discount_ensure_sale_promotion();
+  if ($promotion) {
+    return t('Sale promotion ensured (ID: @id).', ['@id' => $promotion->id()]);
+  }
+  return t('Failed to create Sale promotion. Check the logs.');
+}
+
+/**
+ * Scope the Sale promotion to orders that contain an on-sale item.
+ *
+ * Retrofits the existing promotion with the on-sale-item condition so it no
+ * longer suppresses other promotions (e.g. the family discount) on orders that
+ * have no sale item.
+ */
+function picc_discount_update_10003() {
+  $promotion = picc_discount_ensure_sale_promotion();
+  if (!$promotion) {
+    return 'Failed to load Sale promotion. Check the logs.';
+  }
+  if (empty($promotion->get('conditions')->getValue())) {
+    $promotion->set('conditions', [
+      [
+        'target_plugin_id' => 'picc_order_has_sale_item',
+        'target_plugin_configuration' => [],
+      ],
+    ]);
+    $promotion->save();
+    return 'Added the on-sale-item condition to the Sale promotion.';
+  }
+  return 'Sale promotion already scoped to on-sale items.';
+}
+
+/**
+ * Switch the Sale promotion to 'any' compatibility.
+ *
+ * The family discount now yields to active sales per item, so the sale no
+ * longer needs to suppress all other promotions; 'any' lets the family discount
+ * still apply to non-sale items in a mixed order.
+ */
+function picc_discount_update_10004() {
+  $promotion = picc_discount_ensure_sale_promotion();
+  if (!$promotion) {
+    return 'Failed to load Sale promotion. Check the logs.';
+  }
+  if ($promotion->getCompatibility() !== 'any') {
+    $promotion->setCompatibility('any');
+    $promotion->save();
+    return 'Sale promotion compatibility set to any.';
+  }
+  return 'Sale promotion already compatibility: any.';
 }
