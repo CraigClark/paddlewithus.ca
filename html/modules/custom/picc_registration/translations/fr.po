@@ -322,3 +322,6 @@ msgstr "Fin du rabais le @date"
 
 msgid "per person."
 msgstr "par personne."
+
+msgid "Sessions registered at a sale price are non-refundable."
+msgstr "Les inscriptions à prix réduit ne sont pas remboursables."

@@ -35,14 +35,7 @@ class OrderHasSaleItem extends ConditionBase {
     if (!$entity instanceof OrderInterface) {
       return FALSE;
     }
-    $sale_manager = \Drupal::service('picc_discount.sale_manager');
-    foreach ($entity->getItems() as $order_item) {
-      $variation = $order_item->getPurchasedEntity();
-      if ($variation && $sale_manager->getVariationSale($variation)) {
-        return TRUE;
-      }
-    }
-    return FALSE;
+    return \Drupal::service('picc_discount.sale_manager')->orderHasSaleItem($entity);
   }
 
 }
