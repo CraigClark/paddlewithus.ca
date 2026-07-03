@@ -2,7 +2,10 @@ uuid: 9e50d3ac-fcae-4caf-99fc-9c99f1473ab0
 langcode: en
 status: true
 dependencies:
+  config:
+    - block_content.type.evening_program_status
   module:
+    - block_content
     - field_permissions
     - rabbit_hole
     - role_delegation
@@ -19,5 +22,6 @@ permissions:
   - 'access user profiles'
   - 'administer users'
   - 'assign coach role'
+  - 'edit any evening_program_status block content'
   - 'rabbit hole bypass user'
   - 'view the administration theme'

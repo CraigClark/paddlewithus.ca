@@ -199,7 +199,7 @@ display:
             trim_whitespace: false
             alt: ''
             rel: ''
-            link_class: btn-sm
+            link_class: ''
             prefix: ''
             suffix: ''
             target: ''
@@ -215,7 +215,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: btn-sm
+          element_class: ''
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -241,7 +241,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if changed_1|striptags|trim == \"now\"|date(\"Y-m-d\") %}<section class=\"container-md evening-prog-status {{ field_evening_program_status__value }}\">\r\n<p><strong>{{ field_evening_program_status }}</strong></p>\r\n{{ changed }}\r\n{{ edit_block_content }}\r\n</section>{% else %}<section class=\"container-md bg-base-300 evening-prog-status program_pending\">\r\n<p>Evening program status has not been updated today.</p>\r\n{{ edit_block_content }}\r\n</section>{% endif %}"
+            text: "{% if changed_1|striptags|trim == \"now\"|date(\"Y-m-d\") %}<section class=\"evening-prog-status {{ field_evening_program_status__value }}\">\r\n<p><strong>{{ field_evening_program_status }}</strong></p>\r\n{{ changed }}\r\n{{ edit_block_content }}\r\n</section>{% else %}<section class=\"evening-prog-status program_no_update\">\r\n<p>Evening program status has not been updated today.</p>\r\n{{ edit_block_content }}\r\n</section>{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -312,20 +312,7 @@ display:
       cache:
         type: none
         options: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: true
-          content:
-            value: "<section class=\"container-md bg-base-200 evening-prog-status program_pending\">\r\n<p>Evening program status has not been updated today TEST</p>\r\n"
-            format: full_html
-          tokenize: false
+      empty: {  }
       sorts:
         changed:
           id: changed
