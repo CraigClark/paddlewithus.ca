@@ -1,0 +1,8 @@
+settings:
+  allowed_values:
+    -
+      label: 'Les programmes de ce soir ont lieu'
+    -
+      label: 'Les programmes de ce soir sont annulés'
+    -
+      label: 'Décision à venir pour les programmes de ce soir. Revenez à 16 h 30'

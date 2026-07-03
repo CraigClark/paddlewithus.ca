@@ -1,0 +1,16 @@
+uuid: 5947c6bd-42a0-46a6-8c74-a5404d526605
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.evening_program_status
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: block_content.evening_program_status
+target_entity_type_id: block_content
+target_bundle: evening_program_status
+default_langcode: site_default
+language_alterable: false
