@@ -228,3 +228,11 @@ function picc_registration_update_10015() {
   _picc_registration_import_translations();
   return 'Re-imported translations from picc_registration/translations/*.po.';
 }
+
+/**
+ * Re-import module translations (adds the sale no-refund checkout notice).
+ */
+function picc_registration_update_10016() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}

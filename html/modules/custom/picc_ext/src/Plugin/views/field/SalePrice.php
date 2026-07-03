@@ -70,7 +70,7 @@ class SalePrice extends FieldPluginBase {
 
     return [
       '#type' => 'inline_template',
-      '#template' => '<span class="line-through opacity-70">{{ original }}</span> <span class="text-error font-semibold">{{ sale }}</span> {{ suffix }}<div class="text-sm mt-1"><span class="badge badge-error">{{ off }}</span>{% if label %} {{ label }}{% endif %}{% if ends %} · {{ ends }}{% endif %}</div>',
+      '#template' => '<span class="line-through opacity-70">{{ original }}</span> <span class="text-error font-semibold">{{ sale }}</span> {{ suffix }}<div class="text-sm mt-1"><span class="badge badge-error">{{ off }}</span>{% if label %} {{ label }}{% endif %}{% if ends %} · {{ ends }}{% endif %}</div><div class="text-xs opacity-70 mt-1">{{ no_refund }}</div>',
       '#context' => [
         'original' => '$' . number_format((float) $price->getNumber(), 2),
         'sale' => '$' . number_format($sale_number, 2),
@@ -78,6 +78,7 @@ class SalePrice extends FieldPluginBase {
         'off' => $this->t('@percent% off', ['@percent' => $sale['percent']]),
         'label' => $sale['label'],
         'ends' => $sale['ends_formatted'] ? $this->t('Sale ends @date', ['@date' => $sale['ends_formatted']]) : '',
+        'no_refund' => $this->t('Sessions registered at a sale price are non-refundable.'),
       ],
       '#cache' => [
         'tags' => $sale['term']->getCacheTags(),

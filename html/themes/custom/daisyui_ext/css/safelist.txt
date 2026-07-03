@@ -154,6 +154,7 @@ md:hidden
 md:inline
 mt-1
 text-sm
+text-xs
 opacity-70
 
 block

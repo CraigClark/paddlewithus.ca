@@ -2,6 +2,7 @@
 
 namespace Drupal\picc_discount;
 
+use Drupal\commerce_order\Entity\OrderInterface;
 use Drupal\commerce_product\Entity\ProductInterface;
 use Drupal\commerce_product\Entity\ProductVariationInterface;
 use Drupal\Component\Datetime\TimeInterface;
@@ -226,6 +227,22 @@ class SaleManager {
       }
     }
     return array_values($product_ids);
+  }
+
+  /**
+   * Whether an order contains at least one session that is currently on sale.
+   *
+   * One definition shared by the Sale promotion's condition and the checkout
+   * non-refundable notice.
+   */
+  public function orderHasSaleItem(OrderInterface $order): bool {
+    foreach ($order->getItems() as $order_item) {
+      $variation = $order_item->getPurchasedEntity();
+      if ($variation && $this->getVariationSale($variation)) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
 }
