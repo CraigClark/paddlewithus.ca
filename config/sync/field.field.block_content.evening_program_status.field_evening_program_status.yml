@@ -1,0 +1,21 @@
+uuid: baa5c09a-fb93-4a84-a26a-0c04170d3767
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.evening_program_status
+    - field.storage.block_content.field_evening_program_status
+  module:
+    - options
+id: block_content.evening_program_status.field_evening_program_status
+field_name: field_evening_program_status
+entity_type: block_content
+bundle: evening_program_status
+label: 'Evening program status'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

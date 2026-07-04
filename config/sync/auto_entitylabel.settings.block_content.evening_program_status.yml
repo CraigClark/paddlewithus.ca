@@ -1,0 +1,10 @@
+status: 1
+pattern: 'Evening program status [block_content:changed:date:custom:Y-m-d H:i]'
+escape: false
+preserve_titles: false
+save: true
+chunk: 50
+dependencies:
+  config:
+    - block_content.type.evening_program_status
+new_content_behavior: 0

@@ -1,0 +1,29 @@
+uuid: 4632da66-7056-437c-bfff-9a52bf876046
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.evening_program_status
+    - field.field.block_content.evening_program_status.field_evening_program_status
+id: block_content.evening_program_status.default
+targetEntityType: block_content
+bundle: evening_program_status
+mode: default
+content:
+  field_evening_program_status:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  revision_log: true

@@ -8,4 +8,10 @@
   RewriteEngine On
   RewriteCond %{HTTP_COOKIE} (SESS[a-f0-9]{32}|SSESS[a-f0-9]{32}|NO_CACHE) [NC]
   RewriteRule .* - [E=Cache-Control:no-cache]
+
+  # The evening-status banner renders only on the front page (the language
+  # roots /en and /fr on this site). Keep that page out of LSCache so the
+  # banner is always current; every other page stays fully cached.
+  RewriteCond %{REQUEST_URI} ^/(en|fr)/?$ [NC]
+  RewriteRule .* - [E=Cache-Control:no-cache]
 </IfModule>
