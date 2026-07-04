@@ -7,6 +7,8 @@ use Drupal\Core\Url;
 use Drupal\commerce_product\Entity\ProductInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
 
 /**
  * Implements hook_page_attachments().
@@ -601,4 +603,39 @@ function _picc_ext_event_image_url(ProductInterface $product): string {
         return '';
     }
     return $style->buildUrl($file->getFileUri());
+}
+
+/**
+ * Implements hook_views_post_render().
+ *
+ * Caps the evening program status banner's cache at the next local midnight.
+ *
+ * The banner decides "has the status been updated today?" at render time, so a
+ * page-cached copy served to anonymous visitors would otherwise never re-run
+ * that check after the midnight rollover — it stays frozen until an editor
+ * saves the block or the cache is cleared. Enforcing the max-age here, in code,
+ * rather than only through the view's cache config, guarantees the front page
+ * can never be cached past midnight even if that config is missing or not yet
+ * imported on a given environment. The view keeps `cache: none` as a safe
+ * fallback: if this hook is ever removed the page becomes uncacheable (still
+ * correct), never permanently cached again.
+ */
+function picc_ext_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
+    if ($view->id() === 'evening_program_status') {
+        $output['#cache']['max-age'] = _picc_ext_seconds_until_midnight();
+    }
+}
+
+/**
+ * Seconds from the current request until the next local midnight (minimum 1).
+ *
+ * Uses the site default timezone (America/Toronto), matching the banner's own
+ * "today" comparison, so the cache expires exactly at the local rollover.
+ */
+function _picc_ext_seconds_until_midnight(): int {
+    $tz_name = \Drupal::config('system.date')->get('timezone.default') ?: date_default_timezone_get();
+    $tz = new \DateTimeZone($tz_name);
+    $now = (new \DateTimeImmutable('@' . \Drupal::time()->getRequestTime()))->setTimezone($tz);
+    $midnight = $now->modify('tomorrow')->setTime(0, 0, 0);
+    return max(1, $midnight->getTimestamp() - $now->getTimestamp());
 }
