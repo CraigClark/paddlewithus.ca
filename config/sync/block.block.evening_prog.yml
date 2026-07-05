@@ -2,10 +2,8 @@ uuid: 90a2673e-8215-4eae-9625-5b6c118eac1d
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.evening_program_status
   module:
-    - views
+    - picc_ext
   theme:
     - daisyui_ext
 id: evening_prog
@@ -13,14 +11,12 @@ theme: daisyui_ext
 region: highlighted
 weight: 0
 provider: null
-plugin: 'views_block:evening_program_status-evening_program_status'
+plugin: picc_evening_status_banner
 settings:
-  id: 'views_block:evening_program_status-evening_program_status'
-  label: ''
+  id: picc_evening_status_banner
+  label: 'Evening program status'
   label_display: '0'
-  provider: views
-  views_label: ''
-  items_per_page: null
+  provider: picc_ext
 visibility:
   request_path:
     id: request_path

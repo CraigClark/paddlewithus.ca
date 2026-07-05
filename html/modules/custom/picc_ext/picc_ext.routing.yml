@@ -1,0 +1,10 @@
+picc_ext.evening_status:
+  path: '/evening-status'
+  defaults:
+    _controller: 'Drupal\picc_ext\Controller\EveningStatusController::fragment'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
+  options:
+    _admin_route: FALSE
+    no_cache: FALSE

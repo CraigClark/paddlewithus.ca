@@ -14,6 +14,36 @@
  * it reads as a button and stays legible on every background.
  */
 @layer components {
+  /* Placeholder the JS injects the banner into. Reserve vertical space so the
+     page doesn't shift when the fetched fragment lands, and fade it in. The
+     banner supplies its own margins, so the reserved height roughly matches a
+     rendered notice plus its margin-block. */
+  .evening-prog-mount {
+    min-height: 8.5rem;
+  }
+
+  .evening-prog-mount.is-loaded .evening-prog-status {
+    animation: evening-prog-fade-in 0.3s ease-out both;
+  }
+
+  @keyframes evening-prog-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .evening-prog-mount.is-loaded .evening-prog-status {
+      animation: none;
+    }
+  }
+
   .evening-prog-status {
     --notice-bg: var(--color-base-200);
     --notice-fg: var(--color-base-content);

@@ -1,0 +1,7 @@
+evening_status:
+  version: 1.x
+  js:
+    js/evening-status.js: { minified: false }
+  dependencies:
+    - core/drupal
+    - core/once
