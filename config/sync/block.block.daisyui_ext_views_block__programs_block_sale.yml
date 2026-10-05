@@ -6,6 +6,7 @@ dependencies:
     - views.view.programs
   module:
     - system
+    - ui_styles
     - views
   theme:
     - daisyui_ext
