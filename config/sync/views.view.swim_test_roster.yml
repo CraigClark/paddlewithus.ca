@@ -588,7 +588,7 @@ display:
         type: normal
         title: 'Swim test roster'
         description: 'Evaluate swim test participants'
-        weight: -48
+        weight: -49
         expanded: false
         menu_name: main
         parent: 'views_view:views.registration.page_1'

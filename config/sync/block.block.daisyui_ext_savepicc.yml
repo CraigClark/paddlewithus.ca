@@ -1,0 +1,28 @@
+uuid: 805f8abe-8f45-475a-927c-5963c5259bbd
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:31b7a833-070b-4934-a387-229ca2b8b58e'
+  module:
+    - block_content
+    - system
+  theme:
+    - daisyui_ext
+id: daisyui_ext_savepicc
+theme: daisyui_ext
+region: highlighted
+weight: 0
+provider: null
+plugin: 'block_content:31b7a833-070b-4934-a387-229ca2b8b58e'
+settings:
+  id: 'block_content:31b7a833-070b-4934-a387-229ca2b8b58e'
+  label: 'Save PICC'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/save-the-club\r\n/sauvons-le-club\r\n/write-your-councillor\r\n/ecrivez-votre-conseillere-ou-conseiller\r\n/cart\r\n/checkout/*"

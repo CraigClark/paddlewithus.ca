@@ -1,0 +1,28 @@
+uuid: 6eb01869-7ecc-4538-b705-2f547eb5269c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:9a362218-7664-4973-96c4-ed2d5c4cf8d9'
+  module:
+    - block_content
+    - system
+  theme:
+    - daisyui_ext
+id: daisyui_ext_winterprogramguaranteeen
+theme: daisyui_ext
+region: highlighted
+weight: 0
+provider: null
+plugin: 'block_content:9a362218-7664-4973-96c4-ed2d5c4cf8d9'
+settings:
+  id: 'block_content:9a362218-7664-4973-96c4-ed2d5c4cf8d9'
+  label: 'winter program guarantee en'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/program\r\n/program/winter-sprint-canoe-kayak\r\n/program/canoe-kayak-de-vitesse-hiver\r\n/program/masters-winter-fitness-program\r\n/program/programme-de-conditionnement-physique-hivernal-des-maitres\r\n/cart\r\n/checkout/*"

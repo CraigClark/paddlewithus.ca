@@ -8,9 +8,9 @@ definitions:
     expanded: false
     enabled: false
   user__page:
+    weight: -45
     menu_name: main
     parent: ''
-    weight: -44
     expanded: true
     enabled: true
   user__logout:
