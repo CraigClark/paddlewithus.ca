@@ -7,7 +7,7 @@ label: 'Commerce Product'
 tags:
   title: '[commerce_product:title] | [site:name]'
   description: '[commerce_product:body:summary]'
-  canonical_url: '[commerce_product:url]'
+  canonical_url: '[commerce_product:url:absolute]'
   og_title: '[commerce_product:title]'
   og_description: '[commerce_product:body:summary]'
   og_type: website

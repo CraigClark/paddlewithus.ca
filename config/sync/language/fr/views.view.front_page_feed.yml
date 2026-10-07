@@ -3,7 +3,7 @@ display:
   default:
     display_title: 'Par défaut'
     display_options:
-      title: "Flux de la page d'accueil"
+      title: Accueil
       fields:
         title:
           separator: ', '

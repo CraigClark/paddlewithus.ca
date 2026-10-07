@@ -12,7 +12,7 @@ tags:
   title: '[current-page:title] | [site:name]'
   description: '[site:slogan]'
   image_src: 'https://petriecanoe.ca/themes/custom/daisyui_ext/images/picc-default.jpg'
-  og_site_name: 'Petrie Island Canoe Club'
+  og_site_name: '[site:name]'
   og_title: '[current-page:title]'
   og_description: '[site:slogan]'
   og_type: website

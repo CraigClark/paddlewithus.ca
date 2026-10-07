@@ -383,6 +383,23 @@ function picc_ext_metatags_alter(array &$metatags, array &$context): void {
         return;
     }
 
+    // On view pages metatag resolves tokens in the view config's language
+    // (en), so URL tokens point to the English page from the French one.
+    // Url builds in the current page's language, so set the URLs here.
+    if ($entity->getEntityTypeId() === 'view') {
+        $route = \Drupal::service('path.matcher')->isFrontPage() ? '<front>' : '<current>';
+        $url = Url::fromRoute($route, [], ['absolute' => TRUE])->toString();
+        foreach (['canonical_url', 'shortlink', 'og_url'] as $tag) {
+            if (array_key_exists($tag, $metatags)) {
+                $metatags[$tag] = $url;
+            }
+        }
+        if (array_key_exists('schema_organization_url', $metatags)) {
+            $metatags['schema_organization_url'] = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+        }
+        return;
+    }
+
     $field_name = match ($entity->getEntityTypeId()) {
         // Stories use a dedicated promo image for social sharing; other node
         // bundles (e.g. page) keep using the primary image.
