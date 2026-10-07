@@ -15,8 +15,22 @@
 6. Verify: redirected to `/cart` with a status message.
 7. Check cart shows an order item per participant, priced correctly, with family discount applied (if applicable).
 8. Check billing address is pre-filled from profile.
-9. Complete Stripe checkout (use Stripe test cards in dev).
+9. Complete Stripe checkout (use Stripe test cards in dev, see below).
 10. Verify: order state = Completed, emails sent.
+
+#### Stripe test cards
+
+These work with any test-mode keys. Use any future expiry date (like 12/34), any 3-digit CVC and any valid postal code.
+
+| Card number | Result |
+| --- | --- |
+| `4242 4242 4242 4242` | Payment succeeds |
+| `4000 0000 0000 0002` | Card is declined |
+| `4000 0025 0000 3155` | Triggers the 3D Secure prompt |
+
+The full list is at https://docs.stripe.com/testing.
+
+Before you test on a database pulled from prod, run `ddev drush cim` and disable the `stripe_live` gateway. The dump arrives with `stripe_live` on and `stripe_test` off, and `stripe_live` is in `config_ignore` so `cim` doesn't touch it.
 
 ### Age validation
 
