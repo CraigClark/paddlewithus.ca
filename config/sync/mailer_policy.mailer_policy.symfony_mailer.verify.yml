@@ -1,7 +1,9 @@
 uuid: adb564b9-08d2-4b35-aab8-aaa3cf3957f4
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - symfony_mailer
 id: symfony_mailer.verify
 configuration:
   email_body:
