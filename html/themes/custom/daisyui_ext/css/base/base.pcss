@@ -469,3 +469,10 @@ body:has(.ui-dialog:not(.ui-dialog-off-canvas)) {
 .align-left {
   margin: 0 1.5rem .75rem 0;
 }
+
+/* embedded video fills its container and keeps a 16:9 shape */
+.media-oembed-content {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
