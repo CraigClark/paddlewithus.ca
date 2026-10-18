@@ -72,7 +72,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>The Save the club campaign is over. We''re no longer collecting video consent.</p>'
+  form_close_message: "<p>The Save the club campaign is over. We're no longer collecting video consent.</p>"
   form_exception_message: ''
   form_previous_submissions: false
   form_confidential: false
