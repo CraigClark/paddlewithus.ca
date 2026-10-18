@@ -1,22 +1,22 @@
 uuid: 634202b6-ec40-434e-a1eb-11bb668dfe06
 langcode: en
-status: open
+status: scheduled
 dependencies: {  }
 weight: 0
 open: null
-close: null
+close: '2026-12-31T23:59:00'
 uid: 1
 template: false
 archive: false
 id: video_consent
-title: 'Video consent'
+title: 'Video consent for the Save the club campaign'
 description: 'Parent consent for athlete videos filmed for the Save the club campaign.'
 categories:
   - Registration
 elements: |-
   intro:
     '#type': webform_markup
-    '#markup': '<p>We''re filming athletes for short videos to help save the club. Each athlete tells a story about what Petrie means to them. Each video is about 30 seconds.</p><p>The videos will be shared on the club''s website, social media and fundraising page.</p>'
+    '#markup': '<p>This consent is only for the Save the club fundraising campaign, from September to December 2026. It doesn''t change the photo consent on your athlete''s profile.</p><p>We''re filming athletes for short videos to help save the club. Each athlete tells a story about what Petrie means to them. Each video is about 30 seconds.</p><p>The videos will be shared on the club''s website, social media and fundraising page. They may stay up after December 2026, but we won''t film anything new under this consent.</p>'
   participants:
     '#type': webform_entity_checkboxes
     '#title': 'Which athletes are you giving consent for?'
@@ -27,14 +27,14 @@ elements: |-
     '#selection_settings':
       view:
         view_name: participants
-        display_name: er_participants
+        display_name: er_video_consent
         arguments: {  }
   manage_participants:
     '#type': webform_markup
     '#markup': '<p><a class="btn btn-sm mb-3" href="/user/[current-user:uid]/participant/add?destination=/form/video-consent">Add a family member</a> <a class="btn btn-sm mb-3" href="/user/[current-user:uid]/participant/list">Edit your list of family members</a></p>'
   consent_video:
     '#type': checkbox
-    '#title': 'I consent to the club filming the athletes selected above and sharing the videos on the club''s website, social media and fundraising page.'
+    '#title': 'I consent to the club filming the athletes selected above for the Save the club fundraising campaign (September to December 2026) and sharing the videos on the club''s website, social media and fundraising page.'
     '#required': true
   consent_first_name:
     '#type': checkbox
@@ -72,7 +72,7 @@ settings:
   form_title: source_entity_webform
   form_submit_once: false
   form_open_message: ''
-  form_close_message: '<p>Video consent is not available at this time.</p>'
+  form_close_message: '<p>The Save the club campaign is over. We''re no longer collecting video consent.</p>'
   form_exception_message: ''
   form_previous_submissions: false
   form_confidential: false
