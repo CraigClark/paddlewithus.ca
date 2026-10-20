@@ -1,13 +1,16 @@
 /**
  * Semantic Padding utility classes
  *
- * This file contains utility classes for applying vertical padding to elements.
- * These classes are particularly useful for managing vertical padding within
- * boxes or container elements in your layout.
+ * This file contains utility classes for applying vertical and horizontal
+ * padding to elements. These classes are particularly useful for managing
+ * padding within boxes or container elements in your layout.
  *
  * Class Naming Convention:
  * - .pt-{size}: Applies top padding of the specified size.
  * - .pb-{size}: Applies bottom padding of the specified size.
+ * - .ps-{size}: Applies inline-start padding (left in LTR) of the specified size.
+ * - .pe-{size}: Applies inline-end padding (right in LTR) of the specified size.
+ * - .px-{size}: Applies left and right padding of the specified size.
  * - Sizes are defined as sm, md, lg, etc., corresponding to different padding values.
  *
  * Extending or change this classes based on your needs.
@@ -69,3 +72,86 @@
   @apply pt-md;
 }
 
+@utility ps-xs {
+  @apply ps-2 lg:ps-4;
+}
+
+@utility ps-sm {
+  @apply ps-4 lg:ps-8;
+}
+
+@utility ps-md {
+  @apply ps-6 lg:ps-12;
+}
+
+@utility ps-lg {
+  @apply ps-8 lg:ps-16;
+}
+
+@utility ps-xl {
+  @apply ps-16 lg:ps-28;
+}
+
+@utility ps-2xl {
+  @apply ps-20 lg:ps-32;
+}
+
+@utility ps-auto {
+  @apply ps-md;
+}
+
+@utility pe-xs {
+  @apply pe-2 lg:pe-4;
+}
+
+@utility pe-sm {
+  @apply pe-4 lg:pe-8;
+}
+
+@utility pe-md {
+  @apply pe-6 lg:pe-12;
+}
+
+@utility pe-lg {
+  @apply pe-8 lg:pe-16;
+}
+
+@utility pe-xl {
+  @apply pe-16 lg:pe-28;
+}
+
+@utility pe-2xl {
+  @apply pe-20 lg:pe-32;
+}
+
+@utility pe-auto {
+  @apply pe-md;
+}
+
+@utility px-xs {
+  @apply px-2 lg:px-4;
+}
+
+@utility px-sm {
+  @apply px-4 lg:px-8;
+}
+
+@utility px-md {
+  @apply px-6 lg:px-12;
+}
+
+@utility px-lg {
+  @apply px-8 lg:px-16;
+}
+
+@utility px-xl {
+  @apply px-16 lg:px-28;
+}
+
+@utility px-2xl {
+  @apply px-20 lg:px-32;
+}
+
+@utility px-auto {
+  @apply px-md;
+}

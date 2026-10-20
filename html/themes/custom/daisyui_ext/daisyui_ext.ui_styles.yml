@@ -146,6 +146,51 @@ padding_bottom:
     pb-sm: Small
     pb-xs: Extra small
 
+padding_start:
+  category: "Spacing"
+  label: "Padding start"
+  description: "Utilities for controlling an element's padding start (left)."
+  links:
+    - "https://tailwindcss.com/docs/padding"
+  options:
+    ps-auto: Auto
+    ps-2xl: "2Xlarge"
+    ps-xl: "Xlarge"
+    ps-lg: Large
+    ps-md: Medium
+    ps-sm: Small
+    ps-xs: Extra small
+
+padding_end:
+  category: "Spacing"
+  label: "Padding end"
+  description: "Utilities for controlling an element's padding end (right)."
+  links:
+    - "https://tailwindcss.com/docs/padding"
+  options:
+    pe-auto: Auto
+    pe-2xl: "2Xlarge"
+    pe-xl: "Xlarge"
+    pe-lg: Large
+    pe-md: Medium
+    pe-sm: Small
+    pe-xs: Extra small
+
+padding_x:
+  category: "Spacing"
+  label: "Padding left and right"
+  description: "Utilities for controlling an element's padding left and right."
+  links:
+    - "https://tailwindcss.com/docs/padding"
+  options:
+    px-auto: Auto
+    px-2xl: "2Xlarge"
+    px-xl: "Xlarge"
+    px-lg: Large
+    px-md: Medium
+    px-sm: Small
+    px-xs: Extra small
+
 margin_bottom:
   category: "Spacing"
   label: "Margin bottom"
