@@ -1,0 +1,38 @@
+uuid: d2caf20b-062c-4690-bd71-9b315e571beb
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c437b545-49c4-4c9e-af3c-0171746f91fe'
+  module:
+    - block_content
+    - system
+    - ui_styles
+  theme:
+    - daisyui_ext
+third_party_settings:
+  ui_styles:
+    block:
+      selected:
+        colors_background_color: bg-base-200
+        effects_box_shadow: shadow-sm
+        layout_container: container-md
+        layout_grid: grid-1
+        padding_top: pt-md
+id: daisyui_ext_thankyou
+theme: daisyui_ext
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:c437b545-49c4-4c9e-af3c-0171746f91fe'
+settings:
+  id: 'block_content:c437b545-49c4-4c9e-af3c-0171746f91fe'
+  label: 'Thank you'
+  label_display: visible
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "<front>\r\n/en/save-the-club\r\n/fr/sauvons-le-club\r\n/en/story/ask-5-people\r\n/fr/histoires/demandez-5-personnes-daider-sauver-notre-club"
