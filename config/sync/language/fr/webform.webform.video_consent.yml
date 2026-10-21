@@ -1,21 +1,29 @@
 title: 'Consentement vidéo pour la campagne Sauvons le club'
-description: "Consentement des parents pour les vidéos d'athlètes filmées pour la campagne Sauvons le club."
+description: 'Consentement pour les vidéos filmées pour la campagne Sauvons le club.'
 elements: |
   intro:
-    '#markup': '<p>Ce consentement s''applique seulement à la campagne de financement Sauvons le club, de septembre à décembre 2026. Il ne modifie pas le consentement photo inscrit au profil de votre athlète.</p><p>Nous filmons des athlètes pour de courtes vidéos afin d''aider à sauver le club. Chaque athlète raconte ce que Petrie représente pour lui. Chaque vidéo dure environ 30 secondes.</p><p>Les vidéos seront publiées sur le site Web du club, ses médias sociaux et sa page de collecte de fonds. Elles pourraient rester en ligne après décembre 2026, mais nous ne filmerons rien de nouveau en vertu de ce consentement.</p>'
+    '#markup': '<p>Ce consentement s''applique seulement à la campagne de financement Sauvons le club, de septembre à décembre 2026.</p><p>Nous filmons de courtes vidéos afin d''aider à sauver le club. Chaque personne raconte ce que Petrie représente pour elle. Chaque vidéo dure environ 30 secondes.</p><p>Les vidéos seront publiées sur le site Web du club, ses médias sociaux et sa page de collecte de fonds. Elles pourraient rester en ligne après décembre 2026, mais nous ne filmerons rien de nouveau en vertu de ce consentement.</p><p>Vous pouvez nommer jusqu''à 3 personnes dans ce formulaire. Pour d''autres personnes, remplissez le formulaire de nouveau.</p>'
   participants:
     '#title': 'Pour quels athlètes donnez-vous votre consentement?'
-    '#description': 'Sélectionnez chaque athlète qui peut être filmé.'
-  manage_participants:
-    '#markup': '<p><a class="btn btn-sm mb-3" href="/fr/user/[current-user:uid]/participant/add?destination=/fr/form/video-consent">Ajouter un membre de la famille</a> <a class="btn btn-sm mb-3" href="/fr/user/[current-user:uid]/participant/list">Modifier votre liste de membres de la famille</a></p>'
+    '#description': 'Utilisé par la première version de ce formulaire. Conservé pour que les consentements précédents affichent toujours les athlètes choisis.'
+  person_1:
+    '#title': 'Nom de la personne filmée'
+  person_2:
+    '#title': 'Nom de la deuxième personne filmée'
+  person_3:
+    '#title': 'Nom de la troisième personne filmée'
   consent_video:
-    '#title': 'Je consens à ce que le club filme les athlètes sélectionnés ci-dessus pour la campagne de financement Sauvons le club (de septembre à décembre 2026) et publie les vidéos sur son site Web, ses médias sociaux et sa page de collecte de fonds.'
+    '#title': 'Je consens à ce que le club filme les personnes nommées ci-dessus pour la campagne de financement Sauvons le club (de septembre à décembre 2026) et publie les vidéos sur son site Web, ses médias sociaux et sa page de collecte de fonds.'
   consent_first_name:
     '#title': 'Le club peut afficher leur prénom dans la vidéo.'
   guardian:
-    '#title': 'Je suis le parent ou le tuteur légal des athlètes sélectionnés ci-dessus.'
+    '#title': 'Pour chaque personne nommée ci-dessus, je suis cette personne ou son parent ou tuteur légal.'
   guardian_name:
     '#title': 'Votre nom complet'
+    '#description': 'La personne qui donne son consentement.'
+  consenter_email:
+    '#title': 'Votre courriel'
+    '#description': 'Nous vous enverrons une copie de ce consentement par courriel.'
   withdraw:
     '#markup': '<p>Pour retirer votre consentement, écrivez à <a href="mailto:petriecanoe@gmail.com">petriecanoe@gmail.com</a>. Nous retirerons les vidéos du site Web et des médias sociaux du club.</p>'
   actions:
@@ -23,6 +31,11 @@ elements: |
     '#submit__label': 'Donner mon consentement'
 settings:
   form_close_message: '<p>La campagne Sauvons le club est terminée. Nous ne recueillons plus de consentement vidéo.</p>'
-  form_access_denied_message: '<p>Connectez-vous ou créez un compte pour donner votre consentement vidéo.</p>'
   confirmation_title: 'Consentement enregistré'
-  confirmation_message: '<p>Merci. Votre consentement vidéo a été enregistré.</p>'
+  confirmation_message: '<p>Merci. Votre consentement vidéo a été enregistré. Nous vous en avons envoyé une copie par courriel.</p>'
+handlers:
+  email_consent_copy:
+    label: 'Copie du consentement à la personne et au club'
+    settings:
+      subject: 'Votre consentement vidéo pour la campagne Sauvons le club'
+      body: '<div style="color:#333333;font-family:Arial, sans-serif;font-size:14px;max-width:600px;"><p>Bonjour {{ data.guardian_name }},</p><p>Merci. Voici votre copie du consentement vidéo que vous avez donné au Club de canot de l''île Petrie le {{ webform_submission.created.value|format_date(''custom'', ''j F Y'', null, ''fr'') }}.</p><p><strong>Personnes qui peuvent être filmées</strong></p><ul>{% for key in [''person_1'', ''person_2'', ''person_3''] %}{% if data[key] %}<li>{{ data[key] }}</li>{% endif %}{% endfor %}</ul><p><strong>Ce que vous avez accepté</strong></p><p>Le club peut filmer les personnes nommées ci-dessus pour la campagne de financement Sauvons le club (de septembre à décembre 2026) et publier les vidéos sur son site Web, ses médias sociaux et sa page de collecte de fonds. Les vidéos pourraient rester en ligne après décembre 2026, mais nous ne filmerons rien de nouveau en vertu de ce consentement.</p><p>{% if data.consent_first_name %}Le club peut afficher leur prénom dans la vidéo.{% else %}Le club n''affichera pas leur prénom dans la vidéo.{% endif %}</p><p>Vous avez confirmé que, pour chaque personne nommée, vous êtes cette personne ou son parent ou tuteur légal.</p><p>Pour retirer votre consentement, écrivez à <a href="mailto:petriecanoe@gmail.com">petriecanoe@gmail.com</a>. Nous retirerons les vidéos du site Web et des médias sociaux du club.</p><p>Club de canot de l''île Petrie</p></div>'

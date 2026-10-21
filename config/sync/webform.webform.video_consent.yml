@@ -10,18 +10,17 @@ template: false
 archive: false
 id: video_consent
 title: 'Video consent for the Save the club campaign'
-description: 'Parent consent for athlete videos filmed for the Save the club campaign.'
+description: 'Consent for videos filmed for the Save the club campaign.'
 categories:
   - Registration
 elements: |-
   intro:
     '#type': webform_markup
-    '#markup': '<p>This consent is only for the Save the club fundraising campaign, from September to December 2026. It doesn''t change the photo consent on your athlete''s profile.</p><p>We''re filming athletes for short videos to help save the club. Each athlete tells a story about what Petrie means to them. Each video is about 30 seconds.</p><p>The videos will be shared on the club''s website, social media and fundraising page. They may stay up after December 2026, but we won''t film anything new under this consent.</p>'
+    '#markup': '<p>This consent is only for the Save the club fundraising campaign, from September to December 2026.</p><p>We''re filming short videos to help save the club. Each person tells a story about what Petrie means to them. Each video is about 30 seconds.</p><p>The videos will be shared on the club''s website, social media and fundraising page. They may stay up after December 2026, but we won''t film anything new under this consent.</p><p>You can name up to 3 people on this form. For more people, fill in the form again.</p>'
   participants:
     '#type': webform_entity_checkboxes
     '#title': 'Which athletes are you giving consent for?'
-    '#description': 'Select each athlete who may be filmed.'
-    '#required': true
+    '#description': 'Used by the first version of this form. Kept so earlier consents still show the athletes chosen.'
     '#target_type': profile
     '#selection_handler': views
     '#selection_settings':
@@ -29,23 +28,38 @@ elements: |-
         view_name: participants
         display_name: er_video_consent
         arguments: {  }
-  manage_participants:
-    '#type': webform_markup
-    '#markup': '<p><a class="btn btn-sm mb-3" href="/user/[current-user:uid]/participant/add?destination=/form/video-consent">Add a family member</a> <a class="btn btn-sm mb-3" href="/user/[current-user:uid]/participant/list">Edit your list of family members</a></p>'
+    '#access_create_roles': {  }
+    '#access_update_roles': {  }
+  person_1:
+    '#type': textfield
+    '#title': 'Name of person being filmed'
+    '#required': true
+  person_2:
+    '#type': textfield
+    '#title': 'Name of second person being filmed'
+  person_3:
+    '#type': textfield
+    '#title': 'Name of third person being filmed'
   consent_video:
     '#type': checkbox
-    '#title': 'I consent to the club filming the athletes selected above for the Save the club fundraising campaign (September to December 2026) and sharing the videos on the club''s website, social media and fundraising page.'
+    '#title': 'I consent to the club filming the people named above for the Save the club fundraising campaign (September to December 2026) and sharing the videos on the club''s website, social media and fundraising page.'
     '#required': true
   consent_first_name:
     '#type': checkbox
-    '#title': 'The club may show their first name in the video.'
+    '#title': 'The club may show their first names in the video.'
   guardian:
     '#type': checkbox
-    '#title': 'I am the parent or legal guardian of the athletes selected above.'
+    '#title': 'For each person named above, I am that person or their parent or legal guardian.'
     '#required': true
   guardian_name:
     '#type': textfield
     '#title': 'Your full name'
+    '#description': 'The person giving consent.'
+    '#required': true
+  consenter_email:
+    '#type': email
+    '#title': 'Your email'
+    '#description': 'We''ll email you a copy of this consent.'
     '#required': true
   withdraw:
     '#type': webform_markup
@@ -93,9 +107,9 @@ settings:
   form_autofocus: false
   form_details_toggle: false
   form_reset: false
-  form_access_denied: login
+  form_access_denied: default
   form_access_denied_title: ''
-  form_access_denied_message: '<p>Log in or create an account to give video consent.</p>'
+  form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
   form_file_limit_message: ''
@@ -165,7 +179,7 @@ settings:
   confirmation_type: inline
   confirmation_url: ''
   confirmation_title: 'Consent recorded'
-  confirmation_message: '<p>Thank you. Your video consent has been recorded.</p>'
+  confirmation_message: "<p>Thank you. Your video consent has been recorded. We've emailed you a copy.</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -197,6 +211,7 @@ settings:
 access:
   create:
     roles:
+      - anonymous
       - authenticated
     users: {  }
     permissions: {  }
@@ -243,5 +258,43 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email_consent_copy:
+    id: email
+    handler_id: email_consent_copy
+    label: 'Copy of consent to the person and the club'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:consenter_email:raw]'
+      to_options: {  }
+      bcc_mail: petriecanoe@gmail.com
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[site:mail]'
+      from_options: {  }
+      from_name: '[site:name]'
+      reply_to: petriecanoe@gmail.com
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Your video consent for the Save the club campaign'
+      body: "<div style=\"color:#333333;font-family:Arial, sans-serif;font-size:14px;max-width:600px;\"><p>Hi {{ data.guardian_name }},</p><p>Thank you. This is your copy of the video consent you gave Petrie Island Canoe Club on {{ webform_submission.created.value|format_date('custom', 'F j, Y') }}.</p><p><strong>People who may be filmed</strong></p><ul>{% for key in ['person_1', 'person_2', 'person_3'] %}{% if data[key] %}<li>{{ data[key] }}</li>{% endif %}{% endfor %}</ul><p><strong>What you agreed to</strong></p><p>The club may film the people listed above for the Save the club fundraising campaign (September to December 2026) and share the videos on the club's website, social media and fundraising page. The videos may stay up after December 2026, but we won't film anything new under this consent.</p><p>{% if data.consent_first_name %}The club may show their first names in the video.{% else %}The club won't show their first names in the video.{% endif %}</p><p>You confirmed that, for each person listed, you are that person or their parent or legal guardian.</p><p>To withdraw your consent, email <a href=\"mailto:petriecanoe@gmail.com\">petriecanoe@gmail.com</a>. We'll remove the videos from the club's website and social media.</p><p>Petrie Island Canoe Club</p></div>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: true
+      theme_name: ''
+      langcode: ''
+      parameters: {  }
+      debug: false
 variants: {  }
