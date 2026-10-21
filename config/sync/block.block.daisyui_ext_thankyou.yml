@@ -15,10 +15,12 @@ third_party_settings:
     block:
       selected:
         colors_background_color: bg-base-200
-        effects_box_shadow: shadow-sm
+        effects_box_shadow: shadow-md
         layout_container: container-md
         layout_grid: grid-1
+        padding_bottom: pb-md
         padding_top: pt-md
+      extra: px-md
 id: daisyui_ext_thankyou
 theme: daisyui_ext
 region: content
