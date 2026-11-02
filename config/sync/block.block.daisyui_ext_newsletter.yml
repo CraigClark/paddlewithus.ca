@@ -1,0 +1,33 @@
+uuid: 15716757-63e8-4483-9ca4-42e942686bb4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:7b80dbbc-d0aa-4d22-bccb-e73d48c8cbc8'
+  module:
+    - block_content
+    - system
+  theme:
+    - daisyui_ext
+third_party_settings:
+  ui_styles:
+    block:
+      selected:
+        margin_top: mt-md
+id: daisyui_ext_newsletter
+theme: daisyui_ext
+region: highlighted
+weight: 0
+provider: null
+plugin: 'block_content:7b80dbbc-d0aa-4d22-bccb-e73d48c8cbc8'
+settings:
+  id: 'block_content:7b80dbbc-d0aa-4d22-bccb-e73d48c8cbc8'
+  label: Newsletter
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /node/156
