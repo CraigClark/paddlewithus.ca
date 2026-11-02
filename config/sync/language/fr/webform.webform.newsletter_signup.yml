@@ -1,0 +1,25 @@
+title: "Inscription à l'infolettre"
+description: 'Inscription aux nouvelles et mises à jour du club par courriel. Chaque soumission sert de preuve de consentement en vertu de la LCAP.'
+elements: |
+  email:
+    '#title': Courriel
+  first_name:
+    '#title': Prénom
+  preferred_language:
+    '#title': 'Langue de préférence'
+  interests:
+    '#title': 'Qu''est-ce qui vous intéresse?'
+    '#description': 'Facultatif. Cochez tout ce qui s''applique.'
+    '#options':
+      camps: Camps
+      volunteering: Bénévolat
+      fundraising_events: 'Collectes de fonds et événements'
+      club_news: 'Nouvelles du club'
+  consent:
+    '#title': 'Oui, j''accepte que le Club de canot de l''île Petrie m''envoie des nouvelles et des mises à jour sur le club par courriel. Vous pouvez joindre le club à petriecanoe@gmail.com. Vous pouvez vous désabonner en tout temps.'
+    '#required_error': 'Vous devez donner votre accord pour vous inscrire.'
+  actions:
+    '#title': 'Bouton(s) d''envoi'
+    '#submit__label': 'M''inscrire'
+settings:
+  confirmation_message: "<p>Merci de votre inscription. Nous vous enverrons des nouvelles et des mises à jour du Club de canot de l'île Petrie.</p>"
