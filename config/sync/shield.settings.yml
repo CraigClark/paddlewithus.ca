@@ -19,4 +19,3 @@ http_method_allowlist: {  }
 domains: ''
 user_agents: ''
 flood_control_enabled: true
-
