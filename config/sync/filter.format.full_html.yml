@@ -3,8 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.narrow
-    - core.entity_view_mode.media.wide
+    - core.entity_view_mode.media.responsive_image_full
+    - core.entity_view_mode.media.responsive_image_landscape
+    - core.entity_view_mode.media.responsive_image_medium
+    - core.entity_view_mode.media.responsive_image_portrait
+    - core.entity_view_mode.media.responsive_image_small
+    - core.entity_view_mode.media.responsive_image_square
+    - core.entity_view_mode.media.responsive_image_thumbnail
   module:
     - ck5_block_embed
     - editor
@@ -94,6 +99,7 @@ filters:
     weight: 100
     settings:
       allowed_icon_pack: {  }
+      wrapper: true
       result_format: list
       max_result: 24
   media_embed:
