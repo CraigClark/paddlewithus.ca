@@ -118,3 +118,28 @@ daisyui_ext_icon_pack:
         {% endif %}
         <use href="{{ source }}#{{ icon_id }}"/>
     </svg>
+
+# Turn off the Heroicons packs from the ui_suite_daisyui base theme. They
+# point at /libraries/heroicons, which this site doesn't install, so they
+# logged "Invalid icon path in source" warnings on every cache rebuild.
+# Same pack IDs here replace the base theme's definitions.
+hero_solid_16:
+  enabled: false
+  label: Hero solid 16
+  extractor: svg
+  template: ""
+hero_solid_20:
+  enabled: false
+  label: Hero solid 20
+  extractor: svg
+  template: ""
+hero_solid_24:
+  enabled: false
+  label: Hero solid 24
+  extractor: svg
+  template: ""
+hero_outline_24:
+  enabled: false
+  label: Hero outline 24
+  extractor: svg
+  template: ""
