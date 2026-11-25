@@ -72,6 +72,8 @@ The Generate form gets Reason and Note (shown for Complimentary) and its submit 
 
 Commerce managers have `administer commerce_giftcard` (the module's only permission that covers editing cards and adding transactions). That permission also allows deleting, so `picc_giftcard_commerce_giftcard_access()` forbids `delete` unless the user also has `delete gift cards` (defined in `picc_giftcard.permissions.yml`, not granted to any role, so only administrators have it). This covers the per-card delete form and the bulk delete form.
 
+To protect the audit trail, users without `delete gift cards` also can't update or delete gift card transactions (`picc_giftcard_commerce_giftcard_transaction_access()`), and on an existing card's edit form the balance and code are locked (`picc_giftcard_form_commerce_giftcard_form_alter()`). Balance changes go through Add transaction. Commerce managers can delete the gift card product (`delete any giftcard commerce_product`). Orders and cards bought from it remain.
+
 ## Routes
 
 | Path | Who | What |

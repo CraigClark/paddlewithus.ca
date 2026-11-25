@@ -67,6 +67,7 @@ permissions:
   - 'create terms in sale_type'
   - 'delete any activity commerce_product'
   - 'delete any commerce_promotion'
+  - 'delete any giftcard commerce_product'
   - 'delete term revisions in sale_type'
   - 'delete terms in sale_type'
   - 'duplicate any commerce_promotion'

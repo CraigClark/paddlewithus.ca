@@ -32,7 +32,7 @@ When an amount sells out, its button changes to "Out of stock". Add more with **
 
 Go to **Commerce > Gift cards**. You can search by code, owner or balance. Codes are stored without dashes, so search for `ABCDEFGHJKMN`, not `ABCD-EFGH-JKMN`.
 
-Commerce managers can create, edit, print and send cards, but not delete them. To take a card out of use, edit it and turn off **Enabled**. Only site admins can delete a card.
+Commerce managers can create, edit, print and send cards, but not delete them. To take a card out of use, edit it and turn off **Enabled**. On an existing card the code and balance are locked: change the balance with **Add transaction**, so every change is recorded. Transactions can't be changed or deleted. Only site admins can delete a card or edit those fields. Commerce managers can delete the Gift cards product itself. Orders and cards already sold stay.
 
 Each card's menu has:
 
@@ -43,9 +43,7 @@ Each card's menu has:
 
 ## Changing a balance
 
-Don't type a new number in the card's **Balance** field. That skips the transaction log.
-
-Use **Add transaction** instead:
+Use **Add transaction** to change a balance. The Balance field on the card is locked for commerce managers, because typing a new number there would skip the transaction log.
 
 - A program paid with a gift card was cancelled: add the amount back as a positive number. **Put the order number in the comment.** The site doesn't link it for you.
 - A correction: add or subtract the difference, with a comment saying why.

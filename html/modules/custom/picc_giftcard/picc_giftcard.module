@@ -659,3 +659,38 @@ function picc_giftcard_commerce_giftcard_access(EntityInterface $giftcard, strin
   return AccessResult::forbiddenIf(!$account->hasPermission('delete gift cards'), 'Deleting gift cards needs the "Delete gift cards" permission.')
     ->cachePerPermissions();
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_access() for commerce_giftcard_transaction.
+ *
+ * Transactions are the audit trail. Nobody without "delete gift cards" can
+ * change or delete one. Corrections are made with a new transaction.
+ */
+function picc_giftcard_commerce_giftcard_transaction_access(EntityInterface $transaction, string $operation, AccountInterface $account) {
+  if (!in_array($operation, ['update', 'delete'], TRUE)) {
+    return AccessResult::neutral();
+  }
+  return AccessResult::forbiddenIf(!$account->hasPermission('delete gift cards'), 'Gift card transactions can’t be changed. Add a new transaction instead.')
+    ->cachePerPermissions();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_giftcard edit forms.
+ *
+ * Typing a new balance on an existing card skips the transaction log. Lock
+ * it, so every change goes through "Add transaction" and is recorded.
+ * People with "delete gift cards" (site admins) can still edit it.
+ */
+function picc_giftcard_form_commerce_giftcard_form_alter(array &$form, FormStateInterface $form_state): void {
+  $card = $form_state->getFormObject()->getEntity();
+  if ($card->isNew() || !isset($form['balance']) || \Drupal::currentUser()->hasPermission('delete gift cards')) {
+    return;
+  }
+  $form['balance']['#disabled'] = TRUE;
+  $form['balance']['widget'][0]['#description'] = t('To change the balance, use Add transaction. That keeps a record of every change.');
+  if (isset($form['code'])) {
+    // Changing the code would break printed cards and the history people
+    // look up by code.
+    $form['code']['#disabled'] = TRUE;
+  }
+}
