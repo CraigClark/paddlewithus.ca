@@ -1,0 +1,30 @@
+uuid: 4a380362-702d-49e0-acc2-7cfebffd527a
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_giftcard
+    - options
+id: commerce_giftcard.field_complimentary_reason
+field_name: field_complimentary_reason
+entity_type: commerce_giftcard
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: raffle_prize
+      label: 'Raffle prize'
+    -
+      value: volunteer_thank_you
+      label: 'Volunteer thank-you'
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,14 @@
+uuid: 8acd1241-dd71-4122-ae73-8e9d8aec879b
+langcode: en
+status: true
+dependencies:
+  module:
+    - picc_giftcard
+third_party_settings:
+  picc_giftcard:
+    sellable: false
+id: complimentary
+label: Complimentary
+display_label: ''
+generate:
+  length: 12

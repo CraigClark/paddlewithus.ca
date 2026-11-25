@@ -21,3 +21,7 @@ For developers maintaining or extending the site.
 ## Icons
 
 - [Icon system](icons.md) — how Material Icons + custom SVGs are wired into menu pickers and content; how to add new icons
+
+## Gift cards
+
+- [Architecture, testing and deployment](giftcard-architecture.md): commerce_giftcard plus picc_giftcard, PDF card, safety checks, deploy steps

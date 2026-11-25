@@ -1,0 +1,21 @@
+uuid: 364235ee-ac52-4e03-b322-13c65cc5d837
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.giftcard
+    - field.storage.commerce_product_variation.field_capacity
+  module:
+    - commerce_stock_field
+id: commerce_product_variation.giftcard.field_capacity
+field_name: field_capacity
+entity_type: commerce_product_variation
+bundle: giftcard
+label: 'Number available'
+description: "Enter the number of cards to add or remove, not the total.\r\nExample: from 20 to 25, enter 5. Entering 25 would make it 45."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: commerce_stock_level

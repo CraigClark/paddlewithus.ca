@@ -1,0 +1,23 @@
+uuid: 9df38878-3182-421b-9519-4dad05eb8002
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.giftcard
+    - field.storage.commerce_product_variation.commerce_giftcard_amount
+  module:
+    - commerce_price
+id: commerce_product_variation.giftcard.commerce_giftcard_amount
+field_name: commerce_giftcard_amount
+entity_type: commerce_product_variation
+bundle: giftcard
+label: 'Gift card amount'
+description: 'If this field is left empty, the price of the product will be used as the gift card amount'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: null
+settings:
+  available_currencies: {  }
+  allow_negative: false
+field_type: commerce_price

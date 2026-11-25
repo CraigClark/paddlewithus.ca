@@ -1,0 +1,47 @@
+uuid: 5ab050ae-6fd7-4168-bf28-a506d0fce9c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.giftcard
+    - field.field.commerce_product.giftcard.body
+    - field.field.commerce_product.giftcard.field_primary_image
+  module:
+    - commerce_product
+    - text
+id: commerce_product.giftcard.default
+targetEntityType: commerce_product
+bundle: giftcard
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: -5
+    region: content
+  variations:
+    type: commerce_add_to_cart
+    label: hidden
+    settings:
+      combine: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+hidden:
+  created: true
+  field_primary_image: true
+  langcode: true
+  search_api_excerpt: true
+  stores: true
+  uid: true

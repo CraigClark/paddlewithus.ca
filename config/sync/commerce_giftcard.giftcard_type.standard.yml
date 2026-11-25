@@ -1,0 +1,14 @@
+uuid: 990fafb1-dc07-4f5e-a448-8da2d73860b1
+langcode: en
+status: true
+dependencies:
+  module:
+    - picc_giftcard
+third_party_settings:
+  picc_giftcard:
+    sellable: true
+id: standard
+label: Standard
+display_label: ''
+generate:
+  length: 12

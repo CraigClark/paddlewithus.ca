@@ -1,0 +1,23 @@
+uuid: b674b83f-a0fc-4436-8e69-2d03a560c532
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.giftcard
+    - commerce_product.commerce_product_variation_type.giftcard
+id: commerce_product.giftcard.variations
+field_name: variations
+entity_type: commerce_product
+bundle: giftcard
+label: Variations
+description: 'The product variations.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings:
+    target_bundles:
+      giftcard: giftcard
+field_type: entity_reference

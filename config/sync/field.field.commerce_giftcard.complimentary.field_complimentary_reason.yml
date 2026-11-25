@@ -1,0 +1,21 @@
+uuid: fc1babcb-1aaa-40ff-a51c-6a6e8b662f7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_giftcard.giftcard_type.complimentary
+    - field.storage.commerce_giftcard.field_complimentary_reason
+  module:
+    - options
+id: commerce_giftcard.complimentary.field_complimentary_reason
+field_name: field_complimentary_reason
+entity_type: commerce_giftcard
+bundle: complimentary
+label: Reason
+description: 'Why the club gave this card. Used in the bookkeeper report.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

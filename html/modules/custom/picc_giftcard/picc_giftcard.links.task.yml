@@ -1,0 +1,25 @@
+picc_giftcard.edit:
+  title: 'Edit'
+  route_name: entity.commerce_giftcard.edit_form
+  base_route: entity.commerce_giftcard.edit_form
+  weight: 0
+picc_giftcard.transactions:
+  title: 'Transactions'
+  route_name: entity.commerce_giftcard_transaction.giftcard_collection
+  base_route: entity.commerce_giftcard.edit_form
+  weight: 10
+picc_giftcard.print:
+  title: 'Print'
+  route_name: picc_giftcard.print
+  base_route: entity.commerce_giftcard.edit_form
+  weight: 20
+picc_giftcard.resend:
+  title: 'Send email'
+  route_name: picc_giftcard.resend
+  base_route: entity.commerce_giftcard.edit_form
+  weight: 21
+picc_giftcard.account:
+  title: 'Gift cards'
+  route_name: picc_giftcard.account
+  base_route: entity.user.canonical
+  weight: 30

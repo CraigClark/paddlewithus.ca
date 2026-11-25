@@ -1,0 +1,18 @@
+uuid: 6ceade4c-37a8-4d86-8e07-bfc46a2c2dc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.giftcard
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '1'
+id: commerce_product_variation.giftcard
+target_entity_type_id: commerce_product_variation
+target_bundle: giftcard
+default_langcode: site_default
+language_alterable: false

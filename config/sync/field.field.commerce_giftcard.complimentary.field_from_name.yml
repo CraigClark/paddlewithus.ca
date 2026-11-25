@@ -1,0 +1,19 @@
+uuid: 34cdd53f-0af4-4f4f-b088-7d81de1ff6dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_giftcard.giftcard_type.complimentary
+    - field.storage.commerce_giftcard.field_from_name
+id: commerce_giftcard.complimentary.field_from_name
+field_name: field_from_name
+entity_type: commerce_giftcard
+bundle: complimentary
+label: From
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

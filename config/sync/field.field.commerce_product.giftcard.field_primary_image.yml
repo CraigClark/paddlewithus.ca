@@ -1,0 +1,29 @@
+uuid: b32af824-05b8-46b2-959b-c8b97e204014
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.giftcard
+    - field.storage.commerce_product.field_primary_image
+    - media.type.image
+id: commerce_product.giftcard.field_primary_image
+field_name: field_primary_image
+entity_type: commerce_product
+bundle: giftcard
+label: 'Primary image'
+description: 'Used when this page is shared on social media. Upload a high resolution image. The site resizes and crops it.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

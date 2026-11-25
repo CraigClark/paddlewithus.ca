@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
+    - commerce_giftcard
     - commerce_payment
     - commerce_promotion
     - commerce_stripe
@@ -87,5 +88,11 @@ configuration:
     customer_comments:
       display_label: null
       step: _disabled
-      weight: 10
+      weight: 11
       wrapper_element: fieldset
+    commerce_giftcard_redemption:
+      display_label: null
+      step: _sidebar
+      weight: 10
+      wrapper_element: container
+      allow_multiple: true

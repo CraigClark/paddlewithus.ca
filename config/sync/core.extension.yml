@@ -27,6 +27,7 @@ module:
   commerce_cart: 0
   commerce_checkout: 0
   commerce_email: 0
+  commerce_giftcard: 0
   commerce_number_pattern: 0
   commerce_order: 0
   commerce_payment: 0
@@ -116,6 +117,7 @@ module:
   picc_attendance: 0
   picc_discount: 0
   picc_ext: 0
+  picc_giftcard: 0
   picc_registration: 0
   picc_sku: 0
   profile: 0

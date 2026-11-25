@@ -8,6 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 # Swim test evaluation form
 msgid "Swim test review"
@@ -325,3 +326,198 @@ msgstr "par personne."
 
 msgid "Sessions registered at a sale price are non-refundable."
 msgstr "Les inscriptions à prix réduit ne sont pas remboursables."
+
+# Gift cards (picc_giftcard): card, email, buying and checkout
+msgctxt "picc_giftcard"
+msgid "Gift card"
+msgstr "Carte-cadeau"
+
+msgctxt "picc_giftcard"
+msgid "Value"
+msgstr "Valeur"
+
+msgctxt "picc_giftcard"
+msgid "To"
+msgstr "À"
+
+msgctxt "picc_giftcard"
+msgid "From"
+msgstr "De"
+
+msgctxt "picc_giftcard"
+msgid "Gift card code"
+msgstr "Code de la carte-cadeau"
+
+msgctxt "picc_giftcard"
+msgid "Print"
+msgstr "Imprimer"
+
+msgid "Petrie Island Canoe Club"
+msgstr "Club de Canoë-Kayak de l'Île Petrie"
+
+msgid "Register for any program at petriecanoe.ca and enter this code at checkout."
+msgstr "Inscrivez-vous à n’importe quel programme sur petriecanoe.ca et entrez ce code au moment de payer."
+
+msgid "This card doesn't expire. It can't be redeemed for cash unless required by law."
+msgstr "Cette carte n’expire pas. Elle ne peut pas être échangée contre de l’argent, sauf si la loi l’exige."
+
+msgid "Questions? @email"
+msgstr "Des questions? @email"
+
+msgid "Cut along the dashed line and put the card inside a greeting card."
+msgstr "Découpez la carte le long du pointillé et glissez-la dans une carte de souhaits."
+
+msgid "Keep the code private. Anyone who has it can use the card."
+msgstr "Gardez le code confidentiel. Toute personne qui l’a peut utiliser la carte."
+
+msgid "Gift card @amount for @name"
+msgstr "Carte-cadeau de @amount pour @name"
+
+msgid "Gift card @amount"
+msgstr "Carte-cadeau de @amount"
+
+msgid "Log in or create account to buy"
+msgstr "Connectez-vous ou créez un compte pour acheter"
+
+msgid "Log in or create an account to buy a gift card."
+msgstr "Connectez-vous ou créez un compte pour acheter une carte-cadeau."
+
+msgid "Optional. Up to @max characters. Printed on the card."
+msgstr "Facultatif. Jusqu’à @max caractères. Imprimé sur la carte."
+
+msgid "Optional. The name of the person you’re giving the card to."
+msgstr "Facultatif. Le nom de la personne à qui vous offrez la carte."
+
+msgid "Optional. Your name as you want it on the card."
+msgstr "Facultatif. Votre nom tel qu’il doit apparaître sur la carte."
+
+msgid "The message can be up to @max characters."
+msgstr "Le message peut contenir jusqu’à @max caractères."
+
+msgid "Dashes and spaces are fine."
+msgstr "Les tirets et les espaces sont acceptés."
+
+msgid "Buy another gift card"
+msgstr "Acheter une autre carte-cadeau"
+
+msgid "Your Petrie Island Canoe Club gift card (order @number)"
+msgid_plural "Your Petrie Island Canoe Club gift cards (order @number)"
+msgstr[0] "Votre carte-cadeau du Club de Canoë-Kayak de l'Île Petrie (commande @number)"
+msgstr[1] "Vos cartes-cadeaux du Club de Canoë-Kayak de l'Île Petrie (commande @number)"
+
+msgid "Thank you for buying a gift card. The card is below and attached as a PDF you can print."
+msgid_plural "Thank you for buying gift cards. The cards are below and attached as PDFs you can print, one per card."
+msgstr[0] "Merci d’avoir acheté une carte-cadeau. La carte se trouve ci-dessous et en pièce jointe (PDF) pour l’imprimer."
+msgstr[1] "Merci d’avoir acheté des cartes-cadeaux. Les cartes se trouvent ci-dessous et en pièces jointes (PDF) pour les imprimer, une par carte."
+
+msgid "Order number: @number"
+msgstr "Numéro de commande : @number"
+
+msgid "Date: @date"
+msgstr "Date : @date"
+
+msgid "Total: @total"
+msgstr "Total : @total"
+
+msgid "Gift card @number of @count"
+msgstr "Carte-cadeau @number sur @count"
+
+msgid "Print your gift card: <a href=\":url\">@url</a>"
+msgstr "Imprimez votre carte-cadeau : <a href=\":url\">@url</a>"
+
+msgid "You need to be logged in to open this link."
+msgstr "Vous devez être connecté pour ouvrir ce lien."
+
+msgid "Your Petrie Island Canoe Club gift card"
+msgstr "Votre carte-cadeau du Club de Canoë-Kayak de l'Île Petrie"
+
+msgid "Here is your gift card. It is below and attached as a PDF you can print."
+msgstr "Voici votre carte-cadeau. Elle se trouve ci-dessous et en pièce jointe (PDF) pour l’imprimer."
+
+msgid "This is a gift card code. Enter it in the Gift card code box below."
+msgstr "Ceci est un code de carte-cadeau. Entrez-le dans la case Code de la carte-cadeau ci-dessous."
+
+msgid "This is a gift card code. Gift cards can’t be used to buy gift cards."
+msgstr "Ceci est un code de carte-cadeau. Les cartes-cadeaux ne peuvent pas servir à acheter des cartes-cadeaux."
+
+# Gift cards: product page, checkout box, account tab, email layout
+msgid "You pay @price"
+msgstr "Vous payez @price"
+
+msgid "Discount code"
+msgstr "Code de réduction"
+
+msgid "For discount codes only. Gift card codes go in the gift card box."
+msgstr "Pour les codes de réduction seulement. Les codes de carte-cadeau vont dans la case de la carte-cadeau."
+
+msgid "Have a gift card? Enter its code here. You can use more than one card."
+msgstr "Vous avez une carte-cadeau? Entrez son code ici. Vous pouvez utiliser plus d’une carte."
+
+msgid "You have money left on:"
+msgstr "Il vous reste de l’argent sur :"
+
+msgid "<span class=\"picc-giftcard-code\">@code</span>: @balance left"
+msgstr "<span class=\"picc-giftcard-code\">@code</span> : il reste @balance"
+
+msgid "<span class=\"picc-giftcard-code\">@code</span>: @used on this order, @left left"
+msgstr "<span class=\"picc-giftcard-code\">@code</span> : @used sur cette commande, il reste @left"
+
+msgid "Redeem another gift card"
+msgstr "Utiliser une autre carte-cadeau"
+
+msgid "Gift cards"
+msgstr "Cartes-cadeaux"
+
+msgid "Gift cards you’ve used"
+msgstr "Cartes-cadeaux que vous avez utilisées"
+
+msgid "Gift cards you bought"
+msgstr "Cartes-cadeaux que vous avez achetées"
+
+msgid "Balance left"
+msgstr "Solde restant"
+
+msgid "To use what’s left, enter the code in the gift card box at checkout."
+msgstr "Pour utiliser le solde, entrez le code dans la case de la carte-cadeau au moment de payer."
+
+msgid "You haven’t used a gift card yet. When you do, its balance shows here."
+msgstr "Vous n’avez pas encore utilisé de carte-cadeau. Quand vous le ferez, son solde s’affichera ici."
+
+msgid "Print or download"
+msgstr "Imprimer ou télécharger"
+
+msgid "Your gift card"
+msgstr "Votre carte-cadeau"
+
+msgid "Your gift cards"
+msgstr "Vos cartes-cadeaux"
+
+msgid "Hi @name,"
+msgstr "Bonjour @name,"
+
+msgid "Order date"
+msgstr "Date de la commande"
+
+msgid "Print your gift card"
+msgstr "Imprimer votre carte-cadeau"
+
+msgid "The PDF is also attached. The link needs you to be logged in."
+msgstr "Le PDF est aussi joint. Vous devez être connecté pour ouvrir le lien."
+
+msgid "If you have any questions, please contact us."
+msgstr "Si vous avez des questions, communiquez avec nous."
+
+msgid "Email: @email"
+msgstr "Courriel : @email"
+
+msgid "This is an automated message. Please do not reply to this email."
+msgstr "Ce message est envoyé automatiquement. Veuillez ne pas y répondre."
+
+msgid "Your gift cards with money left:"
+msgstr "Vos cartes-cadeaux avec un solde :"
+
+msgid "Use this card"
+msgstr "Utiliser cette carte"
+
+msgid "Not needed, this order is fully paid"
+msgstr "Pas nécessaire, cette commande est entièrement payée"

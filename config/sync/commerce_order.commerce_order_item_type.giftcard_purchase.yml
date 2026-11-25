@@ -1,0 +1,10 @@
+uuid: a3308170-ca9e-4080-80e3-57f3319bcf7e
+langcode: en
+status: true
+dependencies: {  }
+id: giftcard_purchase
+label: 'Gift card purchase'
+traits: {  }
+locked: false
+purchasableEntityType: commerce_product_variation
+orderType: default

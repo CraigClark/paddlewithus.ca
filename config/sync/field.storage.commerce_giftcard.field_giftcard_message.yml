@@ -1,0 +1,19 @@
+uuid: 786f10e6-5169-4136-9b76-b05b5770c149
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_giftcard
+id: commerce_giftcard.field_giftcard_message
+field_name: field_giftcard_message
+entity_type: commerce_giftcard
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

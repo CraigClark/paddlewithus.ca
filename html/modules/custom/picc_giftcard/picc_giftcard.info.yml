@@ -1,0 +1,13 @@
+name: 'PICC Gift cards'
+type: module
+description: 'Gift card extras for Petrie Island Canoe Club: recipient fields, bilingual email and PDF card, login required to buy, safety checks around commerce_giftcard.'
+package: PICC
+core_version_requirement: ^11
+dependencies:
+  - commerce:commerce_cart
+  - commerce:commerce_checkout
+  - commerce:commerce_order
+  - commerce:commerce_product
+  - commerce_giftcard:commerce_giftcard
+  - symfony_mailer:symfony_mailer
+  - drupal:file

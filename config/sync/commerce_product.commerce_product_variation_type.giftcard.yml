@@ -1,0 +1,11 @@
+uuid: 29b9c024-cd1b-4a7d-9937-aaff7bd4bf04
+langcode: en
+status: true
+dependencies: {  }
+id: giftcard
+label: 'Gift card'
+traits:
+  - commerce_giftcard_purchaseable
+locked: false
+orderItemType: giftcard_purchase
+generateTitle: false

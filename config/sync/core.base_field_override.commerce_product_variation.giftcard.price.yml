@@ -1,0 +1,22 @@
+uuid: 205ee831-e92e-486b-9473-ab440c790f59
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.giftcard
+  module:
+    - commerce_price
+id: commerce_product_variation.giftcard.price
+field_name: price
+entity_type: commerce_product_variation
+bundle: giftcard
+label: Price
+description: 'The price'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_currencies: {  }
+  allow_negative: false
+field_type: commerce_price

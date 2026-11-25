@@ -236,3 +236,43 @@ function picc_registration_update_10016() {
   _picc_registration_import_translations();
   return 'Re-imported translations from picc_registration/translations/*.po.';
 }
+
+/**
+ * Re-import module translations (adds gift card strings from picc_giftcard).
+ */
+function picc_registration_update_10017() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}
+
+/**
+ * Re-import module translations (adds gift card code in coupon box messages).
+ */
+function picc_registration_update_10018() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}
+
+/**
+ * Re-import module translations (gift card checkout box, account tab, email).
+ */
+function picc_registration_update_10019() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}
+
+/**
+ * Re-import module translations (gift card "Use this card" button).
+ */
+function picc_registration_update_10020() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}
+
+/**
+ * Re-import module translations (gift card "fully paid" note).
+ */
+function picc_registration_update_10021() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}

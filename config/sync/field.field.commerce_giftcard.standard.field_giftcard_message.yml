@@ -1,0 +1,19 @@
+uuid: 035d6a54-5a2e-495e-b910-ee59ce2d4e69
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_giftcard.giftcard_type.standard
+    - field.storage.commerce_giftcard.field_giftcard_message
+id: commerce_giftcard.standard.field_giftcard_message
+field_name: field_giftcard_message
+entity_type: commerce_giftcard
+bundle: standard
+label: Message
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

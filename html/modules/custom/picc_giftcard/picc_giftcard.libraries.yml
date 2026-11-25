@@ -1,0 +1,4 @@
+giftcard:
+  css:
+    component:
+      css/giftcard.css: {}

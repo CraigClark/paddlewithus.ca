@@ -1,0 +1,7 @@
+commerce_giftcard.giftcard_type.*.third_party.picc_giftcard:
+  type: mapping
+  label: 'PICC gift card type settings'
+  mapping:
+    sellable:
+      type: boolean
+      label: 'Can be sold on the site'

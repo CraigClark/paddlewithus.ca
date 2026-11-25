@@ -1,0 +1,23 @@
+uuid: c03fff5b-ace2-4d40-b194-09c81eec54db
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.giftcard
+    - field.storage.commerce_product_variation.commerce_giftcard_type
+id: commerce_product_variation.giftcard.commerce_giftcard_type
+field_name: commerce_giftcard_type
+entity_type: commerce_product_variation
+bundle: giftcard
+label: 'Gift card type'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    target_id: standard
+default_value_callback: null
+settings:
+  handler: 'default:commerce_giftcard_type'
+  handler_settings: {  }
+field_type: entity_reference

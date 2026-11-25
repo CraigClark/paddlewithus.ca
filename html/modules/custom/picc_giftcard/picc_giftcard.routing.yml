@@ -1,0 +1,54 @@
+picc_giftcard.print:
+  path: '/gift-card/{commerce_giftcard}/print'
+  defaults:
+    _controller: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::print'
+    _title: 'Gift card'
+  requirements:
+    _custom_access: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::access'
+  options:
+    parameters:
+      commerce_giftcard:
+        type: entity:commerce_giftcard
+picc_giftcard.pdf:
+  path: '/gift-card/{commerce_giftcard}/pdf'
+  defaults:
+    _controller: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::pdf'
+  requirements:
+    _custom_access: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::access'
+  options:
+    parameters:
+      commerce_giftcard:
+        type: entity:commerce_giftcard
+picc_giftcard.resend:
+  path: '/admin/commerce/giftcards/{commerce_giftcard}/send'
+  defaults:
+    _form: '\Drupal\picc_giftcard\Form\GiftcardSendForm'
+    _title: 'Send gift card email'
+  requirements:
+    _permission: 'administer commerce_giftcard'
+  options:
+    _admin_route: TRUE
+    parameters:
+      commerce_giftcard:
+        type: entity:commerce_giftcard
+picc_giftcard.settings:
+  path: '/admin/commerce/config/giftcard-card'
+  defaults:
+    _form: '\Drupal\picc_giftcard\Form\GiftcardSettingsForm'
+    _title: 'Gift card design'
+  requirements:
+    _permission: 'administer commerce_giftcard'
+  options:
+    _admin_route: TRUE
+picc_giftcard.account:
+  path: '/user/{user}/gift-cards'
+  defaults:
+    _controller: '\Drupal\picc_giftcard\Controller\GiftcardAccountController::page'
+    _title: 'Gift cards'
+  requirements:
+    _custom_access: '\Drupal\picc_giftcard\Controller\GiftcardAccountController::access'
+    user: \d+
+  options:
+    parameters:
+      user:
+        type: entity:user

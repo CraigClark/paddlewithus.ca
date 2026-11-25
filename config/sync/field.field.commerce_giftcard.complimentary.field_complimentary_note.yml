@@ -1,0 +1,19 @@
+uuid: d52d9951-1910-416a-8e51-b91e2ace6189
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_giftcard.giftcard_type.complimentary
+    - field.storage.commerce_giftcard.field_complimentary_note
+id: commerce_giftcard.complimentary.field_complimentary_note
+field_name: field_complimentary_note
+entity_type: commerce_giftcard
+bundle: complimentary
+label: Note
+description: 'Optional. For example the event or the volunteer it thanks.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

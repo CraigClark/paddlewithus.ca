@@ -1,0 +1,4 @@
+delete gift cards:
+  title: 'Delete gift cards'
+  description: 'Delete gift card records. Without this, people who administer gift cards can create and edit cards but not delete them. Disable a card instead.'
+  restrict access: true

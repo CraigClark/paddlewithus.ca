@@ -1,0 +1,126 @@
+{#
+/**
+ * @file
+ * Printable gift card: one Letter page, card at the top.
+ *
+ * Used for the PDF (dompdf) and the backup print page, so keep the CSS
+ * simple: tables, blocks and fixed sizes only. No flexbox or grid.
+ *
+ * The card is bilingual. The buyer's language (primary) comes first and
+ * larger, the other language second and smaller.
+ *
+ * Available variables:
+ * - card: amount_en, amount_fr, code, to, from, message, contact_email.
+ * - logo: data URI of the club logo.
+ * - graphic: data URI of the decorative graphic, or empty.
+ * - primary: 'en' or 'fr'.
+ * - for_screen: TRUE on the print page.
+ * - pdf_url: link to the PDF, on the print page only.
+ */
+#}
+{% set secondary = primary == 'fr' ? 'en' : 'fr' %}
+{% set p = {'langcode': primary} %}
+{% set s = {'langcode': secondary} %}
+{% set pc = {'langcode': primary, 'context': 'picc_giftcard'} %}
+{% set sc = {'langcode': secondary, 'context': 'picc_giftcard'} %}
+<!DOCTYPE html>
+<html lang="{{ primary }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ 'Gift card'|t({}, pc) }} / {{ 'Gift card'|t({}, sc) }}</title>
+  <style>
+    @page { size: letter portrait; margin: 0.5in; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: "DejaVu Sans", Arial, sans-serif; color: #1f2a37; font-size: 9pt; line-height: 1.3; background: #ffffff; }
+    .sheet { width: 7.5in; }
+    .card { width: 6in; margin: 0 auto; border: 1pt solid #13324f; }
+    .card td { vertical-align: top; }
+    .inner { padding: 0.16in 0.22in 0.14in 0.22in; }
+    .graphic { text-align: center; padding-top: 0.06in; }
+    .graphic img { height: 0.85in; }
+    .head td { vertical-align: middle; }
+    .logo img { width: 1.15in; }
+    .title { font-size: 18pt; font-weight: bold; color: #13324f; line-height: 1.1; }
+    .title-2 { font-size: 10pt; font-weight: bold; color: #4b5563; }
+    .club { font-size: 7.5pt; color: #4b5563; padding-top: 2pt; }
+    .amount-label { font-size: 7.5pt; color: #4b5563; text-align: right; }
+    .amount { font-size: 26pt; font-weight: bold; color: #13324f; text-align: right; line-height: 1.05; }
+    .amount-2 { font-size: 8pt; color: #6b7280; text-align: right; }
+    .people { margin-top: 0.08in; font-size: 10pt; }
+    .people .label { color: #4b5563; font-size: 8pt; padding-right: 6pt; white-space: nowrap; }
+    .message { margin-top: 0.06in; font-style: italic; font-size: 10pt; text-align: center; color: #374151; }
+    .code-box { margin-top: 0.1in; background: #eef3f8; border: 1pt solid #c7d4e2; text-align: center; padding: 6pt 0 5pt 0; }
+    .code-label { font-size: 7.5pt; color: #4b5563; }
+    .code { font-family: "DejaVu Sans Mono", "Courier New", monospace; font-size: 19pt; font-weight: bold; letter-spacing: 2pt; color: #13324f; }
+    .fine { margin-top: 0.08in; font-size: 7.5pt; color: #374151; }
+    .fine p { margin: 0 0 2pt 0; }
+    .fine .fine-2 { font-size: 6.8pt; color: #6b7280; }
+    .contact { font-size: 7.2pt; color: #4b5563; text-align: center; margin-top: 2pt; }
+    .notes { width: 6in; margin: 0.2in auto 0 auto; text-align: center; color: #6b7280; font-size: 8.5pt; }
+    .notes p { margin: 0 0 3pt 0; }
+    .toolbar { font-family: Arial, sans-serif; text-align: center; padding: 16px; }
+    .toolbar a, .toolbar button { display: inline-block; margin: 0 6px; padding: 8px 16px; font-size: 15px; border-radius: 6px; border: 1px solid #13324f; background: #13324f; color: #fff; text-decoration: none; cursor: pointer; }
+    .toolbar a.secondary { background: #fff; color: #13324f; }
+    @media print { .toolbar { display: none; } }
+    @media screen { .sheet { margin: 0 auto 32px auto; } }
+  </style>
+</head>
+<body>
+{% if for_screen %}
+  <div class="toolbar">
+    <button type="button" onclick="window.print()">{{ 'Print'|t({}, pc) }}</button>
+    {% if pdf_url %}<a class="secondary" href="{{ pdf_url }}">{{ 'Download PDF'|t({}, p) }}</a>{% endif %}
+  </div>
+{% endif %}
+<div class="sheet">
+  <table class="card" cellpadding="0" cellspacing="0">
+    {% if graphic %}
+      <tr><td class="graphic"><img src="{{ graphic }}" alt=""></td></tr>
+    {% endif %}
+    <tr><td class="inner">
+      <table class="head" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          {% if logo %}<td class="logo" width="1.3in"><img src="{{ logo }}" alt="{{ 'Petrie Island Canoe Club'|t({}, p) }}"></td>{% endif %}
+          <td>
+            <div class="title">{{ 'Gift card'|t({}, pc) }}</div>
+            <div class="title-2">{{ 'Gift card'|t({}, sc) }}</div>
+            <div class="club">{{ 'Petrie Island Canoe Club'|t({}, p) }}<br>{{ 'Petrie Island Canoe Club'|t({}, s) }}</div>
+          </td>
+          <td width="1.7in">
+            <div class="amount-label">{{ 'Value'|t({}, pc) }} / {{ 'Value'|t({}, sc) }}</div>
+            <div class="amount">{{ card['amount_' ~ primary] }}</div>
+            <div class="amount-2">{{ card['amount_' ~ secondary] }}</div>
+          </td>
+        </tr>
+      </table>
+
+      {% if card.to or card.from %}
+        <table class="people" cellpadding="0" cellspacing="0">
+          {% if card.to %}<tr><td class="label">{{ 'To'|t({}, pc) }} / {{ 'To'|t({}, sc) }}</td><td><strong>{{ card.to }}</strong></td></tr>{% endif %}
+          {% if card.from %}<tr><td class="label">{{ 'From'|t({}, pc) }} / {{ 'From'|t({}, sc) }}</td><td><strong>{{ card.from }}</strong></td></tr>{% endif %}
+        </table>
+      {% endif %}
+
+      {% if card.message %}
+        <div class="message">{{ card.message|escape|nl2br }}</div>
+      {% endif %}
+
+      <div class="code-box">
+        <div class="code-label">{{ 'Gift card code'|t({}, pc) }} / {{ 'Gift card code'|t({}, sc) }}</div>
+        <div class="code">{{ card.code }}</div>
+      </div>
+
+      <div class="fine">
+        <p>{{ 'Register for any program at petriecanoe.ca and enter this code at checkout.'|t({}, p) }} {{ "This card doesn't expire. It can't be redeemed for cash unless required by law."|t({}, p) }}</p>
+        <p class="fine-2">{{ 'Register for any program at petriecanoe.ca and enter this code at checkout.'|t({}, s) }} {{ "This card doesn't expire. It can't be redeemed for cash unless required by law."|t({}, s) }}</p>
+      </div>
+      <div class="contact">{{ 'Questions? @email'|t({'@email': card.contact_email}, p) }} &nbsp;|&nbsp; {{ 'Questions? @email'|t({'@email': card.contact_email}, s) }}</div>
+    </td></tr>
+  </table>
+  <div class="notes">
+    <p>{{ 'Keep the code private. Anyone who has it can use the card.'|t({}, p) }}</p>
+    <p>{{ 'Keep the code private. Anyone who has it can use the card.'|t({}, s) }}</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+services:
+  picc_giftcard.order_processor:
+    class: Drupal\picc_giftcard\OrderProcessor\GiftcardGuardProcessor
+    tags:
+      # Runs after promotions and before commerce_giftcard's own processor
+      # (priority -1000), so it can clean up what that processor sees.
+      - { name: commerce_order.order_processor, priority: -990 }
+  picc_giftcard.card_builder:
+    class: Drupal\picc_giftcard\GiftcardCardBuilder
+    arguments: ['@renderer', '@state', '@entity_type.manager', '@extension.list.module', '@file_system', '@language_manager']
+  picc_giftcard.mailer:
+    class: Drupal\picc_giftcard\GiftcardMailer
+    arguments: ['@Drupal\symfony_mailer\MailerPlusInterface', '@picc_giftcard.card_builder', '@entity_type.manager', '@logger.channel.picc_giftcard', '@date.formatter', '@language_manager']
+  picc_giftcard.order_subscriber:
+    class: Drupal\picc_giftcard\EventSubscriber\GiftcardOrderSubscriber
+    arguments: ['@entity_type.manager', '@picc_giftcard.mailer', '@logger.channel.picc_giftcard', '@language_manager']
+    tags:
+      - { name: event_subscriber }
+  logger.channel.picc_giftcard:
+    parent: logger.channel_base
+    arguments: ['picc_giftcard']
+  picc_giftcard.lookup:
+    class: Drupal\picc_giftcard\GiftcardLookup
+    arguments: ['@entity_type.manager']

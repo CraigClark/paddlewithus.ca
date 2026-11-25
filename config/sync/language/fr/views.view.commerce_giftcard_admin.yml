@@ -1,0 +1,79 @@
+display:
+  default:
+    display_title: Principal
+    display_options:
+      fields:
+        code:
+          label: Code
+          separator: ', '
+        type:
+          label: Type
+          separator: ', '
+        balance__number:
+          label: Solde
+          separator: ', '
+        status:
+          label: État
+          separator: ', '
+        uid:
+          label: Propriétaire
+          separator: ', '
+        stores_target_id:
+          label: Boutiques
+          separator: ', '
+        created:
+          label: 'Créé le'
+          separator: ', '
+        changed:
+          label: 'Mis à jour'
+          separator: ', '
+        operations:
+          label: Actions
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tout -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      filters:
+        code:
+          expose:
+            label: Code
+        type:
+          expose:
+            label: Type
+        status:
+          expose:
+            label: État
+          group_info:
+            label: État
+            group_items:
+              1:
+                title: Activé
+              2:
+                title: Désactivé
+        balance__currency_code:
+          expose:
+            label: Devise
+        balance__number:
+          expose:
+            label: Solde
+          group_info:
+            label: Solde
+        uid:
+          expose:
+            label: Propriétaire
+  page_1:
+    display_title: Page

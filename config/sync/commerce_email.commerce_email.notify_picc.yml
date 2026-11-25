@@ -21,6 +21,7 @@ conditions:
     configuration:
       variation_types:
         - activity
+        - giftcard
 conditionOperator: AND
 queue: false
 logToEntity: null

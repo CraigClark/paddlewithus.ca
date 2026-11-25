@@ -17,3 +17,7 @@ Practical guides for people who run the club day-to-day.
 - [Parents registering](swim-test-parents-registering.md) — what parents see and do
 - [Coaches evaluating](swim-test-coaches-evaluating.md) — the roster, how to mark pass/fail/undo
 - [No-show review](swim-test-no-show-review.md) — what the commerce manager does with no-shows
+
+## Gift cards
+
+- [Gift cards](giftcards.md): amounts and stock, looking up a card, changing a balance, issuing a card, the card design

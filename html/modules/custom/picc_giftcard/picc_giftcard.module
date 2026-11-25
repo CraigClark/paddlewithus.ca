@@ -1,0 +1,661 @@
+<?php
+
+/**
+ * @file
+ * Gift card extras for Petrie Island Canoe Club.
+ *
+ * Everything here works around or extends commerce_giftcard without changing
+ * it. See the gift card plan for the reasons behind each piece.
+ */
+
+use Drupal\commerce_giftcard\Entity\GiftcardInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use Drupal\picc_giftcard\GiftcardCode;
+use Drupal\picc_giftcard\GiftcardOrderHelper;
+
+/**
+ * Longest message a buyer can write on a card.
+ */
+const PICC_GIFTCARD_MESSAGE_MAX = 200;
+
+/**
+ * Implements hook_theme().
+ */
+function picc_giftcard_theme(): array {
+  return [
+    'picc_giftcard_card' => [
+      'variables' => [
+        'card' => [],
+        'logo' => NULL,
+        'graphic' => NULL,
+        'primary' => 'en',
+        'for_screen' => FALSE,
+        'pdf_url' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for commerce_giftcard.
+ *
+ * Stores codes as upper case letters and digits only, so a code typed with
+ * dashes, spaces or lower case letters still matches (issue 3620718).
+ */
+function picc_giftcard_commerce_giftcard_presave(GiftcardInterface $giftcard): void {
+  $code = $giftcard->getCode();
+  $normalized = GiftcardCode::normalize($code);
+  if ($normalized !== '' && $normalized !== $code) {
+    $giftcard->setCode($normalized);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access() for commerce_giftcard_type.
+ *
+ * A gift card type that's in use can't be deleted. Deleting one breaks
+ * checkout (issue 3620714).
+ */
+function picc_giftcard_commerce_giftcard_type_access(EntityInterface $type, string $operation, AccountInterface $account) {
+  if ($operation !== 'delete') {
+    return AccessResult::neutral();
+  }
+  return AccessResult::forbiddenIf(_picc_giftcard_type_in_use($type->id()), 'This gift card type is in use.')
+    ->addCacheTags(['commerce_product_variation_list', 'commerce_giftcard_list']);
+}
+
+/**
+ * Whether any product variation or gift card uses a gift card type.
+ */
+function _picc_giftcard_type_in_use(string $type_id): bool {
+  $etm = \Drupal::entityTypeManager();
+  $field_map = \Drupal::service('entity_field.manager')->getFieldMap();
+  if (isset($field_map['commerce_product_variation']['commerce_giftcard_type'])) {
+    $variations = $etm->getStorage('commerce_product_variation')->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('commerce_giftcard_type', $type_id)
+      ->range(0, 1)
+      ->count()
+      ->execute();
+    if ($variations) {
+      return TRUE;
+    }
+  }
+  $cards = $etm->getStorage('commerce_giftcard')->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('type', $type_id)
+    ->range(0, 1)
+    ->count()
+    ->execute();
+  return (bool) $cards;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_giftcard_type_edit_form.
+ */
+function picc_giftcard_form_commerce_giftcard_type_edit_form_alter(array &$form, FormStateInterface $form_state): void {
+  $type = $form_state->getFormObject()->getEntity();
+  if (_picc_giftcard_type_in_use($type->id())) {
+    $form['picc_in_use'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['messages', 'messages--warning']],
+      '#weight' => -100,
+      'text' => ['#markup' => t('This gift card type is in use by gift card products or cards, so it can’t be deleted.')],
+    ];
+  }
+}
+
+/**
+ * Implements hook_entity_operation().
+ */
+function picc_giftcard_entity_operation(EntityInterface $entity): array {
+  if ($entity->getEntityTypeId() !== 'commerce_giftcard' || !\Drupal::currentUser()->hasPermission('administer commerce_giftcard')) {
+    return [];
+  }
+  return [
+    'picc_print' => [
+      'title' => t('Print'),
+      'url' => Url::fromRoute('picc_giftcard.print', ['commerce_giftcard' => $entity->id()]),
+      'weight' => 20,
+    ],
+    'picc_send' => [
+      'title' => t('Send email'),
+      'url' => Url::fromRoute('picc_giftcard.resend', ['commerce_giftcard' => $entity->id()]),
+      'weight' => 21,
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for commerce_order_item.
+ *
+ * Names gift card lines "Gift card $250 for Sam" in the cart and on orders.
+ */
+function picc_giftcard_commerce_order_item_presave(EntityInterface $item): void {
+  if ($item->bundle() !== GiftcardOrderHelper::ORDER_ITEM_TYPE) {
+    return;
+  }
+  $variation = $item->getPurchasedEntity();
+  if (!$variation) {
+    return;
+  }
+  $amount = $variation->hasField('commerce_giftcard_amount') && !$variation->get('commerce_giftcard_amount')->isEmpty()
+    ? $variation->get('commerce_giftcard_amount')->first()->toPrice()
+    : $variation->getPrice();
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $formatted = \Drupal::service('picc_giftcard.card_builder')->formatAmount($amount, $langcode);
+  $recipient = $item->hasField('field_recipient_name') ? trim((string) $item->get('field_recipient_name')->value) : '';
+  $title = $recipient !== ''
+    ? t('Gift card @amount for @name', ['@amount' => $formatted, '@name' => $recipient])
+    : t('Gift card @amount', ['@amount' => $formatted]);
+  $item->setTitle((string) $title);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for commerce_order_item_add_to_cart_form.
+ */
+function picc_giftcard_form_commerce_order_item_add_to_cart_form_alter(array &$form, FormStateInterface $form_state): void {
+  $item = $form_state->getFormObject()->getEntity();
+  if ($item->bundle() !== GiftcardOrderHelper::ORDER_ITEM_TYPE) {
+    return;
+  }
+
+  // Login required to buy, same as programs.
+  if (\Drupal::currentUser()->isAnonymous()) {
+    foreach (\Drupal\Core\Render\Element::children($form) as $key) {
+      $form[$key]['#access'] = FALSE;
+    }
+    $form['picc_login'] = [
+      '#type' => 'link',
+      '#title' => t('Log in or create account to buy'),
+      '#url' => Url::fromRoute('user.login', [], ['query' => ['destination' => \Drupal::request()->getRequestUri()]]),
+      '#attributes' => ['class' => ['btn', 'btn-primary']],
+    ];
+    $form['#validate'][] = '_picc_giftcard_add_to_cart_require_login';
+    $form['#cache']['contexts'][] = 'user.roles:anonymous';
+    return;
+  }
+  $form['#cache']['contexts'][] = 'user.roles:anonymous';
+  $form['#attached']['library'][] = 'picc_giftcard/giftcard';
+
+  // "You pay $225.00" under the amount, only when the price is lower than the
+  // card's value (for example a holiday sale). The amount list already says
+  // what the card is worth. The form rebuilds when the amount changes, so this
+  // stays current.
+  $variation_id = $form_state->get('selected_variation');
+  $variation = $variation_id ? \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load($variation_id) : $item->getPurchasedEntity();
+  if ($variation && $variation->hasField('commerce_giftcard_amount') && !$variation->get('commerce_giftcard_amount')->isEmpty() && $variation->getPrice()) {
+    $value = $variation->get('commerce_giftcard_amount')->first()->toPrice();
+    $price = $variation->getPrice();
+    if ($value->getCurrencyCode() === $price->getCurrencyCode() && !$value->equals($price)) {
+      $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $form['picc_you_pay'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'p',
+        '#value' => t('You pay @price', ['@price' => \Drupal::service('picc_giftcard.card_builder')->formatAmount($price, $langcode, TRUE)]),
+        '#attributes' => ['class' => ['picc-giftcard-you-pay']],
+        '#weight' => ($form['purchased_entity']['#weight'] ?? 0) + 0.5,
+      ];
+    }
+  }
+
+  if (isset($form['field_giftcard_message']['widget'][0]['value'])) {
+    $form['field_giftcard_message']['widget'][0]['value']['#maxlength'] = PICC_GIFTCARD_MESSAGE_MAX;
+    $form['field_giftcard_message']['widget'][0]['value']['#description'] = t('Optional. Up to @max characters. Printed on the card.', ['@max' => PICC_GIFTCARD_MESSAGE_MAX]);
+  }
+  foreach (['field_recipient_name' => t('Optional. The name of the person you’re giving the card to.'), 'field_from_name' => t('Optional. Your name as you want it on the card.')] as $field => $description) {
+    if (isset($form[$field]['widget'][0]['value'])) {
+      $form[$field]['widget'][0]['value']['#description'] = $description;
+    }
+  }
+  $form['#validate'][] = '_picc_giftcard_add_to_cart_require_login';
+  $form['#validate'][] = '_picc_giftcard_add_to_cart_validate_message';
+  $form['#validate'][] = '_picc_giftcard_add_to_cart_require_sellable';
+}
+
+/**
+ * Validation: only gift card types that can be sold go in a cart.
+ *
+ * Backstop in case an amount was set up before its type was marked as not
+ * sellable.
+ */
+function _picc_giftcard_add_to_cart_require_sellable(array &$form, FormStateInterface $form_state): void {
+  $item = $form_state->getFormObject()->getEntity();
+  $variation = $item->getPurchasedEntity();
+  if ($variation && $variation->hasField('commerce_giftcard_type') && ($type = $variation->get('commerce_giftcard_type')->entity) && !picc_giftcard_type_is_sellable($type)) {
+    $form_state->setErrorByName('', t('This gift card can’t be bought on the site.'));
+  }
+}
+
+/**
+ * Validation: gift cards can't be added to an anonymous cart.
+ */
+function _picc_giftcard_add_to_cart_require_login(array &$form, FormStateInterface $form_state): void {
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $form_state->setErrorByName('', t('Log in or create an account to buy a gift card.'));
+  }
+}
+
+/**
+ * Validation: the message fits on the card.
+ */
+function _picc_giftcard_add_to_cart_validate_message(array &$form, FormStateInterface $form_state): void {
+  $message = (string) $form_state->getValue(['field_giftcard_message', 0, 'value']);
+  if (mb_strlen($message) > PICC_GIFTCARD_MESSAGE_MAX) {
+    $form_state->setErrorByName('field_giftcard_message', t('The message can be up to @max characters.', ['@max' => PICC_GIFTCARD_MESSAGE_MAX]));
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for commerce_checkout_flow.
+ */
+function picc_giftcard_form_commerce_checkout_flow_alter(array &$form, FormStateInterface $form_state): void {
+  $order = $form_state->getFormObject()->getOrder();
+  $buys_giftcard = GiftcardOrderHelper::hasGiftcardPurchase($order);
+  $step = $form['#step_id'] ?? '';
+  // Codes are entered on the order information step only. On review the
+  // order summary already shows what was applied, and "Go back" lets people
+  // change it. On complete the order is placed.
+  $entry_step = !in_array($step, ['review', 'complete'], TRUE);
+  $form['#attached']['library'][] = 'picc_giftcard/giftcard';
+
+  $containers = [&$form];
+  if (isset($form['sidebar'])) {
+    $containers[] = &$form['sidebar'];
+  }
+  foreach ($containers as &$container) {
+    if (isset($container['coupon_redemption'])) {
+      if (!$entry_step) {
+        $container['coupon_redemption']['#access'] = FALSE;
+      }
+      elseif (isset($container['coupon_redemption']['form']['code'])) {
+        // People type gift card codes into the coupon box. Call it a
+        // discount code, say what it's for, and catch gift card codes.
+        $code = &$container['coupon_redemption']['form']['code'];
+        $code['#title'] = t('Discount code');
+        $code['#description'] = t('For discount codes only. Gift card codes go in the gift card box.');
+        $code['#picc_buys_giftcard'] = $buys_giftcard;
+        $code['#element_validate'][] = '_picc_giftcard_coupon_is_giftcard';
+        unset($code);
+      }
+    }
+    if (!isset($container['commerce_giftcard_redemption'])) {
+      continue;
+    }
+    if ($buys_giftcard || !$entry_step) {
+      // Gift cards can't pay for gift cards (the order processor enforces
+      // it), so the box is hidden on those orders too.
+      $container['commerce_giftcard_redemption']['#access'] = FALSE;
+      continue;
+    }
+    _picc_giftcard_build_redemption_box($container['commerce_giftcard_redemption'], $order);
+  }
+  unset($container);
+
+  if (!$buys_giftcard) {
+    return;
+  }
+  // Login required to buy gift cards. Guest checkout stays on for everything
+  // else, so only hide it for orders with a gift card.
+  if (\Drupal::currentUser()->isAnonymous()) {
+    if (isset($form['login']['guest'])) {
+      $form['login']['guest']['#access'] = FALSE;
+    }
+    $form['#validate'][] = '_picc_giftcard_checkout_require_login';
+  }
+}
+
+/**
+ * Turns the gift card checkout pane into a framed box people can't miss.
+ *
+ * - Heading and a line saying more than one card can be used.
+ * - Lists the person's own cards that still have money on them.
+ * - Shows each applied card with what this order uses and what's left.
+ * - Button says "Redeem another gift card" once a card is applied.
+ */
+function _picc_giftcard_build_redemption_box(array &$pane, $order): void {
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $builder = \Drupal::service('picc_giftcard.card_builder');
+  // The checkout form keeps its own copy of the order. Applying or removing a
+  // card saves a freshly loaded one, so load it again to see the change.
+  $order = \Drupal::entityTypeManager()->getStorage('commerce_order')->load($order->id()) ?: $order;
+  $applied = $order->get('commerce_giftcards')->referencedEntities();
+
+  $pane['#attributes']['class'][] = 'picc-giftcard-box';
+  $pane['picc_title'] = [
+    '#markup' => '<h3 class="picc-giftcard-box__title">' . t('Gift card', [], ['context' => 'picc_giftcard']) . '</h3>'
+      . '<p class="picc-giftcard-box__intro">' . t('Have a gift card? Enter its code here. You can use more than one card.') . '</p>',
+    '#weight' => -100,
+  ];
+
+  if (!isset($pane['form'])) {
+    return;
+  }
+  $inline = &$pane['form'];
+
+  // The person's own cards with money left that aren't on this order yet.
+  $applied_ids = array_map(fn($card) => $card->id(), $applied);
+  $usable = array_diff_key(
+    \Drupal::service('picc_giftcard.lookup')->usableBy((int) $order->getCustomerId()),
+    array_flip($applied_ids)
+  );
+  // Total still to pay. The list always shows, so people can see their
+  // cards. Once the order is fully paid, the Use buttons give way to a note.
+  $still_to_pay = $order->getTotalPrice();
+  $fully_paid = !$still_to_pay || !$still_to_pay->isPositive();
+  if ($usable) {
+    $inline['picc_balance'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['picc-giftcard-box__balance']],
+      '#weight' => -99,
+      'intro' => ['#markup' => '<p class="picc-giftcard-box__balance-intro">' . t('Your gift cards with money left:') . '</p>'],
+    ];
+    foreach ($usable as $card) {
+      $inline['picc_balance']['card_' . $card->id()] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['picc-giftcard-box__card']],
+        'label' => [
+          '#markup' => '<span class="picc-giftcard-box__card-label">' . t('<span class="picc-giftcard-code">@code</span>: @balance left', [
+            '@code' => GiftcardCode::format($card->getCode()),
+            '@balance' => $builder->formatAmount($card->getBalance(), $langcode, TRUE),
+          ]) . '</span>',
+        ],
+        'use' => $fully_paid ? [
+          '#markup' => '<span class="picc-giftcard-box__paid">' . t('Not needed, this order is fully paid') . '</span>',
+        ] : [
+          '#type' => 'submit',
+          '#value' => t('Use this card'),
+          '#name' => 'picc_use_giftcard_' . $card->id(),
+          '#picc_giftcard_id' => (int) $card->id(),
+          '#picc_order_id' => (int) $order->id(),
+          '#submit' => ['_picc_giftcard_use_card_submit'],
+          // Same limits and AJAX refresh as commerce_giftcard's own button.
+          '#limit_validation_errors' => $inline['apply']['#limit_validation_errors'] ?? [$inline['#parents']],
+          '#ajax' => $inline['apply']['#ajax'] ?? NULL,
+          '#attributes' => ['class' => ['picc-giftcard-box__use']],
+        ],
+      ];
+    }
+  }
+
+  // What each applied card covers on this order, from the order adjustments.
+  $used = [];
+  foreach ($order->collectAdjustments(['commerce_giftcard']) as $adjustment) {
+    $used[$adjustment->getSourceId()] = $adjustment->getAmount()->multiply('-1');
+  }
+  foreach ($applied as $index => $card) {
+    if (!isset($inline['giftcards'][$index]['code'])) {
+      continue;
+    }
+    $this_order = $used[$card->id()] ?? NULL;
+    $left = $card->getBalance();
+    if ($this_order && $left) {
+      $left = $left->subtract($this_order);
+    }
+    $inline['giftcards'][$index]['code'] = [
+      '#markup' => t('<span class="picc-giftcard-code">@code</span>: @used on this order, @left left', [
+        '@code' => GiftcardCode::format($card->getCode()),
+        '@used' => $builder->formatAmount($this_order, $langcode, TRUE) ?: $builder->formatAmount(new \Drupal\commerce_price\Price('0', $card->getBalance()->getCurrencyCode()), $langcode, TRUE),
+        '@left' => $builder->formatAmount($left, $langcode, TRUE),
+      ]),
+    ];
+  }
+
+  if (isset($inline['code'])) {
+    // Runs before commerce_giftcard looks the code up.
+    $inline['code']['#element_validate'] = array_merge(['_picc_giftcard_clean_code_input'], $inline['code']['#element_validate'] ?? []);
+    $inline['code']['#description'] = t('Dashes and spaces are fine.');
+  }
+  if (isset($inline['apply']) && $applied) {
+    $inline['apply']['#value'] = t('Redeem another gift card');
+  }
+  unset($inline);
+}
+
+/**
+ * Submit: applies one of the person's own cards with a single click.
+ *
+ * Only cards from GiftcardLookup::usableBy() for the order's customer are
+ * accepted, so a tampered button can't apply someone else's card.
+ */
+function _picc_giftcard_use_card_submit(array &$form, FormStateInterface $form_state): void {
+  $button = $form_state->getTriggeringElement();
+  $card_id = (int) ($button['#picc_giftcard_id'] ?? 0);
+  $order = \Drupal::entityTypeManager()->getStorage('commerce_order')->load($button['#picc_order_id'] ?? 0);
+  $form_state->setRebuild();
+  if (!$order || !$card_id) {
+    return;
+  }
+  $usable = \Drupal::service('picc_giftcard.lookup')->usableBy((int) $order->getCustomerId());
+  $applied = array_column($order->get('commerce_giftcards')->getValue(), 'target_id');
+  if (!isset($usable[$card_id]) || in_array($card_id, array_map('intval', $applied), TRUE)) {
+    return;
+  }
+  $order->get('commerce_giftcards')->appendItem($card_id);
+  $order->save();
+}
+
+/**
+ * Element validate: cleans the gift card code before it's looked up.
+ */
+function _picc_giftcard_clean_code_input(array &$element, FormStateInterface $form_state): void {
+  $value = $form_state->getValue($element['#parents']);
+  if (is_string($value) && $value !== '') {
+    $form_state->setValueForElement($element, GiftcardCode::normalize($value));
+  }
+}
+
+/**
+ * Element validate: flags a gift card code typed into the coupon box.
+ *
+ * Runs before the coupon lookup. The first error set on an element wins, so
+ * this message replaces "The provided coupon code is invalid."
+ */
+function _picc_giftcard_coupon_is_giftcard(array &$element, FormStateInterface $form_state): void {
+  $value = $form_state->getValue($element['#parents']);
+  if (!is_string($value) || trim($value) === '') {
+    return;
+  }
+  // Leave real coupon codes alone.
+  if (\Drupal::entityTypeManager()->getStorage('commerce_promotion_coupon')->loadEnabledByCode(trim($value))) {
+    return;
+  }
+  $code = GiftcardCode::normalize($value);
+  if ($code === '' || !\Drupal::entityTypeManager()->getStorage('commerce_giftcard')->loadByProperties(['code' => $code])) {
+    return;
+  }
+  $message = empty($element['#picc_buys_giftcard'])
+    ? t('This is a gift card code. Enter it in the Gift card code box below.')
+    : t('This is a gift card code. Gift cards can’t be used to buy gift cards.');
+  $form_state->setError($element, $message);
+}
+
+/**
+ * Validation: an order with a gift card can't be checked out as a guest.
+ */
+function _picc_giftcard_checkout_require_login(array &$form, FormStateInterface $form_state): void {
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $form_state->setErrorByName('', t('Log in or create an account to buy a gift card.'));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for views_form_commerce_cart_form_default.
+ */
+function picc_giftcard_form_views_form_commerce_cart_form_default_alter(array &$form, FormStateInterface $form_state): void {
+  // picc_registration adds its "Register for more activities" link in its own
+  // alter, which runs after this one. Change it once the form is built.
+  $form['#after_build'][] = '_picc_giftcard_cart_after_build';
+}
+
+/**
+ * After build: for a cart with only gift cards, link back to gift cards.
+ */
+function _picc_giftcard_cart_after_build(array $form, FormStateInterface $form_state): array {
+  $view = $form_state->getBuildInfo()['args'][0] ?? NULL;
+  $order_id = $view->args[0] ?? NULL;
+  $order = $order_id ? \Drupal::entityTypeManager()->getStorage('commerce_order')->load($order_id) : NULL;
+  if (!GiftcardOrderHelper::onlyGiftcardPurchases($order) || !isset($form['actions']['register_more'])) {
+    return $form;
+  }
+  $product_url = NULL;
+  foreach ($order->getItems() as $item) {
+    if ($variation = $item->getPurchasedEntity()) {
+      $product_url = $variation->getProduct()?->toUrl();
+      break;
+    }
+  }
+  if ($product_url) {
+    $form['actions']['register_more']['#title'] = t('Buy another gift card');
+    $form['actions']['register_more']['#url'] = $product_url;
+  }
+  return $form;
+}
+
+/**
+ * Whether a gift card type can be sold on the site.
+ *
+ * Stored as a third-party setting on the type. Types without the setting are
+ * treated as not sellable, so a new type stays off the site until someone
+ * ticks the box.
+ */
+function picc_giftcard_type_is_sellable($type): bool {
+  return (bool) $type->getThirdPartySetting('picc_giftcard', 'sellable', FALSE);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for commerce_giftcard_type_form.
+ *
+ * Adds "Can be sold on the site" to the gift card type form.
+ */
+function picc_giftcard_form_commerce_giftcard_type_form_alter(array &$form, FormStateInterface $form_state): void {
+  $type = $form_state->getFormObject()->getEntity();
+  $form['picc_sellable'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Can be sold on the site'),
+    '#description' => t('Leave this off for cards the club gives away, like Complimentary. Only types that can be sold show up when you set up gift card amounts for sale.'),
+    '#default_value' => $type->isNew() ? FALSE : picc_giftcard_type_is_sellable($type),
+    '#weight' => 5,
+  ];
+  $form['#entity_builders'][] = '_picc_giftcard_type_entity_builder';
+}
+
+/**
+ * Entity builder: saves the "Can be sold on the site" setting.
+ */
+function _picc_giftcard_type_entity_builder(string $entity_type_id, $type, array &$form, FormStateInterface $form_state): void {
+  $type->setThirdPartySetting('picc_giftcard', 'sellable', (bool) $form_state->getValue('picc_sellable'));
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ *
+ * Gift card amounts can only use types that can be sold.
+ */
+function picc_giftcard_entity_bundle_field_info_alter(array &$fields, $entity_type, string $bundle): void {
+  if ($entity_type->id() === 'commerce_product_variation' && isset($fields['commerce_giftcard_type'])) {
+    $fields['commerce_giftcard_type']->addConstraint('PiccSellableGiftcardType');
+  }
+}
+
+/**
+ * Implements hook_options_list_alter().
+ *
+ * The Type list on gift card amounts only offers types that can be sold.
+ */
+function picc_giftcard_options_list_alter(array &$options, array $context): void {
+  $definition = $context['fieldDefinition'];
+  if ($definition->getName() !== 'commerce_giftcard_type' || $definition->getTargetEntityTypeId() !== 'commerce_product_variation') {
+    return;
+  }
+  $types = \Drupal::entityTypeManager()->getStorage('commerce_giftcard_type')->loadMultiple();
+  foreach (array_keys($options) as $id) {
+    if (isset($types[$id]) && !picc_giftcard_type_is_sellable($types[$id])) {
+      unset($options[$id]);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_giftcard_generate_form.
+ *
+ * Adds Reason and Note for Complimentary cards, and passes them to the cards
+ * the batch creates.
+ */
+function picc_giftcard_form_commerce_giftcard_generate_form_alter(array &$form, FormStateInterface $form_state): void {
+  $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('commerce_giftcard', 'complimentary');
+  if (!isset($fields['field_complimentary_reason'])) {
+    return;
+  }
+  $visible = ['visible' => [':input[name="type"]' => ['value' => 'complimentary']]];
+  $form['picc_reason'] = [
+    '#type' => 'select',
+    '#title' => $fields['field_complimentary_reason']->getLabel(),
+    '#description' => $fields['field_complimentary_reason']->getDescription(),
+    '#options' => ['' => t('- Select -')] + options_allowed_values($fields['field_complimentary_reason']->getFieldStorageDefinition()),
+    '#states' => $visible + ['required' => [':input[name="type"]' => ['value' => 'complimentary']]],
+    '#weight' => 5,
+  ];
+  $form['picc_note'] = [
+    '#type' => 'textfield',
+    '#title' => $fields['field_complimentary_note']->getLabel(),
+    '#description' => $fields['field_complimentary_note']->getDescription(),
+    '#maxlength' => 255,
+    '#states' => $visible,
+    '#weight' => 6,
+  ];
+  $form['#validate'][] = '_picc_giftcard_generate_validate';
+  $form['actions']['submit']['#submit'] = ['_picc_giftcard_generate_submit'];
+}
+
+/**
+ * Validation: Complimentary cards need a reason.
+ */
+function _picc_giftcard_generate_validate(array &$form, FormStateInterface $form_state): void {
+  if ($form_state->getValue('type') === 'complimentary' && !$form_state->getValue('picc_reason')) {
+    $form_state->setErrorByName('picc_reason', t('Choose why the club is giving these cards.'));
+  }
+}
+
+/**
+ * Submit: same batch as commerce_giftcard, plus Reason and Note.
+ *
+ * @see \Drupal\commerce_giftcard\Form\GiftcardGenerateForm::submitForm()
+ */
+function _picc_giftcard_generate_submit(array &$form, FormStateInterface $form_state): void {
+  $values = [
+    'type' => $form_state->getValue('type'),
+    'balance' => $form_state->getValue('balance'),
+    'stores' => $form_state->getValue('stores'),
+  ];
+  if ($values['type'] === 'complimentary') {
+    $values['field_complimentary_reason'] = $form_state->getValue('picc_reason');
+    $values['field_complimentary_note'] = trim((string) $form_state->getValue('picc_note'));
+  }
+  $batch = (new \Drupal\Core\Batch\BatchBuilder())
+    ->setTitle(t('Generating gift cards'))
+    ->setProgressMessage('')
+    ->setFinishCallback([\Drupal\commerce_giftcard\Form\GiftcardGenerateForm::class, 'finishBatch'])
+    ->addOperation([\Drupal\commerce_giftcard\Form\GiftcardGenerateForm::class, 'processBatch'], [$form_state->getValue('quantity'), $values]);
+  batch_set($batch->toArray());
+  $form_state->setRedirect('entity.commerce_giftcard.collection');
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access() for commerce_giftcard.
+ *
+ * "administer commerce_giftcard" also allows deleting. Deleting a card also
+ * needs "delete gift cards", so commerce managers can create and edit cards
+ * but not delete them. They can disable a card instead.
+ */
+function picc_giftcard_commerce_giftcard_access(EntityInterface $giftcard, string $operation, AccountInterface $account) {
+  if ($operation !== 'delete') {
+    return AccessResult::neutral();
+  }
+  return AccessResult::forbiddenIf(!$account->hasPermission('delete gift cards'), 'Deleting gift cards needs the "Delete gift cards" permission.')
+    ->cachePerPermissions();
+}

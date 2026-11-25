@@ -1,0 +1,6 @@
+picc_giftcard.settings:
+  title: 'Gift card design'
+  description: 'Change the graphic and contact email on printed gift cards.'
+  route_name: picc_giftcard.settings
+  parent: commerce_giftcard.configuration
+  weight: 20

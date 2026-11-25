@@ -1,0 +1,64 @@
+uuid: 92fe45f7-c541-48ca-aefd-e92711ddafdc
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_giftcard.giftcard_type.complimentary
+    - field.field.commerce_giftcard.complimentary.field_complimentary_note
+    - field.field.commerce_giftcard.complimentary.field_complimentary_reason
+    - field.field.commerce_giftcard.complimentary.field_from_name
+    - field.field.commerce_giftcard.complimentary.field_giftcard_message
+    - field.field.commerce_giftcard.complimentary.field_recipient_name
+  module:
+    - options
+id: commerce_giftcard.complimentary.default
+targetEntityType: commerce_giftcard
+bundle: complimentary
+mode: default
+content:
+  field_complimentary_note:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  field_complimentary_reason:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_from_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  field_giftcard_message:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 19
+    region: content
+  field_recipient_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 17
+    region: content
+hidden:
+  search_api_excerpt: true
+  stores: true

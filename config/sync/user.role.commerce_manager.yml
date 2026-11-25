@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.activity
+    - commerce_product.commerce_product_type.giftcard
     - environment_indicator.switcher.dev
     - environment_indicator.switcher.remote
     - filter.format.basic_html
@@ -13,6 +14,7 @@ dependencies:
     - user.role.authenticated
   module:
     - commerce
+    - commerce_giftcard
     - commerce_order
     - commerce_payment
     - commerce_product
@@ -45,11 +47,13 @@ permissions:
   - 'access environment indicator'
   - 'access environment indicator dev'
   - 'access environment indicator remote'
+  - 'access giftcard overview'
   - 'access media overview'
   - 'access private fields'
   - 'access profile overview'
   - 'access toolbar'
   - 'access user profiles'
+  - 'administer commerce_giftcard'
   - 'administer commerce_payment'
   - 'administer commerce_promotion'
   - 'administer users'
@@ -57,6 +61,8 @@ permissions:
   - 'create activity commerce_product'
   - 'create commerce_promotion'
   - 'create default commerce_order'
+  - 'create giftcard commerce_product'
+  - 'create giftcard transaction'
   - 'create image media'
   - 'create terms in sale_type'
   - 'delete any activity commerce_product'
@@ -73,6 +79,8 @@ permissions:
   - 'edit terms in sale_type'
   - 'manage activity commerce_product_variation'
   - 'manage activity_registration commerce_order_item'
+  - 'manage giftcard commerce_product_variation'
+  - 'manage giftcard_purchase commerce_order_item'
   - 'manage swim_test_registration commerce_order_item'
   - 'manage swim_test_slot commerce_product_variation'
   - 'masquerade as account_holder'
@@ -82,10 +90,12 @@ permissions:
   - 'skip node redirect'
   - 'translate activity commerce_product'
   - 'translate commerce_product_variation'
+  - 'translate giftcard commerce_product'
   - 'unlock orders'
   - 'update any activity commerce_product'
   - 'update any commerce_payment_method'
   - 'update any commerce_promotion'
+  - 'update any giftcard commerce_product'
   - 'update any participant profile'
   - 'update default commerce_order'
   - 'use text format basic_html'
@@ -101,6 +111,7 @@ permissions:
   - 'view field_swim_attestation_date'
   - 'view field_swim_status'
   - 'view field_swim_test_evaluated_by'
+  - 'view giftcard commerce_product'
   - 'view online commerce_store'
   - 'view picc attendance history'
   - 'view stripe dashboard links'

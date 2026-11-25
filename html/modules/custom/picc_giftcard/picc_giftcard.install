@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for PICC Gift cards.
+ */
+
+use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\picc_giftcard\GiftcardCardBuilder;
+
+/**
+ * Implements hook_install().
+ *
+ * Sets the holly as the starting card graphic.
+ */
+function picc_giftcard_install(): void {
+  if (\Drupal::state()->get(GiftcardCardBuilder::STATE_GRAPHIC)) {
+    return;
+  }
+  $directory = 'public://picc_giftcard';
+  \Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+  $source = DRUPAL_ROOT . '/' . \Drupal::service('extension.list.module')->getPath('picc_giftcard') . '/images/holly.png';
+  $data = file_get_contents($source);
+  if ($data === FALSE) {
+    return;
+  }
+  $file = \Drupal::service('file.repository')->writeData($data, $directory . '/holly.png', FileExists::Rename);
+  \Drupal::service('file.usage')->add($file, 'picc_giftcard', 'state', 1);
+  \Drupal::state()->set(GiftcardCardBuilder::STATE_GRAPHIC, (int) $file->id());
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function picc_giftcard_uninstall(): void {
+  \Drupal::state()->deleteMultiple([
+    GiftcardCardBuilder::STATE_GRAPHIC,
+    GiftcardCardBuilder::STATE_CONTACT,
+  ]);
+}

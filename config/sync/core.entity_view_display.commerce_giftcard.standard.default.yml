@@ -1,0 +1,44 @@
+uuid: 49a50457-41c2-4340-9d95-fe9820d44b7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_giftcard.giftcard_type.standard
+    - field.field.commerce_giftcard.standard.field_from_name
+    - field.field.commerce_giftcard.standard.field_giftcard_message
+    - field.field.commerce_giftcard.standard.field_recipient_name
+id: commerce_giftcard.standard.default
+targetEntityType: commerce_giftcard
+bundle: standard
+mode: default
+content:
+  field_from_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  field_giftcard_message:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 22
+    region: content
+  field_recipient_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 20
+    region: content
+hidden:
+  search_api_excerpt: true
+  stores: true

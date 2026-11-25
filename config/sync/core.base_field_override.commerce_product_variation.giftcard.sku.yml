@@ -1,0 +1,18 @@
+uuid: 008f43b9-c4ca-4efc-af19-205873a7f79f
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.giftcard
+id: commerce_product_variation.giftcard.sku
+field_name: sku
+entity_type: commerce_product_variation
+bundle: giftcard
+label: SKU
+description: 'The unique, machine-readable identifier for a variation.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,13 @@
+uuid: 145f0fa4-1377-4925-b162-bfa62e101193
+langcode: en
+status: true
+dependencies: {  }
+id: giftcard
+label: 'Gift card'
+traits: {  }
+locked: false
+description: 'Gift cards people can buy for someone else'
+variationTypes:
+  - giftcard
+multipleVariations: true
+injectVariationFields: true

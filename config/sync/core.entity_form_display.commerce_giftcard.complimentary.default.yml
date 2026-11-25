@@ -1,0 +1,99 @@
+uuid: 60b0e1ae-fe8b-4e22-b92e-95a5bc7683d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_giftcard.giftcard_type.complimentary
+    - field.field.commerce_giftcard.complimentary.field_complimentary_note
+    - field.field.commerce_giftcard.complimentary.field_complimentary_reason
+    - field.field.commerce_giftcard.complimentary.field_from_name
+    - field.field.commerce_giftcard.complimentary.field_giftcard_message
+    - field.field.commerce_giftcard.complimentary.field_recipient_name
+  module:
+    - commerce
+    - commerce_price
+id: commerce_giftcard.complimentary.default
+targetEntityType: commerce_giftcard
+bundle: complimentary
+mode: default
+content:
+  balance:
+    type: commerce_price_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  code:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_complimentary_note:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_complimentary_reason:
+    type: options_select
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_from_name:
+    type: string_textfield
+    weight: 21
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_giftcard_message:
+    type: string_textarea
+    weight: 22
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_recipient_name:
+    type: string_textfield
+    weight: 20
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 30
+    region: content
+    settings:
+      display_label: false
+    third_party_settings: {  }
+  stores:
+    type: commerce_entity_select
+    weight: 20
+    region: content
+    settings:
+      hide_single_entity: true
+      autocomplete_threshold: 7
+      autocomplete_size: 60
+      autocomplete_placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
