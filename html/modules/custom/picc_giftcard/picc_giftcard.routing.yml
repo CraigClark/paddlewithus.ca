@@ -52,3 +52,35 @@ picc_giftcard.account:
     parameters:
       user:
         type: entity:user
+picc_giftcard.print_signed:
+  path: '/gift-card/{commerce_giftcard}/print/{token}'
+  defaults:
+    _controller: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::print'
+    _title: 'Gift card'
+  requirements:
+    _custom_access: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::accessSigned'
+  options:
+    no_cache: TRUE
+    parameters:
+      commerce_giftcard:
+        type: entity:commerce_giftcard
+picc_giftcard.pdf_signed:
+  path: '/gift-card/{commerce_giftcard}/pdf/{token}'
+  defaults:
+    _controller: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::pdf'
+  requirements:
+    _custom_access: '\Drupal\picc_giftcard\Controller\GiftcardPrintController::accessSigned'
+  options:
+    no_cache: TRUE
+    parameters:
+      commerce_giftcard:
+        type: entity:commerce_giftcard
+picc_giftcard.account_current:
+  path: '/user/gift-cards'
+  defaults:
+    _controller: '\Drupal\picc_giftcard\Controller\GiftcardAccountController::current'
+    _title: 'Gift cards'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+  options:
+    no_cache: TRUE

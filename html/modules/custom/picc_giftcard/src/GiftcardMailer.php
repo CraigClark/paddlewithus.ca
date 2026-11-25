@@ -146,7 +146,7 @@ class GiftcardMailer {
     $how = $this->t('Register for any program at petriecanoe.ca and enter this code at checkout.', [], $p) . ' ' . $this->t("This card doesn't expire. It can't be redeemed for cash unless required by law.", [], $p);
     $how_other = $this->t('Register for any program at petriecanoe.ca and enter this code at checkout.', [], $s) . ' ' . $this->t("This card doesn't expire. It can't be redeemed for cash unless required by law.", [], $s);
 
-    $print_url = Url::fromRoute('picc_giftcard.print', ['commerce_giftcard' => $giftcard->id()], ['absolute' => TRUE, 'language' => $this->languageManager->getLanguage($langcode)])->toString();
+    $print_url = $this->cardBuilder->signedPrintUrl($giftcard, $langcode)->toString();
 
     return '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;border:2px solid ' . self::BLUE . ';border-radius:8px;">'
       . '<tr><td style="background-color:' . self::BLUE . ';padding:10px 16px;color:#ffffff;font-size:16px;font-weight:bold;border-radius:6px 6px 0 0;">' . $this->esc($heading) . '</td></tr>'
@@ -168,7 +168,7 @@ class GiftcardMailer {
       . '<table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background-color:' . self::BLUE . ';border-radius:6px;">'
       . '<a href="' . $this->esc($print_url) . '" style="display:inline-block;padding:10px 18px;color:#ffffff;font-size:14px;font-weight:bold;text-decoration:none;">' . $this->t('Print your gift card', [], $p) . '</a>'
       . '</td></tr></table>'
-      . '<p style="margin:6px 0 0;font-size:12px;color:' . self::MUTED . ';">' . $this->t('The PDF is also attached. The link needs you to be logged in.', [], $p) . '</p>'
+      . '<p style="margin:6px 0 0;font-size:12px;color:' . self::MUTED . ';">' . $this->t('The PDF is also attached. Anyone you forward this email to can print it too.', [], $p) . '</p>'
       . '</td></tr></table>';
   }
 
@@ -214,9 +214,12 @@ class GiftcardMailer {
       }
     });
     $sent = $email->send();
-    $this->logger->info('Gift card email @result (@context).', [
+    $address = $to instanceof \Drupal\Core\Session\AccountInterface ? $to->getEmail() : (string) $to;
+    $this->logger->notice('Gift card email @result to @address (@context, cards @cards).', [
       '@result' => $sent ? 'sent' : 'FAILED',
+      '@address' => $address,
       '@context' => http_build_query($context, '', ', '),
+      '@cards' => implode(', ', array_map(fn($card) => GiftcardCode::format($card->getCode()), $giftcards)),
     ]);
     return $sent;
   }

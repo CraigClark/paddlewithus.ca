@@ -276,3 +276,12 @@ function picc_registration_update_10021() {
   _picc_registration_import_translations();
   return 'Re-imported translations from picc_registration/translations/*.po.';
 }
+
+/**
+ * Re-import module translations (gift card bug-report fixes, and
+ * commerce_giftcard's own checkout strings).
+ */
+function picc_registration_update_10022() {
+  _picc_registration_import_translations();
+  return 'Re-imported translations from picc_registration/translations/*.po.';
+}

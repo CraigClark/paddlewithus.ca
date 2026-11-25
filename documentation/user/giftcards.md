@@ -30,7 +30,7 @@ When an amount sells out, its button changes to "Out of stock". Add more with **
 
 ## Looking up a card
 
-Go to **Commerce > Gift cards**. You can search by code, owner or balance. Codes are stored without dashes, so search for `ABCDEFGHJKMN`, not `ABCD-EFGH-JKMN`.
+Go to **Commerce > Gift cards**. You can search by code, owner or balance. Type the code however you have it, with or without dashes, or just part of it.
 
 Commerce managers can create, edit, print and send cards, but not delete them. To take a card out of use, edit it and turn off **Enabled**. On an existing card the code and balance are locked: change the balance with **Add transaction**, so every change is recorded. Transactions can't be changed or deleted. Only site admins can delete a card or edit those fields. Commerce managers can delete the Gift cards product itself. Orders and cards already sold stay.
 
@@ -45,10 +45,10 @@ Each card's menu has:
 
 Use **Add transaction** to change a balance. The Balance field on the card is locked for commerce managers, because typing a new number there would skip the transaction log.
 
-- A program paid with a gift card was cancelled: add the amount back as a positive number. **Put the order number in the comment.** The site doesn't link it for you.
+- A program paid with a gift card was cancelled: cancel the order. The site puts the money back on the card by itself and notes "Returned: order 386 cancelled." If only part of the order is cancelled (one camp out of several), the card isn't changed. Put the card's share back with **Add transaction**: a positive amount, and a comment with the reason and order number, for example "Camp A cancelled, order 386". See also the cancellations and refunds guide. If the cancelled order bought gift cards, those cards are turned off, since the buyer is being refunded. Each card's history says how much was on it.
 - A correction: add or subtract the difference, with a comment saying why.
 
-Gift cards aren't refunded in cash. If a program paid with a gift card is cancelled, the money goes back on the card.
+A comment is required, and the site records who made the change. Gift cards aren't refunded in cash. If a program paid with a gift card is cancelled, the money goes back on the card.
 
 ## Free (Complimentary) cards
 
@@ -57,7 +57,7 @@ For raffle prizes and thank-yous, use the **Complimentary** type. Complimentary 
 1. Go to **Commerce > Gift cards** and open the **Generate** page (`/admin/commerce/giftcards/generate`).
 2. Choose **Complimentary**, the **Initial balance** and **Number of gift cards** (1 for a single card).
 3. Choose a **Reason** (raffle prize, volunteer thank-you, other) and add a **Note** if it helps, for example the event or who it thanks. The reason is required and goes into the bookkeeper report.
-4. Find the new card in the list, select **Edit** and fill in To and From.
+4. Find the new card in the list, select **Edit** and fill in To and From. The card's Transactions tab shows an "Issued" line with the amount, the reason and who issued it.
 5. Use **Send email** or **Print** from the card's menu.
 
 You can also use **Add gift card > Complimentary** and type your own code. Use letters and digits, at least 12 characters. The site stores codes in capitals and treats 0 as O and 1 as I, so avoid 0 and 1.

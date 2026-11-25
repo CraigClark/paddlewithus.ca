@@ -91,3 +91,23 @@
 .picc-giftcard-account-section {
   margin-bottom: 2rem;
 }
+
+/* Note on Review ("Have a gift card? Go back…") and on the order complete
+   page for gift card orders. */
+.picc-giftcard-box--reminder {
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+}
+
+.picc-giftcard-box--reminder p {
+  margin: 0 0 0.25rem;
+}
+
+.picc-giftcard-box--reminder a {
+  text-decoration: underline;
+}
+
+.picc-giftcard-box__paid-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+}

@@ -47,6 +47,7 @@ function picc_giftcard_theme(): array {
  * dashes, spaces or lower case letters still matches (issue 3620718).
  */
 function picc_giftcard_commerce_giftcard_presave(GiftcardInterface $giftcard): void {
+  _picc_giftcard_stash_opening_balance($giftcard);
   $code = $giftcard->getCode();
   $normalized = GiftcardCode::normalize($code);
   if ($normalized !== '' && $normalized !== $code) {
@@ -152,7 +153,9 @@ function picc_giftcard_commerce_order_item_presave(EntityInterface $item): void 
   $title = $recipient !== ''
     ? t('Gift card @amount for @name', ['@amount' => $formatted, '@name' => $recipient])
     : t('Gift card @amount', ['@amount' => $formatted]);
-  $item->setTitle((string) $title);
+  // t() escapes @placeholders for HTML. The title is stored as plain text
+  // and escaped again when shown, so decode it or O'Brien shows as O&#039;Brien.
+  $item->setTitle(\Drupal\Component\Utility\Html::decodeEntities((string) $title));
 }
 
 /**
@@ -205,7 +208,7 @@ function picc_giftcard_form_commerce_order_item_add_to_cart_form_alter(array &$f
 
   if (isset($form['field_giftcard_message']['widget'][0]['value'])) {
     $form['field_giftcard_message']['widget'][0]['value']['#maxlength'] = PICC_GIFTCARD_MESSAGE_MAX;
-    $form['field_giftcard_message']['widget'][0]['value']['#description'] = t('Optional. Up to @max characters. Printed on the card.', ['@max' => PICC_GIFTCARD_MESSAGE_MAX]);
+    $form['field_giftcard_message']['widget'][0]['value']['#description'] = t('Optional. Up to @max characters. Printed on the card. Emoji don’t print.', ['@max' => PICC_GIFTCARD_MESSAGE_MAX]);
   }
   foreach (['field_recipient_name' => t('Optional. The name of the person you’re giving the card to.'), 'field_from_name' => t('Optional. Your name as you want it on the card.')] as $field => $description) {
     if (isset($form[$field]['widget'][0]['value'])) {
@@ -256,7 +259,14 @@ function _picc_giftcard_add_to_cart_validate_message(array &$form, FormStateInte
 function picc_giftcard_form_commerce_checkout_flow_alter(array &$form, FormStateInterface $form_state): void {
   $order = $form_state->getFormObject()->getOrder();
   $buys_giftcard = GiftcardOrderHelper::hasGiftcardPurchase($order);
+  $only_giftcards = GiftcardOrderHelper::onlyGiftcardPurchases($order);
   $step = $form['#step_id'] ?? '';
+  if ($step === 'complete' && $buys_giftcard) {
+    $form['picc_giftcard_complete'] = [
+      '#markup' => '<div class="picc-giftcard-box picc-giftcard-box--reminder"><p>' . t('Your gift card codes are on their way by email, with a PDF of each card to print.') . '</p><p>' . t('You can also print them any time from <a href=":url">Gift cards</a> on your account.', [':url' => Url::fromRoute('picc_giftcard.account_current')->toString()]) . '</p></div>',
+      '#weight' => 5,
+    ];
+  }
   // Codes are entered on the order information step only. On review the
   // order summary already shows what was applied, and "Go back" lets people
   // change it. On complete the order is placed.
@@ -278,18 +288,22 @@ function picc_giftcard_form_commerce_checkout_flow_alter(array &$form, FormState
         $code = &$container['coupon_redemption']['form']['code'];
         $code['#title'] = t('Discount code');
         $code['#description'] = t('For discount codes only. Gift card codes go in the gift card box.');
-        $code['#picc_buys_giftcard'] = $buys_giftcard;
+        $code['#picc_only_giftcards'] = $only_giftcards;
         $code['#element_validate'][] = '_picc_giftcard_coupon_is_giftcard';
         unset($code);
+        if (isset($container['coupon_redemption']['form']['apply'])) {
+          $container['coupon_redemption']['form']['apply']['#value'] = t('Apply discount code');
+        }
       }
     }
     if (!isset($container['commerce_giftcard_redemption'])) {
       continue;
     }
-    if ($buys_giftcard || !$entry_step) {
-      // Gift cards can't pay for gift cards (the order processor enforces
-      // it), so the box is hidden on those orders too.
+    if (!$entry_step) {
       $container['commerce_giftcard_redemption']['#access'] = FALSE;
+      if ($step === 'review') {
+        _picc_giftcard_review_reminder($container, $order, $form_state);
+      }
       continue;
     }
     _picc_giftcard_build_redemption_box($container['commerce_giftcard_redemption'], $order);
@@ -310,12 +324,46 @@ function picc_giftcard_form_commerce_checkout_flow_alter(array &$form, FormState
 }
 
 /**
+ * On the review step, reminds people who haven't used a gift card.
+ *
+ * The gift card box is only on the first step. If someone skipped past it,
+ * this gives them a way back before they pay.
+ */
+function _picc_giftcard_review_reminder(array &$container, $order, FormStateInterface $form_state): void {
+  $order = \Drupal::entityTypeManager()->getStorage('commerce_order')->load($order->id()) ?: $order;
+  $coverable = GiftcardOrderHelper::coverableByCards($order);
+  if (!$coverable || !$coverable->isPositive()) {
+    return;
+  }
+  $usable = \Drupal::service('picc_giftcard.lookup')->usableBy((int) $order->getCustomerId());
+  $applied = $order->get('commerce_giftcards')->getValue();
+  if ($applied && !$usable) {
+    return;
+  }
+  $flow = $form_state->getFormObject();
+  $url = Url::fromRoute('commerce_checkout.form', [
+    'commerce_order' => $order->id(),
+    'step' => $flow->getPreviousStepId('review') ?: 'order_information',
+  ]);
+  $text = $usable
+    ? t('You have money left on a gift card. <a href=":url">Go back to use it</a>.', [':url' => $url->toString()])
+    : t('Have a gift card? <a href=":url">Go back to add it</a>.', [':url' => $url->toString()]);
+  $container['picc_giftcard_reminder'] = [
+    '#markup' => '<div class="picc-giftcard-box picc-giftcard-box--reminder">' . $text . '</div>',
+    '#weight' => 50,
+    '#cache' => ['max-age' => 0],
+  ];
+}
+
+/**
  * Turns the gift card checkout pane into a framed box people can't miss.
  *
  * - Heading and a line saying more than one card can be used.
  * - Lists the person's own cards that still have money on them.
  * - Shows each applied card with what this order uses and what's left.
  * - Button says "Redeem another gift card" once a card is applied.
+ * - Once the order is fully paid, the code field gives way to a note.
+ * - On an order that also buys gift cards, says cards cover the rest only.
  */
 function _picc_giftcard_build_redemption_box(array &$pane, $order): void {
   $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -324,11 +372,21 @@ function _picc_giftcard_build_redemption_box(array &$pane, $order): void {
   // card saves a freshly loaded one, so load it again to see the change.
   $order = \Drupal::entityTypeManager()->getStorage('commerce_order')->load($order->id()) ?: $order;
   $applied = $order->get('commerce_giftcards')->referencedEntities();
+  $buys_giftcard = GiftcardOrderHelper::hasGiftcardPurchase($order);
+  $only_giftcards = GiftcardOrderHelper::onlyGiftcardPurchases($order);
+  $coverable = GiftcardOrderHelper::coverableByCards($order);
+  $fully_paid = !$coverable || !$coverable->isPositive();
 
   $pane['#attributes']['class'][] = 'picc-giftcard-box';
+  $intro = $only_giftcards
+    ? t('Gift cards can’t be used to buy gift cards.')
+    : t('Have a gift card? Enter its code here. You can use more than one card.');
+  if ($buys_giftcard && !$only_giftcards) {
+    $intro .= ' ' . t('Gift cards pay for the rest of this order, not the gift cards you’re buying.');
+  }
   $pane['picc_title'] = [
     '#markup' => '<h3 class="picc-giftcard-box__title">' . t('Gift card', [], ['context' => 'picc_giftcard']) . '</h3>'
-      . '<p class="picc-giftcard-box__intro">' . t('Have a gift card? Enter its code here. You can use more than one card.') . '</p>',
+      . '<p class="picc-giftcard-box__intro">' . $intro . '</p>',
     '#weight' => -100,
   ];
 
@@ -336,6 +394,14 @@ function _picc_giftcard_build_redemption_box(array &$pane, $order): void {
     return;
   }
   $inline = &$pane['form'];
+  if ($only_giftcards && !$applied) {
+    // Nothing a card could pay for. Keep the heading and the explanation.
+    foreach (\Drupal\Core\Render\Element::children($inline) as $key) {
+      $inline[$key]['#access'] = FALSE;
+    }
+    unset($inline);
+    return;
+  }
 
   // The person's own cards with money left that aren't on this order yet.
   $applied_ids = array_map(fn($card) => $card->id(), $applied);
@@ -343,11 +409,9 @@ function _picc_giftcard_build_redemption_box(array &$pane, $order): void {
     \Drupal::service('picc_giftcard.lookup')->usableBy((int) $order->getCustomerId()),
     array_flip($applied_ids)
   );
-  // Total still to pay. The list always shows, so people can see their
-  // cards. Once the order is fully paid, the Use buttons give way to a note.
-  $still_to_pay = $order->getTotalPrice();
-  $fully_paid = !$still_to_pay || !$still_to_pay->isPositive();
-  if ($usable) {
+  // The list always shows, so people can see their cards. Once the order is
+  // fully paid, the Use buttons give way to a note.
+  if ($usable && !$only_giftcards) {
     $inline['picc_balance'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['picc-giftcard-box__balance']],
@@ -391,23 +455,37 @@ function _picc_giftcard_build_redemption_box(array &$pane, $order): void {
     if (!isset($inline['giftcards'][$index]['code'])) {
       continue;
     }
-    $this_order = $used[$card->id()] ?? NULL;
-    $left = $card->getBalance();
-    if ($this_order && $left) {
-      $left = $left->subtract($this_order);
-    }
+    $this_order = $used[$card->id()] ?? new \Drupal\commerce_price\Price('0', $card->getBalance()->getCurrencyCode());
+    $left = $card->getBalance()->subtract($this_order);
     $inline['giftcards'][$index]['code'] = [
       '#markup' => t('<span class="picc-giftcard-code">@code</span>: @used on this order, @left left', [
         '@code' => GiftcardCode::format($card->getCode()),
-        '@used' => $builder->formatAmount($this_order, $langcode, TRUE) ?: $builder->formatAmount(new \Drupal\commerce_price\Price('0', $card->getBalance()->getCurrencyCode()), $langcode, TRUE),
+        '@used' => $builder->formatAmount($this_order, $langcode, TRUE),
         '@left' => $builder->formatAmount($left, $langcode, TRUE),
       ]),
     ];
   }
 
-  if (isset($inline['code'])) {
-    // Runs before commerce_giftcard looks the code up.
+  if ($fully_paid) {
+    // Nothing left for another card to pay. Say so instead of offering the
+    // code field, which would only add a card that covers $0.
+    foreach (['code', 'apply'] as $key) {
+      if (isset($inline[$key])) {
+        $inline[$key]['#access'] = FALSE;
+      }
+    }
+    if (!$only_giftcards) {
+      $inline['picc_paid'] = [
+        '#markup' => '<p class="picc-giftcard-box__paid-note">' . t('This order is fully paid. To use a different card, remove one above.') . '</p>',
+        '#weight' => 90,
+      ];
+    }
+  }
+  elseif (isset($inline['code'])) {
+    // Runs before commerce_giftcard looks the code up, so its messages are
+    // replaced by plain-language ones.
     $inline['code']['#element_validate'] = array_merge(['_picc_giftcard_clean_code_input'], $inline['code']['#element_validate'] ?? []);
+    $inline['code']['#picc_order_id'] = (int) $order->id();
     $inline['code']['#description'] = t('Dashes and spaces are fine.');
   }
   if (isset($inline['apply']) && $applied) {
@@ -440,12 +518,47 @@ function _picc_giftcard_use_card_submit(array &$form, FormStateInterface $form_s
 }
 
 /**
- * Element validate: cleans the gift card code before it's looked up.
+ * Element validate: cleans the gift card code and checks it in plain words.
+ *
+ * Runs before commerce_giftcard's own check. The first error on an element
+ * wins, so these messages replace the module's ("The provided gift card code
+ * is invalid."), which also can't tell a typo from a card that's turned off.
  */
 function _picc_giftcard_clean_code_input(array &$element, FormStateInterface $form_state): void {
   $value = $form_state->getValue($element['#parents']);
-  if (is_string($value) && $value !== '') {
-    $form_state->setValueForElement($element, GiftcardCode::normalize($value));
+  $code = is_string($value) ? GiftcardCode::normalize($value) : '';
+  if ($code !== '') {
+    $form_state->setValueForElement($element, $code);
+  }
+  $trigger = $form_state->getTriggeringElement();
+  if (($trigger['#name'] ?? '') !== 'apply_giftcard' && !($code !== '' && ($trigger['#button_type'] ?? '') === 'primary')) {
+    return;
+  }
+  if ($code === '') {
+    $form_state->setError($element, t('Enter the code from your gift card.'));
+    return;
+  }
+  $cards = \Drupal::entityTypeManager()->getStorage('commerce_giftcard')->loadByProperties(['code' => $code]);
+  $card = $cards ? reset($cards) : NULL;
+  if (!$card) {
+    $form_state->setError($element, t('We can’t find that code. Check it against your card and try again.'));
+    return;
+  }
+  if (!$card->isEnabled()) {
+    $form_state->setError($element, t('This gift card can’t be used. Please contact the club at @email.', ['@email' => \Drupal::service('picc_giftcard.card_builder')->getContactEmail()]));
+    return;
+  }
+  $balance = $card->getBalance();
+  if (!$balance || !$balance->isPositive()) {
+    $form_state->setError($element, t('This gift card has no money left.'));
+    return;
+  }
+  $order = \Drupal::entityTypeManager()->getStorage('commerce_order')->load($element['#picc_order_id'] ?? 0);
+  if ($order) {
+    $applied = array_map('intval', array_column($order->get('commerce_giftcards')->getValue(), 'target_id'));
+    if (in_array((int) $card->id(), $applied, TRUE)) {
+      $form_state->setError($element, t('That card is already on this order.'));
+    }
   }
 }
 
@@ -468,7 +581,7 @@ function _picc_giftcard_coupon_is_giftcard(array &$element, FormStateInterface $
   if ($code === '' || !\Drupal::entityTypeManager()->getStorage('commerce_giftcard')->loadByProperties(['code' => $code])) {
     return;
   }
-  $message = empty($element['#picc_buys_giftcard'])
+  $message = empty($element['#picc_only_giftcards'])
     ? t('This is a gift card code. Enter it in the Gift card code box below.')
     : t('This is a gift card code. Gift cards can’t be used to buy gift cards.');
   $form_state->setError($element, $message);
@@ -631,6 +744,8 @@ function _picc_giftcard_generate_submit(array &$form, FormStateInterface $form_s
     'type' => $form_state->getValue('type'),
     'balance' => $form_state->getValue('balance'),
     'stores' => $form_state->getValue('stores'),
+    // Owned by whoever generated them, so Print and Send email work for them.
+    'uid' => \Drupal::currentUser()->id(),
   ];
   if ($values['type'] === 'complimentary') {
     $values['field_complimentary_reason'] = $form_state->getValue('picc_reason');
@@ -675,22 +790,286 @@ function picc_giftcard_commerce_giftcard_transaction_access(EntityInterface $tra
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for commerce_giftcard edit forms.
+ * Implements hook_form_BASE_FORM_ID_alter() for commerce_giftcard_form.
  *
- * Typing a new balance on an existing card skips the transaction log. Lock
- * it, so every change goes through "Add transaction" and is recorded.
- * People with "delete gift cards" (site admins) can still edit it.
+ * - The code is cleaned up before the duplicate check, so typing an existing
+ *   code with dashes or in lower case says "already in use" instead of
+ *   crashing on the database's unique index.
+ * - There's one store, so the Stores field is hidden (unticking it made the
+ *   card unusable with no explanation).
+ * - On existing cards, balance, code and owner are locked for anyone
+ *   without "delete gift cards". Balance changes go through Add
+ *   transaction, so they're recorded.
  */
 function picc_giftcard_form_commerce_giftcard_form_alter(array &$form, FormStateInterface $form_state): void {
   $card = $form_state->getFormObject()->getEntity();
-  if ($card->isNew() || !isset($form['balance']) || \Drupal::currentUser()->hasPermission('delete gift cards')) {
+  if (isset($form['code']['widget'][0]['value'])) {
+    $form['code']['widget'][0]['value']['#element_validate'][] = '_picc_giftcard_clean_admin_code';
+    $form['code']['widget'][0]['value']['#description'] = t('Letters and digits. Dashes and spaces are removed, and 0 and 1 are read as O and I.');
+  }
+  if (isset($form['stores'])) {
+    $form['stores']['#access'] = FALSE;
+  }
+  // To, From and Message together, after the owner.
+  foreach (['field_recipient_name' => 20, 'field_from_name' => 21, 'field_giftcard_message' => 22] as $field => $weight) {
+    if (isset($form[$field])) {
+      $form[$field]['#weight'] = $weight;
+    }
+  }
+  if ($card->isNew() || \Drupal::currentUser()->hasPermission('delete gift cards')) {
     return;
   }
-  $form['balance']['#disabled'] = TRUE;
-  $form['balance']['widget'][0]['#description'] = t('To change the balance, use Add transaction. That keeps a record of every change.');
-  if (isset($form['code'])) {
-    // Changing the code would break printed cards and the history people
-    // look up by code.
-    $form['code']['#disabled'] = TRUE;
+  foreach (['balance', 'code', 'uid'] as $field) {
+    if (isset($form[$field])) {
+      $form[$field]['#disabled'] = TRUE;
+    }
+  }
+  if (isset($form['balance']['widget'][0])) {
+    $form['balance']['widget'][0]['#description'] = t('To change the balance, use Add transaction. That keeps a record of every change.');
+  }
+}
+
+/**
+ * Element validate: cleans a code typed on the admin card form.
+ */
+function _picc_giftcard_clean_admin_code(array &$element, FormStateInterface $form_state): void {
+  $value = $form_state->getValue($element['#parents']);
+  if (is_string($value) && $value !== '') {
+    $form_state->setValueForElement($element, GiftcardCode::normalize($value));
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for commerce_giftcard.
+ *
+ * Records changes to a card's status, owner, To, From and message as a $0
+ * transaction, so they show in the card's history with who and when.
+ */
+function picc_giftcard_commerce_giftcard_update(GiftcardInterface $card): void {
+  $original = $card->original ?? NULL;
+  $skip = &drupal_static('picc_giftcard_skip_change_log', []);
+  if (!$original || !empty($skip[$card->id()])) {
+    return;
+  }
+  $changes = [];
+  if ($original->isEnabled() !== $card->isEnabled()) {
+    $changes[] = $card->isEnabled() ? 'Card turned on' : 'Card turned off';
+  }
+  if ((int) $original->get('uid')->target_id !== (int) $card->get('uid')->target_id) {
+    $owner = $card->get('uid')->entity;
+    $changes[] = 'Owner changed to ' . ($owner ? $owner->getDisplayName() : 'nobody');
+  }
+  foreach (['field_recipient_name' => 'To', 'field_from_name' => 'From', 'field_giftcard_message' => 'Message'] as $field => $label) {
+    if ($card->hasField($field) && $original->hasField($field) && trim((string) $original->get($field)->value) !== trim((string) $card->get($field)->value)) {
+      // The first time To/From/Message are filled from the order isn't a
+      // change anyone made by hand.
+      if (trim((string) $original->get($field)->value) === '') {
+        continue;
+      }
+      $changes[] = $label . ' changed';
+    }
+  }
+  if (!$changes) {
+    return;
+  }
+  \Drupal::entityTypeManager()->getStorage('commerce_giftcard_transaction')->create([
+    'giftcard' => $card->id(),
+    'amount' => new \Drupal\commerce_price\Price('0', $card->getBalance() ? $card->getBalance()->getCurrencyCode() : 'CAD'),
+    'comment' => mb_substr(implode('. ', $changes) . '.', 0, 255),
+  ])->save();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for commerce_giftcard_transaction.
+ *
+ * - Every new transaction records who made it: the logged-in person. That's
+ *   the customer for purchases and redemptions at checkout, and the admin
+ *   for manual ones. The form's Owner field can't override it.
+ *
+ * The "Used on order" note gets the order number after the order is placed,
+ * in GiftcardOrderSubscriber::renameUsageNotes().
+ */
+function picc_giftcard_commerce_giftcard_transaction_presave(EntityInterface $transaction): void {
+  if (!$transaction->isNew()) {
+    return;
+  }
+  $uid = (int) \Drupal::currentUser()->id();
+  if ($uid) {
+    $transaction->set('uid', $uid);
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for commerce_giftcard_transaction_form.
+ *
+ * The Owner field is filled in automatically (see the presave hook), and a
+ * comment is required so every manual change says why.
+ */
+function picc_giftcard_form_commerce_giftcard_transaction_form_alter(array &$form, FormStateInterface $form_state): void {
+  if (isset($form['uid'])) {
+    $form['uid']['#access'] = FALSE;
+  }
+  if (isset($form['amount']['widget'][0])) {
+    $form['amount']['widget'][0]['#description'] = t('A positive amount adds money to the card. A negative amount, like -25, takes money off.');
+  }
+  if (isset($form['comment']['widget'][0]['value'])) {
+    $form['comment']['widget'][0]['value']['#required'] = TRUE;
+    $form['comment']['widget'][0]['value']['#description'] = t('Say why, for example "Program cancelled, order 386" or "Correction, entered twice".');
+  }
+}
+
+/**
+ * Moves a hand-made card's starting balance into an "Issued" transaction.
+ *
+ * Called from picc_giftcard_commerce_giftcard_presave(). Cards made by hand (Add gift card, Generate) start with a balance and no
+ * transaction, so the money has no record. Start them at $0 and add an
+ * "Issued" transaction for the balance in picc_giftcard_commerce_giftcard_insert().
+ * Cards bought at checkout already start at $0 with a "Bought" transaction.
+ */
+function _picc_giftcard_stash_opening_balance(GiftcardInterface $giftcard): void {
+  $balance = $giftcard->getBalance();
+  if ($giftcard->isNew() && $balance && $balance->isPositive()) {
+    $opening = &drupal_static('picc_giftcard_opening_balance', []);
+    $opening[$giftcard->uuid()] = $balance;
+    $giftcard->setBalance(new \Drupal\commerce_price\Price('0', $balance->getCurrencyCode()));
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for commerce_giftcard.
+ */
+function picc_giftcard_commerce_giftcard_insert(GiftcardInterface $giftcard): void {
+  $opening = &drupal_static('picc_giftcard_opening_balance', []);
+  if (empty($opening[$giftcard->uuid()])) {
+    return;
+  }
+  $amount = $opening[$giftcard->uuid()];
+  unset($opening[$giftcard->uuid()]);
+  $comment = 'Issued by hand.';
+  if ($giftcard->hasField('field_complimentary_reason') && !$giftcard->get('field_complimentary_reason')->isEmpty()) {
+    $allowed = options_allowed_values($giftcard->get('field_complimentary_reason')->getFieldDefinition()->getFieldStorageDefinition(), $giftcard);
+    $label = $allowed[$giftcard->get('field_complimentary_reason')->value] ?? $giftcard->get('field_complimentary_reason')->value;
+    $note = $giftcard->hasField('field_complimentary_note') ? trim((string) $giftcard->get('field_complimentary_note')->value) : '';
+    $comment = 'Issued (complimentary): ' . $label . ($note !== '' ? ', ' . $note : '') . '.';
+  }
+  \Drupal::entityTypeManager()->getStorage('commerce_giftcard_transaction')->create([
+    'giftcard' => $giftcard->id(),
+    'amount' => $amount,
+    'comment' => mb_substr($comment, 0, 255),
+  ])->save();
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views_view_field.
+ *
+ * Shows codes in the admin lists the way they're printed: ABCD-EFGH-JKMN.
+ */
+function picc_giftcard_preprocess_views_view_field(array &$variables): void {
+  $view = $variables['view'];
+  if (!in_array($view->id(), ['commerce_giftcard_admin', 'commerce_giftcard_transactions_admin'], TRUE)) {
+    return;
+  }
+  $field = $variables['field'];
+  if ($field->realField === 'code' && $field->getEntityType() === 'commerce_giftcard') {
+    $value = trim(strip_tags((string) $variables['output']));
+    if ($value !== '' && preg_match('/^[A-Z0-9]+$/', $value)) {
+      $variables['output'] = ['#markup' => str_replace($value, GiftcardCode::format($value), (string) $variables['output'])];
+    }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for commerce_product_variation_form.
+ *
+ * Gift card amounts need a price above $0 and a card value, so a card can't
+ * end up free on the public page.
+ */
+function picc_giftcard_form_commerce_product_variation_form_alter(array &$form, FormStateInterface $form_state): void {
+  $variation = $form_state->getFormObject()->getEntity();
+  if ($variation->bundle() !== 'giftcard') {
+    return;
+  }
+  if (isset($form['commerce_giftcard_amount']['widget'][0])) {
+    $form['commerce_giftcard_amount']['widget'][0]['#required'] = TRUE;
+    $form['commerce_giftcard_amount']['widget'][0]['#description'] = t('What the card is worth. Can be more than the price, for a sale.');
+  }
+  $form['#validate'][] = '_picc_giftcard_variation_validate';
+}
+
+/**
+ * Validation for gift card amounts.
+ */
+function _picc_giftcard_variation_validate(array &$form, FormStateInterface $form_state): void {
+  $price = $form_state->getValue(['price', 0, 'number']);
+  $value = $form_state->getValue(['commerce_giftcard_amount', 0, 'number']);
+  if ($price === NULL || $price === '' || (float) $price <= 0) {
+    $form_state->setErrorByName('price', t('Gift cards need a price above $0. To give a card away, use a Complimentary card instead.'));
+  }
+  if ($value === NULL || $value === '' || (float) $value <= 0) {
+    $form_state->setErrorByName('commerce_giftcard_amount', t('Enter what the card is worth.'));
+  }
+  elseif ($price !== NULL && $price !== '' && (float) $price > (float) $value) {
+    \Drupal::messenger()->addWarning(t('The price is more than the card is worth. Buyers would pay more than they get. Check the amounts.'));
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views_view_table.
+ *
+ * Cart rows for gift cards: the Name column is the participant for
+ * programs. For gift cards it shows who the card is for, so 2 "$250 gift
+ * card" lines can be told apart. Done here because the table skips the
+ * field template for an empty cell.
+ */
+function picc_giftcard_preprocess_views_view_table(array &$variables): void {
+  $view = $variables['view'];
+  if ($view->id() !== 'commerce_cart_form' || empty($variables['rows'])) {
+    return;
+  }
+  foreach ($variables['rows'] as $index => &$row) {
+    // The cart view is built on the order. The order item comes through the
+    // Item field's relationship.
+    $item = isset($view->field['purchased_entity'], $view->result[$index]) ? $view->field['purchased_entity']->getEntity($view->result[$index]) : NULL;
+    if (!$item || $item->getEntityTypeId() !== 'commerce_order_item' || $item->bundle() !== GiftcardOrderHelper::ORDER_ITEM_TYPE || !isset($row['columns']['field_name'])) {
+      continue;
+    }
+    $to = $item->hasField('field_recipient_name') ? trim((string) $item->get('field_recipient_name')->value) : '';
+    $row['columns']['field_name']['content'] = [[
+      'field_output' => ['#markup' => $to !== '' ? t('For @name', ['@name' => $to]) : t('No name')],
+    ]];
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * The cart's "Registration will be held in your cart for 24 hours" note is
+ * about program spots. Hide it when the cart has only gift cards.
+ */
+function picc_giftcard_views_pre_render(\Drupal\views\ViewExecutable $view): void {
+  if ($view->id() !== 'commerce_cart_form' || empty($view->args[0])) {
+    return;
+  }
+  $order = \Drupal::entityTypeManager()->getStorage('commerce_order')->load($view->args[0]);
+  if (GiftcardOrderHelper::onlyGiftcardPurchases($order)) {
+    unset($view->header['area']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for commerce_order_total_summary.
+ *
+ * Gift card lines in the order summary are labelled when the order was last
+ * recalculated, in whatever language that page was in. Label them in the
+ * language of the page being shown.
+ */
+function picc_giftcard_preprocess_commerce_order_total_summary(array &$variables): void {
+  if (empty($variables['totals']['adjustments'])) {
+    return;
+  }
+  foreach ($variables['totals']['adjustments'] as &$adjustment) {
+    if (($adjustment['type'] ?? '') === 'commerce_giftcard') {
+      $adjustment['label'] = t('Gift card');
+    }
   }
 }

@@ -4,3 +4,10 @@ picc_giftcard.settings:
   route_name: picc_giftcard.settings
   parent: commerce_giftcard.configuration
   weight: 20
+picc_giftcard.account_current:
+  title: 'Gift cards'
+  description: 'Your gift cards and what''s left on them.'
+  route_name: picc_giftcard.account_current
+  menu_name: main
+  parent: user.page
+  weight: 10

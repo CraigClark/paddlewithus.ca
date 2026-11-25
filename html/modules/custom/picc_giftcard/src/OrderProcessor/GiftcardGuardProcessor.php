@@ -11,9 +11,11 @@ use Drupal\picc_giftcard\GiftcardOrderHelper;
  *
  * - Removes disabled gift cards from the order. commerce_giftcard's own
  *   processor doesn't check the status (issue 3620707).
- * - Orders that buy a gift card can't be paid with a gift card.
  * - Gift card lines never get promotion discounts, so a $250 card always
  *   costs $250.
+ *
+ * Gift cards can't pay for gift card lines. That cap is applied after
+ * commerce_giftcard, by GiftcardCapProcessor.
  */
 class GiftcardGuardProcessor implements OrderProcessorInterface {
 
@@ -57,7 +59,7 @@ class GiftcardGuardProcessor implements OrderProcessorInterface {
     // Walk backwards so removing an item doesn't shift the ones still to check.
     for ($delta = $field->count() - 1; $delta >= 0; $delta--) {
       $giftcard = $field->get($delta)->entity;
-      if ($buys_giftcard || !$giftcard || !$giftcard->isEnabled()) {
+      if (!$giftcard || !$giftcard->isEnabled()) {
         $field->removeItem($delta);
       }
     }

@@ -12,6 +12,9 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\State\StateInterface;
+use Drupal\Component\Utility\Crypt;
+use Drupal\Core\PrivateKey;
+use Drupal\Core\Site\Settings;
 use Drupal\Core\Url;
 use Drupal\file\FileInterface;
 
@@ -46,6 +49,7 @@ class GiftcardCardBuilder {
     protected readonly ModuleExtensionList $moduleList,
     protected readonly FileSystemInterface $fileSystem,
     protected readonly LanguageManagerInterface $languageManager,
+    protected readonly PrivateKey $privateKey,
   ) {}
 
   /**
@@ -88,7 +92,7 @@ class GiftcardCardBuilder {
   /**
    * Returns the values shown on a card, used by the template and the email.
    */
-  public function getCardValues(GiftcardInterface $giftcard): array {
+  public function getCardValues(GiftcardInterface $giftcard, bool $for_print = FALSE): array {
     $balance = $giftcard->getBalance();
     $values = [
       'amount_en' => $this->formatAmount($balance, 'en'),
@@ -102,6 +106,10 @@ class GiftcardCardBuilder {
     foreach (['to' => 'field_recipient_name', 'from' => 'field_from_name', 'message' => 'field_giftcard_message'] as $key => $field) {
       if ($giftcard->hasField($field) && !$giftcard->get($field)->isEmpty()) {
         $values[$key] = trim((string) $giftcard->get($field)->value);
+        if ($for_print) {
+          // The PDF font has no emoji, so they print as empty boxes.
+          $values[$key] = trim(preg_replace('/[\x{1F000}-\x{1FAFF}\x{2600}-\x{27BF}\x{FE0F}\x{200D}]/u', '', $values[$key]));
+        }
       }
     }
     return $values;
@@ -117,18 +125,42 @@ class GiftcardCardBuilder {
    * @param string $langcode
    *   The language shown first and larger: 'en' or 'fr'.
    */
-  public function buildHtml(GiftcardInterface $giftcard, bool $for_screen = FALSE, string $langcode = 'en'): string {
+  public function buildHtml(GiftcardInterface $giftcard, bool $for_screen = FALSE, string $langcode = 'en', ?string $token = NULL): string {
     $graphic = $this->getGraphic();
     $build = [
       '#theme' => 'picc_giftcard_card',
-      '#card' => $this->getCardValues($giftcard),
+      '#card' => $this->getCardValues($giftcard, TRUE),
       '#logo' => $this->dataUri(DRUPAL_ROOT . '/' . $this->moduleList->getPath('picc_giftcard') . '/images/logo.png'),
       '#graphic' => $graphic ? $this->dataUri($graphic->getFileUri()) : NULL,
       '#primary' => $langcode === 'fr' ? 'fr' : 'en',
       '#for_screen' => $for_screen,
-      '#pdf_url' => $for_screen ? Url::fromRoute('picc_giftcard.pdf', ['commerce_giftcard' => $giftcard->id()], ['language' => $this->languageManager->getLanguage($langcode)])->toString() : NULL,
+      '#pdf_url' => $for_screen ? ($token ? Url::fromRoute('picc_giftcard.pdf_signed', ['commerce_giftcard' => $giftcard->id(), 'token' => $token], ['language' => $this->languageManager->getLanguage($langcode)]) : Url::fromRoute('picc_giftcard.pdf', ['commerce_giftcard' => $giftcard->id()], ['language' => $this->languageManager->getLanguage($langcode)]))->toString() : NULL,
     ];
     return (string) $this->renderer->renderInIsolation($build);
+  }
+
+  /**
+   * Returns the token that lets anyone with the email open a card's print page.
+   *
+   * Tied to the card ID and code, and signed with the site's private key and
+   * hash salt, so it can't be guessed or reused for another card.
+   */
+  public function signedToken(GiftcardInterface $giftcard): string {
+    return Crypt::hmacBase64('picc_giftcard:' . $giftcard->id() . ':' . GiftcardCode::normalize($giftcard->getCode()), $this->privateKey->get() . Settings::getHashSalt());
+  }
+
+  /**
+   * Checks a print page token.
+   */
+  public function checkToken(GiftcardInterface $giftcard, string $token): bool {
+    return hash_equals($this->signedToken($giftcard), $token);
+  }
+
+  /**
+   * Returns the print page URL that works without logging in.
+   */
+  public function signedPrintUrl(GiftcardInterface $giftcard, string $langcode = 'en', bool $absolute = TRUE): Url {
+    return Url::fromRoute('picc_giftcard.print_signed', ['commerce_giftcard' => $giftcard->id(), 'token' => $this->signedToken($giftcard)], ['absolute' => $absolute, 'language' => $this->languageManager->getLanguage($langcode)]);
   }
 
   /**

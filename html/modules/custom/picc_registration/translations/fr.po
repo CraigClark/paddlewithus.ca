@@ -521,3 +521,70 @@ msgstr "Utiliser cette carte"
 
 msgid "Not needed, this order is fully paid"
 msgstr "Pas nécessaire, cette commande est entièrement payée"
+
+# Gift cards: bug-report fixes (November 25, 2026). Includes commerce_giftcard's own strings.
+msgid "Gift card"
+msgstr "Carte-cadeau"
+
+msgid "Redeemed gift cards"
+msgstr "Cartes-cadeaux utilisées"
+
+msgid "Gift card code"
+msgstr "Code de la carte-cadeau"
+
+msgid "Redeem gift card"
+msgstr "Utiliser la carte-cadeau"
+
+msgid "Gift cards can’t be used to buy gift cards."
+msgstr "Les cartes-cadeaux ne peuvent pas servir à acheter des cartes-cadeaux."
+
+msgid "Gift cards pay for the rest of this order, not the gift cards you’re buying."
+msgstr "Les cartes-cadeaux paient le reste de cette commande, mais pas les cartes-cadeaux que vous achetez."
+
+msgid "This order is fully paid. To use a different card, remove one above."
+msgstr "Cette commande est entièrement payée. Pour utiliser une autre carte, retirez-en une ci-dessus."
+
+msgid "You have money left on a gift card. <a href=\":url\">Go back to use it</a>."
+msgstr "Il vous reste de l’argent sur une carte-cadeau. <a href=\":url\">Revenez en arrière pour l’utiliser</a>."
+
+msgid "Have a gift card? <a href=\":url\">Go back to add it</a>."
+msgstr "Vous avez une carte-cadeau? <a href=\":url\">Revenez en arrière pour l’ajouter</a>."
+
+msgid "Enter the code from your gift card."
+msgstr "Entrez le code de votre carte-cadeau."
+
+msgid "We can’t find that code. Check it against your card and try again."
+msgstr "Nous ne trouvons pas ce code. Vérifiez-le sur votre carte et réessayez."
+
+msgid "This gift card can’t be used. Please contact the club at @email."
+msgstr "Cette carte-cadeau ne peut pas être utilisée. Veuillez communiquer avec le club à @email."
+
+msgid "This gift card has no money left."
+msgstr "Il ne reste plus d’argent sur cette carte-cadeau."
+
+msgid "That card is already on this order."
+msgstr "Cette carte est déjà sur cette commande."
+
+msgid "Apply discount code"
+msgstr "Appliquer le code de réduction"
+
+msgid "For @name"
+msgstr "Pour @name"
+
+msgid "No name"
+msgstr "Sans nom"
+
+msgid "Optional. Up to @max characters. Printed on the card. Emoji don’t print."
+msgstr "Facultatif. Jusqu’à @max caractères. Imprimé sur la carte. Les émojis ne s’impriment pas."
+
+msgid "Turned off. Contact the club."
+msgstr "Désactivée. Communiquez avec le club."
+
+msgid "Your gift card codes are on their way by email, with a PDF of each card to print."
+msgstr "Vos codes de carte-cadeau vous sont envoyés par courriel, avec un PDF de chaque carte à imprimer."
+
+msgid "You can also print them any time from <a href=\":url\">Gift cards</a> on your account."
+msgstr "Vous pouvez aussi les imprimer en tout temps à partir de <a href=\":url\">Cartes-cadeaux</a> dans votre compte."
+
+msgid "The PDF is also attached. Anyone you forward this email to can print it too."
+msgstr "Le PDF est aussi joint. Toute personne à qui vous transférez ce courriel peut aussi l’imprimer."

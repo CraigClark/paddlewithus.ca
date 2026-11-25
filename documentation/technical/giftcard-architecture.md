@@ -56,6 +56,26 @@ Gift cards are built on the contrib module `commerce_giftcard` (2.0.0) plus our 
 - **Language.** The email and PDF lead with the language the order was placed in (current interface language at placement), the other language second and smaller. The print page and PDF download use the current page language.
 - **Email layout.** Matches the order receipt: blue header, grey order box, each card in a framed block. Inline styles only, passed as `Markup` because `#markup` filtering strips `style` attributes.
 
+## Bug report fixes (November 25, 2026)
+
+From `bug-report-giftcards.md` in Craig's notes. Summary of what changed and where:
+
+- **Mixed orders.** Gift cards can pay for everything except gift card lines. `GiftcardGuardProcessor` no longer removes cards from orders that buy a gift card. `GiftcardCapProcessor` (priority -1010, after commerce_giftcard) trims the gift card adjustments so they cover at most the order total minus the gift card lines (`GiftcardOrderHelper::coverableByCards()`). The box explains it. Gift-card-only orders show "Gift cards can't be used to buy gift cards" with no code field.
+- **Signed print links.** `/gift-card/{id}/print/{token}` and `/pdf/{token}` open for anyone with the link. The token is an HMAC of the card ID and code with the private key and hash salt (`GiftcardCardBuilder::signedToken()`). The email uses it, so forwarded emails work.
+- **Transactions.** `picc_giftcard_commerce_giftcard_transaction_presave()` records the logged-in user on every new transaction. The Owner field is hidden on Add transaction, and Comment is required. "Used on order with id N" is rewritten to the order number after placement (`GiftcardOrderSubscriber::renameUsageNotes()`).
+- **Refund tab off.** `GiftcardRouteSubscriber` sets `commerce_giftcard.refund_form` to `_access: FALSE`. Use Add transaction.
+- **Issued transactions.** Cards created with a balance (Add gift card, Generate) start at $0, and an "Issued" transaction adds the balance, with the Complimentary reason in the comment.
+- **Cancelled orders.** `GiftcardOrderSubscriber::onCancel()` returns what each card still has taken off by the order, as "Returned: order N cancelled." It also turns off any card the order bought (`turnOffCardsBought()`), with a note saying how much was on it.
+- **Card history.** `picc_giftcard_commerce_giftcard_update()` adds a $0 transaction when a card is turned on or off, changes owner, or has To, From or Message changed by hand.
+- **Card form.** The code is cleaned before the duplicate check. Stores is hidden. Code, balance and owner are locked on existing cards without `delete gift cards`.
+- **Amounts.** The variation form requires a price above $0 and a card value, and warns if the price is more than the value.
+- **Plain-language checkout messages.** `_picc_giftcard_clean_code_input()` checks the code before commerce_giftcard does and sets friendlier errors (wrong code, $0 left, turned off, already on this order). When the order is fully paid, the code field is replaced by a note.
+- **Review reminder.** `_picc_giftcard_review_reminder()` links back to the first step if no card is used or the person has a card with money left.
+- **Club notification.** `notify_picc` is programs only again. `notify_picc_giftcard` is the gift card version, with no policy list and no codes.
+- **Cart.** The Name column shows "For Sam" on gift card lines (`picc_giftcard_preprocess_views_view_table()`; the cart view is built on the order, so the order item comes from the Item field's relationship). The 24-hour hold note is hidden for gift-card-only carts.
+- **Admin list.** Search cleans the code and matches "contains" (`picc_giftcard_views_pre_build()`). Codes show with dashes.
+- **Other:** plain-text order line titles (no `&#039;`), the order summary label is translated when shown, emoji are stripped from the PDF only, disabled cards show as turned off on the account tab, the send log records the address, generated cards are owned by whoever generated them, the complete page mentions the email, and "Gift cards" is in the My account menu (`/user/gift-cards`).
+
 ## Complimentary cards
 
 Second gift card type, `complimentary`, for cards the club gives away. Fields: To, From, Message, `field_complimentary_reason` (list, required: raffle_prize, volunteer_thank_you, other) and `field_complimentary_note`. There's deliberately no donor option: the club can't give gifts in return for donations.
@@ -83,6 +103,9 @@ To protect the audit trail, users without `delete gift cards` also can't update 
 | `/admin/commerce/giftcards/{id}/send` | `administer commerce_giftcard` | Send the gift card email to any address |
 | `/admin/commerce/config/giftcard-card` | `administer commerce_giftcard` | Card graphic and contact email |
 | `/user/{user}/gift-cards` | the account owner, gift card admins | Gift cards used and bought |
+| `/user/gift-cards` | logged in | Redirects to your own Gift cards tab (My account menu) |
+| `/gift-card/{id}/print/{token}` | anyone with the signed link | Print page from the email |
+| `/gift-card/{id}/pdf/{token}` | anyone with the signed link | PDF from the email |
 
 ## Key files
 

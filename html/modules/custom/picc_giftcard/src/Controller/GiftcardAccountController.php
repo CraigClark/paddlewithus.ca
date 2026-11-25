@@ -45,6 +45,13 @@ class GiftcardAccountController extends ControllerBase {
   }
 
   /**
+   * Sends people to their own Gift cards tab (for the "My account" menu).
+   */
+  public function current(): \Symfony\Component\HttpFoundation\RedirectResponse {
+    return $this->redirect('picc_giftcard.account', ['user' => $this->currentUser()->id()]);
+  }
+
+  /**
    * Lists the cards the user has used and the cards they bought.
    */
   public function page(UserInterface $user): array {
@@ -90,13 +97,13 @@ class GiftcardAccountController extends ControllerBase {
           GiftcardCode::format($card->getCode()),
           $to,
           $this->cardBuilder->formatAmount($card->getBalance(), $langcode),
-          [
+          $card->isEnabled() ? [
             'data' => [
               '#type' => 'link',
               '#title' => $this->t('Print or download'),
               '#url' => Url::fromRoute('picc_giftcard.print', ['commerce_giftcard' => $card->id()]),
             ],
-          ],
+          ] : $this->t('Turned off. Contact the club.'),
         ];
       }
       $build['bought'] = [

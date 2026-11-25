@@ -45,3 +45,20 @@ function picc_giftcard_views_data_alter(array &$data): void {
     ],
   ];
 }
+
+/**
+ * Implements hook_views_pre_build().
+ *
+ * The admin search finds a code however it's typed: with dashes or spaces,
+ * in lower case, or just part of it (the filter is set to "contains").
+ */
+function picc_giftcard_views_pre_build(\Drupal\views\ViewExecutable $view): void {
+  if (!in_array($view->id(), ['commerce_giftcard_admin', 'commerce_giftcard_transactions_admin'], TRUE)) {
+    return;
+  }
+  $input = $view->getExposedInput();
+  if (!empty($input['code']) && is_string($input['code'])) {
+    $input['code'] = \Drupal\picc_giftcard\GiftcardCode::normalize($input['code']);
+    $view->setExposedInput($input);
+  }
+}

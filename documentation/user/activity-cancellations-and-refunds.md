@@ -29,11 +29,22 @@ To cancel some but not all participants on an order:
 
 The commerce manager handles refund processing for the removed portion outside Drupal (Stripe dashboard, etc.).
 
+### If a gift card paid for the order
+
+Cancelling a whole order puts the gift card money back on the card by itself. A partial cancellation doesn't, so put the card's share back by hand:
+
+1. On the order, look at the **Gift card** line in the order total to see the card's code and how much it paid.
+2. Decide how much of the refund goes back on the card and how much goes to Stripe. Gift cards aren't refunded in cash, so the card's share goes back on the card.
+3. Go to **Commerce > Gift cards**, find the card and choose **Add transaction**.
+4. Enter the amount as a positive number, for example 200.
+5. In **Comment**, write why and the order number, for example "Camp A cancelled, order 386".
+6. Save. The card's balance goes up, and its Transactions tab records the amount, your name and the comment.
+
 ## Refunds
 
-Drupal does not initiate refunds automatically. The commerce manager:
-1. Cancels the order (or order item) in Drupal.
-2. Processes the refund in the Stripe dashboard.
+Drupal does not initiate credit card refunds automatically. The commerce manager:
+1. Cancels the order (or order item) in Drupal. If a gift card paid for the order, see "If a gift card paid for the order" above.
+2. Processes the credit card refund, if any, in the Stripe dashboard.
 3. Optionally notes the refund reference in the order comments/notes.
 
 ## Cancellations after event date

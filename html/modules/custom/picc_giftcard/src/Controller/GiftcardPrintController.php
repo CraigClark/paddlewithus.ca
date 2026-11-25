@@ -42,10 +42,17 @@ class GiftcardPrintController extends ControllerBase {
   }
 
   /**
+   * Anyone with a valid signed link can see the card (link from the email).
+   */
+  public function accessSigned(GiftcardInterface $commerce_giftcard, string $token): AccessResultInterface {
+    return AccessResult::allowedIf($this->cardBuilder->checkToken($commerce_giftcard, $token))->setCacheMaxAge(0);
+  }
+
+  /**
    * Shows the card as a print-ready page.
    */
-  public function print(GiftcardInterface $commerce_giftcard): Response {
-    $response = new Response($this->cardBuilder->buildHtml($commerce_giftcard, TRUE, $this->languageManager()->getCurrentLanguage()->getId()));
+  public function print(GiftcardInterface $commerce_giftcard, ?string $token = NULL): Response {
+    $response = new Response($this->cardBuilder->buildHtml($commerce_giftcard, TRUE, $this->languageManager()->getCurrentLanguage()->getId(), $token));
     $response->headers->set('Content-Type', 'text/html; charset=utf-8');
     $response->headers->set('Cache-Control', 'private, no-store');
     $response->headers->set('X-Robots-Tag', 'noindex');
@@ -55,7 +62,7 @@ class GiftcardPrintController extends ControllerBase {
   /**
    * Downloads the card as a PDF.
    */
-  public function pdf(GiftcardInterface $commerce_giftcard): Response {
+  public function pdf(GiftcardInterface $commerce_giftcard, ?string $token = NULL): Response {
     $response = new Response($this->cardBuilder->buildPdf($commerce_giftcard, $this->languageManager()->getCurrentLanguage()->getId()));
     $response->headers->set('Content-Type', 'application/pdf');
     $response->headers->set('Content-Disposition', 'inline; filename="' . $this->cardBuilder->pdfFilename($commerce_giftcard) . '"');

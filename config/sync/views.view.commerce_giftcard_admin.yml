@@ -725,7 +725,7 @@ display:
           entity_type: commerce_giftcard
           entity_field: code
           plugin_id: string
-          operator: '='
+          operator: contains
           value: ''
           group: 1
           exposed: true
