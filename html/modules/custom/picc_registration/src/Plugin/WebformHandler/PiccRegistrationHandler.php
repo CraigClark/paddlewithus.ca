@@ -208,6 +208,10 @@ class PiccRegistrationHandler extends WebformHandlerBase {
 
     if ($existing_order) {
       foreach ($existing_order->getItems() as $item) {
+        // Skip lines without a participant, like gift cards in the same cart.
+        if (!$item->hasField('field_participant')) {
+          continue;
+        }
         $item_variation_id = $item->getPurchasedEntityId();
         $item_participant_id = $item->get('field_participant')->target_id;
 
@@ -323,6 +327,10 @@ class PiccRegistrationHandler extends WebformHandlerBase {
     $existing_participants = [];
     if ($existing_order) {
       foreach ($existing_order->getItems() as $item) {
+        // Skip lines without a participant, like gift cards in the same cart.
+        if (!$item->hasField('field_participant')) {
+          continue;
+        }
         $item_variation_id = $item->getPurchasedEntityId();
         $item_participant_id = $item->get('field_participant')->target_id;
 
@@ -455,7 +463,7 @@ class PiccRegistrationHandler extends WebformHandlerBase {
       // Reload from storage to get a fresh, saveable entity
       $fresh_item = $order_item_storage->load($item_id);
 
-      if (!$fresh_item) {
+      if (!$fresh_item || !$fresh_item->hasField('field_participant')) {
         continue;
       }
 
